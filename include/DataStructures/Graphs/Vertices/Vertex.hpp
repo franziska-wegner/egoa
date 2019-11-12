@@ -67,7 +67,7 @@ class Vertex {
 #pragma mark COMPARATORS
         
             /**
-             * @brief      Comparator
+             * @brief      Compares two vertices for equality.
              *
              * @param      lhs   The left vertex.
              * @param      rhs   The right vertex.
@@ -81,7 +81,7 @@ class Vertex {
             }
 
             /**
-             * @brief      Comparator
+             * @brief      Compares two vertices for inequality.
              *
              * @param      lhs   The left vertex.
              * @param      rhs   The right vertex.

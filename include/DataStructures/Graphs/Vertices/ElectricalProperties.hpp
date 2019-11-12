@@ -655,16 +655,17 @@ class ElectricalProperties {
 
         /**@name Output */
         ///@{
-        ///@todo outsource to IO
 #pragma mark OUTPUT_METHODS
             /**
-             * @brief Header out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Header out stream.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static void HeaderLong ( std::ostream & os ) {
-                os  << std::setw(6)     << "ID"
+            static void HeaderLong ( std::ostream & outputStream ) 
+            {
+                outputStream  
+                    << std::setw(6)     << "ID"
                     << std::setw(6)     << "Type"
                     // << std::setw(10)    << "RealPowerLoad"
                     // << std::setw(20)    << "ReactivePowerLoad"
@@ -681,13 +682,15 @@ class ElectricalProperties {
             }
 
             /**
-             * @brief Header out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Header out stream.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static inline void Header ( std::ostream & os ) {
-                os  << std::setw(6)     << "bus_i"
+            static inline void Header ( std::ostream & outputStream ) 
+            {
+                outputStream  
+                    << std::setw(6)     << "bus_i"
                     << std::setw(6)     << "type"
                     // << std::setw(10)    << "Pd"
                     // << std::setw(10)    << "Qd"
@@ -704,15 +707,17 @@ class ElectricalProperties {
             }
 
             /**
-             * @brief Line out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Line out stream.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
+             * @param[in]  baseMva       The base MVA.
              */
-            inline void Line ( std::ostream & os
-                             , Types::real baseMva = 1 ) const
+            inline void Line ( std::ostream & outputStream
+                             , Types::real    baseMva = 1 ) const
             {
-                os  << std::setprecision(2)
+                outputStream  
+                    << std::setprecision(2)
                     << std::fixed
                     << std::setw(6)     << Name()
                     << std::setw(6)     << Vertices::to_underlying( Type() )
@@ -729,16 +734,19 @@ class ElectricalProperties {
             }
 
             /**
-             * @brief Line out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Writes the electrical property as a line.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
+             * @param[in]  identifier    The identifier.
+             * @param[in]  baseMva       The base MVA.
              */
-            inline void Line ( std::ostream &os
+            inline void Line ( std::ostream  & outputStream
                              , Types::vertexId identifier
-                             , Types::real baseMva = 1 ) const
+                             , Types::real     baseMva = 1 ) const
             {
-                os  << std::setprecision(2)
+                outputStream  
+                    << std::setprecision(2)
                     << std::fixed
                     << std::setw(6)     << identifier
                     << std::setw(15)    << Name()
@@ -758,16 +766,18 @@ class ElectricalProperties {
             }
 
             /**
-             * @brief [brief description]
-             * @details [long description]
-             * 
-             * @param os [description]
-             * @param rhs [description]
+             * @brief      Write the electrical property to an output stream.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
+             * @param      rhs           The right hand side electrical property.
+             *
+             * @return     The output stream.
              */
-            friend std::ostream & operator<< ( std::ostream       & os
-                                             , const TProperties  & rhs ) 
+            friend std::ostream & operator<< ( std::ostream       & outputStream
+                                             , TProperties const  & rhs ) 
             {
-                os  << std::setprecision(2)
+                outputStream  
+                    << std::setprecision(2)
                     << std::fixed
                     << std::endl
                     << "Bus " << rhs.Name()     << std::endl
@@ -783,7 +793,7 @@ class ElectricalProperties {
                     << std::setw(20) << "area: "                << std::setw(10) << rhs.Area()                  << std::setw(25) << ""                          << std::endl
                     << std::setw(20) << "zone: "                << std::setw(10) << rhs.Zone()                  << std::setw(25) << ""                          << std::endl
                     << std::setw(20) << "type: "                << std::setw(10) << rhs.Type()                  << std::setw(25) << ""                          << std::endl;
-                return os;                    
+                return outputStream;                    
             }
         ///@}
 

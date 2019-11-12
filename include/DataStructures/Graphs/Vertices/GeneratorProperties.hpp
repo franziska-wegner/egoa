@@ -153,11 +153,11 @@ class GeneratorProperties {
 #pragma mark COMPARATORS
 
             /**
-             * @brief      Inequality comparator.
+             * @brief      Inequality comparator of two generator properties.
              *
-             * @param      rhs   The right hand side GeneratorProperties.
+             * @param      rhs   The right hand side generator properties.
              *
-             * @return     @p True if both vertices are @p not equal, @p False
+             * @return     @p true if both vertices are @p not equal, @p false
              *     otherwise.
              */
             inline bool operator!=( GeneratorProperties const & rhs ) const 
@@ -166,11 +166,11 @@ class GeneratorProperties {
             }
 
             /**
-             * @brief      Equality comparator.
+             * @brief      Comparison of two generator properties.
              *
-             * @param      rhs   The right hand side GeneratorProperties.
+             * @param      rhs   The right hand side generator properties.
              *
-             * @return     @p True if both vertices are equal, @p False
+             * @return     @p true if both vertices are equal, @p false
              *     otherwise.
              */
             inline bool operator==( GeneratorProperties const & rhs ) const 
@@ -240,13 +240,13 @@ class GeneratorProperties {
         ///@}
 
         /**
-         * @brief Swapping the members of two GeneratorProperties
-         * 
-         * @param lhs Left GeneratorProperties
-         * @param rhs Right GeneratorProperties
+         * @brief      Swapping the members of two generator properties.
+         *
+         * @param      lhs   The left hand side generator property.
+         * @param      rhs   The right hand side generator property.
          */
         friend void swap ( GeneratorProperties & lhs
-                         , GeneratorProperties& rhs ) 
+                         , GeneratorProperties & rhs ) 
         { // Necessary for the copy and swap idiom
             using std::swap; // enable ADL
             // Basic vertex
@@ -1364,10 +1364,18 @@ class GeneratorProperties {
         /**@name Output */ 
         ///@{
 #pragma mark OUTPUT_METHODS
-            friend std::ostream& operator<< ( std::ostream & os
-                                            , const GeneratorProperties& rhs ) 
+            /**
+             * @brief      Writes the generator property to an output stream.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
+             * @param[in]  rhs           The right hand side of the generator property.
+             *
+             * @return     The output stream.
+             */
+            friend std::ostream & operator<< ( std::ostream              & outputStream
+                                             , GeneratorProperties const & rhs ) 
             {
-                os  << std::setprecision(2)
+                outputStream  << std::setprecision(2)
                     << std::fixed
                     << std::endl
                     << "Generator at Bus "      << rhs.Name()   << std::endl
@@ -1381,17 +1389,18 @@ class GeneratorProperties {
                                                                 << std::setw(10) << rhs.ReactivePowerBound().Maximum()<< std::setw(25) << " p.u.     (qmax, MVar), "  << std::endl
                     << std::setw(20) << "voltage magnitude: "   << std::setw(10) << rhs.VoltageMagnitude()            << std::setw(25) << "               (Vm, V), "  << std::endl
                     << std::setw(20) << "status: "              << std::setw(10) << rhs.IsActive()                      << std::setw(25) << ""                          << std::endl;
-                return os;
+                return outputStream;
             }
 
             /**
-             * @brief Header out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Write the header to the output stream.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static inline void Header ( std::ostream & os) {
-                os  << std::setw(20)    << "bus"
+            static inline void Header ( std::ostream & outputStream) 
+            {
+                outputStream  << std::setw(20)    << "bus"
                     << std::setw(10)    << "Pg"
                     << std::setw(10)    << "Qg"
                     << std::setw(10)    << "Qmax"
@@ -1415,8 +1424,9 @@ class GeneratorProperties {
                     << std::endl;
             }
 
-            static inline void HeaderBusGeneratorName ( std::ostream & os) {
-                os  << std::setw(20)    << "bus"
+            static inline void HeaderBusGeneratorName ( std::ostream & outputStream) 
+            {
+                outputStream  << std::setw(20)    << "bus"
                     << std::setw(20)    << "name"
                     << std::setw(10)    << "Pg"
                     << std::setw(10)    << "Qg"
@@ -1442,15 +1452,16 @@ class GeneratorProperties {
             }
 
             /**
-             * @brief Line out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Write the values of the generator property.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
+             * @param[in]  baseMva       The base MVA.
              */
-            inline void Line ( std::ostream & os
-                             , Types::real baseMva = 1 ) const
+            inline void Line ( std::ostream & outputStream
+                             , Types::real    baseMva = 1 ) const
             {
-                os  << std::setprecision(2)
+                outputStream  << std::setprecision(2)
                     << std::fixed
                     << std::setw(20)    << Name()
                     << std::setw(10)    << RealPower()     * baseMva
@@ -1477,16 +1488,18 @@ class GeneratorProperties {
             }
 
             /**
-             * @brief Line out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Writes the values including the identifier of the generator property.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to, e.g., std::cout.
+             * @param[in]  identifier    The identifier.
+             * @param[in]  baseMva       The base MVA.
              */
-            inline void Line ( std::ostream &   os
+            inline void Line ( std::ostream &   outputStream
                              , Types::vertexId  identifier
                              , Types::real      baseMva = 1 ) const
             {
-                os  << std::setprecision(2)
+                outputStream  << std::setprecision(2)
                     << std::fixed
                     << std::setw(6)     << identifier
                     << std::setw(10)    << RealPower()     * baseMva
@@ -1513,16 +1526,18 @@ class GeneratorProperties {
             }
 
             /**
-             * @brief Line out stream
-             * @details List all IEEE standard input data
-             * 
-             * @param os out stream, e.g., std::cout
+             * @brief      Writes the values including the name of the generator property.
+             * @details    List all IEEE standard input data.
+             *
+             * @param      outputStream  The stream to write data to
+             * @param[in]  busName       The bus name
+             * @param[in]  baseMva       The base mva
              */
-            inline void Line ( std::ostream &   os
+            inline void Line ( std::ostream &   outputStream
                              , Types::name      busName
                              , Types::real      baseMva = 1 ) const
             {
-                os  << std::setprecision(2)
+                outputStream  << std::setprecision(2)
                     << std::fixed
                     << std::setw(20)    << busName
                     << std::setw(20)    << Name()
