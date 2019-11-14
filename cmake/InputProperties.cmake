@@ -7,6 +7,10 @@
 # advanced.
 # 
 
+set(EGOA_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
+set(EGOA_COVERAGE_LINK_FLAGS    "-coverage") #lgcov
+set(EGOA_GOOGLE_TEST_FRAMEWORK_STD_LOCATION "external/GoogleTestFramework")
+
 ####################################################################
 # Reset variables ##################################################
 ####################################################################
@@ -96,7 +100,7 @@ set(EGOA_ENABLE_VERBOSE_MAKEFILE ON CACHE BOOL
 set_property(CACHE EGOA_ENABLE_VERBOSE_MAKEFILE PROPERTY STRINGS ON OFF)
 
 # Select test framework (default is GoogleOfflineTestFramework)
-set(EGOA_TEST_FRAMEWORK ON CACHE STRING
+set(EGOA_TEST_FRAMEWORK "GoogleOfflineTestFramework" CACHE STRING
     "Select a test framework (default: GoogleOfflineTestFramework)")
 set_property(CACHE EGOA_TEST_FRAMEWORK PROPERTY STRINGS OfflineGoogleTestFramework OnlineGoogleTestFramework)
 

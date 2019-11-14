@@ -9,9 +9,9 @@
 ####################################################################
 # Reset variables ##################################################
 ####################################################################
-unset(Boost_DIRECTORIES)
-unset(Boost_LIBRARY_DIRS)
-unset(Boost_INCLUDE_DIRS)
+unset(Boost_DIRECTORIES  CACHE)
+unset(Boost_LIBRARY_DIRS CACHE)
+unset(Boost_INCLUDE_DIRS CACHE)
 
 ####################################################################
 # Create variables #################################################

@@ -6,6 +6,17 @@
 # Compiler specific configurations.
 # 
 
+# -ggdb Produce debugging information for use by GDB. This means 
+# to use the most expressive format available (DWARF, stabs, or 
+# the native format if neither of those are supported), including 
+# GDB extensions if at all possible.
+# 
+# - Wall This enables all the warnings about constructions that 
+# some users consider questionable, and that are easy to avoid 
+# (or modify to prevent the warning), even in conjunction with macros
+set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG}")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast")
+
 ####################################################################
 # Compiler Options #################################################
 ####################################################################
@@ -41,7 +52,7 @@ endif()
 ####################################################################
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-    set(EGOA_WARNING_FLAGS "-Wall -Wextra -Wunused-result -Wno-error=unused-but-set-variable -Wno-error=conversion -Wshadow")
+    set(EGOA_WARNING_FLAGS "${EGOA_WARNING_FLAGS} -Wall -Wextra -Wunused-result -Wno-error=unused-but-set-variable -Wno-error=conversion -Wshadow")
     if(CMAKE_CXX_COMPILER_ID MATCHES Clang)
         set(EGOA_WARNING_FLAGS "${EGOA_WARNING_FLAGS} -Wno-error=zero-length-array")
     endif()

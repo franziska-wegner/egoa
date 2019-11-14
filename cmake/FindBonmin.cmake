@@ -7,6 +7,16 @@
 # and standard location. If found it adds the library to the project.
 # 
 
+####################################################################
+# Unset ############################################################
+####################################################################
+unset(BONMIN_INCLUDE_DIR CACHE)
+unset(BONMIN_LIBRARY_DIR CACHE)
+unset(BONMIN_LIBRARY     CACHE)
+
+####################################################################
+# Initial Configuration ############################################
+####################################################################
 set(BONMIN_ROOT_DIR "$ENV{BONMIN_ROOT_DIR}" CACHE PATH "BONMIN root directory.")
 
 get_filename_component(PARENT_DIRECTORY ${PROJECT_SOURCE_DIR} DIRECTORY)
@@ -14,13 +24,6 @@ string(CONCAT BONMIN_HOME ${PARENT_DIRECTORY};/external_libraries)
 
 message(STATUS "Bonmin:")
 message(STATUS "${MY_SPACE}BONMIN_ROOT_DIR:\t\t\t" ${BONMIN_ROOT_DIR})
-
-####################################################################
-# Unset ############################################################
-####################################################################
-unset(BONMIN_INCLUDE_DIR CACHE)
-unset(BONMIN_LIBRARY_DIR CACHE)
-unset(BONMIN_LIBRARY     CACHE)
 
 ####################################################################
 # Bonmin Include Directory #########################################

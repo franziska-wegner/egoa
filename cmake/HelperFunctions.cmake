@@ -6,8 +6,6 @@
 # A collection of function that help to reduce the cmake complexity.
 # 
 
-include_directories(${PROJECT_INCLUDE_DIR})
-
 # Link Gurobi if available
 function(add_gurobi_if_available varName)
     if(GUROBI_FOUND)

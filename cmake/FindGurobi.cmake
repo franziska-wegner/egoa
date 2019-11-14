@@ -3,53 +3,47 @@
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
 #       
-# If GPGT_ENABLE_GUROBI is ON the script searches for Gurobi in given
+# If EGOA_ENABLE_GUROBI is ON the script searches for Gurobi in given
 # and standard location. If found it adds the library to the project.
 # 
-
-set(GUROBI_HOME "${GUROBI_HOME}" CACHE PATH "Path to the Gurobi home directory; default on MacOS \"/Library/gurobi<version>\" use \"/Library\". You can find the current directory by using the command \">which gurobi.sh\". " FORCE)
-set(GUROBI_VERSION "${GUROBI_VERSION}" CACHE STRING "Version of Gurobi, e.g., 751" FORCE)
-
-if(GUROBI_HOME)
-  file(GLOB dirs "${GUROBI_HOME}*")
-elseif(APPLE)
-    file(GLOB dirs $ENV{GUROBI_HOME}*)
-    if(NOT dirs)
-        file(GLOB dirs /Library/gurobi*)
-    endif()
-elseif(UNIX)
-    file(GLOB dirs $ENV{GUROBI_HOME}*)
-endif()
-
-message(STATUS "")
-message(STATUS "Gurobi:")
-message(STATUS "${MY_SPACE}Gurobi version:\t\t\t\t" ${GUROBI_VERSION})
-
-if(APPLE)
-    string(CONCAT GUROBI_DIR /Library/gurobi;${GUROBI_VERSION};/mac64)
-elseif(UNIX)
-    string(CONCAT GUROBI_DIR ${GUROBI_HOME})
-elseif(WIN32)
-    string(CONCAT GUROBI_DIR ${GUROBI_HOME})
-endif()
-message(STATUS "${MY_SPACE}Looking for Gurobi in:\t\t" ${GUROBI_DIR})
-
-string(SUBSTRING ${GUROBI_VERSION} 0 2 GUROBI_VERSION_SHORT)
 
 ####################################################################
 # Unset ############################################################
 ####################################################################
+unset(GUROBI_HOME       CACHE)
+unset(GUROBI_VERSION    CACHE)
+# Hidden
+unset(GUROBI_LIBRARIES   CACHE)
 unset(GUROBI_INCLUDE_DIR CACHE)
 unset(GUROBI_LIBRARY_DIR CACHE)
 unset(GUROBI_LIBRARY     CACHE)
 unset(GUROBI_CPP_LIBRARY CACHE)
 
 ####################################################################
+# Initial Configuration and (Sub-)Version Extraction ###############
+####################################################################
+set(GUROBI_HOME "${GUROBI_ROOT_DIR}" CACHE PATH
+    "Path to the Gurobi home directory; default on MacOS \"/Library/gurobi<version>\" \
+    use \"/Library\". You can find the current directory by using the command \">which \
+    gurobi.sh\". ")
+
+if(GUROBI_HOME AND NOT GUROBI_VERSION)
+    string(REGEX MATCH "[0-9]+" GUROBI_VERSION "${GUROBI_HOME}")
+    message(STATUS "${MY_SPACE}Gurobi version:\t\t\t\t" ${GUROBI_VERSION})
+else()
+    string(REGEX MATCH "[0-9]+" GUROBI_VERSION "$ENV{GUROBI_HOME}")
+    message(STATUS "${MY_SPACE}Gurobi version:\t\t\t\t" ${GUROBI_VERSION})
+endif()
+
+message(STATUS "${MY_SPACE}Looking for Gurobi in:\t\t" ${GUROBI_HOME})
+string(SUBSTRING ${GUROBI_VERSION} 0 2 GUROBI_VERSION_SHORT)
+
+####################################################################
 # Find gurobi include directory ####################################
 ####################################################################
 find_path(GUROBI_INCLUDE_DIR 
         gurobi_c++.h 
-        HINTS "${GUROBI_DIR}/include"
+        HINTS "${GUROBI_HOME}/include"
                 $ENV{GUROBI_HOME}/include
         )
 message(STATUS "${MY_SPACE}GUROBI_INCLUDE_DIR:\t\t\t" ${GUROBI_INCLUDE_DIR})
@@ -59,7 +53,7 @@ message(STATUS "${MY_SPACE}GUROBI_INCLUDE_DIR:\t\t\t" ${GUROBI_INCLUDE_DIR})
 ####################################################################
 find_path(GUROBI_LIBRARY_DIR 
         libgurobi${GUROBI_VERSION_SHORT}.a libgurobi${GUROBI_VERSION_SHORT}.so 
-        HINTS   ${GUROBI_DIR}/lib
+        HINTS   ${GUROBI_HOME}/lib
                 $ENV{GUROBI_HOME}/lib
         )
 
@@ -68,7 +62,7 @@ find_path(GUROBI_LIBRARY_DIR
 ####################################################################
 find_library(GUROBI_LIBRARY 
         libgurobi${GUROBI_VERSION_SHORT}.a libgurobi${GUROBI_VERSION_SHORT}.so
-        HINTS   ${GUROBI_DIR}/lib
+        HINTS   ${GUROBI_HOME}/lib
                 $ENV{GUROBI_HOME}/lib
         )
 message(STATUS "${MY_SPACE}GUROBI_LIBRARY:\t\t\t\t" ${GUROBI_LIBRARY})
@@ -78,7 +72,7 @@ message(STATUS "${MY_SPACE}GUROBI_LIBRARY:\t\t\t\t" ${GUROBI_LIBRARY})
 ####################################################################
 find_library(GUROBI_CPP_LIBRARY 
         libgurobi_c++.a libgurobi_c++.so 
-        HINTS   ${GUROBI_DIR}/lib
+        HINTS   ${GUROBI_HOME}/lib
                 $ENV{GUROBI_HOME}/lib
         )
 message(STATUS "${MY_SPACE}GUROBI_CPP_LIBRARY:\t\t\t" ${GUROBI_CPP_LIBRARY})
@@ -112,3 +106,12 @@ if(EGOA_ENABLE_GUROBI AND NOT GUROBI_FOUND)
       Gurobi installation, and cmake configuration for GUROBI_HOME or disable \
       Gurobi by setting EGOA_ENABLE_GUROBI to OFF." )
 endif(EGOA_ENABLE_GUROBI AND NOT GUROBI_FOUND)
+
+####################################################################
+# Mark some variables as advanced, i.e., not visible for users  ####
+####################################################################
+mark_as_advanced(GUROBI_INCLUDE_DIR)
+mark_as_advanced(GUROBI_LIBRARY_DIR)
+mark_as_advanced(GUROBI_LIBRARY)
+mark_as_advanced(GUROBI_CPP_LIBRARY)
+mark_as_advanced(GUROBI_LIBRARIES)

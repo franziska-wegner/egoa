@@ -107,7 +107,7 @@
 				"EGOA_TEST_FRAMEWORK_LOCATION": "external/GoogleTestFramework",
 				"EGOA_THREAD_LIMIT": "0",
 				"EGOA_WARNINGS_AS_ERRORS": "ON",
-				"GUROBI_HOME": "/Library/gurobi800",
+				"GUROBI_ROOT_DIR": "/Library/gurobi800/mac64/",
 				"OGDF_AUTOGEN_INCLUDE_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug/include",
 				"OGDF_INCLUDE_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf20170723-debug/include",
 				"OGDF_LIBRARY_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug",

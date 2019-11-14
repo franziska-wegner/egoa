@@ -8,8 +8,6 @@
 # include paths and libraries to the project.
 # 
 
-get_filename_component(PARENT_DIRECTORY ${PROJECT_SOURCE_DIR} DIRECTORY)
-
 set ( OGDF_LIBRARY_DIR ${OGDF_LIBRARY_DIR} CACHE FILEPATH "Path to the OGDF library directory including libOGDF.a or libOGDF.so; please use no snapshot higher than 23th of July 2017" )
 set ( OGDF_INCLUDE_DIR ${OGDF_INCLUDE_DIR} CACHE FILEPATH "OGDF include directory" )
 set ( OGDF_AUTOGEN_INCLUDE_DIR ${OGDF_AUTOGEN_INCLUDE_DIR} CACHE FILEPATH "OGDF include directory for automatic generated header (out of source build)." )

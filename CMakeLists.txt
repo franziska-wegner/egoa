@@ -1,6 +1,6 @@
 # CMakeLists.txt
 # 
-#   Created on: Jan 30, 2019
+#   Created on: 30.01.2019
 #       Author: Franziska Wegner
 #       
 # Main cmake configuration file.
@@ -16,7 +16,11 @@ set ( EGOA_VERSION_MINOR 0 )
 ####################################################################
 # Input Parameter ##################################################
 ####################################################################
-set(EGOA_GOOGLE_TEST_FRAMEWORK_STD_LOCATION "external/GoogleTestFramework")
+
+message(STATUS "${PROJECT_INCLUDE_DIR}")
+message(STATUS "${PROJECT_SOURCE_DIR}")
+message(STATUS "${CMAKE_MODULE_PATH}")
+message(STATUS "${CMAKE_CURRENT_BINARY_DIR}")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 include(InputProperties)
@@ -57,10 +61,6 @@ if( EGOA_BUILD_TYPE )
 else(EGOA_BUILD_TYPE)
     set( CMAKE_BUILD_TYPE "Debug" )
 endif(EGOA_BUILD_TYPE)
- 
-# Set compiler flags for different mode 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast")
 
 # Build options
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
@@ -74,8 +74,12 @@ set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 # Find external libraries ###########################################
 #################################################################### 
 
-# Find External Libraries
+# Initial Configuration
+include(SetEnvironmentVariables)
 include(CompilerConfiguration)
+include(HelperFunctions)
+
+# Find External Libraries
 include(QtConfiguration)
 
 if(EGOA_ENABLE_DOCUMENTATION)
@@ -113,8 +117,6 @@ if(EGOA_ENABLE_BOOST)
     include(Boost)
 endif(EGOA_ENABLE_BOOST)
 
-include(SetEnvironmentVariables)
-
 # Google tests
 if (EGOA_ENABLE_TESTS)
     include(CTest)
@@ -125,11 +127,21 @@ if (EGOA_ENABLE_TESTS)
     else ()
         find_package(GoogleTestFramework)
     endif ()
+
+    # Add test coverage 
+    # -coverage includes -fprofile-arcs -ftest-coverage while compiling and
+    # -lgcov while linking -coverage
+    # 
+    # brew install lcov || gcovr (https://gcovr.com/en/stable/)
+    # 
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EGOA_COVERAGE_COMPILE_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EGOA_COVERAGE_LINK_FLAGS}")
 endif(EGOA_ENABLE_TESTS)
 
 # Generate an internal header automatically
-file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include")
+# file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include")
 # configure_file("${CMAKE_MODULE_PATH}/mtsf_internal_configuration.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/mtsf_internal_configuration.h")
+
 if(OGDF_FOUND AND COIN_FOUND)
     message( STATUS "OGDF and COIN include directory and library are added to the project.")
     include_directories(SYSTEM ${OGDF_INCLUDE_DIR} ${OGDF_AUTOGEN_INCLUDE_DIR} ${COIN_INCLUDE_DIRS} GUROBI_INCLUDE_DIRS} ${CPLEX_INCLUDE_DIRS})
@@ -151,20 +163,22 @@ else()
     include_directories(${PROJECT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 endif()
 
-include(HelperFunctions)
-
 ####################################################################
-# Compilation ######################################################
+# Add files, libraries and sources #################################
 #################################################################### 
 file(GLOB_RECURSE HEADERS ${PROJECT_INCLUDE_DIR} include/*.hpp)
-file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp) # ${PROJECT_INCLUDE_DIR}/*.hpp
+file(GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp) 
 file(GLOB_RECURSE SOURCES_REMOVE ${PROJECT_SOURCE_DIR}/src/Runnables/*.cpp )
 list(FILTER SOURCES EXCLUDE REGEX ".*Runnables.*" )
 
-add_library(EGOA ${SOURCES} ${HEADERS} )
+# Add library target EGOA to be build from the source files
+add_library(EGOA ${SOURCES})
 target_link_libraries(EGOA ${QT5_LIBRARIES})
 
+# Add subdirectory here the source directory with the corresponding
+# CMakeLists.txt
 add_subdirectory(src)
+# include_directories(${PROJECT_INCLUDE_DIR})
 
 ####################################################################
 # Testing ##########################################################
@@ -197,17 +211,18 @@ if(Qt5_FOUND)
     target_compile_definitions(EGOA PUBLIC QT5_AVAILABLE)
 endif(Qt5_FOUND) 
 
-# OpenMP
+# OpenMP found
 if(OPENMP_FOUND)
     message(STATUS "${MY_SPACE}OpenMP:\t\t\t\tadd libraries of OpenMP")
     target_compile_definitions(EGOA PUBLIC OPENMP_AVAILABLE)
 endif(OPENMP_FOUND)
 
+# Doxygen found
 if(DOXYGEN_FOUND)
     message(STATUS "${MY_SPACE}doc:\t\t\t\tbuild doxygen documentation")
 endif()
 
-# 
+# Boost found
 if(Boost_FOUND)
     message(STATUS "${MY_SPACE}Boost:\t\t\t\tadd library boost")
     target_compile_definitions(EGOA PUBLIC BOOST_AVAILABLE)
@@ -231,6 +246,7 @@ if(CPLEX_FOUND)
     target_compile_definitions(EGOA PUBLIC CPLEX_AVAILABLE)
 endif(CPLEX_FOUND)
 
+# Cplex found
 if(EGOA_CPLEX_VERSION)
     message(STATUS "${MY_SPACE}CPLEX Version:\t\t${EGOA_CPLEX_VERSION_MAJOR}.${EGOA_CPLEX_VERSION_MINOR} (${EGOA_CPLEX_VERSION})")
     target_compile_definitions(EGOA PUBLIC EGOA_CPLEX_VERSION=${EGOA_CPLEX_VERSION})
@@ -287,10 +303,10 @@ set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
    "${PROJECT_INCLUDE_DIR}/documentation/Doxyfile"
    "${CMAKE_CURRENT_BINARY_DIR}/bin"
    "${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake"
-   # "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt"
+   "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt" #c
    "${CMAKE_CURRENT_BINARY_DIR}/CMakeDoxyfile.in"
    "${CMAKE_CURRENT_BINARY_DIR}/CMakeDoxygenDefaults.cmake"
-   # "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles"
+   "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles" #c
    "${CMAKE_CURRENT_BINARY_DIR}/CTestTestfile.cmake"
    "${CMAKE_CURRENT_BINARY_DIR}/DartConfiguration.tcl"
    "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile.in"
@@ -299,16 +315,16 @@ set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
    "${CMAKE_CURRENT_BINARY_DIR}/googletest-download"
    "${CMAKE_CURRENT_BINARY_DIR}/googletest-src"
    "${CMAKE_CURRENT_BINARY_DIR}/lib"
-   # "${CMAKE_CURRENT_BINARY_DIR}/Makefile"
+   "${CMAKE_CURRENT_BINARY_DIR}/Makefile" #c
    "${CMAKE_CURRENT_BINARY_DIR}/PGT_autogen"
    "${CMAKE_CURRENT_BINARY_DIR}/src/cmake_install.cmake"
-   # "${CMAKE_CURRENT_BINARY_DIR}/src/CMakeFiles"
+   "${CMAKE_CURRENT_BINARY_DIR}/src/CMakeFiles" #c
    "${CMAKE_CURRENT_BINARY_DIR}/src/CTestTestfile.cmake"
    "${CMAKE_CURRENT_BINARY_DIR}/src/Makefile"
    "${CMAKE_CURRENT_BINARY_DIR}/src/pgt_autogen"
    "${CMAKE_CURRENT_BINARY_DIR}/Testing"
    "${CMAKE_CURRENT_BINARY_DIR}/tests/cmake_install.cmake"
-   # "${CMAKE_CURRENT_BINARY_DIR}/tests/CMakeFiles"
+   "${CMAKE_CURRENT_BINARY_DIR}/tests/CMakeFiles" #c
    "${CMAKE_CURRENT_BINARY_DIR}/tests/CTestTestfile.cmake"
    "${CMAKE_CURRENT_BINARY_DIR}/tests/Makefile"
    "${CMAKE_CURRENT_BINARY_DIR}/tests/TestQueues_autogen")
