@@ -1,0 +1,6 @@
+name,bus0,bus1,capital_cost,length,num_parallel,s_max_pu,s_nom,type,v_nom,s_nom_min,s_nom_max,x,r
+1,EXA 0,EXA 7,2000,100,1,0.7,3000,Al/St 240/40 4-bundle 380.0,380,4000,8000,10,20
+2,EXA 1,EXA 3,3000,100,2,0.7,4000,Al/St 240/40 4-bundle 380.0,380,4000,8000,10,20
+3,EXA 1,EXA 4,4000,100,3,0.7,5000,Al/St 240/40 4-bundle 380.0,380,4000,8000,10,20
+4,EXA 2,EXA 4,5000,100,4,0.7,6000,Al/St 240/40 4-bundle 380.0,380,4000,8000,10,20
+5,EXA 4,EXA 8,6000,100,5,0.7,7000,Al/St 240/40 4-bundle 380.0,380,4000,8000,10,20

@@ -1,0 +1,17 @@
+name,co2_emissions
+CCGT,0.187
+OCGT,0.187
+biomass,0.0
+coal,0.354
+geothermal,0.026000000000000002
+lignite,0.33399999999999996
+nuclear,0.0
+oil,0.248
+onwind,0.0
+offwind,0.0
+solar,0.0
+PHS,0.0
+hydro,0.0
+ror,0.0
+H2,0.0
+battery,0.0
