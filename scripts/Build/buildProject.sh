@@ -1,0 +1,189 @@
+#!/bin/sh
+#
+# buildProject.sh
+# 
+#   Created on:
+#       Author: Franziska Wegner
+#       
+# Builds the egoa project with the details specified in the configuration
+# script. Templates for configuration scripts can be found under 
+#   ./localConfig.sh
+#   ./serverConfig.sh
+# 
+
+#########################################################
+# Define input argument #################################
+#########################################################
+source "./buildUsage.sh"
+
+if [ "${buildMode}" = "Release" ]; then
+    # COIN
+    COIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_RELEASE"
+    COIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_RELEASE"
+    # OGDF
+    OGDF_AUTOGEN_INCLUDE_DIR="$OGDF_AUTOGEN_INCLUDE_DIR_RELEASE"
+    OGDF_INCLUDE_DIR"$OGDF_INCLUDE_DIR_RELEASE"
+    OGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_RELEASE"
+    # OGDF Flags
+    OGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS_RELEASE"
+    OGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS_RELEASE"
+else
+    # COIN
+    COIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_DEBUG"
+    COIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_DEBUG"
+    # OGDF
+    OGDF_AUTOGEN_INCLUDE_DIR="$OGDF_AUTOGEN_INCLUDE_DIR_DEBUG"
+    OGDF_INCLUDE_DIR"$OGDF_INCLUDE_DIR_DEBUG"
+    OGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_DEBUG"
+    # OGDF Flags
+    OGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS_DEBUG"
+    OGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS_DEBUG"
+fi
+
+#########################################################
+# Execute ###############################################
+#########################################################
+
+# Change to build directory
+cd "${buildDirectory}"
+
+# Clean build directory
+if [ "${cleanBuildDirectory}" = "TRUE" ]; then
+    echo "\n-- Clean build directory $(pwd)\n";
+    $(/bin/rm -rf ./*)
+    sleep 2
+fi
+
+# Configure and show configuration of the project
+if [ "${buildMode}" = "Release" ]; then
+    cmake "$CMAKE_TARGET" \
+        -DEGOA_BUILD_TYPE="${buildMode}" \
+        -DEGOA_ENABLE_BONMIN="$EGOA_ENABLE_BONMIN" \
+        -DEGOA_ENABLE_BOOST="$EGOA_ENABLE_BOOST" \
+        -DEGOA_ENABLE_DOCUMENTATION="$EGOA_ENABLE_DOCUMENTATION" \
+        -DEGOA_ENABLE_EXCEPTION_HANDLING="$EGOA_ENABLE_EXCEPTION_HANDLING" \
+        -DEGOA_ENABLE_GUROBI="$EGOA_ENABLE_GUROBI" \
+        -DEGOA_ENABLE_IPOPT="$EGOA_ENABLE_IPOPT" \
+        -DEGOA_ENABLE_OGDF="$EGOA_ENABLE_OGDF" \
+        -DEGOA_ENABLE_OPENMP="$EGOA_ENABLE_OPENMP" \
+        -DEGOA_ENABLE_TESTS="$EGOA_ENABLE_TESTS" \
+        -DEGOA_ENABLE_VERBOSE_MAKEFILE="$EGOA_ENABLE_VERBOSE_MAKEFILE" \
+        -DEGOA_PEDANTIC_AS_ERRORS="$EGOA_PEDANTIC_AS_ERRORS" \
+        -DEGOA_PEDANTIC_MODE="$EGOA_PEDANTIC_MODE" \
+        -DEGOA_TEST_FRAMEWORK="$EGOA_TEST_FRAMEWORK" \
+        -DEGOA_TEST_FRAMEWORK_LOCATION="$EGOA_TEST_FRAMEWORK_LOCATION" \
+        -DEGOA_THREAD_LIMIT="$EGOA_THREAD_LIMIT" \
+        -DEGOA_WARNINGS_AS_ERRORS="$EGOA_WARNINGS_AS_ERRORS" \
+        -DBONMIN_ROOT_DIR="$BONMIN_ROOT_DIR" \
+        -DCMAKE_CXX_COMPILER="$CMAKE_CXX_COMPILER" \
+        -DCMAKE_C_COMPILER="$CMAKE_C_COMPILER" \
+        -DGUROBI_HOME="$GUROBI_HOME" \
+        -DOGDF_AUTOGEN_INCLUDE_DIR="$OGDF_AUTOGEN_INCLUDE_DIR_RELEASE" \
+        -DOGDF_INCLUDE_DIR="$OGDF_INCLUDE_DIR_RELEASE" \
+        -DOGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_RELEASE" \
+        -DOPENMP_INCLUDES="$OPENMP_INCLUDES" \
+        -DOPENMP_LIBRARIES="$OPENMP_LIBRARIES" 
+
+    # -DOGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS" \
+    # -DOGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS" \
+    # -DCOIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_RELEASE" \
+    # -DCOIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_RELEASE" \    
+
+    OGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS_RELEASE"
+    OGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS_RELEASE"
+    OGDF_AUTOGEN_INCLUDE_DIR="$OGDF_AUTOGEN_INCLUDE_DIR_RELEASE"
+    OGDF_INCLUDE_DIR="$OGDF_INCLUDE_DIR_RELEASE"
+    OGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_RELEASE"
+    COIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_RELEASE"
+    COIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_RELEASE"
+else
+    cmake "$CMAKE_TARGET" \
+        -DEGOA_BUILD_TYPE="${buildMode}" \
+        -DEGOA_ENABLE_BONMIN="$EGOA_ENABLE_BONMIN" \
+        -DEGOA_ENABLE_BOOST="$EGOA_ENABLE_BOOST" \
+        -DEGOA_ENABLE_DOCUMENTATION="$EGOA_ENABLE_DOCUMENTATION" \
+        -DEGOA_ENABLE_EXCEPTION_HANDLING="$EGOA_ENABLE_EXCEPTION_HANDLING" \
+        -DEGOA_ENABLE_GUROBI="$EGOA_ENABLE_GUROBI" \
+        -DEGOA_ENABLE_IPOPT="$EGOA_ENABLE_IPOPT" \
+        -DEGOA_ENABLE_OGDF="$EGOA_ENABLE_OGDF" \
+        -DEGOA_ENABLE_OPENMP="$EGOA_ENABLE_OPENMP" \
+        -DEGOA_ENABLE_TESTS="$EGOA_ENABLE_TESTS" \
+        -DEGOA_ENABLE_VERBOSE_MAKEFILE="$EGOA_ENABLE_VERBOSE_MAKEFILE" \
+        -DEGOA_PEDANTIC_AS_ERRORS="$EGOA_PEDANTIC_AS_ERRORS" \
+        -DEGOA_PEDANTIC_MODE="$EGOA_PEDANTIC_MODE" \
+        -DEGOA_TEST_FRAMEWORK="$EGOA_TEST_FRAMEWORK" \
+        -DEGOA_TEST_FRAMEWORK_LOCATION="$EGOA_TEST_FRAMEWORK_LOCATION" \
+        -DEGOA_THREAD_LIMIT="$EGOA_THREAD_LIMIT" \
+        -DEGOA_WARNINGS_AS_ERRORS="$EGOA_WARNINGS_AS_ERRORS" \
+        -DBONMIN_ROOT_DIR="$BONMIN_ROOT_DIR" \
+        -DCMAKE_CXX_COMPILER="$CMAKE_CXX_COMPILER" \
+        -DCMAKE_C_COMPILER="$CMAKE_C_COMPILER" \
+        -DGUROBI_HOME="$GUROBI_HOME" \
+        -DOGDF_AUTOGEN_INCLUDE_DIR="$OGDF_AUTOGEN_INCLUDE_DIR_DEBUG" \
+        -DOGDF_INCLUDE_DIR="$OGDF_INCLUDE_DIR_DEBUG" \
+        -DOGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_DEBUG" \
+        -DOPENMP_INCLUDES="$OPENMP_INCLUDES" \
+        -DOPENMP_LIBRARIES="$OPENMP_LIBRARIES" 
+        
+
+    # -DOGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS" \
+    # -DOGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS" \
+    # -DCOIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_DEBUG" \
+    # -DCOIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_DEBUG" \
+
+    OGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS_DEBUG"
+    OGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS_DEBUG"
+    OGDF_AUTOGEN_INCLUDE_DIR="$OGDF_AUTOGEN_INCLUDE_DIR_DEBUG"
+    OGDF_INCLUDE_DIR="$OGDF_INCLUDE_DIR_DEBUG"
+    OGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_DEBUG"
+    COIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_DEBUG"
+    COIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_DEBUG"
+fi
+
+echo
+sleep 4
+
+# Build project
+make
+
+#########################################################
+# Output general information ############################
+#########################################################
+echo 
+echo "---------------------------------------------------------------------------------------------------"
+echo 
+echo "-- The build mode is set to:\t\t${buildMode}"
+echo "-- The build directory is set to:\t${buildDirectory}"
+echo "-- The cmake directory is set to:\t${cmakeTarget}"
+echo "-- The config file is set to:\t\t${configFile}"
+echo "-- Current directory is:\t\t$(pwd)"
+echo 
+echo "Cmake Configuration Overview"
+echo "\tCMAKE_BUILD_TYPE:               $buildMode"
+echo "\tBONMIN_ROOT_DIR:                $BONMIN_ROOT_DIR"
+echo "\tGUROBI_HOME:                    $GUROBI_HOME"
+echo "\tCMAKE_CXX_COMPILER:             $CMAKE_CXX_COMPILER"
+echo "\tCMAKE_C_COMPILER:               $CMAKE_C_COMPILER"
+echo "\tMTSF_PEDANTIC_AS_ERRORS:        $MTSF_PEDANTIC_AS_ERRORS"
+echo "\tMTSF_PEDANTIC_MODE:             $MTSF_PEDANTIC_MODE"
+echo "\tEGOA_WARNINGS_AS_ERRORS:        $EGOA_WARNINGS_AS_ERRORS"
+echo "\tOGDF_USE_ASSERT_EXCEPTIONS:     $OGDF_USE_ASSERT_EXCEPTIONS"
+echo "\tOGDF_WARNING_ERRORS:            $OGDF_WARNING_ERRORS"
+echo "\tOGDF_AUTOGEN_INCLUDE_DIR:       $OGDF_AUTOGEN_INCLUDE_DIR"
+echo "\tOGDF_INCLUDE_DIR:               $OGDF_INCLUDE_DIR"
+echo "\tOGDF_LIBRARY_DIR:               $OGDF_LIBRARY_DIR"
+echo "\tCOIN_INCLUDE_DIR:               $COIN_INCLUDE_DIR"
+echo "\tCOIN_LIBRARY_DIR:               $COIN_LIBRARY_DIR"
+echo "\tOPENMP_INCLUDES:                $OPENMP_INCLUDES"
+echo "\tOPENMP_LIBRARIES:               $OPENMP_LIBRARIES"
+echo "\tEGOA_ENABLE_BONMIN:             $EGOA_ENABLE_BONMIN"
+echo "\tEGOA_ENABLE_BOOST:              $EGOA_ENABLE_BOOST"
+echo "\tEGOA_ENABLE_DOCUMENTATION:      $EGOA_ENABLE_DOCUMENTATION"
+echo "\tEGOA_ENABLE_GUROBI:             $EGOA_ENABLE_GUROBI"
+echo "\tEGOA_ENABLE_IPOPT:              $EGOA_ENABLE_IPOPT"
+echo "\tEGOA_ENABLE_OGDF:               $EGOA_ENABLE_OGDF"
+echo "\tEGOA_ENABLE_OPENMP:             $EGOA_ENABLE_OPENMP"
+echo "\tEGOA_ENABLE_TESTS:              $TEST_ENABLED"
+echo "\tEGOA_ENABLE_VERBOSE_MAKEFILE:   $VERBOSE_MAKEFILE"
+echo "\tEGOA_EXCEPTION_HANDLING:        $PGT_EXCEPTION_HANDLING"
+echo "\tTHREAD_LIMIT:                   $THREAD_LIMIT"
