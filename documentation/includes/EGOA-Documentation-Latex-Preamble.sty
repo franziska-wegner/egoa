@@ -1,0 +1,1213 @@
+% EGOA-Documentation-Latex-Preamble.sty
+% 
+%   Created on: 30.01.2019
+%       Author: Franziska Wegner
+%       
+% Macros that are used within the papers and dissertation can used within the
+% code documentation to provide the possibility to map the theoretical content
+% with the code.
+% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Usepackages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{complexity}
+\usepackage{thmtools}
+\usepackage{nicefrac}
+
+% Tikz
+\usepackage{tikz}
+\usepackage{tikz-timing}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{arrows,shadows}
+\usepackage{esvect}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{authblk}
+\usepackage{multirow}
+\usepackage{booktabs} % For formal tables
+\usepackage{tabularx,environ}
+\usepackage{paralist}
+\usepackage{caption,subcaption}
+\usepackage{float} 
+\usepackage{pifont}
+\usepackage{flushend}
+\usepackage{xargs} 
+\usepackage{xspace}
+\usepackage{textpos}
+
+\usepackage[]{units}
+\usepackage{siunitx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% New Theorem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{hypothesis}[theorem]{Hypothesis}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% ACM defined colors
+\definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
+\definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
+\definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
+\definecolor[named]{ACMRed}{cmyk}{0,0.90,0.86,0}
+\definecolor[named]{ACMLightBlue}{cmyk}{0.49,0.01,0,0}
+\definecolor[named]{ACMGreen}{cmyk}{0.20,0,1,0.19}
+\definecolor[named]{ACMPurple}{cmyk}{0.55,1,0,0.15}
+\definecolor[named]{ACMDarkBlue}{cmyk}{1,0.58,0,0.21}
+% Others
+\definecolor{orange}{HTML}{FF7F00}
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{orange}{RGB}{255,127,0}
+\definecolor{figChar}{cmyk}{0,0.90,0.86,0}
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KIT defined colors
+% 
+% KIT green
+\definecolor{KITgreen}{rgb}{0 0.588 0.509}
+\definecolor{KITgreen70}{rgb}{0.3 0.711 0.656}
+\definecolor{KITgreen50}{rgb}{0.5 0.794 0.754}
+\definecolor{KITgreen30}{rgb}{0.7 0.876 0.852}
+\definecolor{KITgreen15}{rgb}{0.85 0.938 0.926}
+% KIT palegreen
+\definecolor{KITpalegreen}{rgb}{0.509,0.745,0.235}
+\definecolor{KITpalegreen70}{rgb}{0.656,0.821,0.464}
+\definecolor{KITpalegreen50}{rgb}{0.754,0.872,0.617}
+\definecolor{KITpalegreen30}{rgb}{0.852,0.923,0.77}
+\definecolor{KITpalegreen15}{rgb}{0.926,0.961,0.885}
+% KIT yellow
+\definecolor{KITyellow}{rgb}{0.98,0.901,0.078}
+\definecolor{KITyellow70}{rgb}{0.986,0.931,0.354}
+\definecolor{KITyellow50}{rgb}{0.99,0.95,0.539}
+\definecolor{KITyellow30}{rgb}{0.994,0.97,0.723}
+\definecolor{KITyellow15}{rgb}{0.997,0.985,0.861}
+% KIT orange
+\definecolor{KITorange}{rgb}{0.862,0.627,0.117}
+\definecolor{KITorange70}{rgb}{0.903,0.739,0.382}
+\definecolor{KITorange50}{rgb}{0.931,0.813,0.558}
+\definecolor{KITorange30}{rgb}{0.958,0.888,0.735}
+\definecolor{KITorange15}{rgb}{0.979,0.944,0.867}
+% KIT brown
+\definecolor{KITbrown}{rgb}{0.627,0.509,0.196}
+\definecolor{KITbrown70}{rgb}{0.739,0.656,0.437}
+\definecolor{KITbrown50}{rgb}{0.813,0.754,0.598}
+\definecolor{KITbrown30}{rgb}{0.888,0.852,0.758}
+\definecolor{KITbrown15}{rgb}{0.944,0.926,0.879}
+% KIT red
+\definecolor{KITred}{rgb}{0.627,0.117,0.156}
+\definecolor{KITred70}{rgb}{0.739,0.382,0.409}
+\definecolor{KITred50}{rgb}{0.813,0.558,0.578}
+\definecolor{KITred30}{rgb}{0.888,0.735,0.747}
+\definecolor{KITred15}{rgb}{0.944,0.867,0.873}
+% KIT lilac
+\definecolor{KITlilac}{rgb}{0.627,0,0.47}
+\definecolor{KITlilac70}{rgb}{0.739,0.3,0.629}
+\definecolor{KITlilac50}{rgb}{0.813,0.5,0.735}
+\definecolor{KITlilac30}{rgb}{0.888,0.7,0.841}
+\definecolor{KITlilac15}{rgb}{0.944,0.85,0.92}
+% KIT blue
+\definecolor{KITblue}{rgb}{0.274,0.392,0.666}
+\definecolor{KITblue70}{rgb}{0.492,0.574,0.766}
+\definecolor{KITblue50}{rgb}{0.637,0.696,0.833}
+\definecolor{KITblue30}{rgb}{0.782,0.817,0.9}
+\definecolor{KITblue15}{rgb}{0.891,0.908,0.95}
+% KIT seablue
+\definecolor{KITseablue}{rgb}{0.196,0.313,0.549}
+\definecolor{KITseablue70}{rgb}{0.437,0.519,0.684}
+\definecolor{KITseablue50}{rgb}{0.598,0.656,0.774}
+\definecolor{KITseablue30}{rgb}{0.758,0.794,0.864}
+\definecolor{KITseablue15}{rgb}{0.879,0.897,0.932}
+% KIT cyanblue
+\definecolor{KITcyanblue}{rgb}{0.313,0.666,0.901}
+\definecolor{KITcyanblue70}{rgb}{0.519,0.766,0.931}
+\definecolor{KITcyanblue50}{rgb}{0.656,0.833,0.95}
+\definecolor{KITcyanblue30}{rgb}{0.794,0.9,0.97}
+\definecolor{KITcyanblue15}{rgb}{0.897,0.95,0.985}
+% KIT black
+\definecolor{KITblack}{rgb}{0,0,0}
+\definecolor{KITblack70}{rgb}{0.3,0.3,0.3}
+\definecolor{KITblack50}{rgb}{0.5,0.5,0.5}
+\definecolor{KITblack30}{rgb}{0.7,0.7,0.7}
+\definecolor{KITblack15}{rgb}{0.85,0.85,0.85}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Graph
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\network}{\ensuremath{\mathcal{N}}\xspace}
+\newcommand{\graph}{\ensuremath{G}\xspace}
+\newcommand{\dualgraph}{\ensuremath{\graph^\star}\xspace}
+\newcommand{\forest}{\ensuremath{\mathcal{T}}\xspace}
+\newcommand{\tree}{\ensuremath{T}\xspace}
+\newcommand{\treeSet}{\ensuremath{\mathcal{T}}\xspace}
+\newcommand{\embedding}{\ensuremath{\mathcal{E}}\xspace}
+\newcommand{\points}{\ensuremath{\mathcal{P}}\xspace}
+\newcommand{\branches}{\ensuremath{B}\xspace}
+\newcommand{\minor}{\ensuremath{H}\xspace}
+\newcommand{\subgraph}{\ensuremath{H}\xspace}
+\newcommand{\connectedComponent}{\ensuremath{C}\xspace}
+\newcommand{\face}{\ensuremath{\cycle}\xspace}
+\newcommand{\blocks}{\ensuremath{B}\xspace}
+\newcommand{\block}{\ensuremath{\beta}\xspace}%b
+\newcommand{\paralleledgeMap}{\ensuremath{\mathrm{\foneToOneMap{para}}}\xspace}
+\newcommand{\bilinearmap}{\ensuremath{\mathrm{\foneToOneMap{bilin}}}\xspace}
+
+% Vertices
+\newcommand{\vertices}{\ensuremath{V}\xspace}
+\newcommand{\terminals}{\ensuremath{T}\xspace}
+\newcommand{\sourceTerminals}{\ensuremath{\terminals_{\source}}\xspace}
+\newcommand{\sinkTerminals}{\ensuremath{\terminals_{\sink}}\xspace}
+\newcommand{\source}{\ensuremath{s}\xspace}
+\newcommand{\sink}{\ensuremath{t}\xspace}
+\newcommand{\target}{\ensuremath{t}\xspace}
+\newcommand{\vertex}{\ensuremath{v}\xspace}
+\newcommand{\vertexa}{\ensuremath{u}\xspace}
+\newcommand{\vertexb}{\ensuremath{v}\xspace}
+\newcommand{\vertexc}{\ensuremath{w}\xspace}
+\newcommand{\vertexStar}{\ensuremath{c}\xspace}
+
+% Edges
+\newcommandx{\makeUndirected}[1]{\ensuremath{\overleftrightsmallarrow{#1}}\xspace}
+% 
+\newcommand{\edges}{\ensuremath{E}\xspace}
+\newcommandx{\foneToOneMap}[1]{\ensuremath{\mathrm{\mu}_{#1}}\xspace}
+\newcommand{\oneToOneMap}{\ensuremath{\mathrm{\foneToOneMap{dual}}}\xspace}
+\newcommand{\undirectededges}{\ensuremath{\makeUndirected{\edges}}\xspace}
+\newcommand{\undirectededge}{\ensuremath{\makeUndirected{e}}\xspace}
+\newcommandx{\undirected}[2]{\ensuremath{\makeUndirected{(#1,#2)}}\xspace}
+\newcommand{\edge}{\ensuremath{e}\xspace}
+\newcommand{\dualedge}{\ensuremath{\edge^\star}\xspace}
+\newcommand{\edgea}{\ensuremath{\edge_1}\xspace}
+\newcommand{\edgeb}{\ensuremath{\edge_2}\xspace}
+\newcommand{\cuts}{\ensuremath{H}\xspace}
+\newcommand{\apath}{\ensuremath{\pi}\xspace}
+\newcommand{\edgeCost}{\ensuremath{a}\xspace}
+
+% Flow
+\newcommand{\flow}{\ensuremath{f}\xspace}
+\newcommand{\flowa}{\ensuremath{\flow_1}\xspace}
+\newcommand{\flowb}{\ensuremath{\flow_2}\xspace}
+\newcommand{\netflow}{\ensuremath{\flow_{\mathrm{net}}}\xspace}
+
+% Others 
+\newcommand{\partition}{\ensuremath{P}\xspace}
+\newcommand{\neighbor}{\ensuremath{N}\xspace}
+\newcommand{\inneighbor}{\ensuremath{N^+}\xspace}
+\newcommand{\outneighbor}{\ensuremath{N^-}\xspace}
+\newcommand{\boolsubstation}{\ensuremath{z}\xspace}
+\newcommand{\cycle}{\ensuremath{c}\xspace}
+\newcommandx{\fcycle}[2]{\ensuremath{\cycle(#1,#2)}\xspace}
+\newcommand{\cycles}{\ensuremath{C}\xspace}
+\newcommand{\cutset}{\ensuremath{K}\xspace}
+\newcommand{\cutsets}{\ensuremath{\mathcal{\cutset}}\xspace}
+
+% Labels
+\newcommand{\labels}{\ensuremath{L}\xspace}
+\newcommand{\paretolabels}{\ensuremath{D}\xspace}
+\newcommand{\lab}{\ensuremath{\mathrm{\ell}}\xspace}
+\newcommand{\labnew}{\ensuremath{\lab_\mathrm{new}}\xspace}
+\newcommand{\col}{\ensuremath{c}\xspace}
+\newcommand{\colorlabels}{\ensuremath{C}\xspace}
+\newcommand{\orderedlist}[1]{\ensuremath{\langle #1\rangle}\xspace} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Power Grid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Network tuples
+\newcommand{\acnetworktuple}{
+    \ensuremath{\network = (}
+        \ensuremath{\graph=(\vertices,\edges),}
+        \generators,
+        \consumers,
+        \ensuremath{\capacity,}
+        \resistance,
+        \reactance,
+        \susceptance,
+        \conductance,
+        \voltageangledifferencemin,
+        \voltageangledifferencemax,
+        \voltagemin,
+        \voltagemax,
+        \realpowergenerationmin,
+        \realpowergenerationmax,
+        \reactivepowergenerationmin,
+        \reactivepowergenerationmax,
+        \realpowerdemandmin,
+        \realpowerdemandmax,
+        \reactivepowerdemandmin,
+        \reactivepowerdemandmax
+    \ensuremath{)}
+    \xspace
+}
+\newcommand{\dcnetworktuple}{
+    \ensuremath{\network = (}
+        \graph, 
+        \generators, 
+        \consumers, 
+        \ensuremath{\capacity,}
+        \susceptance,
+        \realpowergenerationmin, 
+        \realpowergenerationmax, 
+        \realpowerdemandmin,
+        \realpowerdemandmax
+    \ensuremath{)}
+    \xspace
+}
+\newcommand{\flownetworktuple}{
+    \ensuremath{\network = (}
+        \graph, 
+        \source, 
+        \sink, 
+        \ensuremath{\capacity,}
+        \realpowergenerationmin, 
+        \realpowergenerationmax, 
+        \realpowerdemandmin,
+        \realpowerdemandmax
+    \ensuremath{)}
+    \xspace
+}
+
+% Circuit
+\newcommand{\circuit}{\ensuremath{i}\xspace}
+
+% Costs
+\newcommand{\cost}{\ensuremath{\gamma}\xspace}
+\newcommandx{\fcost}[1]{\ensuremath{\cost_{#1}}\xspace}
+\newcommand{\setPiecwisefct}{\ensuremath{F}\xspace}
+\newcommandx{\fsetPiecwisefct}[1]{\ensuremath{\setPiecwisefct_{#1}}\xspace}
+\newcommand{\gencost}{\ensuremath{c_g}\xspace}
+
+% Losses
+\newcommand{\loss}{\ensuremath{\ell}\xspace}
+\newcommandx{\floss}[1]{\ensuremath{\loss_{#1}}\xspace}
+\newcommand{\losscost}{\ensuremath{c_\ell}\xspace}
+
+% Costs and losses
+\newcommand{\totalgenlosscost}{\ensuremath{c_\lambda}\xspace}
+
+% Buses
+\newcommand{\factsbus}{\ensuremath{\vertices_F}\xspace}
+\newcommand{\generators}{\ensuremath{\vertices_G}\xspace}
+\newcommand{\consumers}{\ensuremath{\vertices_D}\xspace}
+
+% Branches
+\newcommand{\factsedge}{\ensuremath{\edges_F}\xspace}
+\newcommand{\factsbranch}{\ensuremath{\edges_F}\xspace}
+% 
+\newcommand{\rectangulardissection}{\ensuremath{\mathcal{R}}\xspace}
+
+% Resistance
+\newcommand{\resistance}{\ensuremath{r}\xspace}
+\newcommand{\resistances}{\ensuremath{R}\xspace}
+
+% Resistivity
+\newcommand{\resistivity}{\ensuremath{\rho}\xspace}
+
+% Reactances
+\newcommand{\reactance}{\ensuremath{x}\xspace}
+\newcommand{\reactances}{\ensuremath{X}\xspace}
+
+% Susceptance
+\newcommand{\susceptance}{\ensuremath{b}\xspace}
+\newcommand{\linechargingsusceptance}{\ensuremath{b_{\mathrm{ch}}}\xspace}
+\newcommand{\susceptances}{\ensuremath{B}\xspace}
+
+% Conductance
+\newcommand{\conductance}{\ensuremath{g}\xspace}
+\newcommand{\conductances}{\ensuremath{G}\xspace}
+
+% Conductivity
+\newcommand{\conductivity}{\ensuremath{\sigma}\xspace}
+
+% Impedance
+\newcommand{\impedance}{\ensuremath{z}\xspace}
+\newcommand{\impedances}{\ensuremath{Z}\xspace}
+\newcommand{\impedancebase}{\ensuremath{\impedances_{\mathrm{base}}}\xspace}
+
+% Admittance
+\newcommand{\admittance}{\ensuremath{y}\xspace}
+\newcommand{\linechargingadmittance}{\ensuremath{y_{\mathrm{ch}}}\xspace}
+\newcommand{\admittances}{\ensuremath{Y}\xspace}
+\newcommand{\admittancebase}{\ensuremath{\admittances_{\mathrm{base}}}\xspace}
+
+% Transformer
+\newcommand{\tapratio}{\ensuremath{\tau}\xspace}
+
+% Frequency
+\usepackage{fge}
+\newcommand{\frequency}{\ensuremath{\fges}\xspace}
+\newcommand{\angularfrequency}{\ensuremath{\omega}\xspace}
+
+% Capacity
+\DeclareMathOperator{\capacity}{\ensuremath{cap}\xspace}
+\DeclareMathOperator{\capacitybf}{\ensuremath{\mathbfsf{cap}}\xspace}
+\DeclareMathOperator{\mincapacity}{\ensuremath{\MIN{\capacity}}\xspace}
+\newcommand{\NOMcapacity}{\ensuremath{\capacity}\xspace}
+\newcommandx{\fcapacity}[3]{\ensuremath{\capacity_{#1}(#2,#3)}\xspace}
+\newcommandx{\fmincapacity}[2]{\ensuremath{\MIN{\capacity}_{#1}(#2)}\xspace}
+\newcommand{\capacityTightness}{\ensuremath{\xi}\xspace}
+\newcommand{\substationCapacityVariance}{\ensuremath{\delta}\xspace}
+\newcommand{\shapeAspectRatio}{\ensuremath{\beta}\xspace}
+\newcommand{\kNearestNeighbor}{\ensuremath{k}\xspace}
+\newcommand{\edgeInclusionValue}{\ensuremath{\epsilon}\xspace}
+\newcommand{\thermalConductivityCapacity}{\ensuremath{\tau}\xspace}
+
+% Voltages
+\newcommand{\voltage}{\ensuremath{v}\xspace}
+\newcommand{\voltages}{\ensuremath{V}\xspace}
+\newcommand{\voltagemin}{\ensuremath{\MIN{\voltage}}\xspace}
+\newcommand{\voltagemax}{\ensuremath{\MAX{\voltage}}\xspace}
+\newcommand{\vmagnitude}{\ensuremath{|\voltage|}\xspace}
+\newcommand{\voltagebase}{\ensuremath{\voltages_{\mathrm{base}}}\xspace}
+\newcommand{\voltagerms}{\ensuremath{\voltages_{\mathrm{RMS}}}\xspace}
+
+% Current
+\newcommand{\current}{\ensuremath{i}\xspace}
+\newcommand{\currents}{\ensuremath{I}\xspace}
+\newcommand{\currentmax}{\ensuremath{\MAX{\current}}\xspace}
+\newcommand{\currentbase}{\ensuremath{\currents_{\mathrm{base}}}\xspace}
+\newcommand{\currentrms}{\ensuremath{\currents_{\mathrm{RMS}}}\xspace}
+
+% Voltage and current angle
+\newcommand{\aangle}{\ensuremath{\theta}\xspace}
+\newcommand{\vangle}{\ensuremath{\aangle^\voltage}\xspace}
+\newcommand{\vanglemin}{\ensuremath{\MIN{\vangle}}\xspace}
+\newcommand{\vanglemax}{\ensuremath{\MAX{\vangle}}\xspace}
+\newcommand{\iangle}{\ensuremath{\aangle^\current}\xspace}
+\newcommand{\vangleshift}{\ensuremath{\aangle^\voltage_\mathrm{shift}}\xspace}
+\newcommand{\anglea}{\ensuremath{\vangle(\vertexa)}\xspace}
+\newcommand{\angleb}{\ensuremath{\vangle(\vertexb)}\xspace}
+\newcommand{\deltaangle}{\ensuremath{\Delta\vangle}\xspace}
+\newcommand{\deltavangle}{\ensuremath{\Delta\vangle}\xspace}
+\newcommand{\deltavanglemin}{\ensuremath{\MIN{\Delta\vangle}}\xspace}
+\newcommand{\deltavanglemax}{\ensuremath{\MAX{\Delta\vangle}}\xspace}
+\newcommand{\angledifference}{\ensuremath{\Delta}\xspace}
+
+% Complex power
+\newcommand{\complexpower}{\ensuremath{s}\xspace}
+\newcommand{\complexpowers}{\ensuremath{S}\xspace}
+\newcommand{\complexpowermax}{\ensuremath{\MAX{\complexpower}}\xspace}
+\newcommand{\complexpowerbase}{\ensuremath{\complexpowers_{\mathrm{base}}}\xspace}
+
+% Real (active) power
+\newcommand{\supply}{\ensuremath{p}\xspace}
+\newcommand{\realpower}{\ensuremath{p}\xspace}
+\newcommand{\realpowers}{\ensuremath{P}\xspace}
+\newcommand{\realpowersmin}{\ensuremath{\MIN{\realpowers}}\xspace}
+\newcommand{\realpowermin}{\ensuremath{\MIN{\realpower}}\xspace}
+\newcommand{\realpowergenerationmin}{\ensuremath{
+\MIN{\realpower_g}}\xspace}
+\newcommand{\realpowerdemandmin}{\ensuremath{
+\MIN{\realpower_\demand}}\xspace}
+\newcommand{\realpowerdemand}{\ensuremath{\realpower_\demand}\xspace}
+\newcommand{\realpowersmax}{\ensuremath{\realpowers_{\max}}\xspace}
+\newcommand{\realpowermax}{\ensuremath{\MAX{\realpower}}\xspace}
+\newcommand{\realpowergenerationmax}{\ensuremath{\MAX{\realpower_{g}}}\xspace}
+\newcommand{\realpowergeneration}{\ensuremath{\realpower_{g}}\xspace}
+\newcommand{\realpowerdemandmax}{\ensuremath{\MAX{\realpower_{\demand}}}\xspace}
+\newcommand{\realpowerbase}{\ensuremath{\realpowers_{\mathrm{base}}}\xspace}
+
+% Reactive power
+\newcommand{\reactivepower}{\ensuremath{q}\xspace}
+\newcommand{\reactivepowers}{\ensuremath{Q}\xspace}
+\newcommand{\reactivepowermin}{\ensuremath{\MIN{\reactivepower}}\xspace}
+\newcommand{\reactivepowergenerationmin}{\ensuremath{
+\MIN{\reactivepower_{g}}}\xspace}
+\newcommand{\reactivepowerdemandmin}{\ensuremath{
+\MIN{\reactivepower_{\demand}}}\xspace}
+\newcommand{\reactivepowerdemand}{\ensuremath{\reactivepower_{\demand}}\xspace}
+\newcommand{\reactivepowersmin}{\ensuremath{\MIN{\reactivepowers}}\xspace}
+\newcommand{\reactivepowermax}{\ensuremath{\MAX{\reactivepower}}\xspace}
+\newcommand{\reactivepowergeneration}{\ensuremath{
+\reactivepower_{g}}\xspace}
+\newcommand{\reactivepowergenerationmax}{\ensuremath{
+\MAX{\reactivepower_{g}}}\xspace}
+\newcommand{\reactivepowerdemandmax}{\ensuremath{
+\MAX{\reactivepower_{\demand}}}\xspace}
+\newcommand{\reactivepowersmax}{\ensuremath{\MAX{\reactivepowers}}\xspace}
+\newcommand{\reactivepowerbase}{\ensuremath{\reactivepowers_{
+\mathrm{base}}}\xspace}
+% 
+\newcommand{\excess}{\ensuremath{x}\xspace}
+\newcommand{\excessSet}{\ensuremath{X}\xspace}
+\newcommand{\minexcess}{\ensuremath{\MIN{\excess}}\xspace}
+\newcommand{\maxexcess}{\ensuremath{\MAX{\excess}}\xspace}
+
+% Demand
+\newcommand{\demand}{\ensuremath{d}\xspace}
+\newcommand{\mindemand}{\ensuremath{\MIN{\demand}}\xspace}
+\newcommand{\maxdemand}{\ensuremath{\MAX{\demand}}\xspace}
+\newcommand{\paths}{\ensuremath{\Pi}\xspace}
+\newcommand{\pathu}{\ensuremath{\pi}\xspace}
+\newcommandx{\fpath}[3]{\ensuremath{\pathu_{#1}(#2,#3)}\xspace}
+
+\newcommand{\deltawye}{\ensuremath{\Delta\text{-}Y}\xspace}
+\newcommand{\wyedelta}{\ensuremath{Y\text{-}\Delta}\xspace}
+\newcommand{\timestamp}{\ensuremath{t}\xspace}
+\newcommand{\timestamps}{\ensuremath{T}\xspace}
+
+% Switch
+\newcommand{\switch}{\ensuremath{z}\xspace}
+\newcommand{\switched}{\ensuremath{S}\xspace}
+
+% P-Q-V-model
+\newcommand{\pqv}{\ensuremath{PQV}\xspace}
+\newcommand{\iv}{\ensuremath{IV}\xspace}
+
+% Buse Type codes
+\newcommand{\vtbus}{\ensuremath{\mathsf{\voltages\vangle}}\xspace}
+\newcommand{\qtbus}{\ensuremath{\mathsf{\reactivepowers\vangle}}\xspace}
+\newcommand{\pqbus}{\ensuremath{\mathsf{\realpowers\reactivepowers}}\xspace}
+\newcommand{\pvbus}{\ensuremath{\mathsf{\realpowers\voltages}}\xspace}
+\newcommand{\cvbus}{\ensuremath{\mathsf{C\voltages}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Centrality
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\sbc}{\ensuremath{\mathsf{\dtp B}}\xspace}
+\newcommand{\sbcbf}{\ensuremath{\mathbfsf{\dtpbf B}}\xspace}
+\newcommand{\SBC}{\textsc{\DTP Betweenness Centrality}\xspace}
+
+\newcommand{\scu}{\ensuremath{\mathsf{S}}\xspace}
+\newcommand{\scubf}{\ensuremath{\mathbfsf{S}}\xspace}
+\newcommand{\SCu}{\textsc{Switching Centrality}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathOperator{\len}{\ensuremath{len}\xspace}
+\DeclareMathOperator{\costsubstation}{\ensuremath{\totalcost_\mathrm{sub}}\xspace} %csub
+\newcommand{\totalcost}{\ensuremath{c}\xspace} 
+\DeclareMathOperator{\flowcost}{\ensuremath{cost}\xspace}
+\DeclareMathOperator{\degree}{\ensuremath{deg}\xspace} % degree of a vertex
+
+\newcommandx{\deriv}[3]{%
+    \frac{\diff^{#1}#2}{\diff #3^{#1}}}%
+\newcommandx{\pderiv}[3]{%
+    \frac{\partial^{#1}#2}{\partial #3^{#1}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problems
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% General
+\newcommand{\problems}{\ensuremath{\mathcal{P}}\xspace}
+
+% Economic Dispatch Problem (EDP)
+\newcommand{\edp}{EDP\xspace}   
+\newcommand{\EDP}{\textsc{Economic Dispatch Problem}\xspace} 
+
+% Alternating Current (AC)
+\newcommand{\ac}{\ensuremath{\mathsf{AC}}\xspace}
+\newcommand{\acbf}{\ensuremath{\mathbfsf{AC}}\xspace}
+\newcommand{\ACu}{\textsc{Alternating Current}\xspace}
+
+% AC Optimal Power Flow (ACOPF)
+\newcommand{\acopf}{\ensuremath{\mathsf{\ac\opf}}\xspace}
+\newcommand{\acopfbf}{\ensuremath{\mathbfsf{ACOPF}}\xspace}
+\newcommand{\ACOPF}{\textsc{\ACu\ \OPF}\xspace}
+
+% AC Optimal Transmission Switching (ACOTS)
+\newcommand{\acots}{\ensuremath{\mathsf{\ac\ots}}\xspace}
+\newcommand{\acotsbf}{\ensuremath{\mathbfsf{\acbf\otsbf}}\xspace}
+
+% Alternating Direction Method of Multipliers (ADMM)
+\newcommand{\admm}{\ensuremath{\mathrm{ADMM}}\xspace}
+\newcommand{\admmbf}{\ensuremath{\mathbfsf{ADMM}}\xspace}
+\newcommand{\ADMM}{alternating direction method of multipliers\xspace}
+
+% Capacitated Minimum Spanning Tree (CMST)
+\newcommand{\cmst}{\ensuremath{\mathsf{CMST}}\xspace}
+\newcommand{\cmstbf}{\ensuremath{\mathbfsf{CMST}}\xspace}
+\newcommand{\CMST}{\textsc{Capacitated Minimum Spanning Tree}\xspace}
+
+% Combinatorial Optimization Problem (COP)
+\newcommand{\cop}{\ensuremath{\mathsf{COP}}\xspace}
+\newcommand{\copbf}{\ensuremath{\mathbfsf{COP}}\xspace}
+\newcommand{\COP}{\textsc{Combinatorial Optimization Problem}\xspace}
+
+% Direct Current (DC)
+\newcommand{\dc}{\ensuremath{\mathsf{DC}}\xspace}
+\newcommand{\dcbf}{\ensuremath{\mathbfsf{DC}}\xspace}
+\newcommand{\DC}{\textsc{Direct Current}\xspace}
+
+% DC Maximum Power Flow (DCMPF)
+\newcommand{\dcmpf}{\ensuremath{\dc\mathsf{MPF}}\xspace}
+\newcommand{\dcmpfbf}{\ensuremath{\dcbf\tens{MPF}}\xspace}
+\newcommand{\DCMPF}{\DC\textsc{Maximum Power Flow}\xspace}
+
+% DC Optimal Transmission Switching (DCOTS)
+\newcommand{\dcots}{\ensuremath{\mathsf{\dc\ots}}\xspace}
+\newcommand{\dcotsbf}{\ensuremath{\mathbfsf{\dcbf\otsbf}}\xspace}
+
+% DC Optimal Power Flow (DCOPF)
+\newcommand{\dcopf}{\ensuremath{\mathsf{\dc\opf}}\xspace}
+\newcommand{\dcopfbf}{\ensuremath{\mathbfsf{DCOPF}}\xspace}
+\newcommand{\DCOPF}{\textsc{\DC\ \OPF}\xspace}
+% 
+\newcommand{\dfs}{\ensuremath{\mathsf{DFS}}\xspace}
+
+% Dominating Theta Path (DTP)
+\newcommand{\dtp}{\ensuremath{\mathsf{DTP}}\xspace}
+\newcommand{\dtpbf}{\ensuremath{\mathbfsf{DTP}}\xspace}
+\newcommand{\DTP}{\textsc{Dominating Theta Path}\xspace}
+
+% Flexible AC Transmission System (FACTS)
+\newcommand{\facts}{FACTS\xspace}
+\newcommand{\FACTS}{Flexible~\ac\ Transmission Systems\xspace}
+
+% Feasibility Problem (FEAS)
+\newcommand{\feas}{\ensuremath{\mathsf{FEAS}}\xspace}
+\newcommand{\feasbf}{\ensuremath{\mathbfsf{FEAS}}\xspace}
+\newcommand{\FEAS}{\textsc{Feasibility Problem}\xspace}
+
+% Concerning flows 
+\newcommand{\flowvalue}{\ensuremath{F}\xspace}
+\newcommand{\flowvaluebf}{\ensuremath{\mathbfsf{F}}\xspace}
+
+% Kirchhoff's Current Law (KCL)
+\newcommand{\kcl}{KCL\xspace}
+\newcommand{\KCL}{Kirchhoff's Current Law\xspace}
+
+% Kirchhoff's Voltage Law (KVL)
+\newcommand{\kvl}{KVL\xspace}
+\newcommand{\KVL}{Kirchhoff's Voltage Law\xspace}
+
+% Line Outage Distribution Factor (LODF)
+\newcommand{\lodf}{\ensuremath{\mathrm{LODF}}\xspace}
+\newcommand{\lodfbf}{\ensuremath{\mathbfsf{LODF}}\xspace}
+\newcommand{\LODF}{line outage distribution factor\xspace}
+
+% Linear Programming (LP)
+\newcommand{\lp}{\ensuremath{\mathsf{LP}}\xspace}
+\newcommand{\lpbf}{\ensuremath{\mathbfsf{LP}}\xspace}
+\newcommand{\LP}{\textsc{Linear Programming}\xspace}
+
+% Maximum Spanning Tree (MST)
+\newcommand{\maxst}{\ensuremath{\mathsf{MaxST}}\xspace}
+\newcommand{\maxstbf}{\ensuremath{\mathbfsf{MaxST}}\xspace}
+\newcommand{\MAXST}{\textsc{Maximum Spanning Tree}\xspace}
+
+% Multicommodity Capacitated Network Design (MCND)
+\newcommand{\mcnd}{\ensuremath{\mathsf{MCND}}\xspace}
+\newcommand{\mcndbf}{\ensuremath{\mathbfsf{MCND}}\xspace}
+\newcommand{\MCND}{\textsc{Multicommodity Capacitated Network Design}\xspace}
+
+% Minimum Cost Flow (MCF)
+\newcommand{\mcf}{\ensuremath{\mathsf{MCF}}\xspace}
+\newcommand{\mcfbf}{\ensuremath{\mathbfsf{MCF}}\xspace}
+\newcommand{\MCF}{\textsc{Minimum Cost Flow}\xspace} 
+
+% Minimum Cost Flow Problem (MCFP)
+\newcommand{\mcfp}{\ensuremath{\mathsf{MCFP}}\xspace}
+\newcommand{\mcfpbf}{\ensuremath{\mathbfsf{MCFP}}\xspace}
+\newcommand{\MCFP}{\textsc{Minimum Cost Flow Problem}\xspace} 
+
+% Maximum Flow (MF)
+\newcommand{\mf}{\ensuremath{\mathsf{MF}}\xspace}
+\newcommand{\mfbf}{\ensuremath{\mathbfsf{MF}}\xspace}
+\newcommand{\MF}{\text{maximum flow}\xspace} 
+
+% Maximum Flow Problem (MFP)
+\newcommand{\mfp}{\ensuremath{\mathsf{MFP}}\xspace}
+\newcommand{\mfpbf}{\ensuremath{\mathbfsf{MFP}}\xspace}
+\newcommand{\MFP}{\textsc{Maximum Flow Problem}\xspace} 
+
+% Minimum Cut (MC)
+\newcommand{\mc}{\ensuremath{\mathsf{MC}}\xspace}
+\newcommand{\mcbf}{\ensuremath{\mathbfsf{MC}}\xspace}
+\newcommand{\MC}{\text{minimum cut}\xspace} 
+
+% Minimum Cut Problem (MCP)
+\newcommand{\mcp}{\ensuremath{\mathsf{MCP}}\xspace}
+\newcommand{\mcpbf}{\ensuremath{\mathbfsf{MCP}}\xspace}
+\newcommand{\MCP}{\textsc{Minimum Cut Problem}\xspace} 
+
+% Mixed-integer Linear Program (MILP)
+\newcommand{\milp}{\ensuremath{\mathsf{MILP}}\xspace}
+\newcommand{\milpbf}{\ensuremath{\mathbfsf{MILP}}\xspace}
+\newcommand{\MILP}{\textsc{Mixed-integer Linear Program}\xspace}
+
+% Mixed-integer Non-Linear Programming (MINLP)
+\newcommand{\minlp}{\ensuremath{\mathsf{MINLP}}\xspace}
+\newcommand{\minlpbf}{\ensuremath{\mathbfsf{MINLP}}\xspace}
+\newcommand{\MINLP}{\textsc{Mixed-integer NonLinear Programming}\xspace}
+
+% Maximum Power Flow (MPF)
+\newcommand{\mpf}{\ensuremath{\mathsf{MPF}}\xspace}
+\newcommand{\mpfbf}{\ensuremath{\tens{MPF}}\xspace}
+\newcommand{\MPF}{\text{maximum power flow}\xspace}
+
+% Maximum Power Flow (MPFP)
+\newcommand{\mpfp}{\ensuremath{\mathsf{MPFP}}\xspace}
+\newcommand{\mpfpbf}{\ensuremath{\tens{MPFP}}\xspace}
+\newcommand{\MPFP}{\textsc{Maximum Power Flow Problem}\xspace}
+
+% Maximum Spanning Tree (MST)
+\newcommand{\mst}{\ensuremath{\mathsf{MST}}\xspace}
+\newcommand{\mstbf}{\ensuremath{\mathbfsf{MST}}\xspace}
+\newcommand{\MST}{\textsc{Minimum Spanning Tree}\xspace}
+
+% Maximum Transmission Switching Flow (MTSF)
+\newcommand{\mtsf}{\ensuremath{\mathsf{MTSF}}\xspace}
+\newcommand{\mtsfbf}{\ensuremath{\mathbfsf{MTSF}}\xspace}
+\newcommand{\MTSF}{\textsc{Maximum Transmission Switching Flow}\xspace}
+
+% Maximum Transmission Switching Flow Problem (MTSFP)
+\newcommand{\mtsfp}{\ensuremath{\mathsf{MTSFP}}\xspace}
+\newcommand{\mtsfpbf}{\ensuremath{\mathbfsf{MTSFP}}\xspace}
+\newcommand{\MTSFP}{\textsc{Maximum Transmission Switching Flow Problem}\xspace}
+
+% Maximum Transmission Switching Flow - Decision Problem
+\newcommand{\kmtsf}{\ensuremath{k}-\mtsf}
+\newcommand{\kmtsfbf}{\ensuremath{k}-\mtsfbf}
+\newcommand{\kMTSF}{\ensuremath{k}-\acrlong{mtsf}}
+% 
+\newcommand{\kmtsfp}{\ensuremath{k}-\mtsfp}
+\newcommand{\kmtsfpbf}{\ensuremath{k}-\mtsfpbf}
+\newcommand{\kMTSFP}{\ensuremath{k}-\acrlong{mtsfp}}
+
+% Minimum Number of Switches (MNS)
+\newcommand{\mns}{\ensuremath{\mathsf{MNS}}\xspace}
+\newcommand{\mnsbf}{\ensuremath{\mathbfsf{MNS}}\xspace}
+\newcommand{\MNS}{\textsc{Minimum Number of Switches}\xspace}
+
+% Minimum Number of Switches (MNSP)
+\newcommand{\mnsp}{\ensuremath{\mathsf{MNSP}}\xspace}
+\newcommand{\mnspbf}{\ensuremath{\mathbfsf{MNSP}}\xspace}
+\newcommand{\MNSP}{\textsc{Minimum Number of Switches Problem}\xspace}
+
+% Optimal Transmission Switching (OTS)
+\newcommand{\ots}{\ensuremath{\mathsf{OTS}}\xspace}
+\newcommand{\otsbf}{\ensuremath{\mathbfsf{OTS}}\xspace}
+\newcommand{\OTS}{\textsc{Optimal Transmission Switching}\xspace}
+
+% Optimal Transmission Switching Flow Problem (OTSP)
+\newcommand{\otsp}{\ensuremath{\mathsf{OTSP}}\xspace}
+\newcommand{\otspbf}{\ensuremath{\mathbfsf{OTSP}}\xspace}
+\newcommand{\OTSP}{\textsc{Optimal Transmission Switching Problem}\xspace}
+
+% Maximum FACTS Flow (MFF)
+\newcommand{\mff}{\ensuremath{\mathsf{MFF}}\xspace}
+\newcommand{\mffbf}{\ensuremath{\mathbfsf{MFF}}\xspace}
+\newcommand{\MFF}{\textsc{Maximum~\facts\ Flow}\xspace}
+
+% Maximum FACTS Flow Problem (MFFP)
+\newcommand{\mffp}{\ensuremath{\mathsf{MFFP}}\xspace}
+\newcommand{\mffpbf}{\ensuremath{\mathbfsf{MFFP}}\xspace}
+\newcommand{\MFFP}{\textsc{Maximum~\facts Flow Problem}\xspace}
+
+% Minimum Number of FACTS (MNF)
+\newcommand{\mnf}{\ensuremath{\mathsf{MNF}}\xspace}
+\newcommand{\mnfbf}{\ensuremath{\mathbfsf{MNF}}\xspace}
+\newcommand{\MNF}{\textsc{Minimum Number of~\facts}\xspace}
+
+% Minimum Number of FACTS Problem (MNFP)
+\newcommand{\mnfp}{\ensuremath{\mathsf{MNFP}}\xspace}
+\newcommand{\mnfpbf}{\ensuremath{\mathbfsf{MNFP}}\xspace}
+\newcommand{\MNFP}{\textsc{Minimum Number of~\facts Problem}\xspace}
+
+% Optimal FACTS Flow (OFF)
+\newcommand{\off}{\ensuremath{\mathsf{OFF}}\xspace}
+\newcommand{\offbf}{\ensuremath{\mathbfsf{OFF}}\xspace}
+\newcommand{\OFF}{\textsc{Optimal~\facts Flow}\xspace}
+
+% Optimal FACTS Flow Problem (OFFP)
+\newcommand{\offp}{\ensuremath{\mathsf{OFFP}}\xspace}
+\newcommand{\offpbf}{\ensuremath{\mathbfsf{OFFP}}\xspace}
+\newcommand{\OFFP}{\textsc{Optimal~\facts Flow Problem}\xspace}
+
+% Optimal Power Flow (OPF)
+\newcommand{\opf}{\ensuremath{\mathsf{OPF}}\xspace}
+\newcommand{\opfbf}{\ensuremath{\mathbfsf{OPF}}\xspace}
+\newcommand{\OPF}{\textsc{Optimal Power Flow}\xspace}
+
+% Optimal Power Flow (OPF)
+\newcommand{\opfp}{\ensuremath{\mathsf{OPFP}}\xspace}
+\newcommand{\opfpbf}{\ensuremath{\mathbfsf{OPFP}}\xspace}
+\newcommand{\OPFP}{\textsc{Optimal Power Flow Problem}\xspace}
+
+% Power Flow (PF)
+\newcommand{\pf}{\ensuremath{\mathsf{PF}}\xspace}
+\newcommand{\pfbf}{\ensuremath{\tens{PF}}\xspace}
+\newcommand{\PFu}{\textsc{Power Flow}\xspace}
+
+% Power Flow Problem (PFP)
+\newcommand{\pfp}{\ensuremath{\mathsf{PFP}}\xspace}
+\newcommand{\pfpbf}{\ensuremath{\tens{PFP}}\xspace}
+\newcommand{\PFPu}{\textsc{Power Flow Problem}\xspace}
+
+% Power Transfer Distribution Factors
+\newcommand{\ptdf}{\ensuremath{\mathrm{PTDF}}\xspace}
+\newcommand{\ptdfbf}{\ensuremath{\mathbfsf{PTDF}}\xspace}
+\newcommand{\PTDF}{power transfer distribution factors\xspace}
+
+% Quadratic Program (QP)
+\newcommand{\qp}{\ensuremath{\mathrm{QP}}\xspace}
+\newcommand{\qpbf}{\ensuremath{\mathbfsf{QP}}\xspace}
+\newcommand{\QPu}{Quadratic Programming\xspace}
+
+% Restoration Order Problem (ROP)
+\newcommand{\rop}{\ensuremath{\mathsf{ROP}}\xspace}
+\newcommand{\ropbf}{\ensuremath{\mathbfsf{ROP}}\xspace}
+\newcommand{\ROP}{\textsc{Restoration Order Problem}\xspace}
+
+% Simultaneous Flow Problem (SFP)
+\newcommand{\sfp}{\ensuremath{\mathsf{SFP}}\xspace}
+\newcommand{\sfpbf}{\ensuremath{\mathbfsf{SFP}}\xspace}
+\newcommand{\SFP}{\textsc{Simultaneous Flow Problem}\xspace}
+
+% Second Order Cone Programming (SOCP)
+\newcommand{\socp}{\ensuremath{\mathsf{SOCP}}\xspace}
+\newcommand{\socpbf}{\ensuremath{\mathbfsf{SOCP}}\xspace}
+\newcommand{\SOCP}{\textsc{Second Order Cone Programming}\xspace}
+
+% Shortest Path (SP)
+\newcommand{\spp}{\ensuremath{\mathsf{SP}}\xspace}
+\newcommand{\sppbf}{\ensuremath{\mathbfsf{SP}}\xspace}
+\newcommand{\SPPu}{\textsc{Shortest Path}\xspace}
+
+% Shortest Path Problem (SPP)
+\newcommand{\sppp}{\ensuremath{\mathsf{SPP}}\xspace}
+\newcommand{\spppbf}{\ensuremath{\mathbfsf{SPP}}\xspace}
+\newcommand{\SPPPu}{\textsc{Shortest Path Problem}\xspace}
+
+% Shortest Path (SP)
+\newcommand{\lpp}{\ensuremath{\mathsf{LP}}\xspace}
+\newcommand{\lppbf}{\ensuremath{\mathbfsf{LP}}\xspace}
+\newcommand{\LPPu}{\textsc{Longest Path}\xspace}
+
+% Shortest Path Problem
+\newcommand{\lppp}{\ensuremath{\mathsf{LPP}}\xspace}
+\newcommand{\lpppbf}{\ensuremath{\mathbfsf{LPP}}\xspace}
+\newcommand{\LPPPu}{\textsc{Longest Path Problem}\xspace}
+
+% Voltage Normalized Lossless Real Power Flow (VNLP)
+\newcommand{\sinac}{\ensuremath{\mathsf{VNLP}}\xspace}
+\newcommand{\sinacbf}{\ensuremath{\mathbfsf{VNLP}}\xspace}
+\newcommand{\SINAC}{\textsc{Voltage Normalized Lossless Real Power Flow}\xspace}
+
+% Voltage Normalized Lossless Real Power Flow Problem (VNLPP)
+\newcommand{\sinacp}{\ensuremath{\mathsf{VNLPP}}\xspace}
+\newcommand{\sinacpbf}{\ensuremath{\mathbfsf{VNLPP}}\xspace}
+\newcommand{\SINACP}{\textsc{Voltage Normalized Lossless Real Power Flow
+Problem}\xspace}
+
+% s-t-Rainbow Path
+\newcommand{\strp}{\ensuremath{\text{$\source$-$\sink$-}\mathrm{RP}}\xspace}
+\newcommand{\strpbf}{\ensuremath{\source-\sink-\mathbfsf{RP}}\xspace}
+\newcommand{\STRP}{\textsc{Rainbow $\source$-$\sink$-Path}\xspace}
+
+% Subset Sum Problem (SSP)
+\newcommand{\ssp}{\ensuremath{\mathsf{SSP}}\xspace}
+\newcommand{\sspbf}{\ensuremath{\mathbfsf{SSP}}\xspace}
+\newcommand{\SSP}{\textsc{Subset Sum Problem}\xspace}
+
+% Transmission Network Expansion Planning (TNEP)
+\newcommand{\tnep}{\ensuremath{\mathsf{TNEP}}\xspace}
+\newcommand{\tnepbf}{\ensuremath{\mathbfsf{TNEP}}\xspace}
+\newcommand{\TNEP}{\textsc{Transmission Network Expansion Planning}\xspace}
+
+% Transmission Network Expansion Planning Problem (TNEPP)
+\newcommand{\tnepp}{\ensuremath{\mathsf{TNEPP}}\xspace}
+\newcommand{\tneppbf}{\ensuremath{\mathbfsf{TNEPP}}\xspace}
+\newcommand{\TNEPP}{\textsc{Transmission Network Expansion Planning
+Problem}\xspace}
+
+% Transmission System Operators (TSO)
+\newcommand{\tso}{TSO\xspace}
+\newcommand{\TSO}{Transmission System Operators\xspace}
+% 
+\newcommand{\twoapprox}{\ensuremath{\mathsf{2-approx}}\xspace}
+\newcommand{\twoapproxbf}{\ensuremath{\mathbfsf{2-approx}}\xspace}
+\newcommand{\TWOAPPROX}{\textsc{2-Approximation}\xspace}
+
+% Unit Commitment Problem
+\newcommand{\ucp}{\ensuremath{\mathsf{UCP}}\xspace}
+\newcommand{\ucpbf}{\ensuremath{\mathbfsf{UCP}}\xspace}
+\newcommand{\UCP}{\textsc{Unit Commitment Problem}\xspace}
+% 
+\newcommand{\vc}{\ensuremath{\mathsf{VC}}\xspace}
+\newcommand{\vcp}{\ensuremath{\mathsf{VCP}}\xspace}
+\newcommand{\vcpbf}{\ensuremath{\mathbfsf{VCP}}\xspace}
+\newcommand{\VCP}{\textsc{Vertex Cover Problem}\xspace}
+% 
+\newcommand{\fvs}{\ensuremath{\mathsf{FVS}}\xspace}
+\newcommand{\fvsp}{\ensuremath{\mathsf{FVSP}}\xspace}
+\newcommand{\fvspbf}{\ensuremath{\mathbfsf{FVSP}}\xspace}
+\newcommand{\FVSP}{\textsc{Feedback Vertex Set Problem}\xspace}
+% 
+\newcommand{\partitionp}{\ensuremath{\mathsf{PP}}\xspace}
+\newcommand{\partitionpbf}{\ensuremath{\mathbfsf{PP}}\xspace}
+\newcommand{\PartitionP}{\textsc{Partition Problem}\xspace}
+
+% Circuit Problem
+\newcommand{\wcp}{\ensuremath{\mathsf{CP}}\xspace}
+\newcommand{\wcpbf}{\ensuremath{\mathbfsf{CP}}\xspace}
+\newcommand{\WCP}{\textsc{Circuit Problem}\xspace}
+
+% Substation Problem
+\newcommand{\wsp}{\ensuremath{\mathsf{SP}}\xspace}
+\newcommand{\wspbf}{\ensuremath{\mathbfsf{SP}}\xspace}
+\newcommand{\WSP}{\textsc{Substation Problem}\xspace}
+
+% Full Farm Problem
+\newcommand{\wffp}{\ensuremath{\mathsf{FFP}}\xspace}
+\newcommand{\wffpbf}{\ensuremath{\mathbfsf{FFP}}\xspace}
+\newcommand{\WFFP}{\textsc{Full Farm Problem}\xspace}
+
+% flexible Full Farm Problem
+\newcommand{\wfffp}{\ensuremath{\mathsf{fFFP}}\xspace}
+\newcommand{\wfffpbf}{\ensuremath{\mathbfsf{fFFP}}\xspace}
+\newcommand{\WfFFP}{\textsc{flexible Full Farm Problem}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Naturals
+\newcommand{\naturals}{\ensuremath{\mathbb{N}}\xspace}
+
+% Rationals
+\newcommand{\rationals}{\ensuremath{\mathbb{Q}}\xspace}
+\newcommand{\posrationals}{\ensuremath{\rationals_{\ge 0}}\xspace}
+
+% Reals
+\newcommand{\reals}{\ensuremath{\mathbb{R}}\xspace}
+\newcommand{\strictposreals}{\ensuremath{\reals_{>0}}\xspace}
+\newcommand{\posreals}{\ensuremath{\reals_{\ge0}}\xspace}
+\newcommand{\negreals}{\ensuremath{\reals_{\le0}}\xspace}
+
+% Integer
+\newcommand{\integers}{\ensuremath{\mathbb{Z}}\xspace}
+
+% Interval
+\newcommand{\interval}{\ensuremath{I}\xspace}
+\newcommand{\intervals}{\ensuremath{\mathcal{I}}\xspace}
+
+% Complex
+\newcommand{\complexes}{\ensuremath{\mathbb{C}}\xspace}
+\newcommand{\imgPart}{\ensuremath{\textbf{j}}\xspace}
+% 
+\newcommand{\determinant}{\ensuremath{\mathrm{det}}\xspace}
+\newcommandx{\fdeterminant}[1]{\ensuremath{\determinant\left(#1\right)}\xspace}
+\newcommandx{\imaginary}[1]{\ensuremath{\mathcal{I}\!\!m\!\left
+(#1\right)}\xspace}
+\newcommandx{\imaginarySmall}[1]{\ensuremath{\mathcal{I}\!\!m\left
+(#1\right)}\xspace}
+\newcommandx{\real}[1]{\ensuremath{\mathcal{R}\!e\!\left(#1\right)}\xspace}
+\newcommandx{\conjugate}[1]{\ensuremath{{#1}^\star}\xspace}
+\newcommandx{\realSmall}[1]{\ensuremath{\mathcal{R}\!e\left(#1\right)}\xspace}
+\newcommandx{\fsin}[1]{\ensuremath{\sin\!\big(#1\big)}\xspace}
+\newcommandx{\fcos}[1]{\ensuremath{\cos\!\big(#1\big)}\xspace}
+
+% Complexity
+\newcommand{\NPbf}{\ensuremath{\mathbfsf{NP}}}
+\newcommand{\bigO}{\ensuremath{\mathcal{O}}}
+\newcommand{\smallO}{\ensuremath{\mathcal{o}}}
+\newcommand{\logO}{\ensuremath{\mathcal{\widetilde{O}}}}
+\newcommand{\bigT}{\ensuremath{\Theta}}
+\newcommand{\opt}{\ensuremath{\mathrm{OPT}}}
+\newcommand{\optbf}{\ensuremath{\mathbfsf{OPT}}}
+
+% Mathematical norms
+\newcommandx{\norm}[2]{\ensuremath{\left\lVert#1\right\rVert_{#2}}}
+\newcommand{\bnorm}[1]{\ensuremath{\norm{#1}{\susceptance}}}
+\newcommand{\leinsnorm}[1]{\ensuremath{\norm{#1}{\ell 1}}}
+
+% Mathematical operators
+\newcommand{\ringsum}{\ensuremath{\oplus}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simulated Annealing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Turbines
+\newcommand{\turbines}{\ensuremath{\generators}\xspace}
+\newcommand{\turbine}{\ensuremath{t}\xspace}
+
+% Substations
+\newcommand{\substations}{\ensuremath{\consumers}\xspace}
+\newcommand{\substation}{\ensuremath{j}\xspace}
+
+% Possible substations for fFFP
+\newcommand{\possiblesubstations}{\ensuremath{\vertices_{L}}\xspace}
+\newcommand{\locations}{\ensuremath{L}\xspace}
+
+\newcommand{\temperature}{\ensuremath{T}}
+\newcommand{\energy}{\ensuremath{\totalcost}\xspace} %usually E for energy, but E is already used for the set of edges 
+
+% Solutions
+\newcommand{\solutions}{\ensuremath{S}\xspace}
+\newcommand{\solution}{\ensuremath{s}\xspace}
+\newcommand{\solutiona}{\ensuremath{\solution_1}\xspace}
+\newcommand{\solutionb}{\ensuremath{\solution_2}\xspace}
+
+% Best Solution
+\newcommand{\bestsolution}{\ensuremath{\overline{s}}\xspace}
+\newcommand{\bestsolutiona}{\ensuremath{\bestsolution_1}\xspace}
+\newcommand{\bestsolutionb}{\ensuremath{\bestsolution_2}\xspace}
+
+% Probability
+\newcommand{\probability}{\ensuremath{\mathcal{W}}\xspace}
+
+% Representation
+\newcommand{\representations}{\ensuremath{R}\xspace}
+\DeclareMathOperator{\potential}{pot}
+
+% Activity
+\newcommand{\activity}{\ensuremath{\mu}\xspace}
+\newcommand{\activitythreshold}{\ensuremath{\overline{\mu}}\xspace}
+
+% Instances 
+\newcommand{\instances}{\ensuremath{\mathcal{I}}\xspace}
+\newcommand{\instance}{\ensuremath{I}\xspace}
+\newcommand{\instancea}{\ensuremath{\instance_1}\xspace}
+\newcommand{\instanceb}{\ensuremath{\instance_2}\xspace}
+\newcommand{\instancec}{\ensuremath{\instance_k}\xspace}
+
+% Cable Types
+\newcommand{\cabletypes}{\ensuremath{K}\xspace}
+\newcommand{\cabletype}{\ensuremath{\kappa}\xspace}
+\newcommand{\cabletypea}{\ensuremath{\cabletype^{(1)}}\xspace}
+\newcommand{\cabletypeb}{\ensuremath{\cabletype^{(2)}}\xspace}
+\newcommand{\cabletypec}{\ensuremath{\cabletype^{(3)}}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Test Cases
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\usepackage{xifthen}%
+\newcommand{\ifequals}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}%
+\newcommand{\case}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
+\newenvironment{switchcase}[1]{\renewcommand{\case}{\ifequals{#1}}}{}%
+% 
+% Example: Pick case by ID
+\newcommand{\nestacase}[2]{%
+  \begin{switchcase}{#1}%
+    \case{3}{\texttt{nesta\_case3\_lmbd}}%
+    \case{4}{\texttt{nesta\_case4\_gs}}%
+    \case{5}{\texttt{nesta\_case5\_pjm}}%
+    \case{6c}{\texttt{nesta\_case6\_c}}%
+    \case{6ww}{\texttt{nesta\_case6\_ww}}%
+    \case{9}{\texttt{nesta\_case9\_wscc}}%
+    \case{14}{\texttt{nesta\_case14\_ieee}}%
+    \case{24}{\texttt{nesta\_case24\_ieee\_rts}}%
+    \case{29}{\texttt{nesta\_case29\_edin}}%
+    \case{30as}{\texttt{nesta\_case30\_as}}%
+    \case{30fsr}{\texttt{nesta\_case30\_fsr}}%
+    \case{30ieee}{\texttt{nesta\_case30\_ieee}}%
+    \case{39}{\texttt{nesta\_case39\_epri}}%
+    \case{57}{\texttt{nesta\_case57\_ieee}}%
+    \case{73}{\texttt{nesta\_case73\_ieee\_rts}}%
+    \case{89}{\texttt{nesta\_case89\_pegase}}%
+    \case{118}{\texttt{nesta\_case118\_ieee}}%
+    \case{162}{\texttt{nesta\_case162\_ieee\_dtc}}%
+    \case{189}{\texttt{nesta\_case189\_edin}}%
+    \case{300}{\texttt{nesta\_case300\_ieee}}%
+    \case{2383}{\texttt{nesta\_case2383wp\_mp}}%
+    \case{2736}{\texttt{nesta\_case2736sp\_mp}}%
+    \case{2737}{\texttt{nesta\_case2737sop\_mp}}%
+    \case{2746wop}{\texttt{nesta\_case2746wop\_mp}}%
+    \case{2746wp}{\texttt{nesta\_case2746wp\_mp}}%
+    \case{3012}{\texttt{nesta\_case3012wp\_mp}}%
+    \case{3120}{\texttt{nesta\_case3120sp\_mp}}%
+    \case{3375}{\texttt{nesta\_case3375wp\_mp}}%
+    #2%
+  \end{switchcase}%
+}
+% 
+\newcommand{\tablecase}[1]{%
+  % \footnotesize
+  \begin{switchcase}{#1}%
+    \case{nestacase3lmbd}{\texttt{\hphantom{000}3\_lmbd}}%
+    \case{nestacase0003lmbd}{\texttt{\hphantom{000}3\_lmbd}}%
+    \case{nestacase4gs}{\texttt{\hphantom{000}4\_gs}}%
+    \case{nestacase0004gs}{\texttt{\hphantom{000}4\_gs}}%
+    \case{nestacase5pjm}{\texttt{\hphantom{000}5\_pjm}}%
+    \case{nestacase0005pjm}{\texttt{\hphantom{000}5\_pjm}}%
+    \case{nestacase6c}{\texttt{\hphantom{000}6\_c}}%
+    \case{nestacase0006c}{\texttt{\hphantom{000}6\_c}}%
+    \case{nestacase6ww}{\texttt{\hphantom{000}6\_ww}}%
+    \case{nestacase0006ww}{\texttt{\hphantom{000}6\_ww}}%
+    \case{nestacase9wscc}{\texttt{\hphantom{000}9\_wscc}}%
+    \case{nestacase0009wscc}{\texttt{\hphantom{000}9\_wscc}}%
+    \case{nestacase14ieee}{\texttt{\hphantom{00}14\_ieee}}%
+    \case{nestacase0014ieee}{\texttt{\hphantom{00}14\_ieee}}%
+    \case{nestacase24ieeerts}{\texttt{\hphantom{00}24\_ieee\_rts}}%
+    \case{nestacase0024ieeerts}{\texttt{\hphantom{00}24\_ieee\_rts}}%
+    \case{nestacase29edin}{\texttt{\hphantom{00}29\_edin}}%
+    \case{nestacase0029edin}{\texttt{\hphantom{00}29\_edin}}%
+    \case{nestacase30as}{\texttt{\hphantom{00}30\_as}}%
+    \case{nestacase0030as}{\texttt{\hphantom{00}30\_as}}%
+    \case{nestacase30fsr}{\texttt{\hphantom{00}30\_fsr}}%
+    \case{nestacase0030fsr}{\texttt{\hphantom{00}30\_fsr}}%
+    \case{nestacase30ieee}{\texttt{\hphantom{00}30\_ieee}}%
+    \case{nestacase0030ieee}{\texttt{\hphantom{00}30\_ieee}}%
+    \case{nestacase39epri}{\texttt{\hphantom{00}39\_epri}}%
+    \case{nestacase0039epri}{\texttt{\hphantom{00}39\_epri}}%
+    \case{nestacase57ieee}{\texttt{\hphantom{00}57\_ieee}}%
+    \case{nestacase0057ieee}{\texttt{\hphantom{00}57\_ieee}}%
+    \case{nestacase73ieeerts}{\texttt{\hphantom{00}73\_ieee\_rts}}%
+    \case{nestacase0073ieeerts}{\texttt{\hphantom{00}73\_ieee\_rts}}%
+    \case{nestacase89pegase}{\texttt{\hphantom{00}89\_pegase}}%
+    \case{nestacase0089pegase}{\texttt{\hphantom{00}89\_pegase}}%
+    \case{nestacase118ieee}{\texttt{\hphantom{0}118\_ieee}}%
+    \case{nestacase0118ieee}{\texttt{\hphantom{0}118\_ieee}}%
+    \case{nestacase162ieeedtc}{\texttt{\hphantom{0}162\_ieee\_dtc}}%
+    \case{nestacase0162ieeedtc}{\texttt{\hphantom{0}162\_ieee\_dtc}}%
+    \case{nestacase189edin}{\texttt{\hphantom{0}189\_edin}}%
+    \case{nestacase0189edin}{\texttt{\hphantom{0}189\_edin}}%
+    \case{nestacase300ieee}{\texttt{\hphantom{0}300\_ieee}}%
+    \case{nestacase0300ieee}{\texttt{\hphantom{0}300\_ieee}}%
+    \case{nestacase2383wpmp}{\texttt{2383wp\_mp}}%
+    \case{nestacase2736spmp}{\texttt{2736sp\_mp}}%
+    \case{nestacase2737sopmp}{\texttt{2737sop\_mp}}%
+    \case{nestacase2746wopmp}{\texttt{2746wop\_mp}}%
+    \case{nestacase2746wpmp}{\texttt{2746wp\_mp}}%
+    \case{nestacase3012wpmp}{\texttt{3012wp\_mp}}%
+    \case{nestacase3120spmp}{\texttt{3120sp\_mp}}%
+    \case{nestacase3375wpmp}{\texttt{3375wp\_mp}}%
+    % #2%
+  \end{switchcase}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Matrices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Adjacency Matrix
+\newcommand{\adjacencyMatrix}{\ensuremath{\mathbf{A}}\xspace}%A
+\newcommand{\adjacencyMatrixVector}{\ensuremath{\mathbf{a}}\xspace}%A
+\newcommandx{\adjacencyMatrixEntry}[2]{\ensuremath{\mathbf{\adjacencyMatrix_{#1,#2}}}\xspace}
+
+% Admittance Matrix
+\newcommand{\admittanceMatrix}{\ensuremath{\mathbf{Y}}\xspace}
+\newcommand{\admittanceMatrixElement}{\ensuremath{\mathbf{Y_{\edge}}}\xspace}
+\newcommand{\admittanceMatrixNode}{\ensuremath{\mathbf{Y_n}}\xspace}
+\newcommandx{\admittanceMatrixEntry}[2]{\ensuremath{
+\mathbf{\admittanceMatrix_{#1,#2}}}\xspace}
+% 
+\newcommand{\polyhedron}{\ensuremath{P}\xspace}%P
+\newcommand{\righthandsidevector}{\ensuremath{\realpower}\xspace}
+\newcommandx{\frighthandsidevector}[1]{\ensuremath{\vv{\righthandsidevector_
+{#1}}}\xspace}
+\newcommand{\treeAdmittanceProduct}{\ensuremath{\triangle_n}\xspace}%
+
+% Constraint Matrix
+\newcommand{\constraintmatrix}{\ensuremath{\mathbf{A}}\xspace}%A
+\newcommandx{\constraintmatrixRowElement}[1]{\ensuremath{\mathbf{A}_{#1}}\xspace}%A
+
+% Cycle Matrix
+\newcommand{\cycleMatrix}{\ensuremath{\mathbf{B}}\xspace}
+
+% Incidence Matrix
+\newcommand{\incidenceMatrix}{\ensuremath{\mathbf{I}}\xspace}
+\newcommandx{\incidenceMatrixElement}[1]{\ensuremath{\vv{i_{#1}}}\xspace}
+\newcommandx{\incidenceMatrixEntry}[2]{\ensuremath{\mathbf{\incidenceMatrix_{#1,#2}}}\xspace}
+
+% Cutset Matrix
+\newcommand{\cutsetMatrix}{\ensuremath{\mathbf{Q}}\xspace}
+
+% Laplace Matrix
+\newcommand{\laplaceMatrix}{\ensuremath{\mathbf{L}}\xspace}
+\newcommandx{\laplaceMatrixEntry}[2]{\ensuremath{\mathbf{\ell_{#1,#2}}}\xspace}
+\newcommand{\diagonalMatrix}{\ensuremath{\mathbf{D}}\xspace}
+
+% Rank
+\newcommand{\rank}{\ensuremath{\mathrm{rk}}\xspace}
+\newcommandx{\rankx}[1]{\ensuremath{\rank(#1)}\xspace}
+
+% Nullity
+\newcommand{\nullity}{\ensuremath{n}\xspace}
+\newcommandx{\nullityx}[1]{\ensuremath{\nullity(#1)}\xspace}
+
+% Dimension
+\newcommand{\dimension}{\ensuremath{\mathrm{dim}}\xspace}
+\newcommandx{\dimensionx}[1]{\ensuremath{\dimension(#1)}\xspace}
+
+% Image
+\newcommand{\image}{\ensuremath{\mathrm{img}}\xspace}
+\newcommandx{\fimage}[1]{\ensuremath{\image\left(#1\right)}\xspace}
+
+% Kernel
+\newcommand{\kernel}{\ensuremath{\mathrm{ker}}\xspace}
+\newcommandx{\fkernel}[1]{\ensuremath{\kernel\left(#1\right)}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auxiliary
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\newcommand{\plotscale}{0.8}
+\newcommand{\plotscaleOne}{0.45}
+\newcommand\plotsizeAppendix{0.89}
+\newcommand\gapsizeAppendix{\vspace{-0.7cm}}
+\newcommand\trimLeft{0}
+\newcommand\trimBottom{0}
+\newcommand\trimRight{0}
+\newcommand\trimTop{8}
+
+\newcommand{\forbidden}{\ensuremath{T}\xspace} % for tabu
+\newcommand{\hittingSet}{\ensuremath{H}\xspace} % for tabu
+\newcommand{\coloredgraph}{\ensuremath{\mathcal{G}}\xspace} % for tabu
+
+% Notation / Abbreviations
+\newcommand{\leftish}{\ensuremath{\ell}\xspace}
+\newcommand{\rightish}{\ensuremath{r}\xspace}
+\newcommand{\eg}{e.\,g.\xspace}
+\newcommand{\ie}{i.\,e.\xspace}
+\newcommand{\Wlog}{W.\,l.\,o.\,g.\xspace}
+\newcommand{\wrt}{with respect to\xspace}
+\newcommand{\cf}{c.\,f.\xspace}
+\newcommandx{\MAX}[1]{\overline{#1}\xspace}
+\newcommandx{\MIN}[1]{\underline{#1}\xspace}
+
+% Operations
+\DeclareMathOperator{\mergeop}{merge}
+\DeclareMathOperator{\linkop}{link}
+\DeclareMathOperator{\shiftop}{shift}
+\DeclareMathOperator{\extendop}{extend}
+\DeclareMathOperator{\convertop}{convert}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\boundop}{bound}
+\DeclareMathOperator*{\argmax}{\arg\max}
+\DeclareMathOperator*{\argmin}{\arg\min}
+
+% General stuff and hacks
+\DeclareRobustCommand{\ubar}[1]{\ensuremath{\underaccent{\bar}{#1}}}
+\newcommand{\obar}[1]{\ensuremath{\bar{#1}}}
+\newcommand*{\minx}{\mathmakebox[\widthof{$\max$}][r]{\min}}
+\newcommand{\mytilde}{\ensuremath{\operatorname{\hspace{2pt}\tilde{\protect\phantom{\protect\raisebox{1.0pt}{c}}}}\hspace{-9pt}}}
+\newcommand{\inverse}{{\hspace{0.5pt}\protect\raisebox{0.5pt}{\protect\scalebox{0.6}[1.0]{$\scriptstyle-$}\hspace{-0.6pt}$\scriptscriptstyle1$}\hspace{-1pt}}}
+\newcommandx{\transpose}[1]{\ensuremath{#1^\intercal}\xspace}
+
+% Others 
+\newcommand{\distance}{\ensuremath{d}\xspace}
+\newcommand{\algo}{\ensuremath{\mathcal{A}}\xspace}
+\newcommand{\solutionmap}{\ensuremath{\mathtt{SolutionMap}}\xspace}
+\newcommand{\instancemap}{\ensuremath{\mathtt{InstanceMap}}\xspace}
+\newcommand{\reversesolutionmap}{\ensuremath{\mathtt{ReverseSolutionMap}}\xspace}
+\newcommandx{\fmagnitude}[1]{\ensuremath{\lvert{#1}\rvert}\xspace}
+\newcommand{\tmp}{\mathrm{tmp}}
+\newcommand{\twodots}{\mathinner {\ldotp \ldotp}}
+\newcommand{\parent}{\ensuremath{\mathrm{parent}}}
