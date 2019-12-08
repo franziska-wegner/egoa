@@ -2,7 +2,7 @@
  * GraphIterators.hpp
  *
  *  Created on: Mar 4, 2019
- *      Author: Matthias Wolf
+ *      Author: Franziska Wegner, Matthias Wolf
  */
 
 #ifndef EGOA__DATASTRUCTURES__GRAPHS__ITERATORS__GRAPH_ITERATORS_HPP
@@ -66,8 +66,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_vertex_identifiers( TGraph & graph,
-                                             FUNCTION function )
+            void for_all_vertex_identifiers ( TGraph & graph
+                                            , FUNCTION function )
             {
                 for ( auto & vertex : graph.Vertices() ) 
                 {
@@ -95,8 +95,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_vertices ( TGraph & graph,
-                                    FUNCTION function )
+            void for_all_vertices ( TGraph & graph
+                                  , FUNCTION function )
             {
                 for ( auto & vertex : graph.Vertices() ) 
                 {
@@ -124,8 +124,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_vertex_tuples ( TGraph & graph,
-                                         FUNCTION function )
+            void for_all_vertex_tuples ( TGraph & graph
+                                       , FUNCTION function )
             {
                 for ( auto & vertex : graph.Vertices() ) 
                 {
@@ -158,8 +158,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edge_identifiers( TGraph & graph,
-                                           FUNCTION function )
+            void for_all_edge_identifiers ( TGraph & graph
+                                          , FUNCTION function )
             {
                 for ( auto & edge : graph.Edges() ) 
                 {
@@ -187,8 +187,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges ( TGraph & graph,
-                                 FUNCTION function )
+            void for_all_edges ( TGraph & graph
+                               , FUNCTION function )
             {
                 for ( auto & edge : graph.Edges() ) 
                 {
@@ -216,8 +216,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edge_tuples ( TGraph & graph,
-                                       FUNCTION function )
+            void for_all_edge_tuples ( TGraph & graph
+                                     , FUNCTION function )
             {
                 for ( auto & edge : graph.Edges() ) 
                 {
@@ -232,13 +232,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
 #pragma mark SEQUENTIAL_NEIGHBORHOOD_LOOPS
 
             /**
-             * @brief      The @p for loop over all edges at a vertex @f$v\in\vertices@f$.
+             * @brief      The @p for loop over all edges at a vertex @f$\vertex\in\vertices@f$.
              * @details    This is a loop over incoming and outgoing edges.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all edges at
-             *                       @f$v@f$. It must accept one argument of type
+             *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -260,13 +260,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
 
             /**
              * @brief      The @p for loop over all edges at a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              * @details    This is a loop over incoming and outgoing edges.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all edges at
-             *                       @f$v@f$. It must accept one argument of type
+             *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -279,7 +279,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges_at ( TGraph      & graph
+            void for_all_edges_at ( TGraph  & graph
                                   , TVertexId vertexId
                                   , FUNCTION  function )
             {
@@ -295,12 +295,12 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
 
             /**
              * @brief      The @p for loop over all incoming edges of a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all incoming edges of @f$v@f$. It must
+             *                       all incoming edges of @f$\vertex@f$. It must
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
@@ -323,12 +323,12 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
 
             /**
              * @brief      The @p for loop over all incoming edges of a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all incoming edges of @f$v@f$. It must
+             *                       all incoming edges of @f$\vertex@f$. It must
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
@@ -354,12 +354,12 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
 
             /**
              * @brief      The @p for loop over all outgoing edges of a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all outgoing edges of @f$v@f$. It must
+             *                       all outgoing edges of @f$\vertex@f$. It must
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
@@ -382,12 +382,12 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
 
              /**
              * @brief      The @p for loop over all outgoing edges of a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all outgoing edges of @f$v@f$. It must
+             *                       all outgoing edges of @f$\vertex@f$. It must
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
@@ -454,8 +454,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_vertex_identifiers( TGraph & graph,
-                                             FUNCTION function )
+            void for_all_vertex_identifiers ( TGraph & graph
+                                            , FUNCTION function )
             {
                 for ( auto & vertex : graph.Vertices() ) 
                 {
@@ -487,8 +487,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_vertices( TGraph & graph,
-                                   FUNCTION function )
+            void for_all_vertices ( TGraph & graph
+                                  , FUNCTION function )
             {
                 for ( auto & vertex : graph.Vertices() ) 
                 {
@@ -521,8 +521,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_vertex_tuples( TGraph & graph,
-                                        FUNCTION function )
+            void for_all_vertex_tuples ( TGraph & graph
+                                       , FUNCTION function )
             {
                 for ( auto & vertex : graph.Vertices() ) 
                 {
@@ -559,8 +559,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edge_identifiers( TGraph & graph,
-                                           FUNCTION function )
+            void for_all_edge_identifiers ( TGraph & graph
+                                          , FUNCTION function )
             {
                 for ( auto & edge : graph.Edges() ) 
                 {
@@ -592,8 +592,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges( TGraph & graph,
-                                FUNCTION function )
+            void for_all_edges ( TGraph & graph
+                               , FUNCTION function )
             {
                 for ( auto & edge : graph.Edges() ) 
                 {
@@ -624,8 +624,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edge_tuples( TGraph & graph,
-                                           FUNCTION function )
+            void for_all_edge_tuples ( TGraph & graph
+                                     , FUNCTION function )
             {
                 for ( auto & edge : graph.Edges() ) 
                 {
@@ -641,14 +641,14 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
 #pragma mark BREAKABLE_NEIGHBORHOOD_LOOPS
             /**
              * @brief      The breakable @p for loop over all edges at a
-             *     vertex @f$v\in\vertices@f$.
+             *     vertex @f$\vertex\in\vertices@f$.
              * @details    This is a loop over incoming and outgoing edges.
              *     The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all edges at
-             *                       @f$v@f$. It must accept one argument of type
+             *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -663,23 +663,23 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges_at ( TGraph &        graph,
-                                    TVertex const & vertex,
-                                    FUNCTION        function )
+            void for_all_edges_at ( TGraph        & graph
+                                  , TVertex const & vertex
+                                  , FUNCTION        function )
             {
                 for_all_edges_at( graph, vertex.Identifier(), function );
             }
 
             /**
              * @brief      The breakable @p for loop over all edges at a
-             *     vertex @f$v\in\vertices@f$.
+             *     vertex @f$\vertex\in\vertices@f$.
              * @details    This is a loop over incoming and outgoing edges.
              *     The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all edges at
-             *                       @f$v@f$. It must accept one argument of type
+             *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -694,9 +694,9 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges_at ( TGraph &  graph,
-                                    TVertexId vertexId,
-                                    FUNCTION  function )
+            void for_all_edges_at ( TGraph &  graph
+                                  , TVertexId vertexId
+                                  , FUNCTION  function )
             {
                 for ( auto edgeId : graph.InEdgeIdsAt(vertexId) ) 
                 {
@@ -712,13 +712,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
 
             /**
              * @brief      The breakable @p for loop over all incoming edges
-             *     of a vertex @f$v\in\vertices@f$.
+             *     of a vertex @f$\vertex\in\vertices@f$.
              * @details    The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all incoming edges
-             *                       of @f$v@f$. It must accept one argument of type
+             *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -733,22 +733,22 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_in_edges_at ( TGraph &        graph,
-                                   TVertex const & vertex,
-                                   FUNCTION        function)
+            void for_in_edges_at ( TGraph        & graph
+                                 , TVertex const & vertex
+                                 , FUNCTION        function)
             {
                 for_in_edges_at( graph, vertex.Identifier(), function );
             }
 
             /**
              * @brief      The breakable @p for loop over all incoming edges
-             *     of a vertex @f$v\in\vertices@f$.
+             *     of a vertex @f$\vertex\in\vertices@f$.
              * @details    The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all incoming edges
-             *                       of @f$v@f$. It must accept one argument of type
+             *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge edge ) 
@@ -763,9 +763,9 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_in_edges_at ( TGraph &   graph,
-                                   TVertexId  vertexId,
-                                   FUNCTION   function )
+            void for_in_edges_at ( TGraph   & graph
+                                 , TVertexId  vertexId
+                                 , FUNCTION   function )
             {
                 for ( auto edgeID : graph.InEdgeIdsAt(vertexId) )
                 {
@@ -776,13 +776,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
 
             /**
              * @brief      The breakable @p for loop over all outgoing edges
-             *     of a vertex @f$v\in\vertices@f$.
+             *     of a vertex @f$\vertex\in\vertices@f$.
              * @details    The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all outgoing edges
-             *                       of @f$v@f$. It must accept one argument of type
+             *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -797,22 +797,22 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_out_edges_at ( TGraph &        graph,
-                                    TVertex const & vertex,
-                                    FUNCTION        function)
+            void for_out_edges_at ( TGraph        & graph
+                                  , TVertex const & vertex
+                                  , FUNCTION        function)
             {
                 for_out_edges_at( graph, vertex.Identifier(), function );
             }
 
             /**
              * @brief      The breakable @p for loop over all outgoing edges
-             *     of a vertex @f$v\in\vertices@f$.
+             *     of a vertex @f$\vertex\in\vertices@f$.
              * @details    The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all outgoing edges
-             *                       of @f$v@f$. It must accept one argument of type
+             *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -827,9 +827,9 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              */
             template<typename FUNCTION>
             inline static
-            void for_out_edges_at ( TGraph &   graph,
-                                    TVertexId  vertexId,
-                                    FUNCTION   function )
+            void for_out_edges_at ( TGraph &  graph
+                                  , TVertexId vertexId
+                                  , FUNCTION  function )
             {
                 for ( auto edgeID : graph.OutEdgeIdsAt(vertexId) )
                 {
@@ -862,13 +862,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
 #pragma PARALLEL_NEIGHBORHOOD_LOOPS
             /**
              * @brief      The parallel @p for loop over all edges at a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              * @details    This is a loop over incoming and outgoing edges.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all edges at
-             *                       @f$v@f$. It must accept one argument of type
+             *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -881,23 +881,23 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges_at( TGraph        & graph,
-                                   TVertex const & vertex,
-                                   FUNCTION        function )
+            void for_all_edges_at ( TGraph        & graph
+                                  , TVertex const & vertex
+                                  , FUNCTION        function )
             {
                 for_all_edges_at( graph, vertex.Identifier(), function );
             }
 
             /**
              * @brief      The parallel @p for loop over all edges at a vertex
-             *     @f$v\in\vertices@f$.
+             *     @f$\vertex\in\vertices@f$.
              * @details    This is a loop over incoming and outgoing edges.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for all edges at
-             *                       @f$v@f$. It must accept one argument of type
-             *                       @p TGraph::TEdge, e.g.,
+             *                       @f$\vertex@f$. It must accept one
+             *                       argument of type @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
              *      { 
@@ -911,9 +911,9 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              */
             template<typename FUNCTION>
             inline static
-            void for_all_edges_at ( TGraph &  graph,
-                                    TVertexId vertexId,
-                                    FUNCTION  function )
+            void for_all_edges_at ( TGraph &  graph
+                                  , TVertexId vertexId
+                                  , FUNCTION  function )
             {
                 auto & inEdgeIds = graph.InEdgeIdsAt(vertexId);
                 #pragma omp parallel for
@@ -936,13 +936,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
 
             /**
              * @brief      The parallel @p for loop over all incoming edges of
-             *     a vertex @f$v\in\vertices@f$.
+             *     a vertex @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all incoming edges of @f$v@f$. It must
-             *                       accept one argument of type
+             *                       all incoming edges of @f$\vertex@f$. It
+             *                       must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -955,21 +955,21 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              */
             template<typename FUNCTION>
             inline static
-            void for_in_edges_at ( TGraph        & graph,
-                                   TVertex const & vertex,
-                                   FUNCTION        function )
+            void for_in_edges_at ( TGraph        & graph
+                                 , TVertex const & vertex
+                                 , FUNCTION        function )
             {
                 for_in_edges_at( graph, vertex.Identifier(), function );
             }
 
             /**
              * @brief      The parallel @p for loop over all incoming edges of
-             *     a vertex @f$v\in\vertices@f$.
+             *     a vertex @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all incoming edges of @f$v@f$. It must
+             *                       all incoming edges of @f$\vertex@f$. It must
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
@@ -983,9 +983,9 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              */
             template<typename FUNCTION>
             inline static
-            void for_in_edges_at ( TGraph &  graph,
-                                   TVertexId vertexId,
-                                   FUNCTION  function )
+            void for_in_edges_at ( TGraph &  graph
+                                 , TVertexId vertexId
+                                 , FUNCTION  function )
             {
                 auto & inEdgeIds = graph.InEdgeIdsAt(vertexId);
                 #pragma omp parallel for
@@ -999,13 +999,13 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
 
             /**
              * @brief      The parallel @p for loop over all outgoing edges of
-             *     a vertex @f$v\in\vertices@f$.
+             *     a vertex @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertex    The vertex @f$v\in\vertices@f$.
+             * @param[in]  vertex    The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all outgoing edges of @f$v@f$. It must
-             *                       accept one argument of type
+             *                       all outgoing edges of @f$\vertex@f$. It
+             *                       must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 
@@ -1018,22 +1018,22 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              */
             template<typename FUNCTION>
             inline static
-            void for_out_edges_at ( TGraph        & graph,
-                                    TVertex const & vertex,
-                                    FUNCTION        function )
+            void for_out_edges_at ( TGraph        & graph
+                                  , TVertex const & vertex
+                                  , FUNCTION        function )
             {
                 for_out_edges_at( graph, vertex.Identifier(), function );
             }
 
             /**
              * @brief      The parallel @p for loop over all outgoing edges of
-             *     a vertex @f$v\in\vertices@f$.
+             *     a vertex @f$\vertex\in\vertices@f$.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
-             * @param[in]  vertexId  The identifier of the vertex @f$v\in\vertices@f$.
+             * @param[in]  vertexId  The identifier of the vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function object that is called for
-             *                       all outgoing edges of @f$v@f$. It must
-             *                       accept one argument of type
+             *                       all outgoing edges of @f$\vertex@f$. It
+             *                       must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
              *      []( TEdge & edge ) 

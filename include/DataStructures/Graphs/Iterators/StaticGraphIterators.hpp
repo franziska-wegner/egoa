@@ -111,7 +111,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
             template<typename FUNCTION>
             static inline
             void for_all_vertex_tuples ( TGraph & graph
-                                      , FUNCTION function )
+                                       , FUNCTION function )
             {
                 for ( TVertexId vertexId = 0
                     ; vertexId < graph.NumberOfVertices()
@@ -178,7 +178,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
             template<typename FUNCTION>
             static inline 
             void for_all_edge_tuples ( TGraph & graph
-                                    , FUNCTION function )
+                                     , FUNCTION function )
             {
                 for ( TEdgeId edgeId = 0
                     ; edgeId < graph.NumberOfEdges()
@@ -267,7 +267,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable>
             template<typename FUNCTION>
             static inline
             void for_all_vertex_tuples ( TGraph   & graph
-                                      , FUNCTION   function )
+                                       , FUNCTION   function )
             {
                 bool toContinue = true;
                 for ( TVertexId vertexId = 0
@@ -346,7 +346,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable>
             template<typename FUNCTION>
             static inline
             void for_all_edge_tuples ( TGraph   & graph
-                                    , FUNCTION   function )
+                                     , FUNCTION   function )
             {
                 bool toContinue = true;
                 for ( TEdgeId edgeId = 0
@@ -465,7 +465,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
             template<typename FUNCTION>
             static inline
             void for_all_vertex_tuples ( TGraph & graph
-                                      , FUNCTION function )
+                                       , FUNCTION function )
             {
                 #pragma omp parallel for
                     for ( TVertexId vertexId = 0
@@ -565,7 +565,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
             template<typename FUNCTION>
             static inline
             void for_all_edge_tuples ( TGraph & graph
-                                    , FUNCTION function )
+                                     , FUNCTION function )
             {
                 #pragma omp parallel for
                     for ( TEdgeId edgeId = 0
