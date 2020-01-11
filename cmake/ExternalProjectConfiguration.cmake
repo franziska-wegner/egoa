@@ -16,6 +16,16 @@ message( STATUS "Download of data sets:")
 ####################################################################
 # PyPSA Europe #####################################################
 ####################################################################
+# Publication: 
+# 
+# PyPSA-Eur: An Open Optimisation Model of the European Transmission 
+#            System
+# 
+# 2018
+# Website: https://doi.org/10.5281/zenodo.3520875
+#          and https://github.com/PyPSA/pypsa-eur
+####################################################################
+
 file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA" )
 file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA/pypsa-eur" )
 
@@ -39,6 +49,16 @@ endif ( EGOA_DOWNLOAD_PYPSA_EUR )
 ####################################################################
 # PyPSA ITI Collaboration ##########################################
 ####################################################################
+# Publication: 
+# 
+# PyPSA-Eur: An Open Optimisation Model of the European Transmission 
+#            System
+# 
+# 2018
+# Website: https://doi.org/10.5281/zenodo.3520875
+#          and https://git.scc.kit.edu/FN/iti-collaboration
+####################################################################
+
 file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA/pypsa-iti-collaboration" )
 
 if ( EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION )
@@ -61,9 +81,18 @@ endif ( EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION )
 ####################################################################
 # SciGRID Power v0.1 ###############################################
 ####################################################################
+# Publication: 
+# 
+# SciGRID - An Open Source Reference Model for the European 
+#           Transmission Network (v0.2)
+# 
+# 2016
+# Website: http://www.scigrid.de
+####################################################################
+
 set ( EGOA_DOWNLOAD_DIRECTORY_SCIGRID "${PROJECT_INCLUDE_DIR}/data/PowerGrids/SciGrid" )
 
-if ( EGOA_DOWNLOAD_SCIGRID )
+if ( EGOA_DOWNLOAD_SCIGRID AND NOT EXISTS "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.1-data-only" )
     message( STATUS "${MY_SPACE}Download SciGRID Power data (version 0.1) from \"https://www.power.scigrid.de/releases_archive/scigrid-0.1-data-only.zip\" into \"${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.1-data-only/\".")
     file ( MAKE_DIRECTORY "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.1-data-only" )
 
@@ -80,13 +109,21 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     )
 
     file ( REMOVE ${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.1-data-only.zip )
-endif ( EGOA_DOWNLOAD_SCIGRID )
+endif ()
 
 ####################################################################
 # SciGRID Power v0.2 ###############################################
 ####################################################################
+# Publication: 
+# 
+# SciGRID - An Open Source Reference Model for the European 
+#           Transmission Network (v0.2)
+# 
+# 2016
+# Website: http://www.scigrid.de
+####################################################################
 
-if ( EGOA_DOWNLOAD_SCIGRID )
+if ( EGOA_DOWNLOAD_SCIGRID AND NOT EXISTS "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.2-data-only" )
     message( STATUS "${MY_SPACE}Download SciGRID Power data (version 0.2) from \"https://www.power.scigrid.de/releases_archive/scigrid-0.2-data-only.zip\" into \"${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.2-data-only/\".")
 
     file ( DOWNLOAD 
@@ -102,13 +139,21 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     )
 
     file ( REMOVE ${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.2-data-only.zip )
-endif ( EGOA_DOWNLOAD_SCIGRID )
+endif ()
 
 ####################################################################
 # SciGRID Power Germany ############################################
 ####################################################################
+# Publication: 
+# 
+# SciGRID - An Open Source Reference Model for the European 
+#           Transmission Network (v0.2)
+# 
+# 2016
+# Website: http://www.scigrid.de
+####################################################################
 
-if ( EGOA_DOWNLOAD_SCIGRID )
+if ( EGOA_DOWNLOAD_SCIGRID AND NOT EXISTS "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-de-data-only" )
     message( STATUS "${MY_SPACE}Download SciGRID Power data (conference version) from \"https://www.power.scigrid.de/releases_archive/scigrid-conference-de-data-only.zip\" into \"${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-de-data-only/\".")
 
     file ( DOWNLOAD 
@@ -124,13 +169,21 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     )
 
     file ( REMOVE ${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-de-data-only.zip )
-endif ( EGOA_DOWNLOAD_SCIGRID )
+endif ()
 
 ####################################################################
 # SciGRID Power Europe #############################################
 ####################################################################
+# Publication: 
+# 
+# SciGRID - An Open Source Reference Model for the European 
+#           Transmission Network (v0.2)
+# 
+# 2016
+# Website: http://www.scigrid.de
+####################################################################
 
-if ( EGOA_DOWNLOAD_SCIGRID )
+if ( EGOA_DOWNLOAD_SCIGRID AND NOT EXISTS "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-eu-data-only" )
     message( STATUS "${MY_SPACE}Download SciGRID Power data (conference version) from \"https://www.power.scigrid.de/releases_archive/scigrid-conference-eu-data-only.zip\" into \"${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-eu-data-only/\".")
 
     file ( DOWNLOAD 
@@ -146,16 +199,25 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     )
 
     file ( REMOVE ${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-eu-data-only.zip )
-endif ( EGOA_DOWNLOAD_SCIGRID )
+endif ()
 
 ####################################################################
 # Generated Wind Farm Data from ITI 2017 ###########################
+####################################################################
+# Publication: 
+# 
+# A Simulated-Annealing-Based Approach for Wind Farm Cabling
+# 
+# e-Energy '17: Proceedings of the Eighth International Conference 
+#               on Future Energy Systems
+# 2017, Pages 203–215 
+# Website: https://doi.org/10.1145/3077839.3077843
 ####################################################################
 
 set ( EGOA_DOWNLOAD_DIRECTORY_WINDFARM "${PROJECT_INCLUDE_DIR}/data/Windfarms" )
 file ( MAKE_DIRECTORY "${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks" )
 
-if ( EGOA_DOWNLOAD_WINDFARM )
+if ( EGOA_DOWNLOAD_WINDFARM AND NOT EXISTS "${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/2017-iti-windfarm-benchmarksets" )
     message( STATUS "${MY_SPACE}Download generated wind farm data (ITI 2017) from \"https://i11www.iti.kit.edu/_media/projects/windfarmcabling/windfarm-benchmarksets.zip\" into \"${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/2017-iti-windfarm-benchmarksets/\".")
     
     file ( DOWNLOAD 
@@ -167,12 +229,20 @@ if ( EGOA_DOWNLOAD_WINDFARM )
 
     execute_process (
         COMMAND ${CMAKE_COMMAND} -E tar xzf ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/windfarm-benchmarksets.zip 
+        WORKING_DIRECTORY ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/
+    )
+
+    execute_process (
         COMMAND mv ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/windfarm-benchmarksets ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/2017-iti-windfarm-benchmarksets
+        WORKING_DIRECTORY ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/
+    )
+
+    execute_process (
         COMMAND rm -r ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/windfarm-benchmarksets
         WORKING_DIRECTORY ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/
     )
 
     file ( REMOVE ${EGOA_DOWNLOAD_DIRECTORY_WINDFARM}/Networks/windfarm-benchmarksets.zip )
-endif ( EGOA_DOWNLOAD_WINDFARM )
+endif ( )
 
 message( STATUS "")
