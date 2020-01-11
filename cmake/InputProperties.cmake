@@ -118,6 +118,11 @@ set(EGOA_DOWNLOAD_SCIGRID ON CACHE BOOL
     "EGOA_DOWNLOAD_SCIGRID triggers the download for SciGrid")
 set_property(CACHE EGOA_DOWNLOAD_SCIGRID PROPERTY STRINGS ON OFF)
 
+# Download property SciGrid data
+set(EGOA_DOWNLOAD_WINDFARM ON CACHE BOOL
+    "EGOA_DOWNLOAD_WINDFARM triggers the download for Windfarms")
+set_property(CACHE EGOA_DOWNLOAD_WINDFARM PROPERTY STRINGS ON OFF)
+
 ####################################################################
 # Mark some variables as advanced, i.e., not visible for users  ####
 ####################################################################
