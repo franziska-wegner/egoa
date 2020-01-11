@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipestyle SYSTEM "ipe.dtd">
+<ipestyle name="StandardPreamble">
+<preamble>
+  \input{/Users/fwegner/Documents/work/dissertation/03-Document/ipe-latex-preamble.tex}
+</preamble>
+</ipestyle>

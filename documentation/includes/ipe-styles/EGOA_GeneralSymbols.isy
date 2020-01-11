@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipestyle SYSTEM "ipe.dtd">
+<ipestyle name="EGOA-GeneralSymbols">
+    <!-- Symbol -->
+    <symbol name="yes">
+    <path matrix="1.2 0 0 1.2 -729.132 413.85" stroke="KITpalegreen" fill="KITpalegreen70">
+    694.897 289.769 m
+    703.196 286.16
+    711.712 278.511 s
+    725.01 293.598
+    734.277 297.783 s
+    732.953 301.498
+    733.594 309.185 s
+    724.412 304.231
+    715.146 292.915
+    711.004 286.04 s
+    705.588 294.938 l
+    h
+    </path>
+    </symbol>
+    <symbol name="no">
+    <path matrix="0.512 0 0 0.512 7.908 711.519" stroke="KITred" fill="KITred70">
+    368.74 80.9727 m
+    350.572 58.9801 l
+    330.97 71.2513 l
+    354.457 99.152 l
+    332.742 125.648 l
+    347.404 138.078 l
+    368.6 114 l
+    388.998 138.238 l
+    403.501 125.01 l
+    382.783 99.193 l
+    406.43 71.2513 l
+    386.111 58.6614 l
+    h
+    </path>
+    </symbol>
+</ipestyle>

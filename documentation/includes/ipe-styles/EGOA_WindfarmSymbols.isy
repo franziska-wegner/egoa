@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE ipestyle SYSTEM "ipe.dtd">
+<ipestyle name="EGOA-WindfarmSymbols">
+<!-- Turbine -->
+<symbol name="mark/turbine(sx)" transformations="translations">
+<group>
+<path fill="white">
+1.5 0 0 1.5 0 0 e
+</path>
+<path fill="sym-stroke">
+1.7 0 0 1.7 0 0 e
+1.5 0 0 1.5 0 0 e
+</path>
+<path fill="sym-stroke">
+-1.13 -1.27 m
+1.27 1.13 l
+1.13 1.27 l
+-1.27 -1.13 l
+h
+</path>
+<path fill="sym-stroke">
+-1.13 1.27 m
+1.27 -1.13 l
+1.13 -1.27 l
+-1.27 1.13 l
+h
+</path>
+</group>
+</symbol>
+<!-- Substation -->
+<symbol name="mark/substation(sx)" transformations="translations">
+<path fill="KITbrown">
+-1.7 -1.7 m
+1.7 -1.7 l
+1.7 1.7 l
+-1.7 1.7 l
+h
+</path>
+</symbol>
+</ipestyle>

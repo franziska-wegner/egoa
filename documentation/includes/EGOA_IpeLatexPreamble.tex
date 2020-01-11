@@ -1,0 +1,232 @@
+%
+% EGOA_IpeLatexPreamble.tex
+% 
+%  Created on: Nov 11, 2017
+%      Author: Franziska Wegner
+% 
+% Usepackages and includes that are used for mainly all ipe presentations.
+% 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Usepackages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{polar}
+
+\usepackage{pifont} % for \ding{55} -> cross
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage{xspace}
+\usepackage{accents}
+\usepackage{paralist}
+
+\DeclareMathOperator{\lef}{\ell}
+\DeclareMathOperator{\rig}{r}  
+
+\usepackage{amsopn}
+\usepackage{xargs}       % Use more than one optional parameter in a new commands
+
+\usepackage{scrhack}
+
+\usepackage[ngerman,main=american]{babel}
+
+\usepackage{calc}
+
+\usepackage{printlen}
+
+\usepackage{nicefrac}
+\usepackage{xfrac}
+\usepackage[super]{nth} %\nth{1}, \nth{2}, \nth{3}, \nth{4}
+
+% SI units
+\usepackage[binary-units=true]{siunitx}
+\sisetup{
+    % quotient-mode = fraction,
+    per = fraction,
+    % fraction-function=\sfrac,
+    % product-units = single,
+    % output-product={\,},
+    unit-color = UNITCOLOR,
+    % round-mode=places,
+    % round-precision=2,
+    % exponent-product = \cdot,
+    % output-decimal-marker = {.},
+    fraction=sfrac
+}
+
+\usepackage{complexity}
+
+% Table
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{booktabs}
+\def\sharedaffiliation{%
+  \end{tabular}
+  \begin{tabular}{c}
+}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{floatrow}
+\floatsetup[table]{capposition=top}
+
+% Quotes
+\usepackage{csquotes}
+\usepackage{currvita}
+
+
+\makeatletter%https://tex.stackexchange.com/questions/265841/small-overleftrightarrow
+    \newcommand{\overleftrightsmallarrow}{\mathpalette{\overarrowsmall@\leftrightarrowfill@}}
+    \newcommand{\overrightsmallarrow}{\mathpalette{\overarrowsmall@\rightarrowfill@}}
+    \newcommand{\overleftsmallarrow}{\mathpalette{\overarrowsmall@\leftarrowfill@}}
+% 
+    \newcommand{\overarrowsmall@}[3]{%
+    \vbox{%
+      \ialign{%
+        ##\crcr
+        #1{\smaller@style{#2}}\crcr
+        \noalign{\nointerlineskip}%
+        $\m@th\hfil#2#3\hfil$\crcr
+      }%
+    }%
+    }
+    \def\smaller@style#1{%
+    \ifx#1\displaystyle\scriptstyle\else
+      \ifx#1\textstyle\scriptstyle\else
+        \scriptscriptstyle
+      \fi
+    \fi
+    }
+\makeatother
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Includes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{/Users/fwegner/Documents/work/dissertation/03-Document/EGOA_Macros.tex}
+
+\usepackage[most]{tcolorbox}
+\input{/Users/fwegner/Documents/work/dissertation/03-Document/EGOA_Colors.tex}
+\input{/Users/fwegner/Documents/work/dissertation/03-Document/EGOA_TikzCommands.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Problem Environment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\makeatletter
+% \renewcommand\arraystretch{1.5}
+\newenvironment{problem}[2][]{%
+  \def\problem@arg{#1}%
+  \def\problem@framed{framed}%
+  \def\problem@lined{lined}%
+  \def\problem@doublelined{doublelined}%
+  \ifx\problem@arg\@empty%
+    \def\problem@hline{}%
+  \else%
+    \ifx\problem@arg\problem@doublelined%
+      \def\problem@hline{\hline\hline}%
+    \else%
+      \def\problem@hline{\hline}%
+      \def\problem@hrule{\hrule}%
+    \fi%
+  \fi%
+  \ifx\problem@arg\problem@framed%
+    \def\problem@table{\centering\tabularx{1\columnwidth}{|>
+{\itshape}rX|c}}%
+    \def\problem@title{\multicolumn{2}{|l|}{%
+        \raisebox{-\fboxsep}{\textsc{#2}}%
+      }}%
+  \else
+    \def\problem@table{\tabularx{1\columnwidth}{>{\bfseries}rXc}}%
+    \def\problem@title{\multicolumn{2}{l}{%
+        \raisebox{-\fboxsep}{\textsc{\large #2}}%
+      }}%
+  \fi%
+  \bigskip\par\noindent%
+  \renewcommand{\arraystretch}{1.2}%
+    \problem@table%
+      \problem@hline%
+      \problem@title\\[2\fboxsep]\hspace*{0.5cm}%%
+}{%
+      % \\\problem@hline%
+    \endtabularx%
+    \problem@hrule
+  \medskip\par%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Algorithm Environment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+\usepackage[titlenumbered, ruled, vlined, linesnumbered,resetcount]
+{algorithm2e}%, dotocloa
+\SetKwComment{Comment}{\color{KITblack30}$\triangleright$\ }{}
+\SetCommentSty{tiny}
+\SetKw{kwnot}{not}
+\SetKw{kwand}{and}
+\SetKw{kwdominates}{dominates}
+\SetKwFunction{deleteMin}{delMin}
+\SetKwFunction{update}{update}
+\SetKwFunction{myinsert}{insert}
+\SetKwFunction{getPaths}{getPaths}
+\SetKwFunction{deleteDominatedLabels}{deleteDominatedLabels}
+\SetKwFunction{isReachable}{isReachable}
+\SetKwFunction{algodfs}{dfs}
+\SetKwFunction{algoplanarembedding}{planarEmbeddingOf}
+\SetKwFunction{algoconstructDualGraphOf}{constructDualGraphOf}
+\SetKwFunction{algoBipolarSubgraphOf}{bipolarSubgraphOf}
+\SetKwFunction{algoDualGraphOf}{dualGraphOf}
+\SetKwFunction{algoMinCostFlow}{minCostFlow}
+% \DontPrintSemicolon
+\SetKwFunction{topologicSort}{topologicSort}
+\SetKwFunction{computeColors}{computeColors}
+\SetKw{kwfrom}{from}
+\SetKw{kwto}{to}
+\SetKw{kwcontinue}{continue}
+
+\newcommand{\assign}{\longleftarrow}
+
+\SetAlFnt{\tiny}
+\SetAlTitleFnt{\tiny}
+\SetAlCapFnt{\tiny}
+\SetAlCapNameFnt{\tiny}
+\newcommand{\commentfont}[1]{{\color{black50}#1}}
+\newcommand{\kwfont}[1]{\texttt{\color{stroke1}#1}}
+\newcommand{\funcfont}[1]{\texttt{#1}}
+\newcommand{\datafont}[1]{\texttt{#1}}
+
+\SetCommentSty{commentfont}
+\SetKwSty{kwfont}
+\SetFuncSty{funcfont}
+\SetDataSty{datafont}
+
+\SetKwFunction{queueIsEmpty}{isEmpty}%
+\SetKwFunction{queueIsNotEmpty}{isNotEmpty}%
+\SetKwFunction{queueMinElement}{minElement}%
+\SetKwFunction{queueDeleteMin}{deleteMin}%
+\SetKwFunction{queueDeleteMax}{deleteMax}%
+\SetKwFunction{queueInsert}{insert}%
+\SetKwFunction{queueUpdate}{update}%
+\SetKwFunction{setInsert}{insert}%
+\SetKwFunction{setDeleteDominatedLabels}{deleteLabelsDominatedBy}%
+\SetKw{KwNotDominates}{does not dominate}%
+
+\makeatletter
+\newcommand{\setalgotoprulecolor}[1]{\colorlet{toprulecolor}{#1}}
+\let\old@algocf@pre@ruled\@algocf@pre@ruled
+\renewcommand{\@algocf@pre@ruled}{\textcolor{toprulecolor}{\old@algocf@pre@ruled}}
+
+\newcommand{\setalgobotrulecolor}[1]{\colorlet{bottomrulecolor}{#1}}
+\let\old@algocf@post@ruled\@algocf@post@ruled
+\renewcommand{\@algocf@post@ruled}{\textcolor{bottomrulecolor}{\old@algocf@post@ruled}}
+
+\renewcommand{\algocf@caption@ruled}{\box\algocf@capbox\vspace{-1mm}
+\textcolor{bottomrulecolor}{\old@algocf@post@ruled}}%
+\makeatother
+
+\setalgotoprulecolor{stroke1}
+\setalgobotrulecolor{stroke1}
