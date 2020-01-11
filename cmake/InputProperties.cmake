@@ -7,10 +7,6 @@
 # advanced.
 # 
 
-set(EGOA_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
-set(EGOA_COVERAGE_LINK_FLAGS    "-coverage") #lgcov
-set(EGOA_GOOGLE_TEST_FRAMEWORK_STD_LOCATION "external/GoogleTestFramework")
-
 ####################################################################
 # Reset variables ##################################################
 ####################################################################
@@ -29,7 +25,7 @@ unset(EGOA_ENABLE_EXCEPTION_HANDLING)
 unset(EGOA_ENABLE_ASSERTION)
 unset(EGOA_TEST_FRAMEWORK)
 unset(EGOA_THREAD_LIMIT)
-
+unset(EGOA_DOWNLOAD_PYPSA_EUR)
 ####################################################################
 # Create variables and drop down menu ##############################
 ####################################################################
@@ -106,6 +102,21 @@ set_property(CACHE EGOA_TEST_FRAMEWORK PROPERTY STRINGS OfflineGoogleTestFramewo
 
 # Set number of threads
 set(EGOA_THREAD_LIMIT "100" CACHE STRING "Sets OpenMP limit for number of threads")
+
+# Download property PyPSA-eur data
+set(EGOA_DOWNLOAD_PYPSA_EUR ON CACHE BOOL
+    "EGOA_DOWNLOAD_PYPSA_EUR triggers the download for PyPSA-eur")
+set_property(CACHE EGOA_DOWNLOAD_PYPSA_EUR PROPERTY STRINGS ON OFF)
+
+# Download property PyPSA-eur data
+set(EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION ON CACHE BOOL
+    "EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION triggers the download for PyPSA-iti-collaboration")
+set_property(CACHE EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION PROPERTY STRINGS ON OFF)
+
+# Download property SciGrid data
+set(EGOA_DOWNLOAD_SCIGRID ON CACHE BOOL
+    "EGOA_DOWNLOAD_SCIGRID triggers the download for SciGrid")
+set_property(CACHE EGOA_DOWNLOAD_SCIGRID PROPERTY STRINGS ON OFF)
 
 ####################################################################
 # Mark some variables as advanced, i.e., not visible for users  ####
