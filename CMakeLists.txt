@@ -71,13 +71,14 @@ set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR})
 set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 ####################################################################
-# Find external libraries ###########################################
+# Find external libraries ##########################################
 #################################################################### 
 
 # Initial Configuration
 include(SetEnvironmentVariables)
 include(CompilerConfiguration)
 include(HelperFunctions)
+include(ExternalProjectConfiguration)
 
 # Find External Libraries
 include(QtConfiguration)
@@ -134,8 +135,8 @@ if (EGOA_ENABLE_TESTS)
     # 
     # brew install lcov || gcovr (https://gcovr.com/en/stable/)
     # 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EGOA_COVERAGE_COMPILE_FLAGS}")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EGOA_COVERAGE_LINK_FLAGS}")
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EGOA_COVERAGE_COMPILE_FLAGS}")
+    # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EGOA_COVERAGE_LINK_FLAGS}")
 endif(EGOA_ENABLE_TESTS)
 
 # Generate an internal header automatically
@@ -301,12 +302,14 @@ set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
    "${PROJECT_INCLUDE_DIR}/documentation/html"
    "${PROJECT_INCLUDE_DIR}/documentation/*.tmp"
    "${PROJECT_INCLUDE_DIR}/documentation/Doxyfile"
+   "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA"
+   "${PROJECT_INCLUDE_DIR}/data/PowerGrids/SciGrid"
    "${CMAKE_CURRENT_BINARY_DIR}/bin"
    "${CMAKE_CURRENT_BINARY_DIR}/cmake_install.cmake"
-   "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt" #c
+   # "${CMAKE_CURRENT_BINARY_DIR}/CMakeCache.txt" #c
    "${CMAKE_CURRENT_BINARY_DIR}/CMakeDoxyfile.in"
    "${CMAKE_CURRENT_BINARY_DIR}/CMakeDoxygenDefaults.cmake"
-   "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles" #c
+   # "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles" #c
    "${CMAKE_CURRENT_BINARY_DIR}/CTestTestfile.cmake"
    "${CMAKE_CURRENT_BINARY_DIR}/DartConfiguration.tcl"
    "${CMAKE_CURRENT_BINARY_DIR}/Doxyfile.in"
@@ -315,16 +318,16 @@ set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
    "${CMAKE_CURRENT_BINARY_DIR}/googletest-download"
    "${CMAKE_CURRENT_BINARY_DIR}/googletest-src"
    "${CMAKE_CURRENT_BINARY_DIR}/lib"
-   "${CMAKE_CURRENT_BINARY_DIR}/Makefile" #c
+   # "${CMAKE_CURRENT_BINARY_DIR}/Makefile" #c
    "${CMAKE_CURRENT_BINARY_DIR}/PGT_autogen"
    "${CMAKE_CURRENT_BINARY_DIR}/src/cmake_install.cmake"
-   "${CMAKE_CURRENT_BINARY_DIR}/src/CMakeFiles" #c
+   # "${CMAKE_CURRENT_BINARY_DIR}/src/CMakeFiles" #c
    "${CMAKE_CURRENT_BINARY_DIR}/src/CTestTestfile.cmake"
    "${CMAKE_CURRENT_BINARY_DIR}/src/Makefile"
    "${CMAKE_CURRENT_BINARY_DIR}/src/pgt_autogen"
    "${CMAKE_CURRENT_BINARY_DIR}/Testing"
    "${CMAKE_CURRENT_BINARY_DIR}/tests/cmake_install.cmake"
-   "${CMAKE_CURRENT_BINARY_DIR}/tests/CMakeFiles" #c
+   # "${CMAKE_CURRENT_BINARY_DIR}/tests/CMakeFiles" #c
    "${CMAKE_CURRENT_BINARY_DIR}/tests/CTestTestfile.cmake"
    "${CMAKE_CURRENT_BINARY_DIR}/tests/Makefile"
    "${CMAKE_CURRENT_BINARY_DIR}/tests/TestQueues_autogen")
