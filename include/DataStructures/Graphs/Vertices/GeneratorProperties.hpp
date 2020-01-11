@@ -365,27 +365,27 @@ class GeneratorProperties {
              *     already existing energy sources, too, and the flag might be
              *     @p True, too.
              * 
-             * @pre        Default is @p False.
+             * @pre        Default is @p false.
              * 
              * @note       If it is true the extendable generator then the
-             *     generator's nominal real power @f$\realPowerNominal@f$ lies
-             *     between @f$\realPowerNominalMin@f$ and
-             *     @f$\realPowerNominalMax@f$ meaning
+             *     generator's nominal real power @f$\realpowernominal@f$ lies
+             *     between @f$\realpowernominalmin@f$ and
+             *     @f$\realpowernominalmax@f$ meaning
              *     @f[
-             *     \realPowerNominal := [\realPowerNominalMin,\realPowerNominalMax].
+             *     \realpowernominal := [\realpowernominalmin,\realpowernominalmax].
              *     @f] 
              *     Otherwise, the generator's nominal real power
-             *     @f$\realPowerNominal@f$ is defined by a fixed value. Thus, use
-             *     @f$\realPowerNominal@f$ by using @p Mbase when @p
-             *     IsExtendable is @p False, and @f$\realPowerNominalMin@f$ and
-             *     @f$\realPowerNominalMax@f$ by using @p NominalRealPower if
-             *     @p IsExtendable is @p True.
+             *     @f$\realpowernominal@f$ is defined by a fixed value. Thus, use
+             *     @f$\realpowernominal@f$ by using @p Mbase when @p
+             *     IsExtendable is @p false, and @f$\realpowernominalmin@f$ and
+             *     @f$\realpowernominalmax@f$ by using @p NominalRealPower if
+             *     @p IsExtendable is @p true.
              *     
              * @see NominalPower
              * @see NominalRealPowerBound
              *
              * @return     @p True if the generator
-             *     @f$\generator\in\generators@f$ is extendable, @p False
+             *     @f$\vertex\in\generators@f$ is extendable, @p false
              *     otherwise.
              */
             inline bool IsExtendable() const 
@@ -407,27 +407,27 @@ class GeneratorProperties {
              *      generator.IsExtendable() = true;
              * @endcode
              * 
-             * @pre        Default is @p False.
+             * @pre        Default is @p false.
              * 
              * @note       If it is true the extendable generator then the
-             *     generator's nominal real power @f$\realPowerNominal@f$ lies between
-             *     @f$\realPowerNominalMin@f$ and @f$\realPowerNominalMax@f$ meaning
+             *     generator's nominal real power @f$\realpowernominal@f$ lies between
+             *     @f$\realpowernominalmin@f$ and @f$\realpowernominalmax@f$ meaning
              *     @f[
-             *     \realPowerNominal := [\realPowerNominalMin,\realPowerNominalMax].
+             *     \realpowernominal := [\realpowernominalmin,\realpowernominalmax].
              *     @f] 
              *     Otherwise, the generator's nominal real power
-             *     @f$\realPowerNominal@f$ is defined by a fixed value. Thus, use
-             *     @f$\realPowerNominal@f$ by using @p Mbase when @p
-             *     IsExtendable is @p False, and @f$\realPowerNominalMin@f$
-             *     and @f$\realPowerNominalMax@f$ by using @p NominalRealPower
-             *     if @p IsExtendable is @p True.
+             *     @f$\realpowernominal@f$ is defined by a fixed value. Thus, use
+             *     @f$\realpowernominal@f$ by using @p Mbase when @p
+             *     IsExtendable is @p false, and @f$\realpowernominalmin@f$
+             *     and @f$\realpowernominalmax@f$ by using @p NominalRealPower
+             *     if @p IsExtendable is @p true.
              *
              * @see NominalPower
              * @see IsExtendable
              * @see NominalRealPowerBound
              *
-             * @return     @p True if the generator
-             *     @f$\generator\in\generators@f$ is extendable, @p False
+             * @return     @p true if the generator
+             *     @f$\vertex\in\generators@f$ is extendable, @p false
              *     otherwise.
              */
             inline bool & IsExtendable ()
@@ -437,8 +437,8 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter for the nominal power base. 
-             * @details    If the generator @f$\generator\in\generators@f$ is
-             *     @p NOT extendable---meaning IsExtendable is @p False---and
+             * @details    If the generator @f$\vertex\in\generators@f$ is
+             *     @p NOT extendable---meaning IsExtendable is @p false---and
              *         thus, fixed the nominal power is used to normalize or
              *         to denormalize into/from the p.u. units.
              *
@@ -464,7 +464,7 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter and setter for the nominal power base. 
-             * @details    If the generator @f$\generator\in\generators@f$ is
+             * @details    If the generator @f$\vertex\in\generators@f$ is
              *     @p NOT extendable---meaning IsExtendable is @p False---and
              *         thus, fixed the nominal power is used to normalize or
              *         to denormalize into/from the p.u. units.
@@ -489,11 +489,11 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter for the nominal real power bound with
-             *     @f$\realPowerNominal:=[\realPowerNominalMin,\realPowerNominalMax]@f$
+             *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$
              *     while the generator
-             *     @f$\generator\in\generators@f$ is extendable.
+             *     @f$\vertex\in\generators@f$ is extendable.
              *     
-             * @pre        Check if the @f$\generator\in\generators@f$ is
+             * @pre        Check if the @f$\vertex\in\generators@f$ is
              *     extendable meaning IsExtendable is true.
              *     
              * @code{.cpp}
@@ -512,7 +512,7 @@ class GeneratorProperties {
              * @see NominalRealPowerBound
              * 
              * @return     The nominal real power bound
-             *     @f$\realPowerNominal:=[\realPowerNominalMin,\realPowerNominalMax]@f$.
+             *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$.
              */
             inline TBound NominalRealPowerBound () const 
             { 
@@ -522,11 +522,11 @@ class GeneratorProperties {
             /**
              * @brief      Getter and setter for the nominal real power bound
              *     with
-             *     @f$\realPowerNominal:=[\realPowerNominalMin,\realPowerNominalMax]@f$
+             *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$
              *     while the generator
-             *     @f$\generator\in\generators@f$ is extendable.
+             *     @f$\vertex\in\generators@f$ is extendable.
              *     
-             * @pre        Check if the @f$\generator\in\generators@f$ is
+             * @pre        Check if the @f$\vertex\in\generators@f$ is
              *     extendable meaning IsExtendable is true.
              *     
              * @code{.cpp}
@@ -542,7 +542,7 @@ class GeneratorProperties {
              * @see NominalRealPowerBound
              * 
              * @return     The nominal real power bound
-             *     @f$\realPowerNominal:=[\realPowerNominalMin,\realPowerNominalMax]@f$.
+             *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$.
              */
             inline TBound & NominalRealPowerBound ()
             { 
@@ -581,9 +581,9 @@ class GeneratorProperties {
 #pragma mark REAL_POWER_INFORMATION
 
             /**
-             * @brief      Getter for the real power @f$\realPowerGeneration@f$.
+             * @brief      Getter for the real power @f$\realpowergeneration@f$.
              *
-             * @return     The real power @f$\realPowerGeneration@f$.
+             * @return     The real power @f$\realpowergeneration@f$.
              */
             inline Types::real RealPower () const 
             { 
@@ -592,9 +592,9 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter and setter for the real power set point
-             *     @f$\realPowerGeneration@f$.
+             *     @f$\realpowergeneration@f$.
              *
-             * @return     The real power set point @f$\realPowerGeneration@f$.
+             * @return     The real power set point @f$\realpowergeneration@f$.
              */
             inline Types::real & RealPower ()
             { 
@@ -603,10 +603,10 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter for the real power bound
-             *     @f$[\realPowerGenerationMin, \realPowerGenerationMax]@f$.
+             *     @f$[\realpowergenerationmin, \realpowergenerationmax]@f$.
              *
-             * @return     The real power bound @f$[\realPowerGenerationMin,
-             *     \realPowerGenerationMax]@f$.
+             * @return     The real power bound @f$[\realpowergenerationmin,
+             *     \realpowergenerationmax]@f$.
              */
             inline TBound RealPowerBound () const
             { 
@@ -615,10 +615,10 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter and setter for the real power bound
-             *     @f$[\realPowerGenerationMin, \realPowerGenerationMax]@f$.
+             *     @f$[\realpowergenerationmin, \realpowergenerationmax]@f$.
              *
-             * @return     The real power bound @f$[\realPowerGenerationMin,
-             *     \realPowerGenerationMax]@f$.
+             * @return     The real power bound @f$[\realpowergenerationmin,
+             *     \realpowergenerationmax]@f$.
              */
             inline TBound & RealPowerBound ()
             { 
@@ -680,9 +680,9 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter for the reactive power
-             *     @f$\reactivePowerGeneration@f$.
+             *     @f$\reactivepowergeneration@f$.
              *
-             * @return     The real power @f$\reactivePowerGeneration@f$.
+             * @return     The real power @f$\reactivepowergeneration@f$.
              */
             inline Types::real ReactivePower () const
             { 
@@ -691,9 +691,9 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter and setter for the reactive power
-             *     @f$\reactivePowerGeneration@f$.
+             *     @f$\reactivepowergeneration@f$.
              *
-             * @return     The real power @f$\reactivePowerGeneration@f$.
+             * @return     The real power @f$\reactivepowergeneration@f$.
              */
             inline Types::real & ReactivePower ()
             { 
@@ -702,10 +702,10 @@ class GeneratorProperties {
 
             /**
              * @brief      Getter for the reactive power bound
-             *     @f$[\reactivePowerGenerationMin, \reactivePowerGenerationMax]@f$.
+             *     @f$[\reactivepowergenerationmin, \reactivepowergenerationmax]@f$.
              *
              * @return     The reactive power bound
-             *     @f$[\reactivePowerGenerationMin,\reactivePowerGenerationMax]@f$.
+             *     @f$[\reactivepowergenerationmin,\reactivepowergenerationmax]@f$.
              */
             inline TBound ReactivePowerBound () const
             { 
@@ -714,10 +714,10 @@ class GeneratorProperties {
             
             /**
              * @brief      Getter and setter for the reactive power bound
-             *     @f$[\reactivePowerGenerationMin, \reactivePowerGenerationMax]@f$.
+             *     @f$[\reactivepowergenerationmin, \reactivepowergenerationmax]@f$.
              *
              * @return     The reactive power bound
-             *     @f$[\reactivePowerGenerationMin,\reactivePowerGenerationMax]@f$.
+             *     @f$[\reactivepowergenerationmin,\reactivepowergenerationmax]@f$.
              */
             inline TBound & ReactivePowerBound ()
             { 
@@ -782,7 +782,7 @@ class GeneratorProperties {
              *
              * @see Status
              *
-             * @return     @p True if active (on), @p False otherwise (unknown).
+             * @return     @p true if active (on), @p false otherwise (unknown).
              */
             inline bool IsActive () const  
             { 
@@ -825,10 +825,10 @@ class GeneratorProperties {
             /**
              * @brief      Getter for the unit commitment.
              * 
-             * @pre        This can only be @p True if the generator is not
+             * @pre        This can only be @p true if the generator is not
              *     extendable.
              *
-             * @return     @p True if unit commitment, @p False otherwise.
+             * @return     @p true if unit commitment, @p false otherwise.
              */
             inline bool Committable () const 
             { 
@@ -838,10 +838,10 @@ class GeneratorProperties {
             /**
              * @brief      Getter and setter for the unit commitment.
              * 
-             * @pre        This can only be @p True if the generator is not
+             * @pre        This can only be @p true if the generator is not
              *     extendable.
              *
-             * @return     @p True if unit commitment, @p False otherwise.
+             * @return     @p true if unit commitment, @p false otherwise.
              */
             inline bool & Committable () 
             { 
@@ -968,7 +968,7 @@ class GeneratorProperties {
             /**
              * @brief      Getter for the capital cost.
              * @details    The capital cost by extending the generator's
-             *     nominal power @f$\realPowerNominal@f$ by 1 MW.
+             *     nominal power @f$\realpowernominal@f$ by 1 MW.
              *
              * @return     The capital cost.
              */
@@ -980,7 +980,7 @@ class GeneratorProperties {
             /**
              * @brief      Getter and setter for the capital cost.
              * @details    The capital cost by extending the generator's
-             *     nominal power @f$\realPowerNominal@f$ by 1 MW.
+             *     nominal power @f$\realpowernominal@f$ by 1 MW.
              *
              * @return     The capital cost.
              */
@@ -992,7 +992,7 @@ class GeneratorProperties {
             /**
              * @brief      Getter for the startup costs for the generator.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The startup cost for the generator.
              */
@@ -1005,7 +1005,7 @@ class GeneratorProperties {
              * @brief      Getter and setter for the startup costs for the
              *     generator.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The startup cost for the generator.
              */
@@ -1017,7 +1017,7 @@ class GeneratorProperties {
             /**
              * @brief      Getter for the shutdown costs for the generator.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The shut-down cost for the generator.
              */
@@ -1030,7 +1030,7 @@ class GeneratorProperties {
              * @brief      Getter and setter for the shutdown costs for the
              *     generator.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The shut-down cost for the generator.
              */
@@ -1062,7 +1062,7 @@ class GeneratorProperties {
              *     active status until a shutdown is possible, i.e., being in
              *     @p inactive status.
              *     
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum @p active time of the generator.
              */
@@ -1079,7 +1079,7 @@ class GeneratorProperties {
              *     active status until a shutdown is possible, i.e., being in
              *     @p inactive status.
              *     
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum @p active time of the generator.
              */
@@ -1095,7 +1095,7 @@ class GeneratorProperties {
              *     inactive status until a startup is possible again, i.e.,
              *     being in @p active status.
              *     
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum time to be @p inactive of the generator.
              */
@@ -1112,7 +1112,7 @@ class GeneratorProperties {
              *     inactive status until a startup is possible again, i.e.,
              *     being in @p active status.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum time to be @p inactive of the generator.
              */
@@ -1201,7 +1201,8 @@ class GeneratorProperties {
             }
 
             /**
-             * @brief      Getter for the ramp rate for the reactive power (2 sec timescale).
+             * @brief      Getter for the ramp rate for the reactive power (2
+             *     sec timescale).
              * @details    The ramp rate is measured in MVAr/min and is part of the
              *     IEEE data.
              *
@@ -1305,9 +1306,9 @@ class GeneratorProperties {
             /**
              * @brief      Getter for the maximum increase in power at startup.
              * @details    The maximum increase in power at startup is
-             *     measured in per unit of nominal power @f$\realPowerNominal@f$.
+             *     measured in per unit of nominal power @f$\realpowernominal@f$.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The maximum increase in power at startup.
              */
@@ -1320,9 +1321,9 @@ class GeneratorProperties {
              * @brief      Getter and setter for the maximum increase in power
              *     at start-up.
              * @details    The maximum increase in power at startup is
-             *     measured in per unit of nominal power @f$\realPowerNominal@f$.
+             *     measured in per unit of nominal power @f$\realpowernominal@f$.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The maximum increase in power at startup.
              */
@@ -1334,9 +1335,9 @@ class GeneratorProperties {
             /**
              * @brief      Getter for the maximum decrease in power at shut-down.
              * @details    The maximum decrease in power at shutdown is
-             *     measured in per unit of nominal power @f$\realPowerNominal@f$.
+             *     measured in per unit of nominal power @f$\realpowernominal@f$.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The maximum decrease in power at shutdown.
              */
@@ -1349,9 +1350,9 @@ class GeneratorProperties {
              * @brief      Getter and setter for the maximum decrease in power
              *     at shut-down.
              * @details    The maximum decrease in power at shutdown is
-             *     measured in per unit of nominal power @f$\realPowerNominal@f$.
+             *     measured in per unit of nominal power @f$\realpowernominal@f$.
              *
-             * @pre        Only if Committable() is @p True.
+             * @pre        Only if Committable() is @p true.
              *
              * @return     The maximum decrease in power at shutdown.
              */
@@ -1577,9 +1578,8 @@ class GeneratorProperties {
 
         /**@name Voltage Related Members */
         ///@{
-            Types::real     voltageMagnitudeSnapshot_;  /**< The voltage magnitude set point @f$\vgenerator@f$ 
-                                                         *      in per unit (p.u.) of the nominal voltage 
-                                                         *      @f$\vnominal@f$. 
+            Types::real     voltageMagnitudeSnapshot_;  /**< The voltage magnitude set point in per unit (p.u.) 
+                                                         *      of the nominal voltage @f$\voltagenominal@f$.
                                                          */
         ///@}
 
@@ -1598,20 +1598,20 @@ class GeneratorProperties {
                                                          *      this are often renewable energies.
                                                          */
             TBound          nominalRealPowerBound_;     /**< If the generator is extendable the nominal real power 
-                                                         *      @f$\realPowerNominal@f$ can be in the interval 
-                                                         *      @f$\realPowerNominal:=[\realPowerNominalMin,
-                                                         *      \realPowerNominalMax]@f$. 
+                                                         *      @f$\realpowernominal@f$ can be in the interval 
+                                                         *      @f$\realpowernominal\coloneqq[\realpowernominalmin,
+                                                         *      \realpowernominalmax]@f$. 
                                                          */
             TPowerSign      sign_;                      /**< The power sign (1 means generation, -1 means load) */
         ///@}
 
         /**@name Real Power Members */
         ///@{
-            Types::real     realPower_;                 /**< The real power generation @f$\realPowerGeneration@f$
+            Types::real     realPower_;                 /**< The real power generation @f$\realpowergeneration@f$
                                                          *      in @p MW. 
                                                          */
-            TBound          realPowerBound_;            /**< The real power output bound @f$[\realPowerGenerationMin, 
-                                                         *      \realPowerGenerationMax]@f$ in @p MW. 
+            TBound          realPowerBound_;            /**< The real power output bound @f$[\realpowergenerationmin, 
+                                                         *      \realpowergenerationmax]@f$ in @p MW. 
                                                          */            
             Types::real     pc1_;                       /**< The lower real power output of PQ capability curve at 
                                                          *      PC1 in @p MW. 
@@ -1623,11 +1623,11 @@ class GeneratorProperties {
 
         /**@name Real Power Members */
         ///@{
-            Types::real     reactivePower_;             /**< The reactive power generation @f$\reactivePowerGeneration@f$ 
+            Types::real     reactivePower_;             /**< The reactive power generation @f$\reactivepowergeneration@f$ 
                                                          *      in @p MVAr. 
                                                          */
-            TBound          reactivePowerBound_;        /**< The reactive power output bound @f$[\reactivePowerGenerationMin, 
-                                                         *      \reactivePowerGenerationMax]@f$ in @p MVAr. 
+            TBound          reactivePowerBound_;        /**< The reactive power output bound @f$[\reactivepowergenerationmin, 
+                                                         *      \reactivepowergenerationmax]@f$ in @p MVAr. 
                                                          */
             TBound          qc1Bound_;                  /**< The reactive power output bound at @p PC1 in @p MVAr. */
             TBound          qc2Bound_;                  /**< The reactive power output bound at @p PC2 in @p MVAr. */
@@ -1676,7 +1676,7 @@ class GeneratorProperties {
             Types::real     minUpTime_;         /**< The minimum number of snapshots to be @p active. */
             Types::real     minDownTime_;       /**< The minimum number of snapshots to be @p inactive. */
 
-            Types::real     rampAgc_;           /**< The ramp rate for load following AGC, where AGC stands for Automatic generation control (in MW/min). */
+            Types::real     rampAgc_;           /**< The ramp rate for load following AGC, where AGC stands for automatic generation control (in MW/min). */
             Types::real     ramp10_;            /**< The ramp rate for 10 minute reserves (in MW). */
             Types::real     ramp30_;            /**< The ramp rate for 30 minute reserves (in MW). */
             Types::real     rampQ_;             /**< The ramp rate for reactive power (2 sec timescale) (in MVAr/min). */

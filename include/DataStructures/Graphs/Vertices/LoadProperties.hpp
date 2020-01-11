@@ -110,10 +110,10 @@ class LoadProperties {
 
             /**
              * @brief      Getter for the real power demand
-             *     @f$\realPowerDemand@f$ set point in per unit (p.u.) nominal
+             *     @f$\realpowerdemand@f$ set point in per unit (p.u.) nominal
              *     power (MW).
              *
-             * @return     The real power demand @f$\realPowerDemand@f$ set
+             * @return     The real power demand @f$\realpowerdemand@f$ set
              *     point in per unit (p.u.) nominal power (MW).
              */
             inline Types::real RealPowerLoad () const 
@@ -123,10 +123,10 @@ class LoadProperties {
 
             /**
              * @brief      Getter and setter for the real power demand
-             *     @f$\realPowerDemand@f$ set point in per unit (p.u.) nominal
+             *     @f$\realpowerdemand@f$ set point in per unit (p.u.) nominal
              *     power (MW).
              *
-             * @return     The real power demand @f$\realPowerDemand@f$ set
+             * @return     The real power demand @f$\realpowerdemand@f$ set
              *     point in per unit (p.u.) nominal power (MW).
              */
             inline Types::real & RealPowerLoad ()
@@ -136,11 +136,11 @@ class LoadProperties {
 
             /**
              * @brief      Getter for the real power demand bound
-             *     @f$[\realPowerDemandMin, \realPowerDemandMax]@f$ in per
+             *     @f$[\realpowerdemandmin, \realpowerdemandmax]@f$ in per
              *     unit (p.u.) nominal power (MW).
              *
              * @return     The real power demand bound
-             *     @f$[\realPowerDemandMin, \realPowerDemandMax]@f$ in per
+             *     @f$[\realpowerdemandmin, \realpowerdemandmax]@f$ in per
              *     unit (p.u.) nominal power (MW).
              */
             inline TBound RealPowerLoadBound () const 
@@ -150,11 +150,11 @@ class LoadProperties {
 
             /**
              * @brief      Getter and setter for the real power demand bound
-             *     @f$[\realPowerDemandMin, \realPowerDemandMax]@f$ in per
+             *     @f$[\realpowerdemandmin, \realpowerdemandmax]@f$ in per
              *     unit (p.u.) nominal power (MW).
              *
              * @return     The real power demand bound
-             *     @f$[\realPowerDemandMin, \realPowerDemandMax]@f$ in per
+             *     @f$[\realpowerdemandmin, \realpowerdemandmax]@f$ in per
              *     unit (p.u.) nominal power (MW).
              */
             inline TBound & RealPowerLoadBound ()
@@ -169,11 +169,11 @@ class LoadProperties {
 
             /**
              * @brief      Getter for the reactive power demand
-             *     @f$\reactivePowerDemand@f$ in per unit (p.u.) nominal power
+             *     @f$\reactivepowerdemand@f$ in per unit (p.u.) nominal power
              *     (MVAr).
              *
              * @return     The reactive power demand
-             *     @f$\reactivePowerDemand@f$ in per unit (p.u.) nominal power
+             *     @f$\reactivepowerdemand@f$ in per unit (p.u.) nominal power
              *     (MVAr).
              */
             inline Types::real ReactivePowerLoad () const 
@@ -183,11 +183,11 @@ class LoadProperties {
 
             /**
              * @brief      Getter for the reactive power demand
-             *     @f$\reactivePowerDemand@f$ in per unit (p.u.) nominal power
+             *     @f$\reactivepowerdemand@f$ in per unit (p.u.) nominal power
              *     (MVAr).
              *
              * @return     The reactive power demand
-             *     @f$\reactivePowerDemand@f$ in per unit (p.u.) nominal power
+             *     @f$\reactivepowerdemand@f$ in per unit (p.u.) nominal power
              *     (MVAr).
              */
             inline Types::real & ReactivePowerLoad ()
@@ -197,11 +197,11 @@ class LoadProperties {
 
             /**
              * @brief      Getter for the reactive power demand bound
-             *     @f$[\reactivePowerDemandMin, \reactivePowerDemandMax]@f$ in
+             *     @f$[\reactivepowerdemandmin, \reactivepowerdemandmax]@f$ in
              *     per unit (p.u.) nominal power (MVAr).
              *
              * @return     The reactive power demand bound
-             *     @f$[\reactivePowerDemandMin, \reactivePowerDemandMax]@f$ in
+             *     @f$[\reactivepowerdemandmin, \reactivepowerdemandmax]@f$ in
              *     per unit (p.u.) nominal power (MVAr).
              */
             inline TBound ReactivePowerLoadBound () const 
@@ -211,12 +211,12 @@ class LoadProperties {
 
             /**
              * @brief      Getter and setter for the reactive power demand
-             *     bound @f$[\reactivePowerDemandMin,
-             *     \reactivePowerDemandMax]@f$ in per unit (p.u.) nominal
+             *     bound @f$[\reactivepowerdemandmin,
+             *     \reactivepowerdemandmax]@f$ in per unit (p.u.) nominal
              *     power (MVAr).
              *
              * @return     The reactive power demand demand bound
-             *     @f$[\reactivePowerDemandMin, \reactivePowerDemandMax]@f$ in
+             *     @f$[\reactivepowerdemandmin, \reactivepowerdemandmax]@f$ in
              *     per unit (p.u.) nominal power (MVAr).
              */
             inline TBound & ReactivePowerLoadBound ()
@@ -234,7 +234,7 @@ class LoadProperties {
              *
              * @param      rhs   The right hand side LoadProperties.
              *
-             * @return     @p True if both vertices are @p not equal, @p False
+             * @return     @p true if both vertices are @p not equal, @p false
              *     otherwise.
              */
             inline bool operator!= ( LoadProperties const & rhs ) const 
@@ -247,7 +247,7 @@ class LoadProperties {
              *
              * @param      rhs   The right hand side LoadProperties.
              *
-             * @return     @p True if both vertices are equal, @p False
+             * @return     @p true if both vertices are equal, @p false
              *     otherwise.
              */
             inline bool operator== ( LoadProperties const & rhs ) const 
@@ -277,19 +277,19 @@ class LoadProperties {
 
         ///@name Real Power Members
         ///@{
-            Types::real realPowerLoad_;             /**< The real power demand @f$\realPowerDemand@f$. */
+            Types::real realPowerLoad_;             /**< The real power demand @f$\realpowerdemand@f$. */
             TBound      realPowerLoadBound_;        /**< The real power demand bound 
-                                                     *      @f$[\realPowerDemandMin, \realPowerDemandMax]@f$. 
+                                                     *      @f$[\realpowerdemandmin, \realpowerdemandmax]@f$. 
                                                      */
         ///@}
 
         ///@name Reactive Power Members
         ///@{
             Types::real reactivePowerLoad_;         /**< The reactive power demand 
-                                                     *      @f$\reactivePowerDemand@f$. 
+                                                     *      @f$\reactivepowerdemand@f$. 
                                                      */
             TBound      reactivePowerLoadBound_;    /**< The real power demand bound 
-                                                     *      @f$[\reactivePowerDemandMin, \reactivePowerDemandMax]@f$. 
+                                                     *      @f$[\reactivepowerdemandmin, \reactivepowerdemandmax]@f$. 
                                                      */
         ///@}
 };

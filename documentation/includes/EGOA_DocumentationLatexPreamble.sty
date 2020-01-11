@@ -1,6 +1,7 @@
+% 
 % EGOA-Documentation-Latex-Preamble.sty
 % 
-%   Created on: 30.01.2019
+%   Created on: Jan 30, 2019
 %       Author: Franziska Wegner
 %       
 % Macros that are used within the papers and dissertation can used within the
@@ -47,6 +48,30 @@
 
 \usepackage[]{units}
 \usepackage{siunitx}
+
+\makeatletter%https://tex.stackexchange.com/questions/265841/small-overleftrightarrow
+    \newcommand{\overleftrightsmallarrow}{\mathpalette{\overarrowsmall@\leftrightarrowfill@}}
+    \newcommand{\overrightsmallarrow}{\mathpalette{\overarrowsmall@\rightarrowfill@}}
+    \newcommand{\overleftsmallarrow}{\mathpalette{\overarrowsmall@\leftarrowfill@}}
+% 
+    \newcommand{\overarrowsmall@}[3]{%
+    \vbox{%
+      \ialign{%
+        ##\crcr
+        #1{\smaller@style{#2}}\crcr
+        \noalign{\nointerlineskip}%
+        $\m@th\hfil#2#3\hfil$\crcr
+      }%
+    }%
+    }
+    \def\smaller@style#1{%
+    \ifx#1\displaystyle\scriptstyle\else
+      \ifx#1\textstyle\scriptstyle\else
+        \scriptscriptstyle
+      \fi
+    \fi
+    }
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % New Theorem
@@ -221,6 +246,8 @@
 \newcommand{\cutsets}{\ensuremath{\mathcal{\cutset}}\xspace}
 
 % Labels
+\newcommand{\labelu}{\ensuremath{l}\xspace}
+\newcommand{\queue}{\ensuremath{\mathcal{Q}}\xspace}
 \newcommand{\labels}{\ensuremath{L}\xspace}
 \newcommand{\paretolabels}{\ensuremath{D}\xspace}
 \newcommand{\lab}{\ensuremath{\mathrm{\ell}}\xspace}
@@ -329,10 +356,12 @@
 % Susceptance
 \newcommand{\susceptance}{\ensuremath{b}\xspace}
 \newcommand{\linechargingsusceptance}{\ensuremath{b_{\mathrm{ch}}}\xspace}
+\newcommand{\shuntsusceptance}{\ensuremath{b_{\mathrm{sh}}}\xspace}
 \newcommand{\susceptances}{\ensuremath{B}\xspace}
 
 % Conductance
 \newcommand{\conductance}{\ensuremath{g}\xspace}
+\newcommand{\shuntconductance}{\ensuremath{g_{\mathrm{sh}}}\xspace}
 \newcommand{\conductances}{\ensuremath{G}\xspace}
 
 % Conductivity
@@ -377,6 +406,7 @@
 \newcommand{\voltagemin}{\ensuremath{\MIN{\voltage}}\xspace}
 \newcommand{\voltagemax}{\ensuremath{\MAX{\voltage}}\xspace}
 \newcommand{\vmagnitude}{\ensuremath{|\voltage|}\xspace}
+\newcommand{\voltagenominal}{\ensuremath{\voltage_{\mathrm{nom}}}\xspace}
 \newcommand{\voltagebase}{\ensuremath{\voltages_{\mathrm{base}}}\xspace}
 \newcommand{\voltagerms}{\ensuremath{\voltages_{\mathrm{RMS}}}\xspace}
 
@@ -412,37 +442,40 @@
 \newcommand{\supply}{\ensuremath{p}\xspace}
 \newcommand{\realpower}{\ensuremath{p}\xspace}
 \newcommand{\realpowers}{\ensuremath{P}\xspace}
+\newcommand{\realpowergeneration}{\ensuremath{\realpower_{g}}\xspace}
+\newcommand{\realpowerdemand}{\ensuremath{\realpower_\demand}\xspace}
+\newcommand{\realpowernominal}{\ensuremath{\realpower_{\mathrm{nom}}}\xspace}
 \newcommand{\realpowersmin}{\ensuremath{\MIN{\realpowers}}\xspace}
 \newcommand{\realpowermin}{\ensuremath{\MIN{\realpower}}\xspace}
 \newcommand{\realpowergenerationmin}{\ensuremath{
-\MIN{\realpower_g}}\xspace}
+\MIN{\realpowergeneration}}\xspace}
 \newcommand{\realpowerdemandmin}{\ensuremath{
-\MIN{\realpower_\demand}}\xspace}
-\newcommand{\realpowerdemand}{\ensuremath{\realpower_\demand}\xspace}
-\newcommand{\realpowersmax}{\ensuremath{\realpowers_{\max}}\xspace}
+\MIN{\realpowerdemand}}\xspace}
+\newcommand{\realpowernominalmin}{\ensuremath{\MIN{\realpowernominal}}\xspace}
+\newcommand{\realpowersmax}{\ensuremath{\MAX{\realpowers}}\xspace}
 \newcommand{\realpowermax}{\ensuremath{\MAX{\realpower}}\xspace}
-\newcommand{\realpowergenerationmax}{\ensuremath{\MAX{\realpower_{g}}}\xspace}
-\newcommand{\realpowergeneration}{\ensuremath{\realpower_{g}}\xspace}
-\newcommand{\realpowerdemandmax}{\ensuremath{\MAX{\realpower_{\demand}}}\xspace}
+\newcommand{\realpowergenerationmax}{\ensuremath{\MAX{\realpowergeneration}}\xspace}
+\newcommand{\realpowerdemandmax}{\ensuremath{\MAX{\realpowerdemand}}\xspace}
+\newcommand{\realpowernominalmax}{\ensuremath{\MAX{\realpowernominal}}\xspace}
 \newcommand{\realpowerbase}{\ensuremath{\realpowers_{\mathrm{base}}}\xspace}
 
 % Reactive power
 \newcommand{\reactivepower}{\ensuremath{q}\xspace}
 \newcommand{\reactivepowers}{\ensuremath{Q}\xspace}
-\newcommand{\reactivepowermin}{\ensuremath{\MIN{\reactivepower}}\xspace}
-\newcommand{\reactivepowergenerationmin}{\ensuremath{
-\MIN{\reactivepower_{g}}}\xspace}
-\newcommand{\reactivepowerdemandmin}{\ensuremath{
-\MIN{\reactivepower_{\demand}}}\xspace}
-\newcommand{\reactivepowerdemand}{\ensuremath{\reactivepower_{\demand}}\xspace}
-\newcommand{\reactivepowersmin}{\ensuremath{\MIN{\reactivepowers}}\xspace}
-\newcommand{\reactivepowermax}{\ensuremath{\MAX{\reactivepower}}\xspace}
 \newcommand{\reactivepowergeneration}{\ensuremath{
 \reactivepower_{g}}\xspace}
+\newcommand{\reactivepowerdemand}{\ensuremath{\reactivepower_{\demand}}\xspace}
+\newcommand{\reactivepowermin}{\ensuremath{\MIN{\reactivepower}}\xspace}
+\newcommand{\reactivepowergenerationmin}{\ensuremath{
+\MIN{\reactivepowergeneration}}\xspace}
+\newcommand{\reactivepowerdemandmin}{\ensuremath{
+\MIN{\reactivepowerdemand}}\xspace}
+\newcommand{\reactivepowersmin}{\ensuremath{\MIN{\reactivepowers}}\xspace}
+\newcommand{\reactivepowermax}{\ensuremath{\MAX{\reactivepower}}\xspace}
 \newcommand{\reactivepowergenerationmax}{\ensuremath{
-\MAX{\reactivepower_{g}}}\xspace}
+\MAX{\reactivepowergeneration}}\xspace}
 \newcommand{\reactivepowerdemandmax}{\ensuremath{
-\MAX{\reactivepower_{\demand}}}\xspace}
+\MAX{\reactivepowerdemand}}\xspace}
 \newcommand{\reactivepowersmax}{\ensuremath{\MAX{\reactivepowers}}\xspace}
 \newcommand{\reactivepowerbase}{\ensuremath{\reactivepowers_{
 \mathrm{base}}}\xspace}

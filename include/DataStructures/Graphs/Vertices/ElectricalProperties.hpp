@@ -286,9 +286,9 @@ class ElectricalProperties {
 #pragma mark VOLTAGE
             /**
              * @brief      Getter for the nominal voltage
-             *     @f$\vnominal@f$ (also known as base voltage; in kV).
+             *     @f$\voltagenominal@f$ (also known as base voltage; in kV).
              *
-             * @return     The nominal voltage @f$\vnominal@f$ in kV.
+             * @return     The nominal voltage @f$\voltagenominal@f$ in kV.
              */
             inline Types::real NominalVoltage () const 
             { 
@@ -297,9 +297,9 @@ class ElectricalProperties {
 
             /**
              * @brief      Getter and setter for the nominal voltage
-             *     @f$\vnominal@f$ (also known as base voltage; in kV).
+             *     @f$\voltagenominal@f$ (also known as base voltage; in kV).
              *
-             * @return     The nominal voltage @f$\vnominal@f$ in kV.
+             * @return     The nominal voltage @f$\voltagenominal@f$ in kV.
              */
             inline Types::real & NominalVoltage ()
             { 
@@ -308,11 +308,11 @@ class ElectricalProperties {
 
             /**
              * @brief      Getter for the voltage magnitude @f$\vmagnitude@f$.
-             * @details    The voltage magnitude @f$\vmagnitude@f$ is in per
-             *     unit (p.u.) of the nominal voltage @f$\vnominal@f$. It
+             * @details    The voltage magnitude @f$\voltagenominal@f$ is in per
+             *     unit (p.u.) of the nominal voltage @f$\voltagenominal@f$. It
              *     represents a set point.
              *
-             * @return     The voltage magnitude @f$\vmagnitude@f$.
+             * @return     The voltage magnitude @f$\voltagenominal@f$.
              */
             inline Types::real VoltageMagnitude () const 
             { 
@@ -323,7 +323,7 @@ class ElectricalProperties {
              * @brief      Getter and setter for the voltage magnitude
              *     @f$\vmagnitude@f$.
              * @details    The voltage magnitude @f$\vmagnitude@f$ is in per
-             *     unit (p.u.) of the nominal voltage @f$\vnominal@f$. It
+             *     unit (p.u.) of the nominal voltage @f$\voltagenominal@f$. It
              *     represents a set point.
              *
              * @return     The voltage magnitude @f$\vmagnitude@f$.
@@ -374,11 +374,11 @@ class ElectricalProperties {
 
             /**
              * @brief      Getter for the minimum voltage magnitude
-             *     @f$\vmagnitudeMin@f$.
+             *     @f$\voltagemin@f$.
              * @details    The voltage magnitude is in per unit (p.u.) of the
-             *     nominal voltage @f$\vnominal@f$.
+             *     nominal voltage @f$\voltagenominal@f$.
              *
-             * @return     The minimum voltage magnitude @f$\vmagnitudeMin@f$.
+             * @return     The minimum voltage magnitude @f$\voltagemin@f$.
              */
             inline Types::real MinimumVoltage () const 
             { 
@@ -387,16 +387,16 @@ class ElectricalProperties {
 
             /**
              * @brief      Getter and setter for the minimum voltage
-             *     magnitude @f$\vmagnitudeMin@f$.
+             *     magnitude @f$\voltagemin@f$.
              * @details    The voltage magnitude is in per unit (p.u.) of the
-             *     nominal voltage @f$\vnominal@f$.
+             *     nominal voltage @f$\voltagenominal@f$.
              * 
              * @code{.cpp}
              *      ElectricalProperties vertex;
              *      vertex.MinimumVoltage() = 0;
              * @endcode
              * 
-             * @return     The minimum voltage magnitude @f$\vmagnitudeMin@f$.
+             * @return     The minimum voltage magnitude @f$\voltagemin@f$.
              */
             inline Types::real & MinimumVoltage ()
             { 
@@ -405,11 +405,11 @@ class ElectricalProperties {
 
             /**
              * @brief      Getter for the maximum voltage magnitude
-             *     @f$\vmagnitudeMax@f$.
+             *     @f$\voltagemax@f$.
              * @details    The voltage magnitude is in per unit (p.u.) of the
-             *     nominal voltage @f$\vnominal@f$.
+             *     nominal voltage @f$\voltagenominal@f$.
              *
-             * @return     The maximum voltage magnitude @f$\vmagnitudeMax@f$.
+             * @return     The maximum voltage magnitude @f$\voltagemax@f$.
              */
             inline Types::real MaximumVoltage () const 
             { 
@@ -418,7 +418,7 @@ class ElectricalProperties {
 
             /**
              * @brief      Getter and setter for the maximum voltage
-             *     magnitude @f$\vmagnitudeMax@f$.
+             *     magnitude @f$\voltagemax@f$.
              * @details    The voltage magnitude is in p.u.
              *
              * @code{.cpp}
@@ -426,7 +426,7 @@ class ElectricalProperties {
              *      vertex.MaximumVoltage() = 111;
              * @endcode
              *
-             * @return     The maximum voltage magnitude @f$\vmagnitudeMax@f$.
+             * @return     The maximum voltage magnitude @f$\voltagemax@f$.
              */
             inline Types::real & MaximumVoltage ()
             { 
@@ -830,8 +830,8 @@ class ElectricalProperties {
             Types::real     voltageMagnitudeSq_;    /**< Voltage magnitude squared variable */
             // Types::real     realVoltage_;        /**< Real voltage */
             // Types::real     imaginaryVoltage_;   /**< Imaginary voltage */
-            TBound          voltageBound_;          /**< The voltage limits @f$\vmagnitude := [\vmagnitudeMin,\vmagnitudeMax]@f$ 
-                                                     *      in per unit (p.u.) of the nominal voltage @f$\vnominal@f$. 
+            TBound          voltageBound_;          /**< The voltage limits @f$\voltage := [\voltagemin,\voltagemax]@f$ 
+                                                     *      in per unit (p.u.) of the nominal voltage @f$\voltagenominal@f$. 
                                                      */
         ///@}
 
