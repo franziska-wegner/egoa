@@ -13,6 +13,7 @@ find_package ( Git )
 ####################################################################
 # PyPSA Europe #####################################################
 ####################################################################
+file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA" )
 file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA/pypsa-eur" )
 
 if ( EGOA_DOWNLOAD_PYPSA_EUR )
@@ -61,7 +62,7 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     file ( DOWNLOAD 
         https://www.power.scigrid.de/releases_archive/scigrid-0.1-data-only.zip 
         "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.1-data-only.zip"
-        URL_HASH SHA512=56c8246eca1142dc9d9487ef1d1bd690af91c0e3716a56adc25c4a218bceb1be7f84cf5361acbaae354fe23cf44be6f479ae3d6026abd7dcb131b89ca5779f26
+        # URL_HASH SHA512=56c8246eca1142dc9d9487ef1d1bd690af91c0e3716a56adc25c4a218bceb1be7f84cf5361acbaae354fe23cf44be6f479ae3d6026abd7dcb131b89ca5779f26
         SHOW_PROGRESS
     )
 
@@ -82,7 +83,7 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     file ( DOWNLOAD 
         https://www.power.scigrid.de/releases_archive/scigrid-0.2-data-only.zip
         "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-0.2-data-only.zip"
-        URL_HASH SHA512=0f6473487cc224e86d73d764b2b9ad5b34fae3c7b9a2a8f3be70846631429f14ddde10fb0a06672955e2725794c1c32fe5fc5fc356219d371ab462ca98bc1d7c
+        # URL_HASH SHA512=0f6473487cc224e86d73d764b2b9ad5b34fae3c7b9a2a8f3be70846631429f14ddde10fb0a06672955e2725794c1c32fe5fc5fc356219d371ab462ca98bc1d7c
         SHOW_PROGRESS
     )
 
@@ -103,7 +104,7 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     file ( DOWNLOAD 
         https://www.power.scigrid.de/releases_archive/scigrid-conference-de-data-only.zip
         "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-de-data-only.zip"
-        URL_HASH SHA512=a03a69d9f30fca08a7945e9d9acbf4e0da18b639df351024f11df1c4b2d57a15bbc8eb4419b20b97a9741c9641a0aa24c8a3c7b45816380787185e58771ca77f
+        # URL_HASH SHA512=a03a69d9f30fca08a7945e9d9acbf4e0da18b639df351024f11df1c4b2d57a15bbc8eb4419b20b97a9741c9641a0aa24c8a3c7b45816380787185e58771ca77f
         SHOW_PROGRESS
     )
 
@@ -124,7 +125,7 @@ if ( EGOA_DOWNLOAD_SCIGRID )
     file ( DOWNLOAD 
         https://www.power.scigrid.de/releases_archive/scigrid-conference-eu-data-only.zip
         "${EGOA_DOWNLOAD_DIRECTORY_SCIGRID}/scigrid-conference-eu-data-only.zip"
-        URL_HASH SHA512=b8590cf9c2cea1ef3a096d041a5918a8e9f919236aba898e205ba732dbbab7b0b388bfd521399cfa2460123e16f3b0c1528db5dc8d0da82c097b9f096001f697
+        # URL_HASH SHA512=b8590cf9c2cea1ef3a096d041a5918a8e9f919236aba898e205ba732dbbab7b0b388bfd521399cfa2460123e16f3b0c1528db5dc8d0da82c097b9f096001f697
         SHOW_PROGRESS
     )
 
