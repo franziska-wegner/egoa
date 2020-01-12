@@ -395,7 +395,7 @@ class PyPsaParser {
                 while( !file.atEnd() ) 
                 {
                     splitted = ReadLine( file, false );
-                    TGeneratorProperties * generator = new TGeneratorProperties();
+                    TGeneratorProperties generator;
                     std::string temp;
                     
                     USAGE_ASSERT ( static_cast<Types::count>( splitted.size() ) == dataMapperGenerators_.size() );
@@ -409,20 +409,20 @@ class PyPsaParser {
                         (this->*dataMapperGenerators_[counter])( temp , generator);
                     } // for
                     Types::vertexId generatorId = Const::NONE;
-                    if ( mapGeneratorName2BusName_.find(generator->Name()) != mapGeneratorName2BusName_.end() ) 
+                    if ( mapGeneratorName2BusName_.find(generator.Name()) != mapGeneratorName2BusName_.end() ) 
                     {
-                        if ( mapBusName2VertexId_.find(mapGeneratorName2BusName_[generator->Name()]) != mapBusName2VertexId_.end() ) 
+                        if ( mapBusName2VertexId_.find(mapGeneratorName2BusName_[generator.Name()]) != mapBusName2VertexId_.end() ) 
                         {
-                            generatorId = network.AddGeneratorAt(mapBusName2VertexId_[mapGeneratorName2BusName_[generator->Name()]], *generator);
+                            generatorId = network.AddGeneratorAt(mapBusName2VertexId_[mapGeneratorName2BusName_[generator.Name()]], generator);
                         } else {
                             ESSENTIAL_ASSERT( false && "Bus name does not exist" );
                         }
                     } else {
                         ESSENTIAL_ASSERT( false && "Generator name does not exist" );
                     }
-                    if ( mapGeneratorName2Identifier_.find(generator->Name()) == mapGeneratorName2Identifier_.end() ) 
+                    if ( mapGeneratorName2Identifier_.find(generator.Name()) == mapGeneratorName2Identifier_.end() ) 
                     {                        
-                        mapGeneratorName2Identifier_[generator->Name()] = generatorId;
+                        mapGeneratorName2Identifier_[generator.Name()] = generatorId;
                     } else {
                         ESSENTIAL_ASSERT( false && "Generator name to identifier, Generator name duplicates" );   
                     }
@@ -1486,15 +1486,15 @@ class PyPsaParser {
         
         ///@name Function pointer types
         ///@{
-            using ElectricalVertexFunc               = void (PyPsaParser::*)( Types::name const & , TVertexProperties& );
+            using ElectricalVertexFunc               = void (PyPsaParser::*)( Types::name const &, TVertexProperties& );
 
-            using GeneratorVertexFunc                = void (PyPsaParser::*)(Types::name const & , TGeneratorProperties*);
+            using GeneratorVertexFunc                = void (PyPsaParser::*)( Types::name const &, TGeneratorProperties& );
             using GeneratorMaximumRealPowerPuFunc    = std::function<void(Types::string const &, TNetwork&)>;
 
-            using LoadVertexFunc                     = void (PyPsaParser::*)(Types::name const & , TLoadProperties&);
+            using LoadVertexFunc                     = void (PyPsaParser::*)( Types::name const &, TLoadProperties& );
             using LoadMaximumRealPowerPuFunc         = std::function<void(Types::string const &, TNetwork&)>;
 
-            using ElectricalEdgeFunc                 = void (PyPsaParser::*)(Types::name const & , TIoEdge&);
+            using ElectricalEdgeFunc                 = void (PyPsaParser::*)( Types::name const &, TIoEdge& );
         ///@}
 
         ///@name Mappers for Reading Data
@@ -1851,68 +1851,69 @@ class PyPsaParser {
 #pragma mark GENERATOR_DATA_EXTRACTION
 
             /**
-             * @brief      Add the control type to the generator.
+             * @brief      Adds a control type to the generator.
              *
-             * @param      control    The control type.
-             * @param      generator  The generator.
+             * @param      control            The control type.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddControlTypeToGenerator ( Types::string  const & control
-                                                  , TGeneratorProperties * generator ) 
+                                                  , TGeneratorProperties & generatorProperty ) 
             { 
-                generator->Control() = Vertices::StringToControlType ( control );
-                if ( Vertices::ControlType::unknown == generator->Control()  ) 
+                generatorProperty.Control() = Vertices::StringToControlType ( control );
+                if ( Vertices::ControlType::unknown == generatorProperty.Control()  ) 
                 {
-                    generator->Control() = Vertices::ControlType::PQ; 
+                    generatorProperty.Control() = Vertices::ControlType::PQ; 
                 } 
             }
 
             /**
-             * @brief      Add the nominal real power.
+             * @brief      Adds a nominal real power to the generator.
              *
-             * @param      pNom       The nominal real power.
-             * @param      generator  The generator.
+             * @param      pNom               The nominal real power.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGenerator ( Types::string  const & pNom
-                                                       , TGeneratorProperties * generator ) 
+                                                       , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( Types::String2double( pNom ) != 0 ) 
                 {
-                    generator->NominalPower()  = Types::String2double( pNom ); 
+                    generatorProperty.NominalPower()  = Types::String2double( pNom ); 
                 } else {
-                    generator->NominalPower()  = 1; 
+                    generatorProperty.NominalPower()  = 1; 
                 }
             }
 
             /**
-             * @brief      Add if the generator is nominal extendable.
+             * @brief      Changes whether the generator is extendable or not.
              *
-             * @param      pNomExtendable  The nominal extendable.
-             * @param      generator       The generator.
+             * @param      pNomExtendable     The nominal extendable boolean.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorExtendable ( Types::string  const & pNomExtendable
-                                                                 , TGeneratorProperties * generator ) 
+                                                                 , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( pNomExtendable == "TRUE" ) 
                 { 
-                    generator->IsExtendable() = true; 
+                    generatorProperty.IsExtendable() = true; 
                 } else { 
-                    generator->IsExtendable() = false; 
+                    generatorProperty.IsExtendable() = false; 
                 } 
             }
 
             /**
-             * @brief      Add the name to the generator.
+             * @brief      Adds a name to the generator.
              *
-             * @param      name       The name.
-             * @param      generator  The generator.
+             * @param      name               The name.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddNameToGenerator ( Types::name    const & name
-                                           , TGeneratorProperties * generator ) 
+                                           , TGeneratorProperties & generatorProperty ) 
             { 
-                generator->Name()                 = name; 
-                if ( mapGeneratorName2Generator_.find( generator->Name() ) == mapGeneratorName2Generator_.end() ) 
+                generatorProperty.Name()                 = name; 
+                if ( mapGeneratorName2Generator_.find ( generatorProperty.Name() ) 
+                  == mapGeneratorName2Generator_.end() ) 
                 {
-                    mapGeneratorName2Generator_[generator->Name()] = generator; 
+                    mapGeneratorName2Generator_[generatorProperty.Name()] = generatorProperty; 
                 } else {
                     ESSENTIAL_ASSERT( false && "Generator duplicates" );
                 }
@@ -1921,17 +1922,18 @@ class PyPsaParser {
             /**
              * @brief      Associate the generator with a bus.
              *
-             * @param      bus        The bus.
-             * @param      generator  The generator.
+             * @param      bus                The bus.
+             * @param      generatorProperty  The generator property.
              */
             inline void AssociateGeneratorWithBus ( Types::name    const & bus
-                                                  , TGeneratorProperties * generator ) 
+                                                  , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !bus.empty() ) 
                 {
-                    if ( mapGeneratorName2BusName_.find( generator->Name() ) == mapGeneratorName2BusName_.end() ) 
+                    if ( mapGeneratorName2BusName_.find( generatorProperty.Name() ) 
+                      == mapGeneratorName2BusName_.end() ) 
                     {
-                        mapGeneratorName2BusName_[generator->Name()] = bus; 
+                        mapGeneratorName2BusName_[ generatorProperty.Name() ] = bus; 
                     } else {
                         ESSENTIAL_ASSERT( false && "Generator duplicates" );
                     }
@@ -1941,13 +1943,13 @@ class PyPsaParser {
             }
 
             /**
-             * @brief      Add the type to the generator.
+             * @brief      Adds a type to the generator.
              *
-             * @param      type       The type.
-             * @param      generator  The generator.
+             * @param      type               The type.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddTypeToGenerator ( Types::string  const & type
-                                           , TGeneratorProperties * generator ) 
+                                           , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !type.empty() ) 
                 {
@@ -1956,141 +1958,141 @@ class PyPsaParser {
             }
 
             /**
-             * @brief      Add the generator's efficiency to the generator.
+             * @brief      Adds a generator efficiency to generator.
              *
-             * @param      efficiency  The generator's efficiency.
-             * @param      generator   The generator.
+             * @param      efficiency         The generator's efficiency.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddGeneratorEfficiencyToGenerator ( Types::string  const & efficiency
-                                                          , TGeneratorProperties * generator ) 
+                                                          , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !efficiency.empty() ) 
                 {
                     if ( efficiency.compare("inf") != 0 ) 
                     { // not inf
-                        generator->Efficiency() = Types::String2double( efficiency );
+                        generatorProperty.Efficiency() = Types::String2double( efficiency );
                     } else { //inf
-                        generator->Efficiency() = Const::REAL_INFTY;
+                        generatorProperty.Efficiency() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the minimum nominal real power.
+             * @brief      Adds a minimum nominal real power to the generator.
              *
-             * @param      pNomMin    The minimum nominal real power.
-             * @param      generator  The generator.
+             * @param      pNomMin            The nominal minimum real power.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorMin ( Types::string  const & pNomMin
-                                                          , TGeneratorProperties * generator ) 
+                                                          , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !pNomMin.empty() ) 
                 {
                     if ( pNomMin.compare("inf") != 0 ) 
                     { // not inf
-                        generator->NominalRealPowerBound().Minimum() = Types::String2double( pNomMin );
+                        generatorProperty.NominalRealPowerBound().Minimum() = Types::String2double( pNomMin );
                     } else { //inf
-                        generator->NominalRealPowerBound().Minimum() = Const::REAL_INFTY;
+                        generatorProperty.NominalRealPowerBound().Minimum() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the maximum nominal real power to the generator.
+             * @brief      Adds a maximum nominal real power to the generator.
              *
-             * @param      pNomMax    The maximum nominal real power.
-             * @param      generator  The generator.
+             * @param      pNomMax            The maximum nominal real power.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorMax ( Types::string  const & pNomMax
-                                                          , TGeneratorProperties * generator ) 
+                                                          , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !pNomMax.empty() ) 
                 {
                     if ( pNomMax.compare("inf") != 0 ) 
                     { // not inf
-                        generator->NominalRealPowerBound().Maximum() = Types::String2double( pNomMax );      
+                        generatorProperty.NominalRealPowerBound().Maximum() = Types::String2double( pNomMax );      
                     } else { //inf
-                        generator->NominalRealPowerBound().Maximum() = Const::REAL_INFTY;
+                        generatorProperty.NominalRealPowerBound().Maximum() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the minimum real power in p.u. to the generator.
+             * @brief      Adds a minimum real power in p.u. to the generator.
              *
-             * @param      pMinPu     The minimum real power in p.u.
-             * @param      generator  The generator.
+             * @param      pMinPu             The minimum real power in p.u.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddMinimumRealPowerPuToGenerator ( Types::string  const & pMinPu
-                                                         , TGeneratorProperties * generator ) 
+                                                         , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !pMinPu.empty() ) 
                 {
                     if ( pMinPu.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RealPowerBound().Minimum()   = Types::String2double( pMinPu  );
+                        generatorProperty.RealPowerBound().Minimum()   = Types::String2double( pMinPu  );
                     } else { //inf
-                        generator->RealPowerBound().Minimum()   = Const::REAL_INFTY;
+                        generatorProperty.RealPowerBound().Minimum()   = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the maximum real power in p.u.
+             * @brief      Adds a maximum real power in p.u.
              *
-             * @param      pMaxPu     The maximum real power in p.u.
-             * @param      generator  The generator.
+             * @param      pMaxPu             The maximum real power in p.u.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddMaximumRealPowerPuToGenerator ( Types::string  const & pMaxPu
-                                                         , TGeneratorProperties * generator ) 
+                                                         , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !pMaxPu.empty() ) 
                 {
                     if ( pMaxPu.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RealPowerBound().Maximum()   = Types::String2double( pMaxPu  );
+                        generatorProperty.RealPowerBound().Maximum()   = Types::String2double( pMaxPu  );
                     } else { //inf
-                        generator->RealPowerBound().Maximum()   = Const::REAL_INFTY;
+                        generatorProperty.RealPowerBound().Maximum()   = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the real power set point to the generator.
+             * @brief      Adds a real power set point to the generator.
              *
-             * @param      pSet       The real power set point.
-             * @param      generator  The generator.
+             * @param      pSet               The real power set point.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddRealPowerSetPointToGenerator ( Types::string  const & pSet
-                                                        , TGeneratorProperties * generator ) 
+                                                        , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !pSet.empty() ) 
                 {
                     if ( pSet.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RealPower() = Types::String2double( pSet );
+                        generatorProperty.RealPower() = Types::String2double( pSet );
                     } else { //inf
-                        generator->RealPower() = Const::REAL_INFTY;
+                        generatorProperty.RealPower() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the reactive set point to the generator.
+             * @brief      Adds a reactive power set point to the generator.
              *
-             * @param      qSet       The reactive power set point.
-             * @param      generator  The generator.
+             * @param      qSet               The reactive power set point.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddReactivePowerSetPointToGenerator ( Types::string  const & qSet
-                                                            , TGeneratorProperties * generator ) 
+                                                            , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !qSet.empty() ) 
                 {
                     if ( qSet.compare("inf") != 0 ) 
                     { // not inf
-                        generator->ReactivePower() = Types::String2double( qSet );
+                        generatorProperty.ReactivePower() = Types::String2double( qSet );
                     } else { //inf
-                        generator->ReactivePower() = Const::REAL_INFTY;
+                        generatorProperty.ReactivePower() = Const::REAL_INFTY;
                     }
                 }
             }
@@ -2098,73 +2100,76 @@ class PyPsaParser {
             /**
              * @brief      Add the generator's sign to the generator.
              *
-             * @param      sign       The sign.
-             * @param      generator  The generator.
+             * @param      sign               The sign.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddGeneratorSignToGenerator ( Types::string  const & sign
-                                                    , TGeneratorProperties * generator ) 
+                                                    , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !sign.empty() ) 
                 {
                     Types::integer powerSign    = Types::String2integer( sign );
-                    if ( powerSign >= 0 )
-                        generator->PowerSign()  = Vertices::PowerSign::positive;
-                    else
-                        generator->PowerSign()  = Vertices::PowerSign::negative;
-                }
-            }
-
-            /**
-             * @brief      Add the carrier to the generator.
-             *
-             * @param      carrier    The carrier.
-             * @param      generator  The generator.
-             */
-            inline void AddCarrierToGenerator ( Types::string  const & carrier
-                                              , TGeneratorProperties * generator ) 
-            { 
-                if ( !carrier.empty() ) 
-                {
-                    generator->GeneratorType() = Vertices::StringToGeneratorType( carrier );
-                }
-            }
-
-            /**
-             * @brief      Add the marginal cost to the generator.
-             *
-             * @param      marginalCost  The marginal cost.
-             * @param      generator     The generator.
-             */
-            inline void AddMarginalCostToGenerator ( Types::string  const & marginalCost
-                                                   , TGeneratorProperties * generator ) 
-            { 
-                if ( !marginalCost.empty() ) 
-                {
-                    if ( marginalCost.compare("inf") != 0 ) 
-                    { // not inf
-                        generator->MarginalCost() = Types::String2double( marginalCost ); 
-                    } else { //inf
-                        generator->MarginalCost() = Const::REAL_INFTY;
+                    if ( powerSign >= 0 ) 
+                    {
+                        generatorProperty.PowerSign()  = Vertices::PowerSign::positive;
+                    }
+                    else {
+                        generatorProperty.PowerSign()  = Vertices::PowerSign::negative;
                     }
                 }
             }
 
             /**
-             * @brief      Add the capital cost to the generator.
+             * @brief      Adds a carrier to the generator.
              *
-             * @param      capitalCost  The capital cost.
-             * @param      generator    The generator.
+             * @param      carrier            The carrier.
+             * @param      generatorProperty  The generator property.
+             */
+            inline void AddCarrierToGenerator ( Types::string  const & carrier
+                                              , TGeneratorProperties & generatorProperty ) 
+            { 
+                if ( !carrier.empty() ) 
+                {
+                    generatorProperty.GeneratorType() = Vertices::StringToGeneratorType ( carrier );
+                }
+            }
+
+            /**
+             * @brief      Adds a marginal cost to the generator.
+             *
+             * @param      marginalCost       The marginal cost.
+             * @param      generatorProperty  The generator property.
+             */
+            inline void AddMarginalCostToGenerator ( Types::string  const & marginalCost
+                                                   , TGeneratorProperties & generatorProperty ) 
+            { 
+                if ( !marginalCost.empty() ) 
+                {
+                    if ( marginalCost.compare("inf") != 0 ) 
+                    { // not inf
+                        generatorProperty.MarginalCost() = Types::String2double( marginalCost ); 
+                    } else { //inf
+                        generatorProperty.MarginalCost() = Const::REAL_INFTY;
+                    }
+                }
+            }
+
+            /**
+             * @brief      Adds a capital cost to the generator.
+             *
+             * @param      capitalCost        The capital cost.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddCapitalCostToGenerator ( Types::string  const & capitalCost
-                                                  , TGeneratorProperties * generator ) 
+                                                  , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !capitalCost.empty() ) 
                 {
                     if ( capitalCost.compare("inf") != 0 ) 
                     { // not inf
-                        generator->CapitalCost() = Types::String2double( capitalCost );
+                        generatorProperty.CapitalCost() = Types::String2double( capitalCost );
                     } else { //inf
-                        generator->CapitalCost() = Const::REAL_INFTY;
+                        generatorProperty.CapitalCost() = Const::REAL_INFTY;
                     }
                 }
             }
@@ -2175,192 +2180,199 @@ class PyPsaParser {
              * @param      committable  The committable.
              * @param      generator    The generator.
              */
+
+            /**
+             * @brief      Changes the committability property of the generator.
+             *
+             * @param      committable        The committable property.
+             * @param      generatorProperty  The generator property.
+             */
             inline void AddCommittabilityToGenerator ( Types::string  const & committable
-                                                     , TGeneratorProperties * generator ) 
+                                                     , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( committable == "True" ) 
                 { 
-                    generator->Committable() = true; 
+                    generatorProperty.Committable() = true; 
                 } else { 
-                    generator->Committable() = false; 
+                    generatorProperty.Committable() = false; 
                 } 
             }
 
             /**
-             * @brief      Add the start up cost to the generator.
+             * @brief      Adds a start up cost to the generator.
              *
-             * @param      startUpCost  The start up cost.
-             * @param      generator    The generator.
+             * @param      startUpCost        The start up cost.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddStartUpCostToGenerator ( Types::string  const & startUpCost
-                                                  , TGeneratorProperties * generator ) 
+                                                  , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !startUpCost.empty() ) 
                 {
                     if ( startUpCost.compare("inf") != 0 ) 
                     { // not inf
-                        generator->StartUpCost() = Types::String2double( startUpCost );
+                        generatorProperty.StartUpCost() = Types::String2double( startUpCost );
                     } else { //inf
-                        generator->StartUpCost() = Const::REAL_INFTY;
+                        generatorProperty.StartUpCost() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the shutdown cost to the generator.
+             * @brief      Adds a shut down cost to the generator.
              *
-             * @param      shutDownCost  The shut down cost.
-             * @param      generator     The generator.
+             * @param      shutDownCost       The shut down cost.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddShutDownCostToGenerator ( Types::string  const & shutDownCost
-                                                   , TGeneratorProperties * generator ) 
+                                                   , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !shutDownCost.empty() ) 
                 {
                     if ( shutDownCost.compare("inf") != 0 ) 
                     { // not inf
-                        generator->ShutDownCost() = Types::String2double( shutDownCost );
+                        generatorProperty.ShutDownCost() = Types::String2double( shutDownCost );
                     } else { //inf
-                        generator->ShutDownCost() = Const::REAL_INFTY;
+                        generatorProperty.ShutDownCost() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the minimum up time to the generator.
+             * @brief      Adds a minimum up time to the generator.
              *
-             * @param      minUpTime  The minimum up time.
-             * @param      generator  The generator.
+             * @param      minUpTime          The minimum up time.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddMinimumUpTimeToGenerator ( Types::string  const & minUpTime
-                                                    , TGeneratorProperties * generator ) 
+                                                    , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !minUpTime.empty() ) 
                 {
                     if ( minUpTime.compare("inf") != 0 ) 
                     { // not inf
-                        generator->MinimumUpTime() = Types::String2double( minUpTime );        
+                        generatorProperty.MinimumUpTime() = Types::String2double( minUpTime );        
                     } else { //inf
-                        generator->MinimumUpTime() = Const::REAL_INFTY;
+                        generatorProperty.MinimumUpTime() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the minimum down time to the generator.
+             * @brief      Adds a minimum down time to the generator.
              *
-             * @param      minDownTime  The minimum down time.
-             * @param      generator    The generator.
+             * @param      minDownTime        The minimum down time.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddMinimumDownTimeToGenerator ( Types::string  const & minDownTime
-                                                      , TGeneratorProperties * generator ) 
+                                                      , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !minDownTime.empty() ) 
                 {
                     if ( minDownTime.compare("inf") != 0 ) 
                     { // not inf
-                        generator->MinimumDownTime() = Types::String2double( minDownTime );
+                        generatorProperty.MinimumDownTime() = Types::String2double( minDownTime );
                     } else { //inf
-                        generator->MinimumDownTime() = Const::REAL_INFTY;
+                        generatorProperty.MinimumDownTime() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the initial status to the generator.
+             * @brief      Adds an initial status to the generator.
              *
-             * @param      initialStatus  The initial status.
-             * @param      generator      The generator.
+             * @param      initialStatus      The initial status.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddInitialStatusToGenerator ( Types::string  const & initialStatus
-                                                    , TGeneratorProperties * generator ) 
+                                                    , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !initialStatus.empty() ) 
                 {
                     Types::index status     = Types::String2integer( initialStatus );
                     if ( status )
-                        generator->Status() = Vertices::BusStatus::active;
+                        generatorProperty.Status() = Vertices::BusStatus::active;
                     else
-                        generator->Status() = Vertices::BusStatus::inactive;
+                        generatorProperty.Status() = Vertices::BusStatus::inactive;
                 }
             }
 
             /**
-             * @brief      Add the ramp limit up to the generator.
+             * @brief      Adds a ramp up time limit to the generator.
              *
-             * @param      rampLimitUp  The ramp limit up.
-             * @param      generator    The generator.
+             * @param      rampLimitUp        The ramp limit up.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitUpToGenerator ( Types::string  const & rampLimitUp
-                                                  , TGeneratorProperties * generator ) 
+                                                  , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !rampLimitUp.empty() ) 
                 {
                     if ( rampLimitUp.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RampLimitUp() = Types::String2double( rampLimitUp );      
+                        generatorProperty.RampLimitUp() = Types::String2double( rampLimitUp );      
                     } else { //inf
-                        generator->RampLimitUp() = Const::REAL_INFTY;
+                        generatorProperty.RampLimitUp() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the ramp limit down to the generator.
+             * @brief      Adds a ramp down time limit to the generator.
              *
-             * @param      rampLimitDown  The ramp limit down.
-             * @param      generator      The generator.
+             * @param      rampLimitDown      The ramp limit down.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitDownToGenerator ( Types::string  const & rampLimitDown
-                                                    , TGeneratorProperties * generator ) 
+                                                    , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !rampLimitDown.empty() ) 
                 {
                     if ( rampLimitDown.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RampLimitDown() = Types::String2double( rampLimitDown );    
+                        generatorProperty.RampLimitDown() = Types::String2double( rampLimitDown );    
                     } else { //inf
-                        generator->RampLimitDown() = Const::REAL_INFTY;
+                        generatorProperty.RampLimitDown() = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the ramp limit start up to the generator.
+             * @brief      Adds a ramp start up time limit to the generator.
              *
-             * @param      rampLimitStartUp  The ramp limit start up.
-             * @param      generator         The generator.
+             * @param      rampLimitStartUp   The ramp start up time limit.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitStartUpToGenerator ( Types::string  const & rampLimitStartUp
-                                                       , TGeneratorProperties * generator ) 
+                                                       , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !rampLimitStartUp.empty() ) 
                 {
                     if ( rampLimitStartUp.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RampLimitStartUp()  = Types::String2double( rampLimitStartUp);  
+                        generatorProperty.RampLimitStartUp()  = Types::String2double( rampLimitStartUp);  
                     } else { //inf
-                        generator->RampLimitStartUp()  = Const::REAL_INFTY;
+                        generatorProperty.RampLimitStartUp()  = Const::REAL_INFTY;
                     }
                 }
             }
 
             /**
-             * @brief      Add the ramp limit shutdown to the generator.
+             * @brief      Adds a ramp limit shut down to the generator.
              *
              * @param      rampLimitShutDown  The ramp limit shut down.
-             * @param      generator          The generator.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitShutDownToGenerator ( Types::string  const & rampLimitShutDown
-                                                        , TGeneratorProperties * generator ) 
+                                                        , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !rampLimitShutDown.empty() ) 
                 {
                     if ( rampLimitShutDown.compare("inf") != 0 ) 
                     { // not inf
-                        generator->RampLimitShutDown() = Types::String2double( rampLimitShutDown );
+                        generatorProperty.RampLimitShutDown() = Types::String2double( rampLimitShutDown );
                     } else { //inf
-                        generator->RampLimitShutDown() = Const::REAL_INFTY;
+                        generatorProperty.RampLimitShutDown() = Const::REAL_INFTY;
                     }
                 }
             }
@@ -2371,13 +2383,13 @@ class PyPsaParser {
 #pragma mark GENERATOR_DATA_OUTPUT
 
             /**
-             * @brief      Add the real power to a generator.
+             * @brief      Adds a real power to the generator.
              *
-             * @param      realPower  The real power.
-             * @param      generator  The generator.
+             * @param      realPower          The real power.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddRealPowerToGenerator ( Types::name    const & realPower
-                                                , TGeneratorProperties * generator ) 
+                                                , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !realPower.empty() ) 
                 {
@@ -2391,13 +2403,13 @@ class PyPsaParser {
             }
 
             /**
-             * @brief      Add the reactive power to the generator.
+             * @brief      Adds a reactive power to the generator.
              *
-             * @param      reactivePower  The reactive power.
-             * @param      generator      The generator.
+             * @param      reactivePower      The reactive power.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddReactivePowerToGenerator ( Types::name    const & reactivePower
-                                                    , TGeneratorProperties * generator ) 
+                                                    , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !reactivePower.empty() ) 
                 {
@@ -2411,13 +2423,13 @@ class PyPsaParser {
             }
 
             /**
-             * @brief      Add the optimal nominal real power to the generator.
+             * @brief      Adds a optimal nominal real power to the generator.
              *
-             * @param      pNomOpt    The optimal nominal real power.
-             * @param      generator  The generator.
+             * @param      pNomOpt            The optimal nominal real power.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorOpt ( Types::name    const & pNomOpt
-                                                          , TGeneratorProperties * generator ) 
+                                                          , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !pNomOpt.empty() ) 
                 {  
@@ -2431,13 +2443,13 @@ class PyPsaParser {
             }
 
             /**
-             * @brief      Add the status to the generator.
-             *
-             * @param      status     The status.
-             * @param      generator  The generator.
+             * @brief      Adds a status to the generator @f$\vertex\in\generators@f$.
+             *             
+             * @param      status             The status.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddStatusToGenerator ( Types::name    const & status
-                                             , TGeneratorProperties * generator ) 
+                                             , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !status.empty() ) 
                 {
@@ -2451,13 +2463,13 @@ class PyPsaParser {
             }
 
             /**
-             * @brief      Add the weight to the generator.
+             * @brief      Adds a weight to the generator @f$\vertex\in\generators@f$.
              *
-             * @param      weight     The weight.
-             * @param      generator  The generator.
+             * @param      weight             The weight.
+             * @param      generatorProperty  The generator property.
              */
             inline void AddWeightToGenerator ( Types::name    const & weight
-                                             , TGeneratorProperties * generator ) 
+                                             , TGeneratorProperties & generatorProperty ) 
             { 
                 if ( !weight.empty() ) 
                 {
@@ -2485,7 +2497,7 @@ class PyPsaParser {
              * 
              */
             void AddTimestampOfGenerator ( Types::name const & name
-                                                , TNetwork   & network ) 
+                                         , TNetwork          & network ) 
             { /*network.AddSnapshotTimestamp( name ); is already implemented at load equivalent*/ 
             }
 
@@ -2507,9 +2519,9 @@ class PyPsaParser {
                 {
                     if ( maximumRealPowerPu.compare("inf") != 0 ) 
                     { // not inf
-                        network.AddGeneratorRealPowerSnapshotAt(generatorId, Types::String2double( maximumRealPowerPu ) );  
+                        network.AddGeneratorRealPowerSnapshotAt ( generatorId, Types::String2double( maximumRealPowerPu ) );  
                     } else { //inf
-                        network.AddGeneratorRealPowerSnapshotAt(generatorId, Const::REAL_INFTY );  
+                        network.AddGeneratorRealPowerSnapshotAt ( generatorId, Const::REAL_INFTY );  
                     }
                 } else {
                     USAGE_ASSERT ( false && "Generator real power snapshot at generatorId is empty!" );
@@ -2657,7 +2669,7 @@ class PyPsaParser {
              * @param      edge                  The edge.
              */
             void AddNominalApparentPowerToEdge ( Types::name const & apparentPowerNominal
-                                                      , TIoEdge           & edge ) 
+                                               , TIoEdge           & edge ) 
             { 
                 if ( !apparentPowerNominal.empty() ) 
                 {
@@ -2692,7 +2704,7 @@ class PyPsaParser {
              * @param      edge            The edge.
              */
             void AddNominalVoltageToEdge ( Types::name const & voltageNominal
-                                                , TIoEdge           & edge ) 
+                                         , TIoEdge           & edge ) 
             { 
                 if ( !voltageNominal.empty() ) 
                 {
@@ -3449,7 +3461,7 @@ class PyPsaParser {
 #pragma mark MAPPING_OF_DIFFERENT_INPUTS
 
             std::unordered_map<Types::name, Types::vertexId>     mapBusName2VertexId_;           /**< Mapping the bus name to the vertex identifier */
-            std::unordered_map<Types::name, TGeneratorProperties*>   mapGeneratorName2Generator_;    /**< Mapping the generator name to the generator */
+            std::unordered_map<Types::name, TGeneratorProperties>   mapGeneratorName2Generator_;    /**< Mapping the generator name to the generator */
             std::unordered_map<Types::name, Types::vertexId>     mapGeneratorName2Identifier_;   /**< Mapping the generator name to the vertex identifier */
             std::unordered_map<Types::name, Types::name>         mapGeneratorName2BusName_;      /**< Mapping the generator name to the vertex name */
             std::unordered_map<Types::name, Types::vertexId>     mapLoadName2Identifier_;        /**< Mapping the load name to the vertex identifier */
