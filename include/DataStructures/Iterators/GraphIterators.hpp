@@ -18,7 +18,7 @@
 namespace egoa::internal {
 
 /**
- * @brief      The base class for @p for loops for graphs
+ * @brief      The base class for @p for loops for graphs.
  * @details    Implementations for the loops are defined in the
  *             template specializations for the different execution
  *             policies.
@@ -407,7 +407,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             {
                 for ( auto edgeId : graph.OutEdgeIdsAt(vertexId) )
                 {
-                    function( graph.EdgesAt( edgeId ) );
+                    function( graph.EdgeAt( edgeId ) );
                 }
             }
         /// @}

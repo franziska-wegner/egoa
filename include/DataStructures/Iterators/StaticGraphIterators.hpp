@@ -14,7 +14,7 @@
 
 #include "Auxiliary/ExecutionPolicy.hpp"
 
-#include "DataStructures/Graphs/Iterators/GraphIterators.hpp"
+#include "DataStructures/Iterators/GraphIterators.hpp"
 
 namespace egoa::internal {
 
