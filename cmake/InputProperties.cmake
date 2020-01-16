@@ -103,25 +103,40 @@ set_property(CACHE EGOA_TEST_FRAMEWORK PROPERTY STRINGS OfflineGoogleTestFramewo
 # Set number of threads
 set(EGOA_THREAD_LIMIT "100" CACHE STRING "Sets OpenMP limit for number of threads")
 
-# Download property PyPSA-eur data
+# Download PyPSA-eur data
 set(EGOA_DOWNLOAD_PYPSA_EUR ON CACHE BOOL
     "EGOA_DOWNLOAD_PYPSA_EUR triggers the download for PyPSA-eur")
 set_property(CACHE EGOA_DOWNLOAD_PYPSA_EUR PROPERTY STRINGS ON OFF)
 
-# Download property PyPSA-eur data
+# Download PyPSA-eur data
 set(EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION ON CACHE BOOL
     "EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION triggers the download for PyPSA-iti-collaboration")
 set_property(CACHE EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION PROPERTY STRINGS ON OFF)
 
-# Download property SciGrid data
+# Download SciGrid data
 set(EGOA_DOWNLOAD_SCIGRID ON CACHE BOOL
     "EGOA_DOWNLOAD_SCIGRID triggers the download for SciGrid")
 set_property(CACHE EGOA_DOWNLOAD_SCIGRID PROPERTY STRINGS ON OFF)
 
-# Download property SciGrid data
+# Download IEEE data
+set(EGOA_DOWNLOAD_IEEE ON CACHE BOOL
+    "EGOA_DOWNLOAD_IEEE triggers the download of the IEEE benchmark data sets")
+set_property(CACHE EGOA_DOWNLOAD_IEEE PROPERTY STRINGS ON OFF)
+
+# Download Wind Farm data
 set(EGOA_DOWNLOAD_WINDFARM ON CACHE BOOL
     "EGOA_DOWNLOAD_WINDFARM triggers the download for Windfarms")
 set_property(CACHE EGOA_DOWNLOAD_WINDFARM PROPERTY STRINGS ON OFF)
+
+# Download Eigen Library
+set(EGOA_DOWNLOAD_EIGEN ON CACHE BOOL
+    "EGOA_DOWNLOAD_EIGEN triggers the download of the library Eigen")
+set_property(CACHE EGOA_DOWNLOAD_EIGEN PROPERTY STRINGS ON OFF)
+
+# Download Google Test Framework Library
+set(EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK ON CACHE BOOL
+    "EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK triggers the download of the Google Test Framework library")
+set_property(CACHE EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK PROPERTY STRINGS ON OFF)
 
 ####################################################################
 # Mark some variables as advanced, i.e., not visible for users  ####

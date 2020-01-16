@@ -6,7 +6,7 @@
 # Main cmake configuration file.
 # 
 
-cmake_minimum_required ( VERSION 3.5.2 ) 
+cmake_minimum_required ( VERSION 3.13.1 ) 
 project ( EGOA CXX )
 
 # The version number.
@@ -302,6 +302,26 @@ set_property ( DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
     "${PROJECT_INCLUDE_DIR}/documentation/html"
     "${PROJECT_INCLUDE_DIR}/documentation/*.tmp"
     "${PROJECT_INCLUDE_DIR}/documentation/Doxyfile"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/00-Matpower-Data"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/01-Pypower-Data"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/02-gml"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/03-IEEE-Power_Flow_Test_Cases"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/04-IEEE-Dynamic_Test_Cases"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/05-IEEE-Reliability_Test_Systems-RTS"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/06-IEEE-Voltage_Collapse_Sensitivities"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/07-PEGASE_Test_Cases"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/08-Edinburgh_Power_Flow_Test_Cases"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/09-Edinburgh_Dynamic_Test_Cases"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/10-NESTA"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/11-Dimacs"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/12-Hitting-Sets"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/13-Publication_Test_Cases"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/14-EIRGrid_Test_Cases"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/15-Synthetic_Power_Grid_Test_Cases"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/16-Literature_Based_Power_Flow_Test_Cases"
+    # "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/17-Small_Signal_Stability_Test_Cases"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/18-IEEE-Data_Formats"
+    "${PROJECT_INCLUDE_DIR}/data/PowerGrids/IEEE/19-Power_System_Application_Data_Dictionary"
     "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA/pypsa-eur/*"
     "${PROJECT_INCLUDE_DIR}/data/PowerGrids/PyPSA/pypsa-iti-collaboration/elec*"
     "${PROJECT_INCLUDE_DIR}/data/PowerGrids/SciGrid"
