@@ -14,6 +14,26 @@ message( STATUS "")
 message( STATUS "Download of data sets:")
 
 ####################################################################
+# CppAD ############################################################
+####################################################################
+# 
+# Website: https://github.com/coin-or/CppAD.git
+#          and https://coin-or.github.io/CppAD/doc/cppad.htm
+####################################################################
+
+if ( EGOA_DOWNLOAD_CPPAD )
+    message( STATUS "${MY_SPACE}Download CppAD from https://github.com/coin-or/CppAD into ${PROJECT_INCLUDE_DIR}/external/CppAD.")
+    file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/external/CppAD" )
+    
+    ExternalProject_Add ( CppAD
+        GIT_REPOSITORY  https://github.com/coin-or/CppAD
+        SOURCE_DIR      "${PROJECT_INCLUDE_DIR}/external/CppAD"
+        GIT_TAG         master
+        GIT_SHALLOW     1
+    )
+endif ( EGOA_DOWNLOAD_CPPAD )
+
+####################################################################
 # Eigen ############################################################
 ####################################################################
 # 

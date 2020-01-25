@@ -9,7 +9,7 @@
 			"variants":
 			[
 			],
-			"working_dir": "/Users/fw/Documents/work/frameworks/gpgt/build-debug"
+			"working_dir": "/Users/fw/Documents/work/frameworks/egoa/build-debug"
 		}
 	],
 	"folders":
@@ -77,7 +77,7 @@
 	{
 		"cmake":
 		{
-			"build_folder": "/Users/fw/Documents/work/frameworks/gpgt/build-debug",
+			"build_folder": "/Users/fw/Documents/work/frameworks/egoa/build-debug",
 			"command_line_overrides":
 			{
 				"BONMIN_ROOT_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/Bonming-1.8/build",
@@ -89,8 +89,9 @@
 				"COIN_LIBRARY_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug",
 				"CPLEX_HOME": "/Applications/CPLEX_Studio128",
 				"EGOA_BUILD_TYPE": "Debug",
+				"EGOA_DOWNLOAD_CPPAD": "OFF",
 				"EGOA_DOWNLOAD_EIGEN": "OFF",
-				"EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK": "ON",
+				"EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK": "OFF",
 				"EGOA_DOWNLOAD_IEEE": "ON",
 				"EGOA_DOWNLOAD_PYPSA_EUR": "ON",
 				"EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION": "ON",

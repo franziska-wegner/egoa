@@ -26,6 +26,8 @@ unset(EGOA_ENABLE_ASSERTION)
 unset(EGOA_TEST_FRAMEWORK)
 unset(EGOA_THREAD_LIMIT)
 unset(EGOA_DOWNLOAD_PYPSA_EUR)
+unset(EGOA_DOWNLOAD_CPPAD)
+
 ####################################################################
 # Create variables and drop down menu ##############################
 ####################################################################
@@ -137,6 +139,11 @@ set_property(CACHE EGOA_DOWNLOAD_EIGEN PROPERTY STRINGS ON OFF)
 set(EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK ON CACHE BOOL
     "EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK triggers the download of the Google Test Framework library")
 set_property(CACHE EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK PROPERTY STRINGS ON OFF)
+
+# Download Cpp AD (Algorithmic Differentiation) Library
+set(EGOA_DOWNLOAD_CPPAD ON CACHE BOOL
+    "EGOA_DOWNLOAD_CPPAD triggers the download of the Google Test Framework library")
+set_property(CACHE EGOA_DOWNLOAD_CPPAD PROPERTY STRINGS ON OFF)
 
 ####################################################################
 # Mark some variables as advanced, i.e., not visible for users  ####
