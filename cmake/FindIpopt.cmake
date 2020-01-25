@@ -74,6 +74,7 @@ if(IPOPT_FOUND)
     if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
         set(IPOPT_LIBRARIES "${IPOPT_LIBRARIES};m;pthread")
     endif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    include_directories(${IPOPT_INCLUDE_DIR})
 endif(IPOPT_FOUND)
 
 mark_as_advanced(IPOPT_LIBRARY IPOPT_INCLUDE_DIR IPOPT_LIBRARY_DIR)
