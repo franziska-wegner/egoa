@@ -44,13 +44,24 @@ endif ( EGOA_DOWNLOAD_CPPAD )
 if ( EGOA_DOWNLOAD_EIGEN )
     message( STATUS "${MY_SPACE}Download Eigen from https://gitlab.com/libeigen/eigen.git into ${PROJECT_INCLUDE_DIR}/external/Eigen.")
     file ( MAKE_DIRECTORY "${PROJECT_INCLUDE_DIR}/external/Eigen" )
-    
-    ExternalProject_Add ( Eigen
+
+    FetchContent_Declare ( Eigen
         GIT_REPOSITORY  https://gitlab.com/libeigen/eigen.git
         SOURCE_DIR      "${PROJECT_INCLUDE_DIR}/external/Eigen"
         GIT_TAG         master
         GIT_SHALLOW     1
     )
+
+    if ( ${CMAKE_VERSION} VERSION_LESS 3.14 )
+        FetchContent_GetProperties ( Eigen )
+        if ( NOT Eigen_POPULATED )
+            FetchContent_Populate ( Eigen )
+            # add_subdirectory ( ${Eigen_SOURCE_DIR} ${Eigen_BINARY_DIR} )
+        endif()
+    else()
+        FetchContent_MakeAvailable ( Eigen )
+    endif()
+
 endif ( EGOA_DOWNLOAD_EIGEN )
 
 ####################################################################
