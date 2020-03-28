@@ -14,12 +14,13 @@
 unset ( EIGEN_INCLUDE_DIR CACHE )
 
 ####################################################################
-# CppAD include directory ##########################################
+# Eigen include directory ##########################################
 ####################################################################
-find_path ( CPPAD_INCLUDE_DIR
-    NAMES Eigen/src/Core/Array.h 
-    HINTS   /external/Eigen
+find_path ( EIGEN_INCLUDE_DIR
+    NAMES   Eigen/src/Core/Array.h 
+    HINTS   ./external/Eigen
             ${EIGEN_ROOT_DIR}/Eigen/
+            ${EIGEN_ROOT_DIR}
     )
 message ( STATUS "${MY_SPACE}EIGEN_INCLUDE_DIR:\t\t\t" ${EIGEN_INCLUDE_DIR} )
 
@@ -31,9 +32,10 @@ find_package_handle_standard_args ( EIGEN DEFAULT_MSG EIGEN_INCLUDE_DIR )
 
 if ( EIGEN_FOUND)
     set ( EIGEN_INCLUDE_DIRS ${EIGEN_INCLUDE_DIR} )
-    set ( EIGEN_LIBRARIES ${EIGEN_LIBRARY} )
     include_directories ( ${EIGEN_INCLUDE_DIR} )
 endif ( EIGEN_FOUND )
+
+message ( STATUS "${MY_SPACE}EIGEN_INCLUDE_DIR:\t\t\t" ${EIGEN_INCLUDE_DIR} )
 
 mark_as_advanced ( EIGEN_INCLUDE_DIR )
 
