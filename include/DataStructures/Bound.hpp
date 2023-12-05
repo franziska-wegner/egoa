@@ -8,7 +8,7 @@
 #ifndef EGOA__DATA_STRUCTURE__BOUND_HPP
 #define EGOA__DATA_STRUCTURE__BOUND_HPP
 
-#include "Exceptions/PgtExceptions.hpp"
+#include "Exceptions/Exceptions.hpp"
 #include "Exceptions/Assertions.hpp"
 
 namespace egoa {
