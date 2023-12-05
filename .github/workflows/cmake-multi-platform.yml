@@ -12,7 +12,6 @@ on:
 
 env:
   QT_VERSION:     "6.2.0"
-  BUILD_TYPE:      Release
 
 jobs:
   build:
