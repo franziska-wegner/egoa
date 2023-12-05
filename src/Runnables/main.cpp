@@ -230,7 +230,7 @@ int main(int argc, char *argv[]) {
     auto outputType         = parser.value("outputType").toUpper();
 
 #ifndef NDEBUG 
-    qDebug() << endl;
+    qDebug() << Qt::endl;
     qDebug() << "\tInputFile :"   << inputFile;
     qDebug() << "\tOutputDir :"   << outputDir;
     qDebug() << "\tAlgorithm :"   << algorithm;
