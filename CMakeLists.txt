@@ -174,7 +174,7 @@ list ( FILTER SOURCES EXCLUDE REGEX ".*Runnables.*" )
 
 # Add library target EGOA to be build from the source files
 add_library ( EGOA ${SOURCES} )
-target_link_libraries ( EGOA ${QT5_LIBRARIES} )
+target_link_libraries ( EGOA ${QT6_LIBRARIES} )
 
 # Add subdirectory here the source directory with the corresponding
 # CMakeLists.txt
@@ -207,10 +207,10 @@ message ( STATUS "")
 message ( STATUS "Other important targets:")
 
 # QT5 found
-if ( Qt5_FOUND )
-    message ( STATUS "${MY_SPACE}qt5:\t\t\t\tadd libraries of QT5" )
-    target_compile_definitions ( EGOA PUBLIC QT5_AVAILABLE )
-endif ( Qt5_FOUND ) 
+if ( Qt6_FOUND )
+    message ( STATUS "${MY_SPACE}qt6:\t\t\t\tadd libraries of QT6" )
+    target_compile_definitions ( EGOA PUBLIC QT6_AVAILABLE )
+endif ( Qt6_FOUND )
 
 # OpenMP found
 if ( OPENMP_FOUND )
@@ -270,12 +270,12 @@ endif ( BONMIN_FOUND )
 if ( EGOA_ENABLE_EXCEPTION_HANDLING )
     message(STATUS "${MY_SPACE}EGOA Exceptions:\t\t${EGOA_ENABLE_EXCEPTION_HANDLING}")
     target_compile_definitions(EGOA PUBLIC EGOA_ENABLE_EXCEPTION_HANDLING)
-endif()
+endif ( EGOA_ENABLE_EXCEPTION_HANDLING )
 
 if ( EGOA_ENABLE_ASSERTION AND CMAKE_BUILD_TYPE STREQUAL "Debug" )
     message(STATUS "${MY_SPACE}EGOA Assertions:\t\t${EGOA_ENABLE_ASSERTION}")
     target_compile_definitions(EGOA PUBLIC EGOA_ENABLE_ASSERTION)
-endif( )
+endif ( )
 
 # Define a macro to get number of configured threads
 target_compile_definitions ( EGOA PUBLIC EGOA_USER_DEFINED_THREAD_LIMIT=$ENV{OMP_NUM_THREADS} )
