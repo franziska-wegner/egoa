@@ -69,12 +69,12 @@ namespace egoa::Types {
 
         // QString t_string(str.c_str());
         bool ok; double number(0);
-        QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
+        // QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
         number = QString(t_string).toDouble(&ok);   // ok == true, d == 1234.56
-        if (!ok) {
-            QLocale locale(QLocale::German); //QLocale::Catalan
-            number = locale.toDouble(t_string);
-        }
+        // if (!ok) {
+            // QLocale locale(QLocale::German); //QLocale::Catalan
+            // number = locale.toDouble(t_string);
+        // }
         return number;
     }
 
