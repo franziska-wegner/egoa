@@ -14,7 +14,7 @@
 
 #include "Auxiliary/ExecutionPolicy.hpp"
 
-#include "DataStructures/Graphs/Iterators/StaticGraphIterators.hpp"
+#include "DataStructures/Iterators/StaticGraphIterators.hpp"
 #include "DataStructures/Views/VectorView.hpp"
 
 #include "Exceptions/Assertions.hpp"

@@ -107,6 +107,11 @@ enum class GeneratorType {
     unknown       = 99      /**< unknown */
 };
 
+enum class GenerationStrategyDifferentiationType {
+    totalVertexPowerGenerationPerSnapshot = 0,      /**< Sums up GeneratorRealPowerSnapshotAt for all generators at a vertex. */
+    unknown       = 99                              /**< Not defined. */
+};
+
 #pragma mark VERTEX_STATUS
 
 /**

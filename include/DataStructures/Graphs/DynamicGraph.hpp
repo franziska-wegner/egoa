@@ -14,7 +14,7 @@
 #include "Auxiliary/Constants.hpp"
 #include "Auxiliary/Types.hpp"
 
-#include "DataStructures/Graphs/Iterators/DynamicGraphIterators.hpp"
+#include "DataStructures/Iterators/DynamicGraphIterators.hpp"
 
 #include "Exceptions/Assertions.hpp"
 
