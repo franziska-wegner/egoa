@@ -19,7 +19,7 @@
 #include "IO/Wrapper/Edge.hpp"
 #include "IO/Helper/DataValidation.hpp"
 
-#include "DataStructures/Graphs/PowerGrid.hpp"
+#include "DataStructures/Networks/PowerGrid.hpp"
 #include "DataStructures/Graphs/Edges/ElectricalProperties.hpp"
 #include "DataStructures/Graphs/Vertices/ElectricalProperties.hpp"
 #include "DataStructures/Graphs/Vertices/GeneratorProperties.hpp"

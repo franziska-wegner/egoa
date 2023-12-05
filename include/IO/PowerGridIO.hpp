@@ -17,10 +17,10 @@
     #include <ogdf/fileformats/GraphIO.h>
 #endif // OGDF_AVAILABLE
 
-#include "DataStructures/Graphs/PowerGrid.hpp"
-#include "Parser/IeeeCdfMatlabParser.hpp"
-#include "Parser/PyPsaParser.hpp"
-#include "Writer/GeojsonWriter.hpp"
+#include "DataStructures/Networks/PowerGrid.hpp"
+#include "IO/Parser/IeeeCdfMatlabParser.hpp"
+#include "IO/Parser/PyPsaParser.hpp"
+#include "IO/Writer/GeojsonWriter.hpp"
 
 namespace egoa {
 

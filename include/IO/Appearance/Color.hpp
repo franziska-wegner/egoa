@@ -8,6 +8,7 @@
 #ifndef EGOA__IO__COLOR_HPP
 #define EGOA__IO__COLOR_HPP
 
+#include <iostream>
 #include "Auxiliary/Types.hpp"
 
 namespace egoa {
