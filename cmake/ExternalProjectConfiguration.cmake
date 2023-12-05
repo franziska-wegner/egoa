@@ -78,7 +78,7 @@ if ( EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK )
     ExternalProject_Add ( GoogleTestFramework
         GIT_REPOSITORY  https://github.com/google/googletest.git
         SOURCE_DIR      "${PROJECT_INCLUDE_DIR}/external/GoogleTestFramework"
-        GIT_TAG         master
+        GIT_TAG         main
         GIT_SHALLOW     1
     )
 endif ( EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK )
