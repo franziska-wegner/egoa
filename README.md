@@ -1,14 +1,16 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)   [![CMake on multiple platforms](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml)   [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml)
 <h1 align="center">EGOA - Energy Grid Optimization and Analysis</h1>
 
-Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid analysis and planning.
+Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid analysis and planning. This framework is based on the PhD thesis <a href="http://dx.doi.org/10.5445/IR/1000120612">"Combinatorial Problems in Energy Networks -- Graph Theoretic Models and Algorithms"</a>. The Git repository of the PhD thesis is available under <a href="https://github.com/franziska-wegner/PhD_Thesis--Combinatorial_Problems_in_Energy_Networks--Graph_Theoretic_Models_and_Algorithms">Combinatorial_Problems_in_Energy_Networks</a>. 
 
 <h2>Workflow Status</h2>
 
-- Linux & Windows & MacOS Build Status: [![CMake on multiple platforms](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml)
-- [CodeQL](https://codeql.github.com) Scan Build Status: [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml)
-- Project Documentation: [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa)
-- Coverity Scan Build Status: ---
+|  |  |
+|-----:|-----------|
+| Linux & Windows & MacOS Build Status: | [![CMake on multiple platforms](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml)|
+| [CodeQL](https://codeql.github.com) Scan Build Status: | [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml) |
+| Project Documentation: | [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa) |
+| Coverity Scan Build Status: | --- |
 
 <h2>Installation</h2>
 
@@ -45,8 +47,11 @@ If the tests are enabled `"EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework"` t
 
 <h3>CMake Parameter Overrides</h3>
 
-The repository provides an intial set of parameters in the sublimetext project file that can be found under `egoa.sublime-project`.
+The repository provides an intial set of parameters in the sublimetext project file that can be found under `egoa.sublime-project`. In addition, there are scripts that support with server and local runs that have a initial CMake parameter configuration and can be adapted to the particular needs under [egoa/scripts/Build](https://github.com/franziska-wegner/egoa/tree/master/scripts/Build) and monitoring scripts under [egoa/scripts/Experiments](https://github.com/franziska-wegner/egoa/tree/master/scripts/Experiments).
 An essential CMake setting parameter is the build directory that should be changed according to your file system, e.g., `"build_folder": "/Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug"`. 
+
+<details>
+<summary>Example CMake Configuration for SublimeText</summary>
 
 ```
 "cmake": {
@@ -97,11 +102,14 @@ An essential CMake setting parameter is the build directory that should be chang
 }
 ```
 
+</details>
+
 Most parameters represent flags and can be enabled with `ON` if available and `OFF` if not available. Dependent on the flag the required path to the framework or tool has to be set accordingly (see above). There are flags that enable downloads for data sets and frameworks, and start with `EGOA_DOWNLOAD_<framework|dataset>`. The recommendation is to start with a minimum of enabled tools and extend if necessary.
 
 This framework provides a set of unittests that uses the Google Test Framework as base. The CMake files allow two different setups of the test framework that are known by online and offline configuration. The CMake parameter for the online version are `"EGOA_TEST_FRAMEWORK": "OnlineGoogleTestFramework"` OR `"EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework"` with the pointer to the installation directory of the Google test framework repository, e.g., `"EGOA_TEST_FRAMEWORK_LOCATION": "external/GoogleTestFramework"`. 
 
-<h3>Successful Initial CMake Run</h3>
+<details>
+<summary>Successful Initial CMake Run</summary>
 
 ```
 -- 
@@ -160,6 +168,8 @@ SRC=/Users/fwegner/Documents/Repositories/Public/EGOA/egoa and Binary=/Users/fwe
 -- Build files have been written to: /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug
 [Finished in 3.4s]
 ```
+</details>
+
 
 <h2>Recommended IDEs</h2>
 
@@ -167,33 +177,47 @@ A general recommendation is CLION and Sublimetext. However, Visual Studio and ot
 
 <h2>Documentation</h2>
 
-For the purpose of code documentation, the <a href="https://www.doxygen.nl">Doxygen</a> framework is used. It provides a simple and well formed way of code docuemtation for C++. Run 
+The repository's public code documentation is available under [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa). For the purpose of code documentation, the <a href="https://www.doxygen.nl">Doxygen</a> framework is used. It provides a simple and well formed way of code documentation for C++. Run 
 
     make doc
 
 to compile and generate the repository's documentation. The `DoxyfileConfig.in` can be adapted and supports HTML (see `GENERATE_HTML`), LaTex (see `GENERATE_LATEX`), RTF (see `GENERATE_RTF`), MAN page (see `GENERATE_MAN`), XML (see `GENERATE_XML`), and DOCBOOK (see `GENERATE_DOCBOOK`) output of the documentation. Initially only html and latex is generated. The output directory is under`./documentation` and can be changed at `OUTPUT_DIRECTORY` if necessary.
 
-<h2>Data</h2>
+<h2>Benchmark Data Sets</h2>
 
-As mentioned in "CMake Parameter Overrides" the CMake file downloads a lot of test cases itself denoted by `EGOA_DOWNLOAD_<dataset>`, which helps you to start your work faster. Each successful CMake run shows the downloaded dataset directories by
+As mentioned in "CMake Parameter Overrides" the CMake file downloads a lot of benchmark cases itself denoted by `EGOA_DOWNLOAD_<dataset>`, which helps you to start your work faster. Each successful CMake run shows the downloaded dataset directories by
 
 ```
 ...
 -- Download of data sets:
---  Download PyPSA Europe data from https://github.com/PyPSA/pypsa-eur.git into /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/data/PowerGrids/PyPSA/pypsa-eur.
---  Download PyPSA ITI Collaboration data from https://git.scc.kit.edu/FN/iti-collaboration.git into /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/data/PowerGrids/PyPSA/pypsa-iti-collaboration.
+--  Download PyPSA Europe data from https://github.com/PyPSA/pypsa-eur.git into /home/runner/work/egoa/egoa/data/PowerGrids/PyPSA/pypsa-eur.
+--  Download PyPSA ITI Collaboration data from https:/git.scc.kit.edu/FN/iti-collaboration.git into /home/runner/work/egoa/egoa/data/PowerGrids/PyPSA/pypsa-iti-collaboration.
+--  Download SciGRID Power data (version 0.1) from "https://www.power.scigrid.de/releases_archive/scigrid-0.1-data-only.zip" into '/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-0.1-data-only/".
+--  Download SciGRID Power data (version 0.2) from "https://www.power.scigrid.de/releases_archive/scigrid-0.2-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-0.2-data-only/".
+--  Download SciGRID Power data (conference version) from "https://www.power.scigrid.de/releases_archive/scigrid-conference-de-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-conference-de-data-only/".
+--  Download SciGRID Power data (conference version) from "https://www.power.scigrid.de/releases_archive/scigrid-conference-eu-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-conference-eu-data-only/".
 --  Download IEEE Power Grid data.
+--  Download generated wind farm data (ITI 2017) from "https://i1wwww.iti.kit.edu/media/projects/windfarmcabling/windfarm-benchmarksets.zip" into "/home/runner/work/egoa/egoa/data/Windfarms/Networks/2017-iti-windfarm-benchmarksets/".
 ...
 ```
 
 At the moment this is limited to PyPSA, the IEEE cases, and the windfarm cases; and will be extended to other test cases. At the end the following data is on you hard drive in the `egoa/data` after an initial CMake run with all download flags enabled. Note that `(+)` means that the folder is empty at the moment and we need a reliable place to upload the data for research with the right license or the repository went offline/is not public.
 
+<details open>
+<summary>Windfarm</summary>
+
 ```
-Windfarms
 + Cabletypes
 - Networks
     + 2017-iti-windfarm-benchmarksets
+```
 
+</details>
+
+<details open>
+<summary>IEEE</summary>
+
+```
 IEEE
 + 00-Matpower-Data
 (+) 02-gml 
@@ -214,8 +238,14 @@ IEEE
 (+) 17-Small_Signal_Stability_Test_Cases
 + 18-IEEE-Data_Formats
 + 19-Power_System_Application_Data_Dictionary
+```
 
-PyPSA
+</details>
+
+<details>
+<summary>PyPSA</summary>
+
+```
 - pypsa-eur
   - data
     - entsoegridkit
@@ -272,17 +302,21 @@ PyPSA
 + elec_s1024_SE
 + elec_s1024_SI
 + elec_s1024_SK
+```
 
-SciGrid
+</details>
+
+<details>
+<summary>SciGrid</summary>
+
+```
 + scigrid-0.1-data-only
 + scigrid-0.2-data-only
 + scigrid-conference-de-data-only
 + scigrid-conference-eu-data-only
 ```
 
-<h2>Summary</h2>
-
-This repository is based on the PhD thesis <a href="http://dx.doi.org/10.5445/IR/1000120612">"Combinatorial Problems in Energy Networks -- Graph Theoretic Models and Algorithms"</a>. The Git repository of the PhD thesis is available under <a href="https://github.com/franziska-wegner/PhD_Thesis--Combinatorial_Problems_in_Energy_Networks--Graph_Theoretic_Models_and_Algorithms">Combinatorial_Problems_in_Energy_Networks</a>. 
+</details>
 
 <h2>Resources</h2>
 
