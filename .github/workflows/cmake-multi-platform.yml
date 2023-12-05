@@ -75,6 +75,9 @@ jobs:
     #     args: install mingw --version=8.1.0  -y
 
     # Compared to Window and MacOS best option with stable ~2 min installation time.
+    # In the end, it does not matter which OS generates the LaTeX document and compiles 
+    # it. Thus, we decide for Linux as it is the fastest option, w.r.t. LaTeX installation 
+    # time. MacOS: > 13 min, Windows: >> 25 min.
     - name: Install LaTeX (Linux)
       if: startsWith(matrix.os,'ubuntu-')
       run: |
