@@ -9,8 +9,8 @@
 			"variants":
 			[
 			],
-			"working_dir": "/Users/fw/Documents/work/frameworks/egoa/build-debug"
-		}
+			"working_dir": "/Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug",
+		},
 	],
 	"folders":
 	[
@@ -20,7 +20,7 @@
 				".gitignore"
 			],
 			"name": "EGOA (Energy Grid Optimization and Analysis)",
-			"path": "."
+			"path": ".",
 		},
 		{
 			"file_exclude_patterns":
@@ -28,7 +28,7 @@
 				".gitignore"
 			],
 			"name": "Include",
-			"path": "./include"
+			"path": "./include",
 		},
 		{
 			"file_exclude_patterns":
@@ -36,7 +36,7 @@
 				".gitignore"
 			],
 			"name": "Source",
-			"path": "./src"
+			"path": "./src",
 		},
 		{
 			"file_exclude_patterns":
@@ -44,7 +44,7 @@
 				".gitignore"
 			],
 			"name": "Scripts",
-			"path": "./scripts"
+			"path": "./scripts",
 		},
 		{
 			"file_exclude_patterns":
@@ -52,7 +52,7 @@
 				".gitignore"
 			],
 			"name": "Cmake",
-			"path": "./cmake"
+			"path": "./cmake",
 		},
 		{
 			"file_exclude_patterns":
@@ -61,7 +61,7 @@
 				".empty"
 			],
 			"name": "Data",
-			"path": "./data"
+			"path": "./data",
 		},
 		{
 			"file_exclude_patterns":
@@ -70,34 +70,27 @@
 				".empty"
 			],
 			"name": "Tests",
-			"path": "./tests"
+			"path": "./tests",
 		}
 	],
 	"settings":
 	{
 		"cmake":
 		{
-			"build_folder": "/Users/fw/Documents/work/frameworks/egoa/build-debug",
+			"build_folder": "/Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug",
 			"command_line_overrides":
 			{
-				"BONMIN_ROOT_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/Bonming-1.8/build",
-				"Boost_DIRECTORIES": "/usr/local/Cellar/boost/1.71.0/",
 				"Boost_NO_SYSTEM_PATHS": "TRUE",
-				"CMAKE_CXX_COMPILER": "/usr/local/Cellar/llvm@7/7.1.0_1/bin/clang++",
-				"CMAKE_C_COMPILER": "/usr/local/Cellar/llvm@7/7.1.0_1/bin/clang",
-				"COIN_INCLUDE_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug/include",
-				"COIN_LIBRARY_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug",
-				"CPLEX_HOME": "/Applications/CPLEX_Studio128",
-				"EGOA_BUILD_TYPE": "Debug",
+				"EGOA_BUILD_TYPE": "Release",
 				"EGOA_DOWNLOAD_CPPAD": "OFF",
 				"EGOA_DOWNLOAD_EIGEN": "OFF",
 				"EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK": "OFF",
-				"EGOA_DOWNLOAD_IEEE": "ON",
-				"EGOA_DOWNLOAD_PYPSA_EUR": "ON",
-				"EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION": "ON",
-				"EGOA_DOWNLOAD_SCIGRID": "ON",
-				"EGOA_DOWNLOAD_WINDFARM": "ON",
-				"EGOA_ENABLE_ASSERTION": "ON",
+				"EGOA_DOWNLOAD_IEEE": "OFF",
+				"EGOA_DOWNLOAD_PYPSA_EUR": "OFF",
+				"EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION": "OFF",
+				"EGOA_DOWNLOAD_SCIGRID": "OFF",
+				"EGOA_DOWNLOAD_WINDFARM": "OFF",
+				"EGOA_ENABLE_ASSERTION": "OFF",
 				"EGOA_ENABLE_BONMIN": "OFF",
 				"EGOA_ENABLE_BOOST": "OFF",
 				"EGOA_ENABLE_CPLEX": "OFF",
@@ -106,27 +99,34 @@
 				"EGOA_ENABLE_GUROBI": "OFF",
 				"EGOA_ENABLE_IPOPT": "OFF",
 				"EGOA_ENABLE_OGDF": "OFF",
-				"EGOA_ENABLE_OPENMP": "ON",
-				"EGOA_ENABLE_TESTS": "ON",
+				"EGOA_ENABLE_OPENMP": "OFF",
+				"EGOA_ENABLE_TESTS": "OFF",
 				"EGOA_ENABLE_VERBOSE_MAKEFILE": "ON",
 				"EGOA_PEDANTIC_AS_ERRORS": "OFF",
 				"EGOA_PEDANTIC_MODE": "ON",
-				"EGOA_TEST_FRAMEWORK": "OnlineGoogleTestFramework",
-				"EGOA_TEST_FRAMEWORK_LOCATION": "external/GoogleTestFramework",
+				"EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework",
+				"EGOA_TEST_FRAMEWORK_LOCATION": "external/googletest",
 				"EGOA_THREAD_LIMIT": "0",
 				"EGOA_WARNINGS_AS_ERRORS": "ON",
+				"BONMIN_ROOT_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/Bonming-1.8/build",
+				"Boost_DIRECTORIES": "/opt/homebrew/opt/boost/",
+				"CMAKE_CXX_COMPILER": "/opt/homebrew/opt/llvm/bin/clang++",
+				"CMAKE_C_COMPILER": "/opt/homebrew/opt/llvm/bin/clang",
+				"COIN_INCLUDE_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug/include",
+				"COIN_LIBRARY_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug",
+				"CPLEX_HOME": "/Applications/CPLEX_Studio128",
 				"GUROBI_ROOT_DIR": "/Library/gurobi800/mac64/",
 				"OGDF_AUTOGEN_INCLUDE_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug/include",
 				"OGDF_INCLUDE_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf20170723-debug/include",
 				"OGDF_LIBRARY_DIR": "/Users/fw/Documents/work/frameworks/PowergridTool/external_libraries/ogdf-debug",
-				"OPENMP_INCLUDES": "/usr/local/Cellar/llvm@7/7.1.0_1/include",
-				"OPENMP_LIBRARIES": "/usr/local/Cellar/llvm@7/7.1.0_1/lib"
+				"OPENMP_INCLUDES": "/opt/homebrew/opt/llvm/include",
+				"OPENMP_LIBRARIES": "/opt/homebrew/opt/llvm/lib",
 			},
 			"generator": "Unix Makefiles",
 			"windows":
 			{
-				"generator": "Visual Studio"
-			}
+				"generator": "Visual Studio",
+			},
 		},
 		"tab_size": 4,
 		"todoreview":
@@ -154,16 +154,16 @@
 				"CHANGED": "CHANGED[\\s]*?:[\\s]*(?P<changed>.*)$",
 				"FIXME": "FIX ?ME[\\s]*?:[\\s]*(?P<fixme>.*)$",
 				"NOTE": "NOTE[\\s]*?:[\\s]*(?P<note>.*)$",
-				"TODO": "TODO[\\s]*?:[\\s]*(?P<todo>.*)$"
+				"TODO": "TODO[\\s]*?:[\\s]*(?P<todo>.*)$",
 			},
 			"patterns_weight":
 			{
 				"NOTE": 3,
 				"TEST": "z",
-				"TODO": 1
+				"TODO": 1,
 			},
-			"render_folder_depth": "auto"
+			"render_folder_depth": "auto",
 		},
-		"translate_tabs_to_spaces": true
-	}
+		"translate_tabs_to_spaces": true,
+	},
 }
