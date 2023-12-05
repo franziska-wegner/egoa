@@ -1,0 +1,180 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '31 8 * * 2'
+
+env:
+  QT_VERSION:     "6.2.0"
+
+jobs:
+  analyze:
+    name: Analyze
+    # Runner size impacts CodeQL analysis time. To learn more, please see:
+    #   - https://gh.io/recommended-hardware-resources-for-running-codeql
+    #   - https://gh.io/supported-runners-and-hardware-resources
+    #   - https://gh.io/using-larger-runners
+    # Consider using larger runners for possible analysis time improvements.
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'c-cpp' ]
+        build_type: [Release]
+        # c_compiler: [gcc, clang, cl]
+        # include:
+        #   - os: windows-latest
+        #     c_compiler: cl
+        #     cpp_compiler: cl
+        #   - os: ubuntu-latest
+        #     c_compiler: gcc
+        #     cpp_compiler: g++
+        #   - os: ubuntu-latest
+        #     c_compiler: clang
+        #     cpp_compiler: clang++
+        #   - os: macos-latest
+        #     c_compiler: gcc
+        #     cpp_compiler: g++
+        #   - os: macos-latest
+        #     c_compiler: clang
+        #     cpp_compiler: clang++
+        # exclude:
+        #   - os: windows-latest
+        #     c_compiler: gcc
+        #   - os: windows-latest
+        #     c_compiler: clang
+        #   - os: ubuntu-latest
+        #     c_compiler: cl
+        #   - os: macos-latest
+        #     c_compiler: cl
+        # CodeQL supports [ 'c-cpp', 'csharp', 'go', 'java-kotlin', 'javascript-typescript', 'python', 'ruby', 'swift' ]
+        # Use only 'java-kotlin' to analyze code written in Java, Kotlin or both
+        # Use only 'javascript-typescript' to analyze code written in JavaScript, TypeScript or both
+        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ env.QT_VERSION }}
+        cache: 'true'
+        cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
+        dir: ${{ github.workspace }}/Qt
+
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+    - name: Configure CMake
+      env:
+        CMAKE_PREFIX_PATH: ${{env.Qt6_DIR}}
+        CMAKE_MODULE_PATH: ${{env.Qt6_DIR}}
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DBoost_NO_SYSTEM_PATHS=TRUE
+        -DEGOA_BUILD_TYPE=${{ matrix.build_type }}
+        -DEGOA_DOWNLOAD_CPPAD=OFF
+        -DEGOA_DOWNLOAD_EIGEN=OFF
+        -DEGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK=OFF
+        -DEGOA_DOWNLOAD_IEEE=ON
+        -DEGOA_DOWNLOAD_PYPSA_EUR=ON
+        -DEGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION=ON
+        -DEGOA_DOWNLOAD_SCIGRID=ON
+        -DEGOA_DOWNLOAD_WINDFARM=ON
+        -DEGOA_ENABLE_ASSERTION=ON
+        -DEGOA_ENABLE_BONMIN=OFF
+        -DEGOA_ENABLE_BOOST=OFF
+        -DEGOA_ENABLE_CPLEX=OFF
+        -DEGOA_ENABLE_DOCUMENTATION=OFF
+        -DEGOA_ENABLE_EXCEPTION_HANDLING=ON
+        -DEGOA_ENABLE_GUROBI=OFF
+        -DEGOA_ENABLE_IPOPT=OFF
+        -DEGOA_ENABLE_OGDF=OFF
+        -DEGOA_ENABLE_OPENMP=OFF
+        -DEGOA_ENABLE_TESTS=OFF
+        -DEGOA_ENABLE_VERBOSE_MAKEFILE=ON
+        -DEGOA_PEDANTIC_AS_ERRORS=OFF
+        -DEGOA_PEDANTIC_MODE=ON
+        -DEGOA_TEST_FRAMEWORK=OnlineGoogleTestFramework
+        -DEGOA_TEST_FRAMEWORK_LOCATION=external/googletest
+        -DEGOA_THREAD_LIMIT=0
+        -DEGOA_WARNINGS_AS_ERRORS=ON
+        -DBONMIN_ROOT_DIR="NONE-DIR"
+        -DBoost_DIRECTORIES="/opt/homebrew/opt/boost/"
+        -DCOIN_INCLUDE_DIR="NONE-DIR"
+        -DCOIN_LIBRARY_DIR="NONE-DIR"
+        -DCPLEX_HOME="NONE-DIR"
+        -DGUROBI_ROOT_DIR="NONE-DIR"
+        -DOGDF_AUTOGEN_INCLUDE_DIR="NONE-DIR"
+        -DOGDF_INCLUDE_DIR="NONE-DIR"
+        -DOGDF_LIBRARY_DIR="NONE-DIR"
+        -DOPENMP_INCLUDES="/opt/homebrew/opt/llvm/include"
+        -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
+        -S ${{ github.workspace }}
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+        # If you wish to specify custom queries, you can do so here or in a config file.
+        # By default, queries listed here will override any specified in a config file.
+        # Prefix the list here with "+" to use these queries and those in the config file.
+
+        # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
+        # queries: security-extended,security-and-quality
+
+
+    # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
+    # If this step fails, then you should remove it and run the build manually (see below)
+    # - name: Autobuild
+    #   uses: github/codeql-action/autobuild@v2
+
+    # ℹ️ Command-line programs to run using the OS shell.
+    # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+
+    #   If the Autobuild fails above, remove it and uncomment the following three lines.
+    #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
+
+    - name: Build
+      # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+    # - run: |
+    #     echo "Run, Build Application using script"
+    #     ./location_of_script_within_repo/buildscript.sh
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"
