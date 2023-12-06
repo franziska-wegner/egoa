@@ -10,7 +10,7 @@
 
 #include "Auxiliary/ExecutionPolicy.hpp"
 
-#include "Exceptions/PgtExceptions.hpp"
+#include "Exceptions/Exceptions.hpp"
 #include "Exceptions/Assertions.hpp"
 
 #include "DataStructures/Container/DominationCriterion.hpp"
