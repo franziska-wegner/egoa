@@ -178,7 +178,7 @@ jobs:
       run: ctest --build-config ${{ matrix.build_type }}
 
     - name: Generate documentation
-      shell: cmake -P {0}
+      shell: sudo cmake -P {0}
       run: |
         execute_process(
           COMMAND cmake --build build --target doc
