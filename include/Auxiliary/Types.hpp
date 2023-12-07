@@ -42,7 +42,7 @@ namespace egoa::Types {
 
     // String 
     typedef std::string string;             /**< */
-    typedef string      name;               /**< */
+    typedef std::string name;               /**< */
 
     // Snapshots
     typedef real        generatorSnapshot;  /**< */
