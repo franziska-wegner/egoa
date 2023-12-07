@@ -121,13 +121,15 @@ endif ( EGOA_ENABLE_BOOST )
 # Google tests
 if ( EGOA_ENABLE_TESTS )
     include ( CTest )
-    if ( EGOA_TEST_FRAMEWORK STREQUAL "OfflineGoogleTestFramework" )
-        find_package ( GoogleTestFramework PATHS ${EGOA_TEST_FRAMEWORK_LOCATION})
-    elseif ( EGOA_TEST_FRAMEWORK STREQUAL "OnlineGoogleTestFramework" )
-        find_package ( GoogleTestFrameworkOnlineVersion )
-    else ()
-        find_package ( GoogleTestFramework )
-    endif ()
+    # Temp for all, maybe only Windows and MacOS
+    include(FindGoogleTestFramework)
+    # if ( EGOA_TEST_FRAMEWORK STREQUAL "OfflineGoogleTestFramework" )
+    #     find_package ( GoogleTestFramework PATHS ${EGOA_TEST_FRAMEWORK_LOCATION})
+    # elseif ( EGOA_TEST_FRAMEWORK STREQUAL "OnlineGoogleTestFramework" )
+    #     find_package ( GoogleTestFrameworkOnlineVersion )
+    # else ()
+    #     find_package ( GoogleTestFramework )
+    # endif ()
 
     # Add test coverage 
     # -coverage includes -fprofile-arcs -ftest-coverage while compiling and
@@ -138,8 +140,6 @@ if ( EGOA_ENABLE_TESTS )
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EGOA_COVERAGE_COMPILE_FLAGS}")
     # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EGOA_COVERAGE_LINK_FLAGS}")
 endif(EGOA_ENABLE_TESTS)
-# Temp for all, maybe only Windows and MacOS
-include(FindGoogleTestFramework)
 
 # Generate an internal header automatically
 # file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/include")
