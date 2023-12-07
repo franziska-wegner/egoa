@@ -9,7 +9,9 @@
 #define EGOA__DATA_STRUCTURES__CONTAINER__BINARY_HEAP_HPP
 
 #include "Auxiliary/Auxiliary.hpp"
+#include "Auxiliary/Constants.hpp"
 #include "Auxiliary/ExecutionPolicy.hpp"
+#include "Auxiliary/Types.hpp"
 #include "Exceptions/Assertions.hpp"
 
 #include <iomanip>
@@ -155,7 +157,7 @@ class BinaryHeap {
                 {
                     return std::distance( std::begin(heap_), result );
                 }
-                return Const::none;
+                return Const::NONE;
             }
         /// @}
 
