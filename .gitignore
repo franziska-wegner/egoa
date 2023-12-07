@@ -30,3 +30,25 @@
 *.exe
 *.out
 *.app
+
+# Logging
+*.log
+DoxygenWarningLogs.txt
+Doxyfile.in
+
+# Folders
+data/PowerGrids/IEEE/*
+data/PowerGrids/PyPSA/*
+data/PowerGrids/SciGrid/*
+data/Windfarms/Networks/*
+documentation/html/*
+documentation/latex/*
+documentation/Doxyfile
+external/*
+build-debug/*
+
+# OS specific files
+.DS_STORE
+
+# IDE specific files
+egoa.sublime-workspace
