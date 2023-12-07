@@ -13,6 +13,9 @@ project ( EGOA CXX )
 set ( EGOA_VERSION_MAJOR 1 )
 set ( EGOA_VERSION_MINOR 0 )
 
+# Select the MSVC runtime library
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebug")
+
 ####################################################################
 # Input Parameter ##################################################
 ####################################################################
