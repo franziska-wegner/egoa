@@ -1,7 +1,7 @@
 # FindGoogleTestFrameworkOnlineVersion.cmake
 # 
 #   Created on: Jan 30, 2019
-#       Source: https://github.com/google/googletest/tree/master/googletest 
+#       Source: https://github.com/google/googletest/tree/main/googletest 
 # 
 # Requirements      
 #   * CMake 2.8. or later due to the use of ExternalProject_Add(). 
