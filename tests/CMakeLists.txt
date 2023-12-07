@@ -1,7 +1,7 @@
 
 # Now simply link against gtest or gtest_main as needed
 add_executable(TestBound DataStructures/TestBound.cpp)
-target_link_libraries(TestBound gtest gtest_main gmock_main EGOA ${GUROBI_LIBRARIES})
+target_link_libraries(TestBound EGOA gtest gtest_main gmock_main) #${GUROBI_LIBRARIES}
 add_test(NAME TestBound COMMAND TestBound)
 
 ####################################################################################
