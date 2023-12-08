@@ -12,9 +12,9 @@ add_test(NAME TestBound COMMAND TestBound)
 # target_link_libraries(TestStdQueue EGOA gtest gtest_main gmock_main)
 # add_test(NAME TestStdQueue COMMAND TestStdQueue)
 
-# add_executable(TestBinaryHeap DataStructures/Container/TestBinaryHeap.cpp)
-# target_link_libraries(TestBinaryHeap EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestBinaryHeap COMMAND TestBinaryHeap)
+add_executable(TestBinaryHeap DataStructures/Container/TestBinaryHeap.cpp)
+target_link_libraries(TestBinaryHeap EGOA gtest gtest_main gmock_main)
+add_test(NAME TestBinaryHeap COMMAND TestBinaryHeap)
 
 # add_executable(TestMappingBinaryHeap DataStructures/Container/TestMappingBinaryHeap.cpp)
 # target_link_libraries(TestMappingBinaryHeap EGOA gtest gtest_main gmock_main)
