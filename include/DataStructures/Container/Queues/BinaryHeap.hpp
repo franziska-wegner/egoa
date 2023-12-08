@@ -1209,7 +1209,6 @@ class BinaryHeapLoopDifferentiation<HeapType const, ExecutionPolicy::parallel> {
 
 #else // OPENMP_AVAILABLE
 
-namespace internal {
 template<typename HeapType>
 class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::parallel>
     : public BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::sequential> {
