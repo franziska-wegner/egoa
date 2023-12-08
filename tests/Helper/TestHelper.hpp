@@ -47,18 +47,18 @@ Types::string buildAssertionString ( Types::string fileName
 {
     std::stringstream result;
 #ifdef EGOA_ENABLE_ASSERTION
-    result  << "(.*) assertion failed at (.*)"
+    result  << ".* assertion failed at .*"
             << fileName
-            << ":(.*) inside "
+            << ":.* inside .*"
             << function
             << ".\n Condition: "
             << message
             << "";
 #else // ifdef EGOA_ENABLE_ASSERTION
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    result  << "(.*) exception at (.*)"
+    result  << ".* exception at .*"
             << fileName
-            << ":(.*) inside "
+            << ":.* inside .*"
             << function
             << ".\n Condition: "
             << message

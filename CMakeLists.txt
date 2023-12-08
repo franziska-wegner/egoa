@@ -7,11 +7,24 @@
 # 
 
 cmake_minimum_required ( VERSION 3.13.1 ) 
+# Required for CMAKE_MSVC_RUNTIME_LIBRARY 
+# https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_RUNTIME_LIBRARY.html#variable:CMAKE_MSVC_RUNTIME_LIBRARY
+cmake_policy(SET CMP0091 NEW)
+
 project ( EGOA CXX )
 
 # The version number.
 set ( EGOA_VERSION_MAJOR 1 )
 set ( EGOA_VERSION_MINOR 0 )
+
+if ( ${EGOA_BUILD_TYPE} STREQUAL "Debug")
+    # Select the MSVC runtime library
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebugDLL")
+else ()
+    # Select the MSVC runtime library
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+endif ()
+message ( STATUS "CMAKE_MSVC_RUNTIME_LIBRARY: ${CMAKE_MSVC_RUNTIME_LIBRARY} in ${EGOA_BUILD_TYPE}" )
 
 ####################################################################
 # Input Parameter ##################################################
@@ -121,13 +134,15 @@ endif ( EGOA_ENABLE_BOOST )
 # Google tests
 if ( EGOA_ENABLE_TESTS )
     include ( CTest )
-    if ( EGOA_TEST_FRAMEWORK STREQUAL "OfflineGoogleTestFramework" )
-        find_package ( GoogleTestFramework PATHS ${EGOA_TEST_FRAMEWORK_LOCATION})
-    elseif ( EGOA_TEST_FRAMEWORK STREQUAL "OnlineGoogleTestFramework" )
-        find_package ( GoogleTestFrameworkOnlineVersion )
-    else ()
-        find_package ( GoogleTestFramework )
-    endif ()
+    # Temp for all, maybe only Windows and MacOS
+    include(FindGoogleTestFramework)
+    # if ( EGOA_TEST_FRAMEWORK STREQUAL "OfflineGoogleTestFramework" )
+    #     find_package ( GoogleTestFramework PATHS ${EGOA_TEST_FRAMEWORK_LOCATION})
+    # elseif ( EGOA_TEST_FRAMEWORK STREQUAL "OnlineGoogleTestFramework" )
+    #     find_package ( GoogleTestFrameworkOnlineVersion )
+    # else ()
+    #     find_package ( GoogleTestFramework )
+    # endif ()
 
     # Add test coverage 
     # -coverage includes -fprofile-arcs -ftest-coverage while compiling and
