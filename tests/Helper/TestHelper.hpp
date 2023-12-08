@@ -49,7 +49,7 @@ Types::string buildAssertionString ( Types::string fileName
 #ifdef EGOA_ENABLE_ASSERTION
     result  << ".* assertion failed at .*"
             << fileName
-            << ":.* inside "
+            << ":.* inside .*"
             << function
             << ".\n Condition: "
             << message
@@ -58,7 +58,7 @@ Types::string buildAssertionString ( Types::string fileName
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     result  << ".* exception at .*"
             << fileName
-            << ":.* inside "
+            << ":.* inside .*"
             << function
             << ".\n Condition: "
             << message
