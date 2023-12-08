@@ -7,6 +7,10 @@
 # 
 
 cmake_minimum_required ( VERSION 3.13.1 ) 
+# Required for CMAKE_MSVC_RUNTIME_LIBRARY 
+# https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_RUNTIME_LIBRARY.html#variable:CMAKE_MSVC_RUNTIME_LIBRARY
+cmake_policy(SET CMP0091 NEW)
+
 project ( EGOA CXX )
 
 # The version number.
@@ -14,7 +18,7 @@ set ( EGOA_VERSION_MAJOR 1 )
 set ( EGOA_VERSION_MINOR 0 )
 
 # Select the MSVC runtime library
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded")
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
 
 ####################################################################
 # Input Parameter ##################################################
