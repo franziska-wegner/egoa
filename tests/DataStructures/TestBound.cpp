@@ -51,7 +51,7 @@ TEST_F ( TestBound, MaxPositiveNos ) {
 
 TEST_F ( TestBound, DeathTest ) {
     // ASSERT_DEATH({ Bound(3, 1);}, "terminating with uncaught exception of type BoundMismatch: Minimum > maximum: 3 < 1");
-#ifdef PGT_EXCEPTION_HANDLING
+#ifdef EGOA_EXCEPTION_HANDLING
     try {
         egoa::Bound<> bound (3,1);
         FAIL() << "Expected BoundMismatch";
