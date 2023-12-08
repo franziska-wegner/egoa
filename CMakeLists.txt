@@ -17,8 +17,14 @@ project ( EGOA CXX )
 set ( EGOA_VERSION_MAJOR 1 )
 set ( EGOA_VERSION_MINOR 0 )
 
-# Select the MSVC runtime library
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+if ( ${EGOA_BUILD_TYPE} STREQUAL "Debug")
+    # Select the MSVC runtime library
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDebugDLL")
+else ()
+    # Select the MSVC runtime library
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+endif ()
+message ( STATUS "CMAKE_MSVC_RUNTIME_LIBRARY: ${CMAKE_MSVC_RUNTIME_LIBRARY} in ${EGOA_BUILD_TYPE}" )
 
 ####################################################################
 # Input Parameter ##################################################
