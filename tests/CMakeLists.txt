@@ -20,9 +20,9 @@ add_test(NAME TestBinaryHeap COMMAND TestBinaryHeap)
 # target_link_libraries(TestMappingBinaryHeap EGOA gtest gtest_main gmock_main)
 # add_test(NAME TestMappingBinaryHeap COMMAND TestMappingBinaryHeap)
 
-# add_executable(TestBucket DataStructures/Container/TestBucket.cpp)
-# target_link_libraries(TestBucket EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestBucket COMMAND TestBucket)
+add_executable(TestBucket DataStructures/Container/TestBucket.cpp)
+target_link_libraries(TestBucket EGOA gtest gtest_main gmock_main)
+add_test(NAME TestBucket COMMAND TestBucket)
 
 ####################################################################################
 # Tests for GRAPH data structures ##################################################
