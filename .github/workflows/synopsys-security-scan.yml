@@ -2,10 +2,14 @@
 name: Coverity
 on:
   push:
-    branches: [ master, stage, 'releases/**' ]
+    branches: [ main, stage, 'releases/**' ]
   pull_request:
-    branches: [ master, stage, 'releases/**' ]
+    branches: [ main, stage, 'releases/**' ]
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   Coverity:
