@@ -39,7 +39,7 @@ namespace egoa::test {
                                                     , "Bucket"
                                                     , "Top"
                                                     , "!EmptyQueue\\(\\)");
-        ASSERT_DEATH ( {bucket_.Top();}, "(.*)" );
+        ASSERT_DEATH ( {bucket_.Top();}, ".*" );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
