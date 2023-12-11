@@ -148,7 +148,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
 
 #pragma mark TopKey
 #ifdef EGOA_ENABLE_ASSERTION
-    TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
+    TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
             , TopKey ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
@@ -159,7 +159,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestBinaryHeapWithZeroElementsExceptionHandling
+    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
             , TopKey ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
@@ -871,7 +871,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
+    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
             , Pop ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
