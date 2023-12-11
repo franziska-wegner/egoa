@@ -16,9 +16,9 @@ add_executable(TestBinaryHeap DataStructures/Container/TestBinaryHeap.cpp)
 target_link_libraries(TestBinaryHeap EGOA gtest gtest_main gmock_main)
 add_test(NAME TestBinaryHeap COMMAND TestBinaryHeap)
 
-# add_executable(TestMappingBinaryHeap DataStructures/Container/TestMappingBinaryHeap.cpp)
-# target_link_libraries(TestMappingBinaryHeap EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestMappingBinaryHeap COMMAND TestMappingBinaryHeap)
+add_executable(TestMappingBinaryHeap DataStructures/Container/TestMappingBinaryHeap.cpp)
+target_link_libraries(TestMappingBinaryHeap EGOA gtest gtest_main gmock_main)
+add_test(NAME TestMappingBinaryHeap COMMAND TestMappingBinaryHeap)
 
 add_executable(TestBucket DataStructures/Container/TestBucket.cpp)
 target_link_libraries(TestBucket EGOA gtest gtest_main gmock_main)
