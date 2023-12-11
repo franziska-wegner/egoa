@@ -62,11 +62,38 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
 }
 
 #pragma mark Top
-TEST_F(TestMappingBinaryHeapEmptyDeathTest, Top) {
-    auto assertionString = buildAssertionString("Top",
-                                                "!Empty()");
-    ASSERT_DEATH({heapConst_.Top();}, assertionString);
-}
+
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F ( TestMappingBinaryHeapEmptyDeathTest
+           , Top) 
+    {
+        auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
+                                                    , "MappingBinaryHeap"
+                                                    , "Top"
+                                                    , "!Empty()");
+        ASSERT_DEATH({heapConst_.Top();}, assertionString);
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
+            , Top ) 
+    {
+        auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
+                                                    , "BinaryHeap"
+                                                    , "Top"
+                                                    , "!Empty\\(\\)");
+        try {
+            heapConst_.Top();
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
 
 TEST_F(TestMappingBinaryHeapWithOneElement, Top) {
     auto expected = std::make_pair(element_, key_);
@@ -80,11 +107,36 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
 }
 
 #pragma mark TopElement
-TEST_F(TestMappingBinaryHeapEmptyDeathTest, TopElement) {
-    auto assertionString = buildAssertionString("TopElement",
-                                                "!Empty()");
-    ASSERT_DEATH({heapConst_.TopElement();}, assertionString);
-}
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
+            , TopElement ) 
+    {
+        auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
+                                                    , "MappingBinaryHeap"
+                                                    , "TopElement"
+                                                    , "!Empty\\(\\)");
+        ASSERT_DEATH( {heapConst_.TopElement();}, assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
+            , TopElement ) 
+    {
+        auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
+                                                    , "BinaryHeap"
+                                                    , "TopElement"
+                                                    , "!Empty\\(\\)");
+        try {
+            heapConst_.TopElement();
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F(TestMappingBinaryHeapWithOneElement, TopElement) {
     EXPECT_EQ(element_, heapConst_.TopElement());
@@ -95,11 +147,36 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
 }
 
 #pragma mark TopKey
-TEST_F(TestMappingBinaryHeapEmptyDeathTest, TopKey) {
-    auto assertionString = buildAssertionString("TopKey",
-                                                "!Empty()");
-    ASSERT_DEATH({heapConst_.TopKey();}, assertionString);
-}
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
+            , TopKey ) 
+    {
+        auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
+                                                    , "MappingBinaryHeap"
+                                                    , "TopKey"
+                                                    , "!Empty\\(\\)");
+        ASSERT_DEATH( {heapConst_.TopKey();}, assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBinaryHeapWithZeroElementsExceptionHandling
+            , TopKey ) 
+    {
+        auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
+                                                    , "MappingBinaryHeap"
+                                                    , "TopKey"
+                                                    , "!Empty\\(\\)");
+        try {
+            heapConst_.TopKey();
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F(TestMappingBinaryHeapWithOneElement, TopKey) {
     EXPECT_EQ(key_, heapConst_.TopKey());
@@ -730,11 +807,36 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
 }
 
 #pragma mark DeleteTop
-TEST_F(TestMappingBinaryHeapEmptyDeathTest, DeleteTop) {
-    auto assertionString = buildAssertionString("DeleteTop",
-                                                "!Empty()");
-    ASSERT_DEATH({heap_.DeleteTop();}, assertionString);
-}
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
+            , DeleteTop ) 
+    {
+        auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
+                                                    , "BinaryHeap"
+                                                    , "DeleteTop"
+                                                    , "!Empty\\(\\)");
+        ASSERT_DEATH( {heap_.DeleteTop();}, assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
+            , DeleteTop ) 
+    {
+        auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
+                                                    , "BinaryHeap"
+                                                    , "DeleteTop"
+                                                    , "!Empty\\(\\)");
+        try {
+            heap_.DeleteTop();
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F(TestMappingBinaryHeapWithOneElement, DeleteTop) {
     auto top = heap_.DeleteTop();
@@ -757,11 +859,36 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
 }
 
 #pragma mark Pop
-TEST_F(TestMappingBinaryHeapEmptyDeathTest, Pop) {
-    auto assertionString = buildAssertionString("Pop",
-                                                "!Empty()");
-    ASSERT_DEATH({heap_.Pop();}, assertionString);
-}
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
+            , Pop ) 
+    {
+        auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
+                                                    , "MappingBinaryHeap"
+                                                    , "Pop"
+                                                    , "!Empty\\(\\)");
+        ASSERT_DEATH( {heap_.Pop();}, assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
+            , Pop ) 
+    {
+        auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
+                                                    , "MappingBinaryHeap"
+                                                    , "Pop"
+                                                    , "!Empty\\(\\)");
+        try {
+            heap_.Pop();
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F(TestMappingBinaryHeapWithOneElement, Pop) {
     heap_.Pop();
