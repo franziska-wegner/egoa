@@ -71,7 +71,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "Top"
-                                                    , "!Empty()");
+                                                    , "!Empty\\(\\)");
         ASSERT_DEATH({heapConst_.Top();}, assertionString);
     }
 #else
