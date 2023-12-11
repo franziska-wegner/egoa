@@ -65,7 +65,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F ( TestMappingBinaryHeapEmptyDeathTest
-           , Top) 
+           , TopDeathTest )
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -75,8 +75,8 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
-            , Top ) 
+    TEST_F  ( TestMappingBinaryHeapEmpty
+            , TopExceptionHandling ) 
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -109,7 +109,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
 #pragma mark TopElement
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , TopElement ) 
+            , TopElementDeathTest ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -119,8 +119,8 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
-            , TopElement ) 
+    TEST_F  ( TestMappingBinaryHeapEmpty
+            , TopElementExceptionHandling ) 
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -149,7 +149,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
 #pragma mark TopKey
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , TopKey ) 
+            , TopKeyDeathTest ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -159,8 +159,8 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
-            , TopKey ) 
+    TEST_F  ( TestMappingBinaryHeapEmpty
+            , TopKeyExceptionHandling ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -809,7 +809,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
 #pragma mark DeleteTop
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , DeleteTop ) 
+            , DeleteTopDeathTest ) 
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -819,8 +819,8 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
-            , DeleteTop ) 
+    TEST_F  ( TestMappingBinaryHeapEmpty
+            , DeleteTopExceptionHandling ) 
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -861,7 +861,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
 #pragma mark Pop
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , Pop ) 
+            , PopDeathTest ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -871,8 +871,8 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-    TEST_F  ( TestMappingBinaryHeapEmptyExceptionHandling
-            , Pop ) 
+    TEST_F  ( TestMappingBinaryHeapEmpty
+            , PopExceptionHandling ) 
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
