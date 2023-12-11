@@ -254,7 +254,7 @@ jobs:
       #   Death tests use fork(), which is unsafe particularly in a threaded context. For this test, Google Test detected
       #   3 threads. See https://github.com/google/googletest/blob/main/docs/advanced.md#death-tests-and-threads for more
       #   explanation and suggested solutions, especially if this is the last message you see before your test times out.
-      run: ctest --verbose --parallel 1 --build-config ${{ matrix.build_type }}
+      run: ctest --verbose -j1 --build-config ${{ matrix.build_type }}
 
     - name: Generate documentation
       if: startsWith(matrix.os,'ubuntu-')
