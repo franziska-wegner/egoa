@@ -9,6 +9,7 @@
 
 #include <tuple>
 
+using ::testing::MatchesRegex;
 
 namespace egoa::test {
 
