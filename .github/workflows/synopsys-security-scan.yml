@@ -78,7 +78,7 @@ jobs:
     - name: Configure egoa
       run: |
         mkdir build
-        cmake -S . -B build -D CMAKE_BUILD_TYPE=Release -G "Unix Makefiles"
+        cmake -S . -B build -D EGOA_BUILD_TYPE=Release CMAKE_BUILD_TYPE=Release -G "Unix Makefiles"
 
     - name: Run coverity build/scan
       run: |
