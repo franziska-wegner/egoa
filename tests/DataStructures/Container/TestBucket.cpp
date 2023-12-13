@@ -423,11 +423,11 @@ TEST_F  ( TestBucketWithZeroElements
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-//     TEST_F  ( TestBucketWithZeroElements
-//             , AccessElementOptima ) 
-//     {
-//         bucket_.Optima();;
-//     }
+    TEST_F  ( TestBucketWithZeroElements
+            , AccessElementOptima ) 
+    {
+        bucket_.Optima();;
+    }
 ///@}
 
 ///@Name Delete Elements
@@ -634,35 +634,35 @@ TEST_F  ( TestBucketWithZeroElements
         );
     }
 
-//     TEST_F  ( TestBucketWithZeroElements
-//             , IteratorSerialForAllOptima ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+    TEST_F  ( TestBucketWithZeroElements
+            , IteratorSerialForAllOptima ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-//         bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> (
-//             []( TElement const & element ) 
-//             {
-//                 FAIL();
-//             }
-//         );
-//     }
+        bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> (
+            []( TElement const & element ) 
+            {
+                FAIL();
+            }
+        );
+    }
 
-//     TEST_F  ( TestBucketWithZeroElements
-//             , IteratorParallelForAllOptima ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+    TEST_F  ( TestBucketWithZeroElements
+            , IteratorParallelForAllOptima ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-//         bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> (
-//             []( TElement const & element ) 
-//             {
-//                 EXPECT_FALSE ( true );
-//             }
-//         );
-//     }
+        bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> (
+            []( TElement const & element ) 
+            {
+                EXPECT_FALSE ( true );
+            }
+        );
+    }
 
     /// @todo Test for breakable for_all_optima
 ///@}
@@ -1061,25 +1061,25 @@ TEST_F  ( TestBucketWithMultipleInteger
         EXPECT_EQ    ( bucket_.Top(), 1 );
     }
 
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , AccessElementOptima ) 
-//     {
-//         TElement element1 ( 1 ); 
-//         TElement element2 ( 1 ); 
+    TEST_F  ( TestBucketWithMultipleInteger
+            , AccessElementOptima ) 
+    {
+        TElement element1 ( 1 ); 
+        TElement element2 ( 1 ); 
 
-//         bucket_.Merge<DominationCriterion::strict>( element1 );
-//         bucket_.Merge<DominationCriterion::strict>( element2 );
+        bucket_.Merge<DominationCriterion::strict>( element1 );
+        bucket_.Merge<DominationCriterion::strict>( element2 );
 
-//         std::vector<TElement> optima = bucket_.Optima();
-//         ASSERT_EQ ( 3, optima.size() );
+        std::vector<TElement> optima = bucket_.Optima();
+        ASSERT_EQ ( 3, optima.size() );
         
-//         for ( Types::count counter = 0
-//             ; counter < optima.size()
-//             ; ++counter ) 
-//         {
-//             ASSERT_EQ ( optima[counter], 1 );
-//         }
-//     }
+        for ( Types::count counter = 0
+            ; counter < optima.size()
+            ; ++counter ) 
+        {
+            ASSERT_EQ ( optima[counter], 1 );
+        }
+    }
 ///@}
 
 ///@Name Delete Elements
@@ -1662,45 +1662,45 @@ TEST_F  ( TestBucketWithMultipleInteger
         EXPECT_EQ ( counter, 1 );
     }
 
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , IteratorSerialForAllOptima ) 
-//     {
-//         TElement minElement = bucket_.Top();
+    TEST_F  ( TestBucketWithMultipleInteger
+            , IteratorSerialForAllOptima ) 
+    {
+        TElement minElement = bucket_.Top();
 
-//         bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> ( 
-//             [ & minElement ]( TElement const & element ) 
-//             {
-//                 EXPECT_EQ ( element, minElement );
-//             }
-//         );
+        bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> ( 
+            [ & minElement ]( TElement const & element ) 
+            {
+                EXPECT_EQ ( element, minElement );
+            }
+        );
 
-//         bucketConst_.for_all_optima<egoa::ExecutionPolicy::sequential> ( 
-//             [ & minElement ] ( TElement const & element ) 
-//             {
-//                 EXPECT_EQ ( element, minElement );
-//             }
-//         );
-//     }
+        bucketConst_.for_all_optima<egoa::ExecutionPolicy::sequential> ( 
+            [ & minElement ] ( TElement const & element ) 
+            {
+                EXPECT_EQ ( element, minElement );
+            }
+        );
+    }
 
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , IteratorParallelForAllOptima ) 
-//     {
-//         TElement minElement = bucket_.Top();
+    TEST_F  ( TestBucketWithMultipleInteger
+            , IteratorParallelForAllOptima ) 
+    {
+        TElement minElement = bucket_.Top();
 
-//         bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> ( 
-//             [ & minElement ] ( TElement const & element ) 
-//             {
-//                 EXPECT_EQ ( element, minElement );
-//             }
-//         );
+        bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> ( 
+            [ & minElement ] ( TElement const & element ) 
+            {
+                EXPECT_EQ ( element, minElement );
+            }
+        );
 
-//         bucketConst_.for_all_optima<egoa::ExecutionPolicy::parallel> ( 
-//             [ & minElement ] ( TElement const & element ) 
-//             {
-//                 EXPECT_EQ ( element, minElement );
-//             }
-//         );
-//     }
+        bucketConst_.for_all_optima<egoa::ExecutionPolicy::parallel> ( 
+            [ & minElement ] ( TElement const & element ) 
+            {
+                EXPECT_EQ ( element, minElement );
+            }
+        );
+    }
 
     /// @todo tests for breakable for_all_optima
 ///@}
