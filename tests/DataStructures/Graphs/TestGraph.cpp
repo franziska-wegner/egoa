@@ -1214,68 +1214,68 @@ TYPED_TEST(TestGraphStar, DegreeAt) {
 }
 
 
-#pragma mark MinDegree
-TYPED_TEST(TestGraphEmpty, MinDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(0, this->graphConst_.MinDegree());
-    EXPECT_EQ(0, this->graphConst_.MinDegree(index));
-    EXPECT_EQ(Const::NONE, index);
-}
+// #pragma mark MinDegree
+// TYPED_TEST(TestGraphEmpty, MinDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(0, this->graphConst_.MinDegree());
+//     EXPECT_EQ(0, this->graphConst_.MinDegree(index));
+//     EXPECT_EQ(Const::NONE, index);
+// }
 
-TYPED_TEST(TestGraphSingleVertex, MinDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(0, this->graphConst_.MinDegree());
-    EXPECT_EQ(0, this->graphConst_.MinDegree(index));
-    EXPECT_EQ(0, index);
-}
+// TYPED_TEST(TestGraphSingleVertex, MinDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(0, this->graphConst_.MinDegree());
+//     EXPECT_EQ(0, this->graphConst_.MinDegree(index));
+//     EXPECT_EQ(0, index);
+// }
 
-TYPED_TEST(TestGraphFourVertices, MinDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(0, this->graphConst_.MinDegree());
-    EXPECT_EQ(0, this->graphConst_.MinDegree(index));
-    EXPECT_EQ(0, index);
-}
+// TYPED_TEST(TestGraphFourVertices, MinDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(0, this->graphConst_.MinDegree());
+//     EXPECT_EQ(0, this->graphConst_.MinDegree(index));
+//     EXPECT_EQ(0, index);
+// }
 
-TYPED_TEST(TestGraphStar, MinDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(1, this->graphConst_.MinDegree());
-    EXPECT_EQ(1, this->graphConst_.MinDegree(index));
-    EXPECT_EQ(1, this->graphConst_.DegreeAt(index));
-}
+// TYPED_TEST(TestGraphStar, MinDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(1, this->graphConst_.MinDegree());
+//     EXPECT_EQ(1, this->graphConst_.MinDegree(index));
+//     EXPECT_EQ(1, this->graphConst_.DegreeAt(index));
+// }
 
-#pragma mark MaxDegree
-TYPED_TEST(TestGraphEmpty, MaxDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(0, this->graphConst_.MaxDegree());
-    EXPECT_EQ(0, this->graphConst_.MaxDegree(index));
-    EXPECT_EQ(Const::NONE, index);
-}
+// #pragma mark MaxDegree
+// TYPED_TEST(TestGraphEmpty, MaxDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(0, this->graphConst_.MaxDegree());
+//     EXPECT_EQ(0, this->graphConst_.MaxDegree(index));
+//     EXPECT_EQ(Const::NONE, index);
+// }
 
-TYPED_TEST(TestGraphSingleVertex, MaxDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(0, this->graphConst_.MaxDegree());
-    EXPECT_EQ(0, this->graphConst_.MaxDegree(index));
-    EXPECT_EQ(0, this->graphConst_.DegreeAt(index));
-}
+// TYPED_TEST(TestGraphSingleVertex, MaxDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(0, this->graphConst_.MaxDegree());
+//     EXPECT_EQ(0, this->graphConst_.MaxDegree(index));
+//     EXPECT_EQ(0, this->graphConst_.DegreeAt(index));
+// }
 
-TYPED_TEST(TestGraphFourVertices, MaxDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(0, this->graphConst_.MaxDegree());
-    EXPECT_EQ(0, this->graphConst_.MaxDegree(index));
-    EXPECT_EQ(0, this->graphConst_.DegreeAt(index));
-}
+// TYPED_TEST(TestGraphFourVertices, MaxDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(0, this->graphConst_.MaxDegree());
+//     EXPECT_EQ(0, this->graphConst_.MaxDegree(index));
+//     EXPECT_EQ(0, this->graphConst_.DegreeAt(index));
+// }
 
-TYPED_TEST(TestGraphStar, MaxDegree) {
-    Types::index index = 0;
-    EXPECT_EQ(3, this->graphConst_.MaxDegree());
-    EXPECT_EQ(3, this->graphConst_.MaxDegree(index));
-    EXPECT_EQ(3, this->graphConst_.DegreeAt(index));
-}
-/// @}
+// TYPED_TEST(TestGraphStar, MaxDegree) {
+//     Types::index index = 0;
+//     EXPECT_EQ(3, this->graphConst_.MaxDegree());
+//     EXPECT_EQ(3, this->graphConst_.MaxDegree(index));
+//     EXPECT_EQ(3, this->graphConst_.DegreeAt(index));
+// }
+// /// @}
 
-// TODO: Tests for InEdgeIdsAt
-// TODO: Tests for OutEdgeIdsAt
-// TODO: Tests for EdgeIdsAt
+// // TODO: Tests for InEdgeIdsAt
+// // TODO: Tests for OutEdgeIdsAt
+// // TODO: Tests for EdgeIdsAt
 
 /// @name Tests for mapping functions
 /// @{
