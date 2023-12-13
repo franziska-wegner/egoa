@@ -72,7 +72,7 @@ class Bucket {
                                             , TElement
                                             , Types::largeNumber
                                             , Types::largeNumber const *
-                                            , Types::largeNumber>;
+                                            , Types::largeNumber>; // @TODO deprecated
     public:
         ///@name Constructors and Destructor
         ///@{
