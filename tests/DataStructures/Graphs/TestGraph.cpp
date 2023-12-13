@@ -941,16 +941,40 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
 
 #pragma mark VertexAt
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TYPED_TEST(TestGraphEmptyDeathTest, VertexAt) {
-    auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
-    Types::vertexId id = 0;
-    EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
-    EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
-}
+    TYPED_TEST(TestGraphEmptyDeathTest, VertexAt) {
+        auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
+        Types::vertexId id = 0;
+        EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
+        EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
+    }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 
-//@TODO: Exception part
+    TYPED_TEST  ( TestGraphEmpty
+                , VertexAtExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "VertexAt"
+                                                    , "VertexExists\\(id\\)");
+        Types::vertexId id = 0;
+        try {
+            this->graph_.VertexAt(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+        try {
+            this->graphConst_.VertexAt(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
@@ -964,24 +988,68 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphSingleVertex
+                , VertexAtExceptionHandling )
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "VertexAt"
+                                                    , "VertexExists\\(id\\)");
+        Types::vertexId id = this->id_ + 1;
+        try {
+            this->graph_.VertexAt(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+        try {
+            this->graphConst_.VertexAt(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TYPED_TEST(TestGraphFourVerticesDeathTest, VertexAt) {
-    auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
-    Types::vertexId id = Const::NONE;
-    EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
-    EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
-}
+    TYPED_TEST(TestGraphFourVerticesDeathTest, VertexAt) {
+        auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
+        Types::vertexId id = Const::NONE;
+        EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
+        EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
+    }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphFourVertices
+                , VertexAtExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "VertexAt"
+                                                    , "VertexExists\\(id\\)");
+        Types::vertexId id = Const::NONE;
+        try {
+            this->graph_.VertexAt(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+        try {
+            this->graphConst_.VertexAt(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
@@ -1003,47 +1071,113 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 #pragma mark NeighborsOf
 /// @todo death tests for neighbors of non-existent vertices
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TYPED_TEST(TestGraphEmptyDeathTest, NeighborsOf) {
-    auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
-    Types::vertexId id = 0;
-    EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
-    EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
-}
+    TYPED_TEST(TestGraphEmptyDeathTest, NeighborsOf) {
+        auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
+        Types::vertexId id = 0;
+        EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
+        EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
+    }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphEmpty
+                , NeighborsOfExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "NeighborsOf"
+                                                    , "VertexExists\\(id\\)");
+        Types::vertexId id = 0;
+        try {
+            this->graph_.NeighborsOf(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+        try {
+            this->graphConst_.NeighborsOf(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TYPED_TEST(TestGraphSingleVertexDeathTest, NeighborsOf) {
-    auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
-    Types::vertexId id = this->id_ + 1;
-    EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
-    EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
-}
+    TYPED_TEST(TestGraphSingleVertexDeathTest, NeighborsOf) {
+        auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
+        Types::vertexId id = this->id_ + 1;
+        EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
+        EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
+    }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphSingleVertex
+                , NeighborsOfExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "NeighborsOf"
+                                                    , "VertexExists\\(id\\)");
+        Types::vertexId id = this->id_ + 1;
+        try {
+            this->graph_.NeighborsOf(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+        try {
+            this->graphConst_.NeighborsOf(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TYPED_TEST(TestGraphFourVerticesDeathTest, NeighborsOf) {
-    auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
-    Types::vertexId id = Const::NONE;
-    EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
-    EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
-}
+    TYPED_TEST(TestGraphFourVerticesDeathTest, NeighborsOf) {
+        auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
+        Types::vertexId id = Const::NONE;
+        EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
+        EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
+    }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphFourVertices
+                , NeighborsOfExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "NeighborsOf"
+                                                    , "VertexExists\\(id\\)");
+        Types::vertexId id = Const::NONE;
+        try {
+            this->graph_.NeighborsOf(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+        try {
+            this->graphConst_.NeighborsOf(id);
+        } catch ( std::runtime_error const & error ) {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
@@ -1414,16 +1548,16 @@ TYPED_TEST(TestGraphStar, MapVertices) {
 /// @name Tests for adding vertices
 /// @{
 #pragma mark AddVertex
-TYPED_TEST( TestGraphEmpty, AddVertex) 
-{   
+TYPED_TEST( TestGraphEmpty, AddVertex)
+{
     using TVertex           = typename TestFixture::TVertex;
     using TVertexProperties = typename TestFixture::TVertexProperties;
 
     const unsigned NUMBER_OF_VERTICES = 4;
-    
+
     std::vector<Types::index> indices;
 
-    for (size_t i = 0; i < NUMBER_OF_VERTICES; ++i) 
+    for (size_t i = 0; i < NUMBER_OF_VERTICES; ++i)
     {
         TVertexProperties vertexProperties(i);
         auto id = this->graph_.AddVertex(vertexProperties);
@@ -1432,7 +1566,7 @@ TYPED_TEST( TestGraphEmpty, AddVertex)
 
         EXPECT_EQ(id, vertex.Identifier());
         EXPECT_EQ(i + 1, this->graph_.NumberOfVertices());
-        
+
         // Check if all previously inserted vertices are still correct
         for (size_t j = 0; j <= i; ++j) 
         {
@@ -1440,7 +1574,6 @@ TYPED_TEST( TestGraphEmpty, AddVertex)
             EXPECT_EQ(j, this->graph_.VertexAt(indices[j]).Properties().PrivateId() )
             << "After adding vertex " << i << ": Vertex " << j << "is incorrect";
         }
-        
     }
 }
 
@@ -2039,9 +2172,29 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphEmpty
+                , ForAllEdgesAtExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "for_all_edges_at"
+                                                    , "VertexExists\\(vertexId\\)");
+        Types::vertexId nonexistentId = 3;
+        try {
+            this->graph_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
+                nonexistentId,
+                [](typename TestFixture::TEdge &) 
+                {
+                    FAIL();
+                }
+            );
+        } catch ( std::runtime_error const & error ) {
+            EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
@@ -2060,9 +2213,28 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-
-//@TODO: Exception part
-
+    TYPED_TEST  ( TestGraphEmpty
+                , ForAllEdgesAtConstExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString( "Graph.hpp"
+                                                    , "Graph"
+                                                    , "for_all_edges_at"
+                                                    , "VertexExists\\(vertexId\\)");
+        Types::vertexId nonexistentId = 3;
+        try {
+            this->graphConst_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
+                nonexistentId,
+                [](typename TestFixture::TEdge const &) {
+                    FAIL();
+                }
+            );
+        } catch ( std::runtime_error const & error ) {
+            EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
