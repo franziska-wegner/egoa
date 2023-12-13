@@ -3,6 +3,9 @@
 
 Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid analysis and planning. This framework is based on the PhD thesis <a href="http://dx.doi.org/10.5445/IR/1000120612">"Combinatorial Problems in Energy Networks -- Graph Theoretic Models and Algorithms"</a>. The Git repository of the PhD thesis is available under <a href="https://github.com/franziska-wegner/PhD_Thesis--Combinatorial_Problems_in_Energy_Networks--Graph_Theoretic_Models_and_Algorithms">Combinatorial_Problems_in_Energy_Networks</a>. 
 
+<img height=350 alt="Swiss Power Grid Branch with Parameters" src="https://github.com/franziska-wegner/egoa/assets/57569315/514cd0d2-6fac-416a-bf8d-31d97565fed8"/>   <img height=350 alt="Swiss Power Grid Bus with Parameters" src="https://github.com/franziska-wegner/egoa/assets/57569315/aad67a45-a656-4c42-9c74-e7d82eedc6fb"/>
+
+
 <h2>Workflow Status</h2>
 
 |  |  |
