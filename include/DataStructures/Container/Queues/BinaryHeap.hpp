@@ -554,7 +554,7 @@ class BinaryHeap {
                 Types::largeNumber end_;                /**< End */
                 std::vector<TElement> const * vector_;  /**< Vector of elements */
             public:
-                using iterator_category = std::input_iterator_tag;  /**< Iterator category type */
+                using iterator_category = std::forward_iterator_tag;/**< Iterator category type */
                 using value_type        = TElement;                 /**< Value type */
                 using difference_type   = Types::difference;        /**< Difference type */
                 using pointer           = const TElement*;          /**< Element pointer type */
