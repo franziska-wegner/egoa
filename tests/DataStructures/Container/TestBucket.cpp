@@ -981,7 +981,7 @@ TEST_F  ( TestBucketWithMultipleInteger
                 bucket_.Pop();
             } catch ( std::runtime_error const & error )
             {
-                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString2.c_str() ) );
             }
         } catch ( ... )
         {
