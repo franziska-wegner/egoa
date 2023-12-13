@@ -14,8 +14,8 @@
 # - Wall This enables all the warnings about constructions that 
 # some users consider questionable, and that are easy to avoid 
 # (or modify to prevent the warning), even in conjunction with macros
-set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG}")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast")
+set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -coverage")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast -coverage")
 
 ####################################################################
 # Compiler Options #################################################
