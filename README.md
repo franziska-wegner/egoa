@@ -11,7 +11,7 @@ Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid anal
 | [CodeQL](https://codeql.github.com) Scan Build Status: | [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml) |
 | Project Documentation: | [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa) |
 | Coverity Scan Build Status: | <a href="https://scan.coverity.com/projects/franziska-wegner-egoa"><img alt="Coverity Scan Build Status" src="https://scan.coverity.com/projects/29511/badge.svg"/></a> |
-| Code Coverage | [![codecov](https://codecov.io/gh/franziska-wegner/egoa/graph/badge.svg?token=OL0N2WXV4I)](https://codecov.io/gh/franziska-wegner/egoa) |
+| Code Coverage: | [![codecov](https://codecov.io/gh/franziska-wegner/egoa/graph/badge.svg?token=OL0N2WXV4I)](https://codecov.io/gh/franziska-wegner/egoa) |
 
 <h2>Installation</h2>
 
