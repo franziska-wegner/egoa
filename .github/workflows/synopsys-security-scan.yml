@@ -87,7 +87,9 @@ jobs:
     - name: Configure egoa
       run: |
         mkdir build
-        cmake -S . -B build -D EGOA_BUILD_TYPE=Release CMAKE_BUILD_TYPE=Release 
+        cmake -S . -B build 
+        -DEGOA_BUILD_TYPE=Release 
+        -DCMAKE_BUILD_TYPE=Release 
         -DBoost_NO_SYSTEM_PATHS=TRUE
         -DEGOA_DOWNLOAD_CPPAD=OFF
         -DEGOA_DOWNLOAD_EIGEN=OFF
@@ -126,7 +128,6 @@ jobs:
         -DOGDF_LIBRARY_DIR="NONE-DIR"
         -DOPENMP_INCLUDES="/opt/homebrew/opt/llvm/include"
         -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
-        -S ${{ github.workspace }}
         -G "Unix Makefiles"
 
     - name: Run coverity build/scan
