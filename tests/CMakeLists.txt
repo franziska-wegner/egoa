@@ -35,9 +35,9 @@ add_test(NAME TestBucket COMMAND TestBucket)
 # target_link_libraries(TestDynamicGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
 # add_test(NAME TestDynamicGraph COMMAND TestDynamicGraph)
 
-# add_executable(TestPowerGrid DataStructures/Graphs/TestPowerGrid.cpp)
-# target_link_libraries(TestPowerGrid EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
-# add_test(NAME TestPowerGrid COMMAND TestPowerGrid)
+add_executable(TestPowerGrid DataStructures/Graphs/TestPowerGrid.cpp)
+target_link_libraries(TestPowerGrid EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
+add_test(NAME TestPowerGrid COMMAND TestPowerGrid)
 
 # add_executable(TestBlockCutTree DataStructures/Graphs/TestBlockCutTree.cpp)
 # target_link_libraries(TestBlockCutTree EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
