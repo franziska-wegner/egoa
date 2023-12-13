@@ -244,7 +244,7 @@ jobs:
       if: startsWith(matrix.os,'windows-')
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
-    - name: Test (with Coverage)
+    - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       # Execute tests defined by the CMake configuration. Note that --build-config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
@@ -266,11 +266,11 @@ jobs:
       #   Death tests use fork(), which is unsafe particularly in a threaded context. For this test, Google Test detected
       #   3 threads. See https://github.com/google/googletest/blob/main/docs/advanced.md#death-tests-and-threads for more
       #   explanation and suggested solutions, especially if this is the last message you see before your test times out.
-      if: ${{ startsWith(matrix.os,'ubuntu-') && startsWith(matrix.c_compiler,'gcc-') && matrix.build_type == Debug }}
+      if: ${{ startsWith(matrix.os,'ubuntu-') && startsWith(matrix.c_compiler,'gcc') && matrix.build_type == 'Debug' }}
       run: ctest --verbose -j1 --build-config ${{ matrix.build_type }} -T Coverage
 
     - name: Upload coverage reports to Codecov (Ubuntu GCC Debug only)
-      if: ${{ startsWith(matrix.os,'ubuntu-') && startsWith(matrix.c_compiler,'gcc-') && matrix.build_type == Debug }}
+      if: ${{ startsWith(matrix.os,'ubuntu-') && startsWith(matrix.c_compiler,'gcc') && matrix.build_type == 'Debug' }}
       uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
