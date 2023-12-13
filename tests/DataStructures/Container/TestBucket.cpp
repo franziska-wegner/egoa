@@ -342,7 +342,7 @@ TEST_F  ( TestBucketWithZeroElements
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket" 
-                                                    , "operator\\[\\]"
+                                                    , "operator.*\\[\\]"
                                                     , "HasElementAt\\(index\\)");
         ASSERT_DEATH ( {bucket_[0];},  assertionString );
         ASSERT_DEATH ( {bucket_[1];},  assertionString );
@@ -351,34 +351,34 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , AccessElementWithBracketOperatorExceptionHandling ) 
+            , AccessElementWithBracketOperatorExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
-                                                    , "operator\\[\\]"
+                                                    , "Bucket"
+                                                    , "operator.*\\[\\]"
                                                     , "HasElementAt\\(index\\)");
         try {
             try {
                 bucket_[0];
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_[1];
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_[-1];
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -1002,7 +1002,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
-                                                    , "operator\\[\\]"
+                                                    , "operator.*\\[\\]"
                                                     , "HasElementAt\\(index\\)" );
 
         ASSERT_DEATH ( { bucket_[0];  }, assertionString );
@@ -1016,30 +1016,30 @@ TEST_F  ( TestBucketWithMultipleInteger
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
-                                                    , "operator\\[\\]"
+                                                    , "operator.*\\[\\]"
                                                     , "HasElementAt\\(index\\)" );
         try {
             try {
                 bucket_[0];
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_[1];
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_[-1];
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
