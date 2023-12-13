@@ -35,10 +35,10 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Coverity Download
-      run: |
-        curl -fLsS --user $COV_USER:$COVERITY_PASSPHRASE $COV_URL/downloadFile.htm?fn=$CSA.tar.gz | tar -C /tmp -xzf -
-        curl -fLsS --user $COV_USER:$COVERITY_PASSPHRASE -o /tmp/$CSA/bin/license.dat $COV_URL/downloadFile.htm?fn=license.dat
-        /tmp/$CSA/bin/cov-configure --java
+        run: |
+          wget -q https://scan.coverity.com/download/cxx/linux64 --post-data "token=$COVERITY_PASSPHRASE&project=franziska-wegner%2Fegoa" -O coverity_tool.tgz
+          mkdir cov-scan
+          tar ax -f coverity_tool.tgz --strip-components=1 -C cov-scan
 
     - name: Coverity Full Scan
       if: ${{ github.event_name != 'pull_request' }}
