@@ -751,88 +751,86 @@ TEST_F  ( TestBucketWithZeroElements
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-// #ifdef EGOA_ENABLE_ASSERTION
-//     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-//             , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBucketWithMultipleIntegerDeathTest
+            , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-//         TBucket bucketToCompare_;
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "operator>" 
-//                                                     , "!rhs.EmptyQueue\\(\\)" );
-//         ASSERT_DEATH ( { auto test = bucket_ > bucketToCompare_;}
-//                      , assertionString );
-//     }
-// #else
-// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling ) 
-//     {
-//         TBucket bucketToCompare_;
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "operator>" 
-//                                                     , "!rhs.EmptyQueue\\(\\)" );
-//         try {
-//             auto test = bucket_ > bucketToCompare_;
-//         } catch ( std::runtime_error const & error ) 
-//         {
-//             EXPECT_THAT ( MatchesRegex( assertionString.c_str() )
-//                         , error.what() );
-//         } catch ( ... ) 
-//         {
-//             FAIL()  << "Expected std::runtime_error with message: " 
-//                     << assertionString;
-//         }
-//     }
-// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-// #endif // ifdef EGOA_ENABLE_ASSERTION
+        TBucket bucketToCompare_;
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "operator>" 
+                                                    , "!rhs.EmptyQueue\\(\\)" );
+        ASSERT_DEATH ( { auto test = bucket_ > bucketToCompare_;}
+                     , assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBucketWithMultipleInteger
+            , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling ) 
+    {
+        TBucket bucketToCompare_;
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "operator>" 
+                                                    , "!rhs.EmptyQueue\\(\\)" );
+        try {
+            auto test = bucket_ > bucketToCompare_;
+        } catch ( std::runtime_error const & error ) 
+        {
+            EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
-// #ifdef EGOA_ENABLE_ASSERTION
-//     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-//             , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBucketWithMultipleIntegerDeathTest
+            , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-//         TBucket bucketToCompare_;
+        TBucket bucketToCompare_;
 
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "operator>="
-//                                                     , "!rhs.EmptyQueue\\(\\)");
-//         ASSERT_DEATH ( { auto test = bucket_ >= bucketToCompare_;}
-//                      , assertionString );
-//     }
-// #else
-// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling ) 
-//     {
-//         TBucket bucketToCompare_;
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "operator>="
-//                                                     , "!rhs.EmptyQueue\\(\\)");
-//         try {
-//             auto test = bucket_ >= bucketToCompare_;
-//         } catch ( std::runtime_error const & error ) 
-//         {
-//             EXPECT_THAT ( MatchesRegex( assertionString.c_str() )
-//                         , error.what() );
-//         } catch ( ... ) 
-//         {
-//             FAIL()  << "Expected std::runtime_error with message: " 
-//                     << assertionString;
-//         }
-//     }
-// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-// #endif // ifdef EGOA_ENABLE_ASSERTION
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "operator>="
+                                                    , "!rhs.EmptyQueue\\(\\)");
+        ASSERT_DEATH ( { auto test = bucket_ >= bucketToCompare_;}
+                     , assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBucketWithMultipleInteger
+            , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling ) 
+    {
+        TBucket bucketToCompare_;
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "operator>="
+                                                    , "!rhs.EmptyQueue\\(\\)");
+        try {
+            auto test = bucket_ >= bucketToCompare_;
+        } catch ( std::runtime_error const & error ) 
+        {
+            EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 ///@}
 
 // Merge an element into an empty bucket
@@ -909,148 +907,145 @@ TEST_F  ( TestBucketWithMultipleInteger
         ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
     }
 
-// #ifdef EGOA_ENABLE_ASSERTION
-//     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-//             , AccessElementElementAtDeathTest ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBucketWithMultipleIntegerDeathTest
+            , AccessElementElementAtDeathTest ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket" 
-//                                                     , "ElementAt"
-//                                                     , "HasElementAt\\(index\\)" );
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket" 
+                                                    , "ElementAt"
+                                                    , "HasElementAt\\(index\\)" );
 
-//         ASSERT_DEATH ( {bucket_.ElementAt(0);},  assertionString );
-//         ASSERT_DEATH ( {bucket_.ElementAt(1);},  assertionString );
-//         ASSERT_DEATH ( {bucket_.ElementAt(-1);}, assertionString );
+        ASSERT_DEATH ( {bucket_.ElementAt(0);},  assertionString );
+        ASSERT_DEATH ( {bucket_.ElementAt(1);},  assertionString );
+        ASSERT_DEATH ( {bucket_.ElementAt(-1);}, assertionString );
 
-//         ASSERT_FALSE ( bucket_.HasElementAt(0)    );
-//         ASSERT_FALSE ( bucket_.HasElementAt(-1)   );
-//         bucket_.Pop();
-//         ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
-//         ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
-//         EXPECT_TRUE  ( bucket_.EmptyQueue()       );
+        ASSERT_FALSE ( bucket_.HasElementAt(0)    );
+        ASSERT_FALSE ( bucket_.HasElementAt(-1)   );
+        bucket_.Pop();
+        ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
+        ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
+        EXPECT_TRUE  ( bucket_.EmptyQueue()       );
 
-//         auto assertionString2 = buildAssertionString ( "Bucket.hpp"
-//                                                      , "Bucket" 
-//                                                      , "Pop"
-//                                                      , "!EmptyQueue\\(\\)" );
-//         ASSERT_DEATH ( {bucket_.Pop();}, assertionString2 );
-//     }
-// #else
-// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , AccessElementElementAtExceptionHandling ) 
-//     {
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket" 
-//                                                     , "ElementAt"
-//                                                     , "HasElementAt\\(index\\)" );
-//         try {
-//             try {
-//                 bucket_.ElementAt(0);
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-//             }
-//             try {
-//                 bucket_.ElementAt(1);
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-//             }
-//             try {
-//                 bucket_.ElementAt(-1);
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-//             }
+        auto assertionString2 = buildAssertionString ( "Bucket.hpp"
+                                                     , "Bucket" 
+                                                     , "Pop"
+                                                     , "!EmptyQueue\\(\\)" );
+        ASSERT_DEATH ( {bucket_.Pop();}, assertionString2 );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBucketWithMultipleInteger
+            , AccessElementElementAtExceptionHandling ) 
+    {
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket" 
+                                                    , "ElementAt"
+                                                    , "HasElementAt\\(index\\)" );
+        try {
+            try {
+                bucket_.ElementAt(0);
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
+            try {
+                bucket_.ElementAt(1);
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
+            try {
+                bucket_.ElementAt(-1);
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
 
-//             ASSERT_FALSE ( bucket_.HasElementAt(0)    );
-//             ASSERT_FALSE ( bucket_.HasElementAt(-1)   );
-//             bucket_.Pop();
-//             ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
-//             ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
-//             EXPECT_TRUE  ( bucket_.EmptyQueue()       );
+            ASSERT_FALSE ( bucket_.HasElementAt(0)    );
+            ASSERT_FALSE ( bucket_.HasElementAt(-1)   );
+            bucket_.Pop();
+            ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
+            ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
+            EXPECT_TRUE  ( bucket_.EmptyQueue()       );
 
-//             auto assertionString2 = buildAssertionString ( "Bucket.hpp"
-//                                                          , "Bucket" 
-//                                                          , "Pop"
-//                                                          , "!EmptyQueue\\(\\)" );
-//             try {
-//                 bucket_.Pop();
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( MatchesRegex( assertionString2.c_str() ) 
-//                             , error.what() );
-//             }
-//         } catch ( ... ) 
-//         {
-//             FAIL()  << "Expected std::runtime_error with message: " 
-//                     << assertionString;
-//         }
-//     }
-// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-// #endif // ifdef EGOA_ENABLE_ASSERTION
+            auto assertionString2 = buildAssertionString ( "Bucket.hpp"
+                                                         , "Bucket" 
+                                                         , "Pop"
+                                                         , "!EmptyQueue\\(\\)" );
+            try {
+                bucket_.Pop();
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
-// #ifdef EGOA_ENABLE_ASSERTION
-//     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-//             , AccessElementWithBracketOperatorDeathTest ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBucketWithMultipleIntegerDeathTest
+            , AccessElementWithBracketOperatorDeathTest ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
         
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "operator\\[\\]"
-//                                                     , "HasElementAt\\(index\\)" );
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "operator\\[\\]"
+                                                    , "HasElementAt\\(index\\)" );
 
-//         ASSERT_DEATH ( { bucket_[0];  }, assertionString );
-//         ASSERT_DEATH ( { bucket_[1];  }, assertionString );
-//         ASSERT_DEATH ( { bucket_[-1]; }, assertionString );
-//     }
-// #else
-// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , AccessElementWithBracketOperatorExceptionHandling ) 
-//     {
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "operator\\[\\]"
-//                                                     , "HasElementAt\\(index\\)" );
-//         try {
-//             try {
-//                 bucket_[0];
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-//             }
-//             try {
-//                 bucket_[1];
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( MatchesRegex( assertionString.c_str() )
-//                             , error.what() );
-//             }
-//             try {
-//                 bucket_[-1];
-//             } catch ( std::runtime_error const & error ) 
-//             {
-//                 EXPECT_THAT ( MatchesRegex( assertionString.c_str() ) 
-//                             , error.what() );
-//             }
-//         } catch ( ... ) 
-//         {
-//             FAIL()  << "Expected std::runtime_error with message: " 
-//                     << assertionString;
-//         }
-//     }
-// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-// #endif // ifdef EGOA_ENABLE_ASSERTION
-// ///@}
+        ASSERT_DEATH ( { bucket_[0];  }, assertionString );
+        ASSERT_DEATH ( { bucket_[1];  }, assertionString );
+        ASSERT_DEATH ( { bucket_[-1]; }, assertionString );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBucketWithMultipleInteger
+            , AccessElementWithBracketOperatorExceptionHandling ) 
+    {
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "operator\\[\\]"
+                                                    , "HasElementAt\\(index\\)" );
+        try {
+            try {
+                bucket_[0];
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
+            try {
+                bucket_[1];
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
+            try {
+                bucket_[-1];
+            } catch ( std::runtime_error const & error ) 
+            {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+            }
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+///@}
 
 ///@Name Access bucket's top element
 ///@{
@@ -1084,133 +1079,131 @@ TEST_F  ( TestBucketWithMultipleInteger
 
 ///@Name Delete Elements
 ///@{
-// #ifdef EGOA_ENABLE_ASSERTION
-//     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-//             , RemoveElementUsingPopDeathTest ) 
-//     {
-//         bucket_.Pop();
-//         ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
-//         ASSERT_EQ    ( 1, bucket_.HasElementAt(0) );
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBucketWithMultipleIntegerDeathTest
+            , RemoveElementUsingPopDeathTest ) 
+    {
+        bucket_.Pop();
+        ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
+        ASSERT_EQ    ( 1, bucket_.HasElementAt(0) );
         
-//         ASSERT_TRUE ( bucket_.EmptyQueue() );
+        ASSERT_TRUE ( bucket_.EmptyQueue() );
 
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket" 
-//                                                     , "Pop"
-//                                                     , "!EmptyQueue\\(\\)" );
-//         ASSERT_DEATH ( {bucket_.Pop();}, assertionString );
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket" 
+                                                    , "Pop"
+                                                    , "!EmptyQueue\\(\\)" );
+        ASSERT_DEATH ( {bucket_.Pop();}, assertionString );
 
-//         bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-//             []( TElement const & element ) 
-//             {
-//                 ASSERT_TRUE ( element.Valid() );
-//             }
-//         );
-//     }
-// #else
-// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , RemoveElementUsingPopExceptionHandling ) 
-//     {
-//         bucket_.Pop();
-//         ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
-//         ASSERT_EQ    ( 1, bucket_.HasElementAt(0) );
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
+            []( TElement const & element ) 
+            {
+                ASSERT_TRUE ( element.Valid() );
+            }
+        );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBucketWithMultipleInteger
+            , RemoveElementUsingPopExceptionHandling ) 
+    {
+        bucket_.Pop();
+        ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
+        ASSERT_EQ    ( 1, bucket_.HasElementAt(0) );
         
-//         ASSERT_TRUE ( bucket_.EmptyQueue() );
+        ASSERT_TRUE ( bucket_.EmptyQueue() );
 
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket" 
-//                                                     , "Pop"
-//                                                     , "!EmptyQueue\\(\\)" );
-//         try {
-//             bucket_.Pop();
-//         } catch ( std::runtime_error const & error ) 
-//         {
-//                 EXPECT_THAT ( MatchesRegex( assertionString.c_str() )
-//                             , error.what() );
-//         } catch ( ... ) 
-//         {
-//             FAIL()  << "Expected std::runtime_error with message: " 
-//                     << assertionString;
-//         }
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket" 
+                                                    , "Pop"
+                                                    , "!EmptyQueue\\(\\)" );
+        try {
+            bucket_.Pop();
+        } catch ( std::runtime_error const & error ) 
+        {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
 
-//         bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-//             []( TElement const & element ) 
-//             {
-//                 ASSERT_TRUE ( element.Valid() );
-//             }
-//         );
-//     }
-// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-// #endif // ifdef EGOA_ENABLE_ASSERTION
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
+            []( TElement const & element ) 
+            {
+                ASSERT_TRUE ( element.Valid() );
+            }
+        );
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
-// #ifdef EGOA_ENABLE_ASSERTION
-//     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-//             , RemoveElementUsingDeleteMinDeathTest ) 
-//     {
-//         // For more details see
-//         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
-//         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F  ( TestBucketWithMultipleIntegerDeathTest
+            , RemoveElementUsingDeleteMinDeathTest ) 
+    {
+        // For more details see
+        // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
+        ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-//         auto       tuple = bucket_.DeleteTop();
-//         TElement element = std::get<0>(tuple);
-//         ASSERT_EQ    ( element,                 1 );
-//         ASSERT_TRUE ( element.Valid() );
-//         ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
-//         ASSERT_EQ    ( bucket_.ElementAt(0),    1 );
-//         EXPECT_TRUE  ( bucket_.EmptyQueue()       );
+        auto       tuple = bucket_.DeleteTop();
+        TElement element = std::get<0>(tuple);
+        ASSERT_EQ    ( element,                 1 );
+        ASSERT_TRUE ( element.Valid() );
+        ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
+        ASSERT_EQ    ( bucket_.ElementAt(0),    1 );
+        EXPECT_TRUE  ( bucket_.EmptyQueue()       );
 
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "DeleteTop"
-//                                                     , "!EmptyQueue\\(\\)" );
-//         ASSERT_DEATH ( {bucket_.DeleteTop();}, assertionString );
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "DeleteTop"
+                                                    , "!EmptyQueue\\(\\)" );
+        ASSERT_DEATH ( {bucket_.DeleteTop();}, assertionString );
 
-//         bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-//             []( TElement const & element ) 
-//             {
-//                 ASSERT_TRUE ( element.Valid() );
-//             }
-//         );
-//     }
-// #else
-// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-//     TEST_F  ( TestBucketWithMultipleInteger
-//             , RemoveElementUsingDeleteMinExceptionHandling ) 
-//     {
-//         auto       tuple = bucket_.DeleteTop();
-//         TElement element = std::get<0>(tuple);
-//         ASSERT_EQ   ( element,                1 );
-//         ASSERT_TRUE ( element.Valid()           );
-//         ASSERT_TRUE ( bucket_.HasElementAt(0)   );
-//         ASSERT_EQ   ( bucket_.ElementAt(0),   1 );
-//         EXPECT_TRUE ( bucket_.EmptyQueue()      );
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
+            []( TElement const & element ) 
+            {
+                ASSERT_TRUE ( element.Valid() );
+            }
+        );
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestBucketWithMultipleInteger
+            , RemoveElementUsingDeleteMinExceptionHandling ) 
+    {
+        auto       tuple = bucket_.DeleteTop();
+        TElement element = std::get<0>(tuple);
+        ASSERT_EQ   ( element,                1 );
+        ASSERT_TRUE ( element.Valid()           );
+        ASSERT_TRUE ( bucket_.HasElementAt(0)   );
+        ASSERT_EQ   ( bucket_.ElementAt(0),   1 );
+        EXPECT_TRUE ( bucket_.EmptyQueue()      );
 
-//         auto assertionString = buildAssertionString ( "Bucket.hpp"
-//                                                     , "Bucket"
-//                                                     , "DeleteTop"
-//                                                     , "!EmptyQueue\\(\\)" );
-//         try {
-//             bucket_.DeleteTop();
-//         } catch ( std::runtime_error const & error ) 
-//         {
-//                 EXPECT_THAT ( MatchesRegex( assertionString.c_str() )
-//                             , error.what() );
-//         } catch ( ... ) 
-//         {
-//             FAIL()  << "Expected std::runtime_error with message: " 
-//                     << assertionString;
-//         }
+        auto assertionString = buildAssertionString ( "Bucket.hpp"
+                                                    , "Bucket"
+                                                    , "DeleteTop"
+                                                    , "!EmptyQueue\\(\\)" );
+        try {
+            bucket_.DeleteTop();
+        } catch ( std::runtime_error const & error ) 
+        {
+                EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
 
-//         bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-//             []( TElement const & element ) 
-//             {
-//                 ASSERT_TRUE ( element.Valid() );
-//             }
-//         );
-//     }
-// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-// #endif // ifdef EGOA_ENABLE_ASSERTION
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
+            []( TElement const & element ) 
+            {
+                ASSERT_TRUE ( element.Valid() );
+            }
+        );
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
     TEST_F  ( TestBucketWithMultipleInteger
             , RemoveElementAll ) 
