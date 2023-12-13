@@ -31,7 +31,8 @@ jobs:
       CHECKERS: --webapp-security
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout EGOA
+      uses: actions/checkout@v4
 
     - name: Coverity Download
       run: |
