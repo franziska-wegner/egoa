@@ -84,10 +84,21 @@ jobs:
         cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
         dir: ${{ github.workspace }}/Qt
 
-    - name: Configure egoa
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
       run: |
-        mkdir build
-        cmake -S . -B build 
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+    - name: Configure egoa
+      env:
+        CMAKE_PREFIX_PATH: ${{env.Qt6_DIR}}
+        CMAKE_MODULE_PATH: ${{env.Qt6_DIR}}
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_CXX_COMPILER=g++
+        -DCMAKE_C_COMPILER=gcc
         -DEGOA_BUILD_TYPE=Release 
         -DCMAKE_BUILD_TYPE=Release 
         -DBoost_NO_SYSTEM_PATHS=TRUE
@@ -128,7 +139,7 @@ jobs:
         -DOGDF_LIBRARY_DIR="NONE-DIR"
         -DOPENMP_INCLUDES="/opt/homebrew/opt/llvm/include"
         -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
-        -G "Unix Makefiles"
+        -S ${{ github.workspace }}
 
     - name: Run coverity build/scan
       run: |
