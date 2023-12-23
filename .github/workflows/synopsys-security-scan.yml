@@ -1,0 +1,157 @@
+# This file is parttly based on https://github.com/marketplace/actions/synopsys-intelligent-security-scan.
+name: Coverity
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '30 2 * * *'  # Run once per day, to avoid Coverity's submission limits
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  Coverity:
+
+    runs-on: ubuntu-latest
+
+    env:
+      COV_URL: ${{ secrets.SYNOPSYS_ACCESS_URL }}
+      COV_USER: ${{ secrets.SYNOPSYS_ACCESS_EMAIL }}
+      COVERITY_PASSPHRASE: ${{ secrets.SYNOPSYS_ACCESS_TOKEN }}
+      CSA: cov-analysis-linux64-2020.12
+      COVERITY_PROJECT: franziska-wegner/egoa
+      BLDCMD: mvn -B clean package -DskipTests
+      CHECKERS: --webapp-security
+      QT_VERSION:     "6.2.0"
+
+    steps:
+    - name: Checkout EGOA
+      uses: actions/checkout@v4
+
+    - name: Coverity Download
+      run: |
+        wget -q https://scan.coverity.com/download/cxx/linux64 --post-data "token=$COVERITY_PASSPHRASE&project=franziska-wegner%2Fegoa" -O coverity_tool.tgz
+        mkdir cov-scan
+        tar ax -f coverity_tool.tgz --strip-components=1 -C cov-scan
+
+    # - name: Coverity Full Scan
+    #   if: ${{ github.event_name != 'pull_request' }}
+    #   run: |
+    #     export PATH=$PATH:/tmp/$CSA/bin
+    #     set -x
+    #     cov-build --dir idir --fs-capture-search $GITHUB_WORKSPACE $BLDCMD
+    #     cov-analyze --dir idir --ticker-mode none --strip-path $GITHUB_WORKSPACE $CHECKERS
+    #     cov-commit-defects --dir idir --ticker-mode none --url $COV_URL --stream $COVERITY_PROJECT-${GITHUB_REF##*/} --scm git \
+    #       --description $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID --target $RUNNER_OS --version $GITHUB_SHA
+
+    # - name: Coverity Quality Gate
+    #   if: ${{ github.event_name != 'pull_request' }}
+    #   run: |
+    #     curl -fLsS --user $COV_USER:$COVERITY_PASSPHRASE $COV_URL/api/viewContents/issues/v1/OWASP%20Web%20Top%2010?projectId=$COVERITY_PROJECT > results.json
+    #     if [ $(cat results.json | jq .viewContentsV1.totalRows) -ne 0 ]; then cat results.json | jq .viewContentsV1.rows; exit 1; fi
+
+    # - id: changeset
+    #   name: Get Pull Request Changeset
+    #   uses: jitterbit/get-changed-files@v1
+    #   if: ${{ github.event_name == 'pull_request' }}
+
+    # - name: Coverity Incremental Scan
+    #   if: ${{ github.event_name == 'pull_request' && steps.changeset.outputs.added_modified != '' }}
+    #   run: |
+    #     export PATH=$PATH:/tmp/$CSA/bin
+    #     set -x
+    #     cov-run-desktop --dir idir --url $COV_URL --stream $COVERITY_PROJECT-$GITHUB_BASE_REF --build $BLDCMD
+    #     cov-run-desktop --dir idir --url $COV_URL --stream $COVERITY_PROJECT-$GITHUB_BASE_REF --present-in-reference false \
+    #       --ignore-uncapturable-inputs true --exit1-if-defects true ${{ steps.changeset.outputs.added_modified }}
+
+    - name: Setup environment
+      run: |
+        echo "$(pwd)/cov-scan/bin" >> $GITHUB_PATH
+        echo "NPROC=$(getconf _NPROCESSORS_ONLN)" >> $GITHUB_ENV
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ env.QT_VERSION }}
+        cache: 'true'
+        cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
+        dir: ${{ github.workspace }}/Qt
+
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+    - name: Configure egoa
+      env:
+        CMAKE_PREFIX_PATH: ${{env.Qt6_DIR}}
+        CMAKE_MODULE_PATH: ${{env.Qt6_DIR}}
+      run: >
+        cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_CXX_COMPILER=g++
+        -DCMAKE_C_COMPILER=gcc
+        -DEGOA_BUILD_TYPE=Release 
+        -DCMAKE_BUILD_TYPE=Release 
+        -DBoost_NO_SYSTEM_PATHS=TRUE
+        -DEGOA_DOWNLOAD_CPPAD=OFF
+        -DEGOA_DOWNLOAD_EIGEN=OFF
+        -DEGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK=OFF
+        -DEGOA_DOWNLOAD_IEEE=OFF
+        -DEGOA_DOWNLOAD_PYPSA_EUR=OFF
+        -DEGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION=OFF
+        -DEGOA_DOWNLOAD_SCIGRID=OFF
+        -DEGOA_DOWNLOAD_WINDFARM=OFF
+        -DEGOA_ENABLE_ASSERTION=ON
+        -DEGOA_ENABLE_BONMIN=OFF
+        -DEGOA_ENABLE_BOOST=OFF
+        -DEGOA_ENABLE_CPLEX=OFF
+        -DEGOA_ENABLE_DOCUMENTATION=OFF
+        -DEGOA_ENABLE_EXCEPTION_HANDLING=ON
+        -DEGOA_ENABLE_GUROBI=OFF
+        -DEGOA_ENABLE_IPOPT=OFF
+        -DEGOA_ENABLE_OGDF=OFF
+        -DEGOA_ENABLE_OPENMP=OFF
+        -DEGOA_ENABLE_TESTS=OFF
+        -DEGOA_ENABLE_VERBOSE_MAKEFILE=ON
+        -DEGOA_PEDANTIC_AS_ERRORS=OFF
+        -DEGOA_PEDANTIC_MODE=ON
+        -DEGOA_TEST_FRAMEWORK=OfflineGoogleTestFramework
+        -DEGOA_TEST_FRAMEWORK_LOCATION=external/GoogleTestFramework
+        -DEGOA_THREAD_LIMIT=0
+        -DEGOA_WARNINGS_AS_ERRORS=ON
+        -DBONMIN_ROOT_DIR="NONE-DIR"
+        -DBoost_DIRECTORIES="/opt/homebrew/opt/boost/"
+        -DCOIN_INCLUDE_DIR="NONE-DIR"
+        -DCOIN_LIBRARY_DIR="NONE-DIR"
+        -DCPLEX_HOME="NONE-DIR"
+        -DGUROBI_ROOT_DIR="NONE-DIR"
+        -DOGDF_AUTOGEN_INCLUDE_DIR="NONE-DIR"
+        -DOGDF_INCLUDE_DIR="NONE-DIR"
+        -DOGDF_LIBRARY_DIR="NONE-DIR"
+        -DOPENMP_INCLUDES="/opt/homebrew/opt/llvm/include"
+        -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
+        -S ${{ github.workspace }}
+
+    - name: Run coverity build/scan
+      run: |
+        cd build && cov-build --dir cov-int make -j${NPROC}
+
+    - name: Submit results
+      run: |
+        cd build
+        tar zcf cov-scan.tgz cov-int
+        curl --form token=$COVERITY_PASSPHRASE \
+             --form email=$COV_USER \
+             --form file=@cov-scan.tgz \
+             --form version="$(git rev-parse HEAD)" \
+             --form description="Automatic GHA scan" \
+             'https://scan.coverity.com/builds?project=franziska-wegner%2Fegoa'
