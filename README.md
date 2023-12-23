@@ -1,7 +1,10 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)   [![CMake on multiple platforms](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml)   [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml) <a href="https://scan.coverity.com/projects/franziska-wegner-egoa"><img alt="Coverity Scan Build Status" src="https://scan.coverity.com/projects/29511/badge.svg"/></a>
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)   [![CMake on multiple platforms](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml)   [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml) <a href="https://scan.coverity.com/projects/franziska-wegner-egoa"><img alt="Coverity Scan Build Status" src="https://scan.coverity.com/projects/29511/badge.svg"/></a>   [![codecov](https://codecov.io/gh/franziska-wegner/egoa/graph/badge.svg?token=OL0N2WXV4I)](https://codecov.io/gh/franziska-wegner/egoa)
 <h1 align="center">EGOA - Energy Grid Optimization and Analysis</h1>
 
 Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid analysis and planning. This framework is based on the PhD thesis <a href="http://dx.doi.org/10.5445/IR/1000120612">"Combinatorial Problems in Energy Networks -- Graph Theoretic Models and Algorithms"</a>. The Git repository of the PhD thesis is available under <a href="https://github.com/franziska-wegner/PhD_Thesis--Combinatorial_Problems_in_Energy_Networks--Graph_Theoretic_Models_and_Algorithms">Combinatorial_Problems_in_Energy_Networks</a>. 
+
+<img height=275 alt="Swiss Power Grid Branch with Parameters" src="https://github.com/franziska-wegner/egoa/assets/57569315/514cd0d2-6fac-416a-bf8d-31d97565fed8"/>   <img height=275 alt="Swiss Power Grid Bus with Parameters" src="https://github.com/franziska-wegner/egoa/assets/57569315/aad67a45-a656-4c42-9c74-e7d82eedc6fb"/>
+
 
 <h2>Workflow Status</h2>
 
@@ -11,10 +14,147 @@ Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid anal
 | [CodeQL](https://codeql.github.com) Scan Build Status: | [![CodeQL](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/franziska-wegner/egoa/actions/workflows/codeql.yml) |
 | Project Documentation: | [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa) |
 | Coverity Scan Build Status: | <a href="https://scan.coverity.com/projects/franziska-wegner-egoa"><img alt="Coverity Scan Build Status" src="https://scan.coverity.com/projects/29511/badge.svg"/></a> |
+| Code Coverage: | [![codecov](https://codecov.io/gh/franziska-wegner/egoa/graph/badge.svg?token=OL0N2WXV4I)](https://codecov.io/gh/franziska-wegner/egoa) |
+
+
+<h2>Benchmark Data Sets</h2>
+
+The "CMake Parameter Overrides" section shows how to enable the downloads in the CMake file. A lot of benchmark cases can be initially downloaded by enabling the according `EGOA_DOWNLOAD_<dataset>` CMake parameter, which helps you to start your work faster. Each successful CMake run shows the downloaded dataset directories by
+
+```
+...
+-- Download of data sets:
+--  Download PyPSA Europe data from https://github.com/PyPSA/pypsa-eur.git into /home/runner/work/egoa/egoa/data/PowerGrids/PyPSA/pypsa-eur.
+--  Download PyPSA ITI Collaboration data from https:/git.scc.kit.edu/FN/iti-collaboration.git into /home/runner/work/egoa/egoa/data/PowerGrids/PyPSA/pypsa-iti-collaboration.
+--  Download SciGRID Power data (version 0.1) from "https://www.power.scigrid.de/releases_archive/scigrid-0.1-data-only.zip" into '/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-0.1-data-only/".
+--  Download SciGRID Power data (version 0.2) from "https://www.power.scigrid.de/releases_archive/scigrid-0.2-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-0.2-data-only/".
+--  Download SciGRID Power data (conference version) from "https://www.power.scigrid.de/releases_archive/scigrid-conference-de-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-conference-de-data-only/".
+--  Download SciGRID Power data (conference version) from "https://www.power.scigrid.de/releases_archive/scigrid-conference-eu-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-conference-eu-data-only/".
+--  Download IEEE Power Grid data.
+--  Download generated wind farm data (ITI 2017) from "https://i1wwww.iti.kit.edu/media/projects/windfarmcabling/windfarm-benchmarksets.zip" into "/home/runner/work/egoa/egoa/data/Windfarms/Networks/2017-iti-windfarm-benchmarksets/".
+...
+```
+
+At the moment this is limited to PyPSA, the IEEE cases, and the windfarm cases; and will be extended to other test cases. At the end the following data is on you hard drive in the `egoa/data` after an initial CMake run with all download flags enabled. Note that `(+)` means that the folder is empty at the moment and we need a reliable place to upload the data for research with the right license or the repository went offline/is not public.
+
+<details open>
+<summary>Windfarm</summary>
+
+```
++ Cabletypes
+- Networks
+    + 2017-iti-windfarm-benchmarksets
+```
+
+</details>
+
+<details open>
+<summary>IEEE</summary>
+
+```
+IEEE
++ 00-Matpower-Data
+(+) 02-gml 
++ 03-IEEE-Power_Flow_Test_Cases
++ 04-IEEE-Dynamic_Test_Cases
++ 05-IEEE-Reliability_Test_Systems-RTS
++ 06-IEEE-Voltage Collapse_Sensitivities
+(+) 07-PEGASE_Test_Cases
++ 08-Edinburgh_Power_Flow_Test_Cases
++ 09-Edinburgh_Dynamic_Test_Cases
+(+) 10-NESTA
+(+) 11-Dimacs
+(+) 12-Hitting-Sets
+(+) 13-Publication_Test_Cases
+(+) 14-EIRGrid_Test_Cases
+(+) 15-Synthetic_Power_Grid_Test_Cases
+(+) 16-Literature_Based_Power_Flow_Test_Cases
+(+) 17-Small_Signal_Stability_Test_Cases
++ 18-IEEE-Data_Formats
++ 19-Power_System_Application_Data_Dictionary
+```
+
+</details>
+
+<details>
+<summary>PyPSA</summary>
+
+```
+- pypsa-eur
+  - data
+    - entsoegridkit
+      • buses.csv
+      • converters.csv
+      • generators.csv
+      • lines.csv
+      • links.csv
+      • transformers.csv
+    - existing_infrastructure
+      • existing_heating_raw.csv
+      • offwind_capacity_IRENA.csv
+      • onwind_capacity_IRENA.csv
+      • solar_capacity_IRENA.csv
+    - retro
+      • comparative_level_investment.csv
+      • data_building_stock.csv
+      • electricity_taxes_eu.csv
+      • floor_area_missing.csv
+      • retro_cost_germany.csv
+      • u_values_poland.csv
+      • window_assumptions.csv
+    • agg_p_nom_minmax.csv
+    • attributed_ports.json
+    • custom_powerplants.csv
+    • district_heat_share.csv
+    • eia_hydro_annual_generation.csv
+    • geth2015_hydro_capacities.csv
+    • heat_load_profile.csv
+    • heat_load_profile_BDEW.csv
+    • heat_load_profile_DK_AdamJensen.csv
+    • hydrogen_salt_cavern_potentials.csv
+    • links_p_nom.csv
+    • links_tyndp.csv
+    • nuclear_p_max_pu.csv
+    • parameter_corrections.yaml
+    • unit_commitment.csv
+    • urban_percent.csv
+- pypsa-iti-collaboration
++ elec_s1024_AT
++ elec_s1024_BE
++ elec_s1024_BG
++ elec_s1024_CH
++ elec_s1024_CZ
++ elec_s1024_DK
++ elec_s1024_HR
++ elec_s1024_HU
++ elec_s1024_IE
++ elec_s1024_NL
++ elec_s1024_NO
++ elec_s1024_PL
++ elec_s1024_PT
++ elec_s1024_RO
++ elec_s1024_SE
++ elec_s1024_SI
++ elec_s1024_SK
+```
+
+</details>
+
+<details>
+<summary>SciGrid</summary>
+
+```
++ scigrid-0.1-data-only
++ scigrid-0.2-data-only
++ scigrid-conference-de-data-only
++ scigrid-conference-eu-data-only
+```
+
+</details>
 
 <h2>Installation</h2>
 
-This is a Cmake project and can be run in any C++ IDE (Integrated Development Environment) that is on the market and supports CMake. You have to define a certain set of parameters dependent ozn your system and what you wish to run in general. The following description will help you with the initial setup. The links to frameworks that can be linked to this project are given in addition.
+This is a Cmake project and can be run in any C++ IDE (Integrated Development Environment) that is on the market and supports CMake. You have to define a certain set of parameters dependent on your system and what you wish to run in general. The following description will help you with the initial setup. The links to frameworks that can be linked to this project are given in addition.
 
 <h3>Required Preinstallations</h3>
 
@@ -170,7 +310,6 @@ SRC=/Users/fwegner/Documents/Repositories/Public/EGOA/egoa and Binary=/Users/fwe
 ```
 </details>
 
-
 <h2>Recommended IDEs</h2>
 
 A general recommendation is CLION and Sublimetext. However, Visual Studio and others work fine as well.
@@ -182,141 +321,6 @@ The repository's public code documentation is available under [Code Documentatio
     make doc
 
 to compile and generate the repository's documentation. The `DoxyfileConfig.in` can be adapted and supports HTML (see `GENERATE_HTML`), LaTex (see `GENERATE_LATEX`), RTF (see `GENERATE_RTF`), MAN page (see `GENERATE_MAN`), XML (see `GENERATE_XML`), and DOCBOOK (see `GENERATE_DOCBOOK`) output of the documentation. Initially only html and latex is generated. The output directory is under`./documentation` and can be changed at `OUTPUT_DIRECTORY` if necessary.
-
-<h2>Benchmark Data Sets</h2>
-
-As mentioned in "CMake Parameter Overrides" the CMake file downloads a lot of benchmark cases itself denoted by `EGOA_DOWNLOAD_<dataset>`, which helps you to start your work faster. Each successful CMake run shows the downloaded dataset directories by
-
-```
-...
--- Download of data sets:
---  Download PyPSA Europe data from https://github.com/PyPSA/pypsa-eur.git into /home/runner/work/egoa/egoa/data/PowerGrids/PyPSA/pypsa-eur.
---  Download PyPSA ITI Collaboration data from https:/git.scc.kit.edu/FN/iti-collaboration.git into /home/runner/work/egoa/egoa/data/PowerGrids/PyPSA/pypsa-iti-collaboration.
---  Download SciGRID Power data (version 0.1) from "https://www.power.scigrid.de/releases_archive/scigrid-0.1-data-only.zip" into '/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-0.1-data-only/".
---  Download SciGRID Power data (version 0.2) from "https://www.power.scigrid.de/releases_archive/scigrid-0.2-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-0.2-data-only/".
---  Download SciGRID Power data (conference version) from "https://www.power.scigrid.de/releases_archive/scigrid-conference-de-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-conference-de-data-only/".
---  Download SciGRID Power data (conference version) from "https://www.power.scigrid.de/releases_archive/scigrid-conference-eu-data-only.zip" into "/home/runner/work/egoa/egoa/data/PowerGrids/SciGrid/scigrid-conference-eu-data-only/".
---  Download IEEE Power Grid data.
---  Download generated wind farm data (ITI 2017) from "https://i1wwww.iti.kit.edu/media/projects/windfarmcabling/windfarm-benchmarksets.zip" into "/home/runner/work/egoa/egoa/data/Windfarms/Networks/2017-iti-windfarm-benchmarksets/".
-...
-```
-
-At the moment this is limited to PyPSA, the IEEE cases, and the windfarm cases; and will be extended to other test cases. At the end the following data is on you hard drive in the `egoa/data` after an initial CMake run with all download flags enabled. Note that `(+)` means that the folder is empty at the moment and we need a reliable place to upload the data for research with the right license or the repository went offline/is not public.
-
-<details open>
-<summary>Windfarm</summary>
-
-```
-+ Cabletypes
-- Networks
-    + 2017-iti-windfarm-benchmarksets
-```
-
-</details>
-
-<details open>
-<summary>IEEE</summary>
-
-```
-IEEE
-+ 00-Matpower-Data
-(+) 02-gml 
-+ 03-IEEE-Power_Flow_Test_Cases
-+ 04-IEEE-Dynamic_Test_Cases
-+ 05-IEEE-Reliability_Test_Systems-RTS
-+ 06-IEEE-Voltage Collapse_Sensitivities
-(+) 07-PEGASE_Test_Cases
-+ 08-Edinburgh_Power_Flow_Test_Cases
-+ 09-Edinburgh_Dynamic_Test_Cases
-(+) 10-NESTA
-(+) 11-Dimacs
-(+) 12-Hitting-Sets
-(+) 13-Publication_Test_Cases
-(+) 14-EIRGrid_Test_Cases
-(+) 15-Synthetic_Power_Grid_Test_Cases
-(+) 16-Literature_Based_Power_Flow_Test_Cases
-(+) 17-Small_Signal_Stability_Test_Cases
-+ 18-IEEE-Data_Formats
-+ 19-Power_System_Application_Data_Dictionary
-```
-
-</details>
-
-<details>
-<summary>PyPSA</summary>
-
-```
-- pypsa-eur
-  - data
-    - entsoegridkit
-      • buses.csv
-      • converters.csv
-      • generators.csv
-      • lines.csv
-      • links.csv
-      • transformers.csv
-    - existing_infrastructure
-      • existing_heating_raw.csv
-      • offwind_capacity_IRENA.csv
-      • onwind_capacity_IRENA.csv
-      • solar_capacity_IRENA.csv
-    - retro
-      • comparative_level_investment.csv
-      • data_building_stock.csv
-      • electricity_taxes_eu.csv
-      • floor_area_missing.csv
-      • retro_cost_germany.csv
-      • u_values_poland.csv
-      • window_assumptions.csv
-    • agg_p_nom_minmax.csv
-    • attributed_ports.json
-    • custom_powerplants.csv
-    • district_heat_share.csv
-    • eia_hydro_annual_generation.csv
-    • geth2015_hydro_capacities.csv
-    • heat_load_profile.csv
-    • heat_load_profile_BDEW.csv
-    • heat_load_profile_DK_AdamJensen.csv
-    • hydrogen_salt_cavern_potentials.csv
-    • links_p_nom.csv
-    • links_tyndp.csv
-    • nuclear_p_max_pu.csv
-    • parameter_corrections.yaml
-    • unit_commitment.csv
-    • urban_percent.csv
-- pypsa-iti-collaboration
-+ elec_s1024_AT
-+ elec_s1024_BE
-+ elec_s1024_BG
-+ elec_s1024_CH
-+ elec_s1024_CZ
-+ elec_s1024_DK
-+ elec_s1024_HR
-+ elec_s1024_HU
-+ elec_s1024_IE
-+ elec_s1024_NL
-+ elec_s1024_NO
-+ elec_s1024_PL
-+ elec_s1024_PT
-+ elec_s1024_RO
-+ elec_s1024_SE
-+ elec_s1024_SI
-+ elec_s1024_SK
-```
-
-</details>
-
-<details>
-<summary>SciGrid</summary>
-
-```
-+ scigrid-0.1-data-only
-+ scigrid-0.2-data-only
-+ scigrid-conference-de-data-only
-+ scigrid-conference-eu-data-only
-```
-
-</details>
 
 <h2>Resources</h2>
 
