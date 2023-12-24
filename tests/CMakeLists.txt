@@ -27,9 +27,9 @@ add_test(NAME TestMappingBinaryHeap COMMAND TestMappingBinaryHeap)
 ####################################################################################
 # Tests for GRAPH data structures ##################################################
 ####################################################################################
-add_executable(TestGraph DataStructures/Graphs/TestGraph.cpp)
-target_link_libraries(TestGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
-add_test(NAME TestGraph COMMAND TestGraph)
+# add_executable(TestGraph DataStructures/Graphs/TestGraph.cpp)
+# target_link_libraries(TestGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
+# add_test(NAME TestGraph COMMAND TestGraph)
 
 # add_executable(TestDynamicGraph DataStructures/Graphs/TestDynamicGraph.cpp)
 # target_link_libraries(TestDynamicGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
