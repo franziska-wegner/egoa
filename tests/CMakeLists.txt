@@ -8,9 +8,9 @@ add_test(NAME TestBound COMMAND TestBound)
 # Tests for QUEUE data structures ##################################################
 ####################################################################################
 
-# add_executable(TestStdQueue DataStructures/Container/TestStdQueue.cpp)
-# target_link_libraries(TestStdQueue EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestStdQueue COMMAND TestStdQueue)
+add_executable(TestStdQueue DataStructures/Container/TestStdQueue.cpp)
+target_link_libraries(TestStdQueue EGOA gtest gtest_main gmock_main)
+add_test(NAME TestStdQueue COMMAND TestStdQueue)
 
 add_executable(TestBinaryHeap DataStructures/Container/TestBinaryHeap.cpp)
 target_link_libraries(TestBinaryHeap EGOA gtest gtest_main gmock_main)
@@ -20,9 +20,9 @@ add_executable(TestMappingBinaryHeap DataStructures/Container/TestMappingBinaryH
 target_link_libraries(TestMappingBinaryHeap EGOA gtest gtest_main gmock_main)
 add_test(NAME TestMappingBinaryHeap COMMAND TestMappingBinaryHeap)
 
-# add_executable(TestBucket DataStructures/Container/TestBucket.cpp)
-# target_link_libraries(TestBucket EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestBucket COMMAND TestBucket)
+add_executable(TestBucket DataStructures/Container/TestBucket.cpp)
+target_link_libraries(TestBucket EGOA gtest gtest_main gmock_main)
+add_test(NAME TestBucket COMMAND TestBucket)
 
 ####################################################################################
 # Tests for GRAPH data structures ##################################################
