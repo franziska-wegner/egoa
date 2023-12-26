@@ -46,7 +46,8 @@ set(PEDANTIC_FLAGS "-pedantic")
 # Microsoft Visual Studio ##########################################
 ####################################################################
 if(MSVC)
-    add_definitions(/MP /DNOMINMAX)
+    # D:\a\egoa\egoa\tests\DataStructures\Graphs\TestGraph.cpp : fatal  error C1128: number of sections exceeded object file format limit: compile with /bigobj [D:\a\egoa\egoa\build\tests\TestGraph.vcxproj]
+    add_definitions(/MP /DNOMINMAX /bigobj)
     set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /Debug:fastlink")
     # https://docs.microsoft.com/en-us/cpp/build/reference/wx-treat-linker-warnings-as-errors?view=vs-2019
     set(EGOA_WARNINGS_AS_ERRORS_FLAG "/WX")
