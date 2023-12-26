@@ -7,6 +7,8 @@
 
 #include "TestDynamicGraph.hpp"
 
+using ::testing::MatchesRegex;
+
 namespace egoa::test {
 
 #pragma mark DeleteVertex
