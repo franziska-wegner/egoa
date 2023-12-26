@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <functional>
 
+using ::testing::MatchesRegex;
+
 namespace egoa::test {
 
 #pragma mark Name
@@ -940,7 +942,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
 /// @}
 
 #pragma mark VertexAt
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphEmptyDeathTest, VertexAt) {
         auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
         Types::vertexId id = 0;
@@ -953,9 +955,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
     TYPED_TEST  ( TestGraphEmpty
                 , VertexAtExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "VertexAt"
+        auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = 0;
         try {
@@ -979,7 +979,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#ifdef EGOA_ENABLE_ASSERTION
 TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
     auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
     Types::vertexId id = this->id_ + 1;
@@ -991,9 +991,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
     TYPED_TEST  ( TestGraphSingleVertex
                 , VertexAtExceptionHandling )
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "VertexAt"
+        auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = this->id_ + 1;
         try {
@@ -1016,7 +1014,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphFourVerticesDeathTest, VertexAt) {
         auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
         Types::vertexId id = Const::NONE;
@@ -1028,9 +1026,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
     TYPED_TEST  ( TestGraphFourVertices
                 , VertexAtExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "VertexAt"
+        auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = Const::NONE;
         try {
@@ -1070,7 +1066,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 /// @{
 #pragma mark NeighborsOf
 /// @todo death tests for neighbors of non-existent vertices
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphEmptyDeathTest, NeighborsOf) {
         auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
         Types::vertexId id = 0;
@@ -1082,9 +1078,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
     TYPED_TEST  ( TestGraphEmpty
                 , NeighborsOfExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "NeighborsOf"
+        auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = 0;
         try {
@@ -1107,7 +1101,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphSingleVertexDeathTest, NeighborsOf) {
         auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
         Types::vertexId id = this->id_ + 1;
@@ -1119,9 +1113,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
     TYPED_TEST  ( TestGraphSingleVertex
                 , NeighborsOfExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "NeighborsOf"
+        auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = this->id_ + 1;
         try {
@@ -1144,7 +1136,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphFourVerticesDeathTest, NeighborsOf) {
         auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
         Types::vertexId id = Const::NONE;
@@ -1156,9 +1148,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
     TYPED_TEST  ( TestGraphFourVertices
                 , NeighborsOfExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "NeighborsOf"
+        auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = Const::NONE;
         try {
@@ -2175,9 +2165,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
     TYPED_TEST  ( TestGraphEmpty
                 , ForAllEdgesAtExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "for_all_edges_at"
+        auto assertionString = this->assertionString( "for_all_edges_at"
                                                     , "VertexExists\\(vertexId\\)");
         Types::vertexId nonexistentId = 3;
         try {
@@ -2216,9 +2204,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
     TYPED_TEST  ( TestGraphEmpty
                 , ForAllEdgesAtConstExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "for_all_edges_at"
+        auto assertionString = this->assertionString( "for_all_edges_at"
                                                     , "VertexExists\\(vertexId\\)");
         Types::vertexId nonexistentId = 3;
         try {
