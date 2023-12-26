@@ -953,9 +953,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
     TYPED_TEST  ( TestGraphEmpty
                 , VertexAtExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "VertexAt"
+        auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = 0;
         try {
@@ -991,9 +989,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
     TYPED_TEST  ( TestGraphSingleVertex
                 , VertexAtExceptionHandling )
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "VertexAt"
+        auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = this->id_ + 1;
         try {
@@ -1028,9 +1024,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
     TYPED_TEST  ( TestGraphFourVertices
                 , VertexAtExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "VertexAt"
+        auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = Const::NONE;
         try {
@@ -1082,9 +1076,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
     TYPED_TEST  ( TestGraphEmpty
                 , NeighborsOfExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "NeighborsOf"
+        auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = 0;
         try {
@@ -1119,9 +1111,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
     TYPED_TEST  ( TestGraphSingleVertex
                 , NeighborsOfExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "NeighborsOf"
+        auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = this->id_ + 1;
         try {
@@ -1156,9 +1146,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
     TYPED_TEST  ( TestGraphFourVertices
                 , NeighborsOfExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "NeighborsOf"
+        auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
         Types::vertexId id = Const::NONE;
         try {
@@ -2175,9 +2163,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
     TYPED_TEST  ( TestGraphEmpty
                 , ForAllEdgesAtExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "for_all_edges_at"
+        auto assertionString = this->assertionString( "for_all_edges_at"
                                                     , "VertexExists\\(vertexId\\)");
         Types::vertexId nonexistentId = 3;
         try {
@@ -2216,9 +2202,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
     TYPED_TEST  ( TestGraphEmpty
                 , ForAllEdgesAtConstExceptionHandling ) 
     {
-        auto assertionString = this->assertionString( "Graph.hpp"
-                                                    , "Graph"
-                                                    , "for_all_edges_at"
+        auto assertionString = this->assertionString( "for_all_edges_at"
                                                     , "VertexExists\\(vertexId\\)");
         Types::vertexId nonexistentId = 3;
         try {
