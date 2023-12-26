@@ -31,9 +31,9 @@ add_executable(TestGraph DataStructures/Graphs/TestGraph.cpp)
 target_link_libraries(TestGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
 add_test(NAME TestGraph COMMAND TestGraph)
 
-# add_executable(TestDynamicGraph DataStructures/Graphs/TestDynamicGraph.cpp)
-# target_link_libraries(TestDynamicGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
-# add_test(NAME TestDynamicGraph COMMAND TestDynamicGraph)
+add_executable(TestDynamicGraph DataStructures/Graphs/TestDynamicGraph.cpp)
+target_link_libraries(TestDynamicGraph EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
+add_test(NAME TestDynamicGraph COMMAND TestDynamicGraph)
 
 add_executable(TestPowerGrid DataStructures/Graphs/TestPowerGrid.cpp)
 target_link_libraries(TestPowerGrid EGOA ${GUROBI_LIBRARIES} gtest gtest_main gmock_main)
