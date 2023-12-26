@@ -11,12 +11,33 @@ namespace egoa::test {
 
 #pragma mark DeleteVertex
 
-TEST_F(TestDynamicGraphEmptyDeathTest, DeleteVertex) {
-    auto assertionMessage =
-        this->assertionString("RemoveVertexAt", "VertexExists\\(id\\)");
-    Types::vertexId id = 0;
-    EXPECT_DEATH( { this->graph_.RemoveVertexAt(id); }, assertionMessage);
-}
+#ifdef EGOA_ENABLE_ASSERTION
+    TEST_F(TestDynamicGraphEmptyDeathTest, DeleteVertex) {
+        auto assertionMessage =
+            this->assertionString("RemoveVertexAt", "VertexExists\\(id\\)");
+        Types::vertexId id = 0;
+        EXPECT_DEATH( { this->graph_.RemoveVertexAt(id); }, assertionMessage);
+    }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+    TEST_F  ( TestDynamicGraphEmpty
+            , DeleteVertexExceptionHandling ) 
+    {
+        auto assertionString = this->assertionString("RemoveVertexAt", "VertexExists\\(id\\)");
+        Types::vertexId id = 0;
+        try {
+            this->graph_.RemoveVertexAt(id);
+        } catch ( std::runtime_error const & error ) 
+        {
+            EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+        } catch ( ... ) 
+        {
+            FAIL()  << "Expected std::runtime_error with message: " 
+                    << assertionString;
+        }
+    }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F(TestDynamicGraphSingleVertex, DeleteVertex) {
     this->graph_.RemoveVertexAt(this->id_);
