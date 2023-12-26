@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <functional>
 
+using ::testing::MatchesRegex;
+
 namespace egoa::test {
 
 #pragma mark Name
