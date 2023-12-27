@@ -131,6 +131,9 @@ if ( EGOA_ENABLE_BOOST )
     include ( Boost )
 endif ( EGOA_ENABLE_BOOST )
 
+# Search for clang-tidy
+find_package ( ClangTidy )
+
 # Google tests
 if ( EGOA_ENABLE_TESTS )
     include ( CTest )
@@ -226,6 +229,13 @@ if ( Qt6_FOUND )
     message ( STATUS "${MY_SPACE}qt6:\t\t\t\tadd libraries of QT6" )
     target_compile_definitions ( EGOA PUBLIC QT6_AVAILABLE )
 endif ( Qt6_FOUND )
+
+# clang-tidy found
+if ( CLANG_TIDY_PROG )
+    message ( STATUS "${MY_SPACE}clang-tidy:\t\t\t\tis enabled" )
+    # set CXX_CLANG_TIDY property after defining the target
+    # set_target_properties(EGOA PROPERTIES CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY}")
+endif ( CLANG_TIDY_PROG )
 
 # OpenMP found
 if ( OPENMP_FOUND )

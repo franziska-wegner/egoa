@@ -72,6 +72,11 @@ jobs:
         cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
         dir: ${{ github.workspace }}/Qt
 
+    - name: Install LLVM for Clang-Tidy (MacOS)
+      if: startsWith(matrix.os,'macos-')
+      run: |
+        brew install llvm
+
     # - name: Install correct version of mingw
     #   uses: crazy-max/ghaction-chocolatey@v1
     #   with:
