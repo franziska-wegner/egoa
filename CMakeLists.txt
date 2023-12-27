@@ -131,6 +131,9 @@ if ( EGOA_ENABLE_BOOST )
     include ( Boost )
 endif ( EGOA_ENABLE_BOOST )
 
+# Search for clang-tidy
+find_package ( ClangTidy )
+
 # Google tests
 if ( EGOA_ENABLE_TESTS )
     include ( CTest )
