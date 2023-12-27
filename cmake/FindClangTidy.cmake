@@ -10,7 +10,10 @@
 # Search for clang-tidy
 find_program(CLANG_TIDY_PROG 
     HINTS "/opt/homebrew/opt/llvm/bin/"
-    NAMES "clang-tidy" REQUIRED)
+          "/usr/local/opt/llvm/bin/"
+    NAMES "clang-tidy"
+    REQUIRED
+    )
 # Setup clang-tidy command with executable and options, see https://cmake.org/cmake/help/latest/variable/CMAKE_LANG_CLANG_TIDY.html.
 # Disable all default checks (-*) and only enable checks that advocate the use of modern C++ language constructs with (modernize-*).
 set(CMAKE_CXX_CLANG_TIDY
