@@ -26,8 +26,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'c-cpp' ]
+        os: [ubuntu-latest]
+        # language: [ 'c-cpp' ]
         build_type: [Debug]
+        c_compiler: [gcc]
 
     steps:
       - uses: actions/checkout@v3
