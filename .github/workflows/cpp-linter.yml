@@ -1,5 +1,5 @@
 # Based on: https://github.com/cpp-linter/cpp-linter-action
-name: cpp-linter
+name: C/C++ Linter
 
 on:
   push:
@@ -30,6 +30,7 @@ jobs:
         # language: [ 'c-cpp' ]
         build_type: [Debug]
         c_compiler: [gcc]
+        cpp_compiler: [g++]
 
     steps:
       - uses: actions/checkout@v3
