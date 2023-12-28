@@ -107,6 +107,7 @@ jobs:
       - name: C/C++ Linter
         uses: cpp-linter/cpp-linter-action@v2.7.5
         id: linter
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -119,7 +120,7 @@ jobs:
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
           thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
-          # ignore: .github|external/**
+          ignore: external
 
       - name: Fail fast?!
         if: steps.linter.outputs.checks-failed > 0
