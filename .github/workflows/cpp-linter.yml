@@ -1,0 +1,129 @@
+# Based on: https://github.com/cpp-linter/cpp-linter-action
+name: C/C++ Linter
+
+on:
+  push:
+    branches: [ "main" ]
+    paths-ignore: [ "external/**" ]
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore: [ "external/**" ]
+  # workflow_run:
+  #   workflows: ["cmake-multi-platform"]
+  #   types:
+  #     - completed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  QT_VERSION:     "6.2.0"
+
+jobs:
+  cpp-linter:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        # language: [ 'c-cpp' ]
+        build_type: [Debug]
+        c_compiler: [gcc]
+        cpp_compiler: [g++]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ env.QT_VERSION }}
+          cache: 'true'
+          cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
+          dir: ${{ github.workspace }}/Qt
+
+      - name: Set reusable strings
+        # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Configure CMake
+        env:
+          CMAKE_PREFIX_PATH: ${{env.Qt6_DIR}}
+          CMAKE_MODULE_PATH: ${{env.Qt6_DIR}}
+        # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+        # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DBoost_NO_SYSTEM_PATHS=TRUE
+          -DEGOA_BUILD_TYPE=${{ matrix.build_type }}
+          -DEGOA_DOWNLOAD_CPPAD=OFF
+          -DEGOA_DOWNLOAD_EIGEN=ON
+          -DEGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK=ON
+          -DEGOA_DOWNLOAD_IEEE=ON
+          -DEGOA_DOWNLOAD_PYPSA_EUR=ON
+          -DEGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION=ON
+          -DEGOA_DOWNLOAD_SCIGRID=ON
+          -DEGOA_DOWNLOAD_WINDFARM=ON
+          -DEGOA_ENABLE_ASSERTION=ON
+          -DEGOA_ENABLE_BONMIN=OFF
+          -DEGOA_ENABLE_BOOST=OFF
+          -DEGOA_ENABLE_CPLEX=OFF
+          -DEGOA_ENABLE_DOCUMENTATION=OFF
+          -DEGOA_ENABLE_EXCEPTION_HANDLING=ON
+          -DEGOA_ENABLE_GUROBI=OFF
+          -DEGOA_ENABLE_IPOPT=OFF
+          -DEGOA_ENABLE_OGDF=OFF
+          -DEGOA_ENABLE_OPENMP=OFF
+          -DEGOA_ENABLE_TESTS=OFF
+          -DEGOA_ENABLE_VERBOSE_MAKEFILE=ON
+          -DEGOA_PEDANTIC_AS_ERRORS=OFF
+          -DEGOA_PEDANTIC_MODE=ON
+          -DEGOA_TEST_FRAMEWORK=OfflineGoogleTestFramework
+          -DEGOA_TEST_FRAMEWORK_LOCATION=external/GoogleTestFramework
+          -DEGOA_THREAD_LIMIT=0
+          -DEGOA_WARNINGS_AS_ERRORS=ON
+          -DBONMIN_ROOT_DIR="NONE-DIR"
+          -DBoost_DIRECTORIES="/opt/homebrew/opt/boost/"
+          -DCOIN_INCLUDE_DIR="NONE-DIR"
+          -DCOIN_LIBRARY_DIR="NONE-DIR"
+          -DCPLEX_HOME="NONE-DIR"
+          -DGUROBI_ROOT_DIR="NONE-DIR"
+          -DOGDF_AUTOGEN_INCLUDE_DIR="NONE-DIR"
+          -DOGDF_INCLUDE_DIR="NONE-DIR"
+          -DOGDF_LIBRARY_DIR="NONE-DIR"
+          -DOPENMP_INCLUDES="/opt/homebrew/opt/llvm/include"
+          -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
+          -S ${{ github.workspace }}
+
+      - name: C/C++ Linter
+        uses: cpp-linter/cpp-linter-action@v2.7.5
+        id: linter
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          style: llvm #file
+          tidy-checks: boost-*,bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-*,cppcoreguidelines-*
+          files-changed-only: false
+          lines-changed-only: false
+          no-lgtm: false
+          # The following value will only update a single comment
+          # in a pull request's thread. Set it to false to disable the comment.
+          # Set it to true to post a new comment (and delete the old comment).
+          thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
+          ignore: external
+
+      - name: Fail fast?!
+        if: steps.linter.outputs.checks-failed > 0
+        run: echo "Some files failed the linting checks!"
+        # for actual deployment
+        # run: exit 1
