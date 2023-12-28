@@ -12,6 +12,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  QT_VERSION:     "6.2.0"
+
 jobs:
   build:
     runs-on: ubuntu-latest
