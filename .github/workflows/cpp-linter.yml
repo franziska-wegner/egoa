@@ -1,7 +1,11 @@
 # Based on: https://github.com/cpp-linter/cpp-linter-action
 name: cpp-linter
 
-on: pull_request
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
