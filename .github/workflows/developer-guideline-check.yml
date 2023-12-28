@@ -27,6 +27,14 @@ jobs:
 
     # Optionally generate compile_commands.json
 
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ env.QT_VERSION }}
+        cache: 'true'
+        cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
+        dir: ${{ github.workspace }}/Qt
+
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
@@ -38,8 +46,8 @@ jobs:
       id: review
       with:
         clang_tidy_checks: -*,performance-*,readability-*,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,mpi-*,misc-*
-        # List of packages to install
-        apt_packages: qt6
+        # List of packages to install, does not work
+        # apt_packages: qt6
         # CMake command to run in order to generate compile_commands.json
         cmake_command: cmake -B ${{ steps.strings.outputs.build-output-dir }}
             -DCMAKE_EXPORT_COMPILE_COMMANDS=on
