@@ -1,9 +1,24 @@
 {
-    "cableTypes": [
-        { "cost": 20, "capacity": 5 },
-        { "cost": 25, "capacity": 8 },
-        { "cost": 27, "capacity": 12 },
-        { "cost": 41, "capacity": 15 },
-        { "cost": 10000, "capacity": 1000 }
-    ]
+  "cableTypes": [
+    {
+      "capacity": 5,
+      "cost": 20
+    },
+    {
+      "capacity": 8,
+      "cost": 25
+    },
+    {
+      "capacity": 12,
+      "cost": 27
+    },
+    {
+      "capacity": 15,
+      "cost": 41
+    },
+    {
+      "capacity": 1000,
+      "cost": 10000
+    }
+  ]
 }

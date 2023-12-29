@@ -442,4 +442,3 @@ class VoltageAngleDifferenceLabel : public SusceptanceNormLabel<ElementType, Ver
 } // namespace egoa
 
 #endif // EGOA__DATA_STRUCTURES__LABELS__DOMINATING_THETA_PATH_LABEL_HPP
-

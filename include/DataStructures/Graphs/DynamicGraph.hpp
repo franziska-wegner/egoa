@@ -1827,4 +1827,3 @@ public:
 } // namespace egoa
 
 #endif // EGOA__DATA_STRUCTURES__GRAPHS__DYNAMIC_GRAPH_HPP
-

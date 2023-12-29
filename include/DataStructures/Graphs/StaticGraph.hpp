@@ -1561,4 +1561,3 @@ class StaticGraph {
 } // namespace egoa
 
 #endif // EGOA__DATA_STRUCTURES__GRAPHS__STATIC_GRAPH_HPP
-

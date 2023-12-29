@@ -1,445 +1,505 @@
 {
-"type": "FeatureCollection",
-"features": [
+  "features": [
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 0",
-            "type": "unknown",
-            "xCoordinate": "8.59131",
-            "yCoordinate": "53.6251",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "NORDDEUTSCHLAND",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [8.59131,53.6251]
-        }
+      "geometry": {
+        "coordinates": [
+          8.59131,
+          53.6251
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "NORDDEUTSCHLAND",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 0",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "8.59131",
+        "yCoordinate": "53.6251",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 1",
-            "type": "unknown",
-            "xCoordinate": "9.93542",
-            "yCoordinate": "51.5352",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "GOETTINGEN",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [9.93542,51.5352]
-        }
+      "geometry": {
+        "coordinates": [
+          9.93542,
+          51.5352
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "GOETTINGEN",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 1",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "9.93542",
+        "yCoordinate": "51.5352",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 2",
-            "type": "unknown",
-            "xCoordinate": "13.7357",
-            "yCoordinate": "51.0556",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "DRESDEN",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [13.7357,51.0556]
-        }
+      "geometry": {
+        "coordinates": [
+          13.7357,
+          51.0556
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "DRESDEN",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 2",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "13.7357",
+        "yCoordinate": "51.0556",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 3",
-            "type": "unknown",
-            "xCoordinate": "8.37433",
-            "yCoordinate": "49.0163",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "KARLSRUHE",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [8.37433,49.0163]
-        }
+      "geometry": {
+        "coordinates": [
+          8.37433,
+          49.0163
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "KARLSRUHE",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 3",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "8.37433",
+        "yCoordinate": "49.0163",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 4",
-            "type": "unknown",
-            "xCoordinate": "13.0552",
-            "yCoordinate": "52.4001",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "POTSDAM",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [13.0552,52.4001]
-        }
+      "geometry": {
+        "coordinates": [
+          13.0552,
+          52.4001
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "POTSDAM",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 4",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "13.0552",
+        "yCoordinate": "52.4001",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 5",
-            "type": "unknown",
-            "xCoordinate": "13.3951",
-            "yCoordinate": "52.5279",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "BERLIN",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [13.3951,52.5279]
-        }
+      "geometry": {
+        "coordinates": [
+          13.3951,
+          52.5279
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "BERLIN",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 5",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "13.3951",
+        "yCoordinate": "52.5279",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 6",
-            "type": "unknown",
-            "xCoordinate": "10.0085",
-            "yCoordinate": "53.5599",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "HAMBURG",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [10.0085,53.5599]
-        }
+      "geometry": {
+        "coordinates": [
+          10.0085,
+          53.5599
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "HAMBURG",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 6",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "10.0085",
+        "yCoordinate": "53.5599",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 7",
-            "type": "unknown",
-            "xCoordinate": "13.1287",
-            "yCoordinate": "54.3229",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "STRALSUND",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [13.1287,54.3229]
-        }
+      "geometry": {
+        "coordinates": [
+          13.1287,
+          54.3229
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "STRALSUND",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 7",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "13.1287",
+        "yCoordinate": "54.3229",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 8",
-            "type": "unknown",
-            "xCoordinate": "13.233",
-            "yCoordinate": "53.5729",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "NEUBRANDENBURG",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [13.233,53.5729]
-        }
+      "geometry": {
+        "coordinates": [
+          13.233,
+          53.5729
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "NEUBRANDENBURG",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 8",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "13.233",
+        "yCoordinate": "53.5729",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-            "name": "EXA 9",
-            "type": "unknown",
-            "xCoordinate": "30.3223",
-            "yCoordinate": "59.955",
-            "shuntConductance": "0",
-            "shuntSusceptance": "0",
-            "voltageMagnitude": "1",
-            "voltageAngle": "0",
-            "nominalVoltage": "380",
-            "maximumVoltage": "1.79769e+308",
-            "minimumVoltage": "0",
-            "country": "SANKT PETERSBURG",
-            "area": "0",
-            "zone": "0",
-            "control": "PQ",
-            "carrier": "AC",
-            "status": "active"
-        },
-        "geometry": {
-            "type": "Point",
-            "coordinates": [30.3223,59.955]
-        }
+      "geometry": {
+        "coordinates": [
+          30.3223,
+          59.955
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "area": "0",
+        "carrier": "AC",
+        "control": "PQ",
+        "country": "SANKT PETERSBURG",
+        "maximumVoltage": "1.79769e+308",
+        "minimumVoltage": "0",
+        "name": "EXA 9",
+        "nominalVoltage": "380",
+        "shuntConductance": "0",
+        "shuntSusceptance": "0",
+        "status": "active",
+        "type": "unknown",
+        "voltageAngle": "0",
+        "voltageMagnitude": "1",
+        "xCoordinate": "30.3223",
+        "yCoordinate": "59.955",
+        "zone": "0"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-                "name": "1",
-                "status": "1",
-                "type": "standard",
-                "minimumThetaBound": "-inf",
-                "maximumThetaBound": "inf",
-                "resistance": "20",
-                "reactance": "10",
-                "conductance": "0",
-                "susceptance": "-0.1",
-                "charge": "0",
-                "thermalLimitA": "0.7",
-                "thermalLimitB": "0",
-                "thermalLimitC": "0",
-                "tapRatio": "1",
-                "angleShift": "0",
-                "capitalCost": "2000",
-                "length": "100",
-                "numberOfParallelLines": "1",
-                "nominalApparentPower": "3000",
-                "nominalVoltage": "380",
-                "minimumNominalApparentPowerBound": "4000",
-                "maximumNominalApparentPowerBound": "8000",
-                "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                        [8.59131,53.6251],
-                        [13.1287,54.3229]
-            ]
-        }
+      "geometry": {
+        "coordinates": [
+          [
+            8.59131,
+            53.6251
+          ],
+          [
+            13.1287,
+            54.3229
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "angleShift": "0",
+        "capitalCost": "2000",
+        "charge": "0",
+        "conductance": "0",
+        "length": "100",
+        "maximumNominalApparentPowerBound": "8000",
+        "maximumThetaBound": "inf",
+        "minimumNominalApparentPowerBound": "4000",
+        "minimumThetaBound": "-inf",
+        "name": "1",
+        "nominalApparentPower": "3000",
+        "nominalApparentPowerExtendable": "0",
+        "nominalVoltage": "380",
+        "numberOfParallelLines": "1",
+        "reactance": "10",
+        "resistance": "20",
+        "status": "1",
+        "susceptance": "-0.1",
+        "tapRatio": "1",
+        "terrainFactor": "0",
+        "thermalLimitA": "0.7",
+        "thermalLimitB": "0",
+        "thermalLimitC": "0",
+        "type": "standard"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-                "name": "2",
-                "status": "1",
-                "type": "standard",
-                "minimumThetaBound": "-inf",
-                "maximumThetaBound": "inf",
-                "resistance": "20",
-                "reactance": "10",
-                "conductance": "0",
-                "susceptance": "-0.1",
-                "charge": "0",
-                "thermalLimitA": "0.7",
-                "thermalLimitB": "0",
-                "thermalLimitC": "0",
-                "tapRatio": "1",
-                "angleShift": "0",
-                "capitalCost": "3000",
-                "length": "100",
-                "numberOfParallelLines": "2",
-                "nominalApparentPower": "4000",
-                "nominalVoltage": "380",
-                "minimumNominalApparentPowerBound": "4000",
-                "maximumNominalApparentPowerBound": "8000",
-                "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                        [9.93542,51.5352],
-                        [8.37433,49.0163]
-            ]
-        }
+      "geometry": {
+        "coordinates": [
+          [
+            9.93542,
+            51.5352
+          ],
+          [
+            8.37433,
+            49.0163
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "angleShift": "0",
+        "capitalCost": "3000",
+        "charge": "0",
+        "conductance": "0",
+        "length": "100",
+        "maximumNominalApparentPowerBound": "8000",
+        "maximumThetaBound": "inf",
+        "minimumNominalApparentPowerBound": "4000",
+        "minimumThetaBound": "-inf",
+        "name": "2",
+        "nominalApparentPower": "4000",
+        "nominalApparentPowerExtendable": "0",
+        "nominalVoltage": "380",
+        "numberOfParallelLines": "2",
+        "reactance": "10",
+        "resistance": "20",
+        "status": "1",
+        "susceptance": "-0.1",
+        "tapRatio": "1",
+        "terrainFactor": "0",
+        "thermalLimitA": "0.7",
+        "thermalLimitB": "0",
+        "thermalLimitC": "0",
+        "type": "standard"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-                "name": "3",
-                "status": "1",
-                "type": "standard",
-                "minimumThetaBound": "-inf",
-                "maximumThetaBound": "inf",
-                "resistance": "20",
-                "reactance": "10",
-                "conductance": "0",
-                "susceptance": "-0.1",
-                "charge": "0",
-                "thermalLimitA": "0.7",
-                "thermalLimitB": "0",
-                "thermalLimitC": "0",
-                "tapRatio": "1",
-                "angleShift": "0",
-                "capitalCost": "4000",
-                "length": "100",
-                "numberOfParallelLines": "3",
-                "nominalApparentPower": "5000",
-                "nominalVoltage": "380",
-                "minimumNominalApparentPowerBound": "4000",
-                "maximumNominalApparentPowerBound": "8000",
-                "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                        [9.93542,51.5352],
-                        [13.0552,52.4001]
-            ]
-        }
+      "geometry": {
+        "coordinates": [
+          [
+            9.93542,
+            51.5352
+          ],
+          [
+            13.0552,
+            52.4001
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "angleShift": "0",
+        "capitalCost": "4000",
+        "charge": "0",
+        "conductance": "0",
+        "length": "100",
+        "maximumNominalApparentPowerBound": "8000",
+        "maximumThetaBound": "inf",
+        "minimumNominalApparentPowerBound": "4000",
+        "minimumThetaBound": "-inf",
+        "name": "3",
+        "nominalApparentPower": "5000",
+        "nominalApparentPowerExtendable": "0",
+        "nominalVoltage": "380",
+        "numberOfParallelLines": "3",
+        "reactance": "10",
+        "resistance": "20",
+        "status": "1",
+        "susceptance": "-0.1",
+        "tapRatio": "1",
+        "terrainFactor": "0",
+        "thermalLimitA": "0.7",
+        "thermalLimitB": "0",
+        "thermalLimitC": "0",
+        "type": "standard"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-                "name": "4",
-                "status": "1",
-                "type": "standard",
-                "minimumThetaBound": "-inf",
-                "maximumThetaBound": "inf",
-                "resistance": "20",
-                "reactance": "10",
-                "conductance": "0",
-                "susceptance": "-0.1",
-                "charge": "0",
-                "thermalLimitA": "0.7",
-                "thermalLimitB": "0",
-                "thermalLimitC": "0",
-                "tapRatio": "1",
-                "angleShift": "0",
-                "capitalCost": "5000",
-                "length": "100",
-                "numberOfParallelLines": "4",
-                "nominalApparentPower": "6000",
-                "nominalVoltage": "380",
-                "minimumNominalApparentPowerBound": "4000",
-                "maximumNominalApparentPowerBound": "8000",
-                "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                        [13.7357,51.0556],
-                        [13.0552,52.4001]
-            ]
-        }
+      "geometry": {
+        "coordinates": [
+          [
+            13.7357,
+            51.0556
+          ],
+          [
+            13.0552,
+            52.4001
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "angleShift": "0",
+        "capitalCost": "5000",
+        "charge": "0",
+        "conductance": "0",
+        "length": "100",
+        "maximumNominalApparentPowerBound": "8000",
+        "maximumThetaBound": "inf",
+        "minimumNominalApparentPowerBound": "4000",
+        "minimumThetaBound": "-inf",
+        "name": "4",
+        "nominalApparentPower": "6000",
+        "nominalApparentPowerExtendable": "0",
+        "nominalVoltage": "380",
+        "numberOfParallelLines": "4",
+        "reactance": "10",
+        "resistance": "20",
+        "status": "1",
+        "susceptance": "-0.1",
+        "tapRatio": "1",
+        "terrainFactor": "0",
+        "thermalLimitA": "0.7",
+        "thermalLimitB": "0",
+        "thermalLimitC": "0",
+        "type": "standard"
+      },
+      "type": "Feature"
     },
     {
-        "type": "Feature",
-        "properties":{
-                "name": "5",
-                "status": "1",
-                "type": "standard",
-                "minimumThetaBound": "-inf",
-                "maximumThetaBound": "inf",
-                "resistance": "20",
-                "reactance": "10",
-                "conductance": "0",
-                "susceptance": "-0.1",
-                "charge": "0",
-                "thermalLimitA": "0.7",
-                "thermalLimitB": "0",
-                "thermalLimitC": "0",
-                "tapRatio": "1",
-                "angleShift": "0",
-                "capitalCost": "6000",
-                "length": "100",
-                "numberOfParallelLines": "5",
-                "nominalApparentPower": "7000",
-                "nominalVoltage": "380",
-                "minimumNominalApparentPowerBound": "4000",
-                "maximumNominalApparentPowerBound": "8000",
-                "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0"
-        },
-        "geometry": {
-            "type": "LineString",
-            "coordinates": [
-                        [13.0552,52.4001],
-                        [13.233,53.5729]
-            ]
-        }
+      "geometry": {
+        "coordinates": [
+          [
+            13.0552,
+            52.4001
+          ],
+          [
+            13.233,
+            53.5729
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "angleShift": "0",
+        "capitalCost": "6000",
+        "charge": "0",
+        "conductance": "0",
+        "length": "100",
+        "maximumNominalApparentPowerBound": "8000",
+        "maximumThetaBound": "inf",
+        "minimumNominalApparentPowerBound": "4000",
+        "minimumThetaBound": "-inf",
+        "name": "5",
+        "nominalApparentPower": "7000",
+        "nominalApparentPowerExtendable": "0",
+        "nominalVoltage": "380",
+        "numberOfParallelLines": "5",
+        "reactance": "10",
+        "resistance": "20",
+        "status": "1",
+        "susceptance": "-0.1",
+        "tapRatio": "1",
+        "terrainFactor": "0",
+        "thermalLimitA": "0.7",
+        "thermalLimitB": "0",
+        "thermalLimitC": "0",
+        "type": "standard"
+      },
+      "type": "Feature"
     }
-]
+  ],
+  "type": "FeatureCollection"
 }

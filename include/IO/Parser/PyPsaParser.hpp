@@ -3574,4 +3574,3 @@ class NetworkDifferentiation< VertexTypeProperties
 } // namespace egoa
 
 #endif // EGOA__IO__PARSER___PY_PSA_PARSER_HPP
-

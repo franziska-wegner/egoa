@@ -215,4 +215,3 @@ namespace egoa::Edges {
 } // namespace egoa::Edges
 
 #endif // EGOA__DATA_STRUCTURE__EDGES__TYPE_HPP
-
