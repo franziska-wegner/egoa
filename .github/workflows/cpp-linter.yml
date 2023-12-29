@@ -20,6 +20,12 @@ concurrency:
 env:
   QT_VERSION:     "6.2.0"
 
+permissions:
+  contents: read
+  packages: read
+  # To report GitHub Actions status checks
+  statuses: write
+
 jobs:
   cpp-linter:
 
@@ -111,8 +117,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          style: llvm #file
-          tidy-checks: boost-*,bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-*,cppcoreguidelines-*
+          style: "file" #llvm
+          tidy-checks: "boost-*,bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-*,cppcoreguidelines-*"
           files-changed-only: false
           lines-changed-only: false
           no-lgtm: false
@@ -120,7 +126,7 @@ jobs:
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
           thread-comments: ${{ github.event_name == 'pull_request' && 'update' }}
-          ignore: external
+          ignore: "external|Qt|build/CMakeFiles"
 
       - name: Fail fast?!
         if: steps.linter.outputs.checks-failed > 0
