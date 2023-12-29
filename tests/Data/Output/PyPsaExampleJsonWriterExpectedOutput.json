@@ -20,7 +20,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -46,7 +46,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -72,7 +72,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -98,7 +98,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -124,7 +124,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -150,7 +150,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -176,7 +176,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -202,7 +202,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -228,7 +228,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -254,7 +254,7 @@
             "zone": "0",
             "control": "PQ",
             "carrier": "AC",
-            "status": "active" 
+            "status": "active"
         },
         "geometry": {
             "type": "Point",
@@ -287,7 +287,7 @@
                 "minimumNominalApparentPowerBound": "4000",
                 "maximumNominalApparentPowerBound": "8000",
                 "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0" 
+                "terrainFactor": "0"
         },
         "geometry": {
             "type": "LineString",
@@ -323,7 +323,7 @@
                 "minimumNominalApparentPowerBound": "4000",
                 "maximumNominalApparentPowerBound": "8000",
                 "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0" 
+                "terrainFactor": "0"
         },
         "geometry": {
             "type": "LineString",
@@ -359,7 +359,7 @@
                 "minimumNominalApparentPowerBound": "4000",
                 "maximumNominalApparentPowerBound": "8000",
                 "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0" 
+                "terrainFactor": "0"
         },
         "geometry": {
             "type": "LineString",
@@ -395,7 +395,7 @@
                 "minimumNominalApparentPowerBound": "4000",
                 "maximumNominalApparentPowerBound": "8000",
                 "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0" 
+                "terrainFactor": "0"
         },
         "geometry": {
             "type": "LineString",
@@ -431,7 +431,7 @@
                 "minimumNominalApparentPowerBound": "4000",
                 "maximumNominalApparentPowerBound": "8000",
                 "nominalApparentPowerExtendable": "0",
-                "terrainFactor": "0" 
+                "terrainFactor": "0"
         },
         "geometry": {
             "type": "LineString",
@@ -440,6 +440,6 @@
                         [13.233,53.5729]
             ]
         }
-    } 
-] 
+    }
+]
 }

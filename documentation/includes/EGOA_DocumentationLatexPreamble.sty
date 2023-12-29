@@ -1,13 +1,13 @@
-% 
+%
 % EGOA-Documentation-Latex-Preamble.sty
-% 
+%
 %   Created on: Jan 30, 2019
 %       Author: Franziska Wegner
-%       
+%
 % Macros that are used within the papers and dissertation can used within the
 % code documentation to provide the possibility to map the theoretical content
 % with the code.
-% 
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Usepackages
@@ -39,10 +39,10 @@
 \usepackage{tabularx,environ}
 \usepackage{paralist}
 \usepackage{caption,subcaption}
-\usepackage{float} 
+\usepackage{float}
 \usepackage{pifont}
 \usepackage{flushend}
-\usepackage{xargs} 
+\usepackage{xargs}
 \usepackage{xspace}
 \usepackage{textpos}
 
@@ -53,7 +53,7 @@
     \newcommand{\overleftrightsmallarrow}{\mathpalette{\overarrowsmall@\leftrightarrowfill@}}
     \newcommand{\overrightsmallarrow}{\mathpalette{\overarrowsmall@\rightarrowfill@}}
     \newcommand{\overleftsmallarrow}{\mathpalette{\overarrowsmall@\leftarrowfill@}}
-% 
+%
     \newcommand{\overarrowsmall@}[3]{%
     \vbox{%
       \ialign{%
@@ -76,7 +76,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % New Theorem
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -89,7 +89,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Color
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 % ACM defined colors
 \definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
 \definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
@@ -104,10 +104,10 @@
 \definecolor{orange}{rgb}{1,0.5,0}
 \definecolor{orange}{RGB}{255,127,0}
 \definecolor{figChar}{cmyk}{0,0.90,0.86,0}
-% 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % KIT defined colors
-% 
+%
 % KIT green
 \definecolor{KITgreen}{rgb}{0 0.588 0.509}
 \definecolor{KITgreen70}{rgb}{0.3 0.711 0.656}
@@ -212,7 +212,7 @@
 
 % Edges
 \newcommandx{\makeUndirected}[1]{\ensuremath{\overleftrightsmallarrow{#1}}\xspace}
-% 
+%
 \newcommand{\edges}{\ensuremath{E}\xspace}
 \newcommandx{\foneToOneMap}[1]{\ensuremath{\mathrm{\mu}_{#1}}\xspace}
 \newcommand{\oneToOneMap}{\ensuremath{\mathrm{\foneToOneMap{dual}}}\xspace}
@@ -233,7 +233,7 @@
 \newcommand{\flowb}{\ensuremath{\flow_2}\xspace}
 \newcommand{\netflow}{\ensuremath{\flow_{\mathrm{net}}}\xspace}
 
-% Others 
+% Others
 \newcommand{\partition}{\ensuremath{P}\xspace}
 \newcommand{\neighbor}{\ensuremath{N}\xspace}
 \newcommand{\inneighbor}{\ensuremath{N^+}\xspace}
@@ -254,7 +254,7 @@
 \newcommand{\labnew}{\ensuremath{\lab_\mathrm{new}}\xspace}
 \newcommand{\col}{\ensuremath{c}\xspace}
 \newcommand{\colorlabels}{\ensuremath{C}\xspace}
-\newcommand{\orderedlist}[1]{\ensuremath{\langle #1\rangle}\xspace} 
+\newcommand{\orderedlist}[1]{\ensuremath{\langle #1\rangle}\xspace}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Power Grid
@@ -287,13 +287,13 @@
 }
 \newcommand{\dcnetworktuple}{
     \ensuremath{\network = (}
-        \graph, 
-        \generators, 
-        \consumers, 
+        \graph,
+        \generators,
+        \consumers,
         \ensuremath{\capacity,}
         \susceptance,
-        \realpowergenerationmin, 
-        \realpowergenerationmax, 
+        \realpowergenerationmin,
+        \realpowergenerationmax,
         \realpowerdemandmin,
         \realpowerdemandmax
     \ensuremath{)}
@@ -301,12 +301,12 @@
 }
 \newcommand{\flownetworktuple}{
     \ensuremath{\network = (}
-        \graph, 
-        \source, 
-        \sink, 
+        \graph,
+        \source,
+        \sink,
         \ensuremath{\capacity,}
-        \realpowergenerationmin, 
-        \realpowergenerationmax, 
+        \realpowergenerationmin,
+        \realpowergenerationmax,
         \realpowerdemandmin,
         \realpowerdemandmax
     \ensuremath{)}
@@ -339,7 +339,7 @@
 % Branches
 \newcommand{\factsedge}{\ensuremath{\edges_F}\xspace}
 \newcommand{\factsbranch}{\ensuremath{\edges_F}\xspace}
-% 
+%
 \newcommand{\rectangulardissection}{\ensuremath{\mathcal{R}}\xspace}
 
 % Resistance
@@ -479,7 +479,7 @@
 \newcommand{\reactivepowersmax}{\ensuremath{\MAX{\reactivepowers}}\xspace}
 \newcommand{\reactivepowerbase}{\ensuremath{\reactivepowers_{
 \mathrm{base}}}\xspace}
-% 
+%
 \newcommand{\excess}{\ensuremath{x}\xspace}
 \newcommand{\excessSet}{\ensuremath{X}\xspace}
 \newcommand{\minexcess}{\ensuremath{\MIN{\excess}}\xspace}
@@ -529,7 +529,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \DeclareMathOperator{\len}{\ensuremath{len}\xspace}
 \DeclareMathOperator{\costsubstation}{\ensuremath{\totalcost_\mathrm{sub}}\xspace} %csub
-\newcommand{\totalcost}{\ensuremath{c}\xspace} 
+\newcommand{\totalcost}{\ensuremath{c}\xspace}
 \DeclareMathOperator{\flowcost}{\ensuremath{cost}\xspace}
 \DeclareMathOperator{\degree}{\ensuremath{deg}\xspace} % degree of a vertex
 
@@ -547,8 +547,8 @@
 \newcommand{\problems}{\ensuremath{\mathcal{P}}\xspace}
 
 % Economic Dispatch Problem (EDP)
-\newcommand{\edp}{EDP\xspace}   
-\newcommand{\EDP}{\textsc{Economic Dispatch Problem}\xspace} 
+\newcommand{\edp}{EDP\xspace}
+\newcommand{\EDP}{\textsc{Economic Dispatch Problem}\xspace}
 
 % Alternating Current (AC)
 \newcommand{\ac}{\ensuremath{\mathsf{AC}}\xspace}
@@ -597,7 +597,7 @@
 \newcommand{\dcopf}{\ensuremath{\mathsf{\dc\opf}}\xspace}
 \newcommand{\dcopfbf}{\ensuremath{\mathbfsf{DCOPF}}\xspace}
 \newcommand{\DCOPF}{\textsc{\DC\ \OPF}\xspace}
-% 
+%
 \newcommand{\dfs}{\ensuremath{\mathsf{DFS}}\xspace}
 
 % Dominating Theta Path (DTP)
@@ -614,7 +614,7 @@
 \newcommand{\feasbf}{\ensuremath{\mathbfsf{FEAS}}\xspace}
 \newcommand{\FEAS}{\textsc{Feasibility Problem}\xspace}
 
-% Concerning flows 
+% Concerning flows
 \newcommand{\flowvalue}{\ensuremath{F}\xspace}
 \newcommand{\flowvaluebf}{\ensuremath{\mathbfsf{F}}\xspace}
 
@@ -649,32 +649,32 @@
 % Minimum Cost Flow (MCF)
 \newcommand{\mcf}{\ensuremath{\mathsf{MCF}}\xspace}
 \newcommand{\mcfbf}{\ensuremath{\mathbfsf{MCF}}\xspace}
-\newcommand{\MCF}{\textsc{Minimum Cost Flow}\xspace} 
+\newcommand{\MCF}{\textsc{Minimum Cost Flow}\xspace}
 
 % Minimum Cost Flow Problem (MCFP)
 \newcommand{\mcfp}{\ensuremath{\mathsf{MCFP}}\xspace}
 \newcommand{\mcfpbf}{\ensuremath{\mathbfsf{MCFP}}\xspace}
-\newcommand{\MCFP}{\textsc{Minimum Cost Flow Problem}\xspace} 
+\newcommand{\MCFP}{\textsc{Minimum Cost Flow Problem}\xspace}
 
 % Maximum Flow (MF)
 \newcommand{\mf}{\ensuremath{\mathsf{MF}}\xspace}
 \newcommand{\mfbf}{\ensuremath{\mathbfsf{MF}}\xspace}
-\newcommand{\MF}{\text{maximum flow}\xspace} 
+\newcommand{\MF}{\text{maximum flow}\xspace}
 
 % Maximum Flow Problem (MFP)
 \newcommand{\mfp}{\ensuremath{\mathsf{MFP}}\xspace}
 \newcommand{\mfpbf}{\ensuremath{\mathbfsf{MFP}}\xspace}
-\newcommand{\MFP}{\textsc{Maximum Flow Problem}\xspace} 
+\newcommand{\MFP}{\textsc{Maximum Flow Problem}\xspace}
 
 % Minimum Cut (MC)
 \newcommand{\mc}{\ensuremath{\mathsf{MC}}\xspace}
 \newcommand{\mcbf}{\ensuremath{\mathbfsf{MC}}\xspace}
-\newcommand{\MC}{\text{minimum cut}\xspace} 
+\newcommand{\MC}{\text{minimum cut}\xspace}
 
 % Minimum Cut Problem (MCP)
 \newcommand{\mcp}{\ensuremath{\mathsf{MCP}}\xspace}
 \newcommand{\mcpbf}{\ensuremath{\mathbfsf{MCP}}\xspace}
-\newcommand{\MCP}{\textsc{Minimum Cut Problem}\xspace} 
+\newcommand{\MCP}{\textsc{Minimum Cut Problem}\xspace}
 
 % Mixed-integer Linear Program (MILP)
 \newcommand{\milp}{\ensuremath{\mathsf{MILP}}\xspace}
@@ -715,7 +715,7 @@
 \newcommand{\kmtsf}{\ensuremath{k}-\mtsf}
 \newcommand{\kmtsfbf}{\ensuremath{k}-\mtsfbf}
 \newcommand{\kMTSF}{\ensuremath{k}-\acrlong{mtsf}}
-% 
+%
 \newcommand{\kmtsfp}{\ensuremath{k}-\mtsfp}
 \newcommand{\kmtsfpbf}{\ensuremath{k}-\mtsfpbf}
 \newcommand{\kMTSFP}{\ensuremath{k}-\acrlong{mtsfp}}
@@ -870,7 +870,7 @@ Problem}\xspace}
 % Transmission System Operators (TSO)
 \newcommand{\tso}{TSO\xspace}
 \newcommand{\TSO}{Transmission System Operators\xspace}
-% 
+%
 \newcommand{\twoapprox}{\ensuremath{\mathsf{2-approx}}\xspace}
 \newcommand{\twoapproxbf}{\ensuremath{\mathbfsf{2-approx}}\xspace}
 \newcommand{\TWOAPPROX}{\textsc{2-Approximation}\xspace}
@@ -879,17 +879,17 @@ Problem}\xspace}
 \newcommand{\ucp}{\ensuremath{\mathsf{UCP}}\xspace}
 \newcommand{\ucpbf}{\ensuremath{\mathbfsf{UCP}}\xspace}
 \newcommand{\UCP}{\textsc{Unit Commitment Problem}\xspace}
-% 
+%
 \newcommand{\vc}{\ensuremath{\mathsf{VC}}\xspace}
 \newcommand{\vcp}{\ensuremath{\mathsf{VCP}}\xspace}
 \newcommand{\vcpbf}{\ensuremath{\mathbfsf{VCP}}\xspace}
 \newcommand{\VCP}{\textsc{Vertex Cover Problem}\xspace}
-% 
+%
 \newcommand{\fvs}{\ensuremath{\mathsf{FVS}}\xspace}
 \newcommand{\fvsp}{\ensuremath{\mathsf{FVSP}}\xspace}
 \newcommand{\fvspbf}{\ensuremath{\mathbfsf{FVSP}}\xspace}
 \newcommand{\FVSP}{\textsc{Feedback Vertex Set Problem}\xspace}
-% 
+%
 \newcommand{\partitionp}{\ensuremath{\mathsf{PP}}\xspace}
 \newcommand{\partitionpbf}{\ensuremath{\mathbfsf{PP}}\xspace}
 \newcommand{\PartitionP}{\textsc{Partition Problem}\xspace}
@@ -941,7 +941,7 @@ Problem}\xspace}
 % Complex
 \newcommand{\complexes}{\ensuremath{\mathbb{C}}\xspace}
 \newcommand{\imgPart}{\ensuremath{\textbf{j}}\xspace}
-% 
+%
 \newcommand{\determinant}{\ensuremath{\mathrm{det}}\xspace}
 \newcommandx{\fdeterminant}[1]{\ensuremath{\determinant\left(#1\right)}\xspace}
 \newcommandx{\imaginary}[1]{\ensuremath{\mathcal{I}\!\!m\!\left
@@ -988,7 +988,7 @@ Problem}\xspace}
 \newcommand{\locations}{\ensuremath{L}\xspace}
 
 \newcommand{\temperature}{\ensuremath{T}}
-\newcommand{\energy}{\ensuremath{\totalcost}\xspace} %usually E for energy, but E is already used for the set of edges 
+\newcommand{\energy}{\ensuremath{\totalcost}\xspace} %usually E for energy, but E is already used for the set of edges
 
 % Solutions
 \newcommand{\solutions}{\ensuremath{S}\xspace}
@@ -1012,7 +1012,7 @@ Problem}\xspace}
 \newcommand{\activity}{\ensuremath{\mu}\xspace}
 \newcommand{\activitythreshold}{\ensuremath{\overline{\mu}}\xspace}
 
-% Instances 
+% Instances
 \newcommand{\instances}{\ensuremath{\mathcal{I}}\xspace}
 \newcommand{\instance}{\ensuremath{I}\xspace}
 \newcommand{\instancea}{\ensuremath{\instance_1}\xspace}
@@ -1034,7 +1034,7 @@ Problem}\xspace}
 \newcommand{\ifequals}[3]{\ifthenelse{\equal{#1}{#2}}{#3}{}}%
 \newcommand{\case}[2]{#1 #2} % Dummy, so \renewcommand has something to overwrite...
 \newenvironment{switchcase}[1]{\renewcommand{\case}{\ifequals{#1}}}{}%
-% 
+%
 % Example: Pick case by ID
 \newcommand{\nestacase}[2]{%
   \begin{switchcase}{#1}%
@@ -1069,7 +1069,7 @@ Problem}\xspace}
     #2%
   \end{switchcase}%
 }
-% 
+%
 \newcommand{\tablecase}[1]{%
   % \footnotesize
   \begin{switchcase}{#1}%
@@ -1128,7 +1128,7 @@ Problem}\xspace}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Matrices
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 % Adjacency Matrix
 \newcommand{\adjacencyMatrix}{\ensuremath{\mathbf{A}}\xspace}%A
 \newcommand{\adjacencyMatrixVector}{\ensuremath{\mathbf{a}}\xspace}%A
@@ -1140,7 +1140,7 @@ Problem}\xspace}
 \newcommand{\admittanceMatrixNode}{\ensuremath{\mathbf{Y_n}}\xspace}
 \newcommandx{\admittanceMatrixEntry}[2]{\ensuremath{
 \mathbf{\admittanceMatrix_{#1,#2}}}\xspace}
-% 
+%
 \newcommand{\polyhedron}{\ensuremath{P}\xspace}%P
 \newcommand{\righthandsidevector}{\ensuremath{\realpower}\xspace}
 \newcommandx{\frighthandsidevector}[1]{\ensuremath{\vv{\righthandsidevector_
@@ -1190,7 +1190,7 @@ Problem}\xspace}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Auxiliary
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 \newcommand{\plotscale}{0.8}
 \newcommand{\plotscaleOne}{0.45}
 \newcommand\plotsizeAppendix{0.89}
@@ -1234,7 +1234,7 @@ Problem}\xspace}
 \newcommand{\inverse}{{\hspace{0.5pt}\protect\raisebox{0.5pt}{\protect\scalebox{0.6}[1.0]{$\scriptstyle-$}\hspace{-0.6pt}$\scriptscriptstyle1$}\hspace{-1pt}}}
 \newcommandx{\transpose}[1]{\ensuremath{#1^\intercal}\xspace}
 
-% Others 
+% Others
 \newcommand{\distance}{\ensuremath{d}\xspace}
 \newcommand{\algo}{\ensuremath{\mathcal{A}}\xspace}
 \newcommand{\solutionmap}{\ensuremath{\mathtt{SolutionMap}}\xspace}

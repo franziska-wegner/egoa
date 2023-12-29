@@ -3,7 +3,7 @@
  *
  *  Created on: Jan 29, 2019
  *      Author: Franziska Wegner
- *      
+ *
  *  Sources of discussion:
  *      * https://blog.habets.se/2010/09/gettimeofday-should-never-be-used-to-measure-time.html
  *      * https://linux.die.net/man/2/clock_gettime
@@ -20,7 +20,7 @@
 #include "Types.hpp"
 
 // Linux operation systems such as Debian, Ubuntu, Gentoo, Fedora, openSUSE, RedHat, or Centos
-#if defined (__linux__) 
+#if defined (__linux__)
         #include <time.h>
         #include <sys/time.h>
 // Apple and iOS
@@ -34,23 +34,23 @@ namespace egoa::Auxiliary {
 
 /**
  * @class      Timer
- * 
+ *
  * @details    The timer class provides an interface to measure the
  *     performance of the code. If not other set/stated the interface provides
  *     the most robust and accurate timer for the underlying operation system.
- *     
+ *
  * @code{.cpp}
  *      #include <chrono> // just for sleep
  *      #include <thread> // just for sleep
- *      
+ *
  *      int main(int argc, char *argv[]) {
  *          egoa::Auxiliary::Timer timer = egoa::Auxiliary::Timer();
- *      
+ *
  *          // Do something
  *          ...
  *          std::this_thread::sleep_for(std::chrono::milliseconds(9999)); // sleep 9999 ms
- *      
- *          std::cout << "Timer: " << timer.ElapsedMilliseconds() << std::endl; 
+ *
+ *          std::cout << "Timer: " << timer.ElapsedMilliseconds() << std::endl;
  *      }
  * @endcode
  */
@@ -69,7 +69,7 @@ class Timer {
  * To use linux specific clock measurements the system must be a linux system
  * such as Debian, Ubuntu, Gentoo, Fedora, openSUSE, RedHat, or Centos.
  */
-#if defined (__linux__) 
+#if defined (__linux__)
 /**
  * System-wide clock measuring the real time (wall-clock). However, note that
  * this timer can be influenced by administrative clock changes, adjtime(), and NTP.
@@ -121,12 +121,12 @@ class Timer {
 #elif defined(EGOA_TIMER_CLOCK_THREAD_CPUTIME_ID)
         clockid_t linuxClockId = CLOCK_THREAD_CPUTIME_ID;
         // inline void GetTime( struct timespec * ts ) {
-        //     clock_gettime(CLOCK_THREAD_CPUTIME_ID, ts);            
+        //     clock_gettime(CLOCK_THREAD_CPUTIME_ID, ts);
         // }
 #else
-        clockid_t linuxClockId = CLOCK_MONOTONIC_RAW;   
-#endif // Specified clock measurement 
-        struct timespec start_; 
+        clockid_t linuxClockId = CLOCK_MONOTONIC_RAW;
+#endif // Specified clock measurement
+        struct timespec start_;
 
         /**
          * @brief      Timestamp
@@ -147,7 +147,7 @@ class Timer {
 
         /**
          * @brief      Elapsed time
-         * 
+         *
          * @details    Calculates the difference between the current time and
          *     start time that represents the duration.
          *
@@ -161,7 +161,7 @@ class Timer {
 
         /**
          * @brief      Elapsed time in milliseconds
-         * 
+         *
          * @details    Calculates the difference between the current time and
          *     start time that represents the duration.
          *
@@ -176,7 +176,7 @@ class Timer {
         /**
          * @brief      Gets the clock resolution representing the granularity.
          * @details    A possible output is
-         *             CLOCK_MONOTONIC has a resolution of 1ns, and 
+         *             CLOCK_MONOTONIC has a resolution of 1ns, and
          *             CLOCK_MONOTONIC_COARSE has a resolution of 999848ns (about 1ms).
          *
          * @return     The clock resolution.
@@ -201,7 +201,7 @@ class Timer {
             }
 
             inline void TimespecToMilliseconds ( struct timespec * ts
-                                               , Types::largeReal & milliseconds ) 
+                                               , Types::largeReal & milliseconds )
             {
                 milliseconds  = ts->tv_sec  * Const::MILLISEC_PER_SEC;
                 milliseconds += static_cast<Types::largeReal>( ts->tv_nsec ) / Const::NSEC_PER_MILLISEC;
@@ -211,9 +211,9 @@ class Timer {
                 return static_cast<Types::largeReal>( ts->tv_sec  * Const::MILLISEC_PER_SEC + ts->tv_nsec ) / Const::NSEC_PER_MILLISEC;
             }
         ///@}
-// end of defined (__linux__) 
+// end of defined (__linux__)
 #elif defined(__APPLE__) && defined(__MACH__)  // Apple and iOS
-        Types::posInteger start_; 
+        Types::posInteger start_;
 
         /**
          * @brief      Timestamp
@@ -234,7 +234,7 @@ class Timer {
 
         /**
          * @brief      Elapsed time
-         * 
+         *
          * @details    Calculates the difference between the current time and
          *     start time that represents the duration.
          *
@@ -247,7 +247,7 @@ class Timer {
 
         /**
          * @brief      Elapsed time in milliseconds
-         * 
+         *
          * @details    Calculates the difference between the current time and
          *     start time that represents the duration.
          *
@@ -269,7 +269,7 @@ class Timer {
         /**
          * @brief      Gets the clock resolution representing the granularity.
          * @details    A possible output is
-         *             CLOCK_MONOTONIC has a resolution of 1ns, and 
+         *             CLOCK_MONOTONIC has a resolution of 1ns, and
          *             CLOCK_MONOTONIC_COARSE has a resolution of 999848ns (about 1ms).
          *
          * @return     The clock resolution.

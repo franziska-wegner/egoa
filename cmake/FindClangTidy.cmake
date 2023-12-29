@@ -1,14 +1,14 @@
 # FindClangTidy.cmake
-# 
+#
 #   Created on: Dec 27, 2023
 #       Author: Franziska Wegner
-# 
+#
 # This file enables clang tidy for the project.
-# 
+#
 
 
 # Search for clang-tidy
-find_program(CLANG_TIDY_PROG 
+find_program(CLANG_TIDY_PROG
     HINTS "/opt/homebrew/opt/llvm/bin/"
           "/usr/local/opt/llvm/bin/"
     NAMES "clang-tidy"

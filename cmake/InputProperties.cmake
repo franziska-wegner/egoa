@@ -1,11 +1,11 @@
 # InputProperties.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # Create variables and their drop down menus, and mark some variables as
 # advanced.
-# 
+#
 
 ####################################################################
 # Reset variables ##################################################
@@ -103,12 +103,12 @@ set ( EGOA_ENABLE_TESTS ON CACHE BOOL
      "EGOA_ENABLE_TESTS enables the test framework" )
 set_property ( CACHE EGOA_ENABLE_TESTS PROPERTY STRINGS ON OFF )
 
-# Property exception handling 
+# Property exception handling
 set ( EGOA_ENABLE_EXCEPTION_HANDLING ON CACHE BOOL
      "EGOA_ENABLE_EXCEPTION_HANDLING enables exception handling in the framework" )
 set_property ( CACHE EGOA_ENABLE_EXCEPTION_HANDLING PROPERTY STRINGS ON OFF )
 
-# Property exception handling 
+# Property exception handling
 set ( EGOA_ENABLE_ASSERTION ON CACHE BOOL
      "EGOA_ENABLE_ASSERTION enables assertions in debug mode in the framework" )
 set_property ( CACHE EGOA_ENABLE_ASSERTION PROPERTY STRINGS ON OFF )

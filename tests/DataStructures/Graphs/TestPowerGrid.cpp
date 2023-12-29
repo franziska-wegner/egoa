@@ -18,28 +18,28 @@ namespace egoa::test {
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , BaseMva ) 
+       , BaseMva )
 {
    EXPECT_EQ ( 1,      network_.BaseMva() );
    EXPECT_EQ ( 1, networkConst_.BaseMva() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , BaseMva ) 
+       , BaseMva )
 {
    EXPECT_EQ ( 1,      network_.BaseMva() );
    EXPECT_EQ ( 1, networkConst_.BaseMva() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , BaseMva ) 
+       , BaseMva )
 {
    EXPECT_EQ ( 1,      network_.BaseMva() );
    EXPECT_EQ ( 1, networkConst_.BaseMva() );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , BaseMva ) 
+       , BaseMva )
 {
    EXPECT_EQ ( 1,      network_.BaseMva() );
    EXPECT_EQ ( 1, networkConst_.BaseMva() );
@@ -52,19 +52,19 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , ThetaBound ) 
+       , ThetaBound )
 {
    EXPECT_EQ ( -Const::REAL_INFTY,      network_.ThetaBound().Minimum() );
    EXPECT_EQ ( -Const::REAL_INFTY, networkConst_.ThetaBound().Minimum() );
 
    EXPECT_EQ ( Const::REAL_INFTY,      network_.ThetaBound().Maximum() );
    EXPECT_EQ ( Const::REAL_INFTY, networkConst_.ThetaBound().Maximum() );
-   
+
    EXPECT_TRUE ( Bound<>(-Const::REAL_INFTY,Const::REAL_INFTY) == networkConst_.ThetaBound() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , ThetaBound ) 
+       , ThetaBound )
 {
    EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
    EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
@@ -74,7 +74,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , ThetaBound ) 
+       , ThetaBound )
 {
    EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
    EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
@@ -84,7 +84,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , ThetaBound ) 
+       , ThetaBound )
 {
    EXPECT_EQ ( -Const::REAL_INFTY,      network_.ThetaBound().Minimum() );
    EXPECT_EQ ( -Const::REAL_INFTY, networkConst_.ThetaBound().Minimum() );
@@ -100,28 +100,28 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , GeneratorBoundType ) 
+       , GeneratorBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , GeneratorBoundType ) 
+       , GeneratorBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , GeneratorBoundType ) 
+       , GeneratorBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorBoundType ) 
+       , GeneratorBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
@@ -134,28 +134,28 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , LoadBoundType ) 
+       , LoadBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , LoadBoundType ) 
+       , LoadBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , LoadBoundType ) 
+       , LoadBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , LoadBoundType ) 
+       , LoadBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
@@ -168,7 +168,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , MakeBounded ) 
+       , MakeBounded )
 {
     network_.MakeBounded ();
     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
@@ -178,7 +178,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , MakeBounded ) 
+       , MakeBounded )
 {
     network_.MakeBounded ();
     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
@@ -188,7 +188,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , MakeBounded ) 
+       , MakeBounded )
 {
     network_.MakeBounded ();
     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
@@ -198,7 +198,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , MakeBounded ) 
+       , MakeBounded )
 {
     network_.MakeBounded ();
     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
@@ -214,7 +214,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , MakeUnbounded ) 
+       , MakeUnbounded )
 {
     network_.MakeUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -224,7 +224,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , MakeUnbounded ) 
+       , MakeUnbounded )
 {
     network_.MakeUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -234,7 +234,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , MakeUnbounded ) 
+       , MakeUnbounded )
 {
     network_.MakeUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -244,7 +244,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , MakeUnbounded ) 
+       , MakeUnbounded )
 {
     network_.MakeUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -260,7 +260,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , MakePureUnbounded ) 
+       , MakePureUnbounded )
 {
     network_.MakePureUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -270,7 +270,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , MakePureUnbounded ) 
+       , MakePureUnbounded )
 {
     network_.MakePureUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -280,7 +280,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , MakePureUnbounded ) 
+       , MakePureUnbounded )
 {
     network_.MakePureUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -290,7 +290,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , MakePureUnbounded ) 
+       , MakePureUnbounded )
 {
     network_.MakePureUnbounded ();
     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
@@ -306,7 +306,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , MakeExact ) 
+       , MakeExact )
 {
     network_.MakeExact ();
     EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
@@ -316,7 +316,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , MakeExact ) 
+       , MakeExact )
 {
     network_.MakeExact ();
     EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
@@ -326,7 +326,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , MakeExact ) 
+       , MakeExact )
 {
     network_.MakeExact ();
     EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
@@ -336,7 +336,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , MakeExact ) 
+       , MakeExact )
 {
     network_.MakeExact ();
     EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
@@ -352,7 +352,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , IsBounded ) 
+       , IsBounded )
 {
     EXPECT_FALSE (      network_.IsBounded () );
     EXPECT_FALSE ( networkConst_.IsBounded () );
@@ -362,7 +362,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , IsBounded ) 
+       , IsBounded )
 {
     EXPECT_FALSE (      network_.IsBounded () );
     EXPECT_FALSE ( networkConst_.IsBounded () );
@@ -372,7 +372,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , IsBounded ) 
+       , IsBounded )
 {
     EXPECT_FALSE (      network_.IsBounded () );
     EXPECT_FALSE ( networkConst_.IsBounded () );
@@ -382,7 +382,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , IsBounded ) 
+       , IsBounded )
 {
     EXPECT_FALSE (      network_.IsBounded () );
     EXPECT_FALSE ( networkConst_.IsBounded () );
@@ -398,7 +398,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , IsUnbounded ) 
+       , IsUnbounded )
 {
     EXPECT_FALSE (      network_.IsUnbounded () );
     EXPECT_FALSE ( networkConst_.IsUnbounded () );
@@ -411,7 +411,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , IsUnbounded ) 
+       , IsUnbounded )
 {
     EXPECT_FALSE (      network_.IsUnbounded () );
     EXPECT_FALSE ( networkConst_.IsUnbounded () );
@@ -424,7 +424,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , IsUnbounded ) 
+       , IsUnbounded )
 {
     EXPECT_FALSE (      network_.IsUnbounded () );
     EXPECT_FALSE ( networkConst_.IsUnbounded () );
@@ -437,7 +437,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , IsUnbounded ) 
+       , IsUnbounded )
 {
     EXPECT_FALSE (      network_.IsUnbounded () );
     EXPECT_FALSE ( networkConst_.IsUnbounded () );
@@ -456,7 +456,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , IsPureUnbounded ) 
+       , IsPureUnbounded )
 {
     EXPECT_FALSE (      network_.IsPureUnbounded () );
     EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
@@ -466,7 +466,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , IsPureUnbounded ) 
+       , IsPureUnbounded )
 {
     EXPECT_FALSE (      network_.IsPureUnbounded () );
     EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
@@ -476,7 +476,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , IsPureUnbounded ) 
+       , IsPureUnbounded )
 {
     EXPECT_FALSE (      network_.IsPureUnbounded () );
     EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
@@ -486,7 +486,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , IsPureUnbounded ) 
+       , IsPureUnbounded )
 {
     EXPECT_FALSE (      network_.IsPureUnbounded () );
     EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
@@ -502,7 +502,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , IsExact ) 
+       , IsExact )
 {
     EXPECT_FALSE (      network_.IsExact () );
     EXPECT_FALSE ( networkConst_.IsExact () );
@@ -512,7 +512,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , IsExact ) 
+       , IsExact )
 {
     EXPECT_FALSE (      network_.IsExact () );
     EXPECT_FALSE ( networkConst_.IsExact () );
@@ -522,7 +522,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , IsExact ) 
+       , IsExact )
 {
     EXPECT_FALSE (      network_.IsExact () );
     EXPECT_FALSE ( networkConst_.IsExact () );
@@ -532,7 +532,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , IsExact ) 
+       , IsExact )
 {
     EXPECT_FALSE (      network_.IsExact () );
     EXPECT_FALSE ( networkConst_.IsExact () );
@@ -548,7 +548,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , NetworkBoundType ) 
+       , NetworkBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
@@ -567,7 +567,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , NetworkBoundType ) 
+       , NetworkBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
@@ -586,7 +586,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , NetworkBoundType ) 
+       , NetworkBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
@@ -605,7 +605,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , NetworkBoundType ) 
+       , NetworkBoundType )
 {
     EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
@@ -630,7 +630,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , NetworkType ) 
+       , NetworkType )
 {
     EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
     EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
@@ -649,7 +649,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , NetworkType ) 
+       , NetworkType )
 {
     EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
     EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
@@ -668,7 +668,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , NetworkType ) 
+       , NetworkType )
 {
     EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
     EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
@@ -687,7 +687,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , NetworkType ) 
+       , NetworkType )
 {
     EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
     EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
@@ -712,11 +712,11 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , AddGeneratorAtUsingVertexId ) 
+       , AddGeneratorAtUsingVertexId )
 {
     TGeneratorProperties generatorProperties;
     generatorProperties.Name() = "TestGenerator1";
-    
+
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
@@ -727,7 +727,7 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestNetworkEmpty
-       , AddGeneratorAtUsingVertexId ) 
+       , AddGeneratorAtUsingVertexId )
 {
     TVertexProperties vertex;
 
@@ -755,15 +755,15 @@ TEST_F ( TestNetworkEmpty
     EXPECT_TRUE ( network_.HasGenerator( generatorId ) );
     EXPECT_EQ ( 0,      generatorId );
     EXPECT_EQ ( 1,      network_.NumberOfGenerators() );
-    EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(1) ) );    
+    EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(1) ) );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , AddGeneratorAtUsingVertexId ) 
+       , AddGeneratorAtUsingVertexId )
 {
     EXPECT_TRUE  ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(2) ) );
-    EXPECT_EQ ( 1,      network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 1,      network_.NumberOfGenerators() );
 
     TGeneratorProperties generatorProperties;
     generatorProperties.Name()       = "TestGenerator1";
@@ -782,15 +782,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_TRUE ( network_.HasGenerator( generatorId2 ) );
     EXPECT_EQ ( 2,      generatorId2 );
     EXPECT_EQ ( 3,      network_.NumberOfGenerators() );
-    EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );    
+    EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , AddGeneratorAtUsingVertexId ) 
+       , AddGeneratorAtUsingVertexId )
 {
     EXPECT_TRUE  ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(2) ) );
-    EXPECT_EQ ( 1,      network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 1,      network_.NumberOfGenerators() );
 
     TGeneratorProperties generatorProperties;
     generatorProperties.Name()       = "TestGenerator1";
@@ -809,14 +809,14 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE ( network_.HasGenerator( generatorId2 ) );
     EXPECT_EQ ( 2,      generatorId2 );
     EXPECT_EQ ( 3,      network_.NumberOfGenerators() );
-    EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );    
+    EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , AddGeneratorAtUsingVertexId ) 
+       , AddGeneratorAtUsingVertexId )
 {
     EXPECT_TRUE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
-    EXPECT_EQ ( 23,     network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 23,     network_.NumberOfGenerators() );
 
     TGeneratorProperties generatorProperties;
     generatorProperties.Name()       = "TestGenerator1";
@@ -844,10 +844,10 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , AddGeneratorAtUsingVertex ) 
+       , AddGeneratorAtUsingVertex )
 {
     TVertexProperties vertexProperties;
-    
+
 
     vertexProperties.Type()             = Vertices::to_enum<Vertices::IeeeBusType>( 99 );
     vertexProperties.ShuntConductance() = 0;
@@ -877,7 +877,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , AddGeneratorAtUsingVertex ) 
+       , AddGeneratorAtUsingVertex )
 {
     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
     TVertex vertex3 = network_.Graph().VertexAt( static_cast<Types::vertexId>(3) );
@@ -885,14 +885,14 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     // Generate generator with default values
     TGeneratorProperties generatorProperties;
     generatorProperties.Name()                = "TestGenerator1";
-    
+
     Types::generatorId generatorId1 = network_.AddGeneratorAt ( vertex0, generatorProperties );
 
     EXPECT_EQ ( 0,      network_.Graph().VertexId ( vertex0 ) );
     EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex0 ) );
     EXPECT_TRUE ( network_.HasGenerator( generatorId1 ) );
     EXPECT_EQ ( 1,      generatorId1 );
-    EXPECT_EQ ( 2,      network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 2,      network_.NumberOfGenerators() );
 
     Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex3, generatorProperties );
 
@@ -905,7 +905,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , AddGeneratorAtUsingVertex ) 
+       , AddGeneratorAtUsingVertex )
 {
     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
     TVertex vertex1 = network_.Graph().VertexAt( static_cast<Types::vertexId>(1) );
@@ -918,7 +918,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE ( network_.HasGeneratorAt    ( vertex0 ) );
     EXPECT_TRUE ( network_.HasGenerator ( generatorId1 ) );
     EXPECT_EQ ( 1,      generatorId1 );
-    EXPECT_EQ ( 2,      network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 2,      network_.NumberOfGenerators() );
 
     Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex1, generatorProperties );
 
@@ -931,7 +931,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , AddGeneratorAtUsingVertex ) 
+       , AddGeneratorAtUsingVertex )
 {
     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
     TVertex vertex1 = network_.Graph().VertexAt( static_cast<Types::vertexId>(1) );
@@ -944,7 +944,7 @@ TEST_F ( TestPowerGridPyPsaExample
     EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex0 ) );
     EXPECT_TRUE ( network_.HasGenerator( generatorId1 ) );
     EXPECT_EQ ( 23,     generatorId1 );
-    EXPECT_EQ ( 24,     network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
 
     Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex1, generatorProperties );
 
@@ -962,7 +962,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , RemoveGeneratorAtUsingVertexIdGeneratorId ) 
+       , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -978,13 +978,13 @@ TEST_F ( TestNetworkEmptyDeathTest
                                             , "HasGeneratorAt"
                                             , "Graph\\(\\).VertexExists \\( vertexId \\)");
     ASSERT_DEATH ( {network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );}, assertionString );
-    
+
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_EQ ( 0,       network_.NumberOfGenerators() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , RemoveGeneratorAtUsingVertexIdGeneratorId ) 
+       , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
@@ -999,7 +999,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-       , RemoveGeneratorAtUsingVertexIdGeneratorId ) 
+       , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -1032,7 +1032,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , RemoveGeneratorAtUsingVertexIdGeneratorId ) 
+       , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_TRUE ( network_.HasGenerator   ( static_cast<Types::generatorId>(0) ) );
@@ -1043,11 +1043,11 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 0, network_.NumberOfGenerators() );   
+    EXPECT_EQ ( 0, network_.NumberOfGenerators() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGeneratorId ) 
+       , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -1074,7 +1074,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , RemoveGeneratorAtUsingVertexIdGenerator ) 
+       , RemoveGeneratorAtUsingVertexIdGenerator )
 {
     // Generate generator with default values
     TGeneratorProperties generatorProperties;
@@ -1096,13 +1096,13 @@ TEST_F ( TestNetworkEmptyDeathTest
                                             , "HasGeneratorAt"
                                             , "Graph\\(\\).VertexExists \\( vertexId \\)");
     ASSERT_DEATH ( {network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );}, assertionString );
-    
+
     EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , RemoveGeneratorAtUsingVertexIdGenerator ) 
+       , RemoveGeneratorAtUsingVertexIdGenerator )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
@@ -1120,7 +1120,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-       , RemoveGeneratorAtUsingVertexIdGenerator ) 
+       , RemoveGeneratorAtUsingVertexIdGenerator )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
@@ -1150,7 +1150,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-       , RemoveGeneratorAtUsingGeneratorNonExistingVertexId ) 
+       , RemoveGeneratorAtUsingGeneratorNonExistingVertexId )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
@@ -1166,7 +1166,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , RemoveGeneratorAtUsingVertexIdGenerator ) 
+       , RemoveGeneratorAtUsingVertexIdGenerator )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
@@ -1184,7 +1184,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGenerator ) 
+       , RemoveGeneratorAtUsingVertexIdGenerator )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
@@ -1220,28 +1220,28 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , HasGenerator ) 
+       , HasGenerator )
 {
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , HasGenerator ) 
+       , HasGenerator )
 {
     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(1) ) );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , HasGenerator ) 
+       , HasGenerator )
 {
     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(1) ) );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , HasGenerator ) 
-{   
+       , HasGenerator )
+{
     for ( Types::count counter = 0
         ; counter < network_.NumberOfGenerators()
         ; ++counter )
@@ -1252,8 +1252,8 @@ TEST_F ( TestPowerGridPyPsaExample
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAfterRemoval ) 
-{   
+       , HasGeneratorAfterRemoval )
+{
     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>( 5 )
                                , static_cast<Types::generatorId>( 11 ) );
@@ -1267,7 +1267,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , HasGeneratorAtVertexId ) 
+       , HasGeneratorAtVertexId )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -1279,24 +1279,24 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , HasGeneratorAtVertexId ) 
+       , HasGeneratorAtVertexId )
 {
     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) ) );
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( 1 ) ) );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , HasGeneratorAtVertexId ) 
+       , HasGeneratorAtVertexId )
 {
     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) ) );
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( 1 ) ) );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexId ) 
+       , HasGeneratorAtVertexId )
 {
     for ( Types::count counter = 0
-        ; counter < network_.Graph().NumberOfVertices() 
+        ; counter < network_.Graph().NumberOfVertices()
         ; ++counter )
     {
         EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( counter ) ) );
@@ -1304,7 +1304,7 @@ TEST_F ( TestPowerGridPyPsaExample
 }
 
 TEST_F ( TestPowerGridPyPsaExampleDeathTest
-       , HasGeneratorAtVertexId ) 
+       , HasGeneratorAtVertexId )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -1322,7 +1322,7 @@ TEST_F ( TestPowerGridPyPsaExampleDeathTest
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , HasGeneratorAtVertexObject ) 
+       , HasGeneratorAtVertexObject )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -1337,7 +1337,7 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , HasGeneratorAtVertexObject ) 
+       , HasGeneratorAtVertexObject )
 {
     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) );
     EXPECT_TRUE  ( network_.HasGeneratorAt ( vertex0 ) );
@@ -1346,7 +1346,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , HasGeneratorAtVertexObject ) 
+       , HasGeneratorAtVertexObject )
 {
     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) );
     EXPECT_TRUE  ( network_.HasGeneratorAt ( vertex0 ) );
@@ -1355,10 +1355,10 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexObject ) 
+       , HasGeneratorAtVertexObject )
 {
     for ( Types::count counter = 0
-        ; counter < network_.Graph().NumberOfVertices() 
+        ; counter < network_.Graph().NumberOfVertices()
         ; ++counter )
     {
         TVertex vertex = network_.Graph().VertexAt( static_cast<Types::vertexId>( counter ) );
@@ -1373,7 +1373,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
-       , GeneratorId ) 
+       , GeneratorId )
 {
     TGeneratorProperties generatorProperties;
 
@@ -1385,7 +1385,7 @@ TEST_F ( TestNetworkEmpty
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , GeneratorId ) 
+       , GeneratorId )
 {
     TGeneratorProperties generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>( 0 ) );
 
@@ -1396,13 +1396,13 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 
     // Find the generator that was extracted from position 0
     Types::generatorId generatorId = network_.GeneratorId ( generatorProperties );
-    
+
     // That's what we expect
     EXPECT_EQ ( 0, generatorId );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , GeneratorId ) 
+       , GeneratorId )
 {
     TGeneratorProperties generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>( 0 ) );
 
@@ -1413,7 +1413,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 
     // Find the generator that was extracted from position 0
     Types::generatorId generatorId = network_.GeneratorId ( generatorProperties );
-    
+
     // That's what we expect
     EXPECT_EQ ( 0, generatorId );
 }
@@ -1425,7 +1425,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , GeneratorIds ) 
+       , GeneratorIds )
 {
     std::vector<Types::generatorId> generatorIds;
 
@@ -1439,7 +1439,7 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , GeneratorIds ) 
+       , GeneratorIds )
 {
     std::vector<Types::generatorId> generatorIds;
     network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
@@ -1449,7 +1449,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , GeneratorIds ) 
+       , GeneratorIds )
 {
     std::vector<Types::generatorId> generatorIds;
     network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
@@ -1459,10 +1459,10 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorIds ) 
+       , GeneratorIds )
 {
     std::vector<Types::generatorId> generatorIds;
-    network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds ); 
+    network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
 
     EXPECT_EQ ( 2, generatorIds.size() );
 }
@@ -1474,7 +1474,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , GeneratorAt ) 
+       , GeneratorAt )
 {
     // Generator does not exist
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
@@ -1486,26 +1486,26 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , GeneratorAt ) 
+       , GeneratorAt )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
-    
+
     GeneratorComplyInitialValues ( generatorProperties );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , GeneratorAt ) 
+       , GeneratorAt )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
-    
+
     GeneratorComplyInitialValues ( generatorProperties );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorAt ) 
+       , GeneratorAt )
 {
     TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
-    
+
     GeneratorComplyInitialValues ( generatorProperties );
 }
 
@@ -1516,7 +1516,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , GeneratorsAtUsingVertexId ) 
+       , GeneratorsAtUsingVertexId )
 {
     std::vector<TGeneratorProperties> generators;
 
@@ -1530,7 +1530,7 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , GeneratorsAtUsingVertexId ) 
+       , GeneratorsAtUsingVertexId )
 {
     std::vector<TGeneratorProperties> generatorProperties;
     network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
@@ -1542,7 +1542,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     // Clear vector
     generatorProperties.clear();
     EXPECT_EQ ( 0,    generatorProperties.size() );
-    
+
     // Check number of generators at vertex identifier 1
     network_.GeneratorsAt ( static_cast<Types::vertexId>(1)
                           , generatorProperties );
@@ -1550,7 +1550,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , GeneratorsAtUsingVertexId ) 
+       , GeneratorsAtUsingVertexId )
 {
     std::vector<TGeneratorProperties> generatorProperties;
     network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
@@ -1562,7 +1562,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     // Clear vector
     generatorProperties.clear();
     EXPECT_EQ ( 0, generatorProperties.size() );
-    
+
     // Check number of generators at vertex identifier 1
     network_.GeneratorsAt ( static_cast<Types::vertexId>(1)
                           , generatorProperties );
@@ -1570,7 +1570,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorsAtUsingVertexId ) 
+       , GeneratorsAtUsingVertexId )
 {
     std::vector<TGeneratorProperties> generatorProperties;
     network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
@@ -1582,7 +1582,7 @@ TEST_F ( TestPowerGridPyPsaExample
     // Clear vector
     generatorProperties.clear();
     EXPECT_EQ ( 0, generatorProperties.size() );
-    
+
     // Check number of generators at vertex identifier 1
     network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
                           , generatorProperties );
@@ -1596,10 +1596,10 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , GeneratorsAtUsingVertexObject ) 
+       , GeneratorsAtUsingVertexObject )
 {
     std::vector<TGeneratorProperties> generatorProperties;
-    
+
     TVertexProperties   vertexProperties;
     TVertex vertex0 ( 9999, vertexProperties );
 
@@ -1613,7 +1613,7 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , GeneratorsAtUsingVertexObject ) 
+       , GeneratorsAtUsingVertexObject )
 {
     std::vector<TGeneratorProperties> generatorProperties;
 
@@ -1628,14 +1628,14 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     // Clear vector
     generatorProperties.clear();
     EXPECT_EQ ( 0, generatorProperties.size() );
-    
+
     // Check number of generators at vertex identifier 1
     network_.GeneratorsAt( vertex1, generatorProperties );
     EXPECT_EQ ( 0, generatorProperties.size() );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , GeneratorsAtUsingVertexObject ) 
+       , GeneratorsAtUsingVertexObject )
 {
     std::vector<TGeneratorProperties> generatorPropertiesS;
 
@@ -1661,14 +1661,14 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     // Clear vector
     generatorPropertiesS.clear();
     EXPECT_EQ ( 0, generatorPropertiesS.size() );
-    
+
     // Check number of generators at vertex identifier 1
     network_.GeneratorsAt( vertex1, generatorPropertiesS );
     EXPECT_EQ ( 0, generatorPropertiesS.size() );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorsAtUsingVertexObject ) 
+       , GeneratorsAtUsingVertexObject )
 {
     std::vector<TGeneratorProperties> generatorPropertiesS;
 
@@ -1695,7 +1695,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F ( TestNetworkEmptyDeathTest
-       , FindGenerator ) 
+       , FindGenerator )
 {
     TGeneratorProperties              generatorProperties;
     std::vector<TGeneratorProperties> generators;
@@ -1705,7 +1705,7 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , FindGenerator ) 
+       , FindGenerator )
 {
     TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(0) );
     std::vector<TGeneratorProperties> generators;
@@ -1720,13 +1720,13 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 
     // Find the generator that was extracted from position 0
     Types::generatorId generatorId = network_.FindGenerator ( generatorProperties, generators );
-    
+
     // That's what we expect
     EXPECT_EQ ( 0, generatorId );
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , FindGenerator ) 
+       , FindGenerator )
 {
     TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(0) );
     std::vector<TGeneratorProperties> generatorPropertiesS;
@@ -1742,13 +1742,13 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     // Find the generator that was extracted from position 0
     Types::generatorId generatorId = network_.FindGenerator ( generatorProperties
                                                             , generatorPropertiesS );
-    
+
     // That's what we expect
     EXPECT_EQ ( 0, generatorId );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
-       , FindGenerator ) 
+       , FindGenerator )
 {
     TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(15) );
     std::vector<TGeneratorProperties> generatorPropertiesS;
@@ -1760,7 +1760,7 @@ TEST_F ( TestPowerGridPyPsaExample
     // Find the generator that was extracted from position 0
     Types::generatorId generatorId = network_.FindGenerator ( generatorProperties
                                                             , generatorPropertiesS );
-    
+
     // That's what we expect: Field 0 of the vector at vertex 7
     EXPECT_EQ ( 0, generatorId );
 }
@@ -1772,7 +1772,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , TotalRealPowerGenerationBoundAt ) 
+        , TotalRealPowerGenerationBoundAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -1784,7 +1784,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtBounded ) 
+        , TotalRealPowerGenerationBoundAtBounded )
 { // Bounded
     network_.MakeBounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1796,7 +1796,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtBoundedHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtBoundedHasNoGenerator )
 { // Bounded with no generator at that vertex
     network_.MakeBounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1808,7 +1808,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtUnbounded ) 
+        , TotalRealPowerGenerationBoundAtUnbounded )
 { // Unbounded
     network_.MakeUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1820,7 +1820,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtUnboundedHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtUnboundedHasNoGenerator )
 { // Unbounded with no generator at that vertex
     network_.MakeUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1832,7 +1832,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtPureUnbounded ) 
+        , TotalRealPowerGenerationBoundAtPureUnbounded )
 { // PureUnbounded
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1844,7 +1844,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtPureUnboundedHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtPureUnboundedHasNoGenerator )
 { // Pure unbounded with no generator at that vertex
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1856,7 +1856,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtExact ) 
+        , TotalRealPowerGenerationBoundAtExact )
 { // Exact
     network_.MakeExact ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1868,7 +1868,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationBoundAtExactHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtExactHasNoGenerator )
 { // Exact with no generator at that vertex
     network_.MakeExact ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1880,7 +1880,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtBounded ) 
+        , TotalRealPowerGenerationBoundAtBounded )
 { // Bounded
     network_.MakeBounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1892,7 +1892,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtBoundedHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtBoundedHasNoGenerator )
 { // Bounded with no generator at that vertex
     network_.MakeBounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1904,7 +1904,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtUnbounded ) 
+        , TotalRealPowerGenerationBoundAtUnbounded )
 { // Unbounded
     network_.MakeUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1916,7 +1916,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtUnboundedHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtUnboundedHasNoGenerator )
 { // Unbounded with no generator at that vertex
     network_.MakeUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1928,7 +1928,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtPureUnbounded ) 
+        , TotalRealPowerGenerationBoundAtPureUnbounded )
 { // PureUnbounded
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1940,7 +1940,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtPureUnboundedHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtPureUnboundedHasNoGenerator )
 { // Pure unbounded with no generator at that vertex
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1951,7 +1951,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, bound.Maximum() );
 }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4b, TotalRealPowerGenerationBoundAtExact ) 
+TEST_F ( TestPowerGridAcm2018MtsfFigure4b, TotalRealPowerGenerationBoundAtExact )
 { // Exact
     network_.MakeExact ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -1963,7 +1963,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b, TotalRealPowerGenerationBoundAtExact 
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationBoundAtExactHasNoGenerator ) 
+        , TotalRealPowerGenerationBoundAtExactHasNoGenerator )
 { // Exact with no generator at that vertex
     network_.MakeExact ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -1975,7 +1975,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridPyPsaExample
-        , TotalRealPowerGenerationBoundAtBounded ) 
+        , TotalRealPowerGenerationBoundAtBounded )
 { // Bounded
     network_.MakeBounded ();
     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
@@ -1994,7 +1994,7 @@ TEST_F  ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , TotalRealPowerGenerationAt ) 
+        , TotalRealPowerGenerationAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -2006,8 +2006,8 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-        , TotalRealPowerGenerationAtNonExistingVertex ) 
-{ 
+        , TotalRealPowerGenerationAtNonExistingVertex )
+{
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
@@ -2018,8 +2018,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator ) 
-{ 
+        , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator )
+{
     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
 
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -2028,8 +2028,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerGenerationAt ) 
-{ 
+        , TotalRealPowerGenerationAt )
+{
     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
 
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
@@ -2038,20 +2038,20 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-        , TotalRealPowerGenerationAtNonExistingVertex ) 
-{ 
+        , TotalRealPowerGenerationAtNonExistingVertex )
+{
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
                                                 , "Graph\\(\\).VertexExists \\( vertexId \\)");
-    
+
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator ) 
-{ 
+        , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator )
+{
     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
 
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -2060,8 +2060,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerGenerationAt ) 
-{ 
+        , TotalRealPowerGenerationAt )
+{
     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
 
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
@@ -2070,8 +2070,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridPyPsaExample
-        , TotalRealPowerGenerationAt ) 
-{ 
+        , TotalRealPowerGenerationAt )
+{
     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0)
                                                                                                                                                     , static_cast<Types::index>(0) );
 
@@ -2095,7 +2095,7 @@ TEST_F  ( TestPowerGridPyPsaExample
                                                                                                                                         , static_cast<Types::index>(6) );
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(7) ) );
     // Test the total real power generation
-    EXPECT_EQ ( 5280.0, value ); 
+    EXPECT_EQ ( 5280.0, value );
 }
 
 
@@ -2106,7 +2106,7 @@ TEST_F  ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , TotalReactivePowerGenerationBoundAt ) 
+        , TotalReactivePowerGenerationBoundAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -2118,7 +2118,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtBounded ) 
+        , TotalReactivePowerGenerationBoundAtBounded )
 { // Bounded
     network_.MakeBounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2130,7 +2130,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtBoundedHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtBoundedHasNoGenerator )
 { // Bounded with no generator at that vertex
     network_.MakeBounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2142,7 +2142,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtUnbounded ) 
+        , TotalReactivePowerGenerationBoundAtUnbounded )
 { // Unbounded
     network_.MakeUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2154,7 +2154,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtUnboundedHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtUnboundedHasNoGenerator )
 { // Unbounded with no generator at that vertex
     network_.MakeUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2166,7 +2166,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtPureUnbounded ) 
+        , TotalReactivePowerGenerationBoundAtPureUnbounded )
 { // PureUnbounded
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2178,7 +2178,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtPureUnboundedHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtPureUnboundedHasNoGenerator )
 { // Pure unbounded with no generator at that vertex
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2190,7 +2190,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtExact ) 
+        , TotalReactivePowerGenerationBoundAtExact )
 { // Exact
     network_.MakeExact ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2202,7 +2202,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationBoundAtExactHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtExactHasNoGenerator )
 { // Exact with no generator at that vertex
     network_.MakeExact ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2214,7 +2214,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtBounded ) 
+        , TotalReactivePowerGenerationBoundAtBounded )
 { // Bounded
     network_.MakeBounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2226,7 +2226,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtBoundedHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtBoundedHasNoGenerator )
 { // Bounded with no generator at that vertex
     network_.MakeBounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2238,7 +2238,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtUnbounded ) 
+        , TotalReactivePowerGenerationBoundAtUnbounded )
 { // Unbounded
     network_.MakeUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2250,7 +2250,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtUnboundedHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtUnboundedHasNoGenerator )
 { // Unbounded with no generator at that vertex
     network_.MakeUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2262,7 +2262,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtPureUnbounded ) 
+        , TotalReactivePowerGenerationBoundAtPureUnbounded )
 { // PureUnbounded
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2274,7 +2274,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtPureUnboundedHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtPureUnboundedHasNoGenerator )
 { // Pure unbounded with no generator at that vertex
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2286,7 +2286,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , TotalReactivePowerGenerationBoundAtExact ) 
+       , TotalReactivePowerGenerationBoundAtExact )
 { // Exact
     network_.MakeExact ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2298,7 +2298,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationBoundAtExactHasNoGenerator ) 
+        , TotalReactivePowerGenerationBoundAtExactHasNoGenerator )
 { // Exact with no generator at that vertex
     network_.MakeExact ();
     TBound bound = network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
@@ -2316,7 +2316,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , TotalReactivePowerGenerationAt ) 
+        , TotalReactivePowerGenerationAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -2328,8 +2328,8 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-        , TotalReactivePowerGenerationAtNonExistingVertex ) 
-{ 
+        , TotalReactivePowerGenerationAtNonExistingVertex )
+{
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
@@ -2340,8 +2340,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationAtWithVertexThatHasNoGenerator ) 
-{ 
+        , TotalReactivePowerGenerationAtWithVertexThatHasNoGenerator )
+{
     Types::real value = network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
 
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -2350,8 +2350,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalReactivePowerGenerationAt ) 
-{ 
+        , TotalReactivePowerGenerationAt )
+{
     Types::real value = network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
 
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
@@ -2360,20 +2360,20 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-        , TotalReactivePowerGenerationAtNonExistingVertex ) 
-{ 
+        , TotalReactivePowerGenerationAtNonExistingVertex )
+{
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
                                                 , "Graph\\(\\).VertexExists \\( vertexId \\)");
-    
+
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationAtWithVertexThatHasNoGenerator ) 
-{ 
+        , TotalReactivePowerGenerationAtWithVertexThatHasNoGenerator )
+{
     Types::real value = network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(1) );
 
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -2382,8 +2382,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalReactivePowerGenerationAt ) 
-{ 
+        , TotalReactivePowerGenerationAt )
+{
     Types::real value = network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
 
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
@@ -2392,8 +2392,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestPowerGridPyPsaExample
-        , TotalReactivePowerGenerationAt ) 
-{ 
+        , TotalReactivePowerGenerationAt )
+{
     Types::real value = network_.TotalReactivePowerGenerationAt<
                                 Vertices::GenerationStrategyDifferentiationType
                                             ::totalVertexPowerGenerationPerSnapshot > ( static_cast<Types::vertexId>( 0 ) );
@@ -2410,7 +2410,7 @@ TEST_F  ( TestPowerGridPyPsaExample
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , AddLoadAtUsingVertexId ) 
+        , AddLoadAtUsingVertexId )
 {
     TLoadProperties loadProperties;
 
@@ -2424,7 +2424,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestNetworkEmpty
-        , AddLoadAtUsingVertexId ) 
+        , AddLoadAtUsingVertexId )
 {
     // Add vertex
     TVertexProperties vertexProperties;
@@ -2446,8 +2446,8 @@ TEST_F  ( TestNetworkEmpty
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-        , AddLoadAtUsingVertexIdNonExistingVertexId ) 
-{ 
+        , AddLoadAtUsingVertexIdNonExistingVertexId )
+{
     TLoadProperties loadProperties;
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
@@ -2459,8 +2459,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , AddLoadAtUsingVertexId ) 
-{ 
+        , AddLoadAtUsingVertexId )
+{
     Types::vertexId vertexId = static_cast<Types::vertexId>(2);
     EXPECT_EQ    ( 1, network_.NumberOfLoads() );
     EXPECT_FALSE ( network_.HasLoadAt ( vertexId ) );
@@ -2477,8 +2477,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , AddLoadAtUsingVertexId ) 
-{ 
+        , AddLoadAtUsingVertexId )
+{
     Types::vertexId vertexId = static_cast<Types::vertexId>(1);
     EXPECT_EQ    ( 1, network_.NumberOfLoads() );
     EXPECT_FALSE ( network_.HasLoadAt ( vertexId ) );
@@ -2505,7 +2505,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , AddLoadAtVertexObject ) 
+        , AddLoadAtVertexObject )
 {
     TLoadProperties loadProperties;
     TVertexProperties vertexProperties;
@@ -2521,7 +2521,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestNetworkEmpty
-        , AddLoadAtVertexObject ) 
+        , AddLoadAtVertexObject )
 {
     TVertexProperties vertexProperties;
     Types::vertexId   vertexId = network_.Graph().AddVertex ( vertexProperties );
@@ -2545,8 +2545,8 @@ TEST_F  ( TestNetworkEmpty
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , AddLoadAtVertexObject ) 
-{ 
+        , AddLoadAtVertexObject )
+{
     TVertex vertex = network_.Graph().VertexAt ( static_cast<Types::vertexId>(2) );
     EXPECT_FALSE ( network_.HasLoadAt ( vertex ) );
 
@@ -2578,8 +2578,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , AddLoadAtVertexObject ) 
-{ 
+        , AddLoadAtVertexObject )
+{
     TVertex vertex = network_.Graph().VertexAt ( static_cast<Types::vertexId>(1) );
     EXPECT_FALSE ( network_.HasLoadAt ( vertex ) );
 
@@ -2621,7 +2621,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , RemoveLoadAtUsingVertexIdLoadId ) 
+        , RemoveLoadAtUsingVertexIdLoadId )
 {
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
@@ -2638,24 +2638,24 @@ TEST_F  ( TestNetworkEmptyDeathTest
                                             , "HasLoadAt"
                                             , "Graph\\(\\).VertexExists \\( vertexId \\)");
     ASSERT_DEATH ( {network_.HasLoadAt ( static_cast<Types::vertexId>(0) );}, assertionString );
-    
+
     EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
 }
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExists ) 
+        , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExists )
 {
     TVertexProperties vertexProperties;
     Types::vertexId   vertexId = network_.Graph().AddVertex ( vertexProperties );
     TVertex   const & vertex   = network_.Graph().VertexAt  ( vertexId );
-    
+
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
 
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "HasLoad \\( loadId \\)");    
+                                                , "HasLoad \\( loadId \\)");
 
     ASSERT_DEATH ( {network_.RemoveLoadAt ( vertexId
                                           , static_cast<Types::loadId>(0) );}
@@ -2664,7 +2664,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , RemoveLoadAtUsingVertexIdLoadIdAddingAndRemovingMultipleLoads ) 
+        , RemoveLoadAtUsingVertexIdLoadIdAddingAndRemovingMultipleLoads )
 {
     TVertexProperties vertexProperties;
     TLoadProperties loadProperties;
@@ -2716,14 +2716,14 @@ TEST_F  ( TestNetworkEmptyDeathTest
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmpty
-        , HasLoadId ) 
+        , HasLoadId )
 {
     EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_FALSE ( networkConst_.HasLoad ( static_cast<Types::loadId>(0) ) );
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , HasLoadId ) 
+        , HasLoadId )
 { // Checks loadId
     EXPECT_TRUE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_TRUE ( networkConst_.HasLoad ( static_cast<Types::loadId>(0) ) );
@@ -2742,7 +2742,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , HasLoadId ) 
+        , HasLoadId )
 { // Checks loadId
     EXPECT_TRUE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_TRUE ( networkConst_.HasLoad ( static_cast<Types::loadId>(0) ) );
@@ -2767,7 +2767,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmpty
-        , HasLoadObject ) 
+        , HasLoadObject )
 {
     TLoadProperties loadProperties;
     EXPECT_FALSE ( network_.HasLoad ( loadProperties ) );
@@ -2775,7 +2775,7 @@ TEST_F  ( TestNetworkEmpty
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , HasLoadObject ) 
+        , HasLoadObject )
 { // Checks loadObject
     TLoadProperties loadProperties0;
     EXPECT_FALSE ( network_.HasLoad ( loadProperties0 ) );
@@ -2789,7 +2789,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , HasLoadObject ) 
+        , HasLoadObject )
 { // Checks loadObject
     TLoadProperties loadProperties0;
     EXPECT_FALSE ( network_.HasLoad ( loadProperties0 ) );
@@ -2797,7 +2797,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 
     EXPECT_TRUE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_TRUE ( networkConst_.HasLoad ( static_cast<Types::loadId>(0) ) );
-    
+
     TLoadProperties loadProperties1 = network_.LoadAt( 0 );
     EXPECT_TRUE ( network_.HasLoad ( loadProperties1 ) );
     EXPECT_TRUE ( networkConst_.HasLoad ( loadProperties1 ) );
@@ -2810,13 +2810,13 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , HasLoadAt ) 
+        , HasLoadAt )
 { // Checks if there is a load at a vertex
 
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");    
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
 
     ASSERT_DEATH ( {network_.HasLoadAt ( static_cast<Types::vertexId>(0) );}
                  , assertionString );
@@ -2825,7 +2825,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , HasLoadAt ) 
+        , HasLoadAt )
 { // Checks if there is a load at a vertex
     EXPECT_FALSE ( network_.HasLoadAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( networkConst_.HasLoadAt ( static_cast<Types::vertexId>(0) ) );
@@ -2841,17 +2841,17 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , HasLoadAt ) 
+        , HasLoadAt )
 { // Checks if there is a load at a vertex
     EXPECT_FALSE ( network_.HasLoadAt ( static_cast<Types::vertexId>(0) ) );
     EXPECT_FALSE ( networkConst_.HasLoadAt ( static_cast<Types::vertexId>(0) ) );
 
     EXPECT_FALSE ( network_.HasLoadAt ( static_cast<Types::vertexId>(1) ) );
     EXPECT_FALSE ( networkConst_.HasLoadAt ( static_cast<Types::vertexId>(1) ) );
-    
+
     EXPECT_FALSE ( network_.HasLoadAt ( static_cast<Types::vertexId>(2) ) );
     EXPECT_FALSE ( networkConst_.HasLoadAt ( static_cast<Types::vertexId>(2) ) );
-    
+
     EXPECT_TRUE  ( network_.HasLoadAt ( static_cast<Types::vertexId>(3) ) );
     EXPECT_TRUE  ( networkConst_.HasLoadAt ( static_cast<Types::vertexId>(3) ) );
 }
@@ -2863,7 +2863,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , LoadId ) 
+        , LoadId )
 { // Checks if there is a load at a vertex
 
     TLoadProperties loadProperties0;
@@ -2873,7 +2873,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , LoadId ) 
+        , LoadId )
 { // Checks if there is a load at a vertex
     TLoadProperties loadProperties0;
     EXPECT_EQ ( Const::NONE, network_.LoadId ( loadProperties0 ) );
@@ -2881,7 +2881,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 
     EXPECT_TRUE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_TRUE ( networkConst_.HasLoad ( static_cast<Types::loadId>(0) ) );
-    
+
     TLoadProperties loadProperties1 = network_.LoadAt( 0 );
     EXPECT_EQ ( 0, network_.LoadId ( loadProperties1 ) );
 
@@ -2890,7 +2890,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , LoadId ) 
+        , LoadId )
 { // Checks if there is a load at a vertex
     TLoadProperties loadProperties0;
     EXPECT_EQ ( Const::NONE, network_.LoadId ( loadProperties0 ) );
@@ -2898,7 +2898,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 
     EXPECT_TRUE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_TRUE ( networkConst_.HasLoad ( static_cast<Types::loadId>(0) ) );
-    
+
     TLoadProperties loadProperties1 = network_.LoadAt( 0 );
     EXPECT_EQ ( 0, network_.LoadId ( loadProperties1 ) );
 
@@ -2913,7 +2913,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , LoadIds ) 
+        , LoadIds )
 { // Checks if there is a load at a vertex
 
     TLoadProperties             loadProperties0;
@@ -2922,7 +2922,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadIds"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");    
+                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
 
     ASSERT_DEATH ( {network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );}
                  , assertionString );
@@ -2931,11 +2931,11 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , LoadIds ) 
+        , LoadIds )
 { // Checks if there is a load at a vertex
     TLoadProperties             loadProperties0;
     std::vector<Types::loadId>  loadIds;
-    
+
     network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
     EXPECT_EQ ( 0, loadIds.size() );
     networkConst_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
@@ -2959,11 +2959,11 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , LoadIds ) 
+        , LoadIds )
 { // Checks if there is a load at a vertex
     TLoadProperties             loadProperties0;
     std::vector<Types::loadId>  loadIds;
-    
+
     network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
     EXPECT_EQ ( 0, loadIds.size() );
     networkConst_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
@@ -2993,12 +2993,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , LoadAt ) 
+        , LoadAt )
 { // Checks if there is a load at a load ID
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");    
+                                                , "HasLoad \\( loadId \\)");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 0 ) );}
                  , assertionString );
@@ -3007,12 +3007,12 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
-        , LoadAt ) 
+        , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");    
+                                                , "HasLoad \\( loadId \\)");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
@@ -3021,7 +3021,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , LoadAt ) 
+        , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
     TLoadProperties loadProperties0 = network_.LoadAt ( static_cast<Types::loadId>( 0 ) );
 
@@ -3047,12 +3047,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-        , LoadAt ) 
+        , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");    
+                                                , "HasLoad \\( loadId \\)");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
@@ -3061,7 +3061,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , LoadAt ) 
+        , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
     TLoadProperties loadProperties0 = network_.LoadAt ( static_cast<Types::loadId>( 0 ) );
 
@@ -3093,12 +3093,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , LoadsAtVertexId ) 
+        , LoadsAtVertexId )
 { // Return load properties at a vertex ID
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadsAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");    
+                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
 
     std::vector<TLoadProperties> loads;
     ASSERT_DEATH ( {network_.LoadsAt ( static_cast<Types::vertexId>( 0 ), loads );}
@@ -3109,7 +3109,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , LoadsAtVertexId ) 
+        , LoadsAtVertexId )
 { // Return load properties at a vertex ID
     std::vector<TLoadProperties> multipleLoadProperties;
 
@@ -3155,7 +3155,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , LoadsAtVertexId ) 
+        , LoadsAtVertexId )
 { // Return load properties at a vertex ID
     std::vector<TLoadProperties> multipleLoadProperties;
 
@@ -3207,12 +3207,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , LoadsAtVertex ) 
+        , LoadsAtVertex )
 { // Return load properties at a vertex ID
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");    
+                                                , "VertexExists\\(id\\)");
 
     std::vector<TLoadProperties> loads;
     ASSERT_DEATH ( {network_.LoadsAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ), loads );}
@@ -3222,7 +3222,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , LoadsAtVertex ) 
+        , LoadsAtVertex )
 { // Return load properties at a vertex ID
     std::vector<TLoadProperties> multipleLoadProperties;
 
@@ -3268,7 +3268,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , LoadsAtVertex ) 
+        , LoadsAtVertex )
 { // Return load properties at a vertex ID
     std::vector<TLoadProperties> multipleLoadProperties;
 
@@ -3286,7 +3286,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, multipleLoadProperties.size() );
     networkConst_.LoadsAt ( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 2 ) ), multipleLoadProperties );
     EXPECT_EQ ( 0, multipleLoadProperties.size() );
-    
+
     network_.LoadsAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 3 ) ), multipleLoadProperties );
     EXPECT_EQ ( 1, multipleLoadProperties.size() );
     EXPECT_EQ ( "4", multipleLoadProperties[0].Name() );
@@ -3319,12 +3319,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , RealPowerLoadAt ) 
+        , RealPowerLoadAt )
 { // Total real power load for a snapshot (here 0 implicitly) for a vertexId
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RealPowerLoadAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");    
+                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
 
     ASSERT_DEATH ( {network_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
@@ -3333,10 +3333,10 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , RealPowerLoadAt ) 
+        , RealPowerLoadAt )
 { // Total real power load for a snapshot (here 0) for a vertexId
     Types::index snapshotId = 0;
-    
+
     Types::real result = network_.RealPowerLoadAt( static_cast<Types::vertexId>( 3 ), snapshotId );
     EXPECT_EQ ( 8.0 , result );
     result = networkConst_.RealPowerLoadAt( static_cast<Types::vertexId>( 3 ), snapshotId );
@@ -3348,10 +3348,10 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , RealPowerLoadAt ) 
+        , RealPowerLoadAt )
 { // Total real power load for a snapshot (here 0) for a vertexId
     Types::index snapshotId = 0;
-    
+
     Types::real result = network_.RealPowerLoadAt( static_cast<Types::vertexId>( 3 ), snapshotId );
     EXPECT_EQ ( 5.0 , result );
     result = networkConst_.RealPowerLoadAt( static_cast<Types::vertexId>( 3 ), snapshotId );
@@ -3369,12 +3369,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , RealPowerLoadAtVertexObject ) 
+        , RealPowerLoadAtVertexObject )
 { // Total real power load for a snapshot (here 0 implicitly) for a vertexId
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");    
+                                                , "VertexExists\\(id\\)");
 
     ASSERT_DEATH ( {network_.RealPowerLoadAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );}
                  , assertionString );
@@ -3383,10 +3383,10 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , RealPowerLoadAtVertexObject ) 
+        , RealPowerLoadAtVertexObject )
 { // Total real power load for a snapshot (here 0) for a vertexId
     Types::index snapshotId = 0;
-    
+
     Types::real result = network_.RealPowerLoadAt( network_.Graph().VertexAt( static_cast<Types::vertexId>( 3 ) ), snapshotId );
     EXPECT_EQ ( 8.0 , result );
     result = networkConst_.RealPowerLoadAt( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 3 ) ), snapshotId );
@@ -3398,10 +3398,10 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , RealPowerLoadAtVertexObject ) 
+        , RealPowerLoadAtVertexObject )
 { // Total real power load for a snapshot (here 0) for a vertexId
     Types::index snapshotId = 0;
-    
+
     Types::real result = network_.RealPowerLoadAt( network_.Graph().VertexAt( static_cast<Types::vertexId>( 3 ) ), snapshotId );
     EXPECT_EQ ( 5.0 , result );
     result = networkConst_.RealPowerLoadAt( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 3 ) ), snapshotId );
@@ -3419,12 +3419,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , TotalRealPowerLoadBoundAt ) 
+        , TotalRealPowerLoadBoundAt )
 { // Total real power load for a snapshot (here 0 implicitly) for a vertexId
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerLoadBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");    
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
 
     ASSERT_DEATH ( {network_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
@@ -3433,7 +3433,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , TotalRealPowerLoadBoundAt ) 
+        , TotalRealPowerLoadBoundAt )
 { // Total real power load for a snapshot (here 0) for a vertexId
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalRealPowerLoadBoundAt( static_cast<Types::vertexId>( 3 ) );
@@ -3469,7 +3469,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , TotalRealPowerLoadBoundAt ) 
+        , TotalRealPowerLoadBoundAt )
 { // Total real power load for a snapshot (here 0) for a vertexId
     network_.MakePureUnbounded ();
     TBound bound = network_.TotalRealPowerLoadBoundAt( static_cast<Types::vertexId>( 3 ) );
@@ -3511,10 +3511,10 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , AddGeneratorRealPowerSnapshotAt ) 
+        , AddGeneratorRealPowerSnapshotAt )
 { // Add generator snapshot (real power)
     TGeneratorProperties generatorProperties;
-    
+
     CreateExampleGeneratorProperties( generatorProperties );
 
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
@@ -3535,15 +3535,15 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , AddGeneratorRealPowerSnapshotAt ) 
+        , AddGeneratorRealPowerSnapshotAt )
 { // Add generator snapshot (real power)
     TGeneratorProperties generatorProperties;
-    
+
     CreateExampleGeneratorProperties( generatorProperties );
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(2) ) );
-    
+
     Types::generatorId generatorId = network_.AddGeneratorAt(static_cast<Types::vertexId>(2), generatorProperties);
-    
+
     network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(2) ) );
 
@@ -3554,10 +3554,10 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         generatorProperties = generatorsAtVertex[0];
     }
     EXPECT_EQ ( 1, generatorsAtVertex.size() );
-    
+
     CheckExampleGeneratorProperties ( generatorProperties );
     generatorsAtVertex.clear();
-    
+
     network_.GeneratorsAt ( static_cast<Types::vertexId>(2), generatorsAtVertex );
     if ( !generatorsAtVertex.empty() )
     {
@@ -3568,15 +3568,15 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , AddGeneratorRealPowerSnapshotAt ) 
+        , AddGeneratorRealPowerSnapshotAt )
 { // Add generator snapshot (real power)
     TGeneratorProperties generatorProperties;
-    
+
     CreateExampleGeneratorProperties( generatorProperties );
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
-    
+
     Types::generatorId generatorId = network_.AddGeneratorAt(static_cast<Types::vertexId>(1), generatorProperties);
-    
+
     network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );
     network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );
     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
@@ -3588,10 +3588,10 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
         generatorProperties = generatorsAtVertex[0];
     }
     EXPECT_EQ ( 1, generatorsAtVertex.size() );
-    
+
     CheckExampleGeneratorProperties ( generatorProperties );
     generatorsAtVertex.clear();
-    
+
     network_.GeneratorsAt ( static_cast<Types::vertexId>(1), generatorsAtVertex );
     if ( !generatorsAtVertex.empty() )
     {
@@ -3611,20 +3611,20 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmpty
-        , UpdateGeneratorSnapshotSize ) 
-{ 
+        , UpdateGeneratorSnapshotSize )
+{
     network_.UpdateGeneratorSnapshotSize();
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , UpdateGeneratorSnapshotSize ) 
-{ 
-    network_.UpdateGeneratorSnapshotSize();   
+        , UpdateGeneratorSnapshotSize )
+{
+    network_.UpdateGeneratorSnapshotSize();
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , UpdateGeneratorSnapshotSize ) 
-{ 
+        , UpdateGeneratorSnapshotSize )
+{
     network_.UpdateGeneratorSnapshotSize();
 }
 
@@ -3635,20 +3635,20 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmpty
-        , UpdateLoadSnapshotSize ) 
-{ 
+        , UpdateLoadSnapshotSize )
+{
     network_.UpdateLoadSnapshotSize();
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , UpdateLoadSnapshotSize ) 
-{ 
-    network_.UpdateLoadSnapshotSize();   
+        , UpdateLoadSnapshotSize )
+{
+    network_.UpdateLoadSnapshotSize();
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , UpdateLoadSnapshotSize ) 
-{ 
+        , UpdateLoadSnapshotSize )
+{
     network_.UpdateLoadSnapshotSize();
 }
 
@@ -3659,10 +3659,10 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , AddLoadSnapshotAt ) 
-{ 
+        , AddLoadSnapshotAt )
+{
     TLoadProperties loadProperties;
-    
+
     CreateExampleLoadProperties( loadProperties );
 
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
@@ -3683,31 +3683,31 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , AddLoadSnapshotAt ) 
-{ 
+        , AddLoadSnapshotAt )
+{
     TLoadProperties loadProperties;
-    
+
     CreateExampleLoadProperties( loadProperties );
     EXPECT_FALSE ( network_.HasLoadAt ( static_cast<Types::vertexId>(1) ) );
-    
+
     Types::loadId loadId = network_.AddLoadAt(static_cast<Types::vertexId>(1), loadProperties);
-    
+
     network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
     EXPECT_TRUE ( network_.HasLoadAt ( static_cast<Types::vertexId>(1) ) );
 
     std::vector<TLoadProperties> loadsAtVertex;
     network_.LoadsAt ( static_cast<Types::vertexId>(1), loadsAtVertex );
-    if ( !loadsAtVertex.empty() ) 
+    if ( !loadsAtVertex.empty() )
     {
         loadProperties = loadsAtVertex[0];
     }
     EXPECT_EQ ( 1, loadsAtVertex.size() );
-    
+
     CheckExampleLoadProperties ( loadProperties );
     loadsAtVertex.clear();
-    
+
     network_.LoadsAt ( static_cast<Types::vertexId>(1), loadsAtVertex );
-    if ( !loadsAtVertex.empty() ) 
+    if ( !loadsAtVertex.empty() )
     {
         loadProperties = loadsAtVertex[0];
     }
@@ -3716,15 +3716,15 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , AddLoadSnapshotAt ) 
-{ 
+        , AddLoadSnapshotAt )
+{
     TLoadProperties loadProperties;
-        
+
     CreateExampleLoadProperties( loadProperties );
     EXPECT_FALSE ( network_.HasLoadAt ( static_cast<Types::vertexId>(1) ) );
-    
+
     Types::loadId loadId = network_.AddLoadAt(static_cast<Types::vertexId>(1), loadProperties);
-    
+
     network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
     network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
     network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
@@ -3732,17 +3732,17 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 
     std::vector<TLoadProperties> loadsAtVertex;
     network_.LoadsAt ( static_cast<Types::vertexId>(1), loadsAtVertex );
-    if ( !loadsAtVertex.empty() ) 
+    if ( !loadsAtVertex.empty() )
     {
         loadProperties = loadsAtVertex[0];
     }
     EXPECT_EQ ( 1, loadsAtVertex.size() );
-    
+
     CheckExampleLoadProperties ( loadProperties );
     loadsAtVertex.clear();
-    
+
     network_.LoadsAt ( static_cast<Types::vertexId>(1), loadsAtVertex );
-    if ( !loadsAtVertex.empty() ) 
+    if ( !loadsAtVertex.empty() )
     {
         loadProperties = loadsAtVertex[0];
     }
@@ -3757,8 +3757,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmpty
-        , AddSnapshotWeighting ) 
-{ 
+        , AddSnapshotWeighting )
+{
     network_.AddSnapshotWeighting( 9.9 );
 
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
@@ -3770,15 +3770,15 @@ TEST_F  ( TestNetworkEmpty
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , AddSnapshotWeighting ) 
-{ 
+        , AddSnapshotWeighting )
+{
     network_.AddSnapshotWeighting( 9.9 );
-    network_.AddSnapshotWeighting( 1.9 );   
+    network_.AddSnapshotWeighting( 1.9 );
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , AddSnapshotWeighting ) 
-{ 
+        , AddSnapshotWeighting )
+{
     network_.AddSnapshotWeighting( 4.9 );
     network_.AddSnapshotWeighting( 3.9 );
 }
@@ -3790,8 +3790,8 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 
 TEST_F  ( TestNetworkEmptyDeathTest
-        , AddSnapshotTimestamp ) 
-{ 
+        , AddSnapshotTimestamp )
+{
     network_.AddSnapshotTimestamp( "2019-09-19 19:19:19" );
 
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
@@ -3803,15 +3803,15 @@ TEST_F  ( TestNetworkEmptyDeathTest
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
-        , AddSnapshotTimestamp ) 
-{ 
+        , AddSnapshotTimestamp )
+{
     network_.AddSnapshotTimestamp( "2009-09-19 19:19:19" );
-    network_.AddSnapshotTimestamp( "2019-09-19 19:19:19" );   
+    network_.AddSnapshotTimestamp( "2019-09-19 19:19:19" );
 }
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
-        , AddSnapshotTimestamp ) 
-{ 
+        , AddSnapshotTimestamp )
+{
     network_.AddSnapshotTimestamp( "2009-09-19 19:19:19" );
     network_.AddSnapshotTimestamp( "2019-09-19 19:19:19" );
 }
@@ -3858,7 +3858,7 @@ TEST_F ( TestPowerGridPyPsaExample
 
 TEST_F ( TestNetworkEmpty
        , TimestampAt )
-{   
+{
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TimestampAt"
@@ -3903,7 +3903,7 @@ TEST_F ( TestPowerGridPyPsaExample
        , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestamp )
 {
     Types::generatorSnapshot snapshot = network_.GeneratorRealPowerSnapshotAt ( 1, "2013-01-01 03:00:00" );
-    EXPECT_EQ ( 230, snapshot );    
+    EXPECT_EQ ( 230, snapshot );
 }
 
 // ***********************************************************************
@@ -4018,13 +4018,13 @@ TEST_F ( TestNetworkEmptyDeathTest
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , LoadSnapshotOf )
-{   
+{
     EXPECT_EQ ( 8, network_.LoadSnapshotOf ( 0, 0 ) );
 }
 
 TEST_F ( TestPowerGridPyPsaExample
        , LoadSnapshotOf )
-{   
+{
     EXPECT_EQ ( 137, network_.LoadSnapshotOf ( 7, 3 ) );
 }
 

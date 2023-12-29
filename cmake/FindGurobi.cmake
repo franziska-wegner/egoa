@@ -1,11 +1,11 @@
 # FindGurobi.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_GUROBI is ON the script searches for Gurobi in given
 # and standard location. If found it adds the library to the project.
-# 
+#
 
 ####################################################################
 # Unset ############################################################
@@ -41,8 +41,8 @@ string(SUBSTRING ${GUROBI_VERSION} 0 2 GUROBI_VERSION_SHORT)
 ####################################################################
 # Find gurobi include directory ####################################
 ####################################################################
-find_path(GUROBI_INCLUDE_DIR 
-        gurobi_c++.h 
+find_path(GUROBI_INCLUDE_DIR
+        gurobi_c++.h
         HINTS "${GUROBI_HOME}/include"
                 $ENV{GUROBI_HOME}/include
         )
@@ -51,8 +51,8 @@ message(STATUS "${MY_SPACE}GUROBI_INCLUDE_DIR:\t\t\t" ${GUROBI_INCLUDE_DIR})
 ####################################################################
 # Find Gurobi library directory ####################################
 ####################################################################
-find_path(GUROBI_LIBRARY_DIR 
-        libgurobi${GUROBI_VERSION_SHORT}.a libgurobi${GUROBI_VERSION_SHORT}.so 
+find_path(GUROBI_LIBRARY_DIR
+        libgurobi${GUROBI_VERSION_SHORT}.a libgurobi${GUROBI_VERSION_SHORT}.so
         HINTS   ${GUROBI_HOME}/lib
                 $ENV{GUROBI_HOME}/lib
         )
@@ -60,7 +60,7 @@ find_path(GUROBI_LIBRARY_DIR
 ####################################################################
 # Find Gurobi library ##############################################
 ####################################################################
-find_library(GUROBI_LIBRARY 
+find_library(GUROBI_LIBRARY
         libgurobi${GUROBI_VERSION_SHORT}.a libgurobi${GUROBI_VERSION_SHORT}.so
         HINTS   ${GUROBI_HOME}/lib
                 $ENV{GUROBI_HOME}/lib
@@ -70,8 +70,8 @@ message(STATUS "${MY_SPACE}GUROBI_LIBRARY:\t\t\t\t" ${GUROBI_LIBRARY})
 ####################################################################
 # Find Gurobi CPP library ##########################################
 ####################################################################
-find_library(GUROBI_CPP_LIBRARY 
-        libgurobi_c++.a libgurobi_c++.so 
+find_library(GUROBI_CPP_LIBRARY
+        libgurobi_c++.a libgurobi_c++.so
         HINTS   ${GUROBI_HOME}/lib
                 $ENV{GUROBI_HOME}/lib
         )
@@ -101,7 +101,7 @@ mark_as_advanced(GUROBI_LIBRARY GUROBI_CPP_LIBRARY GUROBI_INCLUDE_DIR)
 message(STATUS "")
 
 if(EGOA_ENABLE_GUROBI AND NOT GUROBI_FOUND)
-    message( FATAL_ERROR 
+    message( FATAL_ERROR
         "Gurobi is enabled, but not available on the system. Please, check the \
       Gurobi installation, and cmake configuration for GUROBI_HOME or disable \
       Gurobi by setting EGOA_ENABLE_GUROBI to OFF." )

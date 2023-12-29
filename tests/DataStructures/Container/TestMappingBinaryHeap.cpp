@@ -77,7 +77,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestMappingBinaryHeapEmpty
-            , TopExceptionHandling ) 
+            , TopExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -88,7 +88,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -110,7 +110,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
 #pragma mark TopElement
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , TopElementDeathTest ) 
+            , TopElementDeathTest )
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -121,7 +121,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestMappingBinaryHeapEmpty
-            , TopElementExceptionHandling ) 
+            , TopElementExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -132,7 +132,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -150,7 +150,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
 #pragma mark TopKey
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , TopKeyDeathTest ) 
+            , TopKeyDeathTest )
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -161,7 +161,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestMappingBinaryHeapEmpty
-            , TopKeyExceptionHandling ) 
+            , TopKeyExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -172,7 +172,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -810,7 +810,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
 #pragma mark DeleteTop
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , DeleteTopDeathTest ) 
+            , DeleteTopDeathTest )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -821,7 +821,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestMappingBinaryHeapEmpty
-            , DeleteTopExceptionHandling ) 
+            , DeleteTopExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -832,7 +832,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -862,7 +862,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
 #pragma mark Pop
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestMappingBinaryHeapEmptyDeathTest
-            , PopDeathTest ) 
+            , PopDeathTest )
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -873,7 +873,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestMappingBinaryHeapEmpty
-            , PopExceptionHandling ) 
+            , PopExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
@@ -884,7 +884,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }

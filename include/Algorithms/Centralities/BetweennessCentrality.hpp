@@ -30,7 +30,7 @@ enum class CentralityCounter {
  *     @f$c_{\sbc}\colon\edges\to\posreals@f$ is defined by
  *     @f[
  *      c_{\sbc} := \frac{1}{m_B}\sum_{\source\in\vertices}\sum_{\sink\in\vertices\setminus\{\source\}} \frac{\sigma_{\dtp}(\source,\sink,\edge)}{\sigma_{\dtp}(\source,\sink)},
- *     @f] 
+ *     @f]
  *     where @f$\sigma_{\dtp}(\source,\sink,\edge)@f$ is the number of
  *     @f$\dtp{s}@f$ between @f$\source@f$ and @f$\sink@f$ that use the edge
  *     @f$\edge@f$, @f$\sigma_{\dtp}(\source,\sink)@f$ is the total number of
@@ -40,7 +40,7 @@ enum class CentralityCounter {
  *
  * @pre        The template parameter used for GraphType should have an
  *     interface similar to StaticGraph or DynamicGraph. However, the minimum
- *     requirements on the graph type are 
+ *     requirements on the graph type are
  *     - @p for_all_vertex_identifiers<IsParallel>, and
  *     - see the minimum requirement of the PathFindingAlgorithm, e.g.,
  *       DominatingThetaPath.
@@ -53,7 +53,7 @@ enum class CentralityCounter {
  *     such as IO::DtpRuntimeCollection.
  * @tparam     CentralityCounterType  The centrality counter decides whether
  *     to count edges or vertices.
- * 
+ *
  * @see StaticGraph
  * @see DominatingThetaPath
  * @see IO::DtpRuntimeCollection
@@ -61,8 +61,8 @@ enum class CentralityCounter {
  */
 template< typename GraphType                        = StaticGraph< Vertices::ElectricalProperties<Vertices::IeeeBusType>
                                                                  , Edges::ElectricalProperties >
-        , typename PathFindingAlgorithm             = DominatingThetaPath<GraphType> 
-        , typename MeasurementCollection            = IO::DtpRuntimeCollection 
+        , typename PathFindingAlgorithm             = DominatingThetaPath<GraphType>
+        , typename MeasurementCollection            = IO::DtpRuntimeCollection
         , CentralityCounter CentralityCounterType   = CentralityCounter::counterAtEdges > /**< Distinguish between counting edges or vertices. */
 class BetweennessCentrality {
     public:
@@ -98,7 +98,7 @@ class BetweennessCentrality {
              *
              * @param      graph  The const graph.
              */
-            BetweennessCentrality ( TGraph const & graph ) 
+            BetweennessCentrality ( TGraph const & graph )
             : countersSize_(0)
             , graph_( graph )
 #if defined(OPENMP_AVAILABLE)
@@ -107,7 +107,7 @@ class BetweennessCentrality {
             , algo_( graph_ )
 #endif
             {}
-            
+
             /**
              * @brief      Destroys the object.
              */
@@ -118,7 +118,7 @@ class BetweennessCentrality {
         ///@name Execute the Betweenness Centrality Algorithm
         ///@{
 #pragma mark EXECUTE_ALGORITHM
-            
+
             /**
              * @brief      Run the betweenness centrality.
              * @details    If OpenMP is available this method will run in
@@ -130,7 +130,7 @@ class BetweennessCentrality {
              *     https://en.cppreference.com/w/cpp/container </a>.
              */
             inline void Run ()
-            {   
+            {
                 TNumberOfPaths         numberOfPaths;
                 TRelativeNumberOfPaths relativeNumberOfPaths;
 
@@ -147,9 +147,9 @@ class BetweennessCentrality {
                     Algorithm()[omp_get_thread_num()].NumberOfLabels();
                     TotalNumberOfPaths( numberOfPaths, relativeNumberOfPaths );
 #ifdef EGOA_ENABLE_STATISTIC_BETWEENNESS_CENTRALITY // COLLECT RUNTIME INFORMATION
-                    #pragma omp critical 
-                    { // More information concerning standard container 
-                      // concurrency under "Thread safety": 
+                    #pragma omp critical
+                    { // More information concerning standard container
+                      // concurrency under "Thread safety":
                       // https://en.cppreference.com/w/cpp/container
                         Collection() += Algorithm()[omp_get_thread_num()].Statistic();
                     }
@@ -208,7 +208,7 @@ class BetweennessCentrality {
              *
              * @return     The algorithm.
              */
-            inline TAlgoHandling & Algorithm () 
+            inline TAlgoHandling & Algorithm ()
             {
                 return algo_;
             }
@@ -228,9 +228,9 @@ class BetweennessCentrality {
              *
              * @return     A vector of measurements.
              */
-            inline TMeasurementCollection const & Collection () const 
+            inline TMeasurementCollection const & Collection () const
             {
-                return collection_; 
+                return collection_;
             }
 
             /**
@@ -238,7 +238,7 @@ class BetweennessCentrality {
              *
              * @return     A vector of measurements.
              */
-            inline TMeasurementCollection & Collection () 
+            inline TMeasurementCollection & Collection ()
             {
                 return collection_;
             }
@@ -251,11 +251,11 @@ class BetweennessCentrality {
             /**
              * @brief      Clears the measurement collection.
              */
-            inline void Clear () 
+            inline void Clear ()
             {
                 collection_.Clear();
 
-                if ( CentralityCounterType == CentralityCounter::counterAtEdges ) 
+                if ( CentralityCounterType == CentralityCounter::counterAtEdges )
                 {
                     countersSize_ = graph_.NumberOfEdges();
                 } else {
@@ -285,7 +285,7 @@ class BetweennessCentrality {
              */
             inline void JoinThreadBasedResults ( TNumberOfPaths         const & numberOfPaths
                                                , TRelativeNumberOfPaths const & relativeNumberOfPaths
-                                               , Types::real            const & m_BNormalization      ) 
+                                               , Types::real            const & m_BNormalization      )
             {
 #ifdef OPENMP_AVAILABLE
                 ESSENTIAL_ASSERT ( totalRelativeNumberOfPaths_.size() == countersSize_ );
@@ -297,7 +297,7 @@ class BetweennessCentrality {
 
                 for ( Types::count counterThreads = 0
                     ; counterThreads < omp_get_max_threads()
-                    ; ++counterThreads ) 
+                    ; ++counterThreads )
                 {
                     for ( Types::count counterEdgesOrVertices = 0
                         ; counterEdgesOrVertices < countersSize_
@@ -343,7 +343,7 @@ class BetweennessCentrality {
                                            , TRelativeNumberOfPaths & relativeNumberOfPaths )
             {
 #ifdef OPENMP_AVAILABLE
-                if ( CentralityCounterType == CentralityCounter::counterAtEdges ) 
+                if ( CentralityCounterType == CentralityCounter::counterAtEdges )
                 {
                     Algorithm()[ omp_get_thread_num() ].TotalNumberOfPathsThroughEdge ( numberOfPaths[ omp_get_thread_num() ]
                                                                                       , relativeNumberOfPaths[ omp_get_thread_num() ] );
@@ -352,7 +352,7 @@ class BetweennessCentrality {
                                                                                         , relativeNumberOfPaths[ omp_get_thread_num() ] );
                 }
 #else
-                if ( CentralityCounterType == CentralityCounter::counterAtEdges ) 
+                if ( CentralityCounterType == CentralityCounter::counterAtEdges )
                 {
                     Algorithm().TotalNumberOfPathsThroughEdge   ( numberOfPaths, relativeNumberOfPaths );
                 } else {
@@ -373,13 +373,13 @@ class BetweennessCentrality {
              * @param      relativeNumberOfPaths  The relative number of paths.
              */
             inline void Clear ( TNumberOfPaths         & numberOfPaths
-                              , TRelativeNumberOfPaths & relativeNumberOfPaths ) 
+                              , TRelativeNumberOfPaths & relativeNumberOfPaths )
             {
                 Clear();
 #ifdef OPENMP_AVAILABLE
                 numberOfPaths.assign         ( omp_get_max_threads(), std::vector<Types::count> ( countersSize_, 0   ) );
                 relativeNumberOfPaths.assign ( omp_get_max_threads(), std::vector<Types::real>  ( countersSize_, 0.0 ) );
-#else 
+#else
                 numberOfPaths.assign         ( countersSize_, 0   );
                 relativeNumberOfPaths.assign ( countersSize_, 0.0 );
 #endif
@@ -392,7 +392,7 @@ class BetweennessCentrality {
         TGraph            const & graph_;           /**< The graph @f$\graph = (\vertices,\edges)@f$ on which the DTP is calculated. */
         TAlgoHandling             algo_;            /**< Multiple path finding algorithm are used for the parallelization. */
         TMeasurementCollection    collection_;      /**< The collection of measurements. */
-        
+
         std::vector<Types::real>  totalRelativeNumberOfPaths_;   /**< */
         std::vector<Types::count> totalNumberOfPaths_;           /**< */
 };

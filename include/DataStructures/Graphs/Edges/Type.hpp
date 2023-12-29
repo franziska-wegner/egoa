@@ -4,7 +4,7 @@
  *  Created on: Oct 13, 2018
  *      Author: Franziska Wegner
  */
- 
+
 #ifndef EGOA__DATA_STRUCTURE__EDGES__TYPE_HPP
 #define EGOA__DATA_STRUCTURE__EDGES__TYPE_HPP
 
@@ -57,10 +57,10 @@ namespace egoa::Edges {
      * @return     The output stream.
      */
     inline std::ostream & operator<< ( std::ostream                     & outputStream
-                                     , CarrierDifferentiationType const & rhs ) 
+                                     , CarrierDifferentiationType const & rhs )
     {
-        if      ( rhs == CarrierDifferentiationType::AC    ){ outputStream << "AC";   } 
-        else if ( rhs == CarrierDifferentiationType::DC    ){ outputStream << "DC";   }  
+        if      ( rhs == CarrierDifferentiationType::AC    ){ outputStream << "AC";   }
+        else if ( rhs == CarrierDifferentiationType::DC    ){ outputStream << "DC";   }
         else                                                { outputStream << "unknown";    }
         return outputStream;
     }
@@ -74,14 +74,14 @@ namespace egoa::Edges {
      * @return     The output stream.
      */
     inline std::ostream & operator<< ( std::ostream             & outputStream
-                                     , ElectricalEdgeType const & rhs) 
+                                     , ElectricalEdgeType const & rhs)
     {
-        if      ( rhs == ElectricalEdgeType::standard    ) { outputStream << "standard";   } 
-        else if ( rhs == ElectricalEdgeType::switched    ) { outputStream << "switched";   } 
-        else if ( rhs == ElectricalEdgeType::controller  ) { outputStream << "controller"; } 
-        else if ( rhs == ElectricalEdgeType::transformer ) { outputStream << "transformer";} 
-        else if ( rhs == ElectricalEdgeType::facts       ) { outputStream << "facts";      } 
-        else if ( rhs == ElectricalEdgeType::overloaded  ) { outputStream << "overloaded"; } 
+        if      ( rhs == ElectricalEdgeType::standard    ) { outputStream << "standard";   }
+        else if ( rhs == ElectricalEdgeType::switched    ) { outputStream << "switched";   }
+        else if ( rhs == ElectricalEdgeType::controller  ) { outputStream << "controller"; }
+        else if ( rhs == ElectricalEdgeType::transformer ) { outputStream << "transformer";}
+        else if ( rhs == ElectricalEdgeType::facts       ) { outputStream << "facts";      }
+        else if ( rhs == ElectricalEdgeType::overloaded  ) { outputStream << "overloaded"; }
         else                                               { outputStream << "unknown";    }
         return outputStream;
     }
@@ -99,7 +99,7 @@ namespace egoa::Edges {
      * @param      stroke  The stroke type.
      */
     inline void ElectricalEdge2Stroke ( ElectricalEdgeType const & type
-                                      , ogdf::StrokeType         & stroke ) 
+                                      , ogdf::StrokeType         & stroke )
     {
         switch (type) {
             case ElectricalEdgeType::standard:      stroke = ogdf::StrokeType::Solid;   break;
@@ -119,7 +119,7 @@ namespace egoa::Edges {
      * @param      color  The ogdf::Color type.
      */
     inline void ElectricalEdge2Color ( ElectricalEdgeType const & type
-                                     , ogdf::Color              & color ) 
+                                     , ogdf::Color              & color )
     {
         switch (type) {
             case ElectricalEdgeType::standard:      color = ogdf::Color::Name::Black;     break;
@@ -139,7 +139,7 @@ namespace egoa::Edges {
      * @param      type    The electrical edge type.
      */
     inline void Stroke2ElectricalEdge ( ogdf::StrokeType const & stroke
-                                      , ElectricalEdgeType     & type ) 
+                                      , ElectricalEdgeType     & type )
     {
         switch (stroke) {
             case ogdf::StrokeType::Solid:   type = ElectricalEdgeType::standard;      break;
@@ -159,7 +159,7 @@ namespace egoa::Edges {
      * @param      type   The electrical edge type.
      */
     inline void Color2ElectricalEdge ( ogdf::Color const  & color
-                                     , ElectricalEdgeType & type ) 
+                                     , ElectricalEdgeType & type )
     {
         if ( color == ogdf::Color::Name::Black          )   { type = ElectricalEdgeType::standard;      }
         else if ( color == ogdf::Color::Name::Gray      )   { type = ElectricalEdgeType::switched;      }
@@ -178,7 +178,7 @@ namespace egoa::Edges {
      * @param      color  The color type.
      */
     inline void ElectricalEdge2Color ( ElectricalEdgeType const & type
-                                     , Color                    & color ) 
+                                     , Color                    & color )
     {
         switch (type) {
             case ElectricalEdgeType::standard:      color = Color::Name::KITblack;     break;
@@ -198,7 +198,7 @@ namespace egoa::Edges {
      * @param      stroke  The stroke type.
      */
     inline void ElectricalEdge2Stroke ( ElectricalEdgeType const & type
-                                      , Stroke::Name             & stroke ) 
+                                      , Stroke::Name             & stroke )
     {
         switch (type) {
             case ElectricalEdgeType::standard:      stroke = Stroke::Name::solid;          break;
@@ -207,7 +207,7 @@ namespace egoa::Edges {
             case ElectricalEdgeType::transformer:   stroke = Stroke::Name::dotted;         break;
             case ElectricalEdgeType::facts:         stroke = Stroke::Name::dasheddotted;   break;
             case ElectricalEdgeType::overloaded:    stroke = Stroke::Name::bold;           break;
-            default:                                stroke = Stroke::Name::none;   
+            default:                                stroke = Stroke::Name::none;
         }
     }
 ///@}
@@ -215,4 +215,4 @@ namespace egoa::Edges {
 } // namespace egoa::Edges
 
 #endif // EGOA__DATA_STRUCTURE__EDGES__TYPE_HPP
- 
+

@@ -34,7 +34,7 @@ public:
           comparator_(std::move(comparator))
     {}
 
-    bool operator()(Types::index lhs, Types::index rhs) const 
+    bool operator()(Types::index lhs, Types::index rhs) const
     {
         return comparator_(weights_[lhs], weights_[rhs]);
     }

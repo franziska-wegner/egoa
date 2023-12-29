@@ -1,12 +1,12 @@
 # FindCppAD.cmake
-# 
+#
 #   Created on: Jan 26, 2020
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_CPPAD is ON the script searches for CppAD in given and
 # standard location (see EGOA_DOWNLOAD_CPPAD). If found it adds the library to
 # the project.
-# 
+#
 
 # Environment variable CPPAD_ROOT_DIR of CPPAD should be set, e.g.,
 # /usr/local/include or /external/CppAD/include
@@ -28,7 +28,7 @@ unset ( CPPAD_INCLUDE_DIR CACHE )
 # CppAD include directory ##########################################
 ####################################################################
 find_path ( CPPAD_INCLUDE_DIR
-    NAMES cppad/cppad.hpp 
+    NAMES cppad/cppad.hpp
     HINTS   /external/CppAD/include
             ${CPPAD_ROOT_DIR}/include/
     )
@@ -53,7 +53,7 @@ mark_as_advanced ( CPPAD_INCLUDE_DIR )
 ####################################################################
 message ( STATUS "" )
 if ( EGOA_ENABLE_CPPAD AND NOT CPPAD_FOUND )
-    message( FATAL_ERROR 
+    message( FATAL_ERROR
         "CppAD is enabled, but not available on the system. Please, check the \
        CppAD installation, and cmake configuration or disable CppAD by \
        setting EGOA_ENABLE_CPPAD to OFF." )

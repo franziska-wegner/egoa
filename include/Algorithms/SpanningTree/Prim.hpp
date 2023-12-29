@@ -22,7 +22,7 @@ namespace egoa {
  *      prim.Run();
  *      Subgraph<TGraph> spanningTree = prim.Result();
  *  @endcode
- *  
+ *
  *  @tparam GraphType  The type of the graph.
  *  @tparam WeightType The type of the edge weights.
  */
@@ -48,12 +48,12 @@ class Prim final : public MST<GraphType> {
          *     algorithm. Prim runs in O(|E| log |V|) using binary heaps.
          *     While using Fibonacci heaps the running time is then in O(|E| +
          *     |V| log |V|). The latter is an improvement while |V| << |E|.
-         *     
+         *
          *     Steps:
          *          1. While not all vertices are in the MST component
          *          2. Relax the incident edges to u if necessary
-         *          3. Choose the edge that has the minimum weight between 
-         *          the grown MST component and the non-MST component, i.e., 
+         *          3. Choose the edge that has the minimum weight between
+         *          the grown MST component and the non-MST component, i.e.,
          *          no cycle will be created
          *
          * @pre  This algorithm assumes that the vertex identifiers all lie in
@@ -85,11 +85,11 @@ class Prim final : public MST<GraphType> {
                         // Ignore edges to vertices that have already been included in the MST
                         if (isVertexInMst[neighbor]) return;
 
-                        if (!visited[neighbor]) 
+                        if (!visited[neighbor])
                         { // The neighbor has not been visited before
                             heap.Insert(neighbor, edge.Identifier());
                             visited[neighbor] = true;
-                        } else if ( this->Comparator()( edge.Identifier(), heap.KeyOf(neighbor) ) ) 
+                        } else if ( this->Comparator()( edge.Identifier(), heap.KeyOf(neighbor) ) )
                         {
                             // Better edge to neighbor has been found
                             heap.ChangeKey(neighbor, edge.Identifier());

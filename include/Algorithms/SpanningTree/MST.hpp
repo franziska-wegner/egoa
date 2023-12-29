@@ -59,15 +59,15 @@ class MST {
          *
          * @return     The subgraph representing the calculated spanning tree.
          */
-        inline Subgraph<TGraph> const & Result() const 
+        inline Subgraph<TGraph> const & Result() const
         {
             return spanningTree_;
         }
 
-        friend std::ostream & operator<<( std::ostream & os, MST const & rhs ) 
+        friend std::ostream & operator<<( std::ostream & os, MST const & rhs )
         {
             auto & graph = rhs.spanningTree_.Graph();
-            for ( auto edgeId : rhs.spanningTree_.Edges() ) 
+            for ( auto edgeId : rhs.spanningTree_.Edges() )
             {
                 auto & edge = graph.EdgeAt(edgeId);
                 os << "(" << edge.Source() << ", " << edge.Target() << ");\n";
@@ -83,11 +83,11 @@ class MST {
          *
          * @param      edges  The edges in the spanning tree.
          */
-        void SetResult(std::vector<Types::edgeId> && edges) 
+        void SetResult(std::vector<Types::edgeId> && edges)
         {
             std::vector<Types::vertexId> vertices;
             vertices.reserve(Graph().NumberOfVertices());
-            Graph().template for_all_vertex_identifiers<ExecutionPolicy::sequential>( [&vertices](Types::vertexId id) 
+            Graph().template for_all_vertex_identifiers<ExecutionPolicy::sequential>( [&vertices](Types::vertexId id)
             {
                 vertices.push_back(id);
             });

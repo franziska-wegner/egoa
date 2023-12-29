@@ -19,7 +19,7 @@ namespace egoa {
  *
  * @tparam     ElementType  Atomic or complex element implementing comparison
  *     operators.
- *     
+ *
  * @see        Label representing a label interface.
  * @see        Bucket representing a bucket.
  */
@@ -34,7 +34,7 @@ class BucketElement {
         ///@{
 #pragma mark CONSTRUCTORS_AND_DESTRUCTORS
 
-            BucketElement () 
+            BucketElement ()
             : BucketElement(TElement(),true)
             {}
 
@@ -46,7 +46,7 @@ class BucketElement {
              *      element.
              */
             BucketElement ( TElement    value
-                          , bool        valid ) 
+                          , bool        valid )
             : index_(Const::NONE)
             , valid_(valid)
             , value_(value)
@@ -57,7 +57,7 @@ class BucketElement {
              *
              * @param[in]  element  The element.
              */
-            BucketElement( TElement element ) 
+            BucketElement( TElement element )
             : BucketElement( element, true )
             {}
 
@@ -66,7 +66,7 @@ class BucketElement {
              */
             ~BucketElement() {}
         ///@}
-        
+
         ///@name Domination Operators
         ///@{
 #pragma mark DOMINATION_OPERATORS
@@ -77,7 +77,7 @@ class BucketElement {
              *
              * @return     True if lhs < rhs, False otherwise.
              */
-            inline bool operator<( BucketElement const & rhs ) const 
+            inline bool operator<( BucketElement const & rhs ) const
             {
                 return value_ < rhs.value_;
             }
@@ -89,9 +89,9 @@ class BucketElement {
              *
              * @return     True if lhs <= rhs, False otherwise.
              */
-            inline bool operator<=( BucketElement const & rhs )  const 
-            { 
-                return !(*this > rhs); 
+            inline bool operator<=( BucketElement const & rhs )  const
+            {
+                return !(*this > rhs);
             }
 
             /**
@@ -101,9 +101,9 @@ class BucketElement {
              *
              * @return     True if lhs > rhs, False otherwise.
              */
-            inline bool operator> ( BucketElement const & rhs )  const 
-            { 
-                return rhs < *this; 
+            inline bool operator> ( BucketElement const & rhs )  const
+            {
+                return rhs < *this;
             }
 
             /**
@@ -113,9 +113,9 @@ class BucketElement {
              *
              * @return     True if lhs >= rhs, False otherwise.
              */
-            inline bool operator>=( BucketElement const & rhs )  const 
-            { 
-                return !(rhs > *this); 
+            inline bool operator>=( BucketElement const & rhs )  const
+            {
+                return !(rhs > *this);
             }
         ///@}
 
@@ -130,7 +130,7 @@ class BucketElement {
              *
              * @return     True if lhs == rhs, False otherwise.
              */
-            inline bool operator==( BucketElement const & rhs ) const 
+            inline bool operator==( BucketElement const & rhs ) const
             {
                 return value_ == rhs.value_;
             }
@@ -142,13 +142,13 @@ class BucketElement {
              *
              * @return     True if lhs != rhs, False otherwise.
              */
-            inline bool operator!=( BucketElement const & rhs ) const 
+            inline bool operator!=( BucketElement const & rhs ) const
             {
                 return !(*this==rhs);
             }
         ///@}
 
-        ///@name Concatenation Operators 
+        ///@name Concatenation Operators
         ///@{
 #pragma mark CONCATENATION_OPERATORS
             /**
@@ -158,7 +158,7 @@ class BucketElement {
              *
              * @return     The BucketElement with added TElement.
              */
-            inline BucketElement & operator+=( TElement const & rhs ) 
+            inline BucketElement & operator+=( TElement const & rhs )
             {
                 this->Value() += rhs.Value();
                 return *this;
@@ -171,7 +171,7 @@ class BucketElement {
              *
              * @return     The BucketElement with added TElement.
              */
-            inline BucketElement   operator+ ( TElement const & rhs ) const 
+            inline BucketElement   operator+ ( TElement const & rhs ) const
             {
                 BucketElement temp ( *this );
                 return temp += rhs;
@@ -189,9 +189,9 @@ class BucketElement {
              *
              * @return     The BucketElement's identifier.
              */
-            inline Types::labelId    Index() const 
-            { 
-                return index_; 
+            inline Types::labelId    Index() const
+            {
+                return index_;
             }
 
             /**
@@ -207,8 +207,8 @@ class BucketElement {
              * @return     The BucketElement's identifier.
              */
             inline Types::labelId  & Index()
-            { 
-                return index_; 
+            {
+                return index_;
             }
 
             /**
@@ -216,9 +216,9 @@ class BucketElement {
              *
              * @return     @p True if the BucketElement is valid, @p false otherwise.
              */
-            inline bool   Valid() const 
-            { 
-                return valid_; 
+            inline bool   Valid() const
+            {
+                return valid_;
             }
 
             /**
@@ -231,8 +231,8 @@ class BucketElement {
              * @return     @p True if the BucketElement is valid, @p false otherwise.
              */
             inline bool & Valid()
-            { 
-                return valid_; 
+            {
+                return valid_;
             }
 
             /**
@@ -240,9 +240,9 @@ class BucketElement {
              *
              * @return     The value of the BucketElement.
              */
-            inline TElement   Value() const 
-            { 
-                return value_; 
+            inline TElement   Value() const
+            {
+                return value_;
             }
 
             /**
@@ -255,8 +255,8 @@ class BucketElement {
              * @return     The value of the BucketElement.
              */
             inline TElement & Value()
-            { 
-                return value_; 
+            {
+                return value_;
             }
         ///@}
 
@@ -270,7 +270,7 @@ class BucketElement {
          * @return     The output stream.
          */
         friend std::ostream & operator<< ( std::ostream         & os
-                                         , BucketElement const  & rhs ) 
+                                         , BucketElement const  & rhs )
         {
             return os << "(" << rhs.Value() << "," << rhs.Valid() << ")";
         }

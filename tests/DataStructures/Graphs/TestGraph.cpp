@@ -148,21 +148,21 @@ TYPED_TEST( TestGraphEmpty, EdgeExists ) {
     EXPECT_FALSE(this->graphConst_.EdgeExists(Const::NONE));
 }
 
-TYPED_TEST( TestGraphSingleVertex, EdgeExists ) 
+TYPED_TEST( TestGraphSingleVertex, EdgeExists )
 {
     EXPECT_FALSE(this->graphConst_.EdgeExists(0));
     EXPECT_FALSE(this->graphConst_.EdgeExists(10));
     EXPECT_FALSE(this->graphConst_.EdgeExists(Const::NONE));
 }
 
-TYPED_TEST( TestGraphFourVertices, EdgeExists ) 
+TYPED_TEST( TestGraphFourVertices, EdgeExists )
 {
     EXPECT_FALSE(this->graphConst_.EdgeExists(0));
     EXPECT_FALSE(this->graphConst_.EdgeExists(10));
     EXPECT_FALSE(this->graphConst_.EdgeExists(Const::NONE));
 }
 
-TYPED_TEST( TestGraphBidirectedPath, EdgeExists ) 
+TYPED_TEST( TestGraphBidirectedPath, EdgeExists )
 {
     for (auto id : this->edgeIds_) {
         EXPECT_TRUE(this->graphConst_.EdgeExists(id));
@@ -175,14 +175,14 @@ TYPED_TEST( TestGraphBidirectedPath, EdgeExists )
     EXPECT_FALSE(this->graphConst_.EdgeExists(Const::NONE));
 }
 
-TYPED_TEST( TestGraphStar, EdgeExists ) 
+TYPED_TEST( TestGraphStar, EdgeExists )
 {
-    for (auto id : this->edgeIds_) 
+    for (auto id : this->edgeIds_)
     {
         EXPECT_TRUE(this->graphConst_.EdgeExists(id));
     }
 
-    for (Types::index i = 0; i < 20; ++i) 
+    for (Types::index i = 0; i < 20; ++i)
     {
         using std::begin, std::end;
         bool expected = std::find(begin(this->edgeIds_),
@@ -197,31 +197,31 @@ TYPED_TEST( TestGraphStar, EdgeExists )
 /// @name Tests for Vertices().size()
 /// @{
 #pragma mark VerticesSize
-TYPED_TEST( TestGraphEmpty, VerticesSize ) 
+TYPED_TEST( TestGraphEmpty, VerticesSize )
 {
     EXPECT_EQ(0, this->graph_.Vertices().size());
     EXPECT_EQ(0, this->graphConst_.Vertices().size());
 }
 
-TYPED_TEST( TestGraphSingleVertex, VerticesSize ) 
+TYPED_TEST( TestGraphSingleVertex, VerticesSize )
 {
     EXPECT_EQ(1, this->graph_.Vertices().size());
     EXPECT_EQ(1, this->graphConst_.Vertices().size());
 }
 
-TYPED_TEST( TestGraphFourVertices, VerticesSize ) 
+TYPED_TEST( TestGraphFourVertices, VerticesSize )
 {
     EXPECT_EQ(4, this->graph_.Vertices().size());
     EXPECT_EQ(4, this->graphConst_.Vertices().size());
 }
 
-TYPED_TEST( TestGraphBidirectedPath, VerticesSize ) 
+TYPED_TEST( TestGraphBidirectedPath, VerticesSize )
 {
     EXPECT_EQ(3, this->graph_.Vertices().size());
     EXPECT_EQ(3, this->graphConst_.Vertices().size());
 }
 
-TYPED_TEST( TestGraphStar, VerticesSize ) 
+TYPED_TEST( TestGraphStar, VerticesSize )
 {
     EXPECT_EQ(4, this->graph_.Vertices().size());
     EXPECT_EQ(4, this->graphConst_.Vertices().size());
@@ -231,31 +231,31 @@ TYPED_TEST( TestGraphStar, VerticesSize )
 /// @name Tests for Vertices().empty()
 /// @{
 #pragma mark VerticesEmpty
-TYPED_TEST( TestGraphEmpty, VerticesEmpty ) 
+TYPED_TEST( TestGraphEmpty, VerticesEmpty )
 {
     EXPECT_TRUE(this->graph_.Vertices().empty());
     EXPECT_TRUE(this->graphConst_.Vertices().empty());
 }
 
-TYPED_TEST( TestGraphSingleVertex, VerticesEmpty ) 
+TYPED_TEST( TestGraphSingleVertex, VerticesEmpty )
 {
     EXPECT_FALSE(this->graph_.Vertices().empty());
     EXPECT_FALSE(this->graphConst_.Vertices().empty());
 }
 
-TYPED_TEST( TestGraphFourVertices, VerticesEmpty ) 
+TYPED_TEST( TestGraphFourVertices, VerticesEmpty )
 {
     EXPECT_FALSE(this->graph_.Vertices().empty());
     EXPECT_FALSE(this->graphConst_.Vertices().empty());
 }
 
-TYPED_TEST( TestGraphBidirectedPath, VerticesEmpty ) 
+TYPED_TEST( TestGraphBidirectedPath, VerticesEmpty )
 {
     EXPECT_FALSE(this->graph_.Vertices().empty());
     EXPECT_FALSE(this->graphConst_.Vertices().empty());
 }
 
-TYPED_TEST( TestGraphStar, VerticesEmpty ) 
+TYPED_TEST( TestGraphStar, VerticesEmpty )
 {
     EXPECT_FALSE(this->graph_.Vertices().empty());
     EXPECT_FALSE(this->graphConst_.Vertices().empty());
@@ -265,10 +265,10 @@ TYPED_TEST( TestGraphStar, VerticesEmpty )
 /// @name Tests for Vertices().begin() and Vertices().end()
 /// @{
 #pragma mark VerticesIterate
-TYPED_TEST( TestGraphEmpty, VerticesIterate) 
+TYPED_TEST( TestGraphEmpty, VerticesIterate)
 {
     Types::count counter = 0;
-    for (auto & v : this->graph_.Vertices()) 
+    for (auto & v : this->graph_.Vertices())
     {
         ++counter;
         FAIL();
@@ -276,7 +276,7 @@ TYPED_TEST( TestGraphEmpty, VerticesIterate)
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphSingleVertex, VerticesIterate) 
+TYPED_TEST( TestGraphSingleVertex, VerticesIterate)
 {
     Types::count counter = 0;
     for (auto & v : this->graph_.Vertices()) {
@@ -290,7 +290,7 @@ TYPED_TEST( TestGraphSingleVertex, VerticesIterate)
     EXPECT_EQ(1, counter);
 }
 
-TYPED_TEST( TestGraphFourVertices, VerticesIterate) 
+TYPED_TEST( TestGraphFourVertices, VerticesIterate)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
@@ -309,12 +309,12 @@ TYPED_TEST( TestGraphFourVertices, VerticesIterate)
     EXPECT_TRUE(std::is_sorted(ids.begin(), ids.end()));
 }
 
-TYPED_TEST( TestGraphStar, VerticesIterate) 
+TYPED_TEST( TestGraphStar, VerticesIterate)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
 
-    for (auto & v : this->graph_.Vertices()) 
+    for (auto & v : this->graph_.Vertices())
     {
         ++counter;
         auto id = v.Identifier();
@@ -331,10 +331,10 @@ TYPED_TEST( TestGraphStar, VerticesIterate)
 }
 
 #pragma mark VerticesIterateConst
-TYPED_TEST( TestGraphEmpty, VerticesIterateConst) 
+TYPED_TEST( TestGraphEmpty, VerticesIterateConst)
 {
     Types::count counter = 0;
-    for (auto& v : this->graphConst_.Vertices()) 
+    for (auto& v : this->graphConst_.Vertices())
     {
         ++counter;
         FAIL();
@@ -342,10 +342,10 @@ TYPED_TEST( TestGraphEmpty, VerticesIterateConst)
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphSingleVertex, VerticesIterateConst) 
+TYPED_TEST( TestGraphSingleVertex, VerticesIterateConst)
 {
     Types::count counter = 0;
-    for (auto& v : this->graphConst_.Vertices()) 
+    for (auto& v : this->graphConst_.Vertices())
     {
         ++counter;
         auto id = v.Identifier();
@@ -356,12 +356,12 @@ TYPED_TEST( TestGraphSingleVertex, VerticesIterateConst)
     EXPECT_EQ(1, counter);
 }
 
-TYPED_TEST( TestGraphFourVertices, VerticesIterateConst) 
+TYPED_TEST( TestGraphFourVertices, VerticesIterateConst)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
 
-    for (auto& v : this->graphConst_.Vertices()) 
+    for (auto& v : this->graphConst_.Vertices())
     {
         ++counter;
         auto id = v.Identifier();
@@ -375,7 +375,7 @@ TYPED_TEST( TestGraphFourVertices, VerticesIterateConst)
     EXPECT_TRUE(std::is_sorted(ids.begin(), ids.end()));
 }
 
-TYPED_TEST( TestGraphStar, VerticesIterateConst) 
+TYPED_TEST( TestGraphStar, VerticesIterateConst)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
@@ -398,7 +398,7 @@ TYPED_TEST( TestGraphStar, VerticesIterateConst)
 /// @name Tests for Vertices().rbegin() and Vertices().rend()
 /// @{
 #pragma mark VerticesIterateBackwards
-TYPED_TEST( TestGraphEmpty, VerticesIterateBackwards) 
+TYPED_TEST( TestGraphEmpty, VerticesIterateBackwards)
 {
     Types::count counter = 0;
     for (auto it = this->graph_.Vertices().rbegin();
@@ -411,7 +411,7 @@ TYPED_TEST( TestGraphEmpty, VerticesIterateBackwards)
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphSingleVertex, VerticesIterateBackwards) 
+TYPED_TEST( TestGraphSingleVertex, VerticesIterateBackwards)
 {
     EXPECT_NE(this->graph_.Vertices().rbegin(),
               this->graph_.Vertices().rend());
@@ -430,7 +430,7 @@ TYPED_TEST( TestGraphSingleVertex, VerticesIterateBackwards)
     EXPECT_EQ(1, counter);
 }
 
-TYPED_TEST( TestGraphFourVertices, VerticesIterateBackwards) 
+TYPED_TEST( TestGraphFourVertices, VerticesIterateBackwards)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
@@ -455,7 +455,7 @@ TYPED_TEST( TestGraphFourVertices, VerticesIterateBackwards)
     EXPECT_TRUE(std::is_sorted(ids.begin(), ids.end(), std::greater<Types::vertexId>()));
 }
 
-TYPED_TEST( TestGraphStar, VerticesIterateBackwards) 
+TYPED_TEST( TestGraphStar, VerticesIterateBackwards)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
@@ -466,7 +466,7 @@ TYPED_TEST( TestGraphStar, VerticesIterateBackwards)
 
     for (auto it = this->graph_.Vertices().rbegin();
             it != this->graph_.Vertices().rend();
-            ++it) 
+            ++it)
     {
         ++counter;
         it->Properties().NonConstMemberFunction();
@@ -604,23 +604,23 @@ TYPED_TEST( TestGraphFourVertices, EdgesEmpty ) {
     EXPECT_TRUE(this->graphConst_.Edges().empty());
 }
 
-TYPED_TEST( TestGraphBidirectedPath, EdgesEmpty ) 
+TYPED_TEST( TestGraphBidirectedPath, EdgesEmpty )
 {
     EXPECT_FALSE(this->graph_.Edges().empty());
     EXPECT_FALSE(this->graphConst_.Edges().empty());
 }
 
-TYPED_TEST( TestGraphStar, EdgesEmpty ) 
+TYPED_TEST( TestGraphStar, EdgesEmpty )
 {
     EXPECT_FALSE(this->graph_.Edges().empty());
     EXPECT_FALSE(this->graphConst_.Edges().empty());
 }
 
 #pragma mark EdgesIterate
-TYPED_TEST( TestGraphEmpty, EdgesIterate ) 
+TYPED_TEST( TestGraphEmpty, EdgesIterate )
 {
     Types::count counter = 0;
-    for (auto& edge : this->graph_.Edges()) 
+    for (auto& edge : this->graph_.Edges())
     {
         ++counter;
         edge.Properties().NonConstMemberFunction();
@@ -629,7 +629,7 @@ TYPED_TEST( TestGraphEmpty, EdgesIterate )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphSingleVertex, EdgesIterate ) 
+TYPED_TEST( TestGraphSingleVertex, EdgesIterate )
 {
     Types::count counter = 0;
     for ( auto & edge : this->graph_.Edges() ) {
@@ -640,7 +640,7 @@ TYPED_TEST( TestGraphSingleVertex, EdgesIterate )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphFourVertices, EdgesIterate ) 
+TYPED_TEST( TestGraphFourVertices, EdgesIterate )
 {
     Types::count counter = 0;
     for (auto& edge : this->graph_.Edges()) {
@@ -651,12 +651,12 @@ TYPED_TEST( TestGraphFourVertices, EdgesIterate )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphBidirectedPath, EdgesIterate ) 
+TYPED_TEST( TestGraphBidirectedPath, EdgesIterate )
 {
     Types::count counter = 0;
     std::vector<Types::edgeId> ids;
 
-    for (auto& edge : this->graph_.Edges()) 
+    for (auto& edge : this->graph_.Edges())
     {
         ++counter;
         edge.Properties().NonConstMemberFunction();
@@ -672,12 +672,12 @@ TYPED_TEST( TestGraphBidirectedPath, EdgesIterate )
     EXPECT_TRUE(std::is_sorted(ids.begin(), ids.end()));
 }
 
-TYPED_TEST( TestGraphStar, EdgesIterate) 
+TYPED_TEST( TestGraphStar, EdgesIterate)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
 
-    for ( auto & edge : this->graph_.Edges() ) 
+    for ( auto & edge : this->graph_.Edges() )
     {
         ++counter;
         edge.Properties().NonConstMemberFunction();
@@ -694,10 +694,10 @@ TYPED_TEST( TestGraphStar, EdgesIterate)
 }
 
 #pragma mark EdgesIterateConst
-TYPED_TEST( TestGraphEmpty, EdgesIterateConst ) 
+TYPED_TEST( TestGraphEmpty, EdgesIterateConst )
 {
     Types::count counter = 0;
-    for (auto & v : this->graphConst_.Edges()) 
+    for (auto & v : this->graphConst_.Edges())
     {
         ++counter;
         FAIL();
@@ -705,10 +705,10 @@ TYPED_TEST( TestGraphEmpty, EdgesIterateConst )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphSingleVertex, EdgesIterateConst ) 
+TYPED_TEST( TestGraphSingleVertex, EdgesIterateConst )
 {
     Types::count counter = 0;
-    for (auto & v : this->graphConst_.Edges()) 
+    for (auto & v : this->graphConst_.Edges())
     {
         ++counter;
         FAIL();
@@ -716,10 +716,10 @@ TYPED_TEST( TestGraphSingleVertex, EdgesIterateConst )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphFourVertices, EdgesIterateConst ) 
+TYPED_TEST( TestGraphFourVertices, EdgesIterateConst )
 {
     Types::count counter = 0;
-    for (auto & v : this->graphConst_.Edges()) 
+    for (auto & v : this->graphConst_.Edges())
     {
         ++counter;
         FAIL();
@@ -727,12 +727,12 @@ TYPED_TEST( TestGraphFourVertices, EdgesIterateConst )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphBidirectedPath, EdgesIterateConst ) 
+TYPED_TEST( TestGraphBidirectedPath, EdgesIterateConst )
 {
     Types::count counter = 0;
     std::vector<Types::edgeId> ids;
 
-    for (auto& edge : this->graphConst_.Edges()) 
+    for (auto& edge : this->graphConst_.Edges())
     {
         ++counter;
         auto id = edge.Identifier();
@@ -747,12 +747,12 @@ TYPED_TEST( TestGraphBidirectedPath, EdgesIterateConst )
     EXPECT_TRUE(std::is_sorted(ids.begin(), ids.end()));
 }
 
-TYPED_TEST( TestGraphStar, EdgesIterateConst) 
+TYPED_TEST( TestGraphStar, EdgesIterateConst)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
 
-    for ( auto & edge : this->graphConst_.Edges() ) 
+    for ( auto & edge : this->graphConst_.Edges() )
     {
         ++counter;
         auto id = edge.Identifier();
@@ -768,7 +768,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateConst)
 }
 
 #pragma mark EdgesIterateBackwards
-TYPED_TEST( TestGraphEmpty, EdgesIterateBackwards ) 
+TYPED_TEST( TestGraphEmpty, EdgesIterateBackwards )
 {
     Types::count counter = 0;
     for (auto it = this->graph_.Edges().rbegin();
@@ -782,7 +782,7 @@ TYPED_TEST( TestGraphEmpty, EdgesIterateBackwards )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphSingleVertex, EdgesIterateBackwards ) 
+TYPED_TEST( TestGraphSingleVertex, EdgesIterateBackwards )
 {
     Types::count counter = 0;
     for (auto it = this->graph_.Edges().rbegin();
@@ -796,7 +796,7 @@ TYPED_TEST( TestGraphSingleVertex, EdgesIterateBackwards )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphFourVertices, EdgesIterateBackwards ) 
+TYPED_TEST( TestGraphFourVertices, EdgesIterateBackwards )
 {
     Types::count counter = 0;
     for (auto it = this->graph_.Edges().rbegin();
@@ -810,7 +810,7 @@ TYPED_TEST( TestGraphFourVertices, EdgesIterateBackwards )
     EXPECT_EQ(0, counter);
 }
 
-TYPED_TEST( TestGraphBidirectedPath, EdgesIterateBackwards ) 
+TYPED_TEST( TestGraphBidirectedPath, EdgesIterateBackwards )
 {
     Types::count counter = 0;
     std::vector<Types::edgeId> ids;
@@ -834,7 +834,7 @@ TYPED_TEST( TestGraphBidirectedPath, EdgesIterateBackwards )
     EXPECT_TRUE(std::is_sorted(ids.begin(), ids.end(), std::greater<Types::edgeId>()));
 }
 
-TYPED_TEST( TestGraphStar, EdgesIterateBackwards) 
+TYPED_TEST( TestGraphStar, EdgesIterateBackwards)
 {
     Types::count counter = 0;
     std::vector<Types::vertexId> ids;
@@ -859,7 +859,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwards)
 }
 
 #pragma mark EdgesIterateBackwardsConst
-TYPED_TEST( TestGraphEmpty, EdgesIterateBackwardsConst ) 
+TYPED_TEST( TestGraphEmpty, EdgesIterateBackwardsConst )
 {
     Types::count counter = 0;
     for (auto it = this->graphConst_.Edges().rbegin();
@@ -953,7 +953,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 
     TYPED_TEST  ( TestGraphEmpty
-                , VertexAtExceptionHandling ) 
+                , VertexAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
@@ -963,7 +963,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
         try {
@@ -971,7 +971,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -999,7 +999,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
         try {
@@ -1007,7 +1007,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -1024,7 +1024,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TYPED_TEST  ( TestGraphFourVertices
-                , VertexAtExceptionHandling ) 
+                , VertexAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "VertexAt"
                                                     , "VertexExists\\(id\\)");
@@ -1034,7 +1034,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
         try {
@@ -1042,7 +1042,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -1076,7 +1076,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TYPED_TEST  ( TestGraphEmpty
-                , NeighborsOfExceptionHandling ) 
+                , NeighborsOfExceptionHandling )
     {
         auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
@@ -1086,7 +1086,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
         try {
@@ -1094,7 +1094,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -1111,7 +1111,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TYPED_TEST  ( TestGraphSingleVertex
-                , NeighborsOfExceptionHandling ) 
+                , NeighborsOfExceptionHandling )
     {
         auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
@@ -1121,7 +1121,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
         try {
@@ -1129,7 +1129,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -1146,7 +1146,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TYPED_TEST  ( TestGraphFourVertices
-                , NeighborsOfExceptionHandling ) 
+                , NeighborsOfExceptionHandling )
     {
         auto assertionString = this->assertionString( "NeighborsOf"
                                                     , "VertexExists\\(id\\)");
@@ -1156,7 +1156,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
         try {
@@ -1164,7 +1164,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -1218,7 +1218,7 @@ TYPED_TEST(TestGraphStar, NeighborsOf) {
     EXPECT_EQ(3, neighbors.size());
     ExpectSameContent(expectedNeighbors, neighbors);
     neighbors.clear();
-    
+
     // Leaves
     for (size_t i = 0; i < 3; ++i) {
         Types::vertexId id = this->leafIds_[i];
@@ -1491,7 +1491,7 @@ TYPED_TEST(TestGraphFourVertices, MapEdges) {
 TYPED_TEST(TestGraphStar, MapEdges) {
     const unsigned OFFSET = 1234;
     auto result = this->graphConst_.MapEdges([](
-        Types::edgeId id, const typename TestFixture::TEdge & edge) 
+        Types::edgeId id, const typename TestFixture::TEdge & edge)
         {
             return std::make_pair(id, edge.Properties().PrivateId() + OFFSET);
         }
@@ -1507,7 +1507,7 @@ TYPED_TEST(TestGraphStar, MapEdges) {
 #pragma mark MapVertices
 TYPED_TEST(TestGraphEmpty, MapVertices) {
     int called = 0;
-    auto function = [&called](Types::vertexId, const typename TestFixture::TVertex &) 
+    auto function = [&called](Types::vertexId, const typename TestFixture::TVertex &)
         {
             ++called;
             return 42;
@@ -1558,7 +1558,7 @@ TYPED_TEST( TestGraphEmpty, AddVertex)
         EXPECT_EQ(i + 1, this->graph_.NumberOfVertices());
 
         // Check if all previously inserted vertices are still correct
-        for (size_t j = 0; j <= i; ++j) 
+        for (size_t j = 0; j <= i; ++j)
         {
             ASSERT_TRUE(this->graph_.VertexExists(indices[j]));
             EXPECT_EQ(j, this->graph_.VertexAt(indices[j]).Properties().PrivateId() )
@@ -1568,7 +1568,7 @@ TYPED_TEST( TestGraphEmpty, AddVertex)
 }
 
 #pragma mark AddVertexFromTemporary
-TYPED_TEST(TestGraphEmpty, AddVertexFromTemporary) 
+TYPED_TEST(TestGraphEmpty, AddVertexFromTemporary)
 {
     using TVertex           = typename TestFixture::TVertex;
     using TVertexProperties = typename TestFixture::TVertexProperties;
@@ -1583,7 +1583,7 @@ TYPED_TEST(TestGraphEmpty, AddVertexFromTemporary)
 }
 
 #pragma mark AddVertexFromConstReference
-TYPED_TEST(TestGraphEmpty, AddVertexFromConstReference) 
+TYPED_TEST(TestGraphEmpty, AddVertexFromConstReference)
 {
     using TVertex           = typename TestFixture::TVertex;
     using TVertexProperties = typename TestFixture::TVertexProperties;
@@ -1606,7 +1606,7 @@ TYPED_TEST( TestGraphFourVertices, AddEdge) {
     using TEdge             = typename TestFixture::TEdge;
     using TEdgeProperties   = typename TestFixture::TEdgeProperties;
 
-    for (Types::vertexId i = 0; i < 4; ++i) 
+    for (Types::vertexId i = 0; i < 4; ++i)
     {
         ASSERT_TRUE(this->graph_.VertexExists(0));
     }
@@ -2163,7 +2163,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TYPED_TEST  ( TestGraphEmpty
-                , ForAllEdgesAtExceptionHandling ) 
+                , ForAllEdgesAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "for_all_edges_at"
                                                     , "VertexExists\\(vertexId\\)");
@@ -2171,7 +2171,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
         try {
             this->graph_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
                 nonexistentId,
-                [](typename TestFixture::TEdge &) 
+                [](typename TestFixture::TEdge &)
                 {
                     FAIL();
                 }
@@ -2179,7 +2179,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
         } catch ( std::runtime_error const & error ) {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -2202,7 +2202,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TYPED_TEST  ( TestGraphEmpty
-                , ForAllEdgesAtConstExceptionHandling ) 
+                , ForAllEdgesAtConstExceptionHandling )
     {
         auto assertionString = this->assertionString( "for_all_edges_at"
                                                     , "VertexExists\\(vertexId\\)");
@@ -2217,7 +2217,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
         } catch ( std::runtime_error const & error ) {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }

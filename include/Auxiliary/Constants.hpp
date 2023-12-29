@@ -23,8 +23,8 @@ namespace egoa::Const {
     // 1 ns (for nanosecond) correspond to 1,000,000,000 s (for seconds)
     constexpr Types::count  NSEC_PER_SEC      = 1000000000; // pow(10,9)
     // 1 ns (for nanosecond) correspond to 1,000,000 ms (for milliseconds)
-    constexpr Types::count  NSEC_PER_MILLISEC = 1000000; 
-    constexpr Types::count  MILLISEC_PER_SEC  = 1000; 
+    constexpr Types::count  NSEC_PER_MILLISEC = 1000000;
+    constexpr Types::count  MILLISEC_PER_SEC  = 1000;
 
     constexpr Types::real   EPSILON    = std::numeric_limits<Types::real>::epsilon();
     constexpr Types::index  NONE       = std::numeric_limits<Types::posInteger>::max();

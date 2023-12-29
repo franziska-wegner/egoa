@@ -20,20 +20,20 @@ namespace egoa::test {
 // ***********************************************************************
 // ***********************************************************************
     TEST_F  ( TestBucketWithZeroElements
-            , IsEmptyWhenCreated ) 
+            , IsEmptyWhenCreated )
     {
         ASSERT_TRUE( bucket_.Empty() );
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , HasSizeOfZero ) 
+            , HasSizeOfZero )
     {
         ASSERT_THAT( bucket_.Size(), Eq(0) );
     }
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , CheckTopElementDeathTest ) 
+            , CheckTopElementDeathTest )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
@@ -44,7 +44,7 @@ namespace egoa::test {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , CheckTopElementExceptionHandling ) 
+            , CheckTopElementExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
@@ -52,24 +52,24 @@ namespace egoa::test {
                                                     , "!EmptyQueue\\(\\)");
         try {
             bucket_.Top();
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
-    
-///@Name Compare two empty buckets with <, >, <=, >= ... 
+
+///@Name Compare two empty buckets with <, >, <=, >= ...
 ///@todo Check what happens if processed elements are empty but not unprocessed elements, can this even happening?
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , CompareTwoEmptyBucketsLhsSmallerRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsSmallerRhsDeathTest )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -81,7 +81,7 @@ namespace egoa::test {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , CompareTwoEmptyBucketsLhsSmallerRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsSmallerRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -90,12 +90,12 @@ namespace egoa::test {
                                                     , "!EmptyQueue\\(\\)");
         try {
             auto test = bucket_ < bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -104,11 +104,11 @@ namespace egoa::test {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , CompareTwoEmptyBucketsLhsSmallerEqualRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsSmallerEqualRhsDeathTest )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*<="
                                                     , "!EmptyQueue\\(\\)");
         ASSERT_DEATH ( { auto test = bucket_ <= bucketToCompare_;}, assertionString );
@@ -116,21 +116,21 @@ namespace egoa::test {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , CompareTwoEmptyBucketsLhsSmallerEqualRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsSmallerEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*<="
                                                     , "!EmptyQueue\\(\\)");
         try {
             auto test = bucket_ <= bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -139,7 +139,7 @@ namespace egoa::test {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -151,7 +151,7 @@ namespace egoa::test {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -160,12 +160,12 @@ namespace egoa::test {
                                                     , "!EmptyQueue\\(\\)");
         try {
             auto test = bucket_ > bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -174,7 +174,7 @@ namespace egoa::test {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -186,7 +186,7 @@ namespace egoa::test {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -195,12 +195,12 @@ namespace egoa::test {
                                                     , "!EmptyQueue\\(\\)");
         try {
             auto test = bucket_ >= bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -210,10 +210,10 @@ namespace egoa::test {
 
 // Merge an element into an empty bucket
 TEST_F  ( TestBucketWithZeroElements
-        , MergeAnElementIntoEmptyBucket ) 
+        , MergeAnElementIntoEmptyBucket )
 {
     TElement element = TElement(2,false);
-    
+
     ASSERT_EQ   ( bucket_.Size(), 0 );
     ASSERT_TRUE ( bucket_.Merge( element ) );
     ASSERT_TRUE ( element.Valid()   );
@@ -244,10 +244,10 @@ TEST_F  ( TestBucketWithZeroElements
 ///@Name Check Domination
 ///@{
     TEST_F  ( TestBucketWithZeroElements
-            , DominationCheckStrictDominationOfToElements ) 
+            , DominationCheckStrictDominationOfToElements )
     {
         TElement element = TElement(2,false);
-        
+
         ASSERT_EQ   ( bucket_.Size(), 0 );
         ASSERT_TRUE ( bucket_.Merge<DominationCriterion::strict>( element ) );
         ASSERT_TRUE ( element.Valid()   );
@@ -255,10 +255,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , DominationCheckWeakDominationOfToElements ) 
+            , DominationCheckWeakDominationOfToElements )
     {
         TElement element = TElement(2,false);
-        
+
         ASSERT_EQ   ( bucket_.Size(), 0 );
         ASSERT_TRUE ( bucket_.Merge<DominationCriterion::weak>( element ) );
         ASSERT_TRUE ( element.Valid()   );
@@ -266,10 +266,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , DominationCheckNoneDominationOfToElements ) 
+            , DominationCheckNoneDominationOfToElements )
     {
         TElement element = TElement(2,false);
-        
+
         ASSERT_EQ   ( bucket_.Size(), 0 );
         ASSERT_TRUE ( bucket_.Merge<DominationCriterion::none>( element ) );
         ASSERT_TRUE ( element.Valid()   );
@@ -280,7 +280,7 @@ TEST_F  ( TestBucketWithZeroElements
 ///@Name Access elements
 ///@{
     TEST_F  ( TestBucketWithZeroElements
-            , AccessElementHasElementAt ) 
+            , AccessElementHasElementAt )
     {
         ASSERT_FALSE ( bucket_.HasElementAt(0)  );
         ASSERT_FALSE ( bucket_.HasElementAt(1)  );
@@ -289,10 +289,10 @@ TEST_F  ( TestBucketWithZeroElements
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , AccessElementElementAtDeathTest ) 
+            , AccessElementElementAtDeathTest )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "ElementAt"
                                                     , "HasElementAt\\(index\\)");
         ASSERT_DEATH ( {bucket_.ElementAt(0);},  assertionString );
@@ -302,34 +302,34 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , AccessElementElementAtExceptionHandling ) 
+            , AccessElementElementAtExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "ElementAt"
                                                     , "HasElementAt\\(index\\)");
         try {
             try {
                 bucket_.ElementAt(0);
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_.ElementAt(1);
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_.ElementAt(-1);
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -338,10 +338,10 @@ TEST_F  ( TestBucketWithZeroElements
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , AccessElementWithBracketOperatorDeathTest ) 
+            , AccessElementWithBracketOperatorDeathTest )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*\\[\\]"
                                                     , "HasElementAt\\(index\\)");
         ASSERT_DEATH ( {bucket_[0];},  assertionString );
@@ -390,10 +390,10 @@ TEST_F  ( TestBucketWithZeroElements
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , AccessElementTopDeathTest ) 
+            , AccessElementTopDeathTest )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "Top"
                                                     , "!EmptyQueue\\(\\)");
         EXPECT_TRUE  ( bucket_.EmptyQueue() );
@@ -402,21 +402,21 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , AccessElementTopExceptionHandling ) 
+            , AccessElementTopExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "Top"
                                                     , "!EmptyQueue\\(\\)");
         EXPECT_TRUE  ( bucket_.EmptyQueue() );
         try {
             bucket_.Top();
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -424,7 +424,7 @@ TEST_F  ( TestBucketWithZeroElements
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
     TEST_F  ( TestBucketWithZeroElements
-            , AccessElementOptima ) 
+            , AccessElementOptima )
     {
         bucket_.Optima();;
     }
@@ -434,7 +434,7 @@ TEST_F  ( TestBucketWithZeroElements
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , RemoveElementUsingPopDeathTest ) 
+            , RemoveElementUsingPopDeathTest )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
@@ -445,7 +445,7 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , RemoveElementUsingPopExceptionHandling ) 
+            , RemoveElementUsingPopExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
@@ -453,12 +453,12 @@ TEST_F  ( TestBucketWithZeroElements
                                                     , "!EmptyQueue\\(\\)" );
         try {
             bucket_.Pop();
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -467,31 +467,31 @@ TEST_F  ( TestBucketWithZeroElements
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithZeroElementsDeathTest
-            , RemoveElementUsingDeleteMinDeathTest ) 
+            , RemoveElementUsingDeleteMinDeathTest )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
-                                                    , "DeleteTop" 
+                                                    , "Bucket"
+                                                    , "DeleteTop"
                                                     , "!EmptyQueue\\(\\)" );
         ASSERT_DEATH ( {bucket_.DeleteTop();}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
-            , RemoveElementUsingDeleteMinExceptionHandling ) 
+            , RemoveElementUsingDeleteMinExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
-                                                    , "DeleteTop" 
+                                                    , "Bucket"
+                                                    , "DeleteTop"
                                                     , "!EmptyQueue\\(\\)" );
         try {
             bucket_.DeleteTop();
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -499,7 +499,7 @@ TEST_F  ( TestBucketWithZeroElements
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
     TEST_F  ( TestBucketWithZeroElements
-            , RemoveElementAll ) 
+            , RemoveElementAll )
     {
         bucket_.Clear();
         EXPECT_EQ   ( bucket_.Size(), 0 );
@@ -510,19 +510,19 @@ TEST_F  ( TestBucketWithZeroElements
 ///@Name Empty
 ///@{
     TEST_F  ( TestBucketWithZeroElements
-            , EmptyIsEmpty ) 
+            , EmptyIsEmpty )
     {
         EXPECT_TRUE ( bucket_.Empty() );
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , EmptyHasEmptyQueue ) 
+            , EmptyHasEmptyQueue )
     {
         EXPECT_TRUE ( bucket_.EmptyQueue() );
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , EmptyIsSizeZero ) 
+            , EmptyIsSizeZero )
     {
         EXPECT_EQ   ( bucket_.Size(), 0 );
         EXPECT_TRUE ( bucket_.EmptyQueue() );
@@ -533,10 +533,10 @@ TEST_F  ( TestBucketWithZeroElements
 ///@Name Iterators
 ///@{
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorSerialForAllElements ) 
+            , IteratorSerialForAllElements )
     {
-        bucket_.for_all_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement & element ) 
+        bucket_.for_all_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement & element )
             {
                 EXPECT_FALSE ( true );
             }
@@ -544,10 +544,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorParallelForAllElements ) 
+            , IteratorParallelForAllElements )
     {
-        bucket_.for_all_elements<egoa::ExecutionPolicy::parallel> ( 
-            []( TElement & element ) 
+        bucket_.for_all_elements<egoa::ExecutionPolicy::parallel> (
+            []( TElement & element )
             {
                 EXPECT_FALSE ( true );
             }
@@ -555,44 +555,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorBreakableForAllElements ) 
+            , IteratorBreakableForAllElements )
     {
-        bucket_.for_all_elements<egoa::ExecutionPolicy::breakable> ( 
-            []( TElement & element ) -> bool 
-            {
-                EXPECT_FALSE ( true );
-                return true;
-            }
-        );
-    }
-
-    TEST_F  ( TestBucketWithZeroElements
-            , IteratorSerialForAllProcessedElements ) 
-    {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement & element ) 
-            {
-                EXPECT_FALSE ( true );
-            }
-        );
-    }
-
-    TEST_F  ( TestBucketWithZeroElements
-            , IteratorParallelForAllProcessedElements ) 
-    {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
-            []( TElement & element ) 
-            {
-                EXPECT_FALSE ( true );
-            }
-        );
-    }
-
-    TEST_F  ( TestBucketWithZeroElements
-            , IteratorBreakableForAllProcessedElements ) 
-    {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> ( 
-            []( TElement & element ) -> bool 
+        bucket_.for_all_elements<egoa::ExecutionPolicy::breakable> (
+            []( TElement & element ) -> bool
             {
                 EXPECT_FALSE ( true );
                 return true;
@@ -601,10 +567,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorSerialForAllUnprocessedElements ) 
+            , IteratorSerialForAllProcessedElements )
     {
-        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement & element ) 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement & element )
             {
                 EXPECT_FALSE ( true );
             }
@@ -612,10 +578,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorParallelForAllUnprocessedElements ) 
+            , IteratorParallelForAllProcessedElements )
     {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
-            []( TElement & element ) 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
+            []( TElement & element )
             {
                 EXPECT_FALSE ( true );
             }
@@ -623,10 +589,10 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorBreakableForAllUnprocessedElements ) 
+            , IteratorBreakableForAllProcessedElements )
     {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> ( 
-            []( TElement & element ) -> bool 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> (
+            []( TElement & element ) -> bool
             {
                 EXPECT_FALSE ( true );
                 return true;
@@ -635,14 +601,48 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorSerialForAllOptima ) 
+            , IteratorSerialForAllUnprocessedElements )
+    {
+        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement & element )
+            {
+                EXPECT_FALSE ( true );
+            }
+        );
+    }
+
+    TEST_F  ( TestBucketWithZeroElements
+            , IteratorParallelForAllUnprocessedElements )
+    {
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
+            []( TElement & element )
+            {
+                EXPECT_FALSE ( true );
+            }
+        );
+    }
+
+    TEST_F  ( TestBucketWithZeroElements
+            , IteratorBreakableForAllUnprocessedElements )
+    {
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> (
+            []( TElement & element ) -> bool
+            {
+                EXPECT_FALSE ( true );
+                return true;
+            }
+        );
+    }
+
+    TEST_F  ( TestBucketWithZeroElements
+            , IteratorSerialForAllOptima )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
         bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> (
-            []( TElement const & element ) 
+            []( TElement const & element )
             {
                 FAIL();
             }
@@ -650,14 +650,14 @@ TEST_F  ( TestBucketWithZeroElements
     }
 
     TEST_F  ( TestBucketWithZeroElements
-            , IteratorParallelForAllOptima ) 
+            , IteratorParallelForAllOptima )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
         bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> (
-            []( TElement const & element ) 
+            []( TElement const & element )
             {
                 EXPECT_FALSE ( true );
             }
@@ -672,20 +672,20 @@ TEST_F  ( TestBucketWithZeroElements
 #pragma mark Bucket with vector of int elements
 // ***********************************************************************
 // ***********************************************************************
-///@Name Compare two empty buckets with <, >, <=, >= ... 
+///@Name Compare two empty buckets with <, >, <=, >= ...
 ///@todo Check what happens if processed elements are empty but not unprocessed elements, can this even happening?
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , CompareTwoBucketsWhereOneIsEmptyLhsSmallerRhsDeathTest ) 
+            , CompareTwoBucketsWhereOneIsEmptyLhsSmallerRhsDeathTest )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
-        
+
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*<"
                                                     , "!rhs.EmptyQueue\\(\\)" );
         ASSERT_DEATH ( { auto test = bucket_ < bucketToCompare_;}, assertionString );
@@ -693,21 +693,21 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , CompareTwoBucketsWhereOneIsEmptyLhsSmallerRhsExceptionHandling ) 
+            , CompareTwoBucketsWhereOneIsEmptyLhsSmallerRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*<"
                                                     , "!rhs.EmptyQueue\\(\\)" );
         try {
             auto test = bucket_ < bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -716,7 +716,7 @@ TEST_F  ( TestBucketWithZeroElements
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , CompareTwoEmptyBucketsLhsSmallerEqualRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsSmallerEqualRhsDeathTest )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -724,7 +724,7 @@ TEST_F  ( TestBucketWithZeroElements
 
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*<="
                                                     , "!rhs.EmptyQueue\\(\\)" );
         ASSERT_DEATH ( { auto test = bucket_ <= bucketToCompare_;}, assertionString );
@@ -732,11 +732,11 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , CompareTwoEmptyBucketsLhsSmallerEqualRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsSmallerEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "operator.*<="
                                                     , "!rhs.EmptyQueue\\(\\)" );
         try {
@@ -744,7 +744,7 @@ TEST_F  ( TestBucketWithZeroElements
         } catch ( std::runtime_error const & error ) {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -753,7 +753,7 @@ TEST_F  ( TestBucketWithZeroElements
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -762,7 +762,7 @@ TEST_F  ( TestBucketWithZeroElements
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
-                                                    , "operator.*>" 
+                                                    , "operator.*>"
                                                     , "!rhs.EmptyQueue\\(\\)" );
         ASSERT_DEATH ( { auto test = bucket_ > bucketToCompare_;}
                      , assertionString );
@@ -770,21 +770,21 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
-                                                    , "operator.*>" 
+                                                    , "operator.*>"
                                                     , "!rhs.EmptyQueue\\(\\)" );
         try {
             auto test = bucket_ > bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -793,7 +793,7 @@ TEST_F  ( TestBucketWithZeroElements
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest ) 
+            , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -811,7 +811,7 @@ TEST_F  ( TestBucketWithZeroElements
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling ) 
+            , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
         auto assertionString = buildAssertionString ( "Bucket.hpp"
@@ -820,12 +820,12 @@ TEST_F  ( TestBucketWithZeroElements
                                                     , "!rhs.EmptyQueue\\(\\)");
         try {
             auto test = bucket_ >= bucketToCompare_;
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -835,11 +835,11 @@ TEST_F  ( TestBucketWithZeroElements
 
 // Merge an element into an empty bucket
 TEST_F  ( TestBucketWithMultipleInteger
-        , MergeANewElementIntoTheBucketStdMergeCorrespondsToDominatesWeakly ) 
+        , MergeANewElementIntoTheBucketStdMergeCorrespondsToDominatesWeakly )
 {
     TElement elementDominated = TElement ( 2, false );
     TElement elementMergable  = TElement ( 0, false );
-    
+
     ASSERT_EQ    ( bucket_.Size(), 1 );
 
     ASSERT_FALSE ( bucket_.Merge( elementDominated ) );
@@ -854,11 +854,11 @@ TEST_F  ( TestBucketWithMultipleInteger
 ///@Name Check Domination
 ///@{
     TEST_F  ( TestBucketWithMultipleInteger
-            , DominationCheckStrictDominationOfToElements ) 
+            , DominationCheckStrictDominationOfToElements )
     {
         TElement elementNotMergable = TElement ( 2, false );
         TElement elementMergable    = TElement ( 1, false );
-        
+
         ASSERT_EQ   ( bucket_.Size(), 1 );
         ASSERT_FALSE( bucket_.Merge<DominationCriterion::strict>( elementNotMergable ) );
         ASSERT_FALSE( elementNotMergable.Valid()   );
@@ -869,11 +869,11 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , DominationCheckWeakDominationOfToElements ) 
+            , DominationCheckWeakDominationOfToElements )
     {
         TElement elementNotMergable = TElement ( 1, false );
         TElement elementMergable    = TElement ( 0, false );
-        
+
         ASSERT_EQ    ( bucket_.Size(), 1 );
         ASSERT_FALSE ( bucket_.Merge<DominationCriterion::weak>( elementNotMergable ) );
         ASSERT_FALSE ( elementNotMergable.Valid()   );
@@ -884,10 +884,10 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , DominationCheckNoneDominationOfToElements ) 
+            , DominationCheckNoneDominationOfToElements )
     {
         TElement element = TElement ( 99, false );
-        
+
         ASSERT_EQ   ( bucket_.Size(), 1 );
         ASSERT_TRUE ( bucket_.Merge<DominationCriterion::none>( element ) );
         ASSERT_TRUE ( element.Valid()   );
@@ -898,7 +898,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 ///@Name Access elements
 ///@{
     TEST_F  ( TestBucketWithMultipleInteger
-            , AccessElementHasElementAt ) 
+            , AccessElementHasElementAt )
     {
         ASSERT_FALSE ( bucket_.HasElementAt(0)    );
         ASSERT_FALSE ( bucket_.HasElementAt(-1)   );
@@ -909,7 +909,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , AccessElementElementAtDeathTest ) 
+            , AccessElementElementAtDeathTest )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -940,7 +940,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , AccessElementElementAtExceptionHandling ) 
+            , AccessElementElementAtExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
@@ -949,19 +949,19 @@ TEST_F  ( TestBucketWithMultipleInteger
         try {
             try {
                 bucket_.ElementAt(0);
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_.ElementAt(1);
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
             try {
                 bucket_.ElementAt(-1);
-            } catch ( std::runtime_error const & error ) 
+            } catch ( std::runtime_error const & error )
             {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
             }
@@ -999,7 +999,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
-        
+
         auto assertionString = buildAssertionString ( "Bucket.hpp"
                                                     , "Bucket"
                                                     , "operator.*\\[\\]"
@@ -1050,27 +1050,27 @@ TEST_F  ( TestBucketWithMultipleInteger
 ///@Name Access bucket's top element
 ///@{
     TEST_F  ( TestBucketWithMultipleInteger
-            , AccessElementTop ) 
+            , AccessElementTop )
     {
         EXPECT_FALSE ( bucket_.EmptyQueue() );
         EXPECT_EQ    ( bucket_.Top(), 1 );
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , AccessElementOptima ) 
+            , AccessElementOptima )
     {
-        TElement element1 ( 1 ); 
-        TElement element2 ( 1 ); 
+        TElement element1 ( 1 );
+        TElement element2 ( 1 );
 
         bucket_.Merge<DominationCriterion::strict>( element1 );
         bucket_.Merge<DominationCriterion::strict>( element2 );
 
         std::vector<TElement> optima = bucket_.Optima();
         ASSERT_EQ ( 3, optima.size() );
-        
+
         for ( Types::count counter = 0
             ; counter < optima.size()
-            ; ++counter ) 
+            ; ++counter )
         {
             ASSERT_EQ ( optima[counter], 1 );
         }
@@ -1081,22 +1081,22 @@ TEST_F  ( TestBucketWithMultipleInteger
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , RemoveElementUsingPopDeathTest ) 
+            , RemoveElementUsingPopDeathTest )
     {
         bucket_.Pop();
         ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
         ASSERT_EQ    ( 1, bucket_.HasElementAt(0) );
-        
+
         ASSERT_TRUE ( bucket_.EmptyQueue() );
 
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "Pop"
                                                     , "!EmptyQueue\\(\\)" );
         ASSERT_DEATH ( {bucket_.Pop();}, assertionString );
 
-        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-            []( TElement const & element ) 
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>(
+            []( TElement const & element )
             {
                 ASSERT_TRUE ( element.Valid() );
             }
@@ -1105,31 +1105,31 @@ TEST_F  ( TestBucketWithMultipleInteger
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , RemoveElementUsingPopExceptionHandling ) 
+            , RemoveElementUsingPopExceptionHandling )
     {
         bucket_.Pop();
         ASSERT_TRUE  ( bucket_.HasElementAt(0)    );
         ASSERT_EQ    ( 1, bucket_.HasElementAt(0) );
-        
+
         ASSERT_TRUE ( bucket_.EmptyQueue() );
 
         auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket" 
+                                                    , "Bucket"
                                                     , "Pop"
                                                     , "!EmptyQueue\\(\\)" );
         try {
             bucket_.Pop();
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
 
-        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-            []( TElement const & element ) 
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>(
+            []( TElement const & element )
             {
                 ASSERT_TRUE ( element.Valid() );
             }
@@ -1140,7 +1140,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBucketWithMultipleIntegerDeathTest
-            , RemoveElementUsingDeleteMinDeathTest ) 
+            , RemoveElementUsingDeleteMinDeathTest )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -1160,8 +1160,8 @@ TEST_F  ( TestBucketWithMultipleInteger
                                                     , "!EmptyQueue\\(\\)" );
         ASSERT_DEATH ( {bucket_.DeleteTop();}, assertionString );
 
-        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-            []( TElement const & element ) 
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>(
+            []( TElement const & element )
             {
                 ASSERT_TRUE ( element.Valid() );
             }
@@ -1170,7 +1170,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithMultipleInteger
-            , RemoveElementUsingDeleteMinExceptionHandling ) 
+            , RemoveElementUsingDeleteMinExceptionHandling )
     {
         auto       tuple = bucket_.DeleteTop();
         TElement element = std::get<0>(tuple);
@@ -1186,17 +1186,17 @@ TEST_F  ( TestBucketWithMultipleInteger
                                                     , "!EmptyQueue\\(\\)" );
         try {
             bucket_.DeleteTop();
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
 
-        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>( 
-            []( TElement const & element ) 
+        bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>(
+            []( TElement const & element )
             {
                 ASSERT_TRUE ( element.Valid() );
             }
@@ -1206,7 +1206,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , RemoveElementAll ) 
+            , RemoveElementAll )
     {
         bucket_.Clear();
         EXPECT_EQ   ( bucket_.Size(), 0 );
@@ -1214,7 +1214,7 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , RemoveElementAllWithPrecedingPop ) 
+            , RemoveElementAllWithPrecedingPop )
     {
         bucket_.Pop();
         bucket_.Clear();
@@ -1226,19 +1226,19 @@ TEST_F  ( TestBucketWithMultipleInteger
 ///@Name Empty and size check
 ///@{
     TEST_F  ( TestBucketWithMultipleInteger
-            , IsEmpty ) 
+            , IsEmpty )
     {
         EXPECT_FALSE ( bucket_.Empty() );
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , HasEmptyQueue ) 
+            , HasEmptyQueue )
     {
         EXPECT_FALSE ( bucket_.EmptyQueue() );
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , HaseCorrectSize ) 
+            , HaseCorrectSize )
     {
         EXPECT_EQ   ( bucket_.Size(), 1 );
     }
@@ -1247,10 +1247,10 @@ TEST_F  ( TestBucketWithMultipleInteger
 ///@Name Iterators
 ///@{
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorSerialForAllElements ) 
+            , IteratorSerialForAllElements )
     {
         // Starting with a bunch of unprocessed elements
-        std::vector<TElement> const verificationVectorWithoutProcessedItems =  
+        std::vector<TElement> const verificationVectorWithoutProcessedItems =
                                                             { TElement(1,true)
                                                             , TElement(5,false)
                                                             , TElement(2,false)
@@ -1259,9 +1259,9 @@ TEST_F  ( TestBucketWithMultipleInteger
                                                             , TElement(23,false)
                                                             , TElement(4,false) };
         Types::count counter = 0;
-        bucket_.template for_all_elements<egoa::ExecutionPolicy::sequential> ( 
+        bucket_.template for_all_elements<egoa::ExecutionPolicy::sequential> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter ]( TElement const & element ) 
+            , & counter ]( TElement const & element )
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 EXPECT_EQ ( element.Valid(), verificationVectorWithoutProcessedItems[counter].Valid() );
@@ -1270,9 +1270,9 @@ TEST_F  ( TestBucketWithMultipleInteger
         );
 
         counter = 0;
-        bucketConst_.template for_all_elements<egoa::ExecutionPolicy::sequential> ( 
+        bucketConst_.template for_all_elements<egoa::ExecutionPolicy::sequential> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter ]( TElement const & element ) 
+            , & counter ]( TElement const & element )
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 EXPECT_EQ ( element.Valid(), verificationVectorWithoutProcessedItems[counter].Valid() );
@@ -1282,17 +1282,17 @@ TEST_F  ( TestBucketWithMultipleInteger
 
         // After this pop only processed items are available as all unprocessed items are not valid, meaning here one element
         bucket_.Pop();
-        bucket_.template for_all_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement const & element ) 
+        bucket_.template for_all_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement const & element )
             {
                 EXPECT_EQ ( element, 1 );
                 EXPECT_EQ ( element.Valid(), true );
             }
         );
-        
+
         // Const call
-        bucketConst_.template for_all_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement const & element ) 
+        bucketConst_.template for_all_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement const & element )
             {
                 EXPECT_EQ ( element, 1 );
                 EXPECT_EQ ( element.Valid(), true );
@@ -1302,7 +1302,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 
     // @todo same as in BinaryHeap: (Q1) Can we test more, (Q2) refactoring
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorParallelForAllElements ) 
+            , IteratorParallelForAllElements )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -1316,26 +1316,26 @@ TEST_F  ( TestBucketWithMultipleInteger
         std::vector<Types::count>            numberOfElements ( numberOfThreads, 0 );
         std::vector< std::vector<TElement> > elementsLoopedOver ( numberOfThreads
                                                                 , std::vector<TElement>() );
-        bucket_.for_all_elements<egoa::ExecutionPolicy::parallel> ( 
+        bucket_.for_all_elements<egoa::ExecutionPolicy::parallel> (
             [ & numberOfThreads
             , & numberOfElements
-            , & elementsLoopedOver ]( TElement & element ) 
+            , & elementsLoopedOver ]( TElement & element )
             {
                 ++numberOfElements[ omp_get_thread_num() ];
                 elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
             }
         );
         ParallelIteratorCheck<TElement> ( {1}, numberOfElements, elementsLoopedOver );
-        
+
         // Const loop check
         numberOfElements.clear();
         elementsLoopedOver.clear();
         numberOfElements.resize ( numberOfThreads, 0 );
         elementsLoopedOver.resize ( numberOfThreads, std::vector<TElement>() );
-        bucketConst_.for_all_elements<egoa::ExecutionPolicy::parallel> ( 
+        bucketConst_.for_all_elements<egoa::ExecutionPolicy::parallel> (
             [ & numberOfThreads
             , & numberOfElements
-            , & elementsLoopedOver ]( TElement const & element ) 
+            , & elementsLoopedOver ]( TElement const & element )
             {
                 ++numberOfElements[ omp_get_thread_num() ];
                 elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
@@ -1347,16 +1347,16 @@ TEST_F  ( TestBucketWithMultipleInteger
 
     //@todo Refactoring concerning duplicated calls for const and non-const iterator tests
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorBreakableForAllElements ) 
+            , IteratorBreakableForAllElements )
     {
         // Starting with a bunch of unprocessed elements
-        std::vector<TElement> const verificationVectorWithoutProcessedItems =  
+        std::vector<TElement> const verificationVectorWithoutProcessedItems =
                                                             { TElement(1,true) };
         // Test non-const iterator
         Types::count counter = 0;
-        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> ( 
+        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter]( TElement & element ) -> bool 
+            , & counter]( TElement & element ) -> bool
             {
                 EXPECT_EQ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1367,9 +1367,9 @@ TEST_F  ( TestBucketWithMultipleInteger
 
         // Test non-const iterator
         counter = 0;
-        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> ( 
+        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter]( TElement const & element ) -> bool 
+            , & counter]( TElement const & element ) -> bool
             {
                 EXPECT_EQ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1380,16 +1380,16 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorSerialForAllProcessedElements ) 
+            , IteratorSerialForAllProcessedElements )
     {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement & element ) 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement & element )
             {
                 EXPECT_FALSE ( true );
             }
         );
-        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement const & element ) 
+        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement const & element )
             {
                 EXPECT_FALSE ( true );
             }
@@ -1397,15 +1397,15 @@ TEST_F  ( TestBucketWithMultipleInteger
 
         bucket_.Pop();
 
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement & element ) 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement & element )
             {
                 EXPECT_EQ ( element, 1 );
                 EXPECT_TRUE ( element.Valid() );
             }
         );
-        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> ( 
-            []( TElement const & element ) 
+        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> (
+            []( TElement const & element )
             {
                 EXPECT_EQ ( element, 1 );
                 EXPECT_TRUE ( element.Valid() );
@@ -1415,13 +1415,13 @@ TEST_F  ( TestBucketWithMultipleInteger
         TElement element ( 0, false );
         bucket_.Merge<DominationCriterion::strict> ( element );
         bucket_.Pop();
-        
+
         std::vector<TElement> const checkProcessedElements =  { TElement ( 1, true )
                                                               , TElement ( 0, true ) };
         Types::count counter = 0;
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> ( 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::sequential> (
             [ & checkProcessedElements
-            , & counter]( TElement & element ) 
+            , & counter]( TElement & element )
             {
                 EXPECT_EQ ( element, checkProcessedElements [ counter ] );
                 // EXPECT_TRUE ( element.Valid() ); // Note that this is for the majority of the algorithm correct, but not in general
@@ -1438,7 +1438,7 @@ TEST_F  ( TestBucketWithMultipleInteger
 
     //@todo Refactoring
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorParallelForAllProcessedElements ) 
+            , IteratorParallelForAllProcessedElements )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -1452,10 +1452,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         std::vector<Types::count>            numberOfElements ( numberOfThreads, 0 );
         std::vector< std::vector<TElement> > elementsLoopedOver ( numberOfThreads
                                                                 , std::vector<TElement>() );
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
             [ & numberOfThreads
             , & numberOfElements
-            , & elementsLoopedOver ]( TElement & element ) 
+            , & elementsLoopedOver ]( TElement & element )
             {
                 ++numberOfElements[ omp_get_thread_num() ];
                 elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
@@ -1463,16 +1463,16 @@ TEST_F  ( TestBucketWithMultipleInteger
         );
         std::vector<TElement> emptyVector;
         ParallelIteratorCheck<TElement> ( emptyVector, numberOfElements, elementsLoopedOver );
-        
+
         // Const loop check
         numberOfElements.clear();
         elementsLoopedOver.clear();
         numberOfElements.resize ( numberOfThreads, 0 );
         elementsLoopedOver.resize ( numberOfThreads, std::vector<TElement>() );
-        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
+        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
             [ & numberOfThreads
             , & numberOfElements
-            , & elementsLoopedOver ]( TElement const & element ) 
+            , & elementsLoopedOver ]( TElement const & element )
             {
                 ++numberOfElements[ omp_get_thread_num() ];
                 elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
@@ -1489,16 +1489,16 @@ TEST_F  ( TestBucketWithMultipleInteger
         bucket_.Merge<DominationCriterion::strict> ( element );
         bucket_.Pop();
 
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
-            []( TElement & element ) 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
+            []( TElement & element )
             {
                 EXPECT_EQ   ( element.Value(), 1 );
                 EXPECT_TRUE ( element.Valid()    );
             }
         );
 
-        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
-            []( TElement const & element ) 
+        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
+            []( TElement const & element )
             {
                 EXPECT_EQ ( element.Value(), 1 );
                 EXPECT_TRUE ( element.Valid() );
@@ -1509,17 +1509,17 @@ TEST_F  ( TestBucketWithMultipleInteger
 
     //@todo test more
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorBreakableForAllProcessedElements ) 
+            , IteratorBreakableForAllProcessedElements )
     {
-        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> ( 
-            []( TElement & element ) -> bool 
+        bucket_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> (
+            []( TElement & element ) -> bool
             {
                 EXPECT_FALSE ( true );
                 return true;
             }
         );
-        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> ( 
-            []( TElement const & element ) -> bool 
+        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::breakable> (
+            []( TElement const & element ) -> bool
             {
                 EXPECT_FALSE ( true );
                 return true;
@@ -1529,16 +1529,16 @@ TEST_F  ( TestBucketWithMultipleInteger
 
     //@todo test something
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorSerialForAllUnprocessedElements ) 
+            , IteratorSerialForAllUnprocessedElements )
     {
         // Starting with a bunch of unprocessed elements
-        std::vector<TElement> const verificationVectorWithoutProcessedItems =  
+        std::vector<TElement> const verificationVectorWithoutProcessedItems =
                                                             { TElement ( 1, true ) };
 
         Types::count counter = 0;
-        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::sequential> ( 
+        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::sequential> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter]( TElement & element ) 
+            , & counter]( TElement & element )
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1547,9 +1547,9 @@ TEST_F  ( TestBucketWithMultipleInteger
         EXPECT_EQ ( 1, counter );
 
         counter = 0;
-        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::sequential> ( 
+        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::sequential> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter]( TElement const & element ) 
+            , & counter]( TElement const & element )
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1559,7 +1559,7 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorParallelForAllUnprocessedElements ) 
+            , IteratorParallelForAllUnprocessedElements )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -1573,26 +1573,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         std::vector<Types::count>            numberOfElements ( numberOfThreads, 0 );
         std::vector< std::vector<TElement> > elementsLoopedOver ( numberOfThreads
                                                                 , std::vector<TElement>() );
-        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::parallel> ( 
+        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::parallel> (
             [ & numberOfThreads
             , & numberOfElements
-            , & elementsLoopedOver ]( TElement & element ) 
-            {
-                ++numberOfElements[ omp_get_thread_num() ];
-                elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
-            }
-        );
-        ParallelIteratorCheck<TElement> ( {1}, numberOfElements, elementsLoopedOver );
-        
-        // Const loop check
-        numberOfElements.clear();
-        elementsLoopedOver.clear();
-        numberOfElements.resize ( numberOfThreads, 0 );
-        elementsLoopedOver.resize ( numberOfThreads, std::vector<TElement>() );
-        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::parallel> ( 
-            [ & numberOfThreads
-            , & numberOfElements
-            , & elementsLoopedOver ]( TElement const & element ) 
+            , & elementsLoopedOver ]( TElement & element )
             {
                 ++numberOfElements[ omp_get_thread_num() ];
                 elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
@@ -1600,8 +1584,24 @@ TEST_F  ( TestBucketWithMultipleInteger
         );
         ParallelIteratorCheck<TElement> ( {1}, numberOfElements, elementsLoopedOver );
 
-        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::parallel> ( 
-            [&]( TElement & element ) 
+        // Const loop check
+        numberOfElements.clear();
+        elementsLoopedOver.clear();
+        numberOfElements.resize ( numberOfThreads, 0 );
+        elementsLoopedOver.resize ( numberOfThreads, std::vector<TElement>() );
+        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::parallel> (
+            [ & numberOfThreads
+            , & numberOfElements
+            , & elementsLoopedOver ]( TElement const & element )
+            {
+                ++numberOfElements[ omp_get_thread_num() ];
+                elementsLoopedOver[ omp_get_thread_num() ].emplace_back ( element );
+            }
+        );
+        ParallelIteratorCheck<TElement> ( {1}, numberOfElements, elementsLoopedOver );
+
+        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::parallel> (
+            [&]( TElement & element )
             {
                 auto iter = std::find ( intVector_.begin(), intVector_.end(), element );
                 EXPECT_NE ( iter, intVector_.end()  );
@@ -1609,8 +1609,8 @@ TEST_F  ( TestBucketWithMultipleInteger
             }
         );
 
-        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> ( 
-            [&]( TElement const & element ) 
+        bucketConst_.for_all_processed_elements<egoa::ExecutionPolicy::parallel> (
+            [&]( TElement const & element )
             {
                 auto iter = std::find ( intVector_.begin(), intVector_.end(), element );
                 EXPECT_NE ( iter, intVector_.end()  );
@@ -1623,16 +1623,16 @@ TEST_F  ( TestBucketWithMultipleInteger
     //@todo refactor with the other breakable loops for all elements
     /// @todo This does not really test breaking because there is only one unprocessed element
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorBreakableForAllUnprocessedElements ) 
+            , IteratorBreakableForAllUnprocessedElements )
     {
         // Starting with a bunch of unprocessed elements
-        std::vector<TElement> const verificationVectorWithoutProcessedItems =  
+        std::vector<TElement> const verificationVectorWithoutProcessedItems =
                                                             { TElement(1, true) };
         // Test non-const iterator
         Types::count counter = 0;
-        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> ( 
+        bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter ]( TElement & element ) -> bool 
+            , & counter ]( TElement & element ) -> bool
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1643,9 +1643,9 @@ TEST_F  ( TestBucketWithMultipleInteger
 
         // Test non-const iterator
         counter = 0;
-        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> ( 
+        bucketConst_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter ]( TElement const & element ) -> bool 
+            , & counter ]( TElement const & element ) -> bool
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1656,19 +1656,19 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorSerialForAllOptima ) 
+            , IteratorSerialForAllOptima )
     {
         TElement minElement = bucket_.Top();
 
-        bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> ( 
-            [ & minElement ]( TElement const & element ) 
+        bucket_.for_all_optima<egoa::ExecutionPolicy::sequential> (
+            [ & minElement ]( TElement const & element )
             {
                 EXPECT_EQ ( element, minElement );
             }
         );
 
-        bucketConst_.for_all_optima<egoa::ExecutionPolicy::sequential> ( 
-            [ & minElement ] ( TElement const & element ) 
+        bucketConst_.for_all_optima<egoa::ExecutionPolicy::sequential> (
+            [ & minElement ] ( TElement const & element )
             {
                 EXPECT_EQ ( element, minElement );
             }
@@ -1676,19 +1676,19 @@ TEST_F  ( TestBucketWithMultipleInteger
     }
 
     TEST_F  ( TestBucketWithMultipleInteger
-            , IteratorParallelForAllOptima ) 
+            , IteratorParallelForAllOptima )
     {
         TElement minElement = bucket_.Top();
 
-        bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> ( 
-            [ & minElement ] ( TElement const & element ) 
+        bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> (
+            [ & minElement ] ( TElement const & element )
             {
                 EXPECT_EQ ( element, minElement );
             }
         );
 
-        bucketConst_.for_all_optima<egoa::ExecutionPolicy::parallel> ( 
-            [ & minElement ] ( TElement const & element ) 
+        bucketConst_.for_all_optima<egoa::ExecutionPolicy::parallel> (
+            [ & minElement ] ( TElement const & element )
             {
                 EXPECT_EQ ( element, minElement );
             }

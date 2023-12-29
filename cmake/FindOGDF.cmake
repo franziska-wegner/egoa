@@ -1,12 +1,12 @@
 # FindOGDF.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_OGDF is ON the script searches for OGDF and COIN in given and
 # standard location. If found it adds the library to the project by adding the
 # include paths and libraries to the project.
-# 
+#
 
 set ( OGDF_LIBRARY_DIR ${OGDF_LIBRARY_DIR} CACHE FILEPATH "Path to the OGDF library directory including libOGDF.a or libOGDF.so; please use no snapshot higher than 23th of July 2017" )
 set ( OGDF_INCLUDE_DIR ${OGDF_INCLUDE_DIR} CACHE FILEPATH "OGDF include directory" )
@@ -22,7 +22,7 @@ message(STATUS "OGDF:")
 ####################################################################
 # find ODGF include directory if not given by input
 if(NOT OGDF_INCLUDE_DIR)
-find_path(  OGDF_INCLUDE_DIR 
+find_path(  OGDF_INCLUDE_DIR
     NAMES   ogdf/tree/LCA.h ogdf/basic/Graph.h
     HINTS   /opt/ogdf/include/
             /usr/local/include
@@ -32,7 +32,7 @@ message(STATUS "${MY_SPACE}OGDF_INCLUDE_DIR:\t\t${OGDF_INCLUDE_DIR}")
 
 # find ODGF automatically generated include directory if not given by input
 if(NOT OGDF_AUTOGEN_INCLUDE_DIR)
-find_path(  OGDF_AUTOGEN_INCLUDE_DIR 
+find_path(  OGDF_AUTOGEN_INCLUDE_DIR
     NAMES   ogdf/basic/internal/config_autogen.h
     HINTS   ${OGDF_INCLUDE_DIR}
             ${OGDF_LIBRARY_DIR}/include/
@@ -44,7 +44,7 @@ message(STATUS "${MY_SPACE}OGDF_AUTOGEN_INCLUDE_DIR:\t${OGDF_AUTOGEN_INCLUDE_DIR
 
 # find COIN include directory if not given by input
 if(NOT COIN_INCLUDE_DIR)
-find_path(  COIN_INCLUDE_DIR 
+find_path(  COIN_INCLUDE_DIR
     NAMES   coin/ClpSimplexNonlinear.hpp
     HINTS   ${OGDF_INCLUDE_DIR}
             /usr/local/lib/
@@ -58,7 +58,7 @@ message(STATUS "${MY_SPACE}COIN_INCLUDE_DIR: ${COIN_INCLUDE_DIR}")
 ####################################################################
 # OGDF Library Directory ###########################################
 ####################################################################
-find_library(OGDF_LIBRARY 
+find_library(OGDF_LIBRARY
     libOGDF.a libOGDF.so
     HINTS   ${OGDF_LIBRARY_DIR}
             /usr/local/lib/
@@ -70,7 +70,7 @@ message(STATUS "${MY_SPACE}OGDF_LIBRARY:\t\t\t${OGDF_LIBRARY}")
 ####################################################################
 # COIN Library Directory ###########################################
 ####################################################################
-find_library(COIN_LIBRARY 
+find_library(COIN_LIBRARY
     libCOIN.a libCOIN.so
     HINTS   ${COIN_LIBRARY_DIR}
             ${OGDF_LIBRARY_DIR}
@@ -112,8 +112,8 @@ mark_as_advanced(OGDF_LIBRARY)
 # Output Message ###################################################
 ####################################################################
 message(STATUS "${MY_SPACE}OGDF_DEBUG:\t\t\t${OGDF_DEBUG}")
-if(EGOA_ENABLE_OGDF AND NOT OGDF_FOUND) 
-message( FATAL_ERROR 
+if(EGOA_ENABLE_OGDF AND NOT OGDF_FOUND)
+message( FATAL_ERROR
     "OGDF is enabled, but either not available on the system or the \
     installation is demaged. Please, check the installation of OGDF, the OGDF \
     paths OGDF_AUTOGEN_INCLUDE_DIR, OGDF_INCLUDE_DIR, and OGDF_LIBRARY_DIR in \

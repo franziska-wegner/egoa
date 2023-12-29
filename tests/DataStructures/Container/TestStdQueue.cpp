@@ -43,13 +43,13 @@ TEST_F ( TestStdQueue,
 ///@Name Basic Functionalities
 ///@{
     TEST_F  ( TestStdQueueWithZeroElements
-            , BasicFunctionalityIsEmptyWhenCreated ) 
+            , BasicFunctionalityIsEmptyWhenCreated )
     {
         ASSERT_TRUE( queueConst_.Empty() );
     }
 
     TEST_F  ( TestStdQueueWithZeroElements
-            , BasicFunctionalityHasSizeOfZero ) 
+            , BasicFunctionalityHasSizeOfZero )
     {
         ASSERT_EQ( queueConst_.Size(), 0 );
     }

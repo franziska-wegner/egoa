@@ -24,9 +24,9 @@ namespace egoa::internal {
  *     pointers such as std::function ( see
  *     https://stackoverflow.com/questions/14677997/stdfunction-vs-template
  *     for more information). This is the reason why the following code is not
- *     used 
+ *     used
  *     inline void for_all_<SOME_FUNCTION>(std::function<void(TVertex & vertex)> function) {}
- *     
+ *
  *
  * @tparam     GraphType   The type of the graph, e.g., @p StaticGraph<VertexType, EdgeType>.
  *                         If the graph type is @p const, const references to the vertices
@@ -69,9 +69,9 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
              *                       It must accept one argument of type @p TGraph::TVertexId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
-             *          // Do something with the vertex identifier 
+             *      []( Types::vertexId vertexId )
+             *      {
+             *          // Do something with the vertex identifier
              *      }
              * @endcode
              *
@@ -84,7 +84,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
             {
                 for ( TVertexId vertexId = 0
                     ; vertexId < graph.NumberOfVertices()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
                     auto copy = vertexId;
                     function( copy );
@@ -100,9 +100,9 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
              *                       It must accept two arguments of types @p Types::vertexId
              *                       and @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TVertex & vertex ) 
-             *      { 
-             *          // Do something with the vertex identifier and object. 
+             *      []( Types::vertexId vertexId, TVertex & vertex )
+             *      {
+             *          // Do something with the vertex identifier and object.
              *      }
              * @endcode
              *
@@ -115,7 +115,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
             {
                 for ( TVertexId vertexId = 0
                     ; vertexId < graph.NumberOfVertices()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
                     auto copy = vertexId;
                     function( copy, graph.VertexAt(vertexId) );
@@ -136,8 +136,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
              *                       It must accept one argument of type @p Types::edgeId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId ) 
-             *      { 
+             *      []( Types::edgeId edgeId )
+             *      {
              *          // Do something with the edge identifier.
              *      }
              * @endcode
@@ -145,7 +145,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
              * @tparam     FUNCTION The type of the function object.
              */
             template<typename FUNCTION>
-            static inline 
+            static inline
             void for_all_edge_identifiers ( TGraph & graph
                                           , FUNCTION function )
             {
@@ -167,8 +167,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
              *                       It must accept two arguments of types @p Types::edgeId
              *                       and @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId, TEdge & edge ) 
-             *      { 
+             *      []( Types::edgeId edgeId, TEdge & edge )
+             *      {
              *          // Do something with the edge.
              *      }
              * @endcode
@@ -176,7 +176,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential>
              * @tparam     FUNCTION  The type of the function object.
              */
             template<typename FUNCTION>
-            static inline 
+            static inline
             void for_all_edge_tuples ( TGraph & graph
                                      , FUNCTION function )
             {
@@ -204,7 +204,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable>
     using TVertexId = typename GraphType::TVertexId;
     using TVertex   = typename GraphType::TVertex;
     using TEdgeId   = typename GraphType::TEdgeId;
-    
+
     public:
         /// @name Breakable Vertex Loops
         /// @{
@@ -219,7 +219,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable>
              *                       It must accept one argument of type @p Types::vertexId
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) -> bool 
+             *      []( Types::vertexId vertexId ) -> bool
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the vertex identifier.
@@ -254,7 +254,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable>
              *                       It must accept two arguments of types @p Types::vertexId
              *                       and @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TVertex & vertex ) -> bool 
+             *      []( Types::vertexId vertexId, TVertex & vertex ) -> bool
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the vertex identifier and object.
@@ -296,7 +296,7 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable>
              *                       It must accept one argument of type @p Types::edgeId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId ) -> bool 
+             *      []( Types::edgeId edgeId ) -> bool
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge identifier
@@ -391,8 +391,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p Types::vertexId
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
+             *      []( Types::vertexId vertexId )
+             *      {
              *          // Do something with the vertex identifier.
              *      }
              * @endcode
@@ -423,8 +423,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p TGraph::TVertex,
              *                       e.g.,
              * @code{.cpp}
-             *      []( TVertex & vertex ) 
-             *      { 
+             *      []( TVertex & vertex )
+             *      {
              *          // Do something with the vertex object.
              *      }
              * @endcode
@@ -454,8 +454,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept two arguments of types @p Types::vertexId
              *                       and @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TVertex & vertex ) 
-             *      { 
+             *      []( Types::vertexId vertexId, TVertex & vertex )
+             *      {
              *          // Do something with the vertex identifier and object.
              *      }
              * @endcode
@@ -491,9 +491,9 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p Types::edgeId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId ) 
-             *      { 
-             *          // Do something with the edge identifier 
+             *      []( Types::edgeId edgeId )
+             *      {
+             *          // Do something with the edge identifier
              *      }
              * @endcode
              *
@@ -523,8 +523,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p TGraph::TEdge,
              *                       e.g.,
              * @code{.cpp}
-             *      []( TEdge edge ) 
-             *      { 
+             *      []( TEdge edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -554,8 +554,8 @@ class StaticGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept two arguments of types @p Types::edgeId
              *                       and @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId, TEdge edge ) 
-             *      { 
+             *      []( Types::edgeId edgeId, TEdge edge )
+             *      {
              *          // Do something with the edge.
              *      }
              * @endcode

@@ -24,7 +24,7 @@ namespace egoa {
  * @tparam     ElementType         Some element type, e.g., an electrical edge.
  * @tparam     VertexSetContainer  Container, e.g., unordered set to extract vertex conflicts, loops.
  * @tparam     PointerType         E.g., Types::vertexId.
- * 
+ *
  * @see        Edge::ElectricalEdge representing an ElementType interface.
  * @see        BucketElement representing an minimum interface requirement for a bucket.
  */
@@ -56,7 +56,7 @@ class Label {
              *
              * @param[in]  vertexId  The vertex identifier.
              */
-            Label( Types::vertexId vertexId ) 
+            Label( Types::vertexId vertexId )
             : index_(Const::NONE)
             , vertexId_(vertexId)
             , valid_(true)
@@ -71,7 +71,7 @@ class Label {
              *     the other label.
              *
              * @param      label  The label.
-             * 
+             *
              */
             Label ( Label const & label ) = default;
 
@@ -97,10 +97,10 @@ class Label {
             // inline bool operator!=( Label const & rhs ) const { return true; }
         ///@}
 
-        ///@name Concatenation Operators 
+        ///@name Concatenation Operators
         ///@{
 #pragma mark CONCATENATION_OPERATORS
-            
+
             /**
              * @brief      In place addition.
              *
@@ -129,8 +129,8 @@ class Label {
              * @return     The label's identifier.
              */
             inline Types::labelId Index () const
-            { 
-                return index_; 
+            {
+                return index_;
             }
 
             /**
@@ -145,9 +145,9 @@ class Label {
              *
              * @return     The label's identifier.
              */
-            inline Types::labelId & Index ()                   
-            { 
-                return index_; 
+            inline Types::labelId & Index ()
+            {
+                return index_;
             }
 
             /**
@@ -156,13 +156,13 @@ class Label {
              * @return     @p True if the label is valid, @p False otherwise.
              */
             inline bool Valid () const
-            { 
-                return valid_; 
+            {
+                return valid_;
             }
 
             /**
              * @brief      Setter for the valid flag.
-             * 
+             *
              * @code
              *      this->Valid() = false;
              * @endcode
@@ -170,8 +170,8 @@ class Label {
              * @return     @p True if the label is valid, @p False otherwise.
              */
             inline bool & Valid()
-            { 
-                return valid_; 
+            {
+                return valid_;
             }
 
             /**
@@ -188,9 +188,9 @@ class Label {
              *
              * @return     Vertex identifier.
              */
-            inline Types::vertexId Vertex() const   
-            { 
-                return vertexId_; 
+            inline Types::vertexId Vertex() const
+            {
+                return vertexId_;
             }
 
             /**
@@ -203,8 +203,8 @@ class Label {
              * @return     Vertex identifier.
              */
             inline Types::vertexId & Vertex()
-            { 
-                return vertexId_; 
+            {
+                return vertexId_;
             }
 
             /**
@@ -213,8 +213,8 @@ class Label {
              * @return     Identifier of the previous vertex.
              */
             inline TPointer PreviousVertex() const
-            { 
-                return previousVertexId_; 
+            {
+                return previousVertexId_;
             }
 
             /**
@@ -227,8 +227,8 @@ class Label {
              * @return     Identifier of the previous vertex.
              */
             inline TPointer & PreviousVertex()
-            { 
-                return previousVertexId_; 
+            {
+                return previousVertexId_;
             }
 
             /**
@@ -236,9 +236,9 @@ class Label {
              *
              * @return     Identifier of the previous label.
              */
-            inline TPointer PreviousLabel() const   
-            { 
-                return previousLabelId_;  
+            inline TPointer PreviousLabel() const
+            {
+                return previousLabelId_;
             }
 
             /**
@@ -259,8 +259,8 @@ class Label {
              * @return     Identifier of the previous label.
              */
             inline TPointer  & PreviousLabel()
-            { 
-                return previousLabelId_;  
+            {
+                return previousLabelId_;
             }
         ///@}
 
@@ -274,7 +274,7 @@ class Label {
          * @return     The output stream.
          */
         friend std::ostream & operator<< ( std::ostream & os
-                                         , Label const & rhs ) 
+                                         , Label const & rhs )
         {
             return os << "(" << rhs.Value() << "," << rhs.Valid() << ")";
         }
@@ -282,13 +282,13 @@ class Label {
 #pragma mark MEMBERS
     private:
         Types::labelId  index_;             /**< The identifier of the label that is bucket dependent. */
-        Types::vertexId vertexId_;          /**< The identifier of the vertex to which the label belongs. */        
+        Types::vertexId vertexId_;          /**< The identifier of the vertex to which the label belongs. */
 
         bool            valid_;             /**< The valid flag that is @p True if the label is valid, @p False otherwise. */
 
         TPointer        previousVertexId_;  /**< The identifier of the previous vertex. */
         TPointer        previousLabelId_;   /**< The identifier of the previous label. */
-        
+
 };
 
 } // namespace egoa

@@ -1,4 +1,4 @@
-/* 
+/*
  * Edge.hpp
  *
  *  Created on: Mar 8, 2019
@@ -61,9 +61,9 @@ class Edge {
          *
          * @return     The vertex identifier of the adjacent vertex.
          */
-        inline Types::vertexId Other( Types::vertexId vertexId ) const 
-        { 
-            return ( Source() == vertexId )?Target():Source(); 
+        inline Types::vertexId Other( Types::vertexId vertexId ) const
+        {
+            return ( Source() == vertexId )?Target():Source();
         }
 
         /**
@@ -92,9 +92,9 @@ class Edge {
              *
              * @return     @p true if the edges are the same, @p false otherwise.
              */
-            friend bool operator==(Edge const & lhs, Edge const & rhs) 
+            friend bool operator==(Edge const & lhs, Edge const & rhs)
             {
-                return ( lhs.Identifier() == rhs.Identifier() ) 
+                return ( lhs.Identifier() == rhs.Identifier() )
                     && ( lhs.Source()     == rhs.Source()     )
                     && ( lhs.Target()     == rhs.Target()     )
                     && ( lhs.Properties() == rhs.Properties() );
@@ -108,7 +108,7 @@ class Edge {
              *
              * @return     @p false if the edges are the same, @p true otherwise.
              */
-            friend bool operator!=(Edge const & lhs, Edge const & rhs) 
+            friend bool operator!=(Edge const & lhs, Edge const & rhs)
             {
                 return !(lhs == rhs);
             }

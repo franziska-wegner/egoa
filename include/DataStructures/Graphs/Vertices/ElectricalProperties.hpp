@@ -32,7 +32,7 @@ class ElectricalProperties {
         using TProperties   = ElectricalProperties<TVertexType>;
     private:
         using TBound        = Bound<Types::real>;
-    
+
     public:
         /**@name Constructors and Destructor */
         ///@{
@@ -71,18 +71,18 @@ class ElectricalProperties {
             /**
              * @brief      Reset values to default.
              */
-            inline void Reset () 
+            inline void Reset ()
             {
                 // BasicVertex specifics
                 Name ()           = "";
                 Type ()           = TVertexType::unknown;
                 X ()              = 0.0;
                 Y ()              = 0.0;
-                
+
                 // Admittance specifics
                 ShuntSusceptance ()     = 0.0;
                 ShuntConductance ()     = 0.0;
-                
+
                 // Voltage specifics
                 NominalVoltage()        = 1.0;
                 VoltageAngle()          = 0.0;
@@ -91,14 +91,14 @@ class ElectricalProperties {
                 // realVoltage_      = 0.0;
                 // imaginaryVoltage_ = 0.0;
                 voltageBound_           = TBound ( 0.0, Const::REAL_INFTY );
-                
+
                 // Location specifics
                 Country ()              = "";
                 Area ()                 = 0;
                 Zone ()                 = 0;
                 Control ()              = Vertices::ControlType::PQ;
                 Carrier ()              = EnergyCarrier::AC;
-                
+
                 // Status specifics
                 Status()                = Vertices::BusStatus::active;
             }
@@ -115,9 +115,9 @@ class ElectricalProperties {
              * @return     @p True if both vertices are @p not equal, @p False
              *     otherwise.
              */
-            inline bool operator!=( ElectricalProperties const & rhs ) const 
-            { 
-                return !(this == rhs); 
+            inline bool operator!=( ElectricalProperties const & rhs ) const
+            {
+                return !(this == rhs);
             }
 
             /**
@@ -128,7 +128,7 @@ class ElectricalProperties {
              * @return     @p True if both vertices are equal, @p False
              *     otherwise.
              */
-            inline bool operator==( ElectricalProperties const & rhs ) const 
+            inline bool operator==( ElectricalProperties const & rhs ) const
             {
                 if ( Name()                 != rhs.Name()               ) return false;
                 if ( Type()                 != rhs.Type()               ) return false;
@@ -154,12 +154,12 @@ class ElectricalProperties {
 #pragma mark COPY_AND_SWAP_IDIOM
             /**
              * @brief Swapping the members of two ElectricalVertices
-             * 
+             *
              * @param lhs Left ElectricalProperties
              * @param rhs Right ElectricalProperties
              */
             friend void swap ( ElectricalProperties & lhs
-                             , ElectricalProperties & rhs ) 
+                             , ElectricalProperties & rhs )
             { // Necessary for the copy and swap idiom
                 using std::swap; // enable ADL
                 // Basic vertex
@@ -200,7 +200,7 @@ class ElectricalProperties {
 
             inline Types::real       X()           const { return xCoordinate_; }
             inline Types::real     & X()                 { return xCoordinate_; }
-            
+
             inline Types::real       Y()           const { return yCoordinate_; }
             inline Types::real     & Y()                 { return yCoordinate_; }
         ///@}
@@ -219,9 +219,9 @@ class ElectricalProperties {
              * @return     The shunt susceptance @f$\shuntsusceptance(\vertex)@f$
              *     of @f$\vertex\in\vertices@f$.
              */
-            inline Types::real ShuntSusceptance() const 
-            { 
-                return shuntSusceptance_; 
+            inline Types::real ShuntSusceptance() const
+            {
+                return shuntSusceptance_;
             }
 
             /**
@@ -241,8 +241,8 @@ class ElectricalProperties {
              *     @f$\vertex\in\vertices@f$.
              */
             inline Types::real & ShuntSusceptance()
-            { 
-                return shuntSusceptance_; 
+            {
+                return shuntSusceptance_;
             }
 
             /**
@@ -255,9 +255,9 @@ class ElectricalProperties {
              * @return     The shunt conductance @f$\shuntconductance(\vertex)@f$
              *     of @f$\vertex\in\vertices@f$.
              */
-            inline Types::real ShuntConductance() const 
-            { 
-                return shuntConductance_; 
+            inline Types::real ShuntConductance() const
+            {
+                return shuntConductance_;
             }
 
             /**
@@ -275,9 +275,9 @@ class ElectricalProperties {
              * @return     The shunt conductance @f$\shuntconductance(\vertex)@f$
              *     of @f$\vertex\in\vertices@f$.
              */
-            inline Types::real & ShuntConductance () 
-            { 
-                return shuntConductance_; 
+            inline Types::real & ShuntConductance ()
+            {
+                return shuntConductance_;
             }
         ///@}
 
@@ -290,9 +290,9 @@ class ElectricalProperties {
              *
              * @return     The nominal voltage @f$\voltagenominal@f$ in kV.
              */
-            inline Types::real NominalVoltage () const 
-            { 
-                return nominalVoltage_; 
+            inline Types::real NominalVoltage () const
+            {
+                return nominalVoltage_;
             }
 
             /**
@@ -302,8 +302,8 @@ class ElectricalProperties {
              * @return     The nominal voltage @f$\voltagenominal@f$ in kV.
              */
             inline Types::real & NominalVoltage ()
-            { 
-                return nominalVoltage_; 
+            {
+                return nominalVoltage_;
             }
 
             /**
@@ -314,9 +314,9 @@ class ElectricalProperties {
              *
              * @return     The voltage magnitude @f$\voltagenominal@f$.
              */
-            inline Types::real VoltageMagnitude () const 
-            { 
-                return voltageMagnitude_; 
+            inline Types::real VoltageMagnitude () const
+            {
+                return voltageMagnitude_;
             }
 
             /**
@@ -329,25 +329,25 @@ class ElectricalProperties {
              * @return     The voltage magnitude @f$\vmagnitude@f$.
              */
             inline Types::real & VoltageMagnitude ()
-            { 
-                return voltageMagnitude_; 
+            {
+                return voltageMagnitude_;
             }
 
             /**
              * @brief      Getter for the voltage angle @f$\vangle(\vertex)@f$.
              * @details    The voltage angle is a function
              *     @f$\vangle\colon\vertices\to\reals@f$. It is measured in
-             *     degree. 
-             *     
+             *     degree.
+             *
              * @note       It is used for the data's snapshot and/or
              *     optimization's result.
              *
              * @return     The voltage angle @f$\vangle(\vertex)@f$ at vertex
              *     @f$\vertex\in\vertices@f$.
              */
-            inline Types::real VoltageAngle () const 
-            { 
-                return voltageAngle_; 
+            inline Types::real VoltageAngle () const
+            {
+                return voltageAngle_;
             }
 
             /**
@@ -367,9 +367,9 @@ class ElectricalProperties {
              * @return     The voltage angle @f$\vangle(\vertex)@f$ at vertex
              *     @f$\vertex\in\vertices@f$.
              */
-            inline Types::real & VoltageAngle () 
-            { 
-                return voltageAngle_; 
+            inline Types::real & VoltageAngle ()
+            {
+                return voltageAngle_;
             }
 
             /**
@@ -380,9 +380,9 @@ class ElectricalProperties {
              *
              * @return     The minimum voltage magnitude @f$\voltagemin@f$.
              */
-            inline Types::real MinimumVoltage () const 
-            { 
-                return voltageBound_.Minimum(); 
+            inline Types::real MinimumVoltage () const
+            {
+                return voltageBound_.Minimum();
             }
 
             /**
@@ -390,17 +390,17 @@ class ElectricalProperties {
              *     magnitude @f$\voltagemin@f$.
              * @details    The voltage magnitude is in per unit (p.u.) of the
              *     nominal voltage @f$\voltagenominal@f$.
-             * 
+             *
              * @code{.cpp}
              *      ElectricalProperties vertex;
              *      vertex.MinimumVoltage() = 0;
              * @endcode
-             * 
+             *
              * @return     The minimum voltage magnitude @f$\voltagemin@f$.
              */
             inline Types::real & MinimumVoltage ()
-            { 
-                return voltageBound_.Minimum(); 
+            {
+                return voltageBound_.Minimum();
             }
 
             /**
@@ -411,9 +411,9 @@ class ElectricalProperties {
              *
              * @return     The maximum voltage magnitude @f$\voltagemax@f$.
              */
-            inline Types::real MaximumVoltage () const 
-            { 
-                return voltageBound_.Maximum(); 
+            inline Types::real MaximumVoltage () const
+            {
+                return voltageBound_.Maximum();
             }
 
             /**
@@ -429,15 +429,15 @@ class ElectricalProperties {
              * @return     The maximum voltage magnitude @f$\voltagemax@f$.
              */
             inline Types::real & MaximumVoltage ()
-            { 
-                return voltageBound_.Maximum(); 
+            {
+                return voltageBound_.Maximum();
             }
         ///@}
 
         /**@name Type specific information */
         ///@{
 #pragma mark TYPE_SPECIFIC_INFORMATION
-            
+
             /**
              * @brief      Getter for the country
              * @details    Used in PyPSA for example to specify the location
@@ -445,9 +445,9 @@ class ElectricalProperties {
              *
              * @return     The country of the vertex.
              */
-            inline Types::name Country () const 
-            { 
-                return country_; 
+            inline Types::name Country () const
+            {
+                return country_;
             }
 
             /**
@@ -458,8 +458,8 @@ class ElectricalProperties {
              * @return     The country of the vertex.
              */
             inline Types::name & Country ()
-            { 
-                return country_; 
+            {
+                return country_;
             }
 
             /**
@@ -471,17 +471,17 @@ class ElectricalProperties {
              *     one of the two terminal vertices. Tie line it indicates the
              *     ownership or area to which the losses should be assigned.
              *     This area is not related to the meter bus location.
-             *     
+             *
              * @note       If the value is 0 this means that there is no data
              *     available or there is no area.
              *
              * @return     The bus area number.
              */
-            inline Types::index Area () const 
-            { 
-                return area_; 
+            inline Types::index Area () const
+            {
+                return area_;
             }
-            
+
             /**
              * @brief      Getter and setter for the bus area number.
              * @details    Bus area (1 - 99) indicates in which company/region
@@ -494,7 +494,7 @@ class ElectricalProperties {
              *
              * @note       If the value is 0 this means that there is no data
              *     available or there is no area.
-             *     
+             *
              * @code{.cpp}
              *      ElectricalProperties vertex;
              *      vertex.Area() = 11;
@@ -503,29 +503,29 @@ class ElectricalProperties {
              * @return     The bus area number.
              */
             inline Types::index & Area ()
-            { 
-                return area_; 
+            {
+                return area_;
             }
 
             /**
              * @brief      Getter for the loss zone.
              * @details    A three digit integer from 0 to 999 for defining
-             *     zones of loss calculation.  
-             *     
+             *     zones of loss calculation.
+             *
              * @note       If the value is 0 this means that there is no zone.
              *
              * @return     The loss zone.
              */
-            inline Types::index Zone () const 
-            { 
-                return zone_; 
+            inline Types::index Zone () const
+            {
+                return zone_;
             }
 
             /**
              * @brief      Getter and setter for the loss zone.
              * @details    A three digit integer from 0 to 999 for defining
-             *     zones of loss calculation.  
-             *     
+             *     zones of loss calculation.
+             *
              * @note       If the value is 0 this means that there is no zone.
              *
              * @code{.cpp}
@@ -536,8 +536,8 @@ class ElectricalProperties {
              * @return     The loss zone.
              */
             inline Types::index & Zone ()
-            { 
-                return zone_; 
+            {
+                return zone_;
             }
 
             /**
@@ -550,9 +550,9 @@ class ElectricalProperties {
              *
              * @return     The bus control type strategy.
              */
-            inline Vertices::ControlType Control () const 
-            { 
-                return control_; 
+            inline Vertices::ControlType Control () const
+            {
+                return control_;
             }
 
             /**
@@ -566,14 +566,14 @@ class ElectricalProperties {
              *      ElectricalProperties vertex;
              *      vertex.Control() = Vertices::ControlType::PQ;
              * @endcode
-             * 
+             *
              * @see Type#Vertices#ControlType
              *
              * @return     The bus control type strategy.
              */
             inline Vertices::ControlType & Control ()
-            { 
-                return control_; 
+            {
+                return control_;
             }
 
             /**
@@ -585,9 +585,9 @@ class ElectricalProperties {
              *
              * @return     The energy carrier type.
              */
-            inline Vertices::EnergyCarrier Carrier () const 
-            { 
-                return carrier_; 
+            inline Vertices::EnergyCarrier Carrier () const
+            {
+                return carrier_;
             }
 
             /**
@@ -607,8 +607,8 @@ class ElectricalProperties {
              * @return     The energy carrier type.
              */
             inline Vertices::EnergyCarrier & Carrier ()
-            { 
-                return carrier_; 
+            {
+                return carrier_;
             }
         ///@}
 
@@ -623,11 +623,11 @@ class ElectricalProperties {
              *
              * @return     @p True if active (on), @p False otherwise (unknown).
              */
-            inline bool IsActive () const 
-            { 
+            inline bool IsActive () const
+            {
                 return Vertices::BusStatus::active == Status();
             }
-            
+
             /**
              * @brief      Status of the electrical vertex.
              *
@@ -636,8 +636,8 @@ class ElectricalProperties {
              * @return     The status can have a different status.
              */
             inline Vertices::BusStatus & Status ()
-            { 
-                return status_; 
+            {
+                return status_;
             }
 
             /**
@@ -648,8 +648,8 @@ class ElectricalProperties {
              * @return     The status can have a different status.
              */
             inline Vertices::BusStatus const & Status () const
-            { 
-                return status_; 
+            {
+                return status_;
             }
         ///@}
 
@@ -662,15 +662,15 @@ class ElectricalProperties {
              *
              * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static void HeaderLong ( std::ostream & outputStream ) 
+            static void HeaderLong ( std::ostream & outputStream )
             {
-                outputStream  
+                outputStream
                     << std::setw(6)     << "ID"
                     << std::setw(6)     << "Type"
                     // << std::setw(10)    << "RealPowerLoad"
                     // << std::setw(20)    << "ReactivePowerLoad"
-                    << std::setw(20)    << "ShuntSusceptance" 
-                    << std::setw(20)    << "ShuntConductance" 
+                    << std::setw(20)    << "ShuntSusceptance"
+                    << std::setw(20)    << "ShuntConductance"
                     << std::setw(6)     << "Area"
                     << std::setw(10)    << "VoltageMagnitude"
                     << std::setw(10)    << "VoltageAngle"
@@ -687,14 +687,14 @@ class ElectricalProperties {
              *
              * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static inline void Header ( std::ostream & outputStream ) 
+            static inline void Header ( std::ostream & outputStream )
             {
-                outputStream  
+                outputStream
                     << std::setw(6)     << "bus_i"
                     << std::setw(6)     << "type"
                     // << std::setw(10)    << "Pd"
                     // << std::setw(10)    << "Qd"
-                    << std::setw(10)    << "Gs" 
+                    << std::setw(10)    << "Gs"
                     << std::setw(10)    << "Bs"
                     << std::setw(6)     << "area"
                     << std::setw(10)    << "Vm"
@@ -716,7 +716,7 @@ class ElectricalProperties {
             inline void Line ( std::ostream & outputStream
                              , Types::real    baseMva = 1 ) const
             {
-                outputStream  
+                outputStream
                     << std::setprecision(2)
                     << std::fixed
                     << std::setw(6)     << Name()
@@ -729,7 +729,7 @@ class ElectricalProperties {
                     << std::setw(10)    << NominalVoltage()
                     << std::setw(6)     << Zone()
                     << std::setw(10)    << MaximumVoltage()
-                    << std::setw(10)    << MinimumVoltage() 
+                    << std::setw(10)    << MinimumVoltage()
                     << std::endl;
             }
 
@@ -745,7 +745,7 @@ class ElectricalProperties {
                              , Types::vertexId identifier
                              , Types::real     baseMva = 1 ) const
             {
-                outputStream  
+                outputStream
                     << std::setprecision(2)
                     << std::fixed
                     << std::setw(6)     << identifier
@@ -761,7 +761,7 @@ class ElectricalProperties {
                     << std::setw(10)    << NominalVoltage()
                     << std::setw(6)     << Zone()
                     << std::setw(10)    << MaximumVoltage()
-                    << std::setw(10)    << MinimumVoltage() 
+                    << std::setw(10)    << MinimumVoltage()
                     << std::endl;
             }
 
@@ -774,15 +774,15 @@ class ElectricalProperties {
              * @return     The output stream.
              */
             friend std::ostream & operator<< ( std::ostream       & outputStream
-                                             , TProperties const  & rhs ) 
+                                             , TProperties const  & rhs )
             {
-                outputStream  
+                outputStream
                     << std::setprecision(2)
                     << std::fixed
                     << std::endl
                     << "Bus " << rhs.Name()     << std::endl
                     << std::string(20, '-')     << std::endl
-                    << std::setw(30) << "ID: "                  << std::setw(10) << rhs.Name() 
+                    << std::setw(30) << "ID: "                  << std::setw(10) << rhs.Name()
                     // << std::setw(20) << "load: "                << std::setw(10) << rhs.RealPowerLoad()         << std::setw(25) << " p.u.       (real, MW), "
                     //                                             << std::setw(10) << rhs.ReactivePowerLoad()     << std::setw(25) << " p.u. (reactive, MVar), "  << std::endl
                     << std::setw(20) << "shunt: "               << std::setw(10) << rhs.ShuntSusceptance()      << std::setw(25) << " p.u.    (susceptance), "
@@ -793,7 +793,7 @@ class ElectricalProperties {
                     << std::setw(20) << "area: "                << std::setw(10) << rhs.Area()                  << std::setw(25) << ""                          << std::endl
                     << std::setw(20) << "zone: "                << std::setw(10) << rhs.Zone()                  << std::setw(25) << ""                          << std::endl
                     << std::setw(20) << "type: "                << std::setw(10) << rhs.Type()                  << std::setw(25) << ""                          << std::endl;
-                return outputStream;                    
+                return outputStream;
             }
         ///@}
 
@@ -816,47 +816,47 @@ class ElectricalProperties {
 
         /**@name Voltage Related Members */
         ///@{
-            Types::real     nominalVoltage_;        /**< The nominal voltage also known as base voltage measured 
-                                                     *      in kV. 
+            Types::real     nominalVoltage_;        /**< The nominal voltage also known as base voltage measured
+                                                     *      in kV.
                                                      */
-            Types::real     voltageAngle_;          /**< The voltage angle @f$\vangle(\vertex)@f$ that represents 
-                                                     *      a snapshot of the voltage angle, i.e., final voltage 
+            Types::real     voltageAngle_;          /**< The voltage angle @f$\vangle(\vertex)@f$ that represents
+                                                     *      a snapshot of the voltage angle, i.e., final voltage
                                                      *      angle from data.
                                                      */
-            Types::real     voltageMagnitude_;      /**< Voltage magnitude @f$\vmagnitude(\vertex)@f$ including 
-                                                     *      a snapshot (p.u. set point), i.e., final voltage 
-                                                     *      from data. 
+            Types::real     voltageMagnitude_;      /**< Voltage magnitude @f$\vmagnitude(\vertex)@f$ including
+                                                     *      a snapshot (p.u. set point), i.e., final voltage
+                                                     *      from data.
                                                      */
             Types::real     voltageMagnitudeSq_;    /**< Voltage magnitude squared variable */
             // Types::real     realVoltage_;        /**< Real voltage */
             // Types::real     imaginaryVoltage_;   /**< Imaginary voltage */
-            TBound          voltageBound_;          /**< The voltage limits @f$\voltage := [\voltagemin,\voltagemax]@f$ 
-                                                     *      in per unit (p.u.) of the nominal voltage @f$\voltagenominal@f$. 
+            TBound          voltageBound_;          /**< The voltage limits @f$\voltage := [\voltagemin,\voltagemax]@f$
+                                                     *      in per unit (p.u.) of the nominal voltage @f$\voltagenominal@f$.
                                                      */
         ///@}
 
         /**@name Location Specific Members */
         ///@{
             Types::name     country_;               /** Country */
-            Types::index    area_;                  /**< Bus area (1 - 99) indicates in which company/region 
-                                                     *      the station is located, 0 means data unavailable. 
-                                                     *      A two digit integer from 0 to 99 indicating the 
-                                                     *      company or region in which the line is located. 
-                                                     *      This area number should be the same as the area of 
-                                                     *      one of the two terminal vertices. 
-                                                     *      Tie line it indicates the ownership or area to 
-                                                     *      which the losses should be assigned. 
+            Types::index    area_;                  /**< Bus area (1 - 99) indicates in which company/region
+                                                     *      the station is located, 0 means data unavailable.
+                                                     *      A two digit integer from 0 to 99 indicating the
+                                                     *      company or region in which the line is located.
+                                                     *      This area number should be the same as the area of
+                                                     *      one of the two terminal vertices.
+                                                     *      Tie line it indicates the ownership or area to
+                                                     *      which the losses should be assigned.
                                                      *      This area is not related to the meter bus location.
                                                      */
-            Types::index    zone_;                  /**< Three digit integer from 0 to 999 for defining 
+            Types::index    zone_;                  /**< Three digit integer from 0 to 999 for defining
                                                      *   zones of loss calculation.  A 0 means no zone.
                                                      */
             Vertices::ControlType     control_;     /**< The control type such as PV. */
             Vertices::EnergyCarrier   carrier_;     /**< The energy carrier used at this bus such as AC. */
         ///@}
-            
+
         /**@name Status Members */
-        ///@{    
+        ///@{
             Vertices::BusStatus status_;            /**< Station status: active - true, inactive - false */
         ///@}
 };

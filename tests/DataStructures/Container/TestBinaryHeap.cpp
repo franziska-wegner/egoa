@@ -42,20 +42,20 @@ TEST_F( TestBinaryHeap,
 ///@Name Basic Functionalities
 ///@{
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , BasicFunctionalityIsEmptyWhenCreated ) 
+            , BasicFunctionalityIsEmptyWhenCreated )
     {
         ASSERT_TRUE( heapConst_.Empty() );
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , BasicFunctionalityHasSizeOfZero ) 
+            , BasicFunctionalityHasSizeOfZero )
     {
         ASSERT_EQ( heapConst_.Size(), 0 );
     }
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
-            , BasicFunctionalityCheckTopElementDeathTest ) 
+            , BasicFunctionalityCheckTopElementDeathTest )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -66,7 +66,7 @@ TEST_F( TestBinaryHeap,
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , BasicFunctionalityCheckTopElementExceptionHandling ) 
+            , BasicFunctionalityCheckTopElementExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -77,7 +77,7 @@ TEST_F( TestBinaryHeap,
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -85,7 +85,7 @@ TEST_F( TestBinaryHeap,
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , BasicFunctionalityRemoveAllElements ) 
+            , BasicFunctionalityRemoveAllElements )
     {
         heap_.Clear();
         ASSERT_EQ( heap_.Size(), 0 );
@@ -93,7 +93,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , BasicFunctionalitySearchForNonExistentElementWhileHeapIsEmpty ) 
+            , BasicFunctionalitySearchForNonExistentElementWhileHeapIsEmpty )
     {
         EXPECT_EQ( heap_.Search(4), Const::NONE );
     }
@@ -102,14 +102,14 @@ TEST_F( TestBinaryHeap,
 ///@Name Comparison check
 ///@{
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , EqualityCheckUsingFunctionWithNotIdenticalSuccess ) 
+            , EqualityCheckUsingFunctionWithNotIdenticalSuccess )
     {
         TBinaryHeap heapIdentical;
         EXPECT_TRUE( heap_.IsEqualTo<false>(heapIdentical) );
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , EqualityCheckUsingFunctionWithNotIdenticalFail ) 
+            , EqualityCheckUsingFunctionWithNotIdenticalFail )
     {
         TBinaryHeap heapIdentical;
         heapIdentical.Emplace(99);
@@ -119,7 +119,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , EqualityCheckUsingOperatorSuccess ) 
+            , EqualityCheckUsingOperatorSuccess )
     {
         TBinaryHeap heapIdentical;
         EXPECT_TRUE( ( heap_ == heapIdentical ) );
@@ -127,7 +127,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , EqualityCheckUsingOperatorFail ) 
+            , EqualityCheckUsingOperatorFail )
     {
         TBinaryHeap heapIdentical;
         heapIdentical.Emplace(99);
@@ -139,14 +139,14 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , EqualityCheckUsingFunctionWithIdenticalSuccess ) 
+            , EqualityCheckUsingFunctionWithIdenticalSuccess )
     {
         TBinaryHeap heapIdentical;
         EXPECT_TRUE( heap_.IsEqualTo<true>(heapIdentical) );
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , EqualityCheckUsingFunctionWithIdenticalFail ) 
+            , EqualityCheckUsingFunctionWithIdenticalFail )
     {
         TBinaryHeap heapIdentical;
         heapIdentical.Emplace(99);
@@ -159,9 +159,9 @@ TEST_F( TestBinaryHeap,
 ///@Name Add element check
 ///@{
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , OperatorAddElementZero ) 
+            , OperatorAddElementZero )
     {
-        TElement i  = 0; 
+        TElement i  = 0;
         heap_      += i;
 
         EXPECT_EQ( heap_.Size(), 1 );
@@ -169,7 +169,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , OperatorAddElementOneUsingMoverInsertion ) 
+            , OperatorAddElementOneUsingMoverInsertion )
     {
         heap_ += 1; // == heap_ += std::move(1);
 
@@ -178,9 +178,9 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , AddElementUsingEmplace ) 
+            , AddElementUsingEmplace )
     {
-        heap_.Emplace(99); 
+        heap_.Emplace(99);
 
         EXPECT_EQ( heap_.Size(), 1 );
         EXPECT_EQ( heap_.Top(), 99 );
@@ -190,9 +190,9 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , AddElementUsingInsert ) 
+            , AddElementUsingInsert )
     {
-        heap_.Insert(99); 
+        heap_.Insert(99);
 
         EXPECT_EQ( heap_.Size(), 1 );
         EXPECT_EQ( heap_.Top(), 99 );
@@ -202,7 +202,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , BuildHeapWithEmptyVector ) 
+            , BuildHeapWithEmptyVector )
     {
         TVector emptyElementVector;
         heap_.BuildWith ( emptyElementVector );
@@ -216,21 +216,21 @@ TEST_F( TestBinaryHeap,
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
-            , DecreaseKeyDeathTest ) 
+            , DecreaseKeyDeathTest )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DecreaseKey"
                                                     , "index < Size\\(\\)" );
-        
+
         TElement p = -1;
 
-        ASSERT_DEATH( {heap_.DecreaseKey(0, p);}, assertionString ); 
+        ASSERT_DEATH( {heap_.DecreaseKey(0, p);}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , DecreaseKeyExceptionHandling ) 
+            , DecreaseKeyExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -243,7 +243,7 @@ TEST_F( TestBinaryHeap,
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -252,34 +252,34 @@ TEST_F( TestBinaryHeap,
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
-            , ChangeKeyDeathTest ) 
+            , ChangeKeyDeathTest )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "ChangeKey"
                                                     , "index < Size\\(\\)");
-        
+
         TElement p = -1;
 
-        ASSERT_DEATH( {heap_.ChangeKey(0, p);}, assertionString ); 
+        ASSERT_DEATH( {heap_.ChangeKey(0, p);}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , ChangeKeyExceptionHandling ) 
+            , ChangeKeyExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "ChangeKey"
                                                     , "index < Size\\(\\)");
         TElement p = -1;
-        
+
         try {
             heap_.ChangeKey(0, p);
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -290,13 +290,13 @@ TEST_F( TestBinaryHeap,
 ///@Name Change comparator
 ///@{
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , ComparatorChangeToLess ) 
-    {   
+            , ComparatorChangeToLess )
+    {
         heap_.Comparator( []( TElement a, TElement b ) { return a < b; } );
 
         EXPECT_EQ ( heap_.Size(), 0 );
         EXPECT_TRUE ( heap_.Empty() );
-        
+
         heap_.Emplace(1);
 
         EXPECT_EQ ( heap_.Size(), 1 );
@@ -310,13 +310,13 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , ComparatorChangeToGreater ) 
-    {   
+            , ComparatorChangeToGreater )
+    {
         heap_.Comparator([]( TElement a, TElement b ) { return a > b; });
 
         EXPECT_EQ ( heap_.Size(), 0 );
         EXPECT_TRUE ( heap_.Empty() );
-        
+
         heap_.Emplace(55);
 
         EXPECT_EQ ( heap_.Size(), 1 );
@@ -334,7 +334,7 @@ TEST_F( TestBinaryHeap,
 ///@{
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
-            , RemoveElementUsingPopDeathTest ) 
+            , RemoveElementUsingPopDeathTest )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -345,7 +345,7 @@ TEST_F( TestBinaryHeap,
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , RemoveElementUsingPopExceptionHandling ) 
+            , RemoveElementUsingPopExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -356,7 +356,7 @@ TEST_F( TestBinaryHeap,
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -365,7 +365,7 @@ TEST_F( TestBinaryHeap,
 
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F  ( TestBinaryHeapWithZeroElementsDeathTest
-            , RemoveElementUsingDeleteMinDeathTest ) 
+            , RemoveElementUsingDeleteMinDeathTest )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -377,7 +377,7 @@ TEST_F( TestBinaryHeap,
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , RemoveElementUsingDeleteMinExceptionHandling ) 
+            , RemoveElementUsingDeleteMinExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -388,7 +388,7 @@ TEST_F( TestBinaryHeap,
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -396,7 +396,7 @@ TEST_F( TestBinaryHeap,
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , ClearHeap ) 
+            , ClearHeap )
     {
         EXPECT_TRUE( heap_.Empty() );
         heap_.Clear();
@@ -404,10 +404,10 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , SwapEmptyHeaps ) 
+            , SwapEmptyHeaps )
     {
         TBinaryHeap heapForSwapping;
-        
+
         EXPECT_TRUE( heap_.Empty() );
         EXPECT_TRUE( heapForSwapping.Empty() );
 
@@ -425,15 +425,15 @@ TEST_F( TestBinaryHeap,
 ///@Name Check iterators
 ///@{
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , OutputStream ) 
+            , OutputStream )
     {
-        std::ostringstream os; 
+        std::ostringstream os;
         os << heap_;
         EXPECT_EQ( os.str(), "" );
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , HeapIteratorWithOstream ) 
+            , HeapIteratorWithOstream )
     {
         std::ostringstream os;
         std::copy( heap_.begin(), heap_.end(), std::ostream_iterator<TElement>( os , "|" ) );
@@ -442,14 +442,14 @@ TEST_F( TestBinaryHeap,
 
     // @todo std::copy does not work
     // TEST_F  ( TestBinaryHeapWithZeroElements
-    //         , HeapIteratorCopy ) 
+    //         , HeapIteratorCopy )
     // {
         // TBinaryHeap heapForCopy;
         // std::copy( heap_.Begin(), heap_.End(), heapForCopy );
     // }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , IteratorSerialForAllElements ) 
+            , IteratorSerialForAllElements )
     {
         heap_.for_all_elements<egoa::ExecutionPolicy::sequential> ( []( TElement & element ) {
             EXPECT_FALSE ( true );
@@ -457,7 +457,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , IteratorParallelForAllElements ) 
+            , IteratorParallelForAllElements )
     {
         heap_.for_all_elements<egoa::ExecutionPolicy::parallel> ( []( TElement & element ) {
             EXPECT_FALSE ( true );
@@ -465,7 +465,7 @@ TEST_F( TestBinaryHeap,
     }
 
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , IteratorBreakableForAllElements ) 
+            , IteratorBreakableForAllElements )
     {
         heap_.for_all_elements<egoa::ExecutionPolicy::breakable> ( []( TElement & element ) -> bool {
             EXPECT_FALSE ( true );
@@ -477,19 +477,19 @@ TEST_F( TestBinaryHeap,
 #pragma mark TEST_BINARY_HEAP_WITH_ONE_INT_ELEMENT
 
 TEST_F  ( TestBinaryHeapWithOneIntegerElement
-        , IsNoLongerEmpty ) 
+        , IsNoLongerEmpty )
 {
     ASSERT_FALSE( heap_.Empty() );
 }
 
 TEST_F  ( TestBinaryHeapWithOneIntegerElement
-        , HasSizeOfOne ) 
+        , HasSizeOfOne )
 {
     ASSERT_THAT( heap_.Size(), Eq(1) );
 }
 
 TEST_F  ( TestBinaryHeapWithOneIntegerElement
-        , CheckTopElement ) 
+        , CheckTopElement )
 {
     ASSERT_EQ( heap_.Top(), 99 );
 }
@@ -533,38 +533,38 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 ///@Name Basic Functionalities
 ///@{
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , BasicFunctionalityIsNoLongerEmpty ) 
+            , BasicFunctionalityIsNoLongerEmpty )
     {
         ASSERT_FALSE( heap_.Empty() );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , BasicFunctionalityHasSizeOfSeven ) 
+            , BasicFunctionalityHasSizeOfSeven )
     {
         ASSERT_THAT( heap_.Size(), Eq(7) );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , BasicFunctionalityCheckTopElement ) 
+            , BasicFunctionalityCheckTopElement )
     {
         EXPECT_EQ( heap_.Top(), 1 );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , BasicFunctionalitySearchForElementFour ) 
+            , BasicFunctionalitySearchForElementFour )
     {
         EXPECT_EQ( heap_.Search(4), 5 );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , BasicFunctionalitySwitchToMaxHeapAndCheckTop ) 
+            , BasicFunctionalitySwitchToMaxHeapAndCheckTop )
     {
         heap_.Maximize();
         EXPECT_EQ( heap_.Top(), 55 );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , BasicFunctionalitySwitchToMinHeapAndCheckTop ) 
+            , BasicFunctionalitySwitchToMinHeapAndCheckTop )
     {
         heap_.Minimize();
         EXPECT_EQ( heap_.Top(), 1 );
@@ -580,68 +580,68 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 ///@Name Comparison check
 ///@{
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , EqualityCheckUsingFunctionWithNotIdenticalSuccess ) 
+            , EqualityCheckUsingFunctionWithNotIdenticalSuccess )
     {
         TBinaryHeap heapIdentical;
         TVector     intVector = { 1, 2, 4, 5, 9, 23, 55};
 
         heapIdentical.BuildWith(intVector);
-        
+
         EXPECT_TRUE ( heap_.IsEqualTo<false>(heapIdentical) );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , EqualityCheckUsingFunctionWithNotIdenticalFail ) 
+            , EqualityCheckUsingFunctionWithNotIdenticalFail )
     {
         TBinaryHeap heapIdentical;
         TVector     intVector = { 1, 3, 4, 5, 9, 23, 55};
 
         heapIdentical.BuildWith(intVector);
-        
+
         EXPECT_FALSE ( heap_.IsEqualTo<false>(heapIdentical) );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , EqualityCheckUsingOperatorSuccess ) 
+            , EqualityCheckUsingOperatorSuccess )
     {
         TBinaryHeap heapIdentical;
         TVector     intVector = { 1, 2, 4, 5, 9, 23, 55};
 
         heapIdentical.BuildWith(intVector);
-        
+
         EXPECT_TRUE ( ( heap_ == heapIdentical ) );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , EqualityCheckUsingOperatorFail ) 
+            , EqualityCheckUsingOperatorFail )
     {
         TBinaryHeap heapIdentical;
         TVector     intVector = { 1, 2, 4, 5, 55, 23, 55};
 
         heapIdentical.BuildWith(intVector);
-        
+
         EXPECT_FALSE ( ( heap_ == heapIdentical ) );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , EqualityCheckUsingFunctionWithIdenticalSuccess ) 
+            , EqualityCheckUsingFunctionWithIdenticalSuccess )
     {
         TBinaryHeap heapIdentical;
         TVector     intVector = { 5, 9, 23, 55, 1, 4, 2};
 
         heapIdentical.BuildWith(intVector);
-        
+
         EXPECT_TRUE ( heap_.IsEqualTo<true>(heapIdentical) );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , EqualityCheckUsingFunctionWithIdenticalFail ) 
+            , EqualityCheckUsingFunctionWithIdenticalFail )
     {
         TBinaryHeap heapIdentical;
         TVector     intVector = { 1, 2, 4, 5, 55, 23, 55};
 
         heapIdentical.BuildWith(intVector);
-        
+
         EXPECT_FALSE ( heap_.IsEqualTo<true>(heapIdentical) );
     }
 ///@}
@@ -649,9 +649,9 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 ///@Name Add element check
 ///@{
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , AddElementUsingOperator ) 
+            , AddElementUsingOperator )
     {
-        TElement i  = 0; 
+        TElement i  = 0;
         heap_      += i;
 
         EXPECT_EQ( heap_.Size(), 8 );
@@ -660,7 +660,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , AddElementUsingMoverOperator ) 
+            , AddElementUsingMoverOperator )
     {
         heap_ += 1; // == heap_ += std::move(1);
 
@@ -669,9 +669,9 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , AddElementUsingEmplace ) 
+            , AddElementUsingEmplace )
     {
-        heap_.Emplace(99); 
+        heap_.Emplace(99);
 
         EXPECT_EQ( heap_.Size(), 8 );
         EXPECT_EQ( heap_.Top(), 1 );
@@ -681,9 +681,9 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , AddElementUsingInsert ) 
+            , AddElementUsingInsert )
     {
-        heap_.Insert(99); 
+        heap_.Insert(99);
 
         EXPECT_EQ( heap_.Size(), 8 );
         EXPECT_EQ( heap_.Top(), 1 );
@@ -700,7 +700,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     {
         TElement p = -1;
         // Decrease key of element with key 23 at position 6 to element with key -1
-        heap_.DecreaseKey(6, p); 
+        heap_.DecreaseKey(6, p);
 
         EXPECT_EQ( heap_.Size(), 7 );
         EXPECT_EQ( heap_.Top(), -1 );
@@ -725,7 +725,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , DecreaseKeyInvalidIndexExceptionHandling ) 
+            , DecreaseKeyInvalidIndexExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
@@ -736,7 +736,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -748,7 +748,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     {
         TElement p = -1;
         // Decrease key of element with key 23 at position 6 to element with key -1
-        heap_.ChangeKey(6, p); 
+        heap_.ChangeKey(6, p);
 
         EXPECT_EQ( heap_.Size(), 7 );
         EXPECT_EQ( heap_.Top(), -1 );
@@ -761,7 +761,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     {
         TElement p = 42;
         // Decrease key of element with key 23 at position 6 to element with key 42
-        heap_.ChangeKey(6, p); 
+        heap_.ChangeKey(6, p);
 
         EXPECT_EQ( heap_.Size(), 7 );
         ExpectContent(heap_, {1, 2, 4, 5, 9, 42, 55});
@@ -772,7 +772,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     {
         TElement p = 42;
         // Decrease key of element with key 1 at position 0 to element with key 42
-        heap_.ChangeKey(0, p); 
+        heap_.ChangeKey(0, p);
 
         EXPECT_EQ( heap_.Size(), 7 );
         ExpectContent(heap_, {2, 4, 5, 9, 23, 42, 55});
@@ -783,7 +783,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
            , ChangeKeyInvalidIndex)
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
-                                                    , "BinaryHeap" 
+                                                    , "BinaryHeap"
                                                     , "ChangeKey"
                                                     , "index < Size\\(\\)");
 
@@ -792,10 +792,10 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBinaryHeapWithZeroElements
-            , ChangeKeyInvalidIndexExceptionHandling ) 
+            , ChangeKeyInvalidIndexExceptionHandling )
     {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
-                                                    , "BinaryHeap" 
+                                                    , "BinaryHeap"
                                                     , "ChangeKey"
                                                     , "index < Size\\(\\)");
         try {
@@ -803,7 +803,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -814,7 +814,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 ///@Name Change comparator
 ///@{
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , ComparatorChangeToLess ) 
+            , ComparatorChangeToLess )
     {
         heap_.Comparator([]( TElement a, TElement b ) { return a < b; });
 
@@ -828,7 +828,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , ComparatorChangeToGreater ) 
+            , ComparatorChangeToGreater )
     {
         heap_.Comparator([]( TElement a, TElement b ) { return a > b; });
 
@@ -845,7 +845,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 ///@Name Remove elements
 ///@{
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , RemoveElementUsingPop ) 
+            , RemoveElementUsingPop )
     {
         heap_.Minimize();
         heap_.Pop();
@@ -855,11 +855,11 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 
         heap_.Pop();
         EXPECT_EQ( heap_.Size(), 5 );
-        EXPECT_EQ( heap_.Top(),  4 );    
+        EXPECT_EQ( heap_.Top(),  4 );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , RemoveElementUsingDeleteMin ) 
+            , RemoveElementUsingDeleteMin )
     {
         EXPECT_EQ( heap_.DeleteTop(), 1 );
         EXPECT_EQ( heap_.DeleteTop(), 2 );
@@ -869,14 +869,14 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , RemoveElementUsingClearHeap ) 
+            , RemoveElementUsingClearHeap )
     {
         heap_.Clear();
         EXPECT_TRUE( heap_.Empty() );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , SwapHeaps ) 
+            , SwapHeaps )
     {
         TBinaryHeap heapForSwapping;
         TBinaryHeap heapForComparison;
@@ -905,15 +905,15 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 ///@Name Check iterators
 ///@{
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , HeapIteratorOutputStream ) 
+            , HeapIteratorOutputStream )
     {
-        std::ostringstream os; 
+        std::ostringstream os;
         os << heap_;
         EXPECT_EQ( os.str(), "1|5|2|55|9|4|23|" );
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , HeapIteratorWithOstream ) 
+            , HeapIteratorWithOstream )
     {
         std::ostringstream os;
         std::copy( heap_.begin(), heap_.end(), std::ostream_iterator<TElement>( os , "|" ) );
@@ -941,7 +941,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
 
     // @todo std::copy does not work
     // TEST_F  ( TestBinaryHeapWithVectorOfInteger
-    //         , HeapIteratorCopy ) 
+    //         , HeapIteratorCopy )
     // {
         // egoa::BinaryHeap<int> heapForCopy;
         // std::copy( heap_.begin(), heap_.end(), heapForCopy );
@@ -971,7 +971,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , IteratorParallelForAllElements ) 
+            , IteratorParallelForAllElements )
     {
         // For more details see
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
@@ -1014,13 +1014,13 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
     }
 
     TEST_F  ( TestBinaryHeapWithVectorOfInteger
-            , IteratorBreakableForAllElements ) 
+            , IteratorBreakableForAllElements )
     {
         TVector intVector = { 1, 5, 2, 55, 9, 4, 23 };
         Types::count counter = 0;
         heap_.for_all_elements<egoa::ExecutionPolicy::breakable> ( [&counter,&intVector]( TElement & element ) -> bool {
             EXPECT_EQ( element, intVector[counter] );
-            if ( 9 == intVector[counter] ) { 
+            if ( 9 == intVector[counter] ) {
                 return false; // break
             }
             ++counter;

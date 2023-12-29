@@ -53,7 +53,7 @@ class PyPsaParser {
     using TIoEdge               = io::Edge<TEdgeProperties>;
     // Bounds
     using TBound                = Bound<>;
-    
+
     public:
 
         ///@name Constructors and destructor
@@ -79,7 +79,7 @@ class PyPsaParser {
             , loadSnapshotsSize(0)
             {}
 
-            PyPsaParser ( std::string filenameBuses 
+            PyPsaParser ( std::string filenameBuses
                         , std::string filenameCarriers
                         , std::string filenameGenerators
                         , std::string filenameGeneratorsPMaxPu
@@ -88,7 +88,7 @@ class PyPsaParser {
                         , std::string filenameLinesNew
                         , std::string filenameLoads
                         , std::string filenameLoadsPSet
-                        , std::string filenameNetwork 
+                        , std::string filenameNetwork
                         , std::string filenameSnapshots
                         , std::string filenameStorageUnits
                         , std::string filenameStorageUnitsInflow )
@@ -111,7 +111,7 @@ class PyPsaParser {
 
             ~PyPsaParser()
             {
-                mapBusName2VertexId_.clear();           
+                mapBusName2VertexId_.clear();
                 mapGeneratorName2Generator_.clear();
                 mapGeneratorName2Identifier_.clear();
                 mapGeneratorName2BusName_.clear();
@@ -127,17 +127,17 @@ class PyPsaParser {
              * @brief      Read storage units in flow.
              * @details    For more information see the storage unit section under
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             *     
+             *
              * @I{  An example input is given by:
-             *     
+             *
              *      name         -   Timestamp
              *      AT0 1 hydro  -   Represents a storage unit name with its production snapshot
              *  }
-             *  
+             *
              * @return     Returns @p true if the parsing was successful, @p
              *     false otherwise.
              */
-            inline bool ReadStorageUnitsInflows () 
+            inline bool ReadStorageUnitsInflows ()
             {
                 throw std::runtime_error ( "Not implemented yet! Storage units are currently unsupported." );
                 return true;
@@ -147,41 +147,41 @@ class PyPsaParser {
              * @brief      Reads storage units.
              * @details    For more information see the storage unit section under
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             * 
+             *
              * @I{  The setting is as following:
-             *      name                    - Name 
-             *      
+             *      name                    - Name
+             *
              *      bus                     - Name of the bus (required)
              *      capital_cost            - in currency/MWh (default 0, optional)
              *      carrier                 - (default n/a, optional)
-             *      control                 - 
-             *      cyclic_state_of_charge  - 
-             *      type                    - 
-             *      efficiency_store        - 
+             *      control                 -
+             *      cyclic_state_of_charge  -
+             *      type                    -
+             *      efficiency_store        -
              *      efficiency_dispatch     - in p.u. (default 1, optional)
-             *      inflow                  - 
+             *      inflow                  -
              *      marginal_cost           - in currency/MWh (default 0, optional)
              *      max_hours               - (default NaN, optional)
-             *      p                       - 
+             *      p                       -
              *      p_min_pu                - in p.u., minimum output (default -1, optional)
              *      p_max_pu                - in p.u., maximum output (default 1, optional)
              *      p_nom                   - in MW, nominal power (default 0, optional)
-             *      p_nom_extendable        -  
-             *      p_nom_opt               - 
+             *      p_nom_extendable        -
+             *      p_nom_opt               -
              *      p_set                   - in MW, real power set point (default 0, optional)
-             *      q                       - 
+             *      q                       -
              *      q_set                   - in MVar, reactive power set point (default 0, optional)
              *      sign                    - power sign (default 1, optional)
-             *      standing_loss           - 
-             *      state_of_charge         - 
-             *      state_of_charge_initial - 
-             *      state_of_charge_set     - 
-             *      spill                   - 
+             *      standing_loss           -
+             *      state_of_charge         -
+             *      state_of_charge_initial -
+             *      state_of_charge_set     -
+             *      spill                   -
              *  }
              *
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
-            inline bool ReadStorageUnits() 
+            inline bool ReadStorageUnits()
             {
                 throw std::runtime_error ( "Not implemented yet! Storage units are currently unsupported." );
                 return true;
@@ -193,13 +193,13 @@ class PyPsaParser {
              *      created and added to the network (see the bus section of
              *      <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>
              *      for more information).
-             *      
+             *
              * @I{  The setting is as following:
-             * 
-             *      Name in EGOA        Name in PyPSA       Description                           
-             *      
+             *
+             *      Name in EGOA        Name in PyPSA       Description
+             *
              *      - vertex.Name()     - name          - unique name of the bus
-             *      
+             *
              *      -                   - carrier       - AC, DC  (default AC, optional)
              *      - vertex.Des        - country       - country
              *      - vertex.Type()     - type          - Not specified. We use the IEEE TYPES here.
@@ -209,7 +209,7 @@ class PyPsaParser {
              *      - vertex.VoltageNom - v_nom         - in kV, Nominal voltage (default 1, optional)
              *      - vertex.X()        - x             - X-Coordinate (longitude)
              *      - vertex.Y()        - y             - Y-Coordinate (latitude)
-             *                          
+             *
              *      Output parameter are:
              *          - control         - (default PQ) P,Q,V control strategy for the power flow, must be @p PQ, @p PV or @p Slack.
              *          - marginal_price  - in currency/MWh (default 0). Locational marginal price from LOPF from power balance constraint.
@@ -218,8 +218,8 @@ class PyPsaParser {
              *          - sub_network     - Name of connected sub-network to which the vertex belongs.
              *          - vertex.Theta()  - in RAD (default: 0). The Voltage angle.
              *          - v_ang           - in radians (default 0)
-             *          - v_mag_pu        - in p.u. (default 1). Voltage magnitude, per unit of v_nom. 
-             *   }   
+             *          - v_mag_pu        - in p.u. (default 1). Voltage magnitude, per unit of v_nom.
+             *   }
              *
              * @param      network   The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
              * @param      filename  The filename.
@@ -227,7 +227,7 @@ class PyPsaParser {
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
             inline bool ReadBuses ( TNetwork          & network
-                                  , std::string const & filename ) 
+                                  , std::string const & filename )
             {
                 QFile file( QString::fromStdString(filename + "/" + filenameBuses_) );
                 OpenFile(file);
@@ -235,18 +235,18 @@ class PyPsaParser {
 
                 dataMapperBuses_.clear();
                 ExtractBusHeader( splitted );
-                while( !file.atEnd() ) 
+                while( !file.atEnd() )
                 {
                     TVertexProperties vertexProperties;
                     std::string temp;
 
                     splitted = ReadLine( file, false );
-                    
+
                     USAGE_ASSERT ( static_cast<Types::count>( splitted.size() ) == dataMapperBuses_.size() );
 
                     for ( Types::count counter = 0
                         ; counter < static_cast<Types::count>( splitted.size() )
-                        ; ++counter ) 
+                        ; ++counter )
                     {
                         temp = splitted[counter].toStdString();
                         (this->*dataMapperBuses_[counter])( temp , vertexProperties);
@@ -259,17 +259,17 @@ class PyPsaParser {
 
             /**
              * @brief      Reads carriers.
-             * @details    For more information see the carrier section under 
+             * @details    For more information see the carrier section under
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             *     
+             *
              * @I{  The setting is as following:
              *          - name              - Name of the carrier, see ReadGeneratorMatrix for mapping.
-             *          - co2_emissions     - in tonnes/MWh (CO2 emissions of this carrier) 
+             *          - co2_emissions     - in tonnes/MWh (CO2 emissions of this carrier)
              *  }
              *
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
-            inline bool ReadCarriers() 
+            inline bool ReadCarriers()
             {
                 throw std::runtime_error ( "Not implemented yet! Storage units are currently unsupported." );
                 return true;
@@ -278,14 +278,14 @@ class PyPsaParser {
             /**
              * @brief      Read generators maximum real power production
              *     snapshot in p.u.
-             * @details    For more information see the generator section under 
+             * @details    For more information see the generator section under
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
              *
              * @param      network   The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
              * @param      filename  The filename
-             * 
+             *
              * @I{
-             *     - name 
+             *     - name
              *     - AT0 0 onwind    - Represents a generator name with its production snapshot in p.u.
              *     - AT0 0 ror       - Represents a generator name with its production snapshot in p.u.
              *   }
@@ -293,7 +293,7 @@ class PyPsaParser {
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
             inline bool ReadGeneratorsRealPowerMaxPu ( TNetwork          & network
-                                                     , std::string const & filename ) 
+                                                     , std::string const & filename )
             {
                 QFile file( QString::fromStdString(filename + "/" + filenameGeneratorsPMaxPu_) );
                 OpenFile(file);
@@ -301,21 +301,21 @@ class PyPsaParser {
 
                 dataMapperGeneratorsRealPowerMaxPu_.clear();
                 ExtractGeneratorMaximumRealPowerPuHeader( splitted );
-                
-                while( !file.atEnd() ) 
+
+                while( !file.atEnd() )
                 {
                     splitted = ReadLine( file, false );
                     std::string generationValue;
-                    
+
                     USAGE_ASSERT ( static_cast<Types::count>( splitted.size() ) == dataMapperGeneratorsRealPowerMaxPu_.size() );
-                    
+
                     if ( !splitted[0].isEmpty() )
                     {
                         ++ generatorSnapshotsSize;
                     }
                     for ( Types::count counter = 0
                         ; counter < static_cast<Types::count>( splitted.size() )
-                        ; ++counter ) 
+                        ; ++counter )
                     {
                         generationValue = splitted[counter].toStdString();
                         dataMapperGeneratorsRealPowerMaxPu_[counter]( generationValue, network );
@@ -328,7 +328,7 @@ class PyPsaParser {
              * @brief      Read the generator matrix.
              * @details    While reading each row of the matrix a generator is
              *     created and added to the network. The description of the
-             *     elements is as in 
+             *     elements is as in
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
              *
              * @param      network   The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
@@ -336,23 +336,23 @@ class PyPsaParser {
              *
              * @I{
              *      Name in EGOA                          Name in PyPSA             Description
-             *      
+             *
              *     - vertex.Name()                         - name                   - unique generator name (required)
              *     - vertex.Name()                         - bus                    - bus at which the generator is connected (required)
              *     - vertex.Control()                      - control                - P, Q, V control strategy usually PQ, PV or Slack (default PQ, optional)
              *     - vertex.Type                           - type                   - generator type (default n/a, optional)
-             *     - vertex.CapitalCost()                  - capital_cost           - (default n/a, optional) 
+             *     - vertex.CapitalCost()                  - capital_cost           - (default n/a, optional)
              *     - vertex.Type                           - carrier                - carrier (default n/a, optional)
-             *     - vertex.efficiency                     - efficiency             - (default n/a, optional) 
-             *     - vertex.marginal_cost                  - marginal_cost          - (default n/a, optional) 
+             *     - vertex.efficiency                     - efficiency             - (default n/a, optional)
+             *     - vertex.marginal_cost                  - marginal_cost          - (default n/a, optional)
              *     - vertex.Mbase()                        - p_nom                  - in MW, nominal power for limits (default 0, optional)
              *     - vertex.IsExtendable()                 - p_nom_extendable       - to allow capacity (default 0, optional)
              *     - vertex.NominalRealPower().Minimum()   - p_nom_min              - in p.u., if p_nom extendable, i.e., set p_nom_min (default 0, optional)
              *     - vertex.NominalRealPower().Maximum()   - p_nom_max              - in p.u., if p_nom extendable, i.e., set p_nom_max (default INF, optional)
              *     - vertex.RealPowerBound().Minimum()     - p_min_pu               - in p.u., the minimum output for each snapshot (default 0, optional)
              *     - vertex.RealPowerBound().Maximum()     - p_max_pu               - in p.u., the maximum output for each snapshot (default 1, optional)
-             *     - vertex.ReactivePowerBound().Minimum() - 
-             *     - vertex.ReactivePowerBound().Maximum() - 
+             *     - vertex.ReactivePowerBound().Minimum() -
+             *     - vertex.ReactivePowerBound().Maximum() -
              *     - vertex.RealPowerSetPoint()            - p_set                  - in MW, real power set point (default 0, optional)
              *     - vertex.ReactivePowerSetPoint()        - q_set                  - in MVar, reactive power set point (default 0, optional)
              *     - vertex.PowerSign()                    - sign                   - (default 1, optional)
@@ -369,21 +369,21 @@ class PyPsaParser {
              *     - vertex.RampLimitDown()                - ramp_limit_down        - in p.u., (default NaN, optional)
              *     - vertex.RampLimitStartUp()             - ramp_limit_start_up    - in p.u., (default 1, optional)
              *     - vertex.RampLimitShutDown()            - ramp_limit_shut_down   - in p.u., (default 1, optional)
-             *     
+             *
              *     The Output Parameter:
-             *     
+             *
              *     - vertex.RealPower()                     - p                     - in MW, real power at bus (positive if generation)
              *     - vertex.ReactivePower                   - q                     - in MVar, reactive power at bus (positive if generation)
              *     -                                        - p_nom_opt             - in MW, optimized nominal power (default, 0)
              *     - vertex.Status()                        - status                - Status on or off (default, 1)
-             *     
+             *
              *     - vertex.Weight()                        - weight
              *  }
              *
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
             inline bool ReadGenerators ( TNetwork          & network
-                                       , std::string const & filename ) 
+                                       , std::string const & filename )
             {
                 QFile file( QString::fromStdString(filename + "/" + filenameGenerators_) );
                 OpenFile(file);
@@ -392,26 +392,26 @@ class PyPsaParser {
                 dataMapperGenerators_.clear();
                 ExtractGeneratorHeader( splitted );
 
-                while( !file.atEnd() ) 
+                while( !file.atEnd() )
                 {
                     splitted = ReadLine( file, false );
                     TGeneratorProperties generator;
                     std::string temp;
-                    
+
                     USAGE_ASSERT ( static_cast<Types::count>( splitted.size() ) == dataMapperGenerators_.size() );
-                    
-                    for ( Types::count counter = 0; 
-                          counter < static_cast<Types::count>( splitted.size() ); 
-                          ++counter 
-                        ) 
+
+                    for ( Types::count counter = 0;
+                          counter < static_cast<Types::count>( splitted.size() );
+                          ++counter
+                        )
                     {
                         temp = splitted[counter].toStdString();
                         (this->*dataMapperGenerators_[counter])( temp , generator);
                     } // for
                     Types::vertexId generatorId = Const::NONE;
-                    if ( mapGeneratorName2BusName_.find(generator.Name()) != mapGeneratorName2BusName_.end() ) 
+                    if ( mapGeneratorName2BusName_.find(generator.Name()) != mapGeneratorName2BusName_.end() )
                     {
-                        if ( mapBusName2VertexId_.find(mapGeneratorName2BusName_[generator.Name()]) != mapBusName2VertexId_.end() ) 
+                        if ( mapBusName2VertexId_.find(mapGeneratorName2BusName_[generator.Name()]) != mapBusName2VertexId_.end() )
                         {
                             generatorId = network.AddGeneratorAt(mapBusName2VertexId_[mapGeneratorName2BusName_[generator.Name()]], generator);
                         } else {
@@ -420,11 +420,11 @@ class PyPsaParser {
                     } else {
                         ESSENTIAL_ASSERT( false && "Generator name does not exist" );
                     }
-                    if ( mapGeneratorName2Identifier_.find(generator.Name()) == mapGeneratorName2Identifier_.end() ) 
-                    {                        
+                    if ( mapGeneratorName2Identifier_.find(generator.Name()) == mapGeneratorName2Identifier_.end() )
+                    {
                         mapGeneratorName2Identifier_[generator.Name()] = generatorId;
                     } else {
-                        ESSENTIAL_ASSERT( false && "Generator name to identifier, Generator name duplicates" );   
+                        ESSENTIAL_ASSERT( false && "Generator name to identifier, Generator name duplicates" );
                     }
                 } // while
                 network.UpdateGeneratorSnapshotSize();
@@ -433,11 +433,11 @@ class PyPsaParser {
 
             /**
              * @brief      Sets the generator default values.
-             * @details    The description of the elements is as in 
+             * @details    The description of the elements is as in
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             *     
+             *
              * @I{
-             *     - name 
+             *     - name
              *     - constant
              *     - type               - Type of constraint (only "primary energy", i.e., limits on the usage of primary energy before generator conversion)
              *     - carrier_attribute
@@ -445,10 +445,10 @@ class PyPsaParser {
              *     - constant           - Constant for the rhs
              *     - mu                 - Shadow price of global constraint
              *  }
-             *     
+             *
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
-            inline bool ReadGlobalConstraints() 
+            inline bool ReadGlobalConstraints()
             {
                 throw std::runtime_error ( "Not implemented yet! Storage units are currently unsupported." );
                 return true;
@@ -463,7 +463,7 @@ class PyPsaParser {
              * @param[in]  filename  The filename.
              *
              * @tparam     Graph     A graph type such as PowerGrid or StaticGraph.
-             * 
+             *
              * @I{
              *     edge.Name()                  = name                      -> in -, branch name (default -, required)
              *     edge.Source()                = bus0                      -> in -, source bus ID (default -, required)
@@ -473,51 +473,51 @@ class PyPsaParser {
              *     edge.Length()                = length                    -> in ?, length of this track (default 0, optional).
              *                                                                       Length of line used when "type" is set, also useful for calculating the capital cost.
              *     edge.NumberOfParallelLines() = num_parallel              -> in -, number of parallel lines at this branch (default 1, optional).
-             *                                                                       When “type” is set, this is the number of parallel lines (can also be fractional). 
+             *                                                                       When “type” is set, this is the number of parallel lines (can also be fractional).
              *                                                                       If “type” is empty “” this value is ignored.
              *     edge.ThermalLimit()          = s_max_pu                  -> in p.u., thermal limit (default 1, optional).
-             *                                                                          The maximum allowed absolute flow per unit of s_nom for the OPF (e.g. can be set <1 
-             *                                                                          to approximate n-1 factor, or can be time-varying to represent weather-dependent dynamic 
+             *                                                                          The maximum allowed absolute flow per unit of s_nom for the OPF (e.g. can be set <1
+             *                                                                          to approximate n-1 factor, or can be time-varying to represent weather-dependent dynamic
              *                                                                          line rating for overhead lines).
-             *     edge.NominalApparentPower()  = s_nom                     -> in MW or MVAR, nominal apparent power (default 0, optional). 
+             *     edge.NominalApparentPower()  = s_nom                     -> in MW or MVAR, nominal apparent power (default 0, optional).
              *                                                                              Limit of apparent power which can pass through branch.
-             *     edge.Type()                  = type                      -> in -, name of branch standard type (default ?, ?). 
-             *                                                                       If this is not an empty string “”, then the line standard type impedance parameters 
-             *                                                                       are multiplied with the line length and divided/multiplied by num_parallel to compute 
-             *                                                                       x, r, etc. This will override any values set in r, x, and b. If the string is empty, 
+             *     edge.Type()                  = type                      -> in -, name of branch standard type (default ?, ?).
+             *                                                                       If this is not an empty string “”, then the line standard type impedance parameters
+             *                                                                       are multiplied with the line length and divided/multiplied by num_parallel to compute
+             *                                                                       x, r, etc. This will override any values set in r, x, and b. If the string is empty,
              *                                                                       PyPSA will simply read r, x, etc.
              *     edge.NominalVoltage()        = v_nom                     -> in V, nominal voltage, basekv (default ?, ?)
              *     edge.NominalApparentPowerBound().Minimum() = s_nom_min   -> in MW or MVAr, minimum nominal apparent power (default 0, optional).
              *                                                                              If s_nom is extendable in OPF, set its minimum value.
              *     edge.NominalApparentPowerBound().Maximum() = s_nom_max   -> in MW or MVAr, maximum nominal apparent power (default inf, optional).
              *                                                                              If s_nom is extendable in OPF, set its maximum value (e.g. limited by potential).
-             *     edge.Reactance()             = x                         -> in Ohm,  series reactance (default 0, optional), 
-             *                                                                          must be non-zero for AC branch in linear power flow. 
-             *                                                                          If the line has series inductance L in Henries then x = 2\pi f L where f is the frequency in 
-             *                                                                          Hertz. Series impedance z = r + jx must be non-zero for the non-linear power flow. Ignored if 
+             *     edge.Reactance()             = x                         -> in Ohm,  series reactance (default 0, optional),
+             *                                                                          must be non-zero for AC branch in linear power flow.
+             *                                                                          If the line has series inductance L in Henries then x = 2\pi f L where f is the frequency in
+             *                                                                          Hertz. Series impedance z = r + jx must be non-zero for the non-linear power flow. Ignored if
              *                                                                          type defined.
-             *     edge.Resistance()            = r                         -> in Ohm, series resistance (default 0, optional), 
-             *                                                                         must be non-zero for DC branch in linear power flow. Series impedance z = r + jx must be non-zero 
-             *                                                                         for the non-linear power flow. Ignored if type defined. 
-             *     edge.Conductance()           = g                         -> in Siemens, shunt conductance (default 0, optional), 
-             *                                                                             calculated by resistance and reactance dependent on the model (DC or AC), shunt admittance is 
+             *     edge.Resistance()            = r                         -> in Ohm, series resistance (default 0, optional),
+             *                                                                         must be non-zero for DC branch in linear power flow. Series impedance z = r + jx must be non-zero
+             *                                                                         for the non-linear power flow. Ignored if type defined.
+             *     edge.Conductance()           = g                         -> in Siemens, shunt conductance (default 0, optional),
+             *                                                                             calculated by resistance and reactance dependent on the model (DC or AC), shunt admittance is
              *                                                                             y = g + jb and g = r / (x^2 + r^2).
-             *     edge.Susceptance()           = b                         -> in Siemens, shunt susceptance (default 0, optional), 
-             *                                                                             calculated by resistance and reactance dependent on the model (DC or AC), if the 
-             *                                                                             line has shunt capacitance C in Farads then b = 2\pi f C, where f is the frequency 
+             *     edge.Susceptance()           = b                         -> in Siemens, shunt susceptance (default 0, optional),
+             *                                                                             calculated by resistance and reactance dependent on the model (DC or AC), if the
+             *                                                                             line has shunt capacitance C in Farads then b = 2\pi f C, where f is the frequency
              *                                                                             in Hertz. Shunt admittance is y = g + jb and b = X / (r^2 + x^2). Ignored if type defined.
              *     edge.NominalApparentPowerExtendable() = s_nom_extendable -> in MW or VAR, nominal apparent power (default false, optional).
              *                                                                              Switch to allow capacity s_nom to be extended in OPF.
              *     edge.TerrainFactor           = terrain_factor            -> in -, terrain factor (default 0, ?).
              *                                                                       Terrain factor for increasing capital cost.
              *     edge.ThetaBound().Minimum()  = v_ang_min                 -> in Rad, minimum voltage angle (default -inf, optional).
-             *                                                                         Minimum voltage angle difference across the line. This is a placeholder attribute and is not currently 
+             *                                                                         Minimum voltage angle difference across the line. This is a placeholder attribute and is not currently
              *                                                                         used by any PyPSA functions.
              *     edge.ThetaBound().Maximum()  = v_ang_max                 -> in Rad, maximum voltage angle (default  inf, optional).
-             *                                                                         Maximum voltage angle difference across the line. This is a placeholder attribute and is not currently 
+             *                                                                         Maximum voltage angle difference across the line. This is a placeholder attribute and is not currently
              *                                                                         used by any PyPSA functions.
-             *                                                                         
-             *     [Out]                = sub_network           -> Subnetwork. Name of connected sub-network to which lines belongs. This attribute is set by PyPSA in the function 
+             *
+             *     [Out]                = sub_network           -> Subnetwork. Name of connected sub-network to which lines belongs. This attribute is set by PyPSA in the function
              *                                                                 network.determine_network_topology(); do not set it directly by hand.
              *     [Out]                = p0                    -> in MW (default 0).
              *                                                     Active power at bus0 (positive if branch is withdrawing power from bus0).
@@ -551,7 +551,7 @@ class PyPsaParser {
              */
             template<typename Graph = TNetwork>
             inline bool ReadLines ( Graph             & network
-                                  , const std::string & filename ) 
+                                  , const std::string & filename )
             {
                 QFile file( QString::fromStdString ( filename + "/" + filenameLines_ ) );
                 OpenFile(file);
@@ -560,7 +560,7 @@ class PyPsaParser {
                 dataMapperLines_.clear();
                 ExtractLineHeader( splitted );
 
-                while( !file.atEnd() ) 
+                while( !file.atEnd() )
                 {
                     splitted = ReadLine( file, false );
                     TIoEdge edge;
@@ -571,7 +571,7 @@ class PyPsaParser {
 
                     for ( Types::count counter = 0
                         ; counter < static_cast<Types::count>( splitted.size() )
-                        ; ++counter ) 
+                        ; ++counter )
                     {
                         temp = splitted[counter].toStdString();
                         (this->*dataMapperLines_[counter])( temp , edge );
@@ -583,62 +583,62 @@ class PyPsaParser {
 
             /**
              * @brief      Sets the branch default values.
-             * @details    The description of the elements is as in 
+             * @details    The description of the elements is as in
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
              *
              * @I{  The setting is as following:
-             * 
+             *
              *      Name in EGOA                            Default                 Name in PyPSA   Description
-             *      
+             *
              *      - Status()                              - true
-             *      - Type()                                - Edge::ElectricalEdgeType::standard        type (default: -). Name of line standard type. If this is not an empty string “”, then the line standard type impedance parameters are multiplied with the line length and divided/multiplied by num_parallel to compute x, r, etc. This will override any values set in r, x, and b. If the string is empty, PyPSA will simply read r, x, etc. 
-             *      - Reactance()                           - 0                     x                   Series reactance; must be non-zero for AC branch in linear power flow. If the line has series inductance L in Henries then x = 2\pi f L where f is the frequency in Hertz. Series impedance z = r + jx must be non-zero for the non-linear power flow. Ignored if type defined. 
-             *      - Resistance()                          - 0                     r                   Series resistance; must be non-zero for DC branch in linear power flow. Series impedance z = r + jx must be non-zero for the non-linear power flow. Ignored if type defined. 
+             *      - Type()                                - Edge::ElectricalEdgeType::standard        type (default: -). Name of line standard type. If this is not an empty string “”, then the line standard type impedance parameters are multiplied with the line length and divided/multiplied by num_parallel to compute x, r, etc. This will override any values set in r, x, and b. If the string is empty, PyPSA will simply read r, x, etc.
+             *      - Reactance()                           - 0                     x                   Series reactance; must be non-zero for AC branch in linear power flow. If the line has series inductance L in Henries then x = 2\pi f L where f is the frequency in Hertz. Series impedance z = r + jx must be non-zero for the non-linear power flow. Ignored if type defined.
+             *      - Resistance()                          - 0                     r                   Series resistance; must be non-zero for DC branch in linear power flow. Series impedance z = r + jx must be non-zero for the non-linear power flow. Ignored if type defined.
              *      // calculated by r and x
-             *      - Conductance(0.0)                      - 0                     g                   Shunt conductivity. Shunt admittance is y = g + jb. 
-             *      - Susceptance(0.0)                      - 0                     b                   Shunt susceptance. If the line has shunt capacitance C in Farads then b = 2\pi f C where f is the frequency in Hertz. Shunt admittance is y = g + jb. Ignored if type defined. 
-             *      - NominalApparentPower()                - 0.0                   s_nom               Limit of apparent power which can pass through branch. 
-             *      - NominalApparentPowerExtendable()      - false                 s_nom_extendable    Switch to allow capacity s_nom to be extended in OPF. 
-             *      - NominalApparentPowerBound().Minimum() - 0.0                   s_nom_min           If s_nom is extendable in OPF, set its minimum value. 
+             *      - Conductance(0.0)                      - 0                     g                   Shunt conductivity. Shunt admittance is y = g + jb.
+             *      - Susceptance(0.0)                      - 0                     b                   Shunt susceptance. If the line has shunt capacitance C in Farads then b = 2\pi f C where f is the frequency in Hertz. Shunt admittance is y = g + jb. Ignored if type defined.
+             *      - NominalApparentPower()                - 0.0                   s_nom               Limit of apparent power which can pass through branch.
+             *      - NominalApparentPowerExtendable()      - false                 s_nom_extendable    Switch to allow capacity s_nom to be extended in OPF.
+             *      - NominalApparentPowerBound().Minimum() - 0.0                   s_nom_min           If s_nom is extendable in OPF, set its minimum value.
              *      - NominalApparentPowerBound().Maximum() - Const::REAL_INFTY     s_nom_max           If s_nom is extendable in OPF, set its maximum value (e.g. limited by potential).
              *      - ThermalLimit()                        - 1.0                   s_max_pu            The maximum allowed absolute flow per unit of s_nom for the OPF (e.g. can be set <1 to approximate n-1 factor, or can be time-varying to represent weather-dependent dynamic line rating for overhead lines).
-             *      - CapitalCost()                         - 0.0                   capital_cost        Capital cost of extending s_nom by 1 MVA. 
-             *      - Length()                              - 0.0                   length              Length of line used when “type” is set, also useful for calculating the capital cost. 
-             *      - TerrainFactor()                       - 0.0                   terrain_factor      Terrain factor for increasing capital cost. 
-             *      - NumberOfParallelLines()               - 1.0                   num_parallel        When “type” is set, this is the number of parallel lines (can also be fractional). If “type” is empty “” this value is ignored. 
-             *      - ThetaBound().Minimum()                - -Const::REAL_INFTY    v_ang_min           Minimum voltage angle difference across the line. This is a placeholder attribute and is not currently used by any PyPSA functions. 
+             *      - CapitalCost()                         - 0.0                   capital_cost        Capital cost of extending s_nom by 1 MVA.
+             *      - Length()                              - 0.0                   length              Length of line used when “type” is set, also useful for calculating the capital cost.
+             *      - TerrainFactor()                       - 0.0                   terrain_factor      Terrain factor for increasing capital cost.
+             *      - NumberOfParallelLines()               - 1.0                   num_parallel        When “type” is set, this is the number of parallel lines (can also be fractional). If “type” is empty “” this value is ignored.
+             *      - ThetaBound().Minimum()                - -Const::REAL_INFTY    v_ang_min           Minimum voltage angle difference across the line. This is a placeholder attribute and is not currently used by any PyPSA functions.
              *      - ThetaBound().Minimum()                -  Const::REAL_INFTY    v_ang_max           Maximum voltage angle difference across the line. This is a placeholder attribute and is not currently used by any PyPSA functions.
-             *      
+             *
              *      - sub_network      -       Name of connected sub-network to which lines belongs. This attribute is set by PyPSA in the function network.determine_network_topology(); do not set it directly by hand.
-             *      - p0               0       Active power at bus0 (positive if branch is withdrawing power from bus0). 
-             *      - q0               0       Reactive power at bus0 (positive if branch is withdrawing power from bus0). 
-             *      - p1               0       Active power at bus1 (positive if branch is withdrawing power from bus1). 
-             *      - q1               0       Reactive power at bus1 (positive if branch is withdrawing power from bus1). 
-             *      - x_pu             0       Per unit series reactance calculated by PyPSA from x and bus.v_nom. 
-             *      - r_pu             0       Per unit series resistance calculated by PyPSA from r and bus.v_nom 
-             *      - g_pu             0       Per unit shunt conductivity calculated by PyPSA from g and bus.v_nom 
-             *      - b_pu             0       Per unit shunt susceptance calculated by PyPSA from b and bus.v_nom 
-             *      - x_pu_eff         0       Effective per unit series reactance for linear power flow, calculated by PyPSA from x, tap_ratio for transformers and bus.v_nom. 
-             *      - r_pu_eff         0       Effective per unit series resistance for linear power flow, calculated by PyPSA from x, tap_ratio for transformers and bus.v_nom. 
-             *      - s_nom_opt        0       Optimised capacity for apparent power. 
+             *      - p0               0       Active power at bus0 (positive if branch is withdrawing power from bus0).
+             *      - q0               0       Reactive power at bus0 (positive if branch is withdrawing power from bus0).
+             *      - p1               0       Active power at bus1 (positive if branch is withdrawing power from bus1).
+             *      - q1               0       Reactive power at bus1 (positive if branch is withdrawing power from bus1).
+             *      - x_pu             0       Per unit series reactance calculated by PyPSA from x and bus.v_nom.
+             *      - r_pu             0       Per unit series resistance calculated by PyPSA from r and bus.v_nom
+             *      - g_pu             0       Per unit shunt conductivity calculated by PyPSA from g and bus.v_nom
+             *      - b_pu             0       Per unit shunt susceptance calculated by PyPSA from b and bus.v_nom
+             *      - x_pu_eff         0       Effective per unit series reactance for linear power flow, calculated by PyPSA from x, tap_ratio for transformers and bus.v_nom.
+             *      - r_pu_eff         0       Effective per unit series resistance for linear power flow, calculated by PyPSA from x, tap_ratio for transformers and bus.v_nom.
+             *      - s_nom_opt        0       Optimised capacity for apparent power.
              *      - mu_lower         0       Shadow price of lower s_nom limit -F leq f. Always non-negative.
              *      - mu_upper         0       Shadow price of upper s_nom limit f leq F. Always non-negative.
-             *      
+             *
              *  }
-             *  
+             *
              * @param      edge  The edge object.
              */
-            inline void SetLineDefaultValues( TIoEdge & edge ) 
+            inline void SetLineDefaultValues( TIoEdge & edge )
             {
                 edge.Properties().Status()      = true;
                 edge.Properties().Type()        = Edges::ElectricalEdgeType::standard;
-                edge.Properties().Reactance()   = 0;       
+                edge.Properties().Reactance()   = 0;
                 edge.Properties().Resistance()  = 0;
-                
+
                 // calculated by r and x
                 edge.Properties().Conductance(0.0);
                 edge.Properties().Susceptance(0.0);
-                
+
                 edge.Properties().TapRatio()                             = 1;
                 edge.Properties().NominalApparentPower()                 = 0.0;
                 edge.Properties().NominalApparentPowerExtendable()       = false;
@@ -664,7 +664,7 @@ class PyPsaParser {
              *     ?? = AT0 1
              *     ?? = ...
              *     ?? = AT0 k
-             *     
+             *
              *     where k is the number of loads specified in "loads.csv"
              *  }
              *
@@ -674,16 +674,16 @@ class PyPsaParser {
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
             inline bool ReadLoadsPset ( TNetwork          & network
-                                      , std::string const & filename ) 
+                                      , std::string const & filename )
             {
                 QFile file( QString::fromStdString(filename + "/" + filenameLoadsPSet_) );
                 OpenFile(file);
                 QList<QByteArray> splitted = ReadLine( file, false );
-                
+
                 dataMapperLoadsRealPowerMaxPu_.clear();
                 ExtractLoadMaximumRealPowerPuHeader( splitted );
 
-                while( !file.atEnd() ) 
+                while( !file.atEnd() )
                 {
                     splitted = ReadLine( file, false );
                     std::string loadValue;
@@ -696,7 +696,7 @@ class PyPsaParser {
 
                     for ( Types::count counter = 0
                         ; counter < static_cast<Types::count>( splitted.size() )
-                        ; ++counter ) 
+                        ; ++counter )
                     {
                         loadValue = splitted[counter].toStdString();
                         dataMapperLoadsRealPowerMaxPu_[counter]( loadValue, network );
@@ -707,7 +707,7 @@ class PyPsaParser {
 
             /**
              * @brief      Read the load matrix that is a mapping of load to bus.
-             * @details    While reading each row of the matrix a mapping between load and bus is made 
+             * @details    While reading each row of the matrix a mapping between load and bus is made
              *     and thus, the load is added to the network.
              *
              * @I{
@@ -717,7 +717,7 @@ class PyPsaParser {
              *                  = p_set
              *                  = q_set
              *                  = sign
-             *     
+             *
              *     [out]
              *                  = p
              *                  = q
@@ -729,17 +729,17 @@ class PyPsaParser {
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
             inline bool ReadLoads ( TNetwork          & network
-                                  , std::string const & filename ) 
+                                  , std::string const & filename )
             {
                 QFile file( QString::fromStdString(filename + "/" + filenameLoads_) );
                 OpenFile(file);
                 QList<QByteArray> splitted = ReadLine( file );
                 Types::index busColumn(0);
-                
+
                 dataMapperLoads_.clear();
                 ExtractLoadHeader( splitted, busColumn );
-                
-                while( !file.atEnd() ) 
+
+                while( !file.atEnd() )
                 {
                     splitted = ReadLine( file, false );
                     TLoadProperties vertex;
@@ -747,45 +747,45 @@ class PyPsaParser {
                     Types::string temp;
 
                     USAGE_ASSERT ( static_cast<Types::count>( splitted.size() ) == dataMapperLoads_.size() );
-                    
+
                     // Read a row
                     for ( Types::count counter = 0
                         ; counter < static_cast<Types::count>( splitted.size() )
-                        ; ++counter ) 
+                        ; ++counter )
                     {
                         temp = splitted[counter].toStdString();
                         (this->*dataMapperLoads_[counter])( temp , vertex);
                     } // for each column in a row
 
                     Types::loadId loadId = Const::NONE;
-                    if (mapBusName2VertexId_.find( splitted[ busColumn ].toStdString() ) != mapBusName2VertexId_.end() ) 
+                    if (mapBusName2VertexId_.find( splitted[ busColumn ].toStdString() ) != mapBusName2VertexId_.end() )
                     {
                         loadId = network.AddLoadAt( mapBusName2VertexId_[ splitted[ busColumn ].toStdString() ], vertex );
                     } else {
                         ESSENTIAL_ASSERT( false && "Bus name does not exist" );
                     }
-                    
+
                     if ( mapLoadName2Identifier_.find( vertex.Name() ) == mapLoadName2Identifier_.end() ) {
-                        mapLoadName2Identifier_[vertex.Name()]  = loadId;    
+                        mapLoadName2Identifier_[vertex.Name()]  = loadId;
                     } else {
                         ESSENTIAL_ASSERT( false && "Load name duplicates" );
                     }
-                    
+
                 } // while
                 return true;
             }
 
             /**
              * @brief      Sets the load default values.
-             * @details    The description of the elements is as in 
+             * @details    The description of the elements is as in
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             *     
+             *
              * @I{
              *     vertex.Type()    Vertices::IeeeBusType::load
              *     p_set            0       real power consumption
              *     q_set            0       reactive power consumption
              *     sign             -1      power sign
-             *     
+             *
              *     Output Parameter:
              *     p                0       real power
              *     q                0       reactive power
@@ -793,27 +793,27 @@ class PyPsaParser {
              *
              * @param      vertex  The load vertex object.
              */
-            inline void SetLoadDefaultValues ( TLoadProperties & vertex ) 
+            inline void SetLoadDefaultValues ( TLoadProperties & vertex )
             {
                 vertex.Type()   = Vertices::IeeeBusType::load;
             }
 
             /**
              * @brief      Reads a network.
-             * @details    The description of the elements is as in 
+             * @details    The description of the elements is as in
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             *     
+             *
              * @I{
              *     - name
              *     - pypsa_version
-             *     - srid 
+             *     - srid
              *  }
              *
              * @param      network  The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
              *
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
-            inline bool ReadNetwork( TNetwork & network ) 
+            inline bool ReadNetwork( TNetwork & network )
             {
                 throw std::runtime_error ( "Not implemented yet! Storage units are currently unsupported." );
                 return true;
@@ -821,9 +821,9 @@ class PyPsaParser {
 
             /**
              * @brief      Reads snapshots.
-             * @details    The description of the elements is as in 
+             * @details    The description of the elements is as in
              *     <a href="https://pypsa.org/doc/components.html">https://pypsa.org/doc/components.html</a>.
-             * 
+             *
              * @I{
              *     name        - Time stamp
              *     weightings  - Weighting of the time stamp
@@ -833,7 +833,7 @@ class PyPsaParser {
              *
              * @return     @p True if the parsing was successful, @p False otherwise.
              */
-            inline bool ReadSnapshots( TNetwork & network ) 
+            inline bool ReadSnapshots( TNetwork & network )
             {
                 throw std::runtime_error ( "Not implemented yet! Snapshots weightings are currently unsupported." );
                 // if ( !splitted[0].empty() )
@@ -852,7 +852,7 @@ class PyPsaParser {
              * @return     @p true if the parsing was successful, @p false otherwise.
              */
             inline bool ReadCompleteNetwork ( TNetwork          & network
-                                            , std::string const & filename ) 
+                                            , std::string const & filename )
             {
                 network.BaseMva() = 1.0;
                 return ReadBuses ( network, filename )
@@ -876,14 +876,14 @@ class PyPsaParser {
              */
             inline bool ReadCompleteNetwork ( TNetwork          & network
                                             , TGraph            & candidateNetwork
-                                            , std::string const & filename ) 
+                                            , std::string const & filename )
             {
                 network.BaseMva() = 1.0;
                 bool booleanBuses = ReadBuses ( network, filename );
                 candidateNetwork  = network.Graph();
-                
+
                 return booleanBuses
-                    && ReadGenerators ( network, filename ) 
+                    && ReadGenerators ( network, filename )
                     && ReadGeneratorsRealPowerMaxPu ( network, filename )
                     && ReadLines ( network, filename )
                     && ReadLines<TGraph> ( candidateNetwork, filename )
@@ -894,8 +894,8 @@ class PyPsaParser {
                     && IO::Helper::HasGraphCorrectBounds<TGraph> ( candidateNetwork );
             }
         ///@}
- 
-    public: 
+
+    public:
         ///@name Reader
         ///@{
 #pragma mark READER
@@ -909,13 +909,13 @@ class PyPsaParser {
              * @return     @p true if the parsing was successful, @p false otherwise.
              */
             bool read ( TNetwork          & network
-                      , std::string const & filename ) 
+                      , std::string const & filename )
             {
                 return ReadCompleteNetwork ( network, filename );
             }
 
             /**
-             * @brief      Read network and candidate network from file 
+             * @brief      Read network and candidate network from file
              *
              * @param      network           The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
              * @param      candidateNetwork  The candidate network
@@ -925,13 +925,13 @@ class PyPsaParser {
              */
             bool read   ( TNetwork          & network
                         , TGraph            & candidateNetwork
-                        , std::string const & filename ) 
+                        , std::string const & filename )
             {
                 return ReadCompleteNetwork ( network, candidateNetwork, filename );
             }
         ///@}
 
-    private: 
+    private:
         ///@name Auxiliary
         ///@{
 #pragma mark AUXILIARY
@@ -982,12 +982,12 @@ class PyPsaParser {
              *     column entry.
              */
             inline QList<QByteArray> ReadLine ( QFile & file
-                                              , bool    compress = true ) 
+                                              , bool    compress = true )
             {
                 QByteArray  line = file.readLine();
                 if ( compress ) CompressString( line);
                 line = line.trimmed();
-                return line.split(',');            
+                return line.split(',');
             }
 
             /**
@@ -995,7 +995,7 @@ class PyPsaParser {
              *
              * @param      list  The list.
              */
-            inline void CompressString ( QByteArray & list ) 
+            inline void CompressString ( QByteArray & list )
             {
                 list = list.replace(" ","");
             }
@@ -1007,9 +1007,9 @@ class PyPsaParser {
              *
              * @return     @p true file could be opened, @p false otherwise.
              */
-            inline bool OpenFile ( QFile & file ) 
+            inline bool OpenFile ( QFile & file )
             {
-                if (!file.open(QIODevice::ReadOnly)) 
+                if (!file.open(QIODevice::ReadOnly))
                 {
                     qDebug() << file.errorString();
                     return false; // TODO throw exception
@@ -1043,58 +1043,58 @@ class PyPsaParser {
              *
              * @return     @p true if the extraction was successful, @p false otherwise.
              */
-            inline bool ExtractBusHeader( QList<QByteArray> const & splitted ) 
+            inline bool ExtractBusHeader( QList<QByteArray> const & splitted )
             {
                 for ( Types::count counter = 0
                     ; counter < static_cast<Types::count>( splitted.size() )
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     if ( splitted[counter] == "name" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddBusName );
-                    } else if ( splitted[counter] == "v_nom" ) 
+                    } else if ( splitted[counter] == "v_nom" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddNominalVoltageToVertexProperty );
-                    } else if ( splitted[counter] == "x" ) 
+                    } else if ( splitted[counter] == "x" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddXcoordinateToVertexProperty );
-                    } else if ( splitted[counter] == "y" ) 
+                    } else if ( splitted[counter] == "y" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddYcoordinateToVertexProperty );
-                    } else if ( splitted[counter] == "carrier" ) 
+                    } else if ( splitted[counter] == "carrier" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddCarrierToVertexProperty );
-                    } else if ( splitted[counter] == "country" ) 
+                    } else if ( splitted[counter] == "country" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddCountryToVertexProperty );
-                    } else if ( splitted[counter] == "v_mag_pu_set" ) 
+                    } else if ( splitted[counter] == "v_mag_pu_set" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddVoltageMagnitudePuSetPointToVertexProperty );
-                    } else if ( splitted[counter] == "v_mag_pu_min" ) 
+                    } else if ( splitted[counter] == "v_mag_pu_min" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddMinimumVoltageMagnitudePuToVertexProperty );
-                    } else if ( splitted[counter] == "v_mag_pu_max" ) 
+                    } else if ( splitted[counter] == "v_mag_pu_max" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddMaximumVoltageMagnitudePuToVertexProperty );
-                    } else if ( splitted[counter] == "control" ) 
+                    } else if ( splitted[counter] == "control" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddControlTypeToVertexProperty );
-                    } else if ( splitted[counter] == "sub_network" ) 
+                    } else if ( splitted[counter] == "sub_network" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddSubnetworkToVertexProperty );
-                    } else if ( splitted[counter] == "p" ) 
+                    } else if ( splitted[counter] == "p" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddRealPowerToVertexProperty );
-                    } else if ( splitted[counter] == "q" ) 
+                    } else if ( splitted[counter] == "q" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddReactivePowerToVertexProperty );
-                    } else if ( splitted[counter] == "v_mag_pu" ) 
+                    } else if ( splitted[counter] == "v_mag_pu" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddVoltageMagnitudePuToVertexProperty );
-                    } else if ( splitted[counter] == "v_ang" ) 
+                    } else if ( splitted[counter] == "v_ang" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddVoltageAngleToVertexProperty );
-                    } else if ( splitted[counter] == "marginal_price" ) 
+                    } else if ( splitted[counter] == "marginal_price" )
                     {
                         dataMapperBuses_.emplace_back( &PyPsaParser::AddMarginalPriceToVertexProperty );
                     } // if
@@ -1108,119 +1108,119 @@ class PyPsaParser {
              * @details    Dependent on the data some columns exist and some
              *     are missing. This method dynamically extracts the existing
              *     data.
-             *     
+             *
              * @param      splitted  The splitted line.
              *
              * @return     @p true if the extraction was successful, @p false otherwise.
              */
-            inline bool ExtractLineHeader( QList<QByteArray> const & splitted ) 
+            inline bool ExtractLineHeader( QList<QByteArray> const & splitted )
             {
                 for ( Types::count counter = 0
                     ; counter < static_cast<Types::count>( splitted.size() )
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     if ( splitted[counter] == "name" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddNameToEdge );
-                    } else if ( splitted[counter] == "bus0" ) 
+                    } else if ( splitted[counter] == "bus0" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddSourceVertexToEdge );
-                    } else if ( splitted[counter] == "bus1" ) 
+                    } else if ( splitted[counter] == "bus1" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddTargetVertexToEdge );
-                    } else if ( splitted[counter] == "capital_cost" ) 
+                    } else if ( splitted[counter] == "capital_cost" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddCapitalCostToEdge );
-                    } else if ( splitted[counter] == "length" ) 
+                    } else if ( splitted[counter] == "length" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddLengthToEdge );
-                    } else if ( splitted[counter] == "num_parallel" ) 
+                    } else if ( splitted[counter] == "num_parallel" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddNumberOfParallelLinesToEdge );
-                    } else if ( splitted[counter] == "s_max_pu" ) 
+                    } else if ( splitted[counter] == "s_max_pu" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMaximumApparentPowerPuToEdge );
-                    } else if ( splitted[counter] == "s_nom" ) 
+                    } else if ( splitted[counter] == "s_nom" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddNominalApparentPowerToEdge );
-                    } else if ( splitted[counter] == "type" ) 
+                    } else if ( splitted[counter] == "type" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddLineTypeToEdge );
-                    } else if ( splitted[counter] == "v_nom" ) 
+                    } else if ( splitted[counter] == "v_nom" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddNominalVoltageToEdge );
-                    } else if ( splitted[counter] == "s_nom_min" ) 
+                    } else if ( splitted[counter] == "s_nom_min" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMinimumNominalApparentPowerToEdge );
-                    } else if ( splitted[counter] == "s_nom_max" ) 
+                    } else if ( splitted[counter] == "s_nom_max" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMaximalNominalApparentPowerToEdge );
-                    } else if ( splitted[counter] == "x" ) 
+                    } else if ( splitted[counter] == "x" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddReactanceToEdge );
-                    } else if ( splitted[counter] == "r" ) 
+                    } else if ( splitted[counter] == "r" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddResistanceToEdge );
-                    } else if ( splitted[counter] == "g" ) 
+                    } else if ( splitted[counter] == "g" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddConductanceToEdge );
-                    } else if ( splitted[counter] == "b" ) 
+                    } else if ( splitted[counter] == "b" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddSusceptanceToEdge );
-                    } else if ( splitted[counter] == "s_nom_extendable" ) 
+                    } else if ( splitted[counter] == "s_nom_extendable" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddNominalExtendableApparentPowerToEdge );
-                    } else if ( splitted[counter] == "terrain_factor" ) 
+                    } else if ( splitted[counter] == "terrain_factor" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddTerrainFactorToEdge );
-                    } else if ( splitted[counter] == "v_ang_min" ) 
+                    } else if ( splitted[counter] == "v_ang_min" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMinimumVoltageAngleToEdge );
-                    } else if ( splitted[counter] == "v_ang_max" ) 
+                    } else if ( splitted[counter] == "v_ang_max" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMaximumVoltageAngleToEdge );
-                    } 
+                    }
                     // [out]
-                    else if ( splitted[counter] == "sub_network" ) 
+                    else if ( splitted[counter] == "sub_network" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddSubnetworkToEdge );
-                    } else if ( splitted[counter] == "p0" ) 
+                    } else if ( splitted[counter] == "p0" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddP0ToEdge );
-                    } else if ( splitted[counter] == "q0" ) 
+                    } else if ( splitted[counter] == "q0" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddQ0ToEdge );
-                    } else if ( splitted[counter] == "p1" ) 
+                    } else if ( splitted[counter] == "p1" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddP1ToEdge );
-                    } else if ( splitted[counter] == "q1" ) 
+                    } else if ( splitted[counter] == "q1" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddQ1ToEdge );
-                    } else if ( splitted[counter] == "x_pu" ) 
+                    } else if ( splitted[counter] == "x_pu" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddReactancePuToEdge );
-                    } else if ( splitted[counter] == "r_pu" ) 
+                    } else if ( splitted[counter] == "r_pu" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddResistancePuToEdge );
-                    } else if ( splitted[counter] == "g_pu" ) 
+                    } else if ( splitted[counter] == "g_pu" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddConductancePuToEdge );
-                    } else if ( splitted[counter] == "b_pu" ) 
+                    } else if ( splitted[counter] == "b_pu" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddSusceptancePuToEdge );
-                    } else if ( splitted[counter] == "x_pu_eff" ) 
+                    } else if ( splitted[counter] == "x_pu_eff" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddEffectiveReactancePuToEdge );
-                    } else if ( splitted[counter] == "r_pu_eff" ) 
+                    } else if ( splitted[counter] == "r_pu_eff" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddEffectiveResistancePuToEdge );
-                    } else if ( splitted[counter] == "s_nom_opt" ) 
+                    } else if ( splitted[counter] == "s_nom_opt" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddOptimalNominalApparentPowerToEdge );
-                    } else if ( splitted[counter] == "mu_lower" ) 
+                    } else if ( splitted[counter] == "mu_lower" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMuLowerToEdge );
-                    } else if ( splitted[counter] == "mu_upper" ) 
+                    } else if ( splitted[counter] == "mu_upper" )
                     {
                         dataMapperLines_.emplace_back( &PyPsaParser::AddMuUpperToEdge );
                     } // if
@@ -1238,108 +1238,108 @@ class PyPsaParser {
              *
              * @return     @p true if the extraction was successful, @p false otherwise.
              */
-            inline bool ExtractGeneratorHeader( QList<QByteArray> const & splitted ) 
+            inline bool ExtractGeneratorHeader( QList<QByteArray> const & splitted )
             {
                 for ( Types::count counter = 0
                     ; counter < static_cast<Types::count>( splitted.size() )
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     if ( splitted[counter] == "name" )
                     {
-                        dataMapperGenerators_.emplace_back( &PyPsaParser::AddNameToGenerator ); 
-                    } else if ( splitted[counter] == "bus" ) 
+                        dataMapperGenerators_.emplace_back( &PyPsaParser::AddNameToGenerator );
+                    } else if ( splitted[counter] == "bus" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AssociateGeneratorWithBus );
-                    } else if ( splitted[counter] == "control" ) 
+                    } else if ( splitted[counter] == "control" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddControlTypeToGenerator );
-                    } else if ( splitted[counter] == "type" ) 
+                    } else if ( splitted[counter] == "type" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddTypeToGenerator );
-                    } else if ( splitted[counter] == "efficiency" ) 
+                    } else if ( splitted[counter] == "efficiency" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddGeneratorEfficiencyToGenerator );
-                    } else if ( splitted[counter] == "p_nom" ) 
+                    } else if ( splitted[counter] == "p_nom" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddNominalRealPowerToGenerator );
-                    } else if ( splitted[counter] == "p_nom_extendable" ) 
+                    } else if ( splitted[counter] == "p_nom_extendable" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddNominalRealPowerToGeneratorExtendable );
-                    } else if ( splitted[counter] == "p_nom_min" ) 
+                    } else if ( splitted[counter] == "p_nom_min" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddNominalRealPowerToGeneratorMin );
-                    } else if ( splitted[counter] == "p_nom_max" ) 
+                    } else if ( splitted[counter] == "p_nom_max" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddNominalRealPowerToGeneratorMax );
-                    } else if ( splitted[counter] == "p_min_pu" ) 
+                    } else if ( splitted[counter] == "p_min_pu" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddMinimumRealPowerPuToGenerator );
-                    } else if ( splitted[counter] == "p_max_pu" ) 
+                    } else if ( splitted[counter] == "p_max_pu" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddMaximumRealPowerPuToGenerator );
-                    } else if ( splitted[counter] == "p_set" ) 
+                    } else if ( splitted[counter] == "p_set" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddRealPowerSetPointToGenerator );
-                    } else if ( splitted[counter] == "q_set" ) 
+                    } else if ( splitted[counter] == "q_set" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddReactivePowerSetPointToGenerator );
-                    } else if ( splitted[counter] == "sign" ) 
+                    } else if ( splitted[counter] == "sign" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddGeneratorSignToGenerator );
-                    } else if ( splitted[counter] == "carrier" ) 
+                    } else if ( splitted[counter] == "carrier" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddCarrierToGenerator );
-                    } else if ( splitted[counter] == "marginal_cost" ) 
+                    } else if ( splitted[counter] == "marginal_cost" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddMarginalCostToGenerator );
-                    } else if ( splitted[counter] == "capital_cost" ) 
+                    } else if ( splitted[counter] == "capital_cost" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddCapitalCostToGenerator );
-                    } else if ( splitted[counter] == "committable" ) 
+                    } else if ( splitted[counter] == "committable" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddCommittabilityToGenerator );
-                    } else if ( splitted[counter] == "start_up_cost" ) 
+                    } else if ( splitted[counter] == "start_up_cost" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddStartUpCostToGenerator );
-                    } else if ( splitted[counter] == "shut_down_cost" ) 
+                    } else if ( splitted[counter] == "shut_down_cost" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddShutDownCostToGenerator );
-                    } else if ( splitted[counter] == "min_up_time" ) 
+                    } else if ( splitted[counter] == "min_up_time" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddMinimumUpTimeToGenerator );
-                    } else if ( splitted[counter] == "min_down_time" ) 
+                    } else if ( splitted[counter] == "min_down_time" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddMinimumDownTimeToGenerator );
-                    } else if ( splitted[counter] == "initial_status" ) 
+                    } else if ( splitted[counter] == "initial_status" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddInitialStatusToGenerator );
-                    } else if ( splitted[counter] == "ramp_limit_up" ) 
+                    } else if ( splitted[counter] == "ramp_limit_up" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddRampLimitUpToGenerator );
-                    } else if ( splitted[counter] == "ramp_limit_down" ) 
+                    } else if ( splitted[counter] == "ramp_limit_down" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddRampLimitDownToGenerator );
-                    } else if ( splitted[counter] == "ramp_limit_start_up" ) 
+                    } else if ( splitted[counter] == "ramp_limit_start_up" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddRampLimitStartUpToGenerator );
-                    } else if ( splitted[counter] == "ramp_limit_shut_down" ) 
+                    } else if ( splitted[counter] == "ramp_limit_shut_down" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddRampLimitShutDownToGenerator );
-                    } 
+                    }
                     // [out]
-                    else if ( splitted[counter] == "p" ) 
+                    else if ( splitted[counter] == "p" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddRealPowerToGenerator );
-                    } else if ( splitted[counter] == "q" ) 
+                    } else if ( splitted[counter] == "q" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddReactivePowerToGenerator );
-                    } else if ( splitted[counter] == "p_nom_opt" ) 
+                    } else if ( splitted[counter] == "p_nom_opt" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddNominalRealPowerToGeneratorOpt );
-                    } else if ( splitted[counter] == "status" ) 
+                    } else if ( splitted[counter] == "status" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddStatusToGenerator );
-                    } else if ( splitted[counter] == "weight" ) 
+                    } else if ( splitted[counter] == "weight" )
                     {
                         dataMapperGenerators_.emplace_back( &PyPsaParser::AddWeightToGenerator );
                     } // if
@@ -1355,32 +1355,32 @@ class PyPsaParser {
              * @return     @p true if the header could be extracted, @p false
              *     otherwise.
              */
-            inline bool ExtractGeneratorMaximumRealPowerPuHeader( QList<QByteArray> const & splitted ) 
+            inline bool ExtractGeneratorMaximumRealPowerPuHeader( QList<QByteArray> const & splitted )
             {
                 for ( Types::count counter = 0
                     ; counter < static_cast<Types::count>( splitted.size() )
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     if ( splitted[counter] == "name" )
                     {
-                        dataMapperGeneratorsRealPowerMaxPu_.emplace_back ( 
+                        dataMapperGeneratorsRealPowerMaxPu_.emplace_back (
                             std::bind ( & PyPsaParser::AddTimestampOfGenerator
-                                      , this 
+                                      , this
                                       , std::placeholders::_1 // input string
                                       , std::placeholders::_2 // network
                                       )
                         );
-                    } else 
+                    } else
                     {
                         std::string generatorName = splitted[counter].trimmed().toStdString();
                         // dataMapperGeneratorsRealPowerMaxPu_.emplace_back( std::bind(&PyPsaParser::AddMaximumRealPowerSnapshotPuToGenerator, std::placeholders::_1, mapGeneratorName2Generator_[generatorName]) );
 
-                        if ( mapGeneratorName2Identifier_.find(generatorName) == mapGeneratorName2Identifier_.end() ) 
+                        if ( mapGeneratorName2Identifier_.find(generatorName) == mapGeneratorName2Identifier_.end() )
                         {
                             ESSENTIAL_ASSERT( false && "Generator name does not exist" );
                         }
 
-                        dataMapperGeneratorsRealPowerMaxPu_.emplace_back ( 
+                        dataMapperGeneratorsRealPowerMaxPu_.emplace_back (
                             std::bind ( & PyPsaParser::AddMaximumRealPowerSnapshotPuToGenerator
                                       , this
                                       , std::placeholders::_1 // input string
@@ -1401,11 +1401,11 @@ class PyPsaParser {
              *     otherwise.
              */
             inline bool ExtractLoadHeader ( QList<QByteArray> const & splitted
-                                          , Types::index            & column ) 
+                                          , Types::index            & column )
             {
                 for ( Types::count counter = 0
                     ; counter < static_cast<Types::count>( splitted.size() )
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     if ( splitted[counter] == "name" )
                     {
@@ -1444,31 +1444,31 @@ class PyPsaParser {
              *
              * @return     @p true if the header could be extracted, @p false otherwise.
              */
-            inline bool ExtractLoadMaximumRealPowerPuHeader( QList<QByteArray> const & splitted ) 
+            inline bool ExtractLoadMaximumRealPowerPuHeader( QList<QByteArray> const & splitted )
             {
                 for ( Types::count counter = 0
                     ; counter < static_cast<Types::count>( splitted.size() )
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     if ( splitted[counter] == "name" )
                     {
-                        dataMapperLoadsRealPowerMaxPu_.emplace_back( 
-                            std::bind ( &PyPsaParser::AddLoadTimestampName 
+                        dataMapperLoadsRealPowerMaxPu_.emplace_back(
+                            std::bind ( &PyPsaParser::AddLoadTimestampName
                                       , this
                                       , std::placeholders::_1 // input string
                                       , std::placeholders::_2 // network
                                       )
                         );
-                    } else 
+                    } else
                     {
                         std::string loadName = splitted[counter].toStdString();
-                        
-                        if ( mapLoadName2Identifier_.find(loadName) == mapLoadName2Identifier_.end() ) 
+
+                        if ( mapLoadName2Identifier_.find(loadName) == mapLoadName2Identifier_.end() )
                         {
                             ESSENTIAL_ASSERT( false && "Load name does not exist" );
                         }
 
-                        dataMapperLoadsRealPowerMaxPu_.emplace_back( 
+                        dataMapperLoadsRealPowerMaxPu_.emplace_back(
                             std::bind ( &PyPsaParser::AddMaximumRealPowerSnapshotPuToLoad
                                       , this
                                       , std::placeholders::_1 // input string
@@ -1483,7 +1483,7 @@ class PyPsaParser {
 #pragma mark FUNCTION_POINTER_VECTOR_WITH_FUNCTION_POINTER
 
         std::vector<TGeneratorProperties*> headerGeneratorMaximumRealPowerPu_;   /**< */
-        
+
         ///@name Function pointer types
         ///@{
             using ElectricalVertexFunc               = void (PyPsaParser::*)( Types::name const &, TVertexProperties& );
@@ -1527,9 +1527,9 @@ class PyPsaParser {
              * @param      vertex  The vertex property.
              */
             void AddBusName ( Types::name  const & name
-                                    , TVertexProperties & vertexProperty ) 
-            { 
-                vertexProperty.Name()   = name;                                   
+                                    , TVertexProperties & vertexProperty )
+            {
+                vertexProperty.Name()   = name;
             }
 
             /**
@@ -1539,34 +1539,34 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             void AddNominalVoltageToVertexProperty ( Types::name const & voltageNominal
-                                    , TVertexProperties & vertexProperty ) 
-            {   
-                if ( !voltageNominal.empty() ) 
+                                    , TVertexProperties & vertexProperty )
+            {
+                if ( !voltageNominal.empty() )
                 {
-                    if ( voltageNominal.compare("inf") != 0 ) 
+                    if ( voltageNominal.compare("inf") != 0 )
                     { // not inf
                         vertexProperty.NominalVoltage() = Types::String2double( voltageNominal );
                     } else { //inf
                         vertexProperty.NominalVoltage() = Const::REAL_INFTY;
                     }
-                } 
+                }
             }
 
             /**
              * @brief      Add the bus type to the vertex property.
-             * 
+             *
              * @pre        Assume IEEE type.
              *
              * @param      type            The type.
              * @param      vertexProperty  The vertex property.
-             * 
+             *
              * @note       Placeholder in PyPsa data, i.e., not used yet.
              */
             inline void AddBusTypeToVertexProperty ( Types::name const & type
-                                    , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !type.empty() ) 
-                { 
+                                    , TVertexProperties & vertexProperty )
+            {
+                if ( !type.empty() )
+                {
                     vertexProperty.Type() = Vertices::StringToIeeeBusType ( type );
                 }
             }
@@ -1578,12 +1578,12 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddXcoordinateToVertexProperty ( Types::name const & xCoordinate
-                                                       , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !xCoordinate.empty() ) 
+                                                       , TVertexProperties & vertexProperty )
+            {
+                if ( !xCoordinate.empty() )
                 {
-                    vertexProperty.X()      = Types::String2double( xCoordinate );    
-                } 
+                    vertexProperty.X()      = Types::String2double( xCoordinate );
+                }
             }
 
             /**
@@ -1593,12 +1593,12 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddYcoordinateToVertexProperty ( Types::name const & yCoordinate
-                                 , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !yCoordinate.empty() ) 
+                                 , TVertexProperties & vertexProperty )
+            {
+                if ( !yCoordinate.empty() )
                 {
                     vertexProperty.Y()      = Types::String2double( yCoordinate );
-                } 
+                }
             }
 
             /**
@@ -1608,12 +1608,12 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddCarrierToVertexProperty ( Types::name const & carrier
-                                                   , TVertexProperties & vertexProperty ) 
-            {  
-                if ( !carrier.empty() ) 
+                                                   , TVertexProperties & vertexProperty )
+            {
+                if ( !carrier.empty() )
                 {
                     vertexProperty.Carrier() = Vertices::StringToEnergyCarrier ( carrier );
-                } 
+                }
             }
 
             /**
@@ -1623,13 +1623,13 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddCountryToVertexProperty ( Types::name const & country
-                                                   , TVertexProperties & vertexProperty ) 
+                                                   , TVertexProperties & vertexProperty )
             { // used in data but not specified
-                if ( !country.empty() ) 
+                if ( !country.empty() )
                 {
                     vertexProperty.Country() = country;
-                } 
-            } 
+                }
+            }
 
             /**
              * @brief      Add voltage magnitude set point to the vertex property.
@@ -1638,15 +1638,15 @@ class PyPsaParser {
              * @param      vertexProperty              The vertex property.
              */
             inline void AddVoltageMagnitudePuSetPointToVertexProperty ( Types::name const & voltageMagnitudePuSetpoint
-                                                                      , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !voltageMagnitudePuSetpoint.empty() ) 
+                                                                      , TVertexProperties & vertexProperty )
+            {
+                if ( !voltageMagnitudePuSetpoint.empty() )
                 {
-                    if ( voltageMagnitudePuSetpoint.compare("inf") != 0 ) 
+                    if ( voltageMagnitudePuSetpoint.compare("inf") != 0 )
                     { // not inf
-                        vertexProperty.VoltageMagnitude() = Types::String2double( voltageMagnitudePuSetpoint ); 
+                        vertexProperty.VoltageMagnitude() = Types::String2double( voltageMagnitudePuSetpoint );
                     } else { //inf
-                        vertexProperty.VoltageMagnitude() = Const::REAL_INFTY; 
+                        vertexProperty.VoltageMagnitude() = Const::REAL_INFTY;
                     }
                 }
             }
@@ -1658,11 +1658,11 @@ class PyPsaParser {
              * @param      vertexProperty             The vertex property.
              */
             inline void AddMinimumVoltageMagnitudePuToVertexProperty ( Types::name const & voltageMagnitudePuMinimum
-                                                                     , TVertexProperties & vertexProperty ) 
-            {  
-                if ( !voltageMagnitudePuMinimum.empty() ) 
+                                                                     , TVertexProperties & vertexProperty )
+            {
+                if ( !voltageMagnitudePuMinimum.empty() )
                 { /* vertex voltageMagnitudePuMinimum */
-                    if ( voltageMagnitudePuMinimum.compare("inf") != 0 ) 
+                    if ( voltageMagnitudePuMinimum.compare("inf") != 0 )
                     { // not inf
                         vertexProperty.MinimumVoltage() = Types::String2double( voltageMagnitudePuMinimum );
                     } else { //inf
@@ -1678,11 +1678,11 @@ class PyPsaParser {
              * @param      vertexProperty             The vertex property.
              */
             inline void AddMaximumVoltageMagnitudePuToVertexProperty ( Types::name const & voltageMagnitudePuMaximum
-                                                                     , TVertexProperties & vertexProperty ) 
-            {  
-                if ( !voltageMagnitudePuMaximum.empty() ) 
+                                                                     , TVertexProperties & vertexProperty )
+            {
+                if ( !voltageMagnitudePuMaximum.empty() )
                 { /* vertex voltageMagnitudePuMaximum */
-                    if ( voltageMagnitudePuMaximum.compare("inf") != 0 ) 
+                    if ( voltageMagnitudePuMaximum.compare("inf") != 0 )
                     { // not inf
                         vertexProperty.MaximumVoltage() = Types::String2double( voltageMagnitudePuMaximum );
                     } else { //inf
@@ -1701,13 +1701,13 @@ class PyPsaParser {
              *
              * @param      control         The control type of the bus.
              * @param      vertexProperty  The vertex property.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddControlTypeToVertexProperty ( Types::string const & control
-                                                       , TVertexProperties   & vertexProperty ) 
-            {  
-                if ( !control.empty() ) 
+                                                       , TVertexProperties   & vertexProperty )
+            {
+                if ( !control.empty() )
                 { /* vertex control */
                     vertexProperty.Control() = Vertices::StringToControlType ( control );
                 }
@@ -1718,15 +1718,15 @@ class PyPsaParser {
              *
              * @param      subnetwork      The subnetwork.
              * @param      vertexProperty  The vertex property.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddSubnetworkToVertexProperty ( Types::name const & subnetwork
-                                                      , TVertexProperties & vertexProperty ) 
-            {  
-                if ( !subnetwork.empty() ) 
+                                                      , TVertexProperties & vertexProperty )
+            {
+                if ( !subnetwork.empty() )
                 {
-                    if ( subnetwork.compare("inf") != 0 ) 
+                    if ( subnetwork.compare("inf") != 0 )
                     { // not inf
                         /* vertex subnetwork */
                     } else { //inf
@@ -1740,15 +1740,15 @@ class PyPsaParser {
              *
              * @param      realPower       The real power.
              * @param      vertexProperty  The vertex property.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddRealPowerToVertexProperty ( Types::name const & realPower
-                                                     , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !realPower.empty() ) 
+                                                     , TVertexProperties & vertexProperty )
+            {
+                if ( !realPower.empty() )
                 {
-                    if ( realPower.compare("inf") != 0 ) 
+                    if ( realPower.compare("inf") != 0 )
                     { // not inf
                         /* vertex.RealPowerLoad()        = Types::String2double( realPower ); */
                     } else { //inf
@@ -1762,15 +1762,15 @@ class PyPsaParser {
              *
              * @param      reactivePower   The reactive power
              * @param      vertexProperty  The vertex property
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddReactivePowerToVertexProperty ( Types::name const & reactivePower
-                                                         , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !reactivePower.empty() ) 
+                                                         , TVertexProperties & vertexProperty )
+            {
+                if ( !reactivePower.empty() )
                 {
-                    if ( reactivePower.compare("inf") != 0 ) 
+                    if ( reactivePower.compare("inf") != 0 )
                     { // not inf
                         /*vertex.ReactivePowerLoad()    = Types::String2double( reactivePower ); */
                     } else { //inf
@@ -1784,21 +1784,21 @@ class PyPsaParser {
              *
              * @param      voltageMagnitudePu  The voltage magnitude in p.u.
              * @param      vertexProperty      The vertex property.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddVoltageMagnitudePuToVertexProperty ( Types::name const & voltageMagnitudePu
-                                                              , TVertexProperties & vertexProperty ) 
+                                                              , TVertexProperties & vertexProperty )
             {
-                if ( !voltageMagnitudePu.empty() ) 
+                if ( !voltageMagnitudePu.empty() )
                 {
-                    if ( voltageMagnitudePu.compare("inf") != 0 ) 
+                    if ( voltageMagnitudePu.compare("inf") != 0 )
                     { // not inf
-                        /* vertex.VoltageMagnitude() = voltageMagnitudePu; */ 
+                        /* vertex.VoltageMagnitude() = voltageMagnitudePu; */
                     } else { //inf
-                        /* vertex.VoltageMagnitude() = voltageMagnitudePu; */ 
+                        /* vertex.VoltageMagnitude() = voltageMagnitudePu; */
                     }
-                } 
+                }
             }
 
             /**
@@ -1806,19 +1806,19 @@ class PyPsaParser {
              *
              * @param      voltageAngle    The voltage angle.
              * @param      vertexProperty  The vertex property.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddVoltageAngleToVertexProperty ( Types::name const & voltageAngle
-                                                        , TVertexProperties & vertexProperty ) 
-            { 
-                if ( !voltageAngle.empty() ) 
+                                                        , TVertexProperties & vertexProperty )
+            {
+                if ( !voltageAngle.empty() )
                 {
-                    if ( voltageAngle.compare("inf") != 0 ) 
+                    if ( voltageAngle.compare("inf") != 0 )
                     { // not inf
-                        vertexProperty.VoltageAngle()         = Types::String2double( voltageAngle ); 
+                        vertexProperty.VoltageAngle()         = Types::String2double( voltageAngle );
                     } else { //inf
-                        vertexProperty.VoltageAngle()         = Const::REAL_INFTY; 
+                        vertexProperty.VoltageAngle()         = Const::REAL_INFTY;
                     }
                 }
             }
@@ -1828,15 +1828,15 @@ class PyPsaParser {
              *
              * @param      marginalPrice  The marginal price.
              * @param      vertex         The vertex property.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddMarginalPriceToVertexProperty ( Types::name const & marginalPrice
-                                                         , TVertexProperties & vertex ) 
-            {  
-                if ( !marginalPrice.empty() ) 
+                                                         , TVertexProperties & vertex )
+            {
+                if ( !marginalPrice.empty() )
                 {
-                    if ( marginalPrice.compare("inf") != 0 ) 
+                    if ( marginalPrice.compare("inf") != 0 )
                     { // not inf
                         /* marginalPrice */
                     } else { //inf
@@ -1845,7 +1845,7 @@ class PyPsaParser {
                 }
             }
         ///@}
-        
+
         ///@name Generator (also known as source) data
         ///@{
 #pragma mark GENERATOR_DATA_EXTRACTION
@@ -1857,13 +1857,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddControlTypeToGenerator ( Types::string  const & control
-                                                  , TGeneratorProperties & generatorProperty ) 
-            { 
+                                                  , TGeneratorProperties & generatorProperty )
+            {
                 generatorProperty.Control() = Vertices::StringToControlType ( control );
-                if ( Vertices::ControlType::unknown == generatorProperty.Control()  ) 
+                if ( Vertices::ControlType::unknown == generatorProperty.Control()  )
                 {
-                    generatorProperty.Control() = Vertices::ControlType::PQ; 
-                } 
+                    generatorProperty.Control() = Vertices::ControlType::PQ;
+                }
             }
 
             /**
@@ -1873,13 +1873,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGenerator ( Types::string  const & pNom
-                                                       , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( Types::String2double( pNom ) != 0 ) 
+                                                       , TGeneratorProperties & generatorProperty )
+            {
+                if ( Types::String2double( pNom ) != 0 )
                 {
-                    generatorProperty.NominalPower()  = Types::String2double( pNom ); 
+                    generatorProperty.NominalPower()  = Types::String2double( pNom );
                 } else {
-                    generatorProperty.NominalPower()  = 1; 
+                    generatorProperty.NominalPower()  = 1;
                 }
             }
 
@@ -1890,14 +1890,14 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorExtendable ( Types::string  const & pNomExtendable
-                                                                 , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( pNomExtendable == "TRUE" ) 
-                { 
-                    generatorProperty.IsExtendable() = true; 
-                } else { 
-                    generatorProperty.IsExtendable() = false; 
-                } 
+                                                                 , TGeneratorProperties & generatorProperty )
+            {
+                if ( pNomExtendable == "TRUE" )
+                {
+                    generatorProperty.IsExtendable() = true;
+                } else {
+                    generatorProperty.IsExtendable() = false;
+                }
             }
 
             /**
@@ -1907,17 +1907,17 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddNameToGenerator ( Types::name    const & name
-                                           , TGeneratorProperties & generatorProperty ) 
-            { 
-                generatorProperty.Name()                 = name; 
-                if ( mapGeneratorName2Generator_.find ( generatorProperty.Name() ) 
-                  == mapGeneratorName2Generator_.end() ) 
+                                           , TGeneratorProperties & generatorProperty )
+            {
+                generatorProperty.Name()                 = name;
+                if ( mapGeneratorName2Generator_.find ( generatorProperty.Name() )
+                  == mapGeneratorName2Generator_.end() )
                 {
-                    mapGeneratorName2Generator_[generatorProperty.Name()] = generatorProperty; 
+                    mapGeneratorName2Generator_[generatorProperty.Name()] = generatorProperty;
                 } else {
                     ESSENTIAL_ASSERT( false && "Generator duplicates" );
                 }
-            } 
+            }
 
             /**
              * @brief      Associate the generator with a bus.
@@ -1926,14 +1926,14 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AssociateGeneratorWithBus ( Types::name    const & bus
-                                                  , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !bus.empty() ) 
+                                                  , TGeneratorProperties & generatorProperty )
+            {
+                if ( !bus.empty() )
                 {
-                    if ( mapGeneratorName2BusName_.find( generatorProperty.Name() ) 
-                      == mapGeneratorName2BusName_.end() ) 
+                    if ( mapGeneratorName2BusName_.find( generatorProperty.Name() )
+                      == mapGeneratorName2BusName_.end() )
                     {
-                        mapGeneratorName2BusName_[ generatorProperty.Name() ] = bus; 
+                        mapGeneratorName2BusName_[ generatorProperty.Name() ] = bus;
                     } else {
                         ESSENTIAL_ASSERT( false && "Generator duplicates" );
                     }
@@ -1949,9 +1949,9 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddTypeToGenerator ( Types::string  const & type
-                                           , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !type.empty() ) 
+                                           , TGeneratorProperties & generatorProperty )
+            {
+                if ( !type.empty() )
                 {
                     /* generator type */
                 }
@@ -1964,11 +1964,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddGeneratorEfficiencyToGenerator ( Types::string  const & efficiency
-                                                          , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !efficiency.empty() ) 
+                                                          , TGeneratorProperties & generatorProperty )
+            {
+                if ( !efficiency.empty() )
                 {
-                    if ( efficiency.compare("inf") != 0 ) 
+                    if ( efficiency.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.Efficiency() = Types::String2double( efficiency );
                     } else { //inf
@@ -1984,11 +1984,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorMin ( Types::string  const & pNomMin
-                                                          , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !pNomMin.empty() ) 
+                                                          , TGeneratorProperties & generatorProperty )
+            {
+                if ( !pNomMin.empty() )
                 {
-                    if ( pNomMin.compare("inf") != 0 ) 
+                    if ( pNomMin.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.NominalRealPowerBound().Minimum() = Types::String2double( pNomMin );
                     } else { //inf
@@ -2004,13 +2004,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorMax ( Types::string  const & pNomMax
-                                                          , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !pNomMax.empty() ) 
+                                                          , TGeneratorProperties & generatorProperty )
+            {
+                if ( !pNomMax.empty() )
                 {
-                    if ( pNomMax.compare("inf") != 0 ) 
+                    if ( pNomMax.compare("inf") != 0 )
                     { // not inf
-                        generatorProperty.NominalRealPowerBound().Maximum() = Types::String2double( pNomMax );      
+                        generatorProperty.NominalRealPowerBound().Maximum() = Types::String2double( pNomMax );
                     } else { //inf
                         generatorProperty.NominalRealPowerBound().Maximum() = Const::REAL_INFTY;
                     }
@@ -2024,11 +2024,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddMinimumRealPowerPuToGenerator ( Types::string  const & pMinPu
-                                                         , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !pMinPu.empty() ) 
+                                                         , TGeneratorProperties & generatorProperty )
+            {
+                if ( !pMinPu.empty() )
                 {
-                    if ( pMinPu.compare("inf") != 0 ) 
+                    if ( pMinPu.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.RealPowerBound().Minimum()   = Types::String2double( pMinPu  );
                     } else { //inf
@@ -2044,11 +2044,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddMaximumRealPowerPuToGenerator ( Types::string  const & pMaxPu
-                                                         , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !pMaxPu.empty() ) 
+                                                         , TGeneratorProperties & generatorProperty )
+            {
+                if ( !pMaxPu.empty() )
                 {
-                    if ( pMaxPu.compare("inf") != 0 ) 
+                    if ( pMaxPu.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.RealPowerBound().Maximum()   = Types::String2double( pMaxPu  );
                     } else { //inf
@@ -2064,11 +2064,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddRealPowerSetPointToGenerator ( Types::string  const & pSet
-                                                        , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !pSet.empty() ) 
+                                                        , TGeneratorProperties & generatorProperty )
+            {
+                if ( !pSet.empty() )
                 {
-                    if ( pSet.compare("inf") != 0 ) 
+                    if ( pSet.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.RealPower() = Types::String2double( pSet );
                     } else { //inf
@@ -2084,11 +2084,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddReactivePowerSetPointToGenerator ( Types::string  const & qSet
-                                                            , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !qSet.empty() ) 
+                                                            , TGeneratorProperties & generatorProperty )
+            {
+                if ( !qSet.empty() )
                 {
-                    if ( qSet.compare("inf") != 0 ) 
+                    if ( qSet.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.ReactivePower() = Types::String2double( qSet );
                     } else { //inf
@@ -2104,12 +2104,12 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddGeneratorSignToGenerator ( Types::string  const & sign
-                                                    , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !sign.empty() ) 
+                                                    , TGeneratorProperties & generatorProperty )
+            {
+                if ( !sign.empty() )
                 {
                     Types::integer powerSign    = Types::String2integer( sign );
-                    if ( powerSign >= 0 ) 
+                    if ( powerSign >= 0 )
                     {
                         generatorProperty.PowerSign()  = Vertices::PowerSign::positive;
                     }
@@ -2126,9 +2126,9 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddCarrierToGenerator ( Types::string  const & carrier
-                                              , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !carrier.empty() ) 
+                                              , TGeneratorProperties & generatorProperty )
+            {
+                if ( !carrier.empty() )
                 {
                     generatorProperty.GeneratorType() = Vertices::StringToGeneratorType ( carrier );
                 }
@@ -2141,13 +2141,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddMarginalCostToGenerator ( Types::string  const & marginalCost
-                                                   , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !marginalCost.empty() ) 
+                                                   , TGeneratorProperties & generatorProperty )
+            {
+                if ( !marginalCost.empty() )
                 {
-                    if ( marginalCost.compare("inf") != 0 ) 
+                    if ( marginalCost.compare("inf") != 0 )
                     { // not inf
-                        generatorProperty.MarginalCost() = Types::String2double( marginalCost ); 
+                        generatorProperty.MarginalCost() = Types::String2double( marginalCost );
                     } else { //inf
                         generatorProperty.MarginalCost() = Const::REAL_INFTY;
                     }
@@ -2161,11 +2161,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddCapitalCostToGenerator ( Types::string  const & capitalCost
-                                                  , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !capitalCost.empty() ) 
+                                                  , TGeneratorProperties & generatorProperty )
+            {
+                if ( !capitalCost.empty() )
                 {
-                    if ( capitalCost.compare("inf") != 0 ) 
+                    if ( capitalCost.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.CapitalCost() = Types::String2double( capitalCost );
                     } else { //inf
@@ -2188,14 +2188,14 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddCommittabilityToGenerator ( Types::string  const & committable
-                                                     , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( committable == "True" ) 
-                { 
-                    generatorProperty.Committable() = true; 
-                } else { 
-                    generatorProperty.Committable() = false; 
-                } 
+                                                     , TGeneratorProperties & generatorProperty )
+            {
+                if ( committable == "True" )
+                {
+                    generatorProperty.Committable() = true;
+                } else {
+                    generatorProperty.Committable() = false;
+                }
             }
 
             /**
@@ -2205,11 +2205,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddStartUpCostToGenerator ( Types::string  const & startUpCost
-                                                  , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !startUpCost.empty() ) 
+                                                  , TGeneratorProperties & generatorProperty )
+            {
+                if ( !startUpCost.empty() )
                 {
-                    if ( startUpCost.compare("inf") != 0 ) 
+                    if ( startUpCost.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.StartUpCost() = Types::String2double( startUpCost );
                     } else { //inf
@@ -2225,11 +2225,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddShutDownCostToGenerator ( Types::string  const & shutDownCost
-                                                   , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !shutDownCost.empty() ) 
+                                                   , TGeneratorProperties & generatorProperty )
+            {
+                if ( !shutDownCost.empty() )
                 {
-                    if ( shutDownCost.compare("inf") != 0 ) 
+                    if ( shutDownCost.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.ShutDownCost() = Types::String2double( shutDownCost );
                     } else { //inf
@@ -2245,13 +2245,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddMinimumUpTimeToGenerator ( Types::string  const & minUpTime
-                                                    , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !minUpTime.empty() ) 
+                                                    , TGeneratorProperties & generatorProperty )
+            {
+                if ( !minUpTime.empty() )
                 {
-                    if ( minUpTime.compare("inf") != 0 ) 
+                    if ( minUpTime.compare("inf") != 0 )
                     { // not inf
-                        generatorProperty.MinimumUpTime() = Types::String2double( minUpTime );        
+                        generatorProperty.MinimumUpTime() = Types::String2double( minUpTime );
                     } else { //inf
                         generatorProperty.MinimumUpTime() = Const::REAL_INFTY;
                     }
@@ -2265,11 +2265,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddMinimumDownTimeToGenerator ( Types::string  const & minDownTime
-                                                      , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !minDownTime.empty() ) 
+                                                      , TGeneratorProperties & generatorProperty )
+            {
+                if ( !minDownTime.empty() )
                 {
-                    if ( minDownTime.compare("inf") != 0 ) 
+                    if ( minDownTime.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.MinimumDownTime() = Types::String2double( minDownTime );
                     } else { //inf
@@ -2285,9 +2285,9 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddInitialStatusToGenerator ( Types::string  const & initialStatus
-                                                    , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !initialStatus.empty() ) 
+                                                    , TGeneratorProperties & generatorProperty )
+            {
+                if ( !initialStatus.empty() )
                 {
                     Types::index status     = Types::String2integer( initialStatus );
                     if ( status )
@@ -2304,13 +2304,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitUpToGenerator ( Types::string  const & rampLimitUp
-                                                  , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !rampLimitUp.empty() ) 
+                                                  , TGeneratorProperties & generatorProperty )
+            {
+                if ( !rampLimitUp.empty() )
                 {
-                    if ( rampLimitUp.compare("inf") != 0 ) 
+                    if ( rampLimitUp.compare("inf") != 0 )
                     { // not inf
-                        generatorProperty.RampLimitUp() = Types::String2double( rampLimitUp );      
+                        generatorProperty.RampLimitUp() = Types::String2double( rampLimitUp );
                     } else { //inf
                         generatorProperty.RampLimitUp() = Const::REAL_INFTY;
                     }
@@ -2324,13 +2324,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitDownToGenerator ( Types::string  const & rampLimitDown
-                                                    , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !rampLimitDown.empty() ) 
+                                                    , TGeneratorProperties & generatorProperty )
+            {
+                if ( !rampLimitDown.empty() )
                 {
-                    if ( rampLimitDown.compare("inf") != 0 ) 
+                    if ( rampLimitDown.compare("inf") != 0 )
                     { // not inf
-                        generatorProperty.RampLimitDown() = Types::String2double( rampLimitDown );    
+                        generatorProperty.RampLimitDown() = Types::String2double( rampLimitDown );
                     } else { //inf
                         generatorProperty.RampLimitDown() = Const::REAL_INFTY;
                     }
@@ -2344,13 +2344,13 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitStartUpToGenerator ( Types::string  const & rampLimitStartUp
-                                                       , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !rampLimitStartUp.empty() ) 
+                                                       , TGeneratorProperties & generatorProperty )
+            {
+                if ( !rampLimitStartUp.empty() )
                 {
-                    if ( rampLimitStartUp.compare("inf") != 0 ) 
+                    if ( rampLimitStartUp.compare("inf") != 0 )
                     { // not inf
-                        generatorProperty.RampLimitStartUp()  = Types::String2double( rampLimitStartUp);  
+                        generatorProperty.RampLimitStartUp()  = Types::String2double( rampLimitStartUp);
                     } else { //inf
                         generatorProperty.RampLimitStartUp()  = Const::REAL_INFTY;
                     }
@@ -2364,11 +2364,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddRampLimitShutDownToGenerator ( Types::string  const & rampLimitShutDown
-                                                        , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !rampLimitShutDown.empty() ) 
+                                                        , TGeneratorProperties & generatorProperty )
+            {
+                if ( !rampLimitShutDown.empty() )
                 {
-                    if ( rampLimitShutDown.compare("inf") != 0 ) 
+                    if ( rampLimitShutDown.compare("inf") != 0 )
                     { // not inf
                         generatorProperty.RampLimitShutDown() = Types::String2double( rampLimitShutDown );
                     } else { //inf
@@ -2379,7 +2379,7 @@ class PyPsaParser {
         ///@}
 
         ///@name Generator data output
-        ///@{    
+        ///@{
 #pragma mark GENERATOR_DATA_OUTPUT
 
             /**
@@ -2389,11 +2389,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddRealPowerToGenerator ( Types::name    const & realPower
-                                                , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !realPower.empty() ) 
+                                                , TGeneratorProperties & generatorProperty )
+            {
+                if ( !realPower.empty() )
                 {
-                    if ( realPower.compare("inf") != 0 ) 
+                    if ( realPower.compare("inf") != 0 )
                     { // not inf
                         /* realPower */
                     } else { //inf
@@ -2409,11 +2409,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddReactivePowerToGenerator ( Types::name    const & reactivePower
-                                                    , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !reactivePower.empty() ) 
+                                                    , TGeneratorProperties & generatorProperty )
+            {
+                if ( !reactivePower.empty() )
                 {
-                    if ( reactivePower.compare("inf") != 0 ) 
+                    if ( reactivePower.compare("inf") != 0 )
                     { // not inf
                         /* reactivePower */
                     } else { //inf
@@ -2429,31 +2429,31 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddNominalRealPowerToGeneratorOpt ( Types::name    const & pNomOpt
-                                                          , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !pNomOpt.empty() ) 
-                {  
-                    if ( pNomOpt.compare("inf") != 0 ) 
+                                                          , TGeneratorProperties & generatorProperty )
+            {
+                if ( !pNomOpt.empty() )
+                {
+                    if ( pNomOpt.compare("inf") != 0 )
                     { // not inf
                         /* pNomOpt */
                     } else { //inf
                         /* pNomOpt */
                     }
-                } 
+                }
             }
 
             /**
              * @brief      Adds a status to the generator @f$\vertex\in\generators@f$.
-             *             
+             *
              * @param      status             The status.
              * @param      generatorProperty  The generator property.
              */
             inline void AddStatusToGenerator ( Types::name    const & status
-                                             , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !status.empty() ) 
+                                             , TGeneratorProperties & generatorProperty )
+            {
+                if ( !status.empty() )
                 {
-                    if ( status.compare("inf") != 0 ) 
+                    if ( status.compare("inf") != 0 )
                     { // not inf
                         /* status */
                     } else { //inf
@@ -2469,11 +2469,11 @@ class PyPsaParser {
              * @param      generatorProperty  The generator property.
              */
             inline void AddWeightToGenerator ( Types::name    const & weight
-                                             , TGeneratorProperties & generatorProperty ) 
-            { 
-                if ( !weight.empty() ) 
+                                             , TGeneratorProperties & generatorProperty )
+            {
+                if ( !weight.empty() )
                 {
-                    if ( weight.compare("inf") != 0 ) 
+                    if ( weight.compare("inf") != 0 )
                     { // not inf
                         /* weight */
                     } else { //inf
@@ -2492,13 +2492,13 @@ class PyPsaParser {
              *
              * @param      name     The name.
              * @param      network  The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
-             * 
+             *
              * @todo       What happens if load timestamps does not exist?
-             * 
+             *
              */
             void AddTimestampOfGenerator ( Types::name const & name
-                                         , TNetwork          & network ) 
-            { /*network.AddSnapshotTimestamp( name ); is already implemented at load equivalent*/ 
+                                         , TNetwork          & network )
+            { /*network.AddSnapshotTimestamp( name ); is already implemented at load equivalent*/
             }
 
             /**
@@ -2507,27 +2507,27 @@ class PyPsaParser {
              * @param      maximumRealPowerPu  The maximum real power in p.u.
              * @param      network             The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
              * @param[in]  generatorId         The generator identifier.
-             * 
+             *
              * @todo Check if the number of timestamps are correct
-             * 
+             *
              */
             inline void AddMaximumRealPowerSnapshotPuToGenerator ( Types::name const & maximumRealPowerPu
                                                                  , TNetwork          & network
-                                                                 , Types::vertexId     generatorId ) 
-            { 
-                if ( !maximumRealPowerPu.empty() ) 
+                                                                 , Types::vertexId     generatorId )
+            {
+                if ( !maximumRealPowerPu.empty() )
                 {
-                    if ( maximumRealPowerPu.compare("inf") != 0 ) 
+                    if ( maximumRealPowerPu.compare("inf") != 0 )
                     { // not inf
-                        network.AddGeneratorRealPowerSnapshotAt ( generatorId, Types::String2double( maximumRealPowerPu ) );  
+                        network.AddGeneratorRealPowerSnapshotAt ( generatorId, Types::String2double( maximumRealPowerPu ) );
                     } else { //inf
-                        network.AddGeneratorRealPowerSnapshotAt ( generatorId, Const::REAL_INFTY );  
+                        network.AddGeneratorRealPowerSnapshotAt ( generatorId, Const::REAL_INFTY );
                     }
                 } else {
                     USAGE_ASSERT ( false && "Generator real power snapshot at generatorId is empty!" );
                 }
-            } 
-            // void AddMaximumRealPowerSnapshotPuToGenerator ( Types::name & maximumRealPowerPu, TGeneratorProperties * generator ) { generator->RealPower() = Types::String2double( maximumRealPowerPu );  } 
+            }
+            // void AddMaximumRealPowerSnapshotPuToGenerator ( Types::name & maximumRealPowerPu, TGeneratorProperties * generator ) { generator->RealPower() = Types::String2double( maximumRealPowerPu );  }
         ///@}
 
         ///@name Line (also known as Branch or Circuit) Data
@@ -2541,8 +2541,8 @@ class PyPsaParser {
              * @param      edge  The edge.
              */
             inline void AddNameToEdge ( Types::name const & name
-                                      , TIoEdge           & edge ) 
-            { 
+                                      , TIoEdge           & edge )
+            {
                 edge.Properties().Name() = name;
             }
 
@@ -2553,16 +2553,16 @@ class PyPsaParser {
              * @param      edge    The edge.
              */
             inline void AddSourceVertexToEdge ( Types::name const & source
-                                              , TIoEdge           & edge ) 
-            { 
-                if ( !source.empty() ) 
+                                              , TIoEdge           & edge )
+            {
+                if ( !source.empty() )
                 {
-                    if ( mapBusName2VertexId_.find ( source ) != mapBusName2VertexId_.end() ) 
+                    if ( mapBusName2VertexId_.find ( source ) != mapBusName2VertexId_.end() )
                     {
                         edge.Source() = mapBusName2VertexId_[source];
                     }
                 }
-            } 
+            }
 
             /**
              * @brief      Associate the line with the target bus.
@@ -2571,16 +2571,16 @@ class PyPsaParser {
              * @param      edge    The edge.
              */
             inline void AddTargetVertexToEdge ( Types::name const & target
-                                              , TIoEdge           & edge ) 
-            { 
-                if ( !target.empty() ) 
+                                              , TIoEdge           & edge )
+            {
+                if ( !target.empty() )
                 {
-                    if ( mapBusName2VertexId_.find ( target ) != mapBusName2VertexId_.end() ) 
+                    if ( mapBusName2VertexId_.find ( target ) != mapBusName2VertexId_.end() )
                     {
                         edge.Target() = mapBusName2VertexId_[target];
                     }
                 }
-            } 
+            }
 
             /**
              * @brief      Add the capital cost to the line.
@@ -2589,11 +2589,11 @@ class PyPsaParser {
              * @param      edge         The edge.
              */
             inline void AddCapitalCostToEdge ( Types::name const & capitalCost
-                                             , TIoEdge           & edge ) 
-            { 
-                if ( !capitalCost.empty() ) 
+                                             , TIoEdge           & edge )
+            {
+                if ( !capitalCost.empty() )
                 {
-                    if ( capitalCost.compare("inf") != 0 ) 
+                    if ( capitalCost.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().CapitalCost() = Types::String2double( capitalCost );
                     } else { //inf
@@ -2609,11 +2609,11 @@ class PyPsaParser {
              * @param      edge    The edge.
              */
             inline void AddLengthToEdge ( Types::name const & length
-                                        , TIoEdge           & edge ) 
-            { 
-                if ( !length.empty() ) 
+                                        , TIoEdge           & edge )
+            {
+                if ( !length.empty() )
                 {
-                    if ( length.compare("inf") != 0 ) 
+                    if ( length.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().Length() = Types::String2double( length );
                     } else {
@@ -2629,13 +2629,13 @@ class PyPsaParser {
              * @param      edge                 The edge.
              */
             inline void AddNumberOfParallelLinesToEdge ( Types::name const & numberParallelLines
-                                                       , TIoEdge           & edge ) 
-            { 
-                if ( !numberParallelLines.empty() ) 
+                                                       , TIoEdge           & edge )
+            {
+                if ( !numberParallelLines.empty() )
                 {
-                    if ( numberParallelLines.compare("inf") != 0 ) 
+                    if ( numberParallelLines.compare("inf") != 0 )
                     { // not inf
-                        edge.Properties().NumberOfParallelLines() = Types::String2integer( numberParallelLines ); 
+                        edge.Properties().NumberOfParallelLines() = Types::String2integer( numberParallelLines );
                     } else {
                         ESSENTIAL_ASSERT( false && "Infinity parallel lines");
                     }
@@ -2649,19 +2649,19 @@ class PyPsaParser {
              * @param      edge                    The edge.
              */
             inline void AddMaximumApparentPowerPuToEdge ( Types::name const & apparentPowerMaximumPu
-                                                        , TIoEdge           & edge ) 
-            { 
-                if ( !apparentPowerMaximumPu.empty() ) 
+                                                        , TIoEdge           & edge )
+            {
+                if ( !apparentPowerMaximumPu.empty() )
                 {
-                    if ( apparentPowerMaximumPu.compare("inf") != 0 ) 
+                    if ( apparentPowerMaximumPu.compare("inf") != 0 )
                     { // not inf
-                        edge.Properties().ThermalLimit() = Types::String2double( apparentPowerMaximumPu );   
+                        edge.Properties().ThermalLimit() = Types::String2double( apparentPowerMaximumPu );
                     } else { //inf
                         edge.Properties().ThermalLimit() = Const::REAL_INFTY;
                     }
                 }
-            } 
-            
+            }
+
             /**
              * @brief      Add the nominal apparent power to the line.
              *
@@ -2669,19 +2669,19 @@ class PyPsaParser {
              * @param      edge                  The edge.
              */
             void AddNominalApparentPowerToEdge ( Types::name const & apparentPowerNominal
-                                               , TIoEdge           & edge ) 
-            { 
-                if ( !apparentPowerNominal.empty() ) 
+                                               , TIoEdge           & edge )
+            {
+                if ( !apparentPowerNominal.empty() )
                 {
-                    if ( apparentPowerNominal.compare("inf") != 0 ) 
+                    if ( apparentPowerNominal.compare("inf") != 0 )
                     { // not inf
-                        edge.Properties().NominalApparentPower() = Types::String2double( apparentPowerNominal );     
+                        edge.Properties().NominalApparentPower() = Types::String2double( apparentPowerNominal );
                     } else { //inf
                         edge.Properties().NominalApparentPower() = Const::REAL_INFTY;
                     }
                 }
             }
-            
+
             /**
              * @brief      Add the line type to the line.
              *
@@ -2689,11 +2689,11 @@ class PyPsaParser {
              * @param      edge  The edge.
              */
             inline void AddLineTypeToEdge ( Types::name const & type
-                                          , TIoEdge           & edge ) 
-            { 
-                if ( !type.empty() ) 
+                                          , TIoEdge           & edge )
+            {
+                if ( !type.empty() )
                 {
-                    edge.Properties().Type() = Edges::ElectricalEdgeType::standard; 
+                    edge.Properties().Type() = Edges::ElectricalEdgeType::standard;
                 }
             }
 
@@ -2704,11 +2704,11 @@ class PyPsaParser {
              * @param      edge            The edge.
              */
             void AddNominalVoltageToEdge ( Types::name const & voltageNominal
-                                         , TIoEdge           & edge ) 
-            { 
-                if ( !voltageNominal.empty() ) 
+                                         , TIoEdge           & edge )
+            {
+                if ( !voltageNominal.empty() )
                 {
-                    if ( voltageNominal.compare("inf") != 0 ) 
+                    if ( voltageNominal.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().NominalVoltage() = Types::String2double( voltageNominal );
                     } else { //inf
@@ -2724,11 +2724,11 @@ class PyPsaParser {
              * @param      edge                         The edge.
              */
             inline void AddMinimumNominalApparentPowerToEdge ( Types::name const & apparentPowerNominalMinimum
-                                                             , TIoEdge           & edge ) 
+                                                             , TIoEdge           & edge )
             { /* difference to apparentPowerMaximumPu apart the pu */
-                if ( !apparentPowerNominalMinimum.empty() ) 
+                if ( !apparentPowerNominalMinimum.empty() )
                 {
-                    if ( apparentPowerNominalMinimum.compare("inf") != 0 ) 
+                    if ( apparentPowerNominalMinimum.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().NominalApparentPowerBound().Minimum() = Types::String2double( apparentPowerNominalMinimum );
                     } else { //inf
@@ -2744,13 +2744,13 @@ class PyPsaParser {
              * @param      edge                         The edge.
              */
             inline void AddMaximalNominalApparentPowerToEdge ( Types::name const & apparentPowerNominalMaximum
-                                                             , TIoEdge           & edge ) 
-            { 
-                if ( !apparentPowerNominalMaximum.empty() ) 
+                                                             , TIoEdge           & edge )
+            {
+                if ( !apparentPowerNominalMaximum.empty() )
                 {
-                    if ( apparentPowerNominalMaximum.compare("inf") != 0 ) 
+                    if ( apparentPowerNominalMaximum.compare("inf") != 0 )
                     { // not inf
-                        edge.Properties().NominalApparentPowerBound().Maximum() = Types::String2double( apparentPowerNominalMaximum ); 
+                        edge.Properties().NominalApparentPowerBound().Maximum() = Types::String2double( apparentPowerNominalMaximum );
                     } else { //inf
                         edge.Properties().NominalApparentPowerBound().Maximum() = Const::REAL_INFTY;
                     }
@@ -2763,17 +2763,17 @@ class PyPsaParser {
              * @param      resistance  The resistance.
              * @param      edge        The edge.
              */
-            inline void AddResistanceToEdge ( Types::name const & resistance   
-                                            , TIoEdge           & edge ) 
-            { 
-                if ( !resistance.empty() ) 
+            inline void AddResistanceToEdge ( Types::name const & resistance
+                                            , TIoEdge           & edge )
+            {
+                if ( !resistance.empty() )
                 {
-                    if ( resistance.compare("inf") != 0 ) 
+                    if ( resistance.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().Resistance() = Types::String2double( resistance );
                     } else { //inf
                         edge.Properties().Resistance() = Const::REAL_INFTY;
-                    }  
+                    }
                 }
             }
 
@@ -2784,16 +2784,16 @@ class PyPsaParser {
              * @param      edge       The edge.
              */
             inline void AddReactanceToEdge ( Types::name const & reactance
-                                           , TIoEdge           & edge ) 
-            { 
-                if ( !reactance.empty() ) 
+                                           , TIoEdge           & edge )
+            {
+                if ( !reactance.empty() )
                 {
-                    if ( reactance.compare("inf") != 0 ) 
+                    if ( reactance.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().Reactance() = Types::String2double( reactance );
                     } else { //inf
                         edge.Properties().Reactance() = Const::REAL_INFTY;
-                    }  
+                    }
                 }
             }
 
@@ -2804,18 +2804,18 @@ class PyPsaParser {
              * @param      edge         The edge.
              */
             inline void AddConductanceToEdge ( Types::name const & conductance
-                                             , TIoEdge           & edge ) 
+                                             , TIoEdge           & edge )
             { /* Can be calculated by r and x */
-                if ( !conductance.empty() ) 
+                if ( !conductance.empty() )
                 {
-                    if ( conductance.compare("inf") != 0 ) 
+                    if ( conductance.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().Conductance( Types::String2double( conductance ) );
                     } else { //inf
                         edge.Properties().Conductance( Const::REAL_INFTY );
-                    }  
+                    }
                 }
-            } 
+            }
 
             /**
              * @brief      Add the susceptance to the line.
@@ -2824,19 +2824,19 @@ class PyPsaParser {
              * @param      edge         The edge.
              */
             inline void AddSusceptanceToEdge ( Types::name const & susceptance
-                                             , TIoEdge           & edge ) 
+                                             , TIoEdge           & edge )
             { /* Can be calculated by r and x */
-                if ( !susceptance.empty() ) 
+                if ( !susceptance.empty() )
                 {
-                    if ( susceptance.compare("inf") != 0 ) 
+                    if ( susceptance.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().Susceptance( Types::String2double( susceptance ) );
                     } else { //inf
                         edge.Properties().Susceptance( Const::REAL_INFTY );
-                    }   
+                    }
                 }
-            } 
-            
+            }
+
             /**
              * @brief      Add the nominal extendable apparent power to the line.
              *
@@ -2844,11 +2844,11 @@ class PyPsaParser {
              * @param      edge                            The edge.
              */
             void AddNominalExtendableApparentPowerToEdge ( Types::name const & apparentPowerNominalExtendable
-                                                         , TIoEdge           & edge ) 
-            { 
-                if ( !apparentPowerNominalExtendable.empty() ) 
+                                                         , TIoEdge           & edge )
+            {
+                if ( !apparentPowerNominalExtendable.empty() )
                 {
-                    edge.Properties().NominalApparentPowerExtendable() = Types::String2double( apparentPowerNominalExtendable ); 
+                    edge.Properties().NominalApparentPowerExtendable() = Types::String2double( apparentPowerNominalExtendable );
                 }
             }
 
@@ -2859,16 +2859,16 @@ class PyPsaParser {
              * @param      edge           The edge.
              */
             inline void AddTerrainFactorToEdge ( Types::name const & terrainFactor
-                                               , TIoEdge           & edge ) 
-            { 
-                if ( !terrainFactor.empty() ) 
-                {   
-                    if ( terrainFactor.compare("inf") != 0 ) 
+                                               , TIoEdge           & edge )
+            {
+                if ( !terrainFactor.empty() )
+                {
+                    if ( terrainFactor.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().TerrainFactor() = Types::String2double( terrainFactor );
                     } else { //inf
                         edge.Properties().TerrainFactor() = Const::REAL_INFTY;
-                    }   
+                    }
                 }
             }
 
@@ -2879,16 +2879,16 @@ class PyPsaParser {
              * @param      edge             The edge.
              */
             inline void AddMinimumVoltageAngleToEdge ( Types::name const & voltageAngleMin
-                                                     , TIoEdge           & edge ) 
-            { 
-                if ( !voltageAngleMin.empty() ) 
+                                                     , TIoEdge           & edge )
+            {
+                if ( !voltageAngleMin.empty() )
                 {
-                    if ( voltageAngleMin.compare("inf") != 0 ) 
+                    if ( voltageAngleMin.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().ThetaBound().Minimum() = Types::String2double( voltageAngleMin );
                     } else { //inf
                         edge.Properties().ThetaBound().Minimum()  = Const::REAL_INFTY;
-                    }   
+                    }
                 }
             }
 
@@ -2899,11 +2899,11 @@ class PyPsaParser {
              * @param      edge             The edge.
              */
             inline void AddMaximumVoltageAngleToEdge ( Types::name const & voltageAngleMax
-                                                     , TIoEdge           & edge ) 
-            { 
-                if ( !voltageAngleMax.empty() ) 
+                                                     , TIoEdge           & edge )
+            {
+                if ( !voltageAngleMax.empty() )
                 {
-                    if ( voltageAngleMax.compare("inf") != 0 ) 
+                    if ( voltageAngleMax.compare("inf") != 0 )
                     { // not inf
                         edge.Properties().ThetaBound().Maximum() = Types::String2double( voltageAngleMax );
                     } else { //inf
@@ -2915,28 +2915,28 @@ class PyPsaParser {
 
         /**
          * @name       Line data output.
-         * 
-         * @brief      Each row in the line data creates an edge. 
+         *
+         * @brief      Each row in the line data creates an edge.
          *
          * @note       Currently only used for output.
          */
-        ///@{    
+        ///@{
 #pragma mark LINE_DATA_OUTPUT
-            
+
             /**
              * @brief      Add the subnetwork.
              *
              * @param      subnetwork  The subnetwork.
              * @param      edge        The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddSubnetworkToEdge ( Types::name const & subnetwork
-                                            , TIoEdge           & edge ) 
-            { 
-                if ( !subnetwork.empty() ) 
+                                            , TIoEdge           & edge )
+            {
+                if ( !subnetwork.empty() )
                 {
-                    if ( subnetwork.compare("inf") != 0 ) 
+                    if ( subnetwork.compare("inf") != 0 )
                     { // not inf
                         /* edge subnetwork */
                     } else { //inf
@@ -2950,15 +2950,15 @@ class PyPsaParser {
              *
              * @param      p0    The real power P0.
              * @param      edge  The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddP0ToEdge ( Types::name const & p0
-                                    , TIoEdge           & edge ) 
-            { 
-                if ( !p0.empty() ) 
+                                    , TIoEdge           & edge )
+            {
+                if ( !p0.empty() )
                 {
-                    if ( p0.compare("inf") != 0 ) 
+                    if ( p0.compare("inf") != 0 )
                     { // not inf
                         /* edge p0 */
                     } else { //inf
@@ -2972,15 +2972,15 @@ class PyPsaParser {
              *
              * @param      q0    The reactive power Q0.
              * @param      edge  The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddQ0ToEdge ( Types::name const & q0
-                                    , TIoEdge           & edge ) 
-            { 
-                if ( !q0.empty() ) 
+                                    , TIoEdge           & edge )
+            {
+                if ( !q0.empty() )
                 {
-                    if ( q0.compare("inf") != 0 ) 
+                    if ( q0.compare("inf") != 0 )
                     { // not inf
                         /* edge q0 */
                     } else { //inf
@@ -2994,15 +2994,15 @@ class PyPsaParser {
              *
              * @param      p1    The real power P1.
              * @param      edge  The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddP1ToEdge ( Types::name const & p1
-                                    , TIoEdge           & edge ) 
-            { 
-                if ( !p1.empty() ) 
+                                    , TIoEdge           & edge )
+            {
+                if ( !p1.empty() )
                 {
-                    if ( p1.compare("inf") != 0 ) 
+                    if ( p1.compare("inf") != 0 )
                     { // not inf
                         /* edge p1 */
                     } else { //inf
@@ -3016,15 +3016,15 @@ class PyPsaParser {
              *
              * @param      q1    The reactive power Q1.
              * @param      edge  The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddQ1ToEdge ( Types::name const & q1
-                                    , TIoEdge           & edge ) 
-            { 
-                if ( !q1.empty() ) 
+                                    , TIoEdge           & edge )
+            {
+                if ( !q1.empty() )
                 {
-                    if ( q1.compare("inf") != 0 ) 
+                    if ( q1.compare("inf") != 0 )
                     { // not inf
                         /* edge q1 */
                     } else { //inf
@@ -3038,15 +3038,15 @@ class PyPsaParser {
              *
              * @param      reactancePu  The reactance in p.u.
              * @param      edge         The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddReactancePuToEdge ( Types::name const & reactancePu
-                                             , TIoEdge           & edge ) 
-            { 
-                if ( !reactancePu.empty() ) 
+                                             , TIoEdge           & edge )
+            {
+                if ( !reactancePu.empty() )
                 {
-                    if ( reactancePu.compare("inf") != 0 ) 
+                    if ( reactancePu.compare("inf") != 0 )
                     { // not inf
                         /* edge reactancePu */
                     } else { //inf
@@ -3059,15 +3059,15 @@ class PyPsaParser {
              *
              * @param      resistancePu  The resistance in p.u.
              * @param      edge          The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddResistancePuToEdge ( Types::name const & resistancePu
-                                              , TIoEdge           & edge ) 
-            { 
-                if ( !resistancePu.empty() ) 
+                                              , TIoEdge           & edge )
+            {
+                if ( !resistancePu.empty() )
                 {
-                    if ( resistancePu.compare("inf") != 0 ) 
+                    if ( resistancePu.compare("inf") != 0 )
                     { // not inf
                         /* edge resistancePu */
                     } else { //inf
@@ -3081,15 +3081,15 @@ class PyPsaParser {
              *
              * @param      conductancePu  The conductance in p.u.
              * @param      edge           The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddConductancePuToEdge ( Types::name const & conductancePu
-                                               , TIoEdge           & edge ) 
-            { 
-                if ( !conductancePu.empty() ) 
+                                               , TIoEdge           & edge )
+            {
+                if ( !conductancePu.empty() )
                 {
-                    if ( conductancePu.compare("inf") != 0 ) 
+                    if ( conductancePu.compare("inf") != 0 )
                     { // not inf
                         /* edge conductancePu */
                     } else { //inf
@@ -3103,15 +3103,15 @@ class PyPsaParser {
              *
              * @param      susceptancePu  The susceptance in p.u.
              * @param      edge           The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddSusceptancePuToEdge ( Types::name const & susceptancePu
-                                               , TIoEdge           & edge ) 
-            { 
-                if ( !susceptancePu.empty() ) 
+                                               , TIoEdge           & edge )
+            {
+                if ( !susceptancePu.empty() )
                 {
-                    if ( susceptancePu.compare("inf") != 0 ) 
+                    if ( susceptancePu.compare("inf") != 0 )
                     { // not inf
                         /* edge susceptancePu */
                     } else { //inf
@@ -3119,21 +3119,21 @@ class PyPsaParser {
                     }
                 }
             }
-            
+
             /**
              * @brief      Add the effective reactance in p.u.
              *
              * @param      reactancePuEffective  The effective reactance in p.u.
              * @param      edge                  The edge
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddEffectiveReactancePuToEdge ( Types::name const & reactancePuEffective
-                                                      , TIoEdge           & edge ) 
-            { 
-                if ( !reactancePuEffective.empty() ) 
+                                                      , TIoEdge           & edge )
+            {
+                if ( !reactancePuEffective.empty() )
                 {
-                    if ( reactancePuEffective.compare("inf") != 0 ) 
+                    if ( reactancePuEffective.compare("inf") != 0 )
                     { // not inf
                         /* edge reactancePuEffective */
                     } else { //inf
@@ -3145,17 +3145,17 @@ class PyPsaParser {
             /**
              * @brief      Add the effective resistance in p.u.
              *
-             * @param      resistancePuEffective  The effective resistance in p.u. 
+             * @param      resistancePuEffective  The effective resistance in p.u.
              * @param      edge                   The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddEffectiveResistancePuToEdge ( Types::name const & resistancePuEffective
-                                                       , TIoEdge           & edge ) 
-            { 
-                if ( !resistancePuEffective.empty() ) 
+                                                       , TIoEdge           & edge )
+            {
+                if ( !resistancePuEffective.empty() )
                 {
-                    if ( resistancePuEffective.compare("inf") != 0 ) 
+                    if ( resistancePuEffective.compare("inf") != 0 )
                     { // not inf
                         /* edge resistancePuEffective */
                     } else { //inf
@@ -3169,15 +3169,15 @@ class PyPsaParser {
              *
              * @param      apparentPowerNominalOptimal  The optimal nominal apparent power.
              * @param      edge                         The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddOptimalNominalApparentPowerToEdge ( Types::name const & apparentPowerNominalOptimal
-                                                             , TIoEdge           & edge ) 
-            { 
-                if ( !apparentPowerNominalOptimal.empty() ) 
+                                                             , TIoEdge           & edge )
+            {
+                if ( !apparentPowerNominalOptimal.empty() )
                 {
-                    if ( apparentPowerNominalOptimal.compare("inf") != 0 ) 
+                    if ( apparentPowerNominalOptimal.compare("inf") != 0 )
                     { // not inf
                         /* edge apparentPowerNominalOptimal */
                     } else { //inf
@@ -3191,15 +3191,15 @@ class PyPsaParser {
              *
              * @param      muLower  The mu lower.
              * @param      edge     The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddMuLowerToEdge ( Types::name const & muLower
-                                         , TIoEdge           & edge ) 
-            { 
-                if ( !muLower.empty() ) 
+                                         , TIoEdge           & edge )
+            {
+                if ( !muLower.empty() )
                 {
-                    if ( muLower.compare("inf") != 0 ) 
+                    if ( muLower.compare("inf") != 0 )
                     { // not inf
                         /* edge muLower */
                     } else { //inf
@@ -3213,15 +3213,15 @@ class PyPsaParser {
              *
              * @param      muUpper  The mu upper.
              * @param      edge     The edge.
-             * 
+             *
              * @note       Currently only output and not used yet.
              */
             inline void AddMuUpperToEdge ( Types::name const & muUpper
-                                        , TIoEdge           & edge ) 
-            { 
-                if ( !muUpper.empty() ) 
+                                        , TIoEdge           & edge )
+            {
+                if ( !muUpper.empty() )
                 {
-                    if ( muUpper.compare("inf") != 0 ) 
+                    if ( muUpper.compare("inf") != 0 )
                     { // not inf
                         /* edge muUpper */
                     } else { //inf
@@ -3233,8 +3233,8 @@ class PyPsaParser {
 
         /**
          * @name       Load Data.
-         * 
-         * @brief      Each row in the load data creates an load vertex. 
+         *
+         * @brief      Each row in the load data creates an load vertex.
          *
          * @note       Currently only the name and type is set.
          */
@@ -3248,9 +3248,9 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddNameToLoad ( Types::string const & name
-                                      , TLoadProperties     & vertexProperty ) 
-            { 
-                vertexProperty.Name() = name; 
+                                      , TLoadProperties     & vertexProperty )
+            {
+                vertexProperty.Name() = name;
             }
 
             /**
@@ -3260,9 +3260,9 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AssociateLoadWithVertex ( Types::string const & bus
-                                                , TLoadProperties     & vertexProperty ) 
-            {  
-                if ( !bus.empty() ) 
+                                                , TLoadProperties     & vertexProperty )
+            {
+                if ( !bus.empty() )
                 {
                     /* load bus */
                 }
@@ -3275,14 +3275,14 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddTypeToLoad ( Types::string const & type
-                                      , TLoadProperties     & vertexProperty ) 
-            { 
-                if ( !type.empty() ) 
+                                      , TLoadProperties     & vertexProperty )
+            {
+                if ( !type.empty() )
                 {
-                    vertexProperty.Type() = Vertices::IeeeBusType::load; 
+                    vertexProperty.Type() = Vertices::IeeeBusType::load;
 
                 } else {
-                    vertexProperty.Type() = Vertices::IeeeBusType::load; 
+                    vertexProperty.Type() = Vertices::IeeeBusType::load;
                 }
             }
 
@@ -3293,11 +3293,11 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddRealPowerSetPointToLoad ( Types::string const & pset
-                                                   , TLoadProperties     & vertexProperty ) 
+                                                   , TLoadProperties     & vertexProperty )
             {
-                if ( !pset.empty() ) 
+                if ( !pset.empty() )
                 {
-                    if ( pset.compare("inf") != 0 ) 
+                    if ( pset.compare("inf") != 0 )
                     { // not inf
                         /* load pset */
                     } else { //inf
@@ -3313,11 +3313,11 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddReactivePowerSetPointToLoad ( Types::string const & qset
-                                                       , TLoadProperties     & vertexProperty ) 
+                                                       , TLoadProperties     & vertexProperty )
             {
-                if ( !qset.empty() ) 
+                if ( !qset.empty() )
                 {
-                    if ( qset.compare("inf") != 0 ) 
+                    if ( qset.compare("inf") != 0 )
                     { // not inf
                         /* load qset */
                     } else { //inf
@@ -3333,11 +3333,11 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddSignToLoad ( Types::string const & sign
-                                      , TLoadProperties     & vertexProperty ) 
-            {  
-                if ( !sign.empty() ) 
+                                      , TLoadProperties     & vertexProperty )
+            {
+                if ( !sign.empty() )
                 {
-                    if ( sign.compare("inf") != 0 ) 
+                    if ( sign.compare("inf") != 0 )
                     { // not inf
                         /* power sign */
                     } else { //inf
@@ -3353,11 +3353,11 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddRealPowerToLoad ( Types::string const & realPower
-                                           , TLoadProperties     & vertexProperty ) 
-            { 
-                if ( !realPower.empty() ) 
+                                           , TLoadProperties     & vertexProperty )
+            {
+                if ( !realPower.empty() )
                 {
-                    if ( realPower.compare("inf") != 0 ) 
+                    if ( realPower.compare("inf") != 0 )
                     { // not inf
                         /* load realPower */
                     } else { //inf
@@ -3373,11 +3373,11 @@ class PyPsaParser {
              * @param      vertexProperty  The vertex property.
              */
             inline void AddReactivePowerToLoad ( Types::string const & reactivePower
-                                               , TLoadProperties     & vertexProperty ) 
-            { 
-                if ( !reactivePower.empty() ) 
+                                               , TLoadProperties     & vertexProperty )
+            {
+                if ( !reactivePower.empty() )
                 {
-                    if ( reactivePower.compare("inf") != 0 ) 
+                    if ( reactivePower.compare("inf") != 0 )
                     { // not inf
                         /* load reactivePower */
                     } else { //inf
@@ -3389,7 +3389,7 @@ class PyPsaParser {
 
         /**
          * @name       Load's Real Power Data Snapshot per Timestamp.
-         * 
+         *
          * @brief      Each row in the load's real power set data creates an
          *     snapshot entry.
          *
@@ -3406,9 +3406,9 @@ class PyPsaParser {
              * @param      network  The network @f$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )@f$.
              */
             inline void AddLoadTimestampName ( Types::name const & name
-                                             , TNetwork          & network ) 
-            { 
-                network.AddSnapshotTimestamp( name ); 
+                                             , TNetwork          & network )
+            {
+                network.AddSnapshotTimestamp( name );
             }
 
             /**
@@ -3420,20 +3420,20 @@ class PyPsaParser {
              */
             inline void AddMaximumRealPowerSnapshotPuToLoad ( Types::name const & maximumRealPowerPu
                                                             , TNetwork          & network
-                                                            , Types::vertexId     loadId ) 
-            { 
-                if ( !maximumRealPowerPu.empty() ) 
-                {   
-                    if ( maximumRealPowerPu.compare("inf") != 0 ) 
+                                                            , Types::vertexId     loadId )
+            {
+                if ( !maximumRealPowerPu.empty() )
+                {
+                    if ( maximumRealPowerPu.compare("inf") != 0 )
                     { // not inf
-                        network.AddLoadSnapshotAt ( loadId, Types::String2double( maximumRealPowerPu ) );  
+                        network.AddLoadSnapshotAt ( loadId, Types::String2double( maximumRealPowerPu ) );
                     } else { //inf
-                        network.AddLoadSnapshotAt ( loadId, Const::REAL_INFTY );  
+                        network.AddLoadSnapshotAt ( loadId, Const::REAL_INFTY );
                     }
                 } else {
                     USAGE_ASSERT ( false && "Load real power snapshot at loadId is empty!" );
                 }
-            } 
+            }
         ///@}
 
         ///@name File and Directory Information
@@ -3490,18 +3490,18 @@ template<>
 class NetworkDifferentiation< egoa::Vertices::ElectricalProperties<egoa::Vertices::IeeeBusType>
                             , egoa::Edges::ElectricalProperties
                             , StaticGraph<egoa::Vertices::ElectricalProperties<egoa::Vertices::IeeeBusType>
-                                        , egoa::Edges::ElectricalProperties> > 
+                                        , egoa::Edges::ElectricalProperties> >
 {
     using TGraph            = StaticGraph<egoa::Vertices::ElectricalProperties<egoa::Vertices::IeeeBusType>
                                         , egoa::Edges::ElectricalProperties>;
     using TVertexProperties = egoa::Vertices::ElectricalProperties<egoa::Vertices::IeeeBusType>;
     using TEdgeProperties   = egoa::Edges::ElectricalProperties;
-    
+
     using TIoEdge         = io::Edge<TEdgeProperties>;
 
     public:
         static Types::edgeId AddEdge ( TGraph        & network
-                                     , TIoEdge const & ioEdge    ) 
+                                     , TIoEdge const & ioEdge    )
         {
             return network.AddEdge( ioEdge.Source(), ioEdge.Target(), ioEdge.Properties() );
         }
@@ -3517,18 +3517,18 @@ template<typename VertexTypeProperties, typename EdgeTypeProperties>
 class NetworkDifferentiation< VertexTypeProperties
                             , EdgeTypeProperties
                             , StaticGraph<VertexTypeProperties
-                                        , EdgeTypeProperties> > 
+                                        , EdgeTypeProperties> >
 {
     using TVertexProperties = VertexTypeProperties;
     using TEdgeProperties   = EdgeTypeProperties;
 
     using TGraph            = StaticGraph<TVertexProperties
                                         , TEdgeProperties>;
-    
+
     using TIoEdge         = io::Edge<TEdgeProperties>;
     public:
         static Types::edgeId AddEdge ( TGraph        & network
-                                     , TIoEdge const & ioEdge  ) 
+                                     , TIoEdge const & ioEdge  )
         {
             return network.AddEdge( ioEdge.Source(), ioEdge.Target(), ioEdge.Properties() );
         }
@@ -3546,7 +3546,7 @@ class NetworkDifferentiation< VertexTypeProperties
                             , PowerGrid< StaticGraph< VertexTypeProperties
                                                     , EdgeTypeProperties >
                             , Vertices::GeneratorProperties<>
-                            , Vertices::LoadProperties<Vertices::IeeeBusType> > > 
+                            , Vertices::LoadProperties<Vertices::IeeeBusType> > >
 {
     using TVertexProperties = VertexTypeProperties;
     using TEdgeProperties   = EdgeTypeProperties;
@@ -3574,4 +3574,4 @@ class NetworkDifferentiation< VertexTypeProperties
 } // namespace egoa
 
 #endif // EGOA__IO__PARSER___PY_PSA_PARSER_HPP
- 
+

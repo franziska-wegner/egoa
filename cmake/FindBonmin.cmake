@@ -1,11 +1,11 @@
 # FindBonmin.cmake
-# 
+#
 #   Created on: 30.01.2019
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_BONMIN is ON the script searches for Bonmin in given
 # and standard location. If found it adds the library to the project.
-# 
+#
 
 ####################################################################
 # Unset ############################################################
@@ -29,7 +29,7 @@ message(STATUS "${MY_SPACE}BONMIN_ROOT_DIR:\t\t\t" ${BONMIN_ROOT_DIR})
 # Bonmin Include Directory #########################################
 ####################################################################
 find_path(BONMIN_INCLUDE_DIR
-    NAMES BonTMINLP.hpp 
+    NAMES BonTMINLP.hpp
     HINTS   /usr/local/include/coin
             ${BONMIN_ROOT_DIR}/include/coin
             ${BONMIN_ROOT_DIR}/include
@@ -40,14 +40,14 @@ message(STATUS "${MY_SPACE}BONMIN_INCLUDE_DIR:\t\t\t" ${BONMIN_INCLUDE_DIR})
 # Bonmin Library Directory #########################################
 ####################################################################
 find_path(BONMIN_LIBRARY_DIR
-    NAMES libbonmin.a 
+    NAMES libbonmin.a
     HINTS   /usr/local/lib
             ${BONMIN_ROOT_DIR}/lib
 )
 message(STATUS "${MY_SPACE}BONMIN_LIBRARY_DIR:\t\t\t" ${BONMIN_LIBRARY_DIR})
 
 if(APPLE)
-    find_library(BONMIN_LIBRARY 
+    find_library(BONMIN_LIBRARY
         NAMES libbonmin.a #.dylib #libCbcSolver.a libCbc.a libCgl.a libOsiClp.a libClpSolver.a libClp.a libcoinasl.a libOsi.a libCoinUtils.a libcoinmumps.a
         HINTS   /usr/local/lib
                 ${BONMIN_ROOT_DIR}/lib
@@ -56,7 +56,7 @@ if(APPLE)
 
     set(MAC_BONMIN_COMPILER_FLAGS "-fno-common -no-cpp-precomp -fexceptions -arch x86_64 -m64 -DBONMIN_BUILD")
 elseif(UNIX)
-    find_library(BONMIN_LIBRARY 
+    find_library(BONMIN_LIBRARY
         NAMES libbonmin.a #.so #libCbcSolver.a libCbc.a libCgl.a libOsiClp.a libClpSolver.a libClp.a libcoinasl.a libOsi.a libCoinUtils.a libcoinmumps.a
         HINTS   /usr/local/lib
                 ${BONMIN_ROOT_DIR}/lib
@@ -110,7 +110,7 @@ mark_as_advanced(BONMIN_LIBRARY BONMIN_INCLUDE_DIR)
 message(STATUS "")
 
 if(EGOA_ENABLE_BONMIN AND NOT BONMIN_FOUND)
-    message( FATAL_ERROR 
+    message( FATAL_ERROR
         "Bonmin is enabled, but not available on the system. Please, check the \
          Bonmin installation, and cmake configuration for BONMIN_ROOT_DIR or \
          disable Bonmin by setting EGOA_ENABLE_BONMIN to OFF." )

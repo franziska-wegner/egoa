@@ -60,7 +60,7 @@ class PowerGrid {
         ///@name Constructors and destructor
         ///@{
 #pragma mark CONSTRUCTORS_AND_DESTRUCTOR
-            
+
             /**
              * @brief      Constructs the object.
              */
@@ -75,7 +75,7 @@ class PowerGrid {
             , graph_()
             {}
         ///@}
-    
+
     public:
         /**@name Getter and Setter */
         ///@{
@@ -86,9 +86,9 @@ class PowerGrid {
              *
              * @return     The underlying graph.
              */
-            inline TGraph const & Graph() const 
-            { 
-                return graph_; 
+            inline TGraph const & Graph() const
+            {
+                return graph_;
             }
 
             /**
@@ -97,8 +97,8 @@ class PowerGrid {
              * @return     The underlying graph.
              */
             inline TGraph & Graph()
-            { 
-                return graph_; 
+            {
+                return graph_;
             }
 
             /**
@@ -106,8 +106,8 @@ class PowerGrid {
              *
              * @return     The power grid's base MVA.
              */
-            inline Types::real BaseMva() const 
-            { 
+            inline Types::real BaseMva() const
+            {
                 return baseMva_;
             }
 
@@ -117,7 +117,7 @@ class PowerGrid {
              * @return     The power grid's base MVA.
              */
             inline Types::real & BaseMva()
-            { 
+            {
                 return baseMva_;
             }
 
@@ -126,8 +126,8 @@ class PowerGrid {
              *
              * @return     The voltage angle bound.
              */
-            inline TBound ThetaBound () const 
-            { 
+            inline TBound ThetaBound () const
+            {
                 return thetaBound_;
             }
 
@@ -136,8 +136,8 @@ class PowerGrid {
              *
              * @return     The voltage angle bound.
              */
-            inline TBound & ThetaBound () 
-            { 
+            inline TBound & ThetaBound ()
+            {
                 return thetaBound_;
             }
         ///@}
@@ -152,8 +152,8 @@ class PowerGrid {
              *
              * @return     The generator vertex bound type.
              */
-            inline Vertices::BoundType const & GeneratorBoundType () const 
-            { 
+            inline Vertices::BoundType const & GeneratorBoundType () const
+            {
                 return generatorBoundType_;
             }
 
@@ -163,8 +163,8 @@ class PowerGrid {
              *
              * @return     The generator vertex bound type.
              */
-            inline Vertices::BoundType & GeneratorBoundType () 
-            { 
+            inline Vertices::BoundType & GeneratorBoundType ()
+            {
                 return generatorBoundType_;
             }
 
@@ -175,7 +175,7 @@ class PowerGrid {
              * @return     The load vertex bound type.
              */
             inline Vertices::BoundType const & LoadBoundType () const
-            { 
+            {
                 return loadBoundType_;
             }
 
@@ -185,8 +185,8 @@ class PowerGrid {
              *
              * @return     The load vertex bound type.
              */
-            inline Vertices::BoundType & LoadBoundType ()      
-            { 
+            inline Vertices::BoundType & LoadBoundType ()
+            {
                 return loadBoundType_;
             }
 
@@ -197,26 +197,26 @@ class PowerGrid {
              *     possible generation. (see <a
              *     href="https://doi.org/10.1145/3208903.3208910">https://doi.org/10.1145/3208903.3208910</a>
              *     Page 343 Equations 11 and 12 for the definition)
-             *     
+             *
              *     @f[
-             *      -\maxdemand\leq\netflow(\vertexa)\leq-\mindemand\qquad\forall\vertexa\in\consumers 
+             *      -\maxdemand\leq\netflow(\vertexa)\leq-\mindemand\qquad\forall\vertexa\in\consumers
              *     @f]
              *     @f[
              *       \maxexcess\leq\netflow(\vertexa)\leq \minexcess\qquad\forall\vertexa\in\generators
              *     @f]
-             *     
+             *
              * @pre        All loads are set to @p bounded and all generators
              *     to @p bounded.
-             *     
+             *
              * @I{ In short and easy to read formulation                            }
              * @I{  -dmax(u) <= fnet(u) <= -dmin(u)    for all u in Vc (Loads)      }
              * @I{   xmin(u) <= fnet(u) <=  xmax(u)    for all u in Vg (Generators) }
-             *      
+             *
              * @note       Note that since the data does not provide a proper
              *      load lower bound we use @p maxbound and thus, set the lower
              *      bound to zero.
              */
-            inline void MakeBounded () 
+            inline void MakeBounded ()
             {
                 generatorBoundType_ = Vertices::BoundType::bounded;
                 loadBoundType_      = Vertices::BoundType::bounded;
@@ -229,22 +229,22 @@ class PowerGrid {
              *     maximum are 0 and infinity, respectively. (see <a
              *     href="https://doi.org/10.1145/3208903.3208910">https://doi.org/10.1145/3208903.3208910</a>
              *     Page 342 Equations 2 and 3 for the definition)
-             *     
+             *
              *     @f[
-             *      -\infty\leq\netflow(\vertexa)\leq 0\qquad\forall\vertexa\in\consumers 
+             *      -\infty\leq\netflow(\vertexa)\leq 0\qquad\forall\vertexa\in\consumers
              *     @f]
              *     @f[
              *      0\leq\netflow(\vertexa)\leq\infty\qquad\forall\vertexa\in\generators
              *     @f]
-             * 
+             *
              * @pre        All loads are set to @p unbounded and all
              *     generators to @p unbounded.
-             *     
+             *
              * @I{ In short and easy to read formulation                            }
              * @I{  -infty   <= fnet(u) <= 0         for all u in Vc (Loads)        }
              * @I{   0       <= fnet(u) <= infty     for all u in Vg (Generators)   }
              */
-            inline void MakeUnbounded () 
+            inline void MakeUnbounded ()
             {
                 generatorBoundType_ = Vertices::BoundType::unbounded;
                 loadBoundType_      = Vertices::BoundType::unbounded;
@@ -258,31 +258,31 @@ class PowerGrid {
              *     <a href="https://doi.org/10.1145/3208903.3208910">
              *     https://doi.org/10.1145/3208903.3208910</a> Page 342
              *     Equations 2 and 3 for the definition).
-             *     
+             *
              *     @f[
-             *      -\infty\leq\netflow(\vertexa)\leq 0\qquad\forall\vertexa\in\consumers 
+             *      -\infty\leq\netflow(\vertexa)\leq 0\qquad\forall\vertexa\in\consumers
              *     @f]
              *     @f[
              *      0\leq\netflow(\vertexa)\leq\infty\qquad\forall\vertexa\in\generators
              *     @f]
-             *     
+             *
              * @I{ In short and easy to read formulation                                }
              * @I{  -infty   <= fnet(u) <= 0         for all u in Vc (Loads)            }
              * @I{   0       <= fnet(u) <= infty     for all u in Vg (Generators)       }
-             *      
+             *
              * @note       Note that unbounded generators get bounded demands
              *      as defined in <a
              *      href="https://doi.org/10.1145/3208903.3208910">
              *      https://doi.org/10.1145/3208903.3208910</a> Page 348
              *      Section 7. Note that pure unbounded focuses on the demands
              *      only.
-             *      
+             *
              * @pre        All loads are set to @p pureunbounded and
              *     all generators to @p unbounded.
-             *     
-             * @see        Vertices#BoundType 
+             *
+             * @see        Vertices#BoundType
              */
-            inline void MakePureUnbounded () 
+            inline void MakePureUnbounded ()
             {
                 generatorBoundType_ = Vertices::BoundType::unbounded;
                 loadBoundType_      = Vertices::BoundType::pureunbounded;
@@ -293,26 +293,26 @@ class PowerGrid {
              * @details    This is especially useful when running the ordinary
              *     power flow (PF) program as PF just checks if the generator
              *     and load values produce feasible power flow.
-             *     
+             *
              *     A network has exact bounds if the following holds
              *     @f[
              *      -\demand(\vertexa)\leq\netflow(\vertexa)\leq -\demand(\vertexa)\qquad\forall\vertexa\in\consumers,
              *     @f]
-             *     @f[ 
+             *     @f[
              *       \excess(\vertexa)\leq\netflow(\vertexa)\leq\excess(\vertexa)\qquad\forall\vertexa\in\generators,
-             *     @f] where the netflow is defined by 
+             *     @f] where the netflow is defined by
              *     @f$\netflow:=\sum_{ \{ \vertexa,\vertexb \} \in \undirectededges } \flow ( \vertexa,\vertexb ) @f$,
              *     and the set of generators and and consumers is denoted by
              *     @f$\generators@f$ and @f$\consumers@f$, respectively.
-             * 
+             *
              * @pre        All loads are set to @p exact and all generators to
              *     @p exact.
-             * 
+             *
              * @I{ In short and easy to read formulation                            }
              * @I{   -d(u)   <= fnet(u) <= -d(u)     for all u in Vc (Loads)        }
              * @I{    x(u)   <= fnet(u) <=  x(u)     for all u in Vg (Generators)   }
              */
-            inline void MakeExact () 
+            inline void MakeExact ()
             {
                 generatorBoundType_ = Vertices::BoundType::exact;
                 loadBoundType_      = Vertices::BoundType::exact;
@@ -323,12 +323,12 @@ class PowerGrid {
              *
              * @return     @p true if bounded, @p false otherwise.
              */
-            inline bool IsBounded () const 
+            inline bool IsBounded () const
             {
                 return ( (generatorBoundType_ == Vertices::BoundType::bounded) &&
                          (loadBoundType_      == Vertices::BoundType::bounded) );
             }
-            
+
             /**
              * @brief      Determines if unbounded.
              *
@@ -349,7 +349,7 @@ class PowerGrid {
             {
                 return  (   (   (generatorBoundType_ == Vertices::BoundType::unbounded) ||
                                 (generatorBoundType_ == Vertices::BoundType::pureunbounded)
-                            ) && 
+                            ) &&
                             ( loadBoundType_      == Vertices::BoundType::pureunbounded)
                         );
             }
@@ -361,7 +361,7 @@ class PowerGrid {
              */
             inline bool IsExact () const
             {
-                return ( ( generatorBoundType_ == Vertices::BoundType::exact ) 
+                return ( ( generatorBoundType_ == Vertices::BoundType::exact )
                       && ( loadBoundType_      == Vertices::BoundType::exact ) );
             }
 
@@ -370,10 +370,10 @@ class PowerGrid {
              *
              * @return     The network bound type.
              */
-            inline Vertices::BoundType NetworkBoundType () const 
-            { 
-                if ( IsExact() )                return Vertices::BoundType::exact; 
-                else if ( IsBounded() )         return Vertices::BoundType::bounded; 
+            inline Vertices::BoundType NetworkBoundType () const
+            {
+                if ( IsExact() )                return Vertices::BoundType::exact;
+                else if ( IsBounded() )         return Vertices::BoundType::bounded;
                 else if ( IsUnbounded() )       return Vertices::BoundType::unbounded;
                 else if ( IsPureUnbounded() )   return Vertices::BoundType::pureunbounded;
                 return Vertices::BoundType::unknown;
@@ -385,7 +385,7 @@ class PowerGrid {
              * @return     The network bound type string.
              */
             inline Types::name NetworkType () const
-            { 
+            {
                 std::ostringstream temp;
                 temp << NetworkBoundType();
                 return temp.str();
@@ -405,29 +405,29 @@ class PowerGrid {
              * @return     Output stream
              */
             friend std::ostream & operator<< ( std::ostream            & os
-                                             , PowerGrid<TGraph> const & rhs ) 
+                                             , PowerGrid<TGraph> const & rhs )
             {
                 os << std::string(20, '-');
 
                 os << "\nBuses\n"       << std::string(7, '-')  << "\n";
                 TVertexProperties::Header(os);
                 rhs.Graph().template for_all_vertices<ExecutionPolicy::sequential>([&rhs, &os]( TVertex u )
-                { 
-                    u.Properties().Line( os, rhs.BaseMva() ); 
+                {
+                    u.Properties().Line( os, rhs.BaseMva() );
                 });
 
                 os << "\nGenerators\n"  << std::string(11, '-') << "\n";
                 TGeneratorProperties::HeaderBusGeneratorName(os);
                 rhs.template for_all_generator_tuple<ExecutionPolicy::sequential>( [&rhs, &os]( Types::vertexId vertexId, TGeneratorProperties u )
-                { 
-                    u.Line( os, rhs.Graph().VertexAt(vertexId).Properties().Name(), rhs.BaseMva() ); 
+                {
+                    u.Line( os, rhs.Graph().VertexAt(vertexId).Properties().Name(), rhs.BaseMva() );
                 });
 
                 os << "\nBranches\n"    << std::string(9, '-')  << "\n";
                 TEdgeProperties::Header(os);
                 rhs.Graph().template for_all_edges<ExecutionPolicy::sequential>([&rhs, &os]( TEdge e )
-                { 
-                    e.Properties().Line( os, rhs.Graph().VertexAt(e.Source()).Properties().Name(), rhs.Graph().VertexAt(e.Target()).Properties().Name(), rhs.BaseMva() ); 
+                {
+                    e.Properties().Line( os, rhs.Graph().VertexAt(e.Source()).Properties().Name(), rhs.Graph().VertexAt(e.Target()).Properties().Name(), rhs.BaseMva() );
                 });
 
                 os << "\nMinDegree: " << rhs.Graph().MinDegree() << "\n";
@@ -445,13 +445,13 @@ class PowerGrid {
              * @brief      Adds a generator @f$g\in\generators@f$ at
              *     a vertex @f$\vertex\in\vertices@f$ with vertex identifier
              *     @p vertexId.
-             *     
+             *
              * @I{  Using copy-and-swap idiom. }
              *
              * @param[in]       vertexId            The vertex identifier @p vertexId.
              * @param[in]       generatorProperty   The generator object
              *      @f$\vertex\in\generators@f$.
-             * 
+             *
              * @return     The generator identifier.
              */
             inline Types::generatorId AddGeneratorAt ( Types::vertexId              vertexId
@@ -470,7 +470,7 @@ class PowerGrid {
                 {
                     generatorsAtVertex_.resize ( Graph().NumberOfVertices() );
                 }
-                ESSENTIAL_ASSERT ( generatorsAtVertex_.size() > vertexId  ); 
+                ESSENTIAL_ASSERT ( generatorsAtVertex_.size() > vertexId  );
 
                 //@TODO reuse empty slots
                 Types::generatorId newId = generators_.size() - 1;
@@ -483,7 +483,7 @@ class PowerGrid {
              * @brief      Adds a generator @f$g\in\generators@f$ at
              *     a vertex @f$\vertex\in\vertices@f$ with vertex identifier
              *     @p vertexId.
-             *     
+             *
              * @I{  Using universal references => type deduction. See the
              *      article of Scott Meyers
              *      https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers.
@@ -536,7 +536,7 @@ class PowerGrid {
              * @return     The generator identifier.
              */
             inline Types::generatorId AddGeneratorAt ( TVertex              const & vertex
-                                                     , TGeneratorProperties const & generatorProperty ) 
+                                                     , TGeneratorProperties const & generatorProperty )
             {
                 Types::vertexId vertexId = vertex.Identifier();
 
@@ -561,7 +561,7 @@ class PowerGrid {
              * @return     The generator identifier.
              */
             inline Types::generatorId AddGeneratorAt ( TVertex              const &  vertex
-                                                     , TGeneratorProperties       && generatorProperty ) 
+                                                     , TGeneratorProperties       && generatorProperty )
             {
                 Types::vertexId vertexId = vertex.Identifier();
 
@@ -578,11 +578,11 @@ class PowerGrid {
              * @param[in]  generatorId  The generator identifier.
              */
             inline void RemoveGeneratorAt ( Types::vertexId    vertexId
-                                          , Types::generatorId generatorId ) 
+                                          , Types::generatorId generatorId )
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
                 USAGE_ASSERT ( HasGenerator ( generatorId ) );
-             
+
                 // Remove generator object from V_G implicitly
                 generatorExists_[ generatorId ] = false;
 
@@ -594,13 +594,13 @@ class PowerGrid {
                                         , generatorsAtVertex_[vertexId].end()
                                         , generatorId
                                         );
-                if ( result != generatorsAtVertex_[vertexId].end() ) 
+                if ( result != generatorsAtVertex_[vertexId].end() )
                 {
                     std::swap ( *result
                               , generatorsAtVertex_[vertexId].back() );
                     generatorsAtVertex_[vertexId].pop_back();
-                } else { 
-                    USAGE_ASSERT ( false 
+                } else {
+                    USAGE_ASSERT ( false
                                 && "The generatorId does not exist in generatorsAtVertex_[vertexId]!" );
                 }
             }
@@ -624,7 +624,7 @@ class PowerGrid {
              * @param       generatorProperty  The generator property.
              */
             inline void RemoveGeneratorAt ( Types::vertexId        vertexId
-                                          , TGeneratorProperties & generatorProperty ) 
+                                          , TGeneratorProperties & generatorProperty )
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
@@ -654,9 +654,9 @@ class PowerGrid {
              * @return     @p true if the generator identifier exists, @p
              *     false otherwise.
              */
-            inline bool HasGenerator ( Types::generatorId generatorId ) const 
+            inline bool HasGenerator ( Types::generatorId generatorId ) const
             {
-                return ( generatorId < generators_.size() 
+                return ( generatorId < generators_.size()
                     &&   generatorExists_[generatorId] );
             }
 
@@ -673,7 +673,7 @@ class PowerGrid {
              * @return     @p true if the generator exists, @p false
              *     otherwise.
              */
-            inline bool HasGenerator ( TGeneratorProperties const & generatorProperty ) const 
+            inline bool HasGenerator ( TGeneratorProperties const & generatorProperty ) const
             {
                 return HasGenerator ( GeneratorId ( generatorProperty ) );
             }
@@ -687,10 +687,10 @@ class PowerGrid {
              * @return     @p true if there is a generator at vertex @p
              *     vertexId, @p false otherwise.
              */
-            inline bool HasGeneratorAt ( Types::vertexId vertexId ) const 
+            inline bool HasGeneratorAt ( Types::vertexId vertexId ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
-                return  ( generatorsAtVertex_.size() > vertexId 
+                return  ( generatorsAtVertex_.size() > vertexId
                     && !( generatorsAtVertex_[vertexId].empty() ) );
             }
 
@@ -707,7 +707,7 @@ class PowerGrid {
              * @return     @p true if there is a generator at vertex @p
              *     vertexId, @p false otherwise.
              */
-            inline bool HasGeneratorAt ( TVertex const & vertex ) const 
+            inline bool HasGeneratorAt ( TVertex const & vertex ) const
             {
                 Types::vertexId vertexId = Graph().VertexId ( vertex );
                 USAGE_ASSERT( Graph().VertexExists ( vertexId ) );
@@ -729,10 +729,10 @@ class PowerGrid {
              * @return     If the generator exists the generator's identifier
              *     @p generatorId is returned, @p Const::NONE otherwise.
              */
-            inline Types::generatorId GeneratorId ( TGeneratorProperties const & generatorProperty ) const 
+            inline Types::generatorId GeneratorId ( TGeneratorProperties const & generatorProperty ) const
             {
                 Types::generatorId generatorId = FindGenerator ( generatorProperty, generators_ );
-                return generatorId; 
+                return generatorId;
             }
 
             /**
@@ -743,11 +743,11 @@ class PowerGrid {
              * @param      generatorIds  The generator identifiers.
              */
             inline void GeneratorIds ( Types::vertexId                   vertexId
-                                     , std::vector<Types::generatorId> & generatorIds ) const 
+                                     , std::vector<Types::generatorId> & generatorIds ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
-                
-                if ( HasGeneratorAt( vertexId ) ) 
+
+                if ( HasGeneratorAt( vertexId ) )
                 {
                     generatorIds = generatorsAtVertex_[ vertexId ];
                 }
@@ -771,7 +771,7 @@ class PowerGrid {
              *
              * @return     The generator properties @f$\vertex\in\generators@f$.
              */
-            inline TGeneratorProperties & GeneratorAt ( Types::generatorId generatorId ) 
+            inline TGeneratorProperties & GeneratorAt ( Types::generatorId generatorId )
             {
                 USAGE_ASSERT ( HasGenerator ( generatorId ) );
                 return generators_[generatorId];
@@ -798,13 +798,13 @@ class PowerGrid {
              * @param[in]  vertexId                 The vertex identifier.
              * @param      generator identifiers    The generator identifiers
              *     at vertex with @p vertexId.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId exists
              *     before using this method.
-             *     
+             *
              * @see        StaticGraph#VertexExists
              * @see        DynamicGraph#VertexExists
-             * 
+             *
              * @code{.cpp}
              *      std::vector<Types::generatorId> generatorIds;
              *      if ( this->Graph().VertexExists ( vertexId ) )
@@ -812,17 +812,17 @@ class PowerGrid {
              *          GeneratorsAt ( vertex, generatorIds );
              *      }
              * @endcode
-             *     
+             *
              * @note       If the vertex @f$\vertex\in\vertices@f$ has no
              *     generator @f$\{\vertex\}\cap\generators = \emptyset@f$ then
              *     the generatorIds vectors returns empty.
              */
             inline void GeneratorsAt ( Types::vertexId                   vertexId
-                                     , std::vector<Types::generatorId> & generatorIds ) const 
+                                     , std::vector<Types::generatorId> & generatorIds ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
-                for_all_generator_identifiers_at <ExecutionPolicy::sequential> ( vertexId, 
+                for_all_generator_identifiers_at <ExecutionPolicy::sequential> ( vertexId,
                     [this, &generatorIds](Types::generatorId generatorId)
                     {
                         generatorIds.emplace_back( generatorId );
@@ -835,29 +835,29 @@ class PowerGrid {
              *
              * @param[in]  vertexId    The vertex identifier.
              * @param      generators  The generators at vertex with @p vertexId.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId exists
              *     before using this method.
-             *     
+             *
              * @see        StaticGraph#VertexExists
              * @see        DynamicGraph#VertexExists
-             * 
+             *
              * @code{.cpp}
              *      std::vector<TGeneratorProperties> generators;
              *      if ( this->Graph().VertexExists ( vertexId ) )
              *          GeneratorsAt ( vertex, generators );
              * @endcode
-             *     
+             *
              * @note       If the vertex @f$\vertex\in\vertices@f$ has no
              *     generator @f$\{\vertex\}\cap\generators = \emptyset@f$ then
              *     the generators vectors returns empty.
              */
             inline void GeneratorsAt ( Types::vertexId                     vertexId
-                                     , std::vector<TGeneratorProperties> & generators ) const 
+                                     , std::vector<TGeneratorProperties> & generators ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
-                for_all_generator_identifiers_at <ExecutionPolicy::sequential> ( vertexId, 
+                for_all_generator_identifiers_at <ExecutionPolicy::sequential> ( vertexId,
                     [this, &generators](Types::generatorId generatorId)
                     {
                         generators.emplace_back( generators_[generatorId] );
@@ -874,25 +874,25 @@ class PowerGrid {
              *
              * @param      vertex      The vertex object.
              * @param      generators  The generators at a @p vertex.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             *     
+             *
              * @see        StaticGraph#VertexExists
              * @see        DynamicGraph#VertexExists
-             * 
+             *
              * @code{.cpp}
              *      std::vector<Types::generatorId> generatorIds;
              *      if ( this->Graph().VertexExists ( this->Graph().VertexId ( vertexId ) ) )
              *          GeneratorsAt ( vertex, generatorIds );
              * @endcode
-             *     
+             *
              * @note       If the vertex @f$\vertex\in\vertices@f$ has no
              *     generator @f$\{\vertex\}\cap\generators = \emptyset@f$ then
              *     the generatorIds vectors returns empty.
              */
             inline void GeneratorsAt ( TVertex const                   & vertex
-                                     , std::vector<Types::generatorId> & generatorIds ) const 
+                                     , std::vector<Types::generatorId> & generatorIds ) const
             {
                 Types::vertexId vertexId = Graph().VertexId( vertex );
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
@@ -905,25 +905,25 @@ class PowerGrid {
              *
              * @param      vertex      The vertex object.
              * @param      generators  The generators at a @p vertex.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             *     
+             *
              * @see        StaticGraph#VertexExists
              * @see        DynamicGraph#VertexExists
-             * 
+             *
              * @code{.cpp}
              *      std::vector<TGeneratorProperties> generators;
              *      if ( this->Graph().VertexExists ( this->Graph().VertexId ( vertexId ) ) )
              *          GeneratorsAt ( vertex, generators );
              * @endcode
-             *     
+             *
              * @note       If the vertex @f$\vertex\in\vertices@f$ has no
              *     generator @f$\{\vertex\}\cap\generators = \emptyset@f$ then
              *     the generators vectors returns empty.
              */
             inline void GeneratorsAt ( TVertex const                     & vertex
-                                     , std::vector<TGeneratorProperties> & generators ) const 
+                                     , std::vector<TGeneratorProperties> & generators ) const
             {
                 Types::vertexId vertexId = Graph().VertexId( vertex );
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
@@ -936,7 +936,7 @@ class PowerGrid {
              *
              * @param[in]  generatorProperty   The generator vertex.
              * @param[in]  generators          The generators.
-             * 
+             *
              * @note       If the @p generator @f$\vertex\in\generators@f$
              *     does not exist the method returns @p Const::NONE equivalent
              *     to @f$\emptyset@f$. However, for duplicate generators
@@ -946,7 +946,7 @@ class PowerGrid {
              * @return     The generator's identifier.
              */
             inline Types::generatorId FindGenerator ( TGeneratorProperties              const & generatorProperty
-                                                    , std::vector<TGeneratorProperties> const & generators ) const 
+                                                    , std::vector<TGeneratorProperties> const & generators ) const
             {
                 auto result = std::find ( generators.begin()
                                         , generators.end()
@@ -960,7 +960,7 @@ class PowerGrid {
             }
         ///@}
 
-            
+
         /**@name Accessors for the Total Power Generation at a Vertex  */
         ///@{
 #pragma mark TOTAL_POWER_GENERATION_AT_VERTEX
@@ -972,18 +972,18 @@ class PowerGrid {
              *     at the vertex @p index. This depends also on if the power
              *     grid is set to (1) exact, (2) bounded, or (3)
              *     unbounded/pureunbounded.
-             *     
+             *
              *     (1) Uses the sum of the generators real power generation
-             *         (pg) snapshot, 
-             *         
+             *         (pg) snapshot,
+             *
              *     (2) Uses the sum of the minimum
              *         (@f$\realpowergenerationmin@f$) and the sum of the
              *         maximum (@f$\realpowergenerationmax@f$) real power
              *         generation of the data,
-             *         
+             *
              *     (3) Uses 0 and infinity for the minimum and maximum,
              *         respectively.
-             * 
+             *
              * @param[in]  vertexId  The vertex identifier.
              *
              * @pre        The timestamp position is used for @p
@@ -999,7 +999,7 @@ class PowerGrid {
              */
             template<Vertices::GenerationStrategyDifferentiationType Strategy>
             inline TBound TotalRealPowerGenerationBoundAt ( Types::vertexId vertexId
-                                                          , Types::index    timestampPosition = 0 ) const 
+                                                          , Types::index    timestampPosition = 0 ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
@@ -1013,10 +1013,10 @@ class PowerGrid {
                 else if ( generatorBoundType_ == Vertices::BoundType::bounded )
                 { // BOUNDED
                     TBound pg ( 0.0, 0.0 );
-                    for_all_generators_at <ExecutionPolicy::sequential> ( vertexId, 
+                    for_all_generators_at <ExecutionPolicy::sequential> ( vertexId,
                         [ &pg ]( TGeneratorProperties const & generatorProperty )
                         {
-                            if ( generatorProperty.IsActive() ) 
+                            if ( generatorProperty.IsActive() )
                             {
                                 pg.Maximum() += generatorProperty.RealPowerBound().Maximum();
                                 pg.Minimum() += generatorProperty.RealPowerBound().Minimum();
@@ -1024,7 +1024,7 @@ class PowerGrid {
                         }
                     );
                     return pg;
-                } else 
+                } else
                 { // EXACT
                     ESSENTIAL_ASSERT ( generatorBoundType_ == Vertices::BoundType::exact );
                     auto gen = TotalRealPowerGenerationAt<Strategy> ( vertexId, timestampPosition );
@@ -1057,8 +1057,8 @@ class PowerGrid {
              *     vertex @f$\vertex@f$ with @p vertexId.
              */
             template<Vertices::GenerationStrategyDifferentiationType Strategy>
-            inline Types::real TotalRealPowerGenerationAt ( Types::vertexId vertexId 
-                                                          , Types::index    timestampPosition = 0 ) const 
+            inline Types::real TotalRealPowerGenerationAt ( Types::vertexId vertexId
+                                                          , Types::index    timestampPosition = 0 ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
@@ -1079,15 +1079,15 @@ class PowerGrid {
              *     \reactivepowergenerationmax]@f$ at the vertex @p vertexId.
              *     This depends also on if the power grid is set to (1) exact,
              *     (2) bounded, or (3) unbounded/pureunbounded.
-             *     
+             *
              *     (1) Uses the sum of the generators reactive power
              *         generation (@f$\reactivepowergeneration@f$) snapshot,
-             *         
+             *
              *     (2) Uses the sum of the minimum
              *         (@f$\reactivepowergenerationmin@f$) and the sum of the
              *         maximum (@f$\reactivepowergenerationmax@f$) reactive
              *         power generation of the data,
-             *         
+             *
              *     (3) Uses 0 and infinity for the minimum and maximum,
              *         respectively.
              *
@@ -1099,31 +1099,31 @@ class PowerGrid {
              */
             template<Vertices::GenerationStrategyDifferentiationType Strategy>
             inline TBound TotalReactivePowerGenerationBoundAt ( Types::vertexId vertexId
-                                                              , Types::index    timestampPosition = 0 ) const 
+                                                              , Types::index    timestampPosition = 0 ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
                 TBound qg( 0.0, 0.0 );
-                if (  HasGeneratorAt( vertexId ) 
+                if (  HasGeneratorAt( vertexId )
                    && ( ( generatorBoundType_ == Vertices::BoundType::unbounded )
                      || ( generatorBoundType_ == Vertices::BoundType::pureunbounded ) )
-                   ) 
+                   )
                 { // PUREUNBOUNDED || UNBOUNDED
                     return TBound( 0, Const::REAL_INFTY );
-                } else if ( HasGeneratorAt( vertexId ) 
+                } else if ( HasGeneratorAt( vertexId )
                        && ( generatorBoundType_ == Vertices::BoundType::bounded ) )
                 { // BOUNDED
-                    for_all_generators_at <ExecutionPolicy::sequential> ( vertexId, 
+                    for_all_generators_at <ExecutionPolicy::sequential> ( vertexId,
                         [ &qg ]( TGeneratorProperties const & generator )
                         {
-                            if ( generator.IsActive() ) 
+                            if ( generator.IsActive() )
                             {
                                 qg.Maximum() += generator.ReactivePowerBound().Maximum();
                                 qg.Minimum() += generator.ReactivePowerBound().Minimum();
                             }
                         }
                     );
-                } else if ( HasGeneratorAt( vertexId ) 
+                } else if ( HasGeneratorAt( vertexId )
                        && ( generatorBoundType_ == Vertices::BoundType::exact ) )
                 { // EXACT
                     qg.Maximum() = TotalReactivePowerGenerationAt<Strategy> ( vertexId
@@ -1154,12 +1154,12 @@ class PowerGrid {
              * @return     The total reactive power generation
              *     @f$\reactivepowergeneration@f$ of all generatorsnapshots at a
              *     vertex @f$\vertex\in\vertices@f$ with identifier @p vertexId.
-             *     
+             *
              * @todo Use the same logic as in Real Power using snapshot -> GeneratorRealPowerSnapshotAt( generator, timestampPosition );
              */
             template<Vertices::GenerationStrategyDifferentiationType Strategy>
             inline Types::real TotalReactivePowerGenerationAt ( Types::vertexId vertexId
-                                                              , Types::index    timestampPosition = 0 ) const 
+                                                              , Types::index    timestampPosition = 0 ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
@@ -1188,7 +1188,7 @@ class PowerGrid {
              * @return     The identifier of the load.
              */
             inline Types::loadId AddLoadAt ( Types::vertexId vertexId
-                                           , TLoadProperties load ) 
+                                           , TLoadProperties load )
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
@@ -1222,7 +1222,7 @@ class PowerGrid {
              * @return     The load identifier.
              */
             inline Types::loadId AddLoadAt ( TVertex         const & vertex
-                                           , TLoadProperties const & load ) 
+                                           , TLoadProperties const & load )
             {
                 Types::vertexId vertexId = Graph().VertexId( vertex );
 
@@ -1241,7 +1241,7 @@ class PowerGrid {
              * @return     The load identifier.
              */
             inline Types::loadId AddLoadAt ( TVertex         const &  vertex
-                                           , TLoadProperties       && load ) 
+                                           , TLoadProperties       && load )
             {
                 Types::vertexId vertexId = Graph().VertexId ( vertex );
 
@@ -1274,13 +1274,13 @@ class PowerGrid {
                                         , loadsAtVertex_[vertexId].end()
                                         , loadId
                                         );
-                if ( result != loadsAtVertex_[vertexId].end() ) 
+                if ( result != loadsAtVertex_[vertexId].end() )
                 {
                     std::swap ( *result
                               , loadsAtVertex_[vertexId].back() );
                     loadsAtVertex_[vertexId].pop_back();
-                } else { 
-                    USAGE_ASSERT ( false 
+                } else {
+                    USAGE_ASSERT ( false
                                 && "The loadId does not exist in loadsAtVertex_[vertexId]!" );
                 }
             }
@@ -1331,7 +1331,7 @@ class PowerGrid {
              * @return     @p true if the load identifier exists, @p false
              *     otherwise.
              */
-            inline bool HasLoad ( Types::loadId loadId ) const 
+            inline bool HasLoad ( Types::loadId loadId ) const
             {
                 return ( loadId < loads_.size() )
                       && loadExists_[ loadId ] ;
@@ -1348,7 +1348,7 @@ class PowerGrid {
              *
              * @return     @p true if the load exists, @p false otherwise.
              */
-            inline bool HasLoad ( TLoadProperties const & load ) const 
+            inline bool HasLoad ( TLoadProperties const & load ) const
             {
                 return ( Const::NONE != LoadId ( load ) );
             }
@@ -1362,10 +1362,10 @@ class PowerGrid {
              * @return     @p true if the load identifier exists, @p false
              *     otherwise.
              */
-            inline bool HasLoadAt ( Types::vertexId vertexId ) const 
+            inline bool HasLoadAt ( Types::vertexId vertexId ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
-                return  ( loadsAtVertex_.size() > vertexId 
+                return  ( loadsAtVertex_.size() > vertexId
                     && !( loadsAtVertex_[vertexId].empty() ) );
             }
 
@@ -1382,7 +1382,7 @@ class PowerGrid {
              * @return     @p true if there are loads at the vertex, @p false
              *     otherwise.
              */
-            inline bool HasLoadAt ( TVertex const & vertex ) const 
+            inline bool HasLoadAt ( TVertex const & vertex ) const
             {
                 Types::vertexId vertexId = Graph().VertexId ( vertex );
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
@@ -1397,7 +1397,7 @@ class PowerGrid {
              * @return     If the load object exists it returns the unique
              *     identifier of a load object, otherwise it returns @p Const::NONE.
              */
-            inline Types::loadId LoadId ( TLoadProperties const & load ) const 
+            inline Types::loadId LoadId ( TLoadProperties const & load ) const
             {
                 auto result = std::find ( loads_.begin()
                                         , loads_.end()
@@ -1417,7 +1417,7 @@ class PowerGrid {
              * @return     A set of load identifiers.
              */
             inline void LoadIds ( Types::vertexId              vertexId
-                                , std::vector<Types::loadId> & loadIds ) const 
+                                , std::vector<Types::loadId> & loadIds ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists( vertexId ) );
                 USAGE_ASSERT ( vertexId < loadsAtVertex_.size() );
@@ -1445,10 +1445,10 @@ class PowerGrid {
              * @param[in/out]   loadIds  The load identifiers.
              */
             inline void LoadIds ( TVertex              const & vertex
-                                , std::vector<Types::loadId> & loadIds ) const 
+                                , std::vector<Types::loadId> & loadIds ) const
             {
                 Types::vertexId vertexId = Graph().VertexId ( vertex );
-                
+
                 USAGE_ASSERT( vertexId < Graph().Vertices().size() );
                 USAGE_ASSERT( vertexId < loadsAtVertex_.size()     );
 
@@ -1469,7 +1469,7 @@ class PowerGrid {
              *
              * @return     The load properties.
              */
-            inline TLoadProperties & LoadAt ( Types::loadId loadId ) 
+            inline TLoadProperties & LoadAt ( Types::loadId loadId )
             {
                 USAGE_ASSERT ( HasLoad ( loadId ) );
                 return loads_[loadId];
@@ -1499,11 +1499,11 @@ class PowerGrid {
             {
                 USAGE_ASSERT( Graph().VertexExists( vertexId ) );
 
-                if ( HasLoadAt( vertexId ) ) 
+                if ( HasLoadAt( vertexId ) )
                 {
-                    std::vector<Types::labelId> loadIds; 
+                    std::vector<Types::labelId> loadIds;
                     LoadIds( vertexId, loadIds );
-                    for ( auto id : loadIds ) 
+                    for ( auto id : loadIds )
                     {
                         loads.emplace_back( loads_[id] );
                     }
@@ -1522,11 +1522,11 @@ class PowerGrid {
                 Types::vertexId vertexId = Graph().VertexId ( vertex );
                 USAGE_ASSERT ( Graph().VertexExists( vertexId ) );
 
-                if ( HasLoadAt( vertexId ) ) 
+                if ( HasLoadAt( vertexId ) )
                 {
                     std::vector<Types::loadId> loadIds;
                     LoadIds ( vertexId, loadIds );
-                    for ( auto id : loadIds ) 
+                    for ( auto id : loadIds )
                     {
                         loads.emplace_back( loads_[id] );
                     }
@@ -1553,8 +1553,8 @@ class PowerGrid {
                 USAGE_ASSERT( Graph().VertexExists( vertexId ) );
 
                 Types::loadSnapshot result = 0;
-                for_all_real_power_load_snapshots_at ( 
-                    vertexId, 
+                for_all_real_power_load_snapshots_at (
+                    vertexId,
                     snapshotId,
                     [&result](Types::loadSnapshot load )
                     {
@@ -1599,13 +1599,13 @@ class PowerGrid {
 
                 if ( loadBoundType_ == Vertices::BoundType::pureunbounded )
                 { // PUREUNBOUNDED
-                    if ( HasGeneratorAt ( vertexId ) ) 
+                    if ( HasGeneratorAt ( vertexId ) )
                     { //@todo use when implemented the breakable loop to break after infty was found
                         Types::real loadMax = 0.0;
-                        for_all_loads_at<ExecutionPolicy::sequential> ( vertexId, 
-                            [ &loadMax ]( TLoadProperties const & load ) 
+                        for_all_loads_at<ExecutionPolicy::sequential> ( vertexId,
+                            [ &loadMax ]( TLoadProperties const & load )
                             {
-                                if ( load.RealPowerLoadBound().Maximum() < Const::REAL_INFTY 
+                                if ( load.RealPowerLoadBound().Maximum() < Const::REAL_INFTY
                                   && loadMax < Const::REAL_INFTY )
                                 {
                                     loadMax += load.RealPowerLoadBound().Maximum();
@@ -1629,18 +1629,18 @@ class PowerGrid {
                 //@todo use when implemented the breakable loop to break after infty was found
                 Types::real loadMin = 0.0;
                 Types::real loadMax = 0.0;
-                for_all_loads_at<ExecutionPolicy::sequential> ( vertexId, 
-                    [ &loadMin, &loadMax ]( TLoadProperties const & load ) 
+                for_all_loads_at<ExecutionPolicy::sequential> ( vertexId,
+                    [ &loadMin, &loadMax ]( TLoadProperties const & load )
                     {
-                        if ( load.RealPowerLoadBound().Minimum() < Const::REAL_INFTY 
+                        if ( load.RealPowerLoadBound().Minimum() < Const::REAL_INFTY
                           && loadMin < Const::REAL_INFTY )
                         {
                             loadMin += load.RealPowerLoadBound().Minimum();
                         } else {
                             loadMin = Const::REAL_INFTY;
                         }
-                        
-                        if ( load.RealPowerLoadBound().Maximum() < Const::REAL_INFTY 
+
+                        if ( load.RealPowerLoadBound().Maximum() < Const::REAL_INFTY
                           && loadMax < Const::REAL_INFTY )
                         {
                             loadMax += load.RealPowerLoadBound().Maximum();
@@ -1674,7 +1674,7 @@ class PowerGrid {
                     [ this, &total, timestampPosition ]( Types::loadId loadId )
                     {
                         auto myLoad = LoadSnapshotOf(loadId, timestampPosition);
-                        if ( myLoad >= Const::REAL_INFTY ) 
+                        if ( myLoad >= Const::REAL_INFTY )
                         {
                             total = Const::REAL_INFTY;
                             return false;
@@ -1693,24 +1693,24 @@ class PowerGrid {
              *
              * @return     The reactive power load bound at a vertex @p vertexId.
              */
-            inline TBound TotalReactivePowerLoadBoundAt( Types::vertexId vertexId ) const 
+            inline TBound TotalReactivePowerLoadBoundAt( Types::vertexId vertexId ) const
             {
                 USAGE_ASSERT ( Graph().VertexExists ( vertexId ) );
 
                 if ( loadBoundType_ == Vertices::BoundType::pureunbounded )
                 { // PUREUNBOUNDED
-                    if ( HasGeneratorAt( vertexId ) ) 
+                    if ( HasGeneratorAt( vertexId ) )
                     {
-                        return TBound( 0, Graph().VertexAt( vertexId ).ReactivePowerLoadBound().Maximum() );        
+                        return TBound( 0, Graph().VertexAt( vertexId ).ReactivePowerLoadBound().Maximum() );
                     }
-                    return TBound( 0, Const::REAL_INFTY );    
+                    return TBound( 0, Const::REAL_INFTY );
                 } else if ( loadBoundType_ == Vertices::BoundType::unbounded )
                 { // UNBOUNDED
-                    return TBound( 0, Const::REAL_INFTY ); 
+                    return TBound( 0, Const::REAL_INFTY );
                 } else if ( loadBoundType_ == Vertices::BoundType::exact )
                 { // EXACT: For power flow (PF) calculation
                     return TBound ( Graph().VertexAt( vertexId ).ReactivePowerLoad()
-                                  , Graph().VertexAt( vertexId ).ReactivePowerLoad() );    
+                                  , Graph().VertexAt( vertexId ).ReactivePowerLoad() );
                 }
                 return TBound ( Graph().VertexAt( vertexId ).ReactivePowerLoadBound().Minimum()
                               , Graph().VertexAt( vertexId ).ReactivePowerLoadBound().Maximum() );
@@ -1726,7 +1726,7 @@ class PowerGrid {
              *     @p generatorId.
              * @details    These values represent the maximum possible production
              *     of a generator at a certain timestamp.
-             *     
+             *
              * @param[in]  generatorId                      The identifier of
              *                                              the generator.
              * @param[in]  maximumRealPowerGenerationPu     The generator
@@ -1734,13 +1734,13 @@ class PowerGrid {
              *                                              representing the
              *                                              maximum real power
              *                                              generation in p.u.
-             *                                              
+             *
              * @pre        The generator @f$\vertex\in\generators@f$ with
              *     the @p generatorId has to exist and the maximum real power
              *     generation p.u. has not to be @p Const::NONE.
              */
             inline void AddGeneratorRealPowerSnapshotAt ( Types::generatorId       generatorId
-                                                        , Types::generatorSnapshot maximumRealPowerGenerationPu ) 
+                                                        , Types::generatorSnapshot maximumRealPowerGenerationPu )
             {
                 USAGE_ASSERT ( HasGenerator ( generatorId ) );
                 // USAGE_ASSERT ( maximumRealPowerGenerationPu != Const::NONE );
@@ -1757,7 +1757,7 @@ class PowerGrid {
              * @brief      Update generator snapshot size.
              * @details    There can be more generators than buses.
              */
-            inline void UpdateGeneratorSnapshotSize () 
+            inline void UpdateGeneratorSnapshotSize ()
             {
                 generatorRealPowerSnapshots_.resize( generators_.size() );
             }
@@ -1766,7 +1766,7 @@ class PowerGrid {
              * @brief      Update load snapshot
              * @details    Currently we assume that there is one load per bus
              */
-            inline void UpdateLoadSnapshotSize( ) 
+            inline void UpdateLoadSnapshotSize( )
             {
                 loadSnapshots_.resize( loads_.size() );
             }
@@ -1774,7 +1774,7 @@ class PowerGrid {
             /**
              * @brief      Output generation snapshots.
              */
-            void OutputGeneratorSnaps() 
+            void OutputGeneratorSnaps()
             {
                 for ( Types::count counter = 0
                     ; counter <  timestamps_.size()
@@ -1785,8 +1785,8 @@ class PowerGrid {
                         ; generatorId < generatorRealPowerSnapshots_.size()
                         ; ++generatorId )
                     {
-                        if ( generatorRealPowerSnapshots_[generatorId].size() == 0 
-                          || GeneratorRealPowerSnapshotAt ( generatorId, counter ) == Const::NONE ) 
+                        if ( generatorRealPowerSnapshots_[generatorId].size() == 0
+                          || GeneratorRealPowerSnapshotAt ( generatorId, counter ) == Const::NONE )
                         {
                             continue; // If the generator has no snapshot available
                         }
@@ -1799,7 +1799,7 @@ class PowerGrid {
             /**
              * @brief      Output load snapshots.
              */
-            void OutputLoadSnaps() 
+            void OutputLoadSnaps()
             {
                 for ( Types::count counter = 0
                     ; counter < timestamps_.size()
@@ -1826,17 +1826,17 @@ class PowerGrid {
              *      real power load at a timestamp in p.u.
              */
             inline void AddLoadSnapshotAt ( Types::loadId       loadId
-                                          , Types::loadSnapshot snapshot ) 
+                                          , Types::loadSnapshot snapshot )
             {
                 USAGE_ASSERT ( HasLoad ( loadId ) );
                 USAGE_ASSERT ( snapshot < Const::NONE   );
 
-                if ( loadSnapshots_.size() <= loadId 
-                  || loadSnapshots_.empty() ) 
+                if ( loadSnapshots_.size() <= loadId
+                  || loadSnapshots_.empty() )
                 {
-                    UpdateLoadSnapshotSize();                    
+                    UpdateLoadSnapshotSize();
                 }
-                    
+
                 loadSnapshots_[loadId].emplace_back( snapshot );
             }
 
@@ -1845,7 +1845,7 @@ class PowerGrid {
              *
              * @param[in]  weight   The @p weight of a snapshot
              */
-            inline void AddSnapshotWeighting( Types::weightSnapshot weight ) 
+            inline void AddSnapshotWeighting( Types::weightSnapshot weight )
             {
                 USAGE_ASSERT( weight != Const::NONE );
                 snapshotWeights_.emplace_back( weight );
@@ -1859,7 +1859,7 @@ class PowerGrid {
              *
              * @param[in]  timestamp  The timestamp, e.g., "2019-09-19 19:19:19"
              */
-            inline void AddSnapshotTimestamp( Types::timestampSnapshot timestamp ) 
+            inline void AddSnapshotTimestamp( Types::timestampSnapshot timestamp )
             {
                 USAGE_ASSERT ( !timestamp.empty() );
                 timestamps_.emplace_back( timestamp );
@@ -1871,7 +1871,7 @@ class PowerGrid {
              * @param[in]  timestamp  The timestamp.
              *
              * @return     The position of a @p timestamp.
-             * 
+             *
              * @note       Implementation is very inefficient.
              */
             inline Types::index PositionOf ( Types::timestampSnapshot timestamp ) const
@@ -1894,7 +1894,7 @@ class PowerGrid {
              *
              * @return     The timestamp at the @p position.
              */
-            inline Types::timestampSnapshot TimestampAt ( Types::index timestampPosition ) const 
+            inline Types::timestampSnapshot TimestampAt ( Types::index timestampPosition ) const
             {
                 USAGE_ASSERT ( timestampPosition < timestamps_.size() );
                 return timestamps_[timestampPosition];
@@ -1930,9 +1930,9 @@ class PowerGrid {
                 if ( position != Const::NONE )
                 {
                     return GeneratorRealPowerSnapshotAt ( generatorId, position );
-                } else 
+                } else
                 { // No snapshot available
-                    return Const::NONE; 
+                    return Const::NONE;
                 }
             }
 
@@ -1964,9 +1964,9 @@ class PowerGrid {
              * @details    If the generator has no generation value assigned for
              *             the given timestamp, the method returns
              *             @p Const::NONE.
-             * 
+             *
              * @pre        Check for a valid generatorId and timestamp position.
-             * 
+             *
              * @param      generatorId        The generator identifier.
              * @param[in]  timestampPosition  The timestamp position.
              *
@@ -2017,13 +2017,13 @@ class PowerGrid {
              * @details    Some generators might not have snapshots over time.
              *             In this case this method returns a vector with @p
              *             Const::NONE at these generators.
-             * 
+             *
              * @pre        The vector @p snapshotsAtTimestamp has to be empty
              *             and @p snapshotsAtTimestamp have to be empty.
-             * 
+             *
              * @param[in]  timestamp             The timestamp.
              * @param      snapshotsAtTimestamp  The snapshots at the timestamp.
-             * 
+             *
              * @todo Add the same for reactive power?
              */
             inline void GeneratorRealPowerSnapshotsAt ( Types::timestampSnapshot                timestamp
@@ -2033,13 +2033,13 @@ class PowerGrid {
                 USAGE_ASSERT ( snapshotsAtTimestamp.empty() );
 
                 Types::index position = PositionOf( timestamp );
-                if ( position != Const::NONE ) 
+                if ( position != Const::NONE )
                 {
                     for ( Types::vertexId generatorId = 0
                         ; generatorId < generatorRealPowerSnapshots_.size()
-                        ; ++generatorId ) 
+                        ; ++generatorId )
                     { // if there is a snapshot at a generator there should be at least position many
-                        ESSENTIAL_ASSERT ( generatorRealPowerSnapshots_[generatorId].size() > position ); 
+                        ESSENTIAL_ASSERT ( generatorRealPowerSnapshots_[generatorId].size() > position );
                         if ( generatorRealPowerSnapshots_[generatorId].size() == 0 )
                         { // No snapshots available at the generator with generatorId
                             snapshotsAtTimestamp.emplace_back( Const::NONE );
@@ -2049,7 +2049,7 @@ class PowerGrid {
                 } // if position
             }
         ///@}
-        
+
         ///@name Generator Reactive Power Snapshot
         ///@todo Not fully supported
         ///@{
@@ -2067,7 +2067,7 @@ class PowerGrid {
              *
              * @return     The generation at a @p timestamp (maximum real power
              *             generation in p.u.).
-             *             
+             *
              * @todo       Reactive power is not supported in that way.
              */
             inline Types::generatorSnapshot GeneratorReactivePowerSnapshotAt ( Types::generatorId        generatorId
@@ -2080,9 +2080,9 @@ class PowerGrid {
                 if ( position != Const::NONE )
                 {
                     return GeneratorReactivePowerSnapshotAt ( generatorId, position );
-                } else 
+                } else
                 { // No snapshot available
-                    return Const::NONE; 
+                    return Const::NONE;
                 }
             }
 
@@ -2114,7 +2114,7 @@ class PowerGrid {
              * @details    If the generator has no generation value assigned for
              *             the given timestamp, the method returns
              *             @p Const::NONE.
-             *             
+             *
              * @note       Timestamp is not supported for reactive power currently!
              *
              * @param      generatorId        The generator identifier.
@@ -2122,7 +2122,7 @@ class PowerGrid {
              *
              * @return     The generation at a @p timestamp (maximum real power
              *             generation in p.u.).
-             *             
+             *
              * @todo       Logic for reactive power if data allows it. This is not clean.
              */
             inline Types::generatorSnapshot GeneratorReactivePowerSnapshotAt ( Types::generatorId generatorId
@@ -2178,7 +2178,7 @@ class PowerGrid {
              * @return     The load at the timestamp.
              */
             inline Types::loadSnapshot LoadSnapshotOf ( Types::loadId            loadId
-                                                      , Types::timestampSnapshot timestamp ) 
+                                                      , Types::timestampSnapshot timestamp )
             {
                 USAGE_ASSERT ( loadId != Const::NONE  );
                 USAGE_ASSERT ( loadId < loads_.size() );
@@ -2219,21 +2219,21 @@ class PowerGrid {
              *     timestampPosition.
              */
             inline Types::loadSnapshot LoadSnapshotOf ( Types::loadId loadId
-                                                      , Types::index  timestampPosition ) 
+                                                      , Types::index  timestampPosition )
             {
                 USAGE_ASSERT ( loadId                         != Const::NONE       );
                 USAGE_ASSERT ( loadId                          < loads_.size()     );
                 USAGE_ASSERT ( timestampPosition              != Const::NONE       );
                 USAGE_ASSERT ( loadSnapshots_[loadId].size()  <= timestamps_.size());
-                USAGE_ASSERT ( timestampPosition              <= loadSnapshots_[loadId].size() 
+                USAGE_ASSERT ( timestampPosition              <= loadSnapshots_[loadId].size()
                             || loadSnapshots_[loadId].size()  == 0  );
 
                 if ( loadSnapshots_[loadId].size() != 0 )
                 {
                     return loadSnapshots_[loadId][timestampPosition];
-                } else 
+                } else
                 { // No snapshot available at the load with loadId
-                    return Const::NONE; 
+                    return Const::NONE;
                 }
             }
 
@@ -2254,7 +2254,7 @@ class PowerGrid {
                 USAGE_ASSERT ( loadId                          < loads_.size()     );
                 USAGE_ASSERT ( timestampPosition              != Const::NONE       );
                 USAGE_ASSERT ( loadSnapshots_[loadId].size()  <= timestamps_.size());
-                USAGE_ASSERT ( timestampPosition              <= loadSnapshots_[loadId].size() 
+                USAGE_ASSERT ( timestampPosition              <= loadSnapshots_[loadId].size()
                             || loadSnapshots_[loadId].size()  == 0  );
 
                 if ( loadSnapshots_[loadId].size() != 0 )
@@ -2262,7 +2262,7 @@ class PowerGrid {
                     return loadSnapshots_[loadId][timestampPosition];
                 } else
                 { // No snapshot available at the load with loadId
-                    return Const::NONE; 
+                    return Const::NONE;
                 }
             }
 
@@ -2278,7 +2278,7 @@ class PowerGrid {
              */
             inline void LoadSnapshotsAt ( Types::vertexId                    vertexId
                                         , Types::index                       timestampPosition
-                                        , std::vector<Types::loadSnapshot> & loadSnapshots ) 
+                                        , std::vector<Types::loadSnapshot> & loadSnapshots )
             {
                 USAGE_ASSERT ( vertexId           < Graph().Vertices().size() );
                 USAGE_ASSERT ( timestampPosition != Const::NONE               );
@@ -2306,13 +2306,13 @@ class PowerGrid {
              */
             inline void LoadSnapshotsAt ( TVertex                    const & vertex
                                         , Types::index                       timestampPosition
-                                        , std::vector<Types::loadSnapshot> & loadSnapshots ) 
+                                        , std::vector<Types::loadSnapshot> & loadSnapshots )
             {
                 USAGE_ASSERT( loadSnapshots.empty() );
 
                 Types::vertexId vertexId   = VertexId( vertex );
                 ESSENTIAL_ASSERT( vertexId < Graph().Vertices().size() );
-                
+
                 LoadSnapshotsAt ( vertexId, timestampPosition, loadSnapshots );
             }
 
@@ -2326,19 +2326,19 @@ class PowerGrid {
              * @param      loadSnapshotsAtTimestamp  The load snapshots at the timestamp.
              */
             inline void LoadSnapshotsAt ( Types::timestampSnapshot           timestamp
-                                        , std::vector<Types::loadSnapshot> & loadSnapshotsAtTimestamp ) 
+                                        , std::vector<Types::loadSnapshot> & loadSnapshotsAtTimestamp )
             {
                 USAGE_ASSERT ( !timestamps_.empty()               );
                 USAGE_ASSERT ( loadSnapshotsAtTimestamp.empty() );
 
                 Types::index position = PositionOf( timestamp );
-                if ( position != Const::NONE ) 
+                if ( position != Const::NONE )
                 {
                     for ( Types::loadId loadId = 0
                         ; loadId < loadSnapshots_.size()
-                        ; ++loadId ) 
+                        ; ++loadId )
                     {
-                        if ( loadSnapshots_[loadId].size() == 0 ) 
+                        if ( loadSnapshots_[loadId].size() == 0 )
                         { // No snapshot available
                             loadSnapshotsAtTimestamp.emplace_back( Const::NONE );
                         }
@@ -2357,23 +2357,23 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a generator object as input.
-             * 
+             *
              * @code{.cpp}
              *      for_all_generators (
-             *          []( TGeneratorProperties & generatorProperty ) 
-             *          { 
+             *          []( TGeneratorProperties & generatorProperty )
+             *          {
              *              // Do something with the generator object.
              *          }
              *      );
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all generators.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_generators ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_generators ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_generators ( *this
@@ -2385,23 +2385,23 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a generator object as input
-             * 
+             *
              * @code{.cpp}
              *      for_all_generators (
-             *          []( TGeneratorProperties const & generatorProperty ) 
-             *          { 
+             *          []( TGeneratorProperties const & generatorProperty )
+             *          {
              *              // Do something with the generator object.
              *          }
              *      );
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all generators of a @c power grid. @c
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_generators ( FUNCTION function ) const 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_generators ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_generators ( *this
@@ -2414,12 +2414,12 @@ class PowerGrid {
              *
              * @param      vertex      The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function    The function.
-             * 
+             *
              * @code{.cpp}
-             *      for_all_generators_at ( vertex, 
-             *          []( TGeneratorProperties & generatorProperty ) 
-             *          { 
-             *              // Do something with the generator vertex. 
+             *      for_all_generators_at ( vertex,
+             *          []( TGeneratorProperties & generatorProperty )
+             *          {
+             *              // Do something with the generator vertex.
              *          }
              *      );
              * @endcode
@@ -2428,8 +2428,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generators of @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generators_at ( TVertex  const & vertex
                                        , FUNCTION         function )
             {
@@ -2445,12 +2445,12 @@ class PowerGrid {
              *
              * @param      vertex      The vertex @f$\vertex\in\vertices@f$.
              * @param[in]  function    The function.
-             * 
+             *
              * @code{.cpp}
-             *      for_all_generators_at ( vertex, 
-             *          []( TGeneratorProperties const & generatorProperty ) 
-             *          { 
-             *              // Do something with the generator vertex. 
+             *      for_all_generators_at ( vertex,
+             *          []( TGeneratorProperties const & generatorProperty )
+             *          {
+             *              // Do something with the generator vertex.
              *          }
              *      );
              * @endcode
@@ -2459,8 +2459,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generators of @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generators_at ( TVertex  const & vertex
                                        , FUNCTION         function ) const
             {
@@ -2476,12 +2476,12 @@ class PowerGrid {
              *
              * @param      vertexId    The vertex identifier.
              * @param[in]  function    The function.
-             * 
+             *
              * @code{.cpp}
              *      for_all_generators_at (
-             *          []( TGeneratorProperties & generatorProperty ) 
-             *          { 
-             *              // Do something with the generator vertex. 
+             *          []( TGeneratorProperties & generatorProperty )
+             *          {
+             *              // Do something with the generator vertex.
              *          }
              *      );
              * @endcode
@@ -2490,8 +2490,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generators of @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generators_at ( Types::vertexId vertexId
                                        , FUNCTION        function )
             {
@@ -2507,12 +2507,12 @@ class PowerGrid {
              *
              * @param      vertexId    The vertex identifier.
              * @param[in]  function    The function.
-             * 
+             *
              * @code{.cpp}
              *      for_all_generators_at ( vertexId,
-             *          []( TGeneratorProperties const & generatorProperty ) 
-             *          { 
-             *              // Do something with the generator vertex. 
+             *          []( TGeneratorProperties const & generatorProperty )
+             *          {
+             *              // Do something with the generator vertex.
              *          }
              *      );
              * @endcode
@@ -2521,8 +2521,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generators of @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generators_at ( Types::vertexId vertexId
                                        , FUNCTION        function ) const
             {
@@ -2537,11 +2537,11 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a vertexId as input.
-             *      
+             *
              * @code{.cpp}
              *      for_all_vertex_identifiers_with_generator (
-             *          []( Types::vertexId vertexId ) 
-             *          { 
+             *          []( Types::vertexId vertexId )
+             *          {
              *              // Do something with the identifier of a vertex.
              *          }
              *      );
@@ -2551,9 +2551,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all vertex identifiers having a generator.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_vertex_identifiers_with_generator ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_vertex_identifiers_with_generator ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_vertex_identifiers_with_generator ( *this
@@ -2565,11 +2565,11 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a vertexId as input.
-             *      
+             *
              * @code{.cpp}
              *      for_all_vertex_identifiers_with_generator (
-             *          []( Types::vertexId vertexId ) 
-             *          { 
+             *          []( Types::vertexId vertexId )
+             *          {
              *              // Do something with the identifier of a vertex.
              *          }
              *      );
@@ -2579,9 +2579,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all vertex identifiers having a generator.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_vertex_identifiers_with_generator ( FUNCTION function ) const 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_vertex_identifiers_with_generator ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_vertex_identifiers_with_generator ( *this
@@ -2594,11 +2594,11 @@ class PowerGrid {
              * @param[in]  vertex    The vertex object @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      for_all_generator_identifiers_at ( vertex, 
-             *          []( Types::generatorId generatorId ) 
-             *          { 
+             *      for_all_generator_identifiers_at ( vertex,
+             *          []( Types::generatorId generatorId )
+             *          {
              *              // Do something with the identifier of the generator.
              *          }
              *      );
@@ -2608,8 +2608,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator identifiers at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generator_identifiers_at ( TVertex const & vertex
                                                   , FUNCTION        function )
             {
@@ -2625,11 +2625,11 @@ class PowerGrid {
              * @param[in]  vertex    The vertex object @f$\vertex\in\vertices@f$.
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      for_all_generator_identifiers_at ( vertex, 
-             *          []( Types::generatorId generatorId ) 
-             *          { 
+             *      for_all_generator_identifiers_at ( vertex,
+             *          []( Types::generatorId generatorId )
+             *          {
              *              // Do something with the identifier of the generator.
              *          }
              *      );
@@ -2639,8 +2639,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator identifiers at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generator_identifiers_at ( TVertex const & vertex
                                                   , FUNCTION        function ) const
             {
@@ -2656,11 +2656,11 @@ class PowerGrid {
              * @param[in]  vertexId  The vertex identifier.
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      for_all_generator_identifiers_at ( vertexId, 
-             *          []( Types::generatorId generatorId ) 
-             *          { 
+             *      for_all_generator_identifiers_at ( vertexId,
+             *          []( Types::generatorId generatorId )
+             *          {
              *              // Do something with the identifier of the generator.
              *          }
              *      );
@@ -2670,8 +2670,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator identifiers at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generator_identifiers_at ( Types::vertexId vertexId
                                                   , FUNCTION        function )
             {
@@ -2687,11 +2687,11 @@ class PowerGrid {
              * @param[in]  vertexId  The vertex identifier.
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      for_all_generator_identifiers_at ( vertexId, 
-             *          []( Types::generatorId generatorId ) 
-             *          { 
+             *      for_all_generator_identifiers_at ( vertexId,
+             *          []( Types::generatorId generatorId )
+             *          {
              *              // Do something with the identifier of the generator.
              *          }
              *      );
@@ -2701,8 +2701,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator identifiers at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_generator_identifiers_at ( Types::vertexId vertexId
                                                   , FUNCTION        function ) const
             {
@@ -2718,12 +2718,12 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a vertexId and a generator object as input.
-             *      
+             *
              * @code{.cpp}
              *      for_all_generator_tuple (
              *          []( Types::vertexId        vertexId
-             *            , TGeneratorProperties & generator ) 
-             *          { 
+             *            , TGeneratorProperties & generator )
+             *          {
              *              // Do something with ?.
              *          }
              *      );
@@ -2733,9 +2733,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator tuple of the from (vertexId, generator).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_generator_tuple ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_generator_tuple ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_generator_tuple ( *this
@@ -2748,12 +2748,12 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a vertexId and a generator object as input.
-             *      
+             *
              * @code{.cpp}
              *      for_all_generator_tuple (
              *          []( Types::vertexId      vertexId
-             *            , TGeneratorProperties generator ) 
-             *          { 
+             *            , TGeneratorProperties generator )
+             *          {
              *              // Do something with ?.
              *          }
              *      );
@@ -2763,9 +2763,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator tuple of the from (vertexId, generator).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_generator_tuple ( FUNCTION function ) const 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_generator_tuple ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_generator_tuple ( *this
@@ -2778,12 +2778,12 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a vertexId and a vector of generator objects as input.
-             *      
+             *
              * @code{.cpp}
              *      for_all_generators_tuple (
              *          []( Types::vertexId                   vertexId
-             *            , std::vector<TGeneratorProperties> generators ) 
-             *          { 
+             *            , std::vector<TGeneratorProperties> generators )
+             *          {
              *              // Do something with ?.
              *          }
              *      );
@@ -2793,9 +2793,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator tuple of the from (vertexId, generators).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_generators_tuple ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_generators_tuple ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_generators_tuple ( *this
@@ -2808,12 +2808,12 @@ class PowerGrid {
              *
              * @param[in]  function  The function pointer, e.g., lambda function
              *      that has a vertexId and a vector of generator objects as input.
-             *      
+             *
              * @code{.cpp}
              *      for_all_generators_tuple<ExecutionPolicy::sequential>(
              *          []( Types::vertexId                   vertexId
-             *            , std::vector<TGeneratorProperties> generators ) 
-             *          { 
+             *            , std::vector<TGeneratorProperties> generators )
+             *          {
              *              // Do something with ?.
              *          }
              *      );
@@ -2823,9 +2823,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all generator tuple of the from (vertexId, generators).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_generators_tuple ( FUNCTION function ) const 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_generators_tuple ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_generators_tuple ( *this
@@ -2844,8 +2844,8 @@ class PowerGrid {
              * @code{.cpp}
              *      for_all_real_power_generator_snapshots<ExecutionPolicy::sequential>(
              *          []( Types::index             snapshotId
-             *            , Types::generatorSnapshot snapshot ) 
-             *          { 
+             *            , Types::generatorSnapshot snapshot )
+             *          {
              *              // Do something with the snapshotId and generator snapshot object.
              *          }
              *      );
@@ -2855,9 +2855,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_real_power_generator_snapshots ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_real_power_generator_snapshots ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots ( *this
@@ -2874,8 +2874,8 @@ class PowerGrid {
              * @code{.cpp}
              *      for_all_real_power_generator_snapshots<ExecutionPolicy::sequential>(
              *          []( Types::index             snapshotId
-             *            , Types::generatorSnapshot snapshot ) 
-             *          { 
+             *            , Types::generatorSnapshot snapshot )
+             *          {
              *              // Do something with the snapshotId and generator snapshot object.
              *          }
              *      );
@@ -2885,9 +2885,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_real_power_generator_snapshots( FUNCTION function ) const 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_real_power_generator_snapshots( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots ( *this
@@ -2899,33 +2899,33 @@ class PowerGrid {
              *     snapshots of a generator with @p generatorId.
              *
              * @param      generatorId The identifier of the generator.
-             * @param[in]  function    The function, e.g., lambda function 
-             * 
+             * @param[in]  function    The function, e.g., lambda function
+             *
              * @pre        Check if the generator identifier @p generatorId of the
              *     generatorProperties exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasGenerator ( generatorId ) )
              *      {
-             *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> ( 
+             *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> (
              *              generatorId,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots of @p generatorId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_of ( Types::generatorId generatorId
-                                                           , FUNCTION           function ) 
+                                                           , FUNCTION           function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_of ( *this
@@ -2945,25 +2945,25 @@ class PowerGrid {
              * @code{.cpp}
              *      if ( network.HasGenerator ( generatorId ) )
              *      {
-             *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> ( 
+             *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> (
              *              generatorId,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots of @p generatorId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_of ( Types::vertexId generatorId
-                                                           , FUNCTION        function ) const 
+                                                           , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_of ( *this
@@ -2977,31 +2977,31 @@ class PowerGrid {
              *
              * @param      generatorProperties  The generator properties.
              * @param[in]  function             The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the generator's properties @p
              *     generatorProperties exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasGenerator ( network.GeneratorId ( generatorProperties ) ) )
              *      {
              *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> (
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              {    
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
-             * @endcode 
-             * 
+             * @endcode
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots of @p generator.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_of ( TGeneratorProperties const & generatorProperties
-                                                           , FUNCTION                     function ) 
+                                                           , FUNCTION                     function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_of ( *this
@@ -3015,31 +3015,31 @@ class PowerGrid {
              *
              * @param      generatorProperties  The generator properties.
              * @param[in]  function             The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the generator's properties @p
              *     generatorProperties exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasGenerator ( network.GeneratorId ( generatorProperties ) ) )
              *      {
              *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> (
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              {    
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
-             * @endcode 
-             * 
+             * @endcode
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots of @p generator.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_of ( TGeneratorProperties const & generatorProperties
-                                                           , FUNCTION                     function ) const 
+                                                           , FUNCTION                     function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_of ( *this
@@ -3053,32 +3053,32 @@ class PowerGrid {
              *
              * @param      vertexId    The identifier of a vertex.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
              *          for_all_real_power_generator_snapshots_at<ExecutionPolicy::sequential> (
              *              vertexId,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_at ( Types::vertexId vertexId
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_at ( *this
@@ -3092,32 +3092,32 @@ class PowerGrid {
              *
              * @param      vertexId    The identifier of a vertex.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
              *          for_all_real_power_generator_snapshots_at<ExecutionPolicy::sequential> (
              *              vertexId,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_at ( Types::vertexId vertexId
-                                                           , FUNCTION        function ) const 
+                                                           , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_at ( *this
@@ -3131,32 +3131,32 @@ class PowerGrid {
              *
              * @param      vertex      The vertex.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the vertex @p vertex exists before using
              *     this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
              *      {
              *          for_all_real_power_generator_snapshots_at<ExecutionPolicy::sequential> (
              *              vertex,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_at ( TVertex const & vertex
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_at ( *this
@@ -3170,32 +3170,32 @@ class PowerGrid {
              *
              * @param      vertex      The vertex.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the vertex @p vertex exists before using
              *     this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
              *      {
              *          for_all_real_power_generator_snapshots_at<ExecutionPolicy::sequential> (
              *              vertex,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and generator snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator snapshots at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots_at ( TVertex const & vertex
-                                                           , FUNCTION        function ) const 
+                                                           , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_at ( *this
@@ -3211,11 +3211,11 @@ class PowerGrid {
              * @param      vertexId             The identifier of a vertex.
              * @param      timestampPosition    The position of the snapshot.
              *     (timestamp of the snapshot).
-             * @param[in]  function             The function, e.g. , lambda function 
-             * 
+             * @param[in]  function             The function, e.g. , lambda function
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
@@ -3223,23 +3223,23 @@ class PowerGrid {
              *              vertexId,
              *              timestampPosition,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
-             *      }       
+             *      }
              * @endcode
              *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator at @p timestamp at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>  
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
             void for_all_real_power_generator_snapshots_at ( Types::vertexId vertexId
                                                            , Types::index    timestampPosition
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_at ( *this
@@ -3257,10 +3257,10 @@ class PowerGrid {
              * @param      timestampPosition    The position of the snapshot
              *     (timestamp of the snapshot).
              * @param[in]  function             The function, e.g. , lambda function.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
@@ -3268,19 +3268,19 @@ class PowerGrid {
              *              vertexId,
              *              timestampPosition,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
-             *      }       
+             *      }
              * @endcode
              *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power generator at @p timestamp at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
             void for_all_real_power_generator_snapshots_at ( Types::vertexId    vertexId
                                                            , Types::index       timestampPosition
@@ -3311,23 +3311,23 @@ class PowerGrid {
              *              vertex,
              *              timestampPosition,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
-             *      } 
+             *      }
              * @endcode
              *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load at @p timestamp at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
             void for_all_real_power_generator_snapshots_at ( TVertex const & vertex
                                                            , Types::index    timestampPosition
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_generator_snapshots_at ( *this
@@ -3355,19 +3355,19 @@ class PowerGrid {
              *              vertex,
              *              timestampPosition,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
-             *      } 
+             *      }
              * @endcode
              *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load at @p timestamp at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
             void for_all_real_power_generator_snapshots_at ( TVertex  const & vertex
                                                            , Types::index     timestampPosition
@@ -3384,7 +3384,7 @@ class PowerGrid {
         ///@name Seriell Load Loops
         ///@{
 #pragma mark SERIELL_LOAD_LOOPS
-            
+
             /**
              * @brief      The @p for loop over all @p loads (vertex
              *     independent).
@@ -3394,9 +3394,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_loads<ExecutionPolicy::sequential> (
-             *          []( TLoadProperties & load ) 
-             *          { 
-             *              // Do something with the load object. 
+             *          []( TLoadProperties & load )
+             *          {
+             *              // Do something with the load object.
              *          }
              *      );
              * @endcode
@@ -3405,9 +3405,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_loads ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_loads ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_loads ( *this
@@ -3423,9 +3423,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_loads<ExecutionPolicy::sequential> (
-             *          []( TLoadProperties const & load ) 
-             *          { 
-             *              // Do something with the load object. 
+             *          []( TLoadProperties const & load )
+             *          {
+             *              // Do something with the load object.
              *          }
              *      );
              * @endcode
@@ -3434,8 +3434,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_loads ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
@@ -3453,9 +3453,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_vertex_identifiers_with_load<ExecutionPolicy::sequential> (
-             *          []( Types::vertexId vertexId ) 
-             *          { 
-             *              // Do something with the vertex identifier that has loads. 
+             *          []( Types::vertexId vertexId )
+             *          {
+             *              // Do something with the vertex identifier that has loads.
              *          }
              *      );
              * @endcode
@@ -3464,9 +3464,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all vertex identifier that have a load.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
-            void for_all_vertex_identifiers_with_load ( FUNCTION function ) const 
+            void for_all_vertex_identifiers_with_load ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_vertex_identifiers_with_load ( *this
@@ -3484,9 +3484,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_load_identifiers_at<ExecutionPolicy::sequential>( vertexId
-             *          , []( Types::loadId loadId ) 
-             *          { 
-             *              // Do something with the load identifier at the @p vertex. 
+             *          , []( Types::loadId loadId )
+             *          {
+             *              // Do something with the load identifier at the @p vertex.
              *          }
              *      );
              * @endcode
@@ -3495,7 +3495,7 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all load identifier at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
             void for_all_load_identifiers_at ( Types::vertexId  vertexId
                                              , FUNCTION         function ) const
@@ -3516,9 +3516,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_load_identifiers_at<ExecutionPolicy::sequential> ( vertex
-             *          , []( Types::loadId loadId ) 
-             *          { 
-             *              // Do something with the load identifier at the @p vertex. 
+             *          , []( Types::loadId loadId )
+             *          {
+             *              // Do something with the load identifier at the @p vertex.
              *          }
              *      );
              * @endcode
@@ -3527,10 +3527,10 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all load identifier at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
             inline
             void for_all_load_identifiers_at ( TVertex  const & vertex
-                                             , FUNCTION         function ) const 
+                                             , FUNCTION         function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_load_identifiers_at ( vertex
@@ -3543,14 +3543,14 @@ class PowerGrid {
              *     @p vertex.
              *
              * @param      vertex      The vertex object.
-             * @param[in]  function    The function pointer, e.g., lambda 
+             * @param[in]  function    The function pointer, e.g., lambda
              *      function that has a load object as input.
              *
              * @code{.cpp}
              *      for_all_loads_at<ExecutionPolicy::sequential> ( vertex
-             *          , []( TLoadProperties & load ) 
-             *          { 
-             *              // Do something with the load object at the @p vertex. 
+             *          , []( TLoadProperties & load )
+             *          {
+             *              // Do something with the load object at the @p vertex.
              *          }
              *      );
              * @endcode
@@ -3559,10 +3559,10 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_loads_at ( TVertex  const & vertex
-                                  , FUNCTION         function ) 
+                                  , FUNCTION         function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_loads_at ( vertex
@@ -3580,9 +3580,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_loads_at<ExecutionPolicy::sequential> ( vertex
-             *          , []( TLoadProperties const & load ) 
-             *          { 
-             *              // Do something with the load object at the @p vertex. 
+             *          , []( TLoadProperties const & load )
+             *          {
+             *              // Do something with the load object at the @p vertex.
              *          }
              *      );
              * @endcode
@@ -3591,8 +3591,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_loads_at ( TVertex  const & vertex
                                   , FUNCTION         function ) const
             {
@@ -3612,9 +3612,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_loads_at<ExecutionPolicy::sequential> ( vertexId
-             *          , []( TLoadProperties & load ) 
-             *          { 
-             *              // Do something with the load object at the @p vertexId. 
+             *          , []( TLoadProperties & load )
+             *          {
+             *              // Do something with the load object at the @p vertexId.
              *          }
              *      );
              * @endcode
@@ -3623,15 +3623,15 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_loads_at ( Types::vertexId const vertexId
-                                  , FUNCTION              function ) 
+                                  , FUNCTION              function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_loads_at ( vertexId
                                        , *this
-                                       , function );                
+                                       , function );
             }
 
             /**
@@ -3644,9 +3644,9 @@ class PowerGrid {
              *
              * @code{.cpp}
              *      for_all_loads_at<ExecutionPolicy::sequential> ( vertexId
-             *          , []( TLoadProperties const & load ) 
-             *          { 
-             *              // Do something with the load object at the @p vertexId. 
+             *          , []( TLoadProperties const & load )
+             *          {
+             *              // Do something with the load object at the @p vertexId.
              *          }
              * @endcode
              *
@@ -3654,8 +3654,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_loads_at ( Types::vertexId vertexId
                                   , FUNCTION        function ) const
             {
@@ -3676,9 +3676,9 @@ class PowerGrid {
              * @code{.cpp}
              *      for_all_load_tuples<ExecutionPolicy::sequential> (
              *          []( Types::vertexId   vertexId
-             *            , TLoadProperties & load ) 
-             *          { 
-             *              // Do something with the vertexId and load object. 
+             *            , TLoadProperties & load )
+             *          {
+             *              // Do something with the vertexId and load object.
              *          }
              *      );
              * @endcode
@@ -3687,13 +3687,13 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all load tuples (vertexId, load).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_load_tuples ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_load_tuples ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_load_tuples ( *this
-                                          , function );                
+                                          , function );
             }
 
             /**
@@ -3707,9 +3707,9 @@ class PowerGrid {
              * @code{.cpp}
              *      for_all_load_tuples<ExecutionPolicy::sequential> (
              *          []( Types::vertexId         vertexId
-             *            , TLoadProperties const & load ) 
-             *          { 
-             *              // Do something with the vertexId and load object. 
+             *            , TLoadProperties const & load )
+             *          {
+             *              // Do something with the vertexId and load object.
              *          }
              *      );
              * @endcode
@@ -3718,8 +3718,8 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all load tuples (vertexId, load).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_load_tuples ( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
@@ -3738,9 +3738,9 @@ class PowerGrid {
              * @code{.cpp}
              *      for_all_loads_tuple<ExecutionPolicy::sequential> (
              *          []( Types::vertexId                vertexId
-             *            , std::vector<TLoadProperties> & loads ) 
-             *          { 
-             *              // Do something with the vertexId and load object. 
+             *            , std::vector<TLoadProperties> & loads )
+             *          {
+             *              // Do something with the vertexId and load object.
              *          }
              *      );
              * @endcode
@@ -3749,9 +3749,9 @@ class PowerGrid {
              * @tparam     FUNCTION    The function object that is called for
              *     all loads tuple (vertexId, load).
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_loads_tuple ( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_loads_tuple ( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_loads_tuple ( *this
@@ -3767,24 +3767,24 @@ class PowerGrid {
              * @brief      The @c for loop @c over all load real power snapshots.
              *
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @code{.cpp}
              *      for_all_real_power_load_snapshots<ExecutionPolicy::sequential>(
              *          []( Types::index        snapshotId
-             *            , Types::loadSnapshot snapshot ) 
-             *          { 
+             *            , Types::loadSnapshot snapshot )
+             *          {
              *              // Do something with the snapshotId and load snapshot object.
              *          }
              *      );
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_real_power_load_snapshots( FUNCTION function ) 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_real_power_load_snapshots( FUNCTION function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots ( *this
@@ -3795,24 +3795,24 @@ class PowerGrid {
              * @brief      The @c for loop @c over all load real power snapshots.
              *
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @code{.cpp}
              *      for_all_real_power_load_snapshots<ExecutionPolicy::sequential>(
              *          []( Types::index        snapshotId
-             *            , Types::loadSnapshot snapshot ) 
-             *          { 
+             *            , Types::loadSnapshot snapshot )
+             *          {
              *              // Do something with the snapshotId and load snapshot object.
              *          }
              *      );
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
-            void for_all_real_power_load_snapshots( FUNCTION function ) const 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
+            void for_all_real_power_load_snapshots( FUNCTION function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots ( *this
@@ -3825,32 +3825,32 @@ class PowerGrid {
              *
              * @param[in]  loadId      The load identifier.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the load identifier @p loadId of the
              *     loadProperties exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasLoad ( loadId ) )
              *      {
-             *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> ( 
+             *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
              *              loadId,
              *              []( Types::index snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots of @p loadId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_of ( Types::loadId loadId
-                                                      , FUNCTION      function ) 
+                                                      , FUNCTION      function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_of ( *this
@@ -3864,32 +3864,32 @@ class PowerGrid {
              *
              * @param[in]  loadId      The load identifier.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the load identifier @p loadId of the
              *     loadProperties exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasLoad ( loadId ) )
              *      {
-             *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> ( 
+             *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
              *              loadId,
              *              []( Types::index snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots of @p loadId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_of ( Types::vertexId loadId
-                                                      , FUNCTION        function ) const 
+                                                      , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_of ( *this
@@ -3903,31 +3903,31 @@ class PowerGrid {
              *
              * @param[in]  load        The load object.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the load's properties @p loadProperties exists
              *     before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasLoad ( network.LoadId ( loadProperties ) ) )
              *      {
              *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              {    
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots of @p load.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_of ( TLoadProperties load
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_of ( *this
@@ -3941,31 +3941,31 @@ class PowerGrid {
              *
              * @param[in]  load        The load object.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the load's properties @p loadProperties exists
              *     before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.HasLoad ( network.LoadId ( loadProperties ) ) )
              *      {
              *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              {    
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots of @p load.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_of ( TLoadProperties const & load
-                                                      , FUNCTION                function ) const 
+                                                      , FUNCTION                function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_of ( *this
@@ -3979,32 +3979,32 @@ class PowerGrid {
              *
              * @param[in]  vertexId    The vertex identifier.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
              *          for_all_real_power_load_snapshots_at<ExecutionPolicy::sequential> (
              *              vertexId,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at ( Types::vertexId vertexId
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4018,32 +4018,32 @@ class PowerGrid {
              *
              * @param[in]  vertexId    The vertex identifier.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
              *          for_all_real_power_load_snapshots_at<ExecutionPolicy::sequential> (
              *              vertexId,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at ( Types::vertexId vertexId
-                                                      , FUNCTION        function ) const 
+                                                      , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4057,31 +4057,31 @@ class PowerGrid {
              *
              * @param      vertex      The vertex object.
              * @param[in]  function    The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the @p vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
              *      {
              *          for_all_real_power_load_snapshots_at<ExecutionPolicy::sequential> (
              *              vertex,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at( TVertex const & vertex
-                                                     , FUNCTION        function ) 
+                                                     , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4096,31 +4096,31 @@ class PowerGrid {
              * @param      vertex               The vertex object.
              * @param[in]  timestampPosition    The timestamp position
              * @param[in]  function             The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the @p vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
              *      {
              *          for_all_real_power_load_snapshots_at<ExecutionPolicy::sequential> (
              *              vertex,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at ( TVertex const & vertex
-                                                      , FUNCTION        function ) const 
+                                                      , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4135,11 +4135,11 @@ class PowerGrid {
              * @param      vertexId             The identifier of a vertex
              * @param      timestampPosition    The position of the snapshot
              *     (timestamp of the snapshot).
-             * @param[in]  function             The function, e.g. , lambda function 
-             * 
+             * @param[in]  function             The function, e.g. , lambda function
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
@@ -4147,23 +4147,23 @@ class PowerGrid {
              *              vertexId,
              *              timestampPosition,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at ( Types::vertexId vertexId
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4179,11 +4179,11 @@ class PowerGrid {
              * @param      vertexId             The identifier of a vertex
              * @param      timestampPosition    The position of the snapshot
              *     (timestamp of the snapshot).
-             * @param[in]  function             The function, e.g. , lambda function 
-             * 
+             * @param[in]  function             The function, e.g. , lambda function
+             *
              * @pre        Check if the vertex identifier @p vertexId of the
              *     vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
@@ -4191,23 +4191,23 @@ class PowerGrid {
              *              vertexId
              *              , timestampPosition
              *              , []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load snapshots at @p vertexId.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at ( Types::vertexId vertexId
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) const 
+                                                      , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4223,9 +4223,9 @@ class PowerGrid {
              * @param      vertex               The vertex object.
              * @param[in]  timestampPosition    The timestamp position.
              * @param[in]  function             The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the @p vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
@@ -4233,23 +4233,23 @@ class PowerGrid {
              *              vertex
              *              , timestampPosition
              *              , []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
-             *      } 
+             *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load at @p timestamp at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at( TVertex const & vertex
                                                      , Types::index    timestampPosition
-                                                     , FUNCTION        function ) 
+                                                     , FUNCTION        function )
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4265,9 +4265,9 @@ class PowerGrid {
              * @param      vertex               The vertex object.
              * @param[in]  timestampPosition    The timestamp position
              * @param[in]  function             The function, e.g., lambda function.
-             * 
+             *
              * @pre        Check if the @p vertex exists before using this method.
-             * 
+             *
              * @code{.cpp}
              *      if ( network.Graph().VertexExists( vertexId ) )
              *      {
@@ -4275,23 +4275,23 @@ class PowerGrid {
              *              vertex,
              *              timestampPosition,
              *              []( Types::index        snapshotId
-             *                , Types::loadSnapshot snapshot ) 
-             *              { 
+             *                , Types::loadSnapshot snapshot )
+             *              {
              *                  // Do something with the snapshotId and load snapshot object.
              *              }
              *          );
-             *      } 
+             *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      The execution policy, e.g., ExecutionPolicy::sequential.
              * @tparam     FUNCTION    The function object that is called for
              *     all real power load at @p timestamp at @p vertex.
              */
-            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION> 
-            inline 
+            template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
+            inline
             void for_all_real_power_load_snapshots_at ( TVertex const & vertex
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) const 
+                                                      , FUNCTION        function ) const
             {
                 internal::PowerGridLoopDifferentiation<TNetwork, Policy>
                     ::for_all_real_power_load_snapshots_at ( *this
@@ -4301,7 +4301,7 @@ class PowerGrid {
             }
         ///@}
 
-        inline Types::count NumberOfGenerators() const 
+        inline Types::count NumberOfGenerators() const
         {
             return numberOfGenerators_;
         }
@@ -4333,8 +4333,8 @@ class PowerGrid {
         std::vector< std::vector<Types::vertexId> >         generatorsAtVertex_;            /**< Mapping generator to a vertex */
         std::vector< TGeneratorProperties >                 generators_;                    /**< Vector of generator vertices */
         std::vector< bool >                                 generatorExists_;               /**< Vector that describes which generator vertices exist */
-        
-        std::vector< std::vector<Types::vertexId> >         loadsAtVertex_;        
+
+        std::vector< std::vector<Types::vertexId> >         loadsAtVertex_;
         std::vector< TLoadProperties >                      loads_;                         /**< Vector of load vertices */
         std::vector< bool >                                 loadExists_;                    /**< Vector that describes which load vertices exist */
 
@@ -4367,7 +4367,7 @@ class PowerGrid {
  */
 template<typename PowerGridType>
 inline void SwitchEdges ( PowerGridType                          & grid
-                        , Subgraph<typename PowerGridType::TGraph> remainingSubgraph) 
+                        , Subgraph<typename PowerGridType::TGraph> remainingSubgraph)
 {
     using TEdge = typename PowerGridType::TGraph::TEdge;
     grid.Graph().template for_all_edges<ExecutionPolicy::sequential>(
@@ -4379,7 +4379,7 @@ inline void SwitchEdges ( PowerGridType                          & grid
         }
     );
 
-    for ( auto edgeId : remainingSubgraph.Edges() ) 
+    for ( auto edgeId : remainingSubgraph.Edges() )
     {
         auto & properties   = grid.Graph().EdgeAt(edgeId).Properties();
         properties.Status() = true;

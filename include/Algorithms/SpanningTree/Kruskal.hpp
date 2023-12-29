@@ -46,13 +46,13 @@ class Kruskal final : public MST<GraphType> {
          * @details Kruskal's algorithm runs in O(|E| lg |V|) using binary
          *     heaps and calculates a MST. It uses techniques that are also
          *     common for connected component algorithms.
-         *     
+         *
          *     Steps:
          *          1. Increases the MST by exactly one edge in each iteration
          *          2. It starts with |V| components
          *          3. In each iteration the number of connected components shrinks by 1
          *          4. To manage the connected components it uses a disjoint-set data structure
-         *                      
+         *
          */
         virtual inline void Run() override {
             UnionFind unionFind( this->Graph().NumberOfVertices() );
@@ -69,7 +69,7 @@ class Kruskal final : public MST<GraphType> {
 
             std::vector<Types::edgeId> spanningTreeEdges;
 
-            for ( Types::edgeId edge : edges ) 
+            for ( Types::edgeId edge : edges )
             {
                 Types::vertexId source = this->Graph().EdgeAt( edge ).Source();
                 Types::vertexId target = this->Graph().EdgeAt( edge ).Target();

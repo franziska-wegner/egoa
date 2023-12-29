@@ -1,11 +1,11 @@
 # CMakeLists.txt
-# 
+#
 #   Created on: 30.01.2019
 #       Author: Franziska Wegner
-#       
+#
 # Install binaries into the bin folder. The project can be build with any of
 # the available cmake generators.
-# 
+#
 
 include_directories(Boost_INCLUDE_DIRS)
 

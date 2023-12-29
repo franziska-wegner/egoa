@@ -1,13 +1,13 @@
 # FindIpopt.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_IPOPT is ON the script searches for Ipopt in given
 # and standard location. If found it adds the library to the project.
-# 
+#
 
-# Environment variable IPOPT_ROOT_DIR of IPOPT should be set, e.g., /Users/<user_name>/Documents/CoinIpopt/build 
+# Environment variable IPOPT_ROOT_DIR of IPOPT should be set, e.g., /Users/<user_name>/Documents/CoinIpopt/build
 set ( IPOPT_ROOT_DIR "$ENV{IPOPT_ROOT_DIR}" CACHE PATH "Ipopt root directory." )
 
 get_filename_component ( PARENT_DIRECTORY ${PROJECT_SOURCE_DIR} DIRECTORY )
@@ -30,7 +30,7 @@ unset ( IPOPT_LIBRARY     CACHE )
 # Ipopt include directory ##########################################
 ####################################################################
 find_path ( IPOPT_INCLUDE_DIR
-    NAMES IpNLP.hpp 
+    NAMES IpNLP.hpp
     HINTS   /usr/local/include/coin
             ${IPOPT_ROOT_DIR}/include/coin
             ${IPOPT_ROOT_DIR}/include
@@ -40,22 +40,22 @@ message ( STATUS "${MY_SPACE}IPOPT_INCLUDE_DIR:\t\t\t" ${IPOPT_INCLUDE_DIR} )
 ####################################################################
 # Ipopt library directory ##########################################
 ####################################################################
-find_path ( IPOPT_LIBRARY_DIR 
-    libipopt.dylib libipopt.so 
+find_path ( IPOPT_LIBRARY_DIR
+    libipopt.dylib libipopt.so
     HINTS   /usr/local/lib
             ${IPOPT_ROOT_DIR}/lib
     )
 message ( STATUS "${MY_SPACE}IPOPT_LIBRARY_DIR:\t\t\t" ${IPOPT_LIBRARY_DIR} )
 
 if(APPLE)
-    find_library(IPOPT_LIBRARY 
+    find_library(IPOPT_LIBRARY
         libipopt.dylib
         HINTS   /usr/local/lib
                 ${IPOPT_ROOT_DIR}/lib
     )
 elseif(UNIX)
-    find_library(IPOPT_LIBRARY 
-        libipopt.so 
+    find_library(IPOPT_LIBRARY
+        libipopt.so
         HINTS   /usr/local/lib
                 ${IPOPT_ROOT_DIR}/lib
     )
@@ -84,7 +84,7 @@ mark_as_advanced ( IPOPT_LIBRARY IPOPT_INCLUDE_DIR IPOPT_LIBRARY_DIR )
 ####################################################################
 message ( STATUS "" )
 if ( EGOA_ENABLE_IPOPT AND NOT IPOPT_FOUND )
-    message ( FATAL_ERROR 
+    message ( FATAL_ERROR
         "Ipopt is enabled, but not available on the system. Please, check the \
         Ipopt installation, and cmake configuration or disable Ipopt by \
         setting EGOA_ENABLE_IPOPT to OFF." )

@@ -99,8 +99,8 @@ jobs:
         cmake -B ${{ steps.strings.outputs.build-output-dir }}
         -DCMAKE_CXX_COMPILER=g++
         -DCMAKE_C_COMPILER=gcc
-        -DEGOA_BUILD_TYPE=Release 
-        -DCMAKE_BUILD_TYPE=Release 
+        -DEGOA_BUILD_TYPE=Release
+        -DCMAKE_BUILD_TYPE=Release
         -DBoost_NO_SYSTEM_PATHS=TRUE
         -DEGOA_DOWNLOAD_CPPAD=OFF
         -DEGOA_DOWNLOAD_EIGEN=OFF

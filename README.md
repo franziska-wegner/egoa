@@ -3,7 +3,7 @@
 
 <h1 align="center">EGOA - Energy Grid Optimization and Analysis</h1>
 
-Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid analysis and planning. This framework is based on the PhD thesis <a href="http://dx.doi.org/10.5445/IR/1000120612">"Combinatorial Problems in Energy Networks -- Graph Theoretic Models and Algorithms"</a>. The Git repository of the PhD thesis is available under <a href="https://github.com/franziska-wegner/PhD_Thesis--Combinatorial_Problems_in_Energy_Networks--Graph_Theoretic_Models_and_Algorithms">Combinatorial_Problems_in_Energy_Networks</a>. 
+Energy Grid Optimization and Analysis (EGOA) is a framework for energy grid analysis and planning. This framework is based on the PhD thesis <a href="http://dx.doi.org/10.5445/IR/1000120612">"Combinatorial Problems in Energy Networks -- Graph Theoretic Models and Algorithms"</a>. The Git repository of the PhD thesis is available under <a href="https://github.com/franziska-wegner/PhD_Thesis--Combinatorial_Problems_in_Energy_Networks--Graph_Theoretic_Models_and_Algorithms">Combinatorial_Problems_in_Energy_Networks</a>.
 
 <img height=275 alt="Swiss Power Grid Branch with Parameters" src="https://github.com/franziska-wegner/egoa/assets/57569315/514cd0d2-6fac-416a-bf8d-31d97565fed8"/>   <img height=275 alt="Swiss Power Grid Bus with Parameters" src="https://github.com/franziska-wegner/egoa/assets/57569315/aad67a45-a656-4c42-9c74-e7d82eedc6fb"/>
 
@@ -57,7 +57,7 @@ At the moment this is limited to PyPSA, the IEEE cases, and the windfarm cases; 
 ```
 IEEE
 + 00-Matpower-Data
-(+) 02-gml 
+(+) 02-gml
 + 03-IEEE-Power_Flow_Test_Cases
 + 04-IEEE-Dynamic_Test_Cases
 + 05-IEEE-Reliability_Test_Systems-RTS
@@ -167,13 +167,13 @@ The Qt project can be installed on a Mac using
 brew install qt
 ```
 
-and on Ubuntu using 
+and on Ubuntu using
 
 ```
 sudo apt-get install qt
 ```
 
-The compiler clang and gcc can be installed on a Mac using the following command or you use the Apple clang compiler if necessary. 
+The compiler clang and gcc can be installed on a Mac using the following command or you use the Apple clang compiler if necessary.
 
 ```
 brew install llvm
@@ -191,7 +191,7 @@ If the tests are enabled `"EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework"` t
 <h3>CMake Parameter Overrides</h3>
 
 The repository provides an intial set of parameters in the sublimetext project file that can be found under `egoa.sublime-project`. In addition, there are scripts that support with server and local runs that have a initial CMake parameter configuration and can be adapted to the particular needs under [egoa/scripts/Build](https://github.com/franziska-wegner/egoa/tree/master/scripts/Build) and monitoring scripts under [egoa/scripts/Experiments](https://github.com/franziska-wegner/egoa/tree/master/scripts/Experiments).
-An essential CMake setting parameter is the build directory that should be changed according to your file system, e.g., `"build_folder": "/Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug"`. 
+An essential CMake setting parameter is the build directory that should be changed according to your file system, e.g., `"build_folder": "/Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug"`.
 
 <details>
 <summary>Example CMake Configuration for SublimeText</summary>
@@ -249,63 +249,63 @@ An essential CMake setting parameter is the build directory that should be chang
 
 Most parameters represent flags and can be enabled with `ON` if available and `OFF` if not available. Dependent on the flag the required path to the framework or tool has to be set accordingly (see above). There are flags that enable downloads for data sets and frameworks, and start with `EGOA_DOWNLOAD_<framework|dataset>`. The recommendation is to start with a minimum of enabled tools and extend if necessary.
 
-This framework provides a set of unittests that uses the Google Test Framework as base. The CMake files allow two different setups of the test framework that are known by online and offline configuration. The CMake parameter for the online version are `"EGOA_TEST_FRAMEWORK": "OnlineGoogleTestFramework"` OR `"EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework"` with the pointer to the installation directory of the Google test framework repository, e.g., `"EGOA_TEST_FRAMEWORK_LOCATION": "external/GoogleTestFramework"`. 
+This framework provides a set of unittests that uses the Google Test Framework as base. The CMake files allow two different setups of the test framework that are known by online and offline configuration. The CMake parameter for the online version are `"EGOA_TEST_FRAMEWORK": "OnlineGoogleTestFramework"` OR `"EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework"` with the pointer to the installation directory of the Google test framework repository, e.g., `"EGOA_TEST_FRAMEWORK_LOCATION": "external/GoogleTestFramework"`.
 
 <details>
 <summary>Successful Initial CMake Run</summary>
 
 ```
--- 
+--
 -- /Users/fwegner/Documents/Repositories/Public/EGOA/egoa
--- 
+--
 -- /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug
 -- Set OpenMP variables
 --  OMP_WAIT_POLICY:      ACTIVE
---  OMP_STACKSIZE:      
---  OMP_SCHEDULE:       
+--  OMP_STACKSIZE:
+--  OMP_SCHEDULE:
 --  OMP_PROC_BIND:        TRUE
 --  OMP_THREAD_LIMIT:     0
 --  Number of processors:   8
 --  OMP_NUM_THREADS:      8
--- 
---  Compiler extra flags:      -pedantic -Werror  -Wall -Wextra -Wunused-result -Wno-error=unused-but-set-variable -Wno-error=conversion -Wshadow -Wno-error=zero-length-array 
--- 
+--
+--  Compiler extra flags:      -pedantic -Werror  -Wall -Wextra -Wunused-result -Wno-error=unused-but-set-variable -Wno-error=conversion -Wshadow -Wno-error=zero-length-array
+--
 -- Download of data sets:
 --  Download PyPSA Europe data from https://github.com/PyPSA/pypsa-eur.git into /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/data/PowerGrids/PyPSA/pypsa-eur.
 --  Download PyPSA ITI Collaboration data from https://git.scc.kit.edu/FN/iti-collaboration.git into /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/data/PowerGrids/PyPSA/pypsa-iti-collaboration.
 --  Download IEEE Power Grid data.
--- 
+--
 -- Looking for Qt6
--- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
--- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
---  Found Qt6 Core module in "/opt/homebrew/lib/QtCore.framework/Versions/A/QtCore" 
---  Found Qt6 Quick module in "/opt/homebrew/lib/QtQuick.framework/Versions/A/QtQuick" 
---  Found Qt6 Widgets module in "/opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets" 
---  Found Qt6 Concurrent module in "/opt/homebrew/lib/QtConcurrent.framework/Versions/A/QtConcurrent" 
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR)
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR)
+--  Found Qt6 Core module in "/opt/homebrew/lib/QtCore.framework/Versions/A/QtCore"
+--  Found Qt6 Quick module in "/opt/homebrew/lib/QtQuick.framework/Versions/A/QtQuick"
+--  Found Qt6 Widgets module in "/opt/homebrew/lib/QtWidgets.framework/Versions/A/QtWidgets"
+--  Found Qt6 Concurrent module in "/opt/homebrew/lib/QtConcurrent.framework/Versions/A/QtConcurrent"
 SRC=/Users/fwegner/Documents/Repositories/Public/EGOA/egoa and Binary=/Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug
 --  Doxygen:      /opt/homebrew/bin/doxygen
 -- Google Test Framework
 --  EGOA_ENABLE_TESTS:      ON
--- 
+--
 -- Neither OGDF nor COIN include directory and library are added to the project.
--- 
+--
 -- Compiler:
 --  CMAKE_C_COMPILER:   /opt/homebrew/opt/llvm/bin/clang
 --  CMAKE_CXX_COMPILER:   /opt/homebrew/opt/llvm/bin/clang++
 --  make VERBOSE = 1? :   TRUE
--- 
+--
 -- Other important targets:
 --  qt6:        add libraries of QT6
 --  doc:        build doxygen documentation
 --  EGOA Exceptions:    ON
 --  EGOA Assertions:    ON
--- 
+--
 -- Build type is set to:    Debug
 -- Build files have been written to:  /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug
 -- Runtime output directory:    /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug/bin
 -- Archive output directory:    /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug/lib
 -- Library output directory:    /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug/lib
--- 
+--
 -- Configuring done (3.2s)
 -- Generating done (0.1s)
 -- Build files have been written to: /Users/fwegner/Documents/Repositories/Public/EGOA/egoa/build-debug
@@ -319,7 +319,7 @@ A general recommendation is CLION and Sublimetext. However, Visual Studio and ot
 
 <h2>Documentation</h2>
 
-The repository's public code documentation is available under [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa). For the purpose of code documentation, the <a href="https://www.doxygen.nl">Doxygen</a> framework is used. It provides a simple and well formed way of code documentation for C++. Run 
+The repository's public code documentation is available under [Code Documentation by Doxygen](https://franziska-wegner.github.io/egoa). For the purpose of code documentation, the <a href="https://www.doxygen.nl">Doxygen</a> framework is used. It provides a simple and well formed way of code documentation for C++. Run
 
     make doc
 

@@ -1,12 +1,12 @@
 #!/bin/sh
 #
 # buildProject.sh
-# 
+#
 #   Created on:
 #       Author: Franziska Wegner
-#       
+#
 # Project configuration on the server to avoid "ccmake ." configuration.
-# 
+#
 #########################################################
 # Define local standard argument ########################
 #########################################################
@@ -27,7 +27,7 @@ CMAKE_TARGET="TODO/egoa/framework"
 CMAKE_CXX_COMPILER="/usr/bin/g++-7"
 CMAKE_C_COMPILER="/usr/bin/gcc-7"
 
-# Enable/Disable Tools 
+# Enable/Disable Tools
 EGOA_ENABLE_BONMIN="ON"
 EGOA_ENABLE_BOOST="OFF"
 EGOA_ENABLE_DOCUMENTATION="ON"

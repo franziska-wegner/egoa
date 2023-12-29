@@ -31,14 +31,14 @@ class GenerationStrategyDifferentiation;
  * @details    This is the
  *     <tt> Vertices::GenerationStrategyDifferentiationType::totalVertexRealPowerGenerationPerSnapshot </tt>
  *     specialization.
- *     
+ *
  * @see        Vertices::GenerationStrategyDifferentiationType::totalVertexRealPowerGenerationPerSnapshot
  *
  * @tparam     NetworkType  The type of the network.
  */
 template<typename NetworkType>
 class GenerationStrategyDifferentiation<NetworkType, Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> {
-    
+
     using TNetwork              = NetworkType;
     using TGeneratorProperties  = typename TNetwork::TGeneratorProperties;
 
@@ -61,18 +61,18 @@ class GenerationStrategyDifferentiation<NetworkType, Vertices::GenerationStrateg
          */
         inline static
         Types::real TotalRealPowerGenerationAt ( TNetwork        const & network
-                                               , Types::vertexId         vertexId 
+                                               , Types::vertexId         vertexId
                                                , Types::index            timestampPosition = 0 )
         {
             USAGE_ASSERT ( network.Graph().VertexExists ( vertexId ) );
 
             Types::real pg ( 0.0 );
-            if ( network.HasGeneratorAt ( vertexId ) ) 
+            if ( network.HasGeneratorAt ( vertexId ) )
             {
-                network.template for_all_generators_at <ExecutionPolicy::sequential> ( vertexId, 
+                network.template for_all_generators_at <ExecutionPolicy::sequential> ( vertexId,
                     [ &network, &pg, &timestampPosition ]( TGeneratorProperties const & generator )
                     {
-                        if ( generator.IsActive() ) 
+                        if ( generator.IsActive() )
                         {
                             pg += network.GeneratorRealPowerSnapshotAt ( generator, timestampPosition );
                         }
@@ -113,12 +113,12 @@ class GenerationStrategyDifferentiation<NetworkType, Vertices::GenerationStrateg
             USAGE_ASSERT ( network.Graph().VertexExists ( vertexId ) );
 
             Types::real qg( 0.0 );
-            if ( network.HasGeneratorAt( vertexId ) ) 
+            if ( network.HasGeneratorAt( vertexId ) )
             {
-                network.template for_all_generators_at <ExecutionPolicy::sequential> ( vertexId, 
+                network.template for_all_generators_at <ExecutionPolicy::sequential> ( vertexId,
                     [&network, &qg, &timestampPosition ]( TGeneratorProperties const & generator )
                     {
-                        if ( generator.IsActive() ) 
+                        if ( generator.IsActive() )
                         {
                             qg += network.GeneratorReactivePowerSnapshotAt ( generator
                                                                            , timestampPosition );

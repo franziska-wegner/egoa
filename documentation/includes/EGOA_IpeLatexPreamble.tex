@@ -1,11 +1,11 @@
 %
 % EGOA_IpeLatexPreamble.tex
-% 
+%
 %  Created on: Nov 11, 2017
 %      Author: Franziska Wegner
-% 
+%
 % Usepackages and includes that are used for mainly all ipe presentations.
-% 
+%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Usepackages
@@ -26,7 +26,7 @@
 \usepackage{paralist}
 
 \DeclareMathOperator{\lef}{\ell}
-\DeclareMathOperator{\rig}{r}  
+\DeclareMathOperator{\rig}{r}
 
 \usepackage{amsopn}
 \usepackage{xargs}       % Use more than one optional parameter in a new commands
@@ -83,7 +83,7 @@
     \newcommand{\overleftrightsmallarrow}{\mathpalette{\overarrowsmall@\leftrightarrowfill@}}
     \newcommand{\overrightsmallarrow}{\mathpalette{\overarrowsmall@\rightarrowfill@}}
     \newcommand{\overleftsmallarrow}{\mathpalette{\overarrowsmall@\leftarrowfill@}}
-% 
+%
     \newcommand{\overarrowsmall@}[3]{%
     \vbox{%
       \ialign{%
@@ -102,7 +102,7 @@
     \fi
     }
 \makeatother
-% 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Includes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -115,7 +115,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Problem Environment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 \makeatletter
 % \renewcommand\arraystretch{1.5}
 \newenvironment{problem}[2][]{%
@@ -161,7 +161,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Algorithm Environment
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+%
 \usepackage[titlenumbered, ruled, vlined, linesnumbered,resetcount]
 {algorithm2e}%, dotocloa
 \SetKwComment{Comment}{\color{KITblack30}$\triangleright$\ }{}

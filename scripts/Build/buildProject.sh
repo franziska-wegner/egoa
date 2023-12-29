@@ -1,15 +1,15 @@
 #!/bin/sh
 #
 # buildProject.sh
-# 
+#
 #   Created on:
 #       Author: Franziska Wegner
-#       
+#
 # Builds the egoa project with the details specified in the configuration
-# script. Templates for configuration scripts can be found under 
+# script. Templates for configuration scripts can be found under
 #   ./localConfig.sh
 #   ./serverConfig.sh
-# 
+#
 
 #########################################################
 # Define input argument #################################
@@ -82,12 +82,12 @@ if [ "${buildMode}" = "Release" ]; then
         -DOGDF_INCLUDE_DIR="$OGDF_INCLUDE_DIR_RELEASE" \
         -DOGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_RELEASE" \
         -DOPENMP_INCLUDES="$OPENMP_INCLUDES" \
-        -DOPENMP_LIBRARIES="$OPENMP_LIBRARIES" 
+        -DOPENMP_LIBRARIES="$OPENMP_LIBRARIES"
 
     # -DOGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS" \
     # -DOGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS" \
     # -DCOIN_INCLUDE_DIR="$COIN_INCLUDE_DIR_RELEASE" \
-    # -DCOIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_RELEASE" \    
+    # -DCOIN_LIBRARY_DIR="$COIN_LIBRARY_DIR_RELEASE" \
 
     OGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS_RELEASE"
     OGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS_RELEASE"
@@ -123,8 +123,8 @@ else
         -DOGDF_INCLUDE_DIR="$OGDF_INCLUDE_DIR_DEBUG" \
         -DOGDF_LIBRARY_DIR="$OGDF_LIBRARY_DIR_DEBUG" \
         -DOPENMP_INCLUDES="$OPENMP_INCLUDES" \
-        -DOPENMP_LIBRARIES="$OPENMP_LIBRARIES" 
-        
+        -DOPENMP_LIBRARIES="$OPENMP_LIBRARIES"
+
 
     # -DOGDF_USE_ASSERT_EXCEPTIONS="$OGDF_USE_ASSERT_EXCEPTIONS" \
     # -DOGDF_WARNING_ERRORS="$OGDF_WARNING_ERRORS" \
@@ -149,15 +149,15 @@ make
 #########################################################
 # Output general information ############################
 #########################################################
-echo 
+echo
 echo "---------------------------------------------------------------------------------------------------"
-echo 
+echo
 echo "-- The build mode is set to:\t\t${buildMode}"
 echo "-- The build directory is set to:\t${buildDirectory}"
 echo "-- The cmake directory is set to:\t${cmakeTarget}"
 echo "-- The config file is set to:\t\t${configFile}"
 echo "-- Current directory is:\t\t$(pwd)"
-echo 
+echo
 echo "Cmake Configuration Overview"
 echo "\tCMAKE_BUILD_TYPE:               $buildMode"
 echo "\tBONMIN_ROOT_DIR:                $BONMIN_ROOT_DIR"

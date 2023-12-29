@@ -120,20 +120,20 @@ class DominatingThetaPath final {
 
                 Auxiliary::Timer dtpTime;
 
-                while ( !QueueEmpty() ) 
+                while ( !QueueEmpty() )
                 { // Q != {}
                     TLabel const label   = QueueDeleteMinimum();
                     const TVertexId u     = label.Vertex();
                     ESSENTIAL_ASSERT ( u < graph_.NumberOfVertices() );
 
                     // For all incident edges
-                    graph_.template for_all_edges_at<ExecutionPolicy::sequential>( u, 
-                        [&]( TEdge const & edge ) 
+                    graph_.template for_all_edges_at<ExecutionPolicy::sequential>( u,
+                        [&]( TEdge const & edge )
                         {
                             ESSENTIAL_ASSERT ( u < graph_.NumberOfVertices() );
-                        
+
                             TVertexId v = edge.Other(u);
-                        
+
                             ESSENTIAL_ASSERT ( v < graph_.NumberOfVertices() );
 
 #ifdef EGOA_ENABLE_STATISTIC_DTP // NUMBER OF SCANNED EDGES -> TOTAL NUMBER
@@ -142,7 +142,7 @@ class DominatingThetaPath final {
                             TLabel newlabel;
 
                             if ( ProduceCycle( newlabel, label + edge ) ) return;
-                            SetParentOf( newlabel, label ); 
+                            SetParentOf( newlabel, label );
 
 #ifdef EGOA_ENABLE_STATISTIC_DTP // NUMBER OF EDGES NOT PRODUCING A CYCLE
                             ++dtpRuntimeRow_.NumberOfEdgesProducingNoCycle;
@@ -166,7 +166,7 @@ class DominatingThetaPath final {
                         // std::cout << std::endl << dtpRuntimeRow_ << std::endl;
                         std::cout << "Number of relaxed edges: " << dtpRuntimeRow_.NumberOfRelaxedEdges << std::endl;
                         std::cout << "Number of labels: " << dtpRuntimeRow_.NumberOfLabels << std::endl<< std::endl;
-                        // ESSENTIAL_ASSERT ( ( 1 + dtpRuntimeRow_.NumberOfRelaxedEdges ) 
+                        // ESSENTIAL_ASSERT ( ( 1 + dtpRuntimeRow_.NumberOfRelaxedEdges )
                         //                 == dtpRuntimeRow_.NumberOfLabels );
 #endif
                 }
@@ -213,22 +213,22 @@ class DominatingThetaPath final {
 
                         ESSENTIAL_ASSERT ( graph_.VertexExists( vertexId ) );
 
-                        if ( !isVertexInSubgraph[vertexId] ) 
+                        if ( !isVertexInSubgraph[vertexId] )
                         {
                             isVertexInSubgraph[vertexId] = true;
                             vertices.push_back(vertexId);
                         }
 
-                        if ( label.PreviousVertex() != Const::NONE ) 
+                        if ( label.PreviousVertex() != Const::NONE )
                         { // @todo multiple edges? It would be easier if the labels stored edges
                             Types::edgeId edge = graph_.EdgeId ( vertexId, label.PreviousVertex() );
-                            if ( edge == Const::NONE ) 
+                            if ( edge == Const::NONE )
                             {
                                 edge = graph_.EdgeId ( label.PreviousVertex(), vertexId );
                                 ESSENTIAL_ASSERT( edge != Const::NONE );
                             }
 
-                            if (!isEdgeInSubgraph[edge])  
+                            if (!isEdgeInSubgraph[edge])
                             {
                                 isEdgeInSubgraph[edge] = true;
                                 edges.push_back(edge);
@@ -258,9 +258,9 @@ class DominatingThetaPath final {
              * @return     The optimal value.
              */
             inline Types::real Result ( std::vector<std::vector<TVertexId>> & parent
-                                      , TVertexId                     const   target ) 
+                                      , TVertexId                     const   target )
             {
-                USAGE_ASSERT ( graph_.VertexExists( target ) ); 
+                USAGE_ASSERT ( graph_.VertexExists( target ) );
 
                 // Iterate over all optima
                 Types::real result = \
@@ -268,17 +268,17 @@ class DominatingThetaPath final {
                 {
                     // Add a row for another label path from target t
                     parent.emplace_back( std::vector<TVertexId>() );
-                    
+
                     // Define function pointer for recursive call
                     std::function<void(TLabel const &)> FindPath;
-                    
+
                     // Construct path from the source to the sink
-                    FindPath = [this, &FindPath, & parent = parent] ( TLabel const & label ) 
+                    FindPath = [this, &FindPath, & parent = parent] ( TLabel const & label )
                     {
-                        if ( ( Const::NONE == label.PreviousVertex() ) ) 
+                        if ( ( Const::NONE == label.PreviousVertex() ) )
                         {
                             parent.back().emplace_back ( label.Vertex() );
-                        } else 
+                        } else
                         {
                             TVertexId       vertexId = label.Vertex();
 
@@ -293,15 +293,15 @@ class DominatingThetaPath final {
             }
 
             /**
-             * @brief      Current number of labels 
+             * @brief      Current number of labels
              *
              * @return     Total number of labels
              */
-            inline Types::count NumberOfLabels () 
+            inline Types::count NumberOfLabels ()
             {
                 Types::count numberOfLabels = 0;
 
-                for ( TLabelSet const & labelSet : labelSets_ ) 
+                for ( TLabelSet const & labelSet : labelSets_ )
                 {
                     numberOfLabels += labelSet.Size();
                 }
@@ -318,7 +318,7 @@ class DominatingThetaPath final {
              *
              * @param[in]  source  The source
              */
-            inline void Source ( TVertexId source ) 
+            inline void Source ( TVertexId source )
             {
                 USAGE_ASSERT ( source < labelSets_.size() );
                 Clear();
@@ -333,7 +333,7 @@ class DominatingThetaPath final {
             /**
              * @brief      Clear all data structures.
              */
-            inline void Clear() 
+            inline void Clear()
             {
                 labelSets_.clear();
                 labelSets_.assign( graph_.NumberOfVertices(), TLabelSet() );
@@ -349,7 +349,7 @@ class DominatingThetaPath final {
              *
              * @return     The current statistic representing a row.
              */
-            inline IO::DtpRuntimeRow & Statistic () 
+            inline IO::DtpRuntimeRow & Statistic ()
             {
                 return dtpRuntimeRow_;
             }
@@ -396,11 +396,11 @@ class DominatingThetaPath final {
              * @param      numberOfPaths  The number of paths. (Note that this
              *     field will be resized to the number of vertices in the
              *     graph if not already done.)
-             *     
+             *
              * @todo    Use DAG property of label paths.
              */
             inline void NumberOfPathsThroughVertex ( TVertexId                   target
-                                                   , std::vector<Types::count> & numberOfPathsPerVertex 
+                                                   , std::vector<Types::count> & numberOfPathsPerVertex
                                                    , std::vector<Types::real>  & relativeNumberOfPathsPerVertex )
             {
                 //@todo This is inefficient.
@@ -409,7 +409,7 @@ class DominatingThetaPath final {
 
                 numberOfPathsPerVertex.resize( graph_.NumberOfVertices(), 0 );
 
-                labelSets_[target].for_all_optima ( 
+                labelSets_[target].for_all_optima (
                     [&]( TLabel const & optLabel )
                     {
                         Types::labelId  labelId  = optLabel.Index();
@@ -429,7 +429,7 @@ class DominatingThetaPath final {
                             vertexId = label.PreviousVertex();
                             labelId  = label.PreviousLabel();
 
-                        } while ( labelId  != Const::NONE 
+                        } while ( labelId  != Const::NONE
                                && vertexId != Const::NONE );
                     }
                 ); // For all labels in DTP at target vertex
@@ -465,12 +465,12 @@ class DominatingThetaPath final {
              *     field will be resized).
              * @param      relativeNumberOfPathsPerEdge  The edge score per thread (if we
              *     run the algorithm parallel).
-             *     
+             *
              * @todo    Use DAG property of label paths.
              */
             inline void NumberOfPathsThroughEdge ( TVertexId                   target
                                                  , std::vector<Types::count> & numberOfPathsPerEdge
-                                                 , std::vector<Types::real>  & relativeNumberOfPathsPerEdge ) 
+                                                 , std::vector<Types::real>  & relativeNumberOfPathsPerEdge )
             {
                 //@todo This is inefficient.
                 Types::count numberOfOptimalLabels = LabelSetAt(target).Optima().size(); // Divide by this value
@@ -485,16 +485,16 @@ class DominatingThetaPath final {
                         TLabel & label = LabelAt( vertexId, labelId );
                         labelId        = label.Index();
 
-                        if (   ( label.PreviousLabel()  == Const::NONE ) 
-                            || ( label.PreviousVertex() == Const::NONE ) 
-                            || ( vertexId == Const::NONE ) 
+                        if (   ( label.PreviousLabel()  == Const::NONE )
+                            || ( label.PreviousVertex() == Const::NONE )
+                            || ( vertexId == Const::NONE )
                            ) break; // Label is already on path
 
                         // Increase number of paths at "edgeId"
-                        TEdgeId edgeId = ( graph_.EdgeId( label.PreviousVertex(), vertexId ) != Const::NONE ) 
-                                                ? graph_.EdgeId( label.PreviousVertex(), vertexId ) 
+                        TEdgeId edgeId = ( graph_.EdgeId( label.PreviousVertex(), vertexId ) != Const::NONE )
+                                                ? graph_.EdgeId( label.PreviousVertex(), vertexId )
                                                 : graph_.EdgeId( vertexId, label.PreviousVertex() );
-                        
+
                         ESSENTIAL_ASSERT ( edgeId != Const::NONE );
 
                         ++numberOfPathsPerEdge[edgeId];
@@ -505,12 +505,12 @@ class DominatingThetaPath final {
                         vertexId = label.PreviousVertex();
                         labelId  = label.PreviousLabel();
 
-                    } while ( labelId  != Const::NONE 
+                    } while ( labelId  != Const::NONE
                            && vertexId != Const::NONE );
                 }); // For all labels in DTP at target vertex
             }
         ///@}
-    
+
     private:
         ///@name Accessors
         ///@{
@@ -523,12 +523,12 @@ class DominatingThetaPath final {
              *
              * @return     The vertex identifier.
              */
-            inline TVertexId VertexIdOf ( TLabel const & label ) const 
-            { 
+            inline TVertexId VertexIdOf ( TLabel const & label ) const
+            {
                 USAGE_ASSERT ( !label.Empty() );
-                return label.Vertex();    
+                return label.Vertex();
             }
-            
+
             /**
              * @brief      Getter for the set of labels @f$\labels(\vertex)@f$ of a vertex @f$\vertex@f$.
              *
@@ -536,10 +536,10 @@ class DominatingThetaPath final {
              *
              * @return     The set of labels @f$\labels(\vertex)@f$ for the @p vertex.
              */
-            inline TLabelSet const & LabelSetAt ( TVertexId const vertexId ) const 
-            { 
-                USAGE_ASSERT ( vertexId < labelSets_.size() ); 
-                return labelSets_[vertexId]; 
+            inline TLabelSet const & LabelSetAt ( TVertexId const vertexId ) const
+            {
+                USAGE_ASSERT ( vertexId < labelSets_.size() );
+                return labelSets_[vertexId];
             }
 
             /**
@@ -551,10 +551,10 @@ class DominatingThetaPath final {
              * @return     The set of labels @f$\labels(\vertex)@f$ for the @p
              *     vertex.
              */
-            inline TLabelSet & LabelSetAt ( TVertexId const vertexId ) 
-            { 
-                USAGE_ASSERT ( vertexId < labelSets_.size() ); 
-                return labelSets_[vertexId]; 
+            inline TLabelSet & LabelSetAt ( TVertexId const vertexId )
+            {
+                USAGE_ASSERT ( vertexId < labelSets_.size() );
+                return labelSets_[vertexId];
             }
 
             /**
@@ -567,10 +567,10 @@ class DominatingThetaPath final {
              * @return     The label @f$\labelu@f$.
              */
             inline TLabel & LabelAt ( TVertexId       const vertexId
-                                    , Types::labelId  const labelId ) 
+                                    , Types::labelId  const labelId )
             {
-                USAGE_ASSERT ( vertexId < labelSets_.size() ); 
-                USAGE_ASSERT ( labelId  < Const::NONE ); 
+                USAGE_ASSERT ( vertexId < labelSets_.size() );
+                USAGE_ASSERT ( labelId  < Const::NONE );
 
                 return labelSets_[vertexId].ElementAt ( labelId );
             }
@@ -585,23 +585,23 @@ class DominatingThetaPath final {
              *
              * @return     @p True if the main queue is empty, @p False otherwise.
              */
-            inline bool QueueEmpty() const 
-            { 
-                return queue_.Empty(); 
+            inline bool QueueEmpty() const
+            {
+                return queue_.Empty();
             }
 
             /**
              * @brief      Adds a label to the main queue.
-             * 
+             *
              * @pre        A precondition to that method is that the label set of
              *     the label's @p label vertex was updated. Thus, this method
              *     should only be called by #UpdateLabelSet() or #UpdateLabelSetAt().
              *
              * @param      label  The label.
              */
-            inline void Insert( TLabel const & label ) 
-            { 
-                queue_.Emplace( label.Vertex(), label );  
+            inline void Insert( TLabel const & label )
+            {
+                queue_.Emplace( label.Vertex(), label );
             }
 
             /**
@@ -615,12 +615,12 @@ class DominatingThetaPath final {
              *
              * @param      newLabel  The new label @f$\labelu_{\mathrm{new}}@f$.
              */
-            inline void UpdateQueueWith ( TLabel const & newLabel ) 
+            inline void UpdateQueueWith ( TLabel const & newLabel )
             {
-                if ( !queue_.HasKeyOf ( newLabel.Vertex() ) ) 
+                if ( !queue_.HasKeyOf ( newLabel.Vertex() ) )
                 { // There is no label of vertex v in the queue
                     Insert ( newLabel );
-                } else if ( queue_.KeyOf( newLabel.Vertex() ) > newLabel ) 
+                } else if ( queue_.KeyOf( newLabel.Vertex() ) > newLabel )
                 { // The new label is better than the existing one
                     queue_.ChangeKey ( newLabel.Vertex(), newLabel );
                 }
@@ -633,23 +633,23 @@ class DominatingThetaPath final {
              *     the main queue).
              *
              * @return     Label that has the minimum key
-             * 
+             *
              * @see TQueue
              */
-            inline TLabel QueueDeleteMinimum () 
-            { 
+            inline TLabel QueueDeleteMinimum ()
+            {
                 USAGE_ASSERT ( !queue_.Empty() );
 
                 TVertexId vertexId;
                 TLabel    label;
 
-                std::tie ( vertexId, label ) = queue_.DeleteTop();  
-                
+                std::tie ( vertexId, label ) = queue_.DeleteTop();
+
                 ESSENTIAL_ASSERT ( !LabelSetEmptyAt(vertexId) );
                 label.Index() = UpdateLabelSetAt ( vertexId );
 
-                return label; 
-            } 
+                return label;
+            }
 
             /**
              * @brief      Check if a label set @f$\labels(\vertex)@f$ is
@@ -659,10 +659,10 @@ class DominatingThetaPath final {
              *
              * @return     @p True if the label set is empty, @p False otherwise.
              */
-            inline bool LabelSetEmptyAt( TVertexId const vertexId ) const 
-            { 
-                USAGE_ASSERT ( vertexId < labelSets_.size() ); 
-                return labelSets_[vertexId].EmptyQueue();    
+            inline bool LabelSetEmptyAt( TVertexId const vertexId ) const
+            {
+                USAGE_ASSERT ( vertexId < labelSets_.size() );
+                return labelSets_[vertexId].EmptyQueue();
             }
 
             /**
@@ -674,11 +674,11 @@ class DominatingThetaPath final {
              * @return     @p True if the label set @f$\labels(\vertex)@f$ is
              *     empty, @p False otherwise.
              */
-            inline bool LabelSetEmptyAt( TLabel const & label )  const 
-            { 
+            inline bool LabelSetEmptyAt( TLabel const & label )  const
+            {
                 USAGE_ASSERT ( !label.Empty() );
-                return LabelSetEmptyAt( VertexIdOf ( label ) ); 
-            } 
+                return LabelSetEmptyAt( VertexIdOf ( label ) );
+            }
 
             /**
              * @brief      Update a label set @f$\labels(\vertex)@f$ at a vertex @f$\vertex@f$.
@@ -687,19 +687,19 @@ class DominatingThetaPath final {
              *     update (#labelSet.Pop()) of the label set
              *     @f$\labels(\vertex)@f$ at a vertex
              *     @f$\vertex@f$.
-             * 
+             *
              * @pre        As a precondition #QueueDeleteMinimum() has to be
              *     called.
              *
              * @param      labelSet  The label set @f$\labels(\vertex)@f$ at a
              *     vertex @f$\vertex@f$.
              */
-            inline Types::labelId UpdateLabelSet ( TLabelSet & labelSet ) 
-            { 
+            inline Types::labelId UpdateLabelSet ( TLabelSet & labelSet )
+            {
                 USAGE_ASSERT ( !labelSet.Empty() );
 
                 Types::labelId labelId = labelSet.Pop();
-                
+
                 if ( ! labelSet.EmptyQueue() ) {
                     Insert ( labelSet.Top() );
                 }
@@ -713,17 +713,17 @@ class DominatingThetaPath final {
              *     vertex @f$\vertex@f$ from the queue has to trigger an
              *     update (#labelSet.Pop()) of the label bucket at vertex
              *     @f$\vertex@f$.
-             *     
+             *
              * @pre        As a precondition #QueueDeleteMinimum() has do be
              *     called.
              *
              * @param[in]  vertexId  The vertex identifier of vertex @f$\vertex@f$.
-             * 
+             *
              * @see        DominatingThetaPath#UpdateBucket
              */
-            inline Types::labelId UpdateLabelSetAt ( TVertexId vertexId ) 
-            { 
-                USAGE_ASSERT   ( vertexId < labelSets_.size() ); 
+            inline Types::labelId UpdateLabelSetAt ( TVertexId vertexId )
+            {
+                USAGE_ASSERT   ( vertexId < labelSets_.size() );
                 return UpdateLabelSet ( labelSets_[vertexId] );
             }
         ///@}
@@ -740,7 +740,7 @@ class DominatingThetaPath final {
              * @param      previousLabel  The previous label @f$\labelu_p@f$
              */
             inline void SetParentOf ( TLabel       &  label
-                                    , TLabel const &  previousLabel ) 
+                                    , TLabel const &  previousLabel )
             {
                 label.PreviousVertex() = previousLabel.Vertex();
                 label.PreviousLabel()  = previousLabel.Index();
@@ -763,7 +763,7 @@ class DominatingThetaPath final {
              * @return     @p True if the merging was successful, @p False otherwise.
              */
             inline bool MergeLabelAt( TVertexId vertexId
-                                    , TLabel  & label ) 
+                                    , TLabel  & label )
             {
                 return labelSets_[vertexId].template Merge<Domination>( label );
             }
@@ -783,10 +783,10 @@ class DominatingThetaPath final {
              * @return     @p True if the new label produces a cycle, @p False otherwise.
              */
             inline bool ProduceCycle ( TLabel                  &  label
-                                     , std::pair<TLabel, bool> && pair ) 
+                                     , std::pair<TLabel, bool> && pair )
             {
                 label = std::get<0>(pair);
-                return  !( std::get<1>(pair) ); 
+                return  !( std::get<1>(pair) );
             }
         ///@}
 

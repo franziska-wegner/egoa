@@ -26,7 +26,7 @@ namespace egoa {
  *     @f$c_{\scu}\colon\edges\to\posreals@f$ is defined by
  *     @f[
  *      c_{\scu} := \frac{1}{m_B}\sum_{\source\in\generators}\sum_{\sink\in\consumers} \frac{\omega_{\dtp}(\source,\sink,\edge)}{\omega_{\dtp}(\source,\sink)},
- *     @f] 
+ *     @f]
  *     where @f$\omega_{\dtp}(\source,\sink,\edge)@f$ is the number of
  *     @f$\dtp@f$-paths between @f$\source@f$ and @f$\sink@f$ that use the edge
  *     @f$\edge@f$, @f$\omega_{\dtp}(\source,\sink)@f$ is the total number of
@@ -36,7 +36,7 @@ namespace egoa {
  *
  * @pre        The template parameter used for NetworkType should have an
  *     interface similar to the PowerGrid. However, the minimum
- *     requirements on the network type are 
+ *     requirements on the network type are
  *     - for_all_generator_identifiers<IsParallel>, and
  *     - for the included graph see the minimum requirement of the
  *       PathFindingAlgorithm, e.g., DominatingThetaPath.
@@ -49,7 +49,7 @@ namespace egoa {
  *     such as IO::DtpRuntimeCollection.
  * @tparam     CentralityCounterType  The centrality counter decides whether
  *     to count edges or vertices.
- * 
+ *
  * @see BetweennessCentrality
  * @see PowerGrid
  * @see DominatingThetaPath
@@ -60,13 +60,13 @@ template< typename NetworkType                      = PowerGrid< StaticGraph< Ve
                                                                             , Edges::ElectricalProperties >
                                                                , Vertices::GeneratorProperties<>
                                                                , Vertices::LoadProperties<Vertices::IeeeBusType> >
-        , typename PathFindingAlgorithm             = DominatingThetaPath<typename NetworkType::TGraph> 
-        , typename MeasurementCollection            = IO::DtpRuntimeCollection 
+        , typename PathFindingAlgorithm             = DominatingThetaPath<typename NetworkType::TGraph>
+        , typename MeasurementCollection            = IO::DtpRuntimeCollection
         , CentralityCounter CentralityCounterType   = CentralityCounter::counterAtEdges > /**< Distinguish between counting edges or vertices. */
 class GeneratorBasedBetweennessCentrality final : public BetweennessCentrality < typename NetworkType::TGraph
                                                                                , PathFindingAlgorithm
                                                                                , MeasurementCollection
-                                                                               , CentralityCounterType > 
+                                                                               , CentralityCounterType >
 {
     public:
 #pragma mark TYPE_ALIASING
@@ -84,11 +84,11 @@ class GeneratorBasedBetweennessCentrality final : public BetweennessCentrality <
         ///@name Constructors and Destructor
         ///@{
 #pragma mark CONSTRUCTORS_AND_DESTRUCTORS
-            GeneratorBasedBetweennessCentrality ( TNetwork const & network ) 
+            GeneratorBasedBetweennessCentrality ( TNetwork const & network )
             : TBetweennessCentrality( network.Graph() )
             , network_( network )
             {}
-            
+
             /**
              * @brief      Destroys the object.
              */
@@ -99,7 +99,7 @@ class GeneratorBasedBetweennessCentrality final : public BetweennessCentrality <
         ///@name Execute the Betweenness Centrality Algorithm
         ///@{
 #pragma mark EXECUTE_ALGORITHM
-            
+
             /**
              * @brief      Run the generator-based betweenness centrality.
              * @details    If OpenMP is available this method will run in
@@ -111,13 +111,13 @@ class GeneratorBasedBetweennessCentrality final : public BetweennessCentrality <
              *     https://en.cppreference.com/w/cpp/container </a>.
              */
             inline void Run ()
-            {   
+            {
                 TNumberOfPaths         numberOfPaths;
                 TRelativeNumberOfPaths relativeNumberOfPaths;
 
                 this->Clear ( numberOfPaths, relativeNumberOfPaths );
 
-                network_.template for_all_vertex_identifiers_with_generator<ExecutionPolicy::parallel> ( [   
+                network_.template for_all_vertex_identifiers_with_generator<ExecutionPolicy::parallel> ( [
                     this
                     , & numberOfPaths
                     , & relativeNumberOfPaths ] ( TGeneratorId vertexId )
@@ -130,9 +130,9 @@ class GeneratorBasedBetweennessCentrality final : public BetweennessCentrality <
                     this->TotalNumberOfPaths( numberOfPaths, relativeNumberOfPaths );
 
 #ifdef EGOA_ENABLE_STATISTIC_BETWEENNESS_CENTRALITY // COLLECT RUNTIME INFORMATION
-                    #pragma omp critical 
-                    { // More information concerning standard container 
-                      // concurrency under "Thread safety": 
+                    #pragma omp critical
+                    { // More information concerning standard container
+                      // concurrency under "Thread safety":
                       // https://en.cppreference.com/w/cpp/container
                         this->Algorithm()[omp_get_thread_num()].Statistic().NumberOfGenerators  = network_.NumberOfGenerators();
                         this->Algorithm()[omp_get_thread_num()].Statistic().NumberOfLoads       = network_.NumberOfLoads();

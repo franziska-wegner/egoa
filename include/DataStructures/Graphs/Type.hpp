@@ -17,9 +17,9 @@ namespace egoa {
 ///@{
 #pragma mark POWER_GRID_CONVERSION_METHODS
     inline Types::string BoundTypeToString ( Vertices::BoundType const & boundType )
-    { 
-        if ( Vertices::BoundType::exact              == boundType ) return "exact"; 
-        else if ( Vertices::BoundType::bounded       == boundType ) return "bounded"; 
+    {
+        if ( Vertices::BoundType::exact              == boundType ) return "exact";
+        else if ( Vertices::BoundType::bounded       == boundType ) return "bounded";
         else if ( Vertices::BoundType::unbounded     == boundType ) return "unbounded";
         else if ( Vertices::BoundType::pureunbounded == boundType ) return "pureunbounded" ;
         return "unknown";

@@ -1,18 +1,18 @@
 # OpenMP.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_OPENMP is ON the script adds the target to use the <omp.h>
 # header in the project.
-# 
+#
 # Installation of OpenMP
 #   * To install OpenMP on Mac use:
 #     * OPENMP: brew install llvm   PATH: /usr/local/Cellar/llvm/5.0.1/bin/clang
-#     * CPP = /usr/local/opt/llvm/bin/clang | CPPFLAGS = -I/usr/local/opt/llvm/include -fopenmp 
+#     * CPP = /usr/local/opt/llvm/bin/clang | CPPFLAGS = -I/usr/local/opt/llvm/include -fopenmp
 #                                           | LDFLAGS  = -L/usr/local/opt/llvm/lib
 
-message(STATUS "OpenMP enabled: " ${EGOA_ENABLE_OPENMP}) 
+message(STATUS "OpenMP enabled: " ${EGOA_ENABLE_OPENMP})
 
 # ${CMAKE_CXX_COMPILER}  ---  /usr/local/Cellar/llvm/9.0.0/bin/clang++
 # /usr/local/opt/llvm@8/   or     /usr/local/Cellar/llvm@8/8.0.1/bin/clang++
@@ -67,7 +67,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 # Output Message ###################################################
 ####################################################################
 if(EGOA_ENABLE_OPENMP AND NOT OPENMP_FOUND)
-    message( FATAL_ERROR 
+    message( FATAL_ERROR
       "OpenMP is enabled, but not available on the system. Please, check the \
       specification of your compiler or disable OpenMP by setting \
       EGOA_ENABLE_OPENMP to OFF." )
