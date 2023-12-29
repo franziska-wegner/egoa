@@ -20,6 +20,12 @@ concurrency:
 env:
   QT_VERSION:     "6.2.0"
 
+permissions:
+  contents: read
+  packages: read
+  # To report GitHub Actions status checks
+  statuses: write
+
 jobs:
   cpp-linter:
 
