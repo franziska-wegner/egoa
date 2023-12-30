@@ -990,6 +990,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
@@ -1011,6 +1012,48 @@ TEST_F ( TestNetworkEmptyDeathTest
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_EQ ( 0,       network_.NumberOfGenerators() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveGeneratorAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    try {
+        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+                                   , static_cast<Types::generatorId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    assertionString = buildAssertionString  ( "PowerGrid.hpp"
+                                            , "PowerGrid"
+                                            , "HasGeneratorAt"
+                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+    try {
+        network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+    EXPECT_EQ ( 0,       network_.NumberOfGenerators() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
