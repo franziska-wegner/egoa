@@ -5303,6 +5303,7 @@ TEST_F ( TestNetworkEmpty
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
        , GeneratorRealPowerSnapshotsAt )
 {
@@ -5318,6 +5319,33 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
                                                            , snapshotsAtTimestamp );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+       , GeneratorRealPowerSnapshotsAtExceptionHandling )
+{
+    std::vector<Types::generatorSnapshot> snapshotsAtTimestamp;
+    snapshotsAtTimestamp.emplace_back ( Const::NONE );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorRealPowerSnapshotsAt"
+                                                , "snapshotsAtTimestamp.empty\\(\\)");
+
+    try {
+        network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
+                                               , snapshotsAtTimestamp );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorRealPowerSnapshotsAt )
