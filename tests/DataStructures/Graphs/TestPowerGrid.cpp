@@ -1235,6 +1235,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , RemoveGeneratorAtUsingVertexIdGenerator )
 {
@@ -1262,6 +1263,54 @@ TEST_F ( TestNetworkEmptyDeathTest
     EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
+{
+    // Generate generator with default values
+    TGeneratorProperties generatorProperties;
+    generatorProperties.Name() = "TestGenerator1";
+
+    // Vertex has no generators with assertion at RemoveGeneratorAt
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveGeneratorAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    try {
+        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+                                   , generatorProperties );
+    } catch ( std::runtime_error const & error ) 
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... ) 
+    {
+        FAIL()  << "Expected std::runtime_error with message: " 
+                << assertionString;
+    }
+
+    // Vertex has no generators with assertion at HasGeneratorAt
+    assertionString = buildAssertionString  ( "PowerGrid.hpp"
+                                            , "PowerGrid"
+                                            , "HasGeneratorAt"
+                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+    try {
+        network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error ) 
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... ) 
+    {
+        FAIL()  << "Expected std::runtime_error with message: " 
+                << assertionString;
+    }
+
+    EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
+    EXPECT_EQ ( 0, network_.NumberOfGenerators() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , RemoveGeneratorAtUsingVertexIdGenerator )
