@@ -3980,6 +3980,7 @@ TEST_F  ( TestNetworkEmpty
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
         , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
@@ -3993,6 +3994,39 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     ASSERT_DEATH ( {networkConst_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
+        , LoadAtExceptionHandling )
+{ // Checks if there is a load at a load ID and returns the property
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadAt"
+                                                , "HasLoad \\( loadId \\)");
+
+    try {
+        network_.LoadAt ( static_cast<Types::loadId>( 3 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.LoadAt ( static_cast<Types::loadId>( 3 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , LoadAt )
