@@ -3477,6 +3477,7 @@ TEST_F  ( TestNetworkEmpty
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExists )
 {
@@ -3496,6 +3497,37 @@ TEST_F  ( TestNetworkEmptyDeathTest
                  , assertionString );
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExistsExceptionHandling )
+{
+    TVertexProperties vertexProperties;
+    Types::vertexId   vertexId = network_.Graph().AddVertex ( vertexProperties );
+    TVertex   const & vertex   = network_.Graph().VertexAt  ( vertexId );
+
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveLoadAt"
+                                                , "HasLoad \\( loadId \\)");
+
+    try {
+        network_.RemoveLoadAt ( vertexId
+                              , static_cast<Types::loadId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdLoadIdAddingAndRemovingMultipleLoads )
