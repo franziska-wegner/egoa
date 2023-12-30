@@ -4917,6 +4917,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddLoadSnapshotAt )
 {
@@ -4940,6 +4941,49 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddLoadSnapshotAtExceptionHandling )
+{
+    TLoadProperties loadProperties;
+
+    CreateExampleLoadProperties( loadProperties );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddLoadAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    try {
+        network_.AddLoadAt(static_cast<Types::vertexId>(0), loadProperties);
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    Types::loadId loadId = static_cast<Types::loadId>(0);
+    assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                           , "PowerGrid"
+                                           , "AddLoadSnapshotAt"
+                                           , "HasLoad \\( loadId \\)");
+    try {
+        network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddLoadSnapshotAt )
