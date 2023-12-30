@@ -8,6 +8,7 @@
 #include "TestPowerGrid.hpp"
 
 using testing::StrEq;
+using ::testing::MatchesRegex;
 
 namespace egoa::test {
 
