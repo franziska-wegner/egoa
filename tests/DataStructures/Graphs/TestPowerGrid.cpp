@@ -3410,6 +3410,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdLoadId )
 {
@@ -3432,6 +3433,49 @@ TEST_F  ( TestNetworkEmptyDeathTest
     EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , RemoveLoadAtUsingVertexIdLoadIdExceptionHandling )
+{
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveLoadAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    try {
+        network_.RemoveLoadAt ( static_cast<Types::vertexId>(0)
+                              , static_cast<Types::loadId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    assertionString = buildAssertionString  ( "PowerGrid.hpp"
+                                            , "PowerGrid"
+                                            , "HasLoadAt"
+                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+    try {
+        network_.HasLoadAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExists )
