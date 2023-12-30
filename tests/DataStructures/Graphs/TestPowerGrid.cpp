@@ -2572,6 +2572,7 @@ TEST_F  ( TestNetworkEmpty
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
         , TotalRealPowerGenerationAtNonExistingVertex )
 {
@@ -2583,6 +2584,29 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
+        , TotalRealPowerGenerationAtNonExistingVertexExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalRealPowerGenerationAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    try {
+        network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
+    } catch ( std::runtime_error const & error ) 
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... ) 
+    {
+        FAIL()  << "Expected std::runtime_error with message: " 
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator )
