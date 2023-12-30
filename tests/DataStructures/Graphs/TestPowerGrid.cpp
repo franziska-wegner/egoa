@@ -1706,6 +1706,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , HasGeneratorAtVertexObject )
 {
@@ -1720,6 +1721,32 @@ TEST_F ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.HasGeneratorAt ( vertex ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , HasGeneratorAtVertexObjectExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "HasGeneratorAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    TVertexProperties vertexProperties;
+    TVertex vertex ( 9999, vertexProperties );
+
+    try {
+        network_.HasGeneratorAt ( vertex );
+    } catch ( std::runtime_error const & error ) 
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... ) 
+    {
+        FAIL()  << "Expected std::runtime_error with message: " 
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , HasGeneratorAtVertexObject )
