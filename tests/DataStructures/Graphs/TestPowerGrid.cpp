@@ -1912,6 +1912,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , GeneratorAt )
 {
@@ -1923,6 +1924,29 @@ TEST_F ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.GeneratorAt( static_cast<Types::generatorId>(0) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorAtExceptionHandling )
+{
+    // Generator does not exist
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorAt"
+                                                , "HasGenerator \\( generatorId \\)");
+    try {
+        network_.GeneratorAt( static_cast<Types::generatorId>(0) );
+    } catch ( std::runtime_error const & error ) 
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... ) 
+    {
+        FAIL()  << "Expected std::runtime_error with message: " 
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorAt )
