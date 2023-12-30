@@ -3266,6 +3266,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddLoadAtVertexObject )
 {
@@ -3281,6 +3282,33 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.AddLoadAt ( vertex, loadProperties ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddLoadAtVertexObjectExceptionHandling )
+{
+    TLoadProperties loadProperties;
+    TVertexProperties vertexProperties;
+    TVertex vertex ( 9999, vertexProperties );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddLoadAt"
+                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+    try {
+        network_.AddLoadAt ( vertex, loadProperties );
+    } catch ( std::runtime_error const & error ) 
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... ) 
+    {
+        FAIL()  << "Expected std::runtime_error with message: " 
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestNetworkEmpty
         , AddLoadAtVertexObject )
