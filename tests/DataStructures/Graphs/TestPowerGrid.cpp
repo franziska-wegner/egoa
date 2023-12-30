@@ -5060,6 +5060,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmpty
         , AddSnapshotWeighting )
 {
@@ -5072,6 +5073,30 @@ TEST_F  ( TestNetworkEmpty
     ASSERT_DEATH ( {network_.AddSnapshotWeighting( Const::NONE );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddSnapshotWeightingExceptionHandling )
+{
+    network_.AddSnapshotWeighting( 9.9 );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddSnapshotWeighting"
+                                                , "weight != Const::NONE");
+    try {
+        network_.AddSnapshotWeighting( Const::NONE );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddSnapshotWeighting )
