@@ -3813,6 +3813,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , LoadIds )
 { // Checks if there is a load at a vertex
@@ -3830,6 +3831,44 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {networkConst_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , LoadIdsExceptionHandling )
+{ // Checks if there is a load at a vertex
+
+    TLoadProperties             loadProperties0;
+    std::vector<Types::loadId>  loadIds;
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadIds"
+                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+
+    try {
+        network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    try {
+        networkConst_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , LoadIds )
