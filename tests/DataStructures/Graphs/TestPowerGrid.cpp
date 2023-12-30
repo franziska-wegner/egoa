@@ -2652,12 +2652,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 
     try {
         network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2744,12 +2744,12 @@ TEST_F  ( TestNetworkEmpty
 
     try {
         network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2978,12 +2978,12 @@ TEST_F  ( TestNetworkEmpty
 
     try {
         network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -3014,12 +3014,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 
     try {
         network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -3070,12 +3070,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 
     try {
         network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -3148,12 +3148,12 @@ TEST_F  ( TestNetworkEmpty
 
     try {
         network_.AddLoadAt ( static_cast<Types::vertexId>(0), loadProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -3208,12 +3208,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 
     try {
         network_.AddLoadAt ( static_cast<Types::vertexId>(9), loadProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -3298,12 +3298,12 @@ TEST_F  ( TestNetworkEmpty
 
     try {
         network_.AddLoadAt ( vertex, loadProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
