@@ -34,14 +34,14 @@
 namespace egoa::test {
 
 /**
- * @brief      Fixture that provides the basic network and measurement setup 
+ * @brief      Fixture that provides the basic network and measurement setup
  */
 class TestBetweennessCentralityGraph : public ::testing::Test {
     protected:
         ///@name Type aliasing
         ///@{
 #pragma mark BC_GRAPH_TYPE_ALIASING
-            
+
             // Graph and network data structures
             using TVertex           = Vertices::Vertex<Vertices::ElectricalProperties<>>;
             using TVertexProperties = TVertex::TProperties;
@@ -52,7 +52,7 @@ class TestBetweennessCentralityGraph : public ::testing::Test {
             using TPowerGrid        = PowerGrid<TGraph>;
             // IO
             using TPowerGridIO      = PowerGridIO<TGraph>;
-            // Measurement 
+            // Measurement
             using TMeasurementCollection = IO::DtpRuntimeCollection;
             using TMeasurementRow        = typename TMeasurementCollection::TRow;
         ///@}
@@ -148,7 +148,7 @@ class TestBetweennessCentralityGraph : public ::testing::Test {
                                                    , std::vector<Types::real> const & check    ) const
         {
             ASSERT_EQ ( original.size(), check.size() );
-            
+
             for (Types::count counter = 0
                 ; counter < original.size()
                 ; ++counter )
@@ -179,8 +179,8 @@ class TestBetweennessCentralityGraph : public ::testing::Test {
  * @brief      Class for testing the betweenness centrality with DTP and
  *     voltage angle difference label.
  */
-class TestBetweennessCentralityDtpVoltageAngleDifference 
-        : public TestBetweennessCentralityGraph 
+class TestBetweennessCentralityDtpVoltageAngleDifference
+        : public TestBetweennessCentralityGraph
 {
     protected:
 
@@ -192,7 +192,7 @@ class TestBetweennessCentralityDtpVoltageAngleDifference
         using TMQueue        = MappingBinaryHeap<typename TGraph::TVertexId, TLabel >;
         // Bucket
         using TLabelSet      = Bucket< TQueue >;
-        
+
         // Dominating theta path using susceptance norm only
         using TFindPathAlgo  = DominatingThetaPath < TGraph
                                                    , TLabel
@@ -214,7 +214,7 @@ class TestBetweennessCentralityDtpVoltageAngleDifference
        {}
 
        ~TestBetweennessCentralityDtpVoltageAngleDifference () {}
-}; 
+};
 
 // ***********************************************************************
 // ***********************************************************************
@@ -226,8 +226,8 @@ class TestBetweennessCentralityDtpVoltageAngleDifference
  * @brief      Class for testing the betweenness centrality with DTP and
  *     voltage angle difference label using @c edge counter @c.
  */
-class TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter 
-        : public TestBetweennessCentralityDtpVoltageAngleDifference 
+class TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
+        : public TestBetweennessCentralityDtpVoltageAngleDifference
 {
     protected:
 #pragma mark BC_DTP_VANGLE_EDGE_COUNTER_TYPE_ALIASING
@@ -235,7 +235,7 @@ class TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
                                                      , TFindPathAlgo
                                                      , TMeasurementCollection
                                                      , CentralityCounter::counterAtEdges >;
- 
+
  #pragma mark BC_DTP_VANGLE_EDGE_COUNTER_CONSTRUCTORS_AND_DESTRUCTOR
        TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter ()
        : TestBetweennessCentralityDtpVoltageAngleDifference()
@@ -256,7 +256,7 @@ class TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
 
 #pragma mark BC_DTP_VANGLE_EDGE_COUNTER_MEMBER
         TBcDtpVangle betweennessAlgorithm_;
-}; 
+};
 
 // ***********************************************************************
 // ***********************************************************************
@@ -268,8 +268,8 @@ class TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
  * @brief      Class for test betweenness centrality with DTP and voltage
  *     angle difference labels using vertex counter.
  */
-class TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter 
-        : public TestBetweennessCentralityDtpVoltageAngleDifference 
+class TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter
+        : public TestBetweennessCentralityDtpVoltageAngleDifference
 {
     protected:
 #pragma mark BC_DTP_VANGLE_VERTEX_COUNTER_TYPE_ALIASING
@@ -298,7 +298,7 @@ class TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter
 
 #pragma mark BC_DTP_VANGLE_VERTEX_COUNTER_MEMBERS
         TBcDtpVangle betweennessAlgorithm_;
-}; 
+};
 
 #pragma mark BC_DTP_SUSCEPTANCE_NORM
 
@@ -306,8 +306,8 @@ class TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter
  * @brief      Class for test betweenness centrality with DTP and susceptance
  *     norm labels.
  */
-class TestBetweennessCentralityDtpSusceptanceNorm 
-        : public TestBetweennessCentralityGraph 
+class TestBetweennessCentralityDtpSusceptanceNorm
+        : public TestBetweennessCentralityGraph
 {
     protected:
 
@@ -348,8 +348,8 @@ class TestBetweennessCentralityDtpSusceptanceNorm
  * @brief      Class for testing the betweenness centrality with DTP and
  *     susceptance norm labels using @c edge counter @c.
  */
-class TestBetweennessCentralityDtpSusceptanceNormEdgeCounter 
-        : public TestBetweennessCentralityDtpSusceptanceNorm 
+class TestBetweennessCentralityDtpSusceptanceNormEdgeCounter
+        : public TestBetweennessCentralityDtpSusceptanceNorm
 {
     protected:
 
@@ -376,7 +376,7 @@ class TestBetweennessCentralityDtpSusceptanceNormEdgeCounter
         {}
 
         ~TestBetweennessCentralityDtpSusceptanceNormEdgeCounter () {}
-    
+
 #pragma mark BC_DTP_SUSCEPTANCE_NORM_EDGE_COUNTER_MEMBERS
         TBcDtpBnorm betweennessAlgorithm_;
 };
@@ -385,8 +385,8 @@ class TestBetweennessCentralityDtpSusceptanceNormEdgeCounter
  * @brief      Class for testing the betweenness centrality with DTP and
  *     susceptance norm labels using @c vertex counter @c.
  */
-class TestBetweennessCentralityDtpSusceptanceNormVertexCounter 
-        : public TestBetweennessCentralityDtpSusceptanceNorm 
+class TestBetweennessCentralityDtpSusceptanceNormVertexCounter
+        : public TestBetweennessCentralityDtpSusceptanceNorm
 {
     protected:
         using TBcDtpBnorm    = BetweennessCentrality < TGraph
@@ -410,7 +410,7 @@ class TestBetweennessCentralityDtpSusceptanceNormVertexCounter
         {}
 
         virtual ~TestBetweennessCentralityDtpSusceptanceNormVertexCounter () {}
-    
+
     protected:
         TBcDtpBnorm betweennessAlgorithm_;
 };
@@ -420,8 +420,8 @@ class TestBetweennessCentralityDtpSusceptanceNormVertexCounter
  *     susceptance norm labels using @c edge counter @c and the @c
  *     Acm2018MtsfFigure4a @c.
  */
-class TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter 
-        : public TestBetweennessCentralityDtpSusceptanceNormEdgeCounter 
+class TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter
+        : public TestBetweennessCentralityDtpSusceptanceNormEdgeCounter
 {
     protected:
         TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter ()
@@ -429,10 +429,10 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4a_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4a_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4a_
                             << " does not exist!";
                 exit(1);
             }
@@ -441,7 +441,7 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter
 
         virtual ~TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -452,8 +452,8 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter
  *     susceptance norm labels using @c vertex counter @c and the @c
  *     Acm2018MtsfFigure4a @c.
  */
-class TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter 
-        : public TestBetweennessCentralityDtpSusceptanceNormVertexCounter 
+class TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter
+        : public TestBetweennessCentralityDtpSusceptanceNormVertexCounter
 {
     protected:
         TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter ()
@@ -461,10 +461,10 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4a_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4a_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4a_
                             << " does not exist!";
                 exit(1);
             }
@@ -473,7 +473,7 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter
 
         virtual ~TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -484,8 +484,8 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4aVertexCounter
  *     susceptance norm labels using @c edge counter @c and the @c
  *     Acm2018MtsfFigure4b @c.
  */
-class TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter 
-        : public TestBetweennessCentralityDtpSusceptanceNormEdgeCounter 
+class TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter
+        : public TestBetweennessCentralityDtpSusceptanceNormEdgeCounter
 {
     protected:
         TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter ()
@@ -493,10 +493,10 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4b_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4b_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4b_
                             << " does not exist!";
                 exit(1);
             }
@@ -505,7 +505,7 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter
 
         virtual ~TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -516,8 +516,8 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter
  *     susceptance norm labels using @c vertex counter @c and the @c
  *     Acm2018MtsfFigure4b @c.
  */
-class TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter 
-        : public TestBetweennessCentralityDtpSusceptanceNormVertexCounter 
+class TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter
+        : public TestBetweennessCentralityDtpSusceptanceNormVertexCounter
 {
     protected:
         TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter ()
@@ -525,10 +525,10 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4b_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4b_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4b_
                             << " does not exist!";
                 exit(1);
             }
@@ -537,7 +537,7 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter
 
         virtual ~TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -548,8 +548,8 @@ class TestBcDtpBnormUsingAcm2018MtsfFigure4bVertexCounter
  *     voltage angle difference labels using @c edge counter @c and the @c
  *     Acm2018MtsfFigure4a @c.
  */
-class TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter 
-        : public TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter 
+class TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter
+        : public TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
 {
     protected:
         TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter ()
@@ -557,10 +557,10 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4a_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4a_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4a_
                             << " does not exist!";
                 exit(1);
             }
@@ -569,7 +569,7 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter
 
         virtual ~TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -580,8 +580,8 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter
  *     voltage angle difference labels using @c vertex counter @c and the @c
  *     Acm2018MtsfFigure4a @c.
  */
-class TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter 
-        : public TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter 
+class TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter
+        : public TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter
 {
     protected:
         TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter ()
@@ -589,10 +589,10 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4a_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4a_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4a_
                             << " does not exist!";
                 exit(1);
             }
@@ -601,7 +601,7 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter
 
         virtual ~TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -612,8 +612,8 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4aVertexCounter
  *     voltage angle difference labels using @c edge counter @c and the @c
  *     Acm2018MtsfFigure4b @c.
  */
-class TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter 
-        : public TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter 
+class TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter
+        : public TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
 {
     protected:
         TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter ()
@@ -621,10 +621,10 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4b_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4b_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4b_
                             << " does not exist!";
                 exit(1);
             }
@@ -633,7 +633,7 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter
 
         virtual ~TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -644,8 +644,8 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter
  *     voltage angle difference labels using @c vertex counter @c and the @c
  *     Acm2018MtsfFigure4b @c.
  */
-class TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter 
-        : public TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter 
+class TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter
+        : public TestBetweennessCentralityDtpVoltageAngleDifferenceVertexCounter
 {
     protected:
         TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter ()
@@ -653,10 +653,10 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4b_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4b_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4b_
                             << " does not exist!";
                 exit(1);
             }
@@ -665,7 +665,7 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter
 
         virtual ~TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             betweennessAlgorithm_.Clear();
         }
@@ -677,19 +677,19 @@ class TestBcDtpVangleUsingAcm2018MtsfFigure4bVertexCounter
  *     Acm2018MtsfFigure4b @c.
  */
 class TestBcDtpVangleUsingMultipleCases
-        : public TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter 
+        : public TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter
 {
     protected:
         TestBcDtpVangleUsingMultipleCases ()
         : TestBetweennessCentralityDtpVoltageAngleDifferenceEdgeCounter( std::move( TGraph( "MultipleCases" ) ) )
-        {            
+        {
             // Types::string TestCaseExample = "../../framework/data/PowerGrids/IEEE/00-Matpower-Data/case9.m";
             // if (!TPowerGridIO::read ( network_
             //                         , TestCaseExample
-            //                         , TPowerGridIO::readIeeeCdfMatlab ) ) 
+            //                         , TPowerGridIO::readIeeeCdfMatlab ) )
             // {
-            //     std::cerr   << "Expected file " 
-            //                 << TestCaseExample 
+            //     std::cerr   << "Expected file "
+            //                 << TestCaseExample
             //                 << " does not exist!";
             //     exit(1);
             // }
@@ -698,7 +698,7 @@ class TestBcDtpVangleUsingMultipleCases
 
         virtual ~TestBcDtpVangleUsingMultipleCases () {}
 
-        virtual void SetUp () override 
+        virtual void SetUp () override
         {
             // betweennessAlgorithm_.Clear();
         }

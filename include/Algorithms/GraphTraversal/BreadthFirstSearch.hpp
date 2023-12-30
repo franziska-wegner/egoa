@@ -33,7 +33,7 @@ namespace egoa {
  * @tparam     IsDirected  If @p true the graph is treated as a directed graph,
  *     if @p false the graph is treated as an undirected graph.
  */
-template< typename GraphType = StaticGraph<Vertices::ElectricalProperties<>,Edges::ElectricalProperties> 
+template< typename GraphType = StaticGraph<Vertices::ElectricalProperties<>,Edges::ElectricalProperties>
         , typename QueueType = StdQueue<GraphType::TVertexId>
         , bool     IsDirected= false >
 class BFS final : Traversal<IsDirected> {
@@ -56,7 +56,7 @@ class BFS final : Traversal<IsDirected> {
          */
         virtual inline void Run() {
             ESSENTIAL_ASSERT ( queue_.Empty() );
-            
+
             EnqueueVertexWith  ( source_ );
             SetVertexVisitedAt ( source_ );
 

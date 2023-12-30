@@ -35,7 +35,7 @@ class BucketLoopDifferentiation;
 
 /**
  * @brief      Class for bucket data structure.
- * 
+ *
  * @code{.cpp}
  *      egoa::Bucket<egoa::BinaryHeap<int>, int> bucket;
  * @endcode
@@ -43,7 +43,7 @@ class BucketLoopDifferentiation;
  * @tparam     PriorityQueue  Type of the priority queue used within the
  *     bucket, e.g., BinaryHeap. The PriorityQueue has to provide the
  *     following interface.
- *     
+ *
  *     Function                      | Description
  *     ------------------------------|---------------------
  *     Top                           | Returns the top element.
@@ -89,45 +89,45 @@ class Bucket {
                 Comparator( std::less<TElement>() );
             }
         ///@}
-        
+
         /**
          * @name      Comparators for Unprocessed Bucket Elements
-         * 
+         *
          * @param      rhs   The right hand side bucket.
-         * 
+         *
          * @pre        Neither of the bucket queues is allowed to be empty.
          *     Check status of the queue by using #EmptyQueue().
-         *     
+         *
          * @return     @p true if the element with an optimal key is <, >, <=, >= than
          *     the rhs bucket, @p false otherwise.
-         *     
+         *
          * @see        EmptyQueue()
          */
         ///@{
 #pragma mark OPERATORS
 
-            inline bool operator< ( TBucket const & rhs ) const 
+            inline bool operator< ( TBucket const & rhs ) const
             {
                 USAGE_ASSERT ( !EmptyQueue()     );
                 USAGE_ASSERT ( !rhs.EmptyQueue() );
                 return ( Top() < rhs.Top() );
             }
 
-            inline bool operator>  ( TBucket const & rhs ) const 
+            inline bool operator>  ( TBucket const & rhs ) const
             {
                 USAGE_ASSERT ( !EmptyQueue()     );
                 USAGE_ASSERT ( !rhs.EmptyQueue() );
                 return rhs < *this;
             }
 
-            inline bool operator<= ( TBucket const & rhs ) const 
+            inline bool operator<= ( TBucket const & rhs ) const
             {
                 USAGE_ASSERT ( !EmptyQueue()     );
                 USAGE_ASSERT ( !rhs.EmptyQueue() );
                 return !(*this > rhs);
             }
 
-            inline bool operator>= ( TBucket const & rhs ) const 
+            inline bool operator>= ( TBucket const & rhs ) const
             {
                 USAGE_ASSERT ( !EmptyQueue()     );
                 USAGE_ASSERT ( !rhs.EmptyQueue() );
@@ -146,20 +146,20 @@ class Bucket {
          * @pre        Note that the element will be moved if the return type is true.
          *
          * @tparam     Domination  The domination sense such as weak, strict, or none.
-         * 
+         *
          * @return     @p true if the @p newElement is added into the bucket,
          *     @p false otherwise (meaning it was dominated in some sense defined
          *     by @p Domination).
          */
         ///@{
 #pragma mark MERGE_ELEMENTS
-            
+
             template<DominationCriterion Domination = DominationCriterion::weak>
-            inline bool Merge ( TElement && newElement ) 
+            inline bool Merge ( TElement && newElement )
             {
                 newElement.Valid() = true;
                 for_all_elements<ExecutionPolicy::breakable>(
-                    [&](TElement & element) -> bool 
+                    [&](TElement & element) -> bool
                     {
                         if ( internal::DominationDifferentiation<TElement, Domination>
                             ::Dominates( element, newElement, Comparator() ) ) {
@@ -172,11 +172,11 @@ class Bucket {
                             --numberOfValidUnprocessedElements_;
                         }
                         // also covers DominationCriterion::none
-                        return true; 
+                        return true;
                     }
                 );
 
-                if ( !newElement.Valid() ) 
+                if ( !newElement.Valid() )
                 {
                     PopInvalidUnprocessedElements();
                     return false;
@@ -190,7 +190,7 @@ class Bucket {
             }
 
             template<DominationCriterion Domination = DominationCriterion::weak>
-            inline bool Merge ( TElement & newElement ) 
+            inline bool Merge ( TElement & newElement )
             {
                 bool valid = Merge<Domination>( TElement(newElement) );
                 newElement.Valid() = valid;
@@ -198,7 +198,7 @@ class Bucket {
             }
 
             template<DominationCriterion Domination = DominationCriterion::weak>
-            inline bool Merge( TElement const & newElement ) 
+            inline bool Merge( TElement const & newElement )
             {
                 return Merge<Domination>( TElement(newElement) );
             }
@@ -206,15 +206,15 @@ class Bucket {
 
         ///@todo Think about it
         inline bool HasElement ( TElement const & newElement
-                               , TElement       & existingElement ) 
+                               , TElement       & existingElement )
         {
             bool hasElement = false;
-            for_all_elements<ExecutionPolicy::breakable>( 
+            for_all_elements<ExecutionPolicy::breakable>(
                 [ & newElement
                 , & existingElement
-                , & hasElement](TElement & element) -> bool 
+                , & hasElement](TElement & element) -> bool
                 {
-                    if ( newElement == element ) 
+                    if ( newElement == element )
                     {
                         existingElement = element;
                         hasElement = true;
@@ -239,7 +239,7 @@ class Bucket {
              * @return     @p true if it has an element at that position, @p
              *     false otherwise.
              */
-            inline bool HasElementAt ( Types::index index ) 
+            inline bool HasElementAt ( Types::index index )
             {
                 USAGE_ASSERT ( index >= 0 );
                 return ( index < NumberOfProcessedElements() );
@@ -249,13 +249,13 @@ class Bucket {
              * @brief      Processed element at a certain position @a index.
              *
              * @param[in]  index  The position of a processed element.
-             * 
+             *
              * @pre        There are processed elements and #HasElementAt( index )
              *     is true.
              *
              * @return     The processed element at the position @a index.
              */
-            inline TElement & ElementAt ( Types::index index ) 
+            inline TElement & ElementAt ( Types::index index )
             {
 #ifdef PGT_EXCEPTION_HANDLING
                 throw_out_of_bound( index, NumberOfProcessedElements() );
@@ -268,13 +268,13 @@ class Bucket {
              * @brief      Processed element at a certain position @a index.
              *
              * @param[in]  index  The position of a processed element.
-             * 
+             *
              * @pre        There are processed elements and #HasElementAt( index )
              *     is true.
              *
              * @return     The processed element at the position @a index.
              */
-            inline TElement & operator[] ( Types::index index ) 
+            inline TElement & operator[] ( Types::index index )
             {
 #ifdef PGT_EXCEPTION_HANDLING
                 throw_out_of_bound( index, NumberOfProcessedElements() );
@@ -287,13 +287,13 @@ class Bucket {
              * @brief      Processed element at a certain position @a index.
              *
              * @param[in]  index  The position of a processed element.
-             * 
+             *
              * @pre        There are processed elements and #HasElementAt( index )
              *     is true.
              *
              * @return     The processed element at the position @a index.
              */
-            inline TElement & operator[] ( Types::index index ) const 
+            inline TElement & operator[] ( Types::index index ) const
             {
 #ifdef PGT_EXCEPTION_HANDLING
                 throw_out_of_bound( index, NumberOfProcessedElements() );
@@ -307,12 +307,12 @@ class Bucket {
              * @details    Top returns an unprocessed element that has an optimal
              *     key (e.g. for VoltageAngleDifferenceLabel the key would be the
              *     susceptance norm).
-             *     
+             *
              * @pre        The queue is not empty meaning #EmptyQueue() is false.
              *
              * @return     The element with an optimal key.
              */
-            inline TElement const & Top () const 
+            inline TElement const & Top () const
             {
                 USAGE_ASSERT ( !EmptyQueue() );
                 ESSENTIAL_ASSERT( unprocessedElements_.Top().Valid() );
@@ -324,23 +324,23 @@ class Bucket {
              * @details    Get all elements that have an optimum value, e.g. for the
              *     VoltageAngleDifferenceLabel an optimum corresponds to the minimum
              *     delta theta value of the path.
-             *     
+             *
              * @note       This function does not change the bucket. All elements
              *     stay in the queue. The equality check depends on the element
              *     equality check.
-             *     
+             *
              * @todo       Is this loop sufficient for unprocessed labels only?
              *
              * @return     Vector of elements with optimum value
              */
-            inline std::vector<TElement> Optima () const 
+            inline std::vector<TElement> Optima () const
             {   //@todo This is a very bad implementation. Think about it again.
                 auto result  = std::min_element( processedElements_.begin(), processedElements_.end(), [](TElement a, TElement b) { return a.Value() < b.Value(); } );
                 auto result2 = std::min_element( unprocessedElements_.begin(), unprocessedElements_.end(), [](TElement a, TElement b) { return a.Value() < b.Value(); } );
                 TElement minElement;
                 if ( result != processedElements_.end() )
                 {
-                    if ( result2 != unprocessedElements_.end() ) 
+                    if ( result2 != unprocessedElements_.end() )
                     {
                         ((*result)<(*result2))?(minElement = *result):(minElement = *result2);
                     } else {
@@ -352,12 +352,12 @@ class Bucket {
 
                 // Extract elements with the same optimum value
                 std::vector<TElement> optima;
-                for_all_elements<ExecutionPolicy::sequential> ( 
+                for_all_elements<ExecutionPolicy::sequential> (
                     [ & minElement
                     , & optima ]( TElement const & element )
                     {
-                        if ( element.Value() == minElement.Value() ) 
-                        { 
+                        if ( element.Value() == minElement.Value() )
+                        {
                             optima.emplace_back( element );
                         }
                     }
@@ -379,10 +379,10 @@ class Bucket {
              *
              * @pre        The queue---meaning the unprocessed items---is not
              *     allowed to be empty.
-             *     
+             *
              * @return     The element with a optimal key.
              */
-            inline Types::index Pop () 
+            inline Types::index Pop ()
             {
                 USAGE_ASSERT ( !EmptyQueue() );
 
@@ -401,13 +401,13 @@ class Bucket {
              *     label is the one with the smallest key (e.g. for
              *     VoltageAngleDifferenceLabel the key would be the susceptance
              *     norm times the minimum capacity).
-             *     
+             *
              * @pre        The queue---meaning the unprocessed items---is not
              *     allowed to be empty.
              *
              * @return     The element with a optimal key.
              */
-            inline std::pair<TElement, Types::index> DeleteTop () 
+            inline std::pair<TElement, Types::index> DeleteTop ()
             {
                 USAGE_ASSERT ( !EmptyQueue() );
                 Types::index index = Pop();
@@ -420,7 +420,7 @@ class Bucket {
         /**
          * @brief      Clear the bucket.
          */
-        inline void Clear () noexcept 
+        inline void Clear () noexcept
         {
             processedElements_.clear();
             unprocessedElements_.Clear();
@@ -447,16 +447,16 @@ class Bucket {
 #pragma mark COMPARATOR
 
             inline std::function<bool ( TElement const &
-                                      , TElement const & ) > 
-            const & Comparator () const 
-            { 
-                return unprocessedElements_.Comparator(); 
+                                      , TElement const & ) >
+            const & Comparator () const
+            {
+                return unprocessedElements_.Comparator();
             }
 
             inline void Comparator( std::function<bool  ( TElement const &
-                                                        , TElement const & )> comparator ) 
-            { 
-                unprocessedElements_.Comparator ( comparator ); 
+                                                        , TElement const & )> comparator )
+            {
+                unprocessedElements_.Comparator ( comparator );
             }
         ///@}
 
@@ -466,7 +466,7 @@ class Bucket {
          *
          * @return     @p true if empty, @p false otherwise.
          */
-        inline bool Empty () const 
+        inline bool Empty () const
         {
             return ( processedElements_.empty() && unprocessedElements_.Empty() );
         }
@@ -476,12 +476,12 @@ class Bucket {
          *
          * @return     @p true if empty, @p false otherwise.
          */
-        inline bool EmptyQueue () const 
+        inline bool EmptyQueue () const
         {
             return unprocessedElements_.Empty();
         }
 
-        inline Types::count Size () const 
+        inline Types::count Size () const
         {
             return NumberOfProcessedElements() + NumberOfUnprocessedElements();
         }
@@ -489,7 +489,7 @@ class Bucket {
         ///@name Element Loops
         ///@{
 #pragma mark LOOPS
-        
+
             /**
              * @brief      The @c for loop @c over all elements in the bucket.
              * @details    Loop over all processed and unprocessed elements.
@@ -497,19 +497,19 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function.
              *
              * @code{.cpp}
-             *      []( TElement & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      @p true if the loop is run in parallel using
              *     OpenMP, @p false otherwise.
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            void for_all_elements ( FUNCTION function ) 
+            void for_all_elements ( FUNCTION function )
             {
                 internal::BucketLoopDifferentiation<Bucket, Policy>
                     ::for_all_elements ( *this, function );
@@ -524,9 +524,9 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function.
              *
              * @code{.cpp}
-             *      []( TElement const & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement const & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
              *
@@ -535,8 +535,8 @@ class Bucket {
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
-            inline 
-            void for_all_elements ( FUNCTION function ) const 
+            inline
+            void for_all_elements ( FUNCTION function ) const
             {
                 internal::BucketLoopDifferentiation<Bucket const, Policy>
                     ::for_all_elements ( *this, function );
@@ -548,9 +548,9 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function
              *
              * @code{.cpp}
-             *      []( TElement & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
              *
@@ -559,8 +559,8 @@ class Bucket {
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
-            inline 
-            void for_all_processed_elements ( FUNCTION function ) 
+            inline
+            void for_all_processed_elements ( FUNCTION function )
             {
                 internal::BucketLoopDifferentiation<Bucket, Policy>
                     ::for_all_processed_elements ( *this, function );
@@ -572,9 +572,9 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function
              *
              * @code{.cpp}
-             *      []( TElement const & element ) 
-             *      { 
-             *          Do something with the element object. 
+             *      []( TElement const & element )
+             *      {
+             *          Do something with the element object.
              *      }
              * @endcode
              *
@@ -584,7 +584,7 @@ class Bucket {
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            void for_all_processed_elements ( FUNCTION function ) const 
+            void for_all_processed_elements ( FUNCTION function ) const
             {
                 internal::BucketLoopDifferentiation<Bucket const, Policy>
                     ::for_all_processed_elements ( *this, function );
@@ -599,19 +599,19 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function.
              *
              * @code{.cpp}
-             *      []( TElement & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy  @p true if the loop is run in parallel using
              *     OpenMP, @p false otherwise.
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            void for_all_unprocessed_elements ( FUNCTION function ) 
+            void for_all_unprocessed_elements ( FUNCTION function )
             {
                 internal::BucketLoopDifferentiation<Bucket, Policy>
                     ::for_all_unprocessed_elements ( *this, function );
@@ -627,19 +627,19 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function.
              *
              * @code{.cpp}
-             *      []( TElement const & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement const & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy  @p true if the loop is run in parallel using
              *     OpenMP, @p false otherwise.
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            void for_all_unprocessed_elements ( FUNCTION function ) const 
+            void for_all_unprocessed_elements ( FUNCTION function ) const
             {
                 internal::BucketLoopDifferentiation<Bucket const, Policy>
                     ::for_all_unprocessed_elements ( *this, function );
@@ -652,19 +652,19 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function.
              *
              * @code{.cpp}
-             *      []( TElement & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      @p true if the loop is run in parallel
              *     using OpenMP, @p false otherwise.
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            Types::real for_all_optima ( FUNCTION function ) 
+            Types::real for_all_optima ( FUNCTION function )
             {
                 return internal::BucketLoopDifferentiation<Bucket, Policy>
                     ::for_all_optima ( *this, function );
@@ -678,26 +678,26 @@ class Bucket {
              * @param[in]  function    The function, e.g., lambda function
              *
              * @code{.cpp}
-             *      []( TElement const & element ) 
-             *      { 
-             *          // Do something with the element object. 
+             *      []( TElement const & element )
+             *      {
+             *          // Do something with the element object.
              *      }
              * @endcode
-             * 
+             *
              * @tparam     Policy      @p true if the loop is run in parallel
              *     using OpenMP, @p false otherwise.
              * @tparam     FUNCTION    The function pointer.
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            Types::real for_all_optima ( FUNCTION function ) const 
+            Types::real for_all_optima ( FUNCTION function ) const
             {
                 return internal::BucketLoopDifferentiation<Bucket const, Policy>
                     ::for_all_optima ( *this, function );
             }
         ///@}
 
-    private: 
+    private:
         ///@name Add an Element
         ///@{
 #pragma mark ADD_ELEMENTS
@@ -711,7 +711,7 @@ class Bucket {
              *
              * @pre        Function @see Pop().
              */
-            inline Types::index MoveToProcessed ( TElement && element ) 
+            inline Types::index MoveToProcessed ( TElement && element )
             {
                processedElements_.push_back ( std::move(element) );
                processedElements_.back().Index() = processedElements_.size() - 1;
@@ -719,7 +719,7 @@ class Bucket {
             }
 
             /**
-             * @brief      Insert an element 
+             * @brief      Insert an element
              *
              * @param      element  The element.
              */
@@ -737,9 +737,9 @@ class Bucket {
              *
              * @return     The number of processed elements.
              */
-            inline Types::count NumberOfProcessedElements() const noexcept 
-            { 
-                return   processedElements_.size(); 
+            inline Types::count NumberOfProcessedElements() const noexcept
+            {
+                return   processedElements_.size();
             }
 
             /**
@@ -767,7 +767,7 @@ class Bucket {
              * @return     @p true if the @p lhs dominates the @p rhs, @p false otherwise.
              */
             template<DominationCriterion Domination>
-            inline bool Dominates ( TElement const & lhs, TElement const & rhs ) const 
+            inline bool Dominates ( TElement const & lhs, TElement const & rhs ) const
             {
                 return internal::DominationDifferentiation<TElement, Domination>
                     ::Dominates( lhs, rhs, Comparator() );
@@ -782,10 +782,10 @@ class Bucket {
              * @brief      Pops invalid unprocessed elements until @p unprocessedElements_
              *             is empty or the top element is valid.
              */
-            inline void PopInvalidUnprocessedElements() 
+            inline void PopInvalidUnprocessedElements()
             {
-                while (!unprocessedElements_.Empty() 
-                    && !unprocessedElements_.Top().Valid()) 
+                while (!unprocessedElements_.Empty()
+                    && !unprocessedElements_.Top().Valid())
                 {
                     unprocessedElements_.Pop();
                 }
@@ -801,7 +801,7 @@ class Bucket {
         friend internal::BucketLoopDifferentiation<Bucket const, ExecutionPolicy::parallel>;
 
 #pragma mark MEMBERS
-        std::vector<TElement>                     processedElements_;   /**< The processed elements that do not change their status and stay valid */ 
+        std::vector<TElement>                     processedElements_;   /**< The processed elements that do not change their status and stay valid */
         TPriorityQueue                          unprocessedElements_;   /**< The unprocessed elements that might change their status, e.g., to invalid */
         Types::count               numberOfValidUnprocessedElements_;   /**< The number of valid unprocessed elements. */
 };
@@ -825,12 +825,12 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::sequential> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
-         * 
+         *
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
@@ -848,9 +848,9 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::sequential> {
          * @param[in]  function    The function, e.g., lambda function.
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
          *
@@ -861,7 +861,7 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::sequential> {
         void for_all_processed_elements ( BucketType & bucket
                                         , FUNCTION     function )
         {
-            for ( auto & element : bucket.processedElements_ ) 
+            for ( auto & element : bucket.processedElements_ )
             {
                 function ( element );
             }
@@ -873,9 +873,9 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::sequential> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
          *
@@ -887,7 +887,7 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::sequential> {
                                           , FUNCTION     function )
         {
             bucket.unprocessedElements_.template for_all_elements<ExecutionPolicy::sequential>(
-                [&function]( auto & element ) 
+                [&function]( auto & element )
                 {
                     if (!element.Valid()) return;
                     function(element);
@@ -903,23 +903,23 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::sequential> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
-         * 
+         *
          * @tparam     Policy      @p true if the loop is run in parallel
          *     using OpenMP, @p false otherwise.
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         Types::real for_all_optima ( BucketType & bucket
                                    , FUNCTION     function )
         {
             std::vector<TElement> optima = bucket.Optima();
-            for ( TElement const & element : optima ) 
+            for ( TElement const & element : optima )
             {
                 function ( element );
             }
@@ -937,11 +937,11 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::breakable> {
     public:
 
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_elements ( BucketType & bucket
                               , FUNCTION     function )
         {
-            for ( auto & element : bucket.processedElements_ ) 
+            for ( auto & element : bucket.processedElements_ )
             {
                 bool toContinue = function( element );
                 if (!toContinue) return;
@@ -958,21 +958,21 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::breakable> {
          *      continued, if @p false this emulates a break.
          *
          * @code{.cpp}
-         *      []( TElement & element ) -> bool 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element ) -> bool
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_processed_elements ( BucketType & bucket
                                         , FUNCTION     function )
         {
             bool toContinue = true;
-            for ( auto & element : bucket.processedElements_ ) 
+            for ( auto & element : bucket.processedElements_ )
             {
                 toContinue = function ( element );
                 if ( !toContinue ) break;
@@ -987,21 +987,21 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::breakable> {
          *      continued, if @p false this emulates a break.
          *
          * @code{.cpp}
-         *      []( TElement & element ) -> bool 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element ) -> bool
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
-         * 
+         *
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_unprocessed_elements ( BucketType & bucket
                                           , FUNCTION     function )
         {
             bucket.unprocessedElements_.template for_all_elements<ExecutionPolicy::breakable>(
-                [&function](auto & element) -> bool 
+                [&function](auto & element) -> bool
                 {
                     if (!element.Valid()) return true;
                     return function(element);
@@ -1010,12 +1010,12 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::breakable> {
         }
 
         template<typename FUNCTION>
-        static inline 
+        static inline
         Types::real for_all_optima ( BucketType & bucket
                                    , FUNCTION     function )
         {
             std::vector<TElement> optima = bucket.Optima();
-            for ( TElement const & element : optima ) 
+            for ( TElement const & element : optima )
             {
                 bool toContinue = function ( element );
                 if (!toContinue) break;
@@ -1047,16 +1047,16 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::parallel> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
-         * 
+         *
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_elements ( BucketType & bucket
                               , FUNCTION     function )
         {
@@ -1070,16 +1070,16 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::parallel> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_processed_elements ( BucketType & bucket
                                         , FUNCTION     function )
         {
@@ -1098,21 +1098,21 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::parallel> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
-         * 
+         *
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_unprocessed_elements ( BucketType & bucket
                                           , FUNCTION     function )
         {
             bucket.unprocessedElements_.template for_all_elements<ExecutionPolicy::parallel>(
-                [&function](auto & element) 
+                [&function](auto & element)
                 {
                     if (!element.Valid()) return;
                     function(element);
@@ -1127,18 +1127,18 @@ class BucketLoopDifferentiation<BucketType, ExecutionPolicy::parallel> {
          * @param[in]  function    The function, e.g., lambda function
          *
          * @code{.cpp}
-         *      []( TElement & element ) 
-         *      { 
-         *          // Do something with the element object. 
+         *      []( TElement & element )
+         *      {
+         *          // Do something with the element object.
          *      }
          * @endcode
-         * 
+         *
          * @tparam     Policy      @p true if the loop is run in parallel
          *     using OpenMP, @p false otherwise.
          * @tparam     FUNCTION    The function pointer.
          */
         template<typename FUNCTION>
-        static inline 
+        static inline
         Types::real for_all_optima ( BucketType & bucket
                                    , FUNCTION     function )
         {

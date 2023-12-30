@@ -24,7 +24,7 @@ namespace egoa::internal {
  * @details    Implementations for the loops are defined in the
  *             template specializations for the different execution
  *             policies.
- *     
+ *
  *
  * @tparam     PowerGridType    The type of a power grid, e.g., PowerGrid.
  * @tparam     Policy           The execution policy.
@@ -33,8 +33,8 @@ template<typename PowerGridType, ExecutionPolicy Policy >
 class PowerGridLoopDifferentiation;
 
 template<typename PowerGridType >
-class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> { 
-    
+class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
+
     using TNetwork              = PowerGridType;
     using TVertex               = typename TNetwork::TVertex;
     using TGeneratorProperties  = typename TNetwork::TGeneratorProperties;
@@ -50,7 +50,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             /**
              * @brief      The sequential @p for loop over all @p generators
              *     (vertex independent).
-             *     
+             *
              * @param      network   The network @f$\network = ( \graph,
              *     \generators, \consumers, \capacity, \susceptance, \dots
              *     )@f$.
@@ -58,9 +58,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generatorProperties ) 
-             *      { 
-             *          Do something with the generator properties. 
+             *      []( TGeneratorProperties & generatorProperties )
+             *      {
+             *          Do something with the generator properties.
              *      }
              * @endcode
              *
@@ -70,9 +70,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_generators ( TNetwork & network
-                                    , FUNCTION   function ) 
+                                    , FUNCTION   function )
             {
-                for ( TGeneratorProperties & generator : network.generators_ ) 
+                for ( TGeneratorProperties & generator : network.generators_ )
                 {
                     function( generator );
                 }
@@ -81,7 +81,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             /**
              * @brief      The sequential @p for loop over all @p generators (vertex
              *     independent).
-             *     
+             *
              * @param      network   The const network @f$\network = ( \graph,
              *     \generators, \consumers, \capacity, \susceptance, \dots
              *     )@f$.
@@ -89,9 +89,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties const & generatorProperties ) 
-             *      { 
-             *          Do something with the generator properties. 
+             *      []( TGeneratorProperties const & generatorProperties )
+             *      {
+             *          Do something with the generator properties.
              *      }
              * @endcode
              *
@@ -101,9 +101,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_generators ( TNetwork const & network
-                                    , FUNCTION         function ) 
+                                    , FUNCTION         function )
             {
-                for ( TGeneratorProperties const & generator : network.generators_ ) 
+                for ( TGeneratorProperties const & generator : network.generators_ )
                 {
                     function( generator );
                 }
@@ -118,11 +118,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *     )@f$.
              * @param[in]  function  The function pointer, e.g., lambda function
              *     that has a vertex identifier @p Types::vertexId as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
-             *          Do something with the vertex identifier that has generators. 
+             *      []( Types::vertexId vertexId )
+             *      {
+             *          Do something with the vertex identifier that has generators.
              *      }
              * @endcode
              *
@@ -132,14 +132,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_vertex_identifiers_with_generator ( TNetwork const & network
-                                                           , FUNCTION         function ) 
+                                                           , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
-                    if (   network.HasGeneratorAt(vertexId) 
+                    if (   network.HasGeneratorAt(vertexId)
                         && network.Graph().VertexExists(vertexId) ) {
                         vertexIdSafeguard = vertexId;
                         function( vertexIdSafeguard );
@@ -158,11 +158,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a generator identifier @p
              *      Types::generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::generatorId generatorId ) 
-             *      { 
-             *          Do something with the generator identifier at the @p vertexId. 
+             *      []( Types::generatorId generatorId )
+             *      {
+             *          Do something with the generator identifier at the @p vertexId.
              *      }
              * @endcode
              *
@@ -173,13 +173,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_generator_identifiers_at ( Types::vertexId vertexId
                                                  , TNetwork const & network
-                                                 , FUNCTION         function ) 
+                                                 , FUNCTION         function )
             {
                 Types::loadId generatorIdSafeguard = 0;
-                if (   network.HasGeneratorAt ( vertexId ) 
-                    && network.Graph().VertexExists ( vertexId ) ) 
+                if (   network.HasGeneratorAt ( vertexId )
+                    && network.Graph().VertexExists ( vertexId ) )
                 {
-                    for ( Types::generatorId generatorId : network.generatorsAtVertex_[vertexId] ) 
+                    for ( Types::generatorId generatorId : network.generatorsAtVertex_[vertexId] )
                     {
                         generatorIdSafeguard = generatorId;
                         function ( generatorIdSafeguard );
@@ -198,11 +198,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a generator identifier @p generatorId as
              *      input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::generatorId generatorId ) 
-             *      { 
-             *          Do something with the generator identifier at the @p vertex. 
+             *      []( Types::generatorId generatorId )
+             *      {
+             *          Do something with the generator identifier at the @p vertex.
              *      }
              * @endcode
              *
@@ -213,13 +213,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_generator_identifiers_at ( TVertex const & vertex
                                                  , TNetwork const & network
-                                                 , FUNCTION         function ) 
+                                                 , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_generator_identifiers_at ( vertexId, network, function );
             }
 
-            
+
             /**
              * @brief      The sequential @p for loop over all generator objects
              *     at a @p vertex.
@@ -232,9 +232,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertex. 
+             *      []( TGeneratorProperties & generator )
+             *      {
+             *          Do something with the generator object at the @p vertex.
              *      }
              * @endcode
              *
@@ -245,7 +245,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_generators_at ( TVertex  const & vertex
                                        , TNetwork       & network
-                                       , FUNCTION         function ) 
+                                       , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_generators_at ( vertexId, network, function );
@@ -263,9 +263,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties const & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertex. 
+             *      []( TGeneratorProperties const & generator )
+             *      {
+             *          Do something with the generator object at the @p vertex.
              *      }
              * @endcode
              *
@@ -276,7 +276,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_generators_at ( TVertex  const & vertex
                                        , TNetwork const & network
-                                       , FUNCTION         function ) 
+                                       , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_generators_at ( vertexId, network, function );
@@ -294,9 +294,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertexId. 
+             *      []( TGeneratorProperties & generator )
+             *      {
+             *          Do something with the generator object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -307,9 +307,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_generators_at ( Types::vertexId const vertexId
                                        , TNetwork            & network
-                                       , FUNCTION              function ) 
+                                       , FUNCTION              function )
             {
-                for_all_generator_identifiers_at ( vertexId, network, 
+                for_all_generator_identifiers_at ( vertexId, network,
                     [ &network, &function ]( Types::generatorId generatorId )
                     {
                         function ( network.generators_[generatorId] );
@@ -329,9 +329,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties const & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertexId. 
+             *      []( TGeneratorProperties const & generator )
+             *      {
+             *          Do something with the generator object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -342,9 +342,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_generators_at ( Types::vertexId const   vertexId
                                        , TNetwork        const & network
-                                       , FUNCTION                function ) 
+                                       , FUNCTION                function )
             {
-                for_all_generator_identifiers_at ( vertexId, network, 
+                for_all_generator_identifiers_at ( vertexId, network,
                     [ &network, &function ]( Types::generatorId generatorId )
                     {
                         function ( network.generators_[generatorId] );
@@ -362,11 +362,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a vertex identifier @p vertexId and a
              *      @c generator object@c as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TGeneratorProperties & generatorProperties ) 
-             *      { 
-             *          Do something with the vertexId and the generator object. 
+             *      []( Types::vertexId vertexId, TGeneratorProperties & generatorProperties )
+             *      {
+             *          Do something with the vertexId and the generator object.
              *      }
              * @endcode
              *
@@ -376,14 +376,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_generator_tuple ( TNetwork & network
-                                         , FUNCTION   function ) 
+                                         , FUNCTION   function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
-                    if ( network.HasGeneratorAt(vertexId) ) 
+                    if ( network.HasGeneratorAt(vertexId) )
                     {
                         for ( Types::generatorId generatorId : network.generatorsAtVertex_[vertexId] )
                         {
@@ -404,11 +404,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a vertex identifier @p vertexId and a
              *      @c generator object@c as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TGeneratorProperties const & generator ) 
-             *      { 
-             *          Do something with the vertexId and the generator object. 
+             *      []( Types::vertexId vertexId, TGeneratorProperties const & generator )
+             *      {
+             *          Do something with the vertexId and the generator object.
              *      }
              * @endcode
              *
@@ -418,14 +418,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_generator_tuple ( TNetwork const & network
-                                         , FUNCTION         function ) 
+                                         , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
-                    if ( network.HasGeneratorAt(vertexId) ) 
+                    if ( network.HasGeneratorAt(vertexId) )
                     {
                         for ( Types::generatorId generatorId : network.generatorsAtVertex_[vertexId] )
                         {
@@ -448,9 +448,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      @c generator objects@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, std::vector<TGeneratorProperties> const & generators ) 
-             *      { 
-             *          Do something with the set of generators at the vertexId 
+             *      []( Types::vertexId vertexId, std::vector<TGeneratorProperties> const & generators )
+             *      {
+             *          Do something with the set of generators at the vertexId
              *          and identifier of the vertex that has generators.
              *      }
              * @endcode
@@ -461,12 +461,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_generators_tuple ( TNetwork & network
-                                          , FUNCTION   function ) 
+                                          , FUNCTION   function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
                     if ( network.HasGeneratorAt(vertexId) )
                     {
@@ -490,9 +490,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      @c generator objects@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, std::vector<TGeneratorProperties> const & generators ) 
-             *      { 
-             *          // Do something with the set of generators at the vertexId 
+             *      []( Types::vertexId vertexId, std::vector<TGeneratorProperties> const & generators )
+             *      {
+             *          // Do something with the set of generators at the vertexId
              *          // and identifier of the vertex that has generators.
              *      }
              * @endcode
@@ -503,12 +503,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_generators_tuple ( TNetwork const & network
-                                          , FUNCTION         function ) 
+                                          , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
                     if ( network.HasGeneratorAt ( vertexId ) )
                     {
@@ -529,13 +529,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          * @param      network     The network @f$\network = ( \graph,
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @code{.cpp}
          *      for_all_real_power_generator_snapshots<ExecutionPolicy::sequential>(
          *          network,
          *          []( Types::index             snapshotId
-         *            , Types::generatorSnapshot snapshot ) 
-         *          { 
+         *            , Types::generatorSnapshot snapshot )
+         *          {
          *              // Do something with the snapshotId and generator snapshot object.
          *          }
          *      );
@@ -545,28 +545,28 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power generator snapshots.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots ( TNetwork & network
-                                                        , FUNCTION   function ) 
+                                                        , FUNCTION   function )
             {
                 for ( Types::index generatorId = 0
                     ; generatorId < network.generatorRealPowerSnapshots_.size()
-                    ; ++generatorId ) 
-                { 
+                    ; ++generatorId )
+                {
                     for_all_real_power_generator_snapshots_of ( network, generatorId, function );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots ( TNetwork const & network
                                                         , FUNCTION         function )
             {
                 for ( Types::index generatorId = 0
                     ; generatorId < network.generatorRealPowerSnapshots_.size()
-                    ; ++generatorId ) 
-                { 
+                    ; ++generatorId )
+                {
                     for_all_real_power_generator_snapshots_of ( network, generatorId, function );
                 }
             }
@@ -579,20 +579,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          * @param      network     The network @f$\network = ( \graph,
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      generatorId The identifier of the generator.
-         * @param[in]  function    The function, e.g., lambda function. 
-         * 
+         * @param[in]  function    The function, e.g., lambda function.
+         *
          * @pre        Check if the generator identifier @p generatorId of the
          *     generatorProperties exists before using this method.
-         *     
+         *
          * @code{.cpp}
          *      if ( network.HasGenerator ( generatorId ) )
          *      {
-         *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> ( 
+         *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> (
          *              network,
          *              generatorId,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -603,34 +603,34 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power generator snapshots at @p generatorId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork         & network
                                                            , Types::generatorId generatorId
-                                                           , FUNCTION           function ) 
+                                                           , FUNCTION           function )
             {
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
 
                 for ( Types::index snapshotId = 0
                     ; snapshotId < network.generatorRealPowerSnapshots_[generatorId].size()
-                    ; ++snapshotId ) 
-                { 
+                    ; ++snapshotId )
+                {
                     function( snapshotId, network.generatorRealPowerSnapshots_[generatorId][snapshotId] );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork   const & network
                                                            , Types::generatorId generatorId
-                                                           , FUNCTION           function ) 
+                                                           , FUNCTION           function )
             {
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
 
                 for ( Types::index snapshotId = 0
                     ; snapshotId < network.generatorRealPowerSnapshots_[generatorId].size()
-                    ; ++snapshotId ) 
-                { 
+                    ; ++snapshotId )
+                {
                     function( snapshotId, network.generatorRealPowerSnapshots_[generatorId][snapshotId] );
                 }
             }
@@ -644,18 +644,18 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      generatorProperties  The generator properties.
          * @param[in]  function             The function, e.g. , lambda function.
-         * 
+         *
          * @pre        Check if the generator's properties @p
          *     generatorProperties exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.HasGenerator ( network.GeneratorId ( generatorProperties ) ) )
          *      {
          *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::sequential> (
          *              network,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              {    
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -666,29 +666,29 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power generator snapshots of @p generatorProperties.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork           & network
                                                            , TGeneratorProperties generatorProperties
-                                                           , FUNCTION             function ) 
+                                                           , FUNCTION             function )
             {
                 Types::generatorId generatorId = network.GeneratorId( generatorProperties );
 
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
-                
+
                 for_all_real_power_generator_snapshots_of ( network, generatorId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork const &     network
                                                            , TGeneratorProperties generatorProperties
-                                                           , FUNCTION             function ) 
+                                                           , FUNCTION             function )
             {
                 Types::generatorId generatorId = network.GeneratorId( generatorProperties );
 
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
-                
+
                 for_all_real_power_generator_snapshots_of ( network, generatorId, function );
             }
         ///@}
@@ -701,10 +701,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      vertexId    The identifier of a vertex.
          * @param[in]  function    The function, e.g. , lambda function.
-         * 
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -712,8 +712,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              network,
          *              vertexId,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -724,24 +724,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power generator snapshots at @p vertexId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork &      network
                                                            , Types::vertexId vertexId
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 USAGE_ASSERT ( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorsAt( vertexId, generatorIds );
-                
+
                 for ( Types::generatorId generatorId : generatorIds )
                 {
                     for_all_real_power_generator_snapshots_of ( network, generatorId, function );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork const & network
                                                            , Types::vertexId  vertexId
@@ -751,7 +751,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorsAt( vertexId, generatorIds );
-                
+
 
                 for ( Types::generatorId generatorId : generatorIds )
                 {
@@ -768,10 +768,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      vertex      The vertex.
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @pre        Check if the vertex @p vertex exists before using
          *     this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
          *      {
@@ -779,8 +779,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              network,
          *              vertex,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -791,35 +791,35 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power generator snapshots at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork         & network
                                                            , TVertex    const & vertex
-                                                           , FUNCTION           function ) 
+                                                           , FUNCTION           function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
-                
+
                 USAGE_ASSERT ( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorAt( vertexId, generatorIds );
-                
+
                 for_all_real_power_generator_snapshots_at ( network, vertexId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork   const & network
                                                            , TVertex    const & vertex
                                                            , FUNCTION           function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
-                
+
                 USAGE_ASSERT ( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorAt( vertexId, generatorIds );
-                
+
                 for_all_real_power_generator_snapshots_at ( network, vertexId, function );
             }
         ///@}
@@ -834,11 +834,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          * @param      vertexId             The identifier of a vertex
          * @param      timestampPosition    The position of the snapshot
          *     (timestamp of the snapshot).
-         * @param[in]  function             The function, e.g. , lambda function 
-         * 
+         * @param[in]  function             The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -847,37 +847,37 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              vertexId,
          *              timestampPosition,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      }       
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power generator at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork &      network
                                                            , Types::vertexId vertexId
                                                            , Types::index    timestampPosition
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 USAGE_ASSERT( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorIds ( vertexId, generatorIds );
 
-                for ( Types::generatorId generatorId : generatorIds ) 
-                { 
+                for ( Types::generatorId generatorId : generatorIds )
+                {
                     function ( network.GeneratorSnapshotOf( generatorId, timestampPosition ) );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork   const & network
                                                            , Types::vertexId    vertexId
@@ -889,8 +889,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorIds ( vertexId, generatorIds );
 
-                for ( Types::generatorId generatorId : generatorIds ) 
-                { 
+                for ( Types::generatorId generatorId : generatorIds )
+                {
                     function ( network.GeneratorSnapshotOf( generatorId, timestampPosition ) );
                 }
             }
@@ -917,24 +917,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              vertex,
          *              timestampPosition,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  // Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  // Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      } 
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork      & network
                                                            , TVertex const & vertex
                                                            , Types::index    timestampPosition
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -943,12 +943,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 for_all_real_power_generator_snapshots_at ( network, vertexId, timestampPosition, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork const & network
                                                            , TVertex  const & vertex
                                                            , Types::index     timestampPosition
-                                                           , FUNCTION         function ) 
+                                                           , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -974,9 +974,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      that has a load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties & load ) 
-             *      { 
-             *          Do something with the load object. 
+             *      []( TLoadProperties & load )
+             *      {
+             *          Do something with the load object.
              *      }
              * @endcode
              *
@@ -986,9 +986,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_loads ( TNetwork & network
-                               , FUNCTION   function ) 
+                               , FUNCTION   function )
             {
-                for ( TLoadProperties & load : network.loads_ ) 
+                for ( TLoadProperties & load : network.loads_ )
                 {
                     function ( load );
                 }
@@ -1005,9 +1005,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      that has a const load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the load object. 
+             *      []( TLoadProperties const & load )
+             *      {
+             *          Do something with the load object.
              *      }
              * @endcode
              *
@@ -1017,9 +1017,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_loads ( TNetwork const & network
-                               , FUNCTION         function ) 
+                               , FUNCTION         function )
             {
-                for ( TLoadProperties const & load : network.loads_ ) 
+                for ( TLoadProperties const & load : network.loads_ )
                 {
                     function ( load );
                 }
@@ -1037,9 +1037,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
-             *          Do something with the vertex identifier that has loads. 
+             *      []( Types::vertexId vertexId )
+             *      {
+             *          Do something with the vertex identifier that has loads.
              *      }
              * @endcode
              *
@@ -1049,15 +1049,15 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_vertex_identifiers_with_load ( TNetwork const & network
-                                                      , FUNCTION         function ) 
+                                                      , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
-                    if (   network.HasLoadAt(vertexId) 
-                        && network.Graph().VertexExists(vertexId) ) 
+                    if (   network.HasLoadAt(vertexId)
+                        && network.Graph().VertexExists(vertexId) )
                     {
                         vertexIdSafeguard = vertexId;
                         function ( vertexIdSafeguard );
@@ -1076,11 +1076,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a load identifier @p Types::loadId as
              *      input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::loadId loadId ) 
-             *      { 
-             *          Do something with the load identifier at the @p vertex. 
+             *      []( Types::loadId loadId )
+             *      {
+             *          Do something with the load identifier at the @p vertex.
              *      }
              * @endcode
              *
@@ -1091,12 +1091,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_load_identifiers_at ( Types::vertexId  vertexId
                                              , TNetwork const & network
-                                             , FUNCTION         function ) 
+                                             , FUNCTION         function )
             {
                 Types::loadId loadIdSafeguard = 0;
-                if (   network.HasLoadAt ( vertexId ) 
+                if (   network.HasLoadAt ( vertexId )
                     && network.Graph().VertexExists ( vertexId ) ) {
-                    for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] ) 
+                    for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] )
                     {
                         loadIdSafeguard = loadId;
                         function ( loadIdSafeguard );
@@ -1116,9 +1116,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a load identifier as input.
              *
              * @code{.cpp}
-             *      []( Types::loadId loadId ) 
-             *      { 
-             *          Do something with the load identifier at the @p vertex. 
+             *      []( Types::loadId loadId )
+             *      {
+             *          Do something with the load identifier at the @p vertex.
              *      }
              * @endcode
              *
@@ -1129,7 +1129,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_load_identifiers_at ( TVertex  const & vertex
                                              , TNetwork const & network
-                                             , FUNCTION         function ) 
+                                             , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_load_identifiers_at ( vertexId, network, function );
@@ -1145,11 +1145,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *     )@f$.
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a load object as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( TLoadProperties & loadProperties ) 
-             *      { 
-             *          Do something with the load object at the @p vertex. 
+             *      []( TLoadProperties & loadProperties )
+             *      {
+             *          Do something with the load object at the @p vertex.
              *      }
              * @endcode
              *
@@ -1160,7 +1160,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_loads_at ( TVertex  const & vertex
                                   , TNetwork       & network
-                                  , FUNCTION         function ) 
+                                  , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_loads_at ( vertexId, network, function );
@@ -1176,11 +1176,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *     )@f$.
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a load object as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertex. 
+             *      []( TLoadProperties const & load )
+             *      {
+             *          Do something with the load object at the @p vertex.
              *      }
              * @endcode
              *
@@ -1191,7 +1191,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_loads_at ( TVertex  const & vertex
                                   , TNetwork const & network
-                                  , FUNCTION         function ) 
+                                  , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_loads_at ( vertexId, network, function );
@@ -1209,9 +1209,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertexId. 
+             *      []( TLoadProperties & load )
+             *      {
+             *          Do something with the load object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -1222,9 +1222,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_loads_at ( Types::vertexId const vertexId
                                   , TNetwork            & network
-                                  , FUNCTION              function ) 
+                                  , FUNCTION              function )
             {
-                for_all_load_identifiers_at ( vertexId, network, 
+                for_all_load_identifiers_at ( vertexId, network,
                     [ &network, &function ]( Types::loadId loadId )
                     {
                         function ( network.loads_[loadId] );
@@ -1244,9 +1244,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      function that has a load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertexId. 
+             *      []( TLoadProperties const & load )
+             *      {
+             *          Do something with the load object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -1257,9 +1257,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             inline static
             void for_all_loads_at ( Types::vertexId const   vertexId
                                   , TNetwork        const & network
-                                  , FUNCTION                function ) 
+                                  , FUNCTION                function )
             {
-                for_all_load_identifiers_at ( vertexId, network, 
+                for_all_load_identifiers_at ( vertexId, network,
                     [ &network, &function ]( Types::loadId loadId )
                     {
                         function ( network.loads_[loadId] );
@@ -1279,9 +1279,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      @c load object@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TLoadProperties & loadProperties ) 
-             *      { 
-             *          Do something with the vertexId and load object. 
+             *      []( Types::vertexId vertexId, TLoadProperties & loadProperties )
+             *      {
+             *          Do something with the vertexId and load object.
              *      }
              * @endcode
              *
@@ -1291,16 +1291,16 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_load_tuples ( TNetwork & network
-                                     , FUNCTION   function ) 
+                                     , FUNCTION   function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
-                    if ( network.HasLoadAt(vertexId) ) 
+                    if ( network.HasLoadAt(vertexId) )
                     {
-                        for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] ) 
+                        for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] )
                         {
                             vertexIdSafeguard = vertexId;
                             function( vertexIdSafeguard, network.loads_[loadId] );
@@ -1321,9 +1321,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      @c load object@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TLoadProperties const & loadProperties ) 
-             *      { 
-             *          Do something with the vertexId and load object. 
+             *      []( Types::vertexId vertexId, TLoadProperties const & loadProperties )
+             *      {
+             *          Do something with the vertexId and load object.
              *      }
              * @endcode
              *
@@ -1333,16 +1333,16 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_load_tuples ( TNetwork const & network
-                                     , FUNCTION         function ) 
+                                     , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
-                    if ( network.HasLoadAt(vertexId) ) 
+                    if ( network.HasLoadAt(vertexId) )
                     {
-                        for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] ) 
+                        for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] )
                         {
                             vertexIdSafeguard = vertexId;
                             function( vertexIdSafeguard, network.loads_[loadId] );
@@ -1363,10 +1363,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
              *      @c load objects@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, std::vector<TLoadProperties> & loads ) 
-             *      { 
-             *          Do something with the set of loads at the vertexId 
-             *          and identifier of the vertex that has loads. 
+             *      []( Types::vertexId vertexId, std::vector<TLoadProperties> & loads )
+             *      {
+             *          Do something with the set of loads at the vertexId
+             *          and identifier of the vertex that has loads.
              *      }
              * @endcode
              *
@@ -1376,12 +1376,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
             template<typename FUNCTION>
             inline static
             void for_all_loads_tuple ( TNetwork const & network
-                                     , FUNCTION         function ) 
+                                     , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 for ( Types::vertexId vertexId = 0
                     ; vertexId < network.Graph().Vertices().size()
-                    ; ++vertexId ) 
+                    ; ++vertexId )
                 {
                     if ( network.HasLoadAt(vertexId) )
                     {
@@ -1403,14 +1403,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *
          * @param      network     The network
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @code{.cpp}
          *      for_all_real_power_load_snapshots<ExecutionPolicy::sequential>(
          *          network,
          *          []( Types::index        snapshotId
-         *            , Types::loadSnapshot snapshot ) 
-         *          { 
-         *              Do something with the snapshotId and load snapshot object 
+         *            , Types::loadSnapshot snapshot )
+         *          {
+         *              Do something with the snapshotId and load snapshot object
          *          }
          *      );
          * @endcode
@@ -1419,14 +1419,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power load snapshots.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots ( TNetwork & network
-                                                   , FUNCTION   function ) 
+                                                   , FUNCTION   function )
             {
                 for ( Types::loadId loadId = 0
                     ; loadId < network.loadSnapshots_.size()
-                    ; ++loadId ) 
+                    ; ++loadId )
                 {
                     for_all_real_power_load_snapshots_of ( network
                                                          , loadId
@@ -1434,14 +1434,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots ( TNetwork const & network
                                                    , FUNCTION         function )
             {
                 for ( Types::loadId loadId = 0
                     ; loadId < network.loadSnapshots_.size()
-                    ; ++loadId ) 
+                    ; ++loadId )
                 {
                     for_all_real_power_load_snapshots_of ( network
                                                          , loadId
@@ -1449,7 +1449,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 }
             }
         ///@}
-            
+
         /**
          * @brief      The sequential @c for loop @c over all real power
          *     snapshots of a load with @p loadId.
@@ -1457,20 +1457,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          * @param      network     The network.
          * @param      loadId      The identifier of the load.
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @pre        Check if the load identifier @p loadId of the
          *     loadProperties exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.HasLoad ( loadId ) )
          *      {
-         *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> ( 
+         *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
          *              network,
          *              loadId,
          *              []( Types::index snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -1480,24 +1480,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power load snapshots at @p loadId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork &    network
                                                       , Types::loadId loadId
-                                                      , FUNCTION      function ) 
+                                                      , FUNCTION      function )
             {
                 USAGE_ASSERT ( network.HasLoad ( loadId ) );
 
                 for ( Types::index timestampPosition = 0
                     ; timestampPosition < network.loadSnapshots_.size()
-                    ; ++timestampPosition ) 
-                { 
+                    ; ++timestampPosition )
+                {
                     function ( timestampPosition
                              , network.LoadSnapshotOf( loadId, timestampPosition ) );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork const & network
                                                       , Types::loadId    loadId
@@ -1507,8 +1507,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
 
                 for ( Types::index timestampPosition = 0
                     ; timestampPosition < network.loadSnapshots_.size()
-                    ; ++timestampPosition ) 
-                { 
+                    ; ++timestampPosition )
+                {
                     function ( timestampPosition
                              , network.LoadSnapshotOf( loadId, timestampPosition ) );
                 }
@@ -1522,20 +1522,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *
          * @param      network          The network.
          * @param      loadProperties   The load properties.
-         * @param[in]  function         The function, e.g. , lambda function 
-         * 
+         * @param[in]  function         The function, e.g. , lambda function
+         *
          * @pre        Check if the load's properties @p loadProperties exists
          *     before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.HasLoad ( network.LoadId ( loadProperties ) ) )
          *      {
          *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
          *              network,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              {    
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -1545,27 +1545,27 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power load snapshots at @p loadProperties.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork              & network
                                                       , TLoadProperties const & loadProperties
-                                                      , FUNCTION                function ) 
+                                                      , FUNCTION                function )
             {
                 Types::loadId loadId = network.LoadId ( loadProperties );
-                
+
                 USAGE_ASSERT ( network.HasLoad ( loadId ) );
 
                 for_all_real_power_load_snapshots_of ( network, loadId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork        const & network
                                                       , TLoadProperties const & loadProperties
                                                       , FUNCTION                function )
             {
                 Types::loadId loadId = network.LoadId ( loadProperties );
-                
+
                 USAGE_ASSERT ( network.HasLoad ( loadId ) );
 
                 for_all_real_power_load_snapshots_of ( network, loadId, function );
@@ -1578,11 +1578,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *
          * @param      network     The network
          * @param      vertexId    The identifier of a vertex
-         * @param[in]  function    The function, e.g. , lambda function 
-         * 
+         * @param[in]  function    The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -1590,8 +1590,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              network,
          *              vertexId,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  Do something with the snapshotId and load snapshot object }
          *              }
          *          );
@@ -1602,24 +1602,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power load snapshots at @p vertexId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork &      network
                                                       , Types::vertexId vertexId
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 USAGE_ASSERT( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::loadId> loadIds;
                 network.LoadIds ( vertexId, loadIds );
 
-                for ( Types::loadId loadId : loadIds ) 
-                { 
+                for ( Types::loadId loadId : loadIds )
+                {
                     for_all_real_power_load_snapshots_of ( network, loadId, function );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork   const & network
                                                       , Types::vertexId    vertexId
@@ -1630,8 +1630,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 std::vector<Types::loadId> loadIds;
                 network.LoadIds ( vertexId, loadIds );
 
-                for ( Types::loadId loadId : loadIds ) 
-                { 
+                for ( Types::loadId loadId : loadIds )
+                {
                     for_all_real_power_load_snapshots_of ( network, loadId, function );
                 }
             }
@@ -1643,10 +1643,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *
          * @param      network     The network
          * @param      vertex      The vertex
-         * @param[in]  function    The function, e.g. , lambda function 
-         * 
+         * @param[in]  function    The function, e.g. , lambda function
+         *
          * @pre        Check if the @p vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
          *      {
@@ -1654,9 +1654,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              network,
          *              vertex,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -1666,11 +1666,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power load snapshots at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork      & network
                                                       , TVertex const & vertex
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -1679,7 +1679,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 for_all_real_power_load_snapshots_at ( network, vertexId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork const & network
                                                       , TVertex  const & vertex
@@ -1702,11 +1702,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          * @param      vertexId             The identifier of a vertex
          * @param      timestampPosition    The position of the snapshot
          *     (timestamp of the snapshot).
-         * @param[in]  function             The function, e.g. , lambda function 
-         * 
+         * @param[in]  function             The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -1715,9 +1715,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              vertexId,
          *              timestampPosition,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -1727,25 +1727,25 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork &      network
                                                       , Types::vertexId vertexId
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 USAGE_ASSERT( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::loadId> loadIds;
                 network.LoadIds ( vertexId, loadIds );
 
-                for ( Types::loadId loadId : loadIds ) 
-                { 
+                for ( Types::loadId loadId : loadIds )
+                {
                     function ( network.LoadSnapshotOf( loadId, timestampPosition ) );
                 }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork   const & network
                                                       , Types::vertexId    vertexId
@@ -1757,8 +1757,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 std::vector<Types::loadId> loadIds;
                 network.LoadIds ( vertexId, loadIds );
 
-                for ( Types::loadId loadId : loadIds ) 
-                { 
+                for ( Types::loadId loadId : loadIds )
+                {
                     function ( network.LoadSnapshotOf( loadId, timestampPosition ) );
                 }
             }
@@ -1783,24 +1783,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
          *              vertex,
          *              timestampPosition,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      } 
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork      & network
                                                       , TVertex const & vertex
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -1809,12 +1809,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
                 for_all_real_power_load_snapshots_at ( network, vertexId, timestampPosition, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork const & network
                                                       , TVertex  const & vertex
                                                       , Types::index     timestampPosition
-                                                      , FUNCTION         function ) 
+                                                      , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -1834,7 +1834,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::sequential> {
  * @tparam     PowerGridType  The type of the power grid.
  */
 template<typename PowerGridType >
-class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::breakable> { 
+class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::breakable> {
     // Template type aliasing
     using TNetwork              = PowerGridType;
     using TVertex               = typename TNetwork::TVertex;
@@ -1954,9 +1954,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generator ) 
-             *      { 
-             *          Do something with the generator object. 
+             *      []( TGeneratorProperties & generator )
+             *      {
+             *          Do something with the generator object.
              *      }
              * @endcode
              *
@@ -1966,12 +1966,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_generators ( TNetwork & network
-                                    , FUNCTION   function ) 
+                                    , FUNCTION   function )
             {
                 #pragma omp parallel for
                     for ( Types::index generatorId = 0
                         ; generatorId < network.generators_.size()
-                        ; ++generatorId ) 
+                        ; ++generatorId )
                     {
                         function( network.generators_[generatorId] );
                     }
@@ -1988,9 +1988,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generator ) 
-             *      { 
-             *          Do something with the generator object. 
+             *      []( TGeneratorProperties & generator )
+             *      {
+             *          Do something with the generator object.
              *      }
              * @endcode
              *
@@ -2000,12 +2000,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_generators ( TNetwork const & network
-                                    , FUNCTION         function ) 
+                                    , FUNCTION         function )
             {
                 #pragma omp parallel for
                     for ( Types::index generatorId = 0
                         ; generatorId < network.generators_.size()
-                        ; ++generatorId ) 
+                        ; ++generatorId )
                     {
                         function( network.generators_[generatorId] );
                     }
@@ -2020,11 +2020,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *     )@f$.
              * @param[in]  function  The function pointer, e.g., lambda function
              *     that has a vertex identifier @p Types::vertexId as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
-             *          Do something with the vertex identifier that has generators. 
+             *      []( Types::vertexId vertexId )
+             *      {
+             *          Do something with the vertex identifier that has generators.
              *      }
              * @endcode
              *
@@ -2033,14 +2033,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_vertex_identifiers_with_generator ( TNetwork const & network
-                                                           , FUNCTION         function ) 
+                                                           , FUNCTION         function )
             {
                 #pragma omp parallel for
                     for ( Types::vertexId index = 0
                         ; index < network.Graph().Vertices().size()
-                        ; ++index ) 
+                        ; ++index )
                     {
-                        if (   network.HasGeneratorAt(index) 
+                        if (   network.HasGeneratorAt(index)
                             && network.Graph().VertexExists(index) )
                         {
                             function( index );
@@ -2059,11 +2059,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a generator identifier @p
              *      Types::generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::generatorId generatorId ) 
-             *      { 
-             *          Do something with the generator identifier at the @p vertexId. 
+             *      []( Types::generatorId generatorId )
+             *      {
+             *          Do something with the generator identifier at the @p vertexId.
              *      }
              * @endcode
              *
@@ -2074,9 +2074,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_generator_identifiers_at ( Types::vertexId  vertexId
                                                  , TNetwork  const & network
-                                                 , FUNCTION          function ) 
+                                                 , FUNCTION          function )
             {
-                if (   network.HasGeneratorAt ( vertexId ) 
+                if (   network.HasGeneratorAt ( vertexId )
                     && network.Graph().VertexExists ( vertexId ) ) {
                     #pragma omp parallel for
                         for ( Types::count counter = 0
@@ -2099,11 +2099,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a generator identifier @p
              *      Types::generatorId as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::generatorId generatorId ) 
-             *      { 
-             *          Do something with the generator identifier at the @p vertexId. 
+             *      []( Types::generatorId generatorId )
+             *      {
+             *          Do something with the generator identifier at the @p vertexId.
              *      }
              * @endcode
              *
@@ -2114,7 +2114,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_generator_identifiers_at ( TVertex  const & vertex
                                                  , TNetwork  const & network
-                                                 , FUNCTION          function ) 
+                                                 , FUNCTION          function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_generator_identifiers_at ( vertexId, network, function );
@@ -2132,9 +2132,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertexId. 
+             *      []( TGeneratorProperties & generator )
+             *      {
+             *          Do something with the generator object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -2145,9 +2145,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_generators_at ( Types::vertexId const vertexId
                                        , TNetwork            & network
-                                       , FUNCTION              function ) 
+                                       , FUNCTION              function )
             {
-                for_all_generator_identifiers_at ( vertexId, 
+                for_all_generator_identifiers_at ( vertexId,
                     [ &network, &function ]( Types::generatorId generatorId )
                     {
                         function ( network.generators_[generatorId] );
@@ -2167,9 +2167,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties const & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertexId. 
+             *      []( TGeneratorProperties const & generator )
+             *      {
+             *          Do something with the generator object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -2180,9 +2180,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_generators_at ( Types::vertexId const   vertexId
                                        , TNetwork        const & network
-                                       , FUNCTION                function ) 
+                                       , FUNCTION                function )
             {
-                for_all_generator_identifiers_at ( vertexId, 
+                for_all_generator_identifiers_at ( vertexId,
                     [ &network, &function ]( Types::generatorId generatorId )
                     {
                         function ( network.generators_[generatorId] );
@@ -2202,9 +2202,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertex. 
+             *      []( TGeneratorProperties & generator )
+             *      {
+             *          Do something with the generator object at the @p vertex.
              *      }
              * @endcode
              *
@@ -2215,7 +2215,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_generators_at ( TVertex  const & vertex
                                        , TNetwork       & network
-                                       , FUNCTION         function ) 
+                                       , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_generators_at ( vertexId, network, function );
@@ -2233,9 +2233,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a generator object as input.
              *
              * @code{.cpp}
-             *      []( TGeneratorProperties const & generator ) 
-             *      { 
-             *          Do something with the generator object at the @p vertex. 
+             *      []( TGeneratorProperties const & generator )
+             *      {
+             *          Do something with the generator object at the @p vertex.
              *      }
              * @endcode
              *
@@ -2245,7 +2245,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_generators_at ( TVertex  const & vertex
                                        , TNetwork const & network
-                                       , FUNCTION         function ) 
+                                       , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_generators_at ( vertexId, network, function );
@@ -2261,12 +2261,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a vertex identifier @p vertexId and a
              *      @c generator object@c as input.
-             *      
+             *
              * @code{.cpp}
              *      []( Types::vertexId vertexId
-             *        , TGeneratorProperties & generatorProperties ) 
-             *      { 
-             *          Do something with the vertexId and the generator object. 
+             *        , TGeneratorProperties & generatorProperties )
+             *      {
+             *          Do something with the vertexId and the generator object.
              *      }
              * @endcode
              *
@@ -2274,20 +2274,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *     all generator tuple (vertexId, generatorProperties).
              */
             template<typename FUNCTION>
-            inline static 
+            inline static
             void for_all_generator_tuple ( TNetwork & network
-                                         , FUNCTION   function ) 
+                                         , FUNCTION   function )
             {
                 #pragma omp parallel for
                     for ( Types::vertexId index = 0
                         ; index < network.Graph().Vertices().size()
-                        ; ++index ) 
+                        ; ++index )
                     {
                         if ( network.HasGeneratorAt(index) )
                         {
                             std::vector<TGeneratorProperties> generators;
                             network.GeneratorsAt(index, generators);
-                            for ( TGeneratorProperties & generator : generators ) 
+                            for ( TGeneratorProperties & generator : generators )
                             {
                                 function( index, generator);
                             }
@@ -2305,11 +2305,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a vertex identifier @p vertexId and a
              *      @c generator object@c as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TGeneratorProperties const & generator ) 
-             *      { 
-             *          Do something with the vertexId and the generator object. 
+             *      []( Types::vertexId vertexId, TGeneratorProperties const & generator )
+             *      {
+             *          Do something with the vertexId and the generator object.
              *      }
              * @endcode
              *
@@ -2319,12 +2319,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_generator_tuple ( TNetwork const & network
-                                         , FUNCTION         function ) 
+                                         , FUNCTION         function )
             {
                 #pragma omp parallel for
                     for ( Types::vertexId index = 0
                         ; index < network.Graph().Vertices().size()
-                        ; ++index ) 
+                        ; ++index )
                     {
                         if ( network.HasGeneratorAt(index) )
                         {
@@ -2350,9 +2350,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *
              * @code{.cpp}
              *      []( Types::vertexId vertexId
-             *        , std::vector<TGeneratorProperties> & generators ) 
-             *      { 
-             *          Do something with the set of generators at the vertexId 
+             *        , std::vector<TGeneratorProperties> & generators )
+             *      {
+             *          Do something with the set of generators at the vertexId
              *          and identifier of the vertex that has generators.
              *      }
              * @endcode
@@ -2363,12 +2363,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_generators_tuple ( TNetwork const & network
-                                          , FUNCTION         function ) 
+                                          , FUNCTION         function )
             {
                 #pragma omp parallel for
                     for ( Types::vertexId index = 0
                         ; index < network.Graph().Vertices().size()
-                        ; ++index ) 
+                        ; ++index )
                     {
                         if ( network.HasGeneratorAt(index) )
                         {
@@ -2388,13 +2388,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          * @param      network     The network @f$\network = ( \graph,
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @code{.cpp}
          *      for_all_real_power_generator_snapshots<ExecutionPolicy::parallel>(
          *          network,
          *          []( Types::index             snapshotId
-         *            , Types::generatorSnapshot snapshot ) 
-         *          { 
+         *            , Types::generatorSnapshot snapshot )
+         *          {
          *              // Do something with the snapshotId and generator snapshot object.
          *          }
          *      );
@@ -2404,30 +2404,30 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power generator snapshots.
          */
         ///@{
-            template<typename FUNCTION> 
-            inline 
+            template<typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots ( TNetwork & network
-                                                        , FUNCTION   function ) 
+                                                        , FUNCTION   function )
             {
                 #pragma omp parallel for
                     for ( Types::index generatorId = 0
                         ; generatorId < network.generatorRealPowerSnapshots_.size()
-                        ; ++generatorId ) 
-                    { 
+                        ; ++generatorId )
+                    {
                         for_all_real_power_generator_snapshots_of ( network, generatorId, function );
                     }
             }
 
-            template<typename FUNCTION> 
-            inline 
+            template<typename FUNCTION>
+            inline
             void for_all_real_power_generator_snapshots ( TNetwork const & network
-                                                        , FUNCTION         function ) const 
+                                                        , FUNCTION         function ) const
             {
                 #pragma omp parallel for
                     for ( Types::index generatorId = 0
                         ; generatorId < network.generatorRealPowerSnapshots_.size()
-                        ; ++generatorId ) 
-                    { 
+                        ; ++generatorId )
+                    {
                         for_all_real_power_generator_snapshots_of ( network, generatorId, function );
                     }
             }
@@ -2440,20 +2440,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          * @param      network     The network @f$\network = ( \graph,
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      generatorId The identifier of the generator.
-         * @param[in]  function    The function, e.g., lambda function. 
-         * 
+         * @param[in]  function    The function, e.g., lambda function.
+         *
          * @pre        Check if the generator identifier @p generatorId of the
          *     generatorProperties exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.HasGenerator ( generatorId ) )
          *      {
-         *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::parallel> ( 
+         *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::parallel> (
          *              network,
          *              generatorId,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -2464,35 +2464,35 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power generator snapshots at @p generatorId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork         & network
                                                            , Types::generatorId generatorId
-                                                           , FUNCTION           function    ) 
+                                                           , FUNCTION           function    )
             {
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
 
                 #pragma omp parallel for
                     for ( Types::index snapshotId = 0
                         ; snapshotId < network.generatorRealPowerSnapshots_[generatorId].size()
-                        ; ++snapshotId ) 
+                        ; ++snapshotId )
                     { // snapshotId corresponds to row
                         function( snapshotId, network.generatorRealPowerSnapshots_[generatorId][snapshotId] );
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork   const & network
                                                            , Types::generatorId generatorId
-                                                           , FUNCTION           function    ) 
+                                                           , FUNCTION           function    )
             {
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
 
                 #pragma omp parallel for
                     for ( Types::index snapshotId = 0
                         ; snapshotId < network.generatorRealPowerSnapshots_[generatorId].size()
-                        ; ++snapshotId ) 
+                        ; ++snapshotId )
                     { // snapshotId corresponds to row
                         function( snapshotId, network.generatorRealPowerSnapshots_[generatorId][snapshotId] );
                     }
@@ -2507,51 +2507,51 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      generatorProperties  The generator properties.
          * @param[in]  function             The function, e.g. , lambda function.
-         * 
+         *
          * @pre        Check if the generator identifier @p generatorId of the
          *     generatorProperties exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.HasGenerator ( network.GeneratorId ( generatorProperties ) ) )
          *      {
          *          for_all_real_power_generator_snapshots_of<ExecutionPolicy::parallel> (
          *              network,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              {    
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
          *      }
-         * @endcode 
+         * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power generator snapshots of @p generatorProperties.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork                   & network
                                                            , TGeneratorProperties const & generatorProperties
-                                                           , FUNCTION                     function ) 
+                                                           , FUNCTION                     function )
             {
                 Types::generatorId generatorId = network.GeneratorId( generatorProperties );
 
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
-                
+
                 for_all_real_power_generator_snapshots_of ( network, generatorId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_of ( TNetwork             const & network
                                                            , TGeneratorProperties const & generatorProperties
-                                                           , FUNCTION                     function  ) 
+                                                           , FUNCTION                     function  )
             {
                 Types::generatorId generatorId = network.GeneratorId( generatorProperties );
 
                 USAGE_ASSERT ( network.HasGenerator ( generatorId ) );
-                
+
                 for_all_real_power_generator_snapshots_of ( network, generatorId, function );
             }
         ///@}
@@ -2564,10 +2564,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      vertexId    The identifier of a vertex.
          * @param[in]  function    The function, e.g. , lambda function.
-         * 
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -2575,8 +2575,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              network,
          *              vertexId,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -2587,17 +2587,17 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power generator snapshots at @p vertexId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork       & network
                                                            , Types::vertexId  vertexId
-                                                           , FUNCTION         function ) 
+                                                           , FUNCTION         function )
             {
                 USAGE_ASSERT ( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorAt( vertexId, generatorIds );
-                
+
                 #pragma omp parallel for
                     for ( Types::index index = 0
                         ; index < generatorIds.size()
@@ -2607,7 +2607,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork const & network
                                                            , Types::vertexId  vertexId
@@ -2617,7 +2617,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorAt( vertexId, generatorIds );
-                
+
                 #pragma omp parallel for
                     for ( Types::index index = 0
                         ; index < generatorIds.size()
@@ -2636,10 +2636,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *         \generators, \consumers, \capacity, \susceptance, \dots)@f$.
          * @param      vertex      The vertex.
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
          *      {
@@ -2647,8 +2647,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              network,
          *              vertex,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  // Do something with the snapshotId and generator snapshot object.
          *              }
          *          );
@@ -2659,35 +2659,35 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power generator snapshots at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork & network
                                                            , TVertex    vertex
-                                                           , FUNCTION   function ) 
+                                                           , FUNCTION   function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
-                
+
                 USAGE_ASSERT ( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorAt( vertexId, generatorIds );
-                
+
                 for_all_real_power_generator_snapshots_at ( network, vertexId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork const & network
                                                            , TVertex          vertex
                                                            , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
-                
+
                 USAGE_ASSERT ( network.Graph().VertexExists( vertexId ) );
 
                 std::vector<Types::generatorId> generatorIds;
                 network.GeneratorAt( vertexId, generatorIds );
-                
+
                 for_all_real_power_generator_snapshots_at ( network, vertexId, function );
             }
         ///@}
@@ -2702,11 +2702,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          * @param      vertexId             The identifier of a vertex
          * @param      timestampPosition    The position of the snapshot
          *     (timestamp of the snapshot).
-         * @param[in]  function             The function, e.g. , lambda function 
-         * 
+         * @param[in]  function             The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -2714,24 +2714,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              network,
          *              vertexId,
          *              timestampPosition,
-         *              []( Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *              []( Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      }       
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power generator at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork &      network
                                                            , Types::vertexId vertexId
                                                            , Types::index    timestampPosition
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 USAGE_ASSERT( network.Graph().VertexExists( vertexId ) );
 
@@ -2747,7 +2747,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork   const & network
                                                            , Types::vertexId    vertexId
@@ -2789,24 +2789,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              network,
          *              vertex,
          *              timestampPosition,
-         *              []( Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *              []( Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      } 
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork      & network
                                                            , TVertex const & vertex
                                                            , Types::index    timestampPosition
-                                                           , FUNCTION        function ) 
+                                                           , FUNCTION        function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -2815,12 +2815,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 for_all_real_power_generator_snapshots_at ( network, vertexId, timestampPosition, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_generator_snapshots_at ( TNetwork const & network
                                                            , TVertex  const & vertex
                                                            , Types::index     timestampPosition
-                                                           , FUNCTION         function ) 
+                                                           , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -2845,9 +2845,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      that has a load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties & load ) 
-             *      { 
-             *          Do something with the load object. 
+             *      []( TLoadProperties & load )
+             *      {
+             *          Do something with the load object.
              *      }
              * @endcode
              *
@@ -2857,11 +2857,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_loads ( TNetwork & network
-                               , FUNCTION   function ) 
+                               , FUNCTION   function )
             {
                 #pragma omp parallel for
                     for ( Types::loadId loadId = 0
-                        ; loadId < network.loads_.size() 
+                        ; loadId < network.loads_.size()
                         ; ++loadId )
                     {
                         function ( network.loads_[loadId] );
@@ -2879,9 +2879,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      that has a const load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the load object. 
+             *      []( TLoadProperties const & load )
+             *      {
+             *          Do something with the load object.
              *      }
              * @endcode
              *
@@ -2891,11 +2891,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_loads ( TNetwork const & network
-                               , FUNCTION         function ) 
+                               , FUNCTION         function )
             {
                 #pragma omp parallel for
                     for ( Types::loadId loadId = 0
-                        ; loadId < network.loads_.size() 
+                        ; loadId < network.loads_.size()
                         ; ++loadId )
                     {
                         function ( network.loads_[loadId] );
@@ -2914,9 +2914,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
-             *          Do something with the vertex identifier that has loads. 
+             *      []( Types::vertexId vertexId )
+             *      {
+             *          Do something with the vertex identifier that has loads.
              *      }
              * @endcode
              *
@@ -2926,16 +2926,16 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_vertex_identifiers_with_load ( TNetwork const & network
-                                                      , FUNCTION         function ) 
+                                                      , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 #pragma omp parallel for
                     for ( Types::vertexId vertexId = 0
                         ; vertexId < network.Graph().Vertices().size()
-                        ; ++vertexId ) 
+                        ; ++vertexId )
                     {
-                        if (   network.HasLoadAt(vertexId) 
-                            && network.Graph().VertexExists(vertexId) ) 
+                        if (   network.HasLoadAt(vertexId)
+                            && network.Graph().VertexExists(vertexId) )
                         {
                             vertexIdSafeguard = vertexId;
                             function ( vertexIdSafeguard );
@@ -2954,11 +2954,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a load identifier @p Types::loadId as
              *      input.
-             *      
+             *
              * @code{.cpp}
-             *      []( Types::loadId loadId ) 
-             *      { 
-             *          Do something with the load identifier at the @p vertex. 
+             *      []( Types::loadId loadId )
+             *      {
+             *          Do something with the load identifier at the @p vertex.
              *      }
              * @endcode
              *
@@ -2969,10 +2969,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_load_identifiers_at ( Types::vertexId  vertexId
                                              , TNetwork const & network
-                                             , FUNCTION         function ) 
+                                             , FUNCTION         function )
             {
-                if (   network.HasLoadAt ( vertexId ) 
-                    && network.Graph().VertexExists ( vertexId ) ) 
+                if (   network.HasLoadAt ( vertexId )
+                    && network.Graph().VertexExists ( vertexId ) )
                 {
                     #pragma omp parallel for
                         for ( Types::index index = 0
@@ -2996,9 +2996,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a load identifier as input.
              *
              * @code{.cpp}
-             *      []( Types::loadId loadId ) 
-             *      { 
-             *          Do something with the load identifier at the @p vertex. 
+             *      []( Types::loadId loadId )
+             *      {
+             *          Do something with the load identifier at the @p vertex.
              *      }
              * @endcode
              *
@@ -3009,7 +3009,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_load_identifiers_at ( TVertex  const & vertex
                                              , TNetwork const & network
-                                             , FUNCTION         function ) 
+                                             , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_load_identifiers_at ( vertexId, network, function );
@@ -3025,11 +3025,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *     )@f$.
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a load object as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( TLoadProperties & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertex. 
+             *      []( TLoadProperties & load )
+             *      {
+             *          Do something with the load object at the @p vertex.
              *      }
              * @endcode
              *
@@ -3040,7 +3040,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_loads_at ( TVertex  const & vertex
                                   , TNetwork       & network
-                                  , FUNCTION         function ) 
+                                  , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_loads_at ( vertexId, network, function );
@@ -3056,11 +3056,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *     )@f$.
              * @param[in]  function  The function pointer, e.g., lambda
              *      function that has a load object as input.
-             *      
+             *
              * @code{.cpp}
-             *      []( TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertex. 
+             *      []( TLoadProperties const & load )
+             *      {
+             *          Do something with the load object at the @p vertex.
              *      }
              * @endcode
              *
@@ -3071,7 +3071,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_loads_at ( TVertex  const & vertex
                                   , TNetwork const & network
-                                  , FUNCTION         function ) 
+                                  , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
                 for_all_loads_at ( vertexId, network, function );
@@ -3089,9 +3089,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertexId. 
+             *      []( TLoadProperties & load )
+             *      {
+             *          Do something with the load object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -3102,9 +3102,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_loads_at ( Types::vertexId const vertexId
                                   , TNetwork            & network
-                                  , FUNCTION              function ) 
+                                  , FUNCTION              function )
             {
-                for_all_load_identifiers_at ( vertexId, network, 
+                for_all_load_identifiers_at ( vertexId, network,
                     [ &network, &function ]( Types::loadId loadId )
                     {
                         function ( network.loads_[loadId] );
@@ -3124,9 +3124,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      function that has a load object as input.
              *
              * @code{.cpp}
-             *      []( TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the load object at the @p vertexId. 
+             *      []( TLoadProperties const & load )
+             *      {
+             *          Do something with the load object at the @p vertexId.
              *      }
              * @endcode
              *
@@ -3137,9 +3137,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             inline static
             void for_all_loads_at ( Types::vertexId const   vertexId
                                   , TNetwork        const & network
-                                  , FUNCTION                function ) 
+                                  , FUNCTION                function )
             {
-                for_all_load_identifiers_at ( vertexId, network, 
+                for_all_load_identifiers_at ( vertexId, network,
                     [ &network, &function ]( Types::loadId loadId )
                     {
                         function ( network.loads_[loadId] );
@@ -3159,9 +3159,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      @c load object@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TLoadProperties & load ) 
-             *      { 
-             *          Do something with the vertexId and load object. 
+             *      []( Types::vertexId vertexId, TLoadProperties & load )
+             *      {
+             *          Do something with the vertexId and load object.
              *      }
              * @endcode
              *
@@ -3171,17 +3171,17 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_load_tuples ( TNetwork & network
-                                     , FUNCTION   function ) 
+                                     , FUNCTION   function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 #pragma omp parallel for
                     for ( Types::vertexId vertexId = 0
                         ; vertexId < network.Graph().Vertices().size()
-                        ; ++vertexId ) 
+                        ; ++vertexId )
                     {
-                        if ( network.HasLoadAt(vertexId) ) 
+                        if ( network.HasLoadAt(vertexId) )
                         {
-                            for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] ) 
+                            for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] )
                             {
                                 vertexIdSafeguard = vertexId;
                                 function( vertexIdSafeguard, network.loads_[loadId] );
@@ -3202,9 +3202,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      @c load object@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TLoadProperties const & load ) 
-             *      { 
-             *          Do something with the vertexId and load object. 
+             *      []( Types::vertexId vertexId, TLoadProperties const & load )
+             *      {
+             *          Do something with the vertexId and load object.
              *      }
              * @endcode
              *
@@ -3214,17 +3214,17 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_load_tuples ( TNetwork const & network
-                                     , FUNCTION         function ) 
+                                     , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 #pragma omp parallel for
                     for ( Types::vertexId vertexId = 0
                         ; vertexId < network.Graph().Vertices().size()
-                        ; ++vertexId ) 
+                        ; ++vertexId )
                     {
-                        if ( network.HasLoadAt(vertexId) ) 
+                        if ( network.HasLoadAt(vertexId) )
                         {
-                            for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] ) 
+                            for ( Types::loadId loadId : network.loadsAtVertex_[vertexId] )
                             {
                                 vertexIdSafeguard = vertexId;
                                 function( vertexIdSafeguard, network.loads_[loadId] );
@@ -3245,10 +3245,10 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
              *      @c load objects@c as input.
              *
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, std::vector<TLoadProperties> & loads ) 
-             *      { 
-             *          Do something with the set of loads at the vertexId 
-             *          and identifier of the vertex that has loads. 
+             *      []( Types::vertexId vertexId, std::vector<TLoadProperties> & loads )
+             *      {
+             *          Do something with the set of loads at the vertexId
+             *          and identifier of the vertex that has loads.
              *      }
              * @endcode
              *
@@ -3258,13 +3258,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
             template<typename FUNCTION>
             inline static
             void for_all_loads_tuple ( TNetwork const & network
-                                     , FUNCTION         function ) 
+                                     , FUNCTION         function )
             {
                 Types::vertexId vertexIdSafeguard = 0;
                 #pragma omp parallel for
                     for ( Types::vertexId vertexId = 0
                         ; vertexId < network.Graph().Vertices().size()
-                        ; ++vertexId ) 
+                        ; ++vertexId )
                     {
                         if ( network.HasLoadAt(vertexId) )
                         {
@@ -3285,14 +3285,14 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *
          * @param      network     The network
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @code{.cpp}
          *      for_all_real_power_load_snapshots<ExecutionPolicy::parallel>(
          *          network,
          *          []( Types::index        snapshotId
-         *            , Types::loadSnapshot snapshot ) 
-         *          { 
-         *              Do something with the snapshotId and load snapshot object 
+         *            , Types::loadSnapshot snapshot )
+         *          {
+         *              Do something with the snapshotId and load snapshot object
          *          }
          *      );
          * @endcode
@@ -3301,15 +3301,15 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power load snapshots.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots ( TNetwork & network
-                                                   , FUNCTION   function ) 
+                                                   , FUNCTION   function )
             {
                 #pragma omp parallel for
                     for ( Types::loadId loadId = 0
                         ; loadId < network.loadSnapshots_.size()
-                        ; ++loadId ) 
+                        ; ++loadId )
                     {
                         for_all_real_power_load_snapshots_of ( network
                                                              , loadId
@@ -3317,7 +3317,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots ( TNetwork const & network
                                                    , FUNCTION         function )
@@ -3325,7 +3325,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 #pragma omp parallel for
                     for ( Types::loadId loadId = 0
                         ; loadId < network.loadSnapshots_.size()
-                        ; ++loadId ) 
+                        ; ++loadId )
                     {
                         for_all_real_power_load_snapshots_of ( network
                                                              , loadId
@@ -3333,7 +3333,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                     }
             }
         ///@}
-            
+
         /**
          * @brief      The parallel @c for loop @c over all real power
          *     snapshots of a load with @p loadId.
@@ -3341,20 +3341,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          * @param      network     The network.
          * @param      loadId      The identifier of the load.
          * @param[in]  function    The function, e.g., lambda function.
-         * 
+         *
          * @pre        Check if the load identifier @p loadId of the
          *     loadProperties exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.HasLoad ( loadId ) )
          *      {
-         *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> ( 
+         *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
          *              network,
          *              loadId,
          *              []( Types::index snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -3364,25 +3364,25 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power load snapshots at @p loadId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork &    network
                                                       , Types::loadId loadId
-                                                      , FUNCTION      function ) 
+                                                      , FUNCTION      function )
             {
                 USAGE_ASSERT ( network.HasLoad ( loadId ) );
 
                 #pragma omp parallel for
                     for ( Types::index timestampPosition = 0
                         ; timestampPosition < network.loadSnapshots_.size()
-                        ; ++timestampPosition ) 
-                    { 
+                        ; ++timestampPosition )
+                    {
                         function ( timestampPosition
                                  , network.LoadSnapshotOf( loadId, timestampPosition ) );
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork const & network
                                                       , Types::loadId    loadId
@@ -3391,8 +3391,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 #pragma omp parallel for
                     for ( Types::index timestampPosition = 0
                         ; timestampPosition < network.loadSnapshots_.size()
-                        ; ++timestampPosition ) 
-                    { 
+                        ; ++timestampPosition )
+                    {
                         function ( timestampPosition
                                  , network.LoadSnapshotOf( loadId, timestampPosition ) );
                     }
@@ -3406,20 +3406,20 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *
          * @param      network          The network.
          * @param      loadProperties   The load properties.
-         * @param[in]  function         The function, e.g. , lambda function. 
-         * 
+         * @param[in]  function         The function, e.g. , lambda function.
+         *
          * @pre        Check if the load identifier @p loadId of the
          *     loadProperties exists before using this method.
-         *     
+         *
          * @code{.cpp}
          *      if ( network.HasLoad ( network.LoadId ( loadProperties ) ) )
          *      {
          *          for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential> (
          *              network,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              {    
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -3429,27 +3429,27 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power load snapshots at @p load.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork &      network
                                                       , TLoadProperties loadProperties
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 Types::loadId loadId = network.LoadId ( loadProperties );
-                
+
                 USAGE_ASSERT ( network.HasLoad ( loadId ) );
 
                 for_all_real_power_load_snapshots_of ( network, loadId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_of ( TNetwork const & network
                                                       , TLoadProperties  loadProperties
                                                       , FUNCTION         function )
             {
                 Types::loadId loadId = network.LoadId ( loadProperties );
-                
+
                 USAGE_ASSERT ( network.HasLoad ( loadId ) );
 
                 for_all_real_power_load_snapshots_of ( network, loadId, function );
@@ -3462,11 +3462,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *
          * @param      network     The network
          * @param      vertexId    The identifier of a vertex
-         * @param[in]  function    The function, e.g. , lambda function 
-         * 
+         * @param[in]  function    The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -3474,8 +3474,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              network,
          *              vertexId,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
+         *                , Types::loadSnapshot snapshot )
+         *              {
          *                  Do something with the snapshotId and load snapshot object }
          *              }
          *          );
@@ -3486,11 +3486,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power load snapshots at @p vertexId.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork &      network
                                                       , Types::vertexId vertexId
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 USAGE_ASSERT( network.Graph().VertexExists( vertexId ) );
 
@@ -3500,13 +3500,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 #pragma omp parallel for
                     for ( Types::index loadId = 0
                         ; loadId < loadIds.size()
-                        ; ++loadId ) 
-                    { 
+                        ; ++loadId )
+                    {
                         for_all_real_power_load_snapshots_of ( network, loadId, function );
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork const & network
                                                       , Types::vertexId  vertexId
@@ -3520,8 +3520,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 #pragma omp parallel for
                     for ( Types::index loadId = 0
                         ; loadId < loadIds.size()
-                        ; ++loadId ) 
-                    { 
+                        ; ++loadId )
+                    {
                         for_all_real_power_load_snapshots_of ( network, loadId, function );
                     }
             }
@@ -3533,11 +3533,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *
          * @param      network     The network
          * @param      vertex      The vertex
-         * @param[in]  function    The function, e.g. , lambda function 
-         * 
+         * @param[in]  function    The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( network.Graph().VertexId( vertex ) ) )
          *      {
@@ -3545,9 +3545,9 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              network,
          *              vertex,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
          *      }
@@ -3557,11 +3557,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork & network
                                                       , TVertex    vertex
-                                                      , FUNCTION   function ) 
+                                                      , FUNCTION   function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -3570,7 +3570,7 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 for_all_real_power_load_snapshots_at ( network, vertexId, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork const & network
                                                       , TVertex          vertex
@@ -3593,11 +3593,11 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          * @param      vertexId             The identifier of a vertex
          * @param      timestampPosition    The position of the snapshot
          *     (timestamp of the snapshot).
-         * @param[in]  function             The function, e.g. , lambda function 
-         * 
+         * @param[in]  function             The function, e.g. , lambda function
+         *
          * @pre        Check if the vertex identifier @p vertexId of the
          *     vertex exists before using this method.
-         * 
+         *
          * @code{.cpp}
          *      if ( network.Graph().VertexExists( vertexId ) )
          *      {
@@ -3606,24 +3606,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              vertexId,
          *              timestampPosition,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      }       
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork &      network
                                                       , Types::vertexId vertexId
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 USAGE_ASSERT( network.Graph().VertexExists( vertexId ) );
 
@@ -3633,13 +3633,13 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 #pragma omp parallel for
                     for ( Types::index loadId = 0
                         ; loadId < loadIds.size()
-                        ; ++loadId ) 
-                    { 
+                        ; ++loadId )
+                    {
                         function ( network.LoadSnapshotOf( loadId, timestampPosition ) );
                     }
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork   const & network
                                                       , Types::vertexId    vertexId
@@ -3654,8 +3654,8 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 #pragma omp parallel for
                     for ( Types::index loadId = 0
                         ; loadId < loadIds.size()
-                        ; ++loadId ) 
-                    { 
+                        ; ++loadId )
+                    {
                         function ( network.LoadSnapshotOf( loadId, timestampPosition ) );
                     }
             }
@@ -3681,24 +3681,24 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
          *              vertex,
          *              timestampPosition,
          *              []( Types::index        snapshotId
-         *                , Types::loadSnapshot snapshot ) 
-         *              { 
-         *                  Do something with the snapshotId and load snapshot object 
+         *                , Types::loadSnapshot snapshot )
+         *              {
+         *                  Do something with the snapshotId and load snapshot object
          *              }
          *          );
-         *      } 
+         *      }
          * @endcode
          *
          * @tparam     FUNCTION    The function object that is called for
          *     all real power load at @p timestamp at @p vertex.
          */
         ///@{
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork      & network
                                                       , TVertex const & vertex
                                                       , Types::index    timestampPosition
-                                                      , FUNCTION        function ) 
+                                                      , FUNCTION        function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 
@@ -3707,12 +3707,12 @@ class PowerGridLoopDifferentiation<PowerGridType, ExecutionPolicy::parallel> {
                 for_all_real_power_load_snapshots_at ( network, vertexId, timestampPosition, function );
             }
 
-            template<typename FUNCTION> 
+            template<typename FUNCTION>
             inline static
             void for_all_real_power_load_snapshots_at ( TNetwork const & network
                                                       , TVertex  const & vertex
                                                       , Types::index     timestampPosition
-                                                      , FUNCTION         function ) 
+                                                      , FUNCTION         function )
             {
                 Types::vertexId vertexId = network.Graph().VertexId( vertex );
 

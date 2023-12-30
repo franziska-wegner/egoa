@@ -28,7 +28,7 @@
 %
 % see [Figure 4a; Section 5; Grastien et al., 2018]
 % or slide 20 in https://i11www.iti.kit.edu/_media/members/franziska_wegner/2018-07-18_franziska-wegner_energieinformatik_teil13_vl2_the-maximum-transmission-switching-flow-problem.pdf
-% 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function mpc = mtsf_case4_fig4_a

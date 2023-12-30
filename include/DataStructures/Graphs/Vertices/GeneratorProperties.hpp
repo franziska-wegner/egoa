@@ -31,7 +31,7 @@ class GeneratorProperties {
         ///@{
             using TBound         = Bound<Types::real>;
         ///@}
-        
+
         ///@name Type Specific Types
         ///@{
             using TVertexType    = VertexType;
@@ -60,12 +60,12 @@ class GeneratorProperties {
             , sign_(TPowerSign::positive)
             // real power
             , realPower_(0.0)
-            , realPowerBound_( TBound(0.0, Const::REAL_INFTY) ) 
+            , realPowerBound_( TBound(0.0, Const::REAL_INFTY) )
             , pc1_(0.0)
             , pc2_(0.0)
             // reactive power
             , reactivePower_(0.0)
-            , reactivePowerBound_( TBound(0.0, Const::REAL_INFTY) ) 
+            , reactivePowerBound_( TBound(0.0, Const::REAL_INFTY) )
             , qc1Bound_( TBound(0.0, 0.0) )
             , qc2Bound_( TBound(0.0, 0.0) )
             // status
@@ -97,7 +97,7 @@ class GeneratorProperties {
             /**
              * @brief      Reset to default values.
              */
-            inline void Reset () 
+            inline void Reset ()
             {
                 // BasicVertex specifics
                 Name ()           = "";
@@ -160,9 +160,9 @@ class GeneratorProperties {
              * @return     @p true if both vertices are @p not equal, @p false
              *     otherwise.
              */
-            inline bool operator!=( GeneratorProperties const & rhs ) const 
-            { 
-                return !(this == rhs); 
+            inline bool operator!=( GeneratorProperties const & rhs ) const
+            {
+                return !(this == rhs);
             }
 
             /**
@@ -173,14 +173,14 @@ class GeneratorProperties {
              * @return     @p true if both vertices are equal, @p false
              *     otherwise.
              */
-            inline bool operator==( GeneratorProperties const & rhs ) const 
+            inline bool operator==( GeneratorProperties const & rhs ) const
             {
                 // Basic Vertex
                 if ( Name()   != rhs.Name()   ) return false;
                 if ( X()      != rhs.X()      ) return false;
                 if ( Y()      != rhs.Y()      ) return false;
                 if ( Type()   != rhs.Type()   ) return false;
-                
+
                 // Voltage specific information
                 if ( !Auxiliary::EQ ( VoltageMagnitude(), rhs.VoltageMagnitude()                ) ) return false;
 
@@ -246,7 +246,7 @@ class GeneratorProperties {
          * @param      rhs   The right hand side generator property.
          */
         friend void swap ( GeneratorProperties & lhs
-                         , GeneratorProperties & rhs ) 
+                         , GeneratorProperties & rhs )
         { // Necessary for the copy and swap idiom
             using std::swap; // enable ADL
             // Basic vertex
@@ -279,7 +279,7 @@ class GeneratorProperties {
             // Status specific information
             swap( lhs.status_,                  rhs.status_);
             swap( lhs.committable_,             rhs.committable_);
-            
+
             // Type specific information
             swap( lhs.control_,                 rhs.control_);
             swap( lhs.type_,                    rhs.type_);
@@ -317,7 +317,7 @@ class GeneratorProperties {
 
             inline Types::real       X()           const { return xCoordinate_; }
             inline Types::real     & X()                 { return xCoordinate_; }
-            
+
             inline Types::real       Y()           const { return yCoordinate_; }
             inline Types::real     & Y()                 { return yCoordinate_; }
         ///@}
@@ -333,9 +333,9 @@ class GeneratorProperties {
              *
              * @return     The voltage magnitude @f$\vmagnitude@f$.
              */
-            inline Types::real VoltageMagnitude () const 
-            { 
-                return voltageMagnitudeSnapshot_; 
+            inline Types::real VoltageMagnitude () const
+            {
+                return voltageMagnitudeSnapshot_;
             }
 
             /**
@@ -346,12 +346,12 @@ class GeneratorProperties {
              * @return     The voltage magnitude @f$\vmagnitude@f$.
              */
             inline Types::real & VoltageMagnitude ()
-            { 
-                return voltageMagnitudeSnapshot_; 
+            {
+                return voltageMagnitudeSnapshot_;
             }
         ///@}
 
-        /**@name Nominal Power Information */ 
+        /**@name Nominal Power Information */
         ///@{
 #pragma mark NOMINAL_POWER
 
@@ -364,23 +364,23 @@ class GeneratorProperties {
              *     False. However, in some cases it makes sense to extend
              *     already existing energy sources, too, and the flag might be
              *     @p True, too.
-             * 
+             *
              * @pre        Default is @p false.
-             * 
+             *
              * @note       If it is true the extendable generator then the
              *     generator's nominal real power @f$\realpowernominal@f$ lies
              *     between @f$\realpowernominalmin@f$ and
              *     @f$\realpowernominalmax@f$ meaning
              *     @f[
              *     \realpowernominal := [\realpowernominalmin,\realpowernominalmax].
-             *     @f] 
+             *     @f]
              *     Otherwise, the generator's nominal real power
              *     @f$\realpowernominal@f$ is defined by a fixed value. Thus, use
              *     @f$\realpowernominal@f$ by using @p Mbase when @p
              *     IsExtendable is @p false, and @f$\realpowernominalmin@f$ and
              *     @f$\realpowernominalmax@f$ by using @p NominalRealPower if
              *     @p IsExtendable is @p true.
-             *     
+             *
              * @see NominalPower
              * @see NominalRealPowerBound
              *
@@ -388,9 +388,9 @@ class GeneratorProperties {
              *     @f$\vertex\in\generators@f$ is extendable, @p false
              *     otherwise.
              */
-            inline bool IsExtendable() const 
-            { 
-                return pNomExtendable_; 
+            inline bool IsExtendable() const
+            {
+                return pNomExtendable_;
             }
 
             /**
@@ -406,15 +406,15 @@ class GeneratorProperties {
              * @code{.cpp}
              *      generator.IsExtendable() = true;
              * @endcode
-             * 
+             *
              * @pre        Default is @p false.
-             * 
+             *
              * @note       If it is true the extendable generator then the
              *     generator's nominal real power @f$\realpowernominal@f$ lies between
              *     @f$\realpowernominalmin@f$ and @f$\realpowernominalmax@f$ meaning
              *     @f[
              *     \realpowernominal := [\realpowernominalmin,\realpowernominalmax].
-             *     @f] 
+             *     @f]
              *     Otherwise, the generator's nominal real power
              *     @f$\realpowernominal@f$ is defined by a fixed value. Thus, use
              *     @f$\realpowernominal@f$ by using @p Mbase when @p
@@ -431,12 +431,12 @@ class GeneratorProperties {
              *     otherwise.
              */
             inline bool & IsExtendable ()
-            { 
-                return pNomExtendable_; 
+            {
+                return pNomExtendable_;
             }
 
             /**
-             * @brief      Getter for the nominal power base. 
+             * @brief      Getter for the nominal power base.
              * @details    If the generator @f$\vertex\in\generators@f$ is
              *     @p NOT extendable---meaning IsExtendable is @p false---and
              *         thus, fixed the nominal power is used to normalize or
@@ -445,7 +445,7 @@ class GeneratorProperties {
              * @code{.cpp}
              *     GeneratorProperties const & generator;
              *     ...
-             *     if ( !generator.IsExtendable() )  
+             *     if ( !generator.IsExtendable() )
              *     { // nominal real power is a value and thus, is fixed.
              *         std::cout << "p_nom = " << generator.Mbase() << std::endl;
              *     }
@@ -457,20 +457,20 @@ class GeneratorProperties {
              *
              * @return     The nominal power base.
              */
-            inline Types::real NominalPower () const 
-            { 
+            inline Types::real NominalPower () const
+            {
                 return nominalPower_;
             }
 
             /**
-             * @brief      Getter and setter for the nominal power base. 
+             * @brief      Getter and setter for the nominal power base.
              * @details    If the generator @f$\vertex\in\generators@f$ is
              *     @p NOT extendable---meaning IsExtendable is @p False---and
              *         thus, fixed the nominal power is used to normalize or
              *         to denormalize into/from the p.u. units.
              *
              * @code{.cpp}
-             *     if ( !generator.IsExtendable() )  
+             *     if ( !generator.IsExtendable() )
              *     { // nominal real power is a value and thus, is fixed.
              *         generator.Mbase() = 11.11;
              *     }
@@ -483,8 +483,8 @@ class GeneratorProperties {
              * @return     The nominal power base.
              */
             inline Types::real & NominalPower ()
-            { 
-                return nominalPower_; 
+            {
+                return nominalPower_;
             }
 
             /**
@@ -492,31 +492,31 @@ class GeneratorProperties {
              *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$
              *     while the generator
              *     @f$\vertex\in\generators@f$ is extendable.
-             *     
+             *
              * @pre        Check if the @f$\vertex\in\generators@f$ is
              *     extendable meaning IsExtendable is true.
-             *     
+             *
              * @code{.cpp}
-             *     if ( generator.IsExtendable() ) 
+             *     if ( generator.IsExtendable() )
              *     { // nominal real power lies in between a bound and thus, is flexible.
              *         std::cout << "p_nom_min = " << generator.NominalRealPower().Minimum()
              *                   << "p_nom_max = " << generator.NominalRealPower().Maximum() << std::endl;
-             *     } else 
+             *     } else
              *     { // nominal real power is a value and thus, is fixed.
              *         std::cout << "p_nom = " << generator.Mbase() << std::endl;
              *     }
              * @endcode
-             * 
+             *
              * @see NominalPower
              * @see IsExtendable
              * @see NominalRealPowerBound
-             * 
+             *
              * @return     The nominal real power bound
              *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$.
              */
-            inline TBound NominalRealPowerBound () const 
-            { 
-                return nominalRealPowerBound_; 
+            inline TBound NominalRealPowerBound () const
+            {
+                return nominalRealPowerBound_;
             }
 
             /**
@@ -525,28 +525,28 @@ class GeneratorProperties {
              *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$
              *     while the generator
              *     @f$\vertex\in\generators@f$ is extendable.
-             *     
+             *
              * @pre        Check if the @f$\vertex\in\generators@f$ is
              *     extendable meaning IsExtendable is true.
-             *     
+             *
              * @code{.cpp}
-             *     if ( generator.IsExtendable() ) 
+             *     if ( generator.IsExtendable() )
              *     { // nominal real power lies in between a bound and thus, is flexible.
              *         generator.NominalRealPower().Minimum() = 0.0;
              *         generator.NominalRealPower().Maximum() = 11.11;
              *     }
              * @endcode
-             * 
+             *
              * @see NominalPower
              * @see IsExtendable
              * @see NominalRealPowerBound
-             * 
+             *
              * @return     The nominal real power bound
              *     @f$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]@f$.
              */
             inline TBound & NominalRealPowerBound ()
-            { 
-                return nominalRealPowerBound_; 
+            {
+                return nominalRealPowerBound_;
             }
 
             /**
@@ -554,11 +554,11 @@ class GeneratorProperties {
              *
              * @return     The power sign, if 1 the generator produces energy,
              *     otherwise if -1 it consumes energy.
-             *     
+             *
              * @todo make enum
              */
-            inline TPowerSign PowerSign () const 
-            { 
+            inline TPowerSign PowerSign () const
+            {
                 return sign_;
             }
 
@@ -567,16 +567,16 @@ class GeneratorProperties {
              *
              * @return     The power sign, if 1 the generator produces energy,
              *     otherwise if -1 it consumes energy.
-             *     
+             *
              * @todo make enum
              */
-            inline TPowerSign & PowerSign () 
-            { 
-                return sign_; 
+            inline TPowerSign & PowerSign ()
+            {
+                return sign_;
             }
         ///@}
 
-        /**@name Real Power Information */ 
+        /**@name Real Power Information */
         ///@{
 #pragma mark REAL_POWER_INFORMATION
 
@@ -585,9 +585,9 @@ class GeneratorProperties {
              *
              * @return     The real power @f$\realpowergeneration@f$.
              */
-            inline Types::real RealPower () const 
-            { 
-                return realPower_; 
+            inline Types::real RealPower () const
+            {
+                return realPower_;
             }
 
             /**
@@ -597,8 +597,8 @@ class GeneratorProperties {
              * @return     The real power set point @f$\realpowergeneration@f$.
              */
             inline Types::real & RealPower ()
-            { 
-                return realPower_; 
+            {
+                return realPower_;
             }
 
             /**
@@ -609,8 +609,8 @@ class GeneratorProperties {
              *     \realpowergenerationmax]@f$.
              */
             inline TBound RealPowerBound () const
-            { 
-                return realPowerBound_; 
+            {
+                return realPowerBound_;
             }
 
             /**
@@ -621,8 +621,8 @@ class GeneratorProperties {
              *     \realpowergenerationmax]@f$.
              */
             inline TBound & RealPowerBound ()
-            { 
-                return realPowerBound_; 
+            {
+                return realPowerBound_;
             }
 
             /**
@@ -632,9 +632,9 @@ class GeneratorProperties {
              * @return     The lower real power output of @p PQ capability
              *     curve (MW).
              */
-            inline Types::real Pc1 () const 
-            { 
-                return pc1_; 
+            inline Types::real Pc1 () const
+            {
+                return pc1_;
             }
 
             /**
@@ -645,8 +645,8 @@ class GeneratorProperties {
              *     curve (MW).
              */
             inline Types::real & Pc1 ()
-            { 
-                return pc1_; 
+            {
+                return pc1_;
             }
 
             /**
@@ -656,9 +656,9 @@ class GeneratorProperties {
              * @return     The upper real power output of @p PQ capability
              *     curve (MW).
              */
-            inline Types::real Pc2 () const 
-            { 
-                return pc2_; 
+            inline Types::real Pc2 () const
+            {
+                return pc2_;
             }
 
             /**
@@ -669,12 +669,12 @@ class GeneratorProperties {
              *     curve (MW).
              */
             inline Types::real & Pc2 ()
-            { 
-                return pc2_; 
+            {
+                return pc2_;
             }
         ///@}
 
-        /**@name Reactive Power Information */ 
+        /**@name Reactive Power Information */
         ///@{
 #pragma mark REACTIVE_POWER_INFORMATION
 
@@ -685,8 +685,8 @@ class GeneratorProperties {
              * @return     The real power @f$\reactivepowergeneration@f$.
              */
             inline Types::real ReactivePower () const
-            { 
-                return reactivePower_; 
+            {
+                return reactivePower_;
             }
 
             /**
@@ -696,8 +696,8 @@ class GeneratorProperties {
              * @return     The real power @f$\reactivepowergeneration@f$.
              */
             inline Types::real & ReactivePower ()
-            { 
-                return reactivePower_; 
+            {
+                return reactivePower_;
             }
 
             /**
@@ -708,10 +708,10 @@ class GeneratorProperties {
              *     @f$[\reactivepowergenerationmin,\reactivepowergenerationmax]@f$.
              */
             inline TBound ReactivePowerBound () const
-            { 
-                return reactivePowerBound_; 
+            {
+                return reactivePowerBound_;
             }
-            
+
             /**
              * @brief      Getter and setter for the reactive power bound
              *     @f$[\reactivepowergenerationmin, \reactivepowergenerationmax]@f$.
@@ -720,8 +720,8 @@ class GeneratorProperties {
              *     @f$[\reactivepowergenerationmin,\reactivepowergenerationmax]@f$.
              */
             inline TBound & ReactivePowerBound ()
-            { 
-                return reactivePowerBound_; 
+            {
+                return reactivePowerBound_;
             }
 
             /**
@@ -731,9 +731,9 @@ class GeneratorProperties {
              *
              * @return     The reactive power output bound at @p PC1.
              */
-            inline TBound Qc1Bound () const 
-            { 
-                return qc1Bound_; 
+            inline TBound Qc1Bound () const
+            {
+                return qc1Bound_;
             }
 
             /**
@@ -744,8 +744,8 @@ class GeneratorProperties {
              * @return     The reactive power output bound at @p PC1.
              */
             inline TBound & Qc1Bound ()
-            { 
-                return qc1Bound_; 
+            {
+                return qc1Bound_;
             }
 
             /**
@@ -755,9 +755,9 @@ class GeneratorProperties {
              *
              * @return     The reactive power output bound at @p PC2.
              */
-            inline TBound Qc2Bound () const 
-            { 
-                return qc2Bound_; 
+            inline TBound Qc2Bound () const
+            {
+                return qc2Bound_;
             }
 
             /**
@@ -768,8 +768,8 @@ class GeneratorProperties {
              * @return     The reactive power output bound at @p PC2.
              */
             inline TBound & Qc2Bound ()
-            { 
-                return qc2Bound_; 
+            {
+                return qc2Bound_;
             }
         ///@}
 
@@ -784,14 +784,14 @@ class GeneratorProperties {
              *
              * @return     @p true if active (on), @p false otherwise (unknown).
              */
-            inline bool IsActive () const  
-            { 
+            inline bool IsActive () const
+            {
                 if ( TBusStatus::active == Status() )
                     return true;
-                else 
-                    return false; 
+                else
+                    return false;
             }
-            
+
             /**
              * @brief      Status of the electrical vertex.
              * @details    The status of the generator/machine is described by
@@ -802,9 +802,9 @@ class GeneratorProperties {
              * @return     The status can have a different status.
              */
             ///@todo USE DIFFERENT TYPE see bus
-            inline TBusStatus Status () const 
-            { 
-                return status_; 
+            inline TBusStatus Status () const
+            {
+                return status_;
             }
 
             /**
@@ -818,38 +818,38 @@ class GeneratorProperties {
              */
             ///@todo USE DIFFERENT TYPE see bus
             inline TBusStatus & Status ()
-            { 
-                return status_; 
+            {
+                return status_;
             }
 
             /**
              * @brief      Getter for the unit commitment.
-             * 
+             *
              * @pre        This can only be @p true if the generator is not
              *     extendable.
              *
              * @return     @p true if unit commitment, @p false otherwise.
              */
-            inline bool Committable () const 
-            { 
-                return committable_; 
+            inline bool Committable () const
+            {
+                return committable_;
             }
 
             /**
              * @brief      Getter and setter for the unit commitment.
-             * 
+             *
              * @pre        This can only be @p true if the generator is not
              *     extendable.
              *
              * @return     @p true if unit commitment, @p false otherwise.
              */
-            inline bool & Committable () 
-            { 
-                return committable_; 
+            inline bool & Committable ()
+            {
+                return committable_;
             }
         ///@}
 
-        /**@name Type Specific Information*/ 
+        /**@name Type Specific Information*/
         ///@{
 #pragma mark TYPE_INFORMATION
 
@@ -865,8 +865,8 @@ class GeneratorProperties {
              * @return     The control strategy.
              */
             inline Vertices::ControlType Control () const
-            { 
-                return control_; 
+            {
+                return control_;
             }
 
             /**
@@ -875,16 +875,16 @@ class GeneratorProperties {
              *     Slack. The slack vertex represents a reference vertex used
              *     to set a voltage angle for example to 0 and thus, determine
              *     the other voltage angle.
-             *     
+             *
              * @see Vertices#ControlType
              *
              * @return     The control strategy.
              */
             inline Vertices::ControlType & Control ()
-            { 
-                return control_; 
+            {
+                return control_;
             }
-            
+
             /**
              * @brief      Getter for the generator type.
              * @details    The generator type determines if it is a
@@ -895,8 +895,8 @@ class GeneratorProperties {
              * @return     The generator type.
              */
             inline Vertices::GeneratorType GeneratorType () const
-            { 
-                return generatorType_; 
+            {
+                return generatorType_;
             }
 
             /**
@@ -909,10 +909,10 @@ class GeneratorProperties {
              * @return     The generator type.
              */
             inline Vertices::GeneratorType & GeneratorType ()
-            { 
-                return generatorType_; 
+            {
+                return generatorType_;
             }
-            
+
             /**
              * @brief      Getter for the efficiency of the generator.
              * @details    The efficiency of a generator is calculated by the
@@ -920,9 +920,9 @@ class GeneratorProperties {
              *
              * @return     The efficiency of the generator.
              */
-            inline Types::real Efficiency () const 
-            { 
-                return efficiency_; 
+            inline Types::real Efficiency () const
+            {
+                return efficiency_;
             }
 
             /**
@@ -934,12 +934,12 @@ class GeneratorProperties {
              * @return     The efficiency of the generator.
              */
             inline Types::real & Efficiency ()
-            { 
-                return efficiency_; 
+            {
+                return efficiency_;
             }
         ///@}
 
-        /**@name Cost Specific Information */ 
+        /**@name Cost Specific Information */
         ///@{
 #pragma mark COST_SPECIFIC_INFOMRATION
 
@@ -949,9 +949,9 @@ class GeneratorProperties {
              *
              * @return     The marginal cost.
              */
-            inline Types::real MarginalCost () const 
-            { 
-                return marginalCost_; 
+            inline Types::real MarginalCost () const
+            {
+                return marginalCost_;
             }
 
             /**
@@ -961,8 +961,8 @@ class GeneratorProperties {
              * @return     The marginal cost.
              */
             inline Types::real & MarginalCost ()
-            { 
-                return marginalCost_; 
+            {
+                return marginalCost_;
             }
 
             /**
@@ -973,8 +973,8 @@ class GeneratorProperties {
              * @return     The capital cost.
              */
             inline Types::real CapitalCost () const
-            { 
-                return capitalCost_; 
+            {
+                return capitalCost_;
             }
 
             /**
@@ -985,8 +985,8 @@ class GeneratorProperties {
              * @return     The capital cost.
              */
             inline Types::real & CapitalCost ()
-            { 
-                return capitalCost_; 
+            {
+                return capitalCost_;
             }
 
             /**
@@ -996,9 +996,9 @@ class GeneratorProperties {
              *
              * @return     The startup cost for the generator.
              */
-            inline Types::real StartUpCost () const 
-            { 
-                return startUpCost_; 
+            inline Types::real StartUpCost () const
+            {
+                return startUpCost_;
             }
 
             /**
@@ -1010,8 +1010,8 @@ class GeneratorProperties {
              * @return     The startup cost for the generator.
              */
             inline Types::real & StartUpCost ()
-            { 
-                return startUpCost_; 
+            {
+                return startUpCost_;
             }
 
             /**
@@ -1022,8 +1022,8 @@ class GeneratorProperties {
              * @return     The shut-down cost for the generator.
              */
             inline Types::real ShutDownCost () const
-            { 
-                return shutDownCost_; 
+            {
+                return shutDownCost_;
             }
 
             /**
@@ -1035,18 +1035,18 @@ class GeneratorProperties {
              * @return     The shut-down cost for the generator.
              */
             inline Types::real & ShutDownCost ()
-            { 
-                return shutDownCost_; 
+            {
+                return shutDownCost_;
             }
         ///@}
 
         /**
          * @name    Ramp Specific Information
-         * 
+         *
          * @brief   Ramp Limits: The inner dynamic of generators does not
          *     always allow to change the production level, i.e., a maximum
          *     possible change is set by ramp limits.
-         * 
+         *
          *     Ramp rate: Describes how fast generator outputs can be changed.
          *     There are usually ramping up (increasing) and down
          *     (decreasing), i.e., the unit is in units of power over time
@@ -1056,19 +1056,19 @@ class GeneratorProperties {
 #pragma mark RAMP_SPECIFIC_INFORMATION
 
             /**
-             * @brief      Getter for the minimum availability (active) time. 
+             * @brief      Getter for the minimum availability (active) time.
              * @details    This is measured in number of snapshots. This
              *     represents the minimum number of snapshots to be in @p
              *     active status until a shutdown is possible, i.e., being in
              *     @p inactive status.
-             *     
+             *
              * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum @p active time of the generator.
              */
             inline Types::real MinimumUpTime () const
-            { 
-                return minUpTime_; 
+            {
+                return minUpTime_;
             }
 
             /**
@@ -1078,30 +1078,30 @@ class GeneratorProperties {
              *     represents the minimum number of snapshots to be in @p
              *     active status until a shutdown is possible, i.e., being in
              *     @p inactive status.
-             *     
+             *
              * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum @p active time of the generator.
              */
             inline Types::real & MinimumUpTime ()
-            { 
-                return minUpTime_; 
+            {
+                return minUpTime_;
             }
 
             /**
-             * @brief      Getter for the minimum time to be @p inactive. 
+             * @brief      Getter for the minimum time to be @p inactive.
              * @details    This is measured in number of snapshots. This
              *     represents the minimum number of snapshots to be in @p
              *     inactive status until a startup is possible again, i.e.,
              *     being in @p active status.
-             *     
+             *
              * @pre        Only if Committable() is @p true.
              *
              * @return     The minimum time to be @p inactive of the generator.
              */
             inline Types::real MinimumDownTime () const
-            { 
-                return minDownTime_; 
+            {
+                return minDownTime_;
             }
 
             /**
@@ -1117,22 +1117,22 @@ class GeneratorProperties {
              * @return     The minimum time to be @p inactive of the generator.
              */
             inline Types::real & MinimumDownTime ()
-            { 
-                return minDownTime_; 
+            {
+                return minDownTime_;
             }
 
             /**
              * @brief      Getter for the ramp rate for load following AGC.
              * @details    The ramp rate is measured in MW/min and is part of
              *     the IEEE data.
-             * 
+             *
              * @note       AGC stands for Automatic Generation Control.
              *
              * @return     The ramp rate for load following AGC.
              */
-            inline Types::real RampAgc () const 
-            { 
-                return rampAgc_; 
+            inline Types::real RampAgc () const
+            {
+                return rampAgc_;
             }
 
             /**
@@ -1140,14 +1140,14 @@ class GeneratorProperties {
              *     following AGC.
              * @details    The ramp rate is measured in MW/min and is part of
              *     the IEEE data.
-             * 
+             *
              * @note       AGC stands for Automatic Generation Control.
              *
              * @return     The ramp rate for load following AGC.
              */
             inline Types::real & RampAgc ()
-            { 
-                return rampAgc_; 
+            {
+                return rampAgc_;
             }
 
             /**
@@ -1157,9 +1157,9 @@ class GeneratorProperties {
              *
              * @return     The ramp rate for a 10 minute reserve.
              */
-            inline Types::real Ramp10 () const 
-            { 
-                return ramp10_; 
+            inline Types::real Ramp10 () const
+            {
+                return ramp10_;
             }
 
             /**
@@ -1171,8 +1171,8 @@ class GeneratorProperties {
              * @return     The ramp rate for a 10 minute reserve.
              */
             inline Types::real & Ramp10 ()
-            { 
-                return ramp10_; 
+            {
+                return ramp10_;
             }
 
             /**
@@ -1182,9 +1182,9 @@ class GeneratorProperties {
              *
              * @return     The ramp rate for a 30 minute reserve.
              */
-            inline Types::real Ramp30 () const 
-            { 
-                return ramp30_; 
+            inline Types::real Ramp30 () const
+            {
+                return ramp30_;
             }
 
             /**
@@ -1196,8 +1196,8 @@ class GeneratorProperties {
              * @return     The ramp rate for a 30 minute reserve.
              */
             inline Types::real & Ramp30 ()
-            { 
-                return ramp30_; 
+            {
+                return ramp30_;
             }
 
             /**
@@ -1208,9 +1208,9 @@ class GeneratorProperties {
              *
              * @return     The ramp rate for the reactive power.
              */
-            inline Types::real RampQ () const 
-            { 
-                return rampQ_; 
+            inline Types::real RampQ () const
+            {
+                return rampQ_;
             }
 
             /**
@@ -1222,8 +1222,8 @@ class GeneratorProperties {
              * @return     The ramp rate for the reactive power.
              */
             inline Types::real & RampQ ()
-            { 
-                return rampQ_; 
+            {
+                return rampQ_;
             }
 
             /**
@@ -1231,9 +1231,9 @@ class GeneratorProperties {
              *
              * @return     The area participation factor (APF).
              */
-            inline Types::real Apf () const 
-            { 
-                return apf_; 
+            inline Types::real Apf () const
+            {
+                return apf_;
             }
 
             /**
@@ -1243,8 +1243,8 @@ class GeneratorProperties {
              * @return     The area participation factor (APF).
              */
             inline Types::real & Apf ()
-            { 
-                return apf_; 
+            {
+                return apf_;
             }
 
             /**
@@ -1257,10 +1257,10 @@ class GeneratorProperties {
              * @return     The maximum increase in power.
              */
             inline Types::real RampLimitUp () const
-            { 
-                return rampLimitUp_; 
+            {
+                return rampLimitUp_;
             }
-            
+
             /**
              * @brief      Getter and setter for the maximum increase in power.
              * @details    The maximum increase in power is measured in per
@@ -1271,8 +1271,8 @@ class GeneratorProperties {
              * @return     The maximum increase in power.
              */
             inline Types::real & RampLimitUp ()
-            { 
-                return rampLimitUp_; 
+            {
+                return rampLimitUp_;
             }
 
             /**
@@ -1285,10 +1285,10 @@ class GeneratorProperties {
              * @return     The maximum decrease in power.
              */
             inline Types::real RampLimitDown () const
-            { 
-                return rampLimitDown_; 
+            {
+                return rampLimitDown_;
             }
-            
+
             /**
              * @brief      Getter and setter for the maximum decrease in power.
              * @details    The maximum decrease in power is measured in per
@@ -1299,8 +1299,8 @@ class GeneratorProperties {
              * @return     The maximum decrease in power.
              */
             inline Types::real & RampLimitDown ()
-            { 
-                return rampLimitDown_; 
+            {
+                return rampLimitDown_;
             }
 
             /**
@@ -1313,10 +1313,10 @@ class GeneratorProperties {
              * @return     The maximum increase in power at startup.
              */
             inline Types::real RampLimitStartUp () const
-            { 
-                return rampLimitStartUp_; 
+            {
+                return rampLimitStartUp_;
             }
-            
+
             /**
              * @brief      Getter and setter for the maximum increase in power
              *     at start-up.
@@ -1328,8 +1328,8 @@ class GeneratorProperties {
              * @return     The maximum increase in power at startup.
              */
             inline Types::real & RampLimitStartUp ()
-            { 
-                return rampLimitStartUp_; 
+            {
+                return rampLimitStartUp_;
             }
 
             /**
@@ -1342,10 +1342,10 @@ class GeneratorProperties {
              * @return     The maximum decrease in power at shutdown.
              */
             inline Types::real RampLimitShutDown () const
-            { 
-                return rampLimitShutDown_; 
+            {
+                return rampLimitShutDown_;
             }
-            
+
             /**
              * @brief      Getter and setter for the maximum decrease in power
              *     at shut-down.
@@ -1357,12 +1357,12 @@ class GeneratorProperties {
              * @return     The maximum decrease in power at shutdown.
              */
             inline Types::real & RampLimitShutDown ()
-            { 
-                return rampLimitShutDown_; 
+            {
+                return rampLimitShutDown_;
             }
-        ///@}       
+        ///@}
 
-        /**@name Output */ 
+        /**@name Output */
         ///@{
 #pragma mark OUTPUT_METHODS
             /**
@@ -1374,14 +1374,14 @@ class GeneratorProperties {
              * @return     The output stream.
              */
             friend std::ostream & operator<< ( std::ostream              & outputStream
-                                             , GeneratorProperties const & rhs ) 
+                                             , GeneratorProperties const & rhs )
             {
                 outputStream  << std::setprecision(2)
                     << std::fixed
                     << std::endl
                     << "Generator at Bus "      << rhs.Name()   << std::endl
                     << "-------------------"    << std::endl
-                    << std::setw(30) << "bus: "                 << std::setw(10) << rhs.Name() 
+                    << std::setw(30) << "bus: "                 << std::setw(10) << rhs.Name()
                     << std::setw(20) << "generation: "          << std::setw(10) << rhs.RealPower()                   << std::setw(25) << " p.u.       (real, MW), "
                                                                 << std::setw(10) << rhs.ReactivePower()               << std::setw(25) << " p.u. (reactive, MVar), "  << std::endl
                     << std::setw(20) << "real power bound: "    << std::setw(10) << rhs.RealPowerBound().Minimum()    << std::setw(25) << " p.u.       (pmin, MW), "
@@ -1399,13 +1399,13 @@ class GeneratorProperties {
              *
              * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static inline void Header ( std::ostream & outputStream) 
+            static inline void Header ( std::ostream & outputStream)
             {
                 outputStream  << std::setw(20)    << "bus"
                     << std::setw(10)    << "Pg"
                     << std::setw(10)    << "Qg"
                     << std::setw(10)    << "Qmax"
-                    << std::setw(10)    << "Qmin" 
+                    << std::setw(10)    << "Qmin"
                     << std::setw(10)    << "Vg"
                     << std::setw(10)    << "mBase"
                     << std::setw(10)    << "status"
@@ -1425,14 +1425,14 @@ class GeneratorProperties {
                     << std::endl;
             }
 
-            static inline void HeaderBusGeneratorName ( std::ostream & outputStream) 
+            static inline void HeaderBusGeneratorName ( std::ostream & outputStream)
             {
                 outputStream  << std::setw(20)    << "bus"
                     << std::setw(20)    << "name"
                     << std::setw(10)    << "Pg"
                     << std::setw(10)    << "Qg"
                     << std::setw(10)    << "Qmax"
-                    << std::setw(10)    << "Qmin" 
+                    << std::setw(10)    << "Qmin"
                     << std::setw(10)    << "Vg"
                     << std::setw(10)    << "mBase"
                     << std::setw(10)    << "status"
@@ -1578,29 +1578,29 @@ class GeneratorProperties {
 
         /**@name Voltage Related Members */
         ///@{
-            Types::real     voltageMagnitudeSnapshot_;  /**< The voltage magnitude set point in per unit (p.u.) 
+            Types::real     voltageMagnitudeSnapshot_;  /**< The voltage magnitude set point in per unit (p.u.)
                                                          *      of the nominal voltage @f$\voltagenominal@f$.
                                                          */
         ///@}
 
-        /**@name Nominal Power Members */ 
+        /**@name Nominal Power Members */
         ///@{
-            Types::real     nominalPower_;              /**< The total nominal power of machine (also known as 
+            Types::real     nominalPower_;              /**< The total nominal power of machine (also known as
                                                          *      MVA base or mBase), defaults set to baseMVA.
                                                          */
-            bool            pNomExtendable_;            /**< Determines if the generator is extendable and thus, 
-                                                         *      uses @p nominalRealPowerBound_ bounds. If the  
-                                                         *      generator is not extendable @p mBase_ is used. 
-                                                         *      Thus, the extension/upgrade level is unknown and 
-                                                         *      can be decided by, e.g., a MILP. However, generators 
-                                                         *      that are not build are not interesting for standard 
-                                                         *      problems such as MTSF or MFF. Note that for PyPsa 
+            bool            pNomExtendable_;            /**< Determines if the generator is extendable and thus,
+                                                         *      uses @p nominalRealPowerBound_ bounds. If the
+                                                         *      generator is not extendable @p mBase_ is used.
+                                                         *      Thus, the extension/upgrade level is unknown and
+                                                         *      can be decided by, e.g., a MILP. However, generators
+                                                         *      that are not build are not interesting for standard
+                                                         *      problems such as MTSF or MFF. Note that for PyPsa
                                                          *      this are often renewable energies.
                                                          */
-            TBound          nominalRealPowerBound_;     /**< If the generator is extendable the nominal real power 
-                                                         *      @f$\realpowernominal@f$ can be in the interval 
+            TBound          nominalRealPowerBound_;     /**< If the generator is extendable the nominal real power
+                                                         *      @f$\realpowernominal@f$ can be in the interval
                                                          *      @f$\realpowernominal\coloneqq[\realpowernominalmin,
-                                                         *      \realpowernominalmax]@f$. 
+                                                         *      \realpowernominalmax]@f$.
                                                          */
             TPowerSign      sign_;                      /**< The power sign (1 means generation, -1 means load) */
         ///@}
@@ -1608,55 +1608,55 @@ class GeneratorProperties {
         /**@name Real Power Members */
         ///@{
             Types::real     realPower_;                 /**< The real power generation @f$\realpowergeneration@f$
-                                                         *      in @p MW. 
+                                                         *      in @p MW.
                                                          */
-            TBound          realPowerBound_;            /**< The real power output bound @f$[\realpowergenerationmin, 
-                                                         *      \realpowergenerationmax]@f$ in @p MW. 
-                                                         */            
-            Types::real     pc1_;                       /**< The lower real power output of PQ capability curve at 
-                                                         *      PC1 in @p MW. 
+            TBound          realPowerBound_;            /**< The real power output bound @f$[\realpowergenerationmin,
+                                                         *      \realpowergenerationmax]@f$ in @p MW.
                                                          */
-            Types::real     pc2_;                       /**< The upper real power output of PQ capability curve at 
-                                                         *      PC2 in @p MW. 
+            Types::real     pc1_;                       /**< The lower real power output of PQ capability curve at
+                                                         *      PC1 in @p MW.
+                                                         */
+            Types::real     pc2_;                       /**< The upper real power output of PQ capability curve at
+                                                         *      PC2 in @p MW.
                                                          */
         ///@}
 
         /**@name Real Power Members */
         ///@{
-            Types::real     reactivePower_;             /**< The reactive power generation @f$\reactivepowergeneration@f$ 
-                                                         *      in @p MVAr. 
+            Types::real     reactivePower_;             /**< The reactive power generation @f$\reactivepowergeneration@f$
+                                                         *      in @p MVAr.
                                                          */
-            TBound          reactivePowerBound_;        /**< The reactive power output bound @f$[\reactivepowergenerationmin, 
-                                                         *      \reactivepowergenerationmax]@f$ in @p MVAr. 
+            TBound          reactivePowerBound_;        /**< The reactive power output bound @f$[\reactivepowergenerationmin,
+                                                         *      \reactivepowergenerationmax]@f$ in @p MVAr.
                                                          */
             TBound          qc1Bound_;                  /**< The reactive power output bound at @p PC1 in @p MVAr. */
             TBound          qc2Bound_;                  /**< The reactive power output bound at @p PC2 in @p MVAr. */
         ///@}
-        
+
         /**@name Status Members */
         ///@{
             TBusStatus      status_;                    /**< Describes the status of the generator. */
-            bool            committable_;               /**< Decides whether unit commitment is @p active (while 
-                                                         *      not being extendable) or @p inactive. 
+            bool            committable_;               /**< Decides whether unit commitment is @p active (while
+                                                         *      not being extendable) or @p inactive.
                                                          */
         ///@}
 
         /**@name Type Members */
         ///@{
-            TControlType    control_;                   /**< The control strategy, must be either @p PQ, @p PV 
-                                                         *      or @p Slack. 
+            TControlType    control_;                   /**< The control strategy, must be either @p PQ, @p PV
+                                                         *      or @p Slack.
                                                          */
             TGeneratorType  generatorType_;             /**< The generator type, i.e., solar. */
-            Types::real     efficiency_;                /**< The efficiency representing the ratio between primary 
-                                                         *      and electrical energy. 
+            Types::real     efficiency_;                /**< The efficiency representing the ratio between primary
+                                                         *      and electrical energy.
                                                          */
         ///@}
-        
+
         /**@name Cost Specific Members */
         ///@{
             Types::real     marginalCost_;              /**< The marginal cost for production of 1 MW. */
             Types::real     capitalCost_;               /**< The Capital cost of extending p_nom by 1 MW. */
-            
+
             Types::real     startUpCost_;               /**< The startup cost of the generator. */
             Types::real     shutDownCost_;              /**< The shutdown cost of the generator. */
         ///@}
@@ -1666,7 +1666,7 @@ class GeneratorProperties {
          * @brief   Ramp Limits: The inner dynamic of generators does not
          *     always allow to change the production level, i.e., a maximum
          *     possible change is set by ramp limits.
-         * 
+         *
          *     Ramp rate: Describes how fast generator outputs can be changed.
          *     There are usually ramping up (increasing) and down
          *     (decreasing), i.e., the unit is in units of power over time
@@ -1687,7 +1687,7 @@ class GeneratorProperties {
             Types::real     rampLimitStartUp_;  /**< The maximum increase at startup in per unit of nominal power. */
             Types::real     rampLimitShutDown_; /**< The maximum decrease at shutdown in per unit of nominal power. */
         ///@}
-        
+
 
         // Types::real MU_P_BOUND  /**< in u/MW, Kuhn-Tucker multiplier on lower/upper P_g limit (MU_PMIN / MU_PMAX) */
         // Types::real MU_QMAX  /**< in u/MVAr, Kuhn-Tucker multiplier on lower/upper Q_g limit (MU_QMIN / MU_QMAX) */

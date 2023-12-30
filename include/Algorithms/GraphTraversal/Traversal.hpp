@@ -31,7 +31,7 @@ class GraphTypeLoopDifferentiation;
  * @tparam     IsDirected  If @p true the graph is treated as a directed graph,
  *     if @p false the graph is treated as an undirected graph.
  */
-template< typename GraphType, 
+template< typename GraphType,
           bool IsDirected    = false >
 class Traversal {
     public:
@@ -41,7 +41,7 @@ class Traversal {
         ///@name Constructors and destructor
         ///@{
 #pragma mark CONSTRUCTOR_AND_DESTRUCTOR
-            
+
             /**
              * @brief      Constructs a new instance.
              *
@@ -70,7 +70,7 @@ class Traversal {
         ///@}
 
 #pragma mark RESULT_EXTRACTION
-        virtual inline void Result ( std::vector<TVertexId> parent ) 
+        virtual inline void Result ( std::vector<TVertexId> parent )
         {
             // @todo Implement, see MST
             throw std::runtime_error("Not implemented yet!");
@@ -86,7 +86,7 @@ class Traversal {
              *
              * @param[in]  vertexId  The vertex identifier.
              */
-            inline void SetVertexVisitedAt ( TVertexId vertexId ) 
+            inline void SetVertexVisitedAt ( TVertexId vertexId )
             {
                 USAGE_ASSERT ( graph_.VertexExists ( vertexId ) );
                 visited_[vertexId] = true;
@@ -101,10 +101,10 @@ class Traversal {
              *
              * @return     @p true if the vertex was visited, otherwise @p false.
              */
-            inline bool VisitedVertexAt ( TVertexId vertexId ) const 
+            inline bool VisitedVertexAt ( TVertexId vertexId ) const
             {
                 USAGE_ASSERT ( graph_.VertexExists ( vertexId ) );
-                return visited_[vertexId]; 
+                return visited_[vertexId];
             }
         ///@}
 
@@ -116,7 +116,7 @@ class Traversal {
              *
              * @param[in]  vertexId  The vertex identifier.
              */
-            inline void SetVertexProcessedAt ( TVertexId vertexId ) 
+            inline void SetVertexProcessedAt ( TVertexId vertexId )
             {
                 USAGE_ASSERT ( graph_.VertexExists ( vertexId ) );
                 processed_[vertexId] = true;
@@ -132,10 +132,10 @@ class Traversal {
              *
              * @return     @p true if the vertex is processed, otherwise @p false.
              */
-            inline bool ProcessedVertexAt ( TVertexId vertexId ) const 
+            inline bool ProcessedVertexAt ( TVertexId vertexId ) const
             {
                 USAGE_ASSERT ( graph_.VertexExists ( vertexId ) );
-                return processed_[vertexId]; 
+                return processed_[vertexId];
             }
         ///@}
 
@@ -149,16 +149,16 @@ class Traversal {
          * @return     The vertex identifier of the parent.
          */
         ///@{
-            inline TVertexId & ParentOf ( TVertexId vertexId ) 
+            inline TVertexId & ParentOf ( TVertexId vertexId )
             {
                 USAGE_ASSERT ( graph_.VertexExists ( vertexId ) );
-                return parent_[vertexId]; 
+                return parent_[vertexId];
             }
 
-            inline TVertexId ParentOf ( TVertexId vertexId ) const 
+            inline TVertexId ParentOf ( TVertexId vertexId ) const
             {
                 USAGE_ASSERT ( graph_.VertexExists ( vertexId ) );
-                return parent_[vertexId]; 
+                return parent_[vertexId];
             }
         ///@}
 
@@ -178,7 +178,7 @@ class Traversal {
         /**
          * @brief      Clear and resize all vectors
          */
-        inline void Clear () 
+        inline void Clear ()
         {
             visited_.clear ();
             visited_.resize ( graph_.NumberOfVertices(), false );
@@ -190,12 +190,12 @@ class Traversal {
             parent_.resize ( graph_.NumberOfVertices(), Const::NONE );
         }
 
-        inline bool VertexExists ( TVertexId vertexId ) 
+        inline bool VertexExists ( TVertexId vertexId )
         {
             return graph_.VertexExists ( vertexId );
         }
 
-        inline bool NumberOfVertices() 
+        inline bool NumberOfVertices()
         {
             return graph_.NumberOfVertices ( );
         }
@@ -217,8 +217,8 @@ class Traversal {
              *
              * @code{.cpp}
              *      breakable_for_all_edges_at(
-             *          []( TEdge const & edge ) 
-             *          { 
+             *          []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -240,16 +240,16 @@ class Traversal {
              *
              * @param      vertexId  The vertex identifier.
              * @param[in]  function  The function
-             * 
+             *
              * @code{.cpp}
              *      for_all_edges_at ( vertexId
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
              * @endcode
-             * 
+             *
              * @tparam     FUNCTION  The function object that is called for
              *     all incident (outgoing) edges at @p vertexId.
              */
@@ -288,19 +288,19 @@ class GraphTypeLoopDifferentiation< GraphType, true > {
 
     public:
         template<typename FUNCTION>
-        static inline 
+        static inline
         void breakable_for_all_edges_at ( TGraph    const & graph
                                         , TVertexId const & vertex
-                                        , FUNCTION          function ) 
+                                        , FUNCTION          function )
         {
             graph.template for_out_edges_at<ExecutionPolicy::breakable> ( vertex, function );
         }
 
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_edges_at ( TGraph    const & graph
                               , TVertexId const & vertex
-                              , FUNCTION          function ) 
+                              , FUNCTION          function )
         {
             graph.template for_out_edges_at<ExecutionPolicy::sequential> ( vertex, function );
         }
@@ -316,19 +316,19 @@ class GraphTypeLoopDifferentiation< GraphType, false > {
 
     public:
         template<typename FUNCTION>
-        static inline 
+        static inline
         void breakable_for_all_edges_at ( TGraph    const & graph
                                         , TVertexId const & vertex
-                                        , FUNCTION          function ) 
+                                        , FUNCTION          function )
         {
             graph.template for_all_edges_at<ExecutionPolicy::breakable> ( vertex, function );
         }
 
         template<typename FUNCTION>
-        static inline 
+        static inline
         void for_all_edges_at ( TGraph          & graph
                               , TVertexId const & vertex
-                              , FUNCTION          function ) 
+                              , FUNCTION          function )
         {
             graph.template for_all_edges_at<ExecutionPolicy::sequential> ( vertex, function );
         }

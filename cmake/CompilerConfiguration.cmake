@@ -6,13 +6,13 @@
 # Compiler specific configurations.
 #
 
-# -ggdb Produce debugging information for use by GDB. This means 
-# to use the most expressive format available (DWARF, stabs, or 
-# the native format if neither of those are supported), including 
+# -ggdb Produce debugging information for use by GDB. This means
+# to use the most expressive format available (DWARF, stabs, or
+# the native format if neither of those are supported), including
 # GDB extensions if at all possible.
-# 
-# - Wall This enables all the warnings about constructions that 
-# some users consider questionable, and that are easy to avoid 
+#
+# - Wall This enables all the warnings about constructions that
+# some users consider questionable, and that are easy to avoid
 # (or modify to prevent the warning), even in conjunction with macros
 if (CMAKE_BUILD_TYPE MATCHES "Debug" AND CMAKE_CXX_COMPILER_ID MATCHES "GNU" AND CMAKE_SYSTEM_NAME MATCHES "Linux")
     set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -coverage")
@@ -80,7 +80,7 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 else()
     set(extra_flags  "${extra_flags} ${EGOA_WARNING_FLAGS_RELEASE}")
 endif()
-# Warning and error 
+# Warning and error
 if(EGOA_WARNINGS_AS_ERRORS)
     set(extra_flags "${EGOA_WARNINGS_AS_ERRORS_FLAG} ${extra_flags}")
 endif()
@@ -92,6 +92,6 @@ if(EGOA_PEDANTIC_MODE)
         set(extra_flags "${EGOA_PEDANTIC_WARNING_FLAG} ${extra_flags}")
     endif()
 endif()
-# 
+#
 set_property(TARGET ${TARGET_NAME} APPEND_STRING PROPERTY COMPILE_FLAGS " ${extra_flags} ")
 message(STATUS "${MY_SPACE}Compiler extra flags:\t\t\t${TARGET_NAME} ${extra_flags}")

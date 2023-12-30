@@ -1,17 +1,17 @@
 # SetEnvironmentVariables.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
-# Set environment variables that are used for, e.g., 
+#
+# Set environment variables that are used for, e.g.,
 # - OpenMP
 # - ...
-# 
+#
 
 # Set OpenMP variables
 message( STATUS "Set OpenMP variables" )
 
-set(ENV{OMP_WAIT_POLICY} "ACTIVE") 
+set(ENV{OMP_WAIT_POLICY} "ACTIVE")
 message( STATUS "${MY_SPACE}OMP_WAIT_POLICY:\t\t\t" $ENV{OMP_WAIT_POLICY})
 
 # Stack size of each OpenMP threads

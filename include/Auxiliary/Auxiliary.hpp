@@ -24,7 +24,7 @@ namespace egoa::Auxiliary {
      * @return     The number of allowed threads.
      */
     inline Types::count NumberOfThreads ()        { return omp_get_num_threads(); }
-    
+
     /**
      * @brief      Maximum number of possible threads.
      *
@@ -71,7 +71,7 @@ namespace egoa::Auxiliary {
  *      http://realtimecollisiondetection.net/blog/?p=
  *      https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/
  *      https://randomascii.wordpress.com/2012/06/26/doubles-are-not-floats-so-dont-compare-them/
- * 
+ *
  *      The absolute tolerance test fails when x and y become large, and the
  *      relative tolerance test fails when they become small. It is therefore
  *      desired to combine these two tests together in a single test. Over the
@@ -86,7 +86,7 @@ namespace egoa::Auxiliary {
  *
  * @return     TRUE if both doubles are equal with regards to the tolerance, FALSE otherwise.
  */
-inline bool EQ (double a, double b, double absTol = Const::EPSILON, double relTol = Const::EPSILON) 
+inline bool EQ (double a, double b, double absTol = Const::EPSILON, double relTol = Const::EPSILON)
 {
     if ( fabs(a - b) <= absTol * std::max(1.0, ( relTol/absTol * std::max(fabs(a), fabs(b)) ) ) )
         return true;
@@ -116,7 +116,7 @@ struct MatchPathSeparator
 
 /**
  * @brief Path separator in Windows systems
- * 
+ *
  * @param ch [description]
  * @return [description]
  */
@@ -136,12 +136,12 @@ struct MatchPathSeparator
  *
  * @return     The filename
  */
-inline Types::string Basename( Types::string const & pathname ) 
+inline Types::string Basename( Types::string const & pathname )
 {
-    return  std::string( 
-                std::find_if(   pathname.rbegin(), 
+    return  std::string(
+                std::find_if(   pathname.rbegin(),
                                 pathname.rend(),
-                                MatchPathSeparator() 
+                                MatchPathSeparator()
                             ).base(),
                         pathname.end() );
 }
@@ -153,7 +153,7 @@ inline Types::string Basename( Types::string const & pathname )
  *
  * @return     The filename without the extension.
  */
-inline Types::string RemoveExtension( std::string const & filename ) 
+inline Types::string RemoveExtension( std::string const & filename )
 {
     std::string::const_reverse_iterator pivot  = std::find( filename.rbegin(), filename.rend(), '.' );
     return pivot == filename.rend() ? filename : std::string( filename.begin(), pivot.base() - 1 );

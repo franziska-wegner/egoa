@@ -4,7 +4,7 @@
  *  Created on: Nov 07, 2018
  *      Author: Franziska Wegner
  */
- 
+
 #ifndef EGOA__EXCEPTIONS__PGT_EXCEPTIONS_HPP
 #define EGOA__EXCEPTIONS__PGT_EXCEPTIONS_HPP
 
@@ -23,8 +23,8 @@ template<typename T>
 void my_exception(T arg1, T arg2, const char *file, const char *func, size_t line) {
 #ifdef PGT_EXCEPTION_HANDLING
     if ( arg1 < arg2 )
-        throw runtime_error( (std::string)file + ":" + (std::string)func + ":" + std::to_string(line) + 
-                            ": index out of bound error with index:"  + to_string(arg1) + 
+        throw runtime_error( (std::string)file + ":" + (std::string)func + ":" + std::to_string(line) +
+                            ": index out of bound error with index:"  + to_string(arg1) +
                             " > number of elements ( here " + to_string(arg2) + ")." );
 #endif
 }
@@ -55,7 +55,7 @@ class BoundMismatch : public std::runtime_error {
         {
             if ( minimum > maximum ) {
                 throw BoundMismatch( minimum, maximum );
-            } 
+            }
             return true;
         }
 

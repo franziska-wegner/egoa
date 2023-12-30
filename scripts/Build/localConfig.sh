@@ -1,13 +1,13 @@
 #!/bin/sh
 #
 # localConfig.sh
-# 
+#
 #   Created on:
 #       Author: Franziska Wegner
-#       
+#
 # Project configuration on the local computer to avoid "ccmake ."
 # configuration.
-# 
+#
 #########################################################
 # Define local standard argument ########################
 #########################################################
@@ -28,7 +28,7 @@ CMAKE_TARGET="/Users/fw/Documents/work/frameworks/egoa/framework"
 CMAKE_CXX_COMPILER="/usr/local/Cellar/llvm@7/7.1.0_1/bin/clang++",
 CMAKE_C_COMPILER="/usr/local/Cellar/llvm@7/7.1.0_1/bin/clang",
 
-# Enable/Disable Tools 
+# Enable/Disable Tools
 EGOA_ENABLE_BONMIN="ON"
 EGOA_ENABLE_BOOST="OFF"
 EGOA_ENABLE_CPLEX="ON"
@@ -41,11 +41,11 @@ EGOA_ENABLE_OPENMP="ON"
 EGOA_ENABLE_TESTS="ON"
 EGOA_ENABLE_VERBOSE_MAKEFILE="ON"
 # Select test framework
-EGOA_TEST_FRAMEWORK="OfflineGoogleTestFramework" 
+EGOA_TEST_FRAMEWORK="OfflineGoogleTestFramework"
 # The following path is used when
 # EGOA_TEST_FRAMEWORK="OfflineGoogleTestFramework" otherwise it will be
 # ignored
-EGOA_TEST_FRAMEWORK_LOCATION="external/GoogleTestFramework" 
+EGOA_TEST_FRAMEWORK_LOCATION="external/GoogleTestFramework"
 # Number of Threads
 # EGOA_THREAD_LIMIT="0", i.e., uses the maximum possible number of threads
 EGOA_THREAD_LIMIT="1"

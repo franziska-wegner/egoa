@@ -14,10 +14,10 @@ namespace egoa {
 
 /**
  * @brief      Class for Susceptance norm label.
- * @details    The susceptance norm is defined by 
- *             @f[ 
+ * @details    The susceptance norm is defined by
+ *             @f[
  *                  \bnorm{\fpath{}{\vertexa}{\vertexb}} := \sum_{\edge\in\fpath{}{\vertexa}{\vertexb}}\susceptance(\edge)^{-1},
- *             @f] 
+ *             @f]
  *             where @f$\susceptance(\vertexa,\vertexb)\in\reals@f$ is the
  *             susceptance defined for all @f$(\vertexa,\vertexb)\in\edges@f$.
  *             For more information see Section 3 in the paper <a
@@ -32,7 +32,7 @@ namespace egoa {
  *             Types::vertexId id = ...;
  *             element.Other(id);
  *             @endcode
- * 
+ *
  * @see        Edge::ElectricalEdge representing an ElementType interface.
  * @see        BucketElement representing an minimum interface requirement for a bucket.
  * @see        Label representing the base class.
@@ -63,7 +63,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @param[in]  vertexId  The vertex identifier.
              */
-            SusceptanceNormLabel () 
+            SusceptanceNormLabel ()
             : SusceptanceNormLabel ( Const::NONE, Const::REAL_INFTY )
             {}
 
@@ -76,7 +76,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @param[in]  vertexId  The vertex identifier.
              */
-            SusceptanceNormLabel ( Types::vertexId vertexId ) 
+            SusceptanceNormLabel ( Types::vertexId vertexId )
             : SusceptanceNormLabel ( vertexId, Const::REAL_INFTY )
             {}
 
@@ -90,7 +90,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              * @param[in]  susceptanceNorm  The susceptance norm @f$\bnorm{\fpath{}{\vertexa}{\vertexb}}@f$.
              */
             SusceptanceNormLabel ( Types::vertexId  vertexId
-                                 , Types::real      susceptanceNorm ) 
+                                 , Types::real      susceptanceNorm )
             : SusceptanceNormLabel ( vertexId, susceptanceNorm, TVertexSet() )
             {}
 
@@ -106,7 +106,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              */
             SusceptanceNormLabel ( Types::vertexId  vertexId
                                  , Types::real      susceptanceNorm
-                                 , TVertexSet       vertexSet ) 
+                                 , TVertexSet       vertexSet )
             : TLabel ( vertexId )
             , susceptanceNorm_ ( susceptanceNorm )
             , vertexSet_ ( vertexSet )
@@ -141,13 +141,13 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
         ///@name Getter and Setter
         ///@{
 #pragma mark GETTER_AND_SETTER
-            
+
             /**
              * @brief      Getter of the set of all visited vertices from the source.
              *
              * @return     Set of all visited vertices.
              */
-            inline TVertexSet const & VertexSet() const 
+            inline TVertexSet const & VertexSet() const
             {
                 return vertexSet_;
             }
@@ -157,7 +157,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     Set of all visited vertices.
              */
-            inline TVertexSet & VertexSet() 
+            inline TVertexSet & VertexSet()
             {
                 return vertexSet_;
             }
@@ -174,7 +174,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     @p true if lhs < rhs, @p false otherwise.
              */
-            inline bool operator< ( SusceptanceNormLabel const & rhs ) const 
+            inline bool operator< ( SusceptanceNormLabel const & rhs ) const
             {
                 return this->SusceptanceNorm() < rhs.SusceptanceNorm();
             }
@@ -186,9 +186,9 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     @p true if lhs <= rhs, @p false otherwise.
              */
-            inline bool operator<= ( SusceptanceNormLabel const & rhs )  const 
-            { 
-                return !(*this > rhs); 
+            inline bool operator<= ( SusceptanceNormLabel const & rhs )  const
+            {
+                return !(*this > rhs);
             }
 
             /**
@@ -198,11 +198,11 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     @p true if lhs > rhs, @p false otherwise.
              */
-            inline bool operator> ( SusceptanceNormLabel const & rhs )   const 
-            { 
-                return rhs < *this; 
+            inline bool operator> ( SusceptanceNormLabel const & rhs )   const
+            {
+                return rhs < *this;
             }
-            
+
             /**
              * @brief      Weak domination using greater or equal than.
              *
@@ -210,9 +210,9 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     @p true if lhs >= rhs, @p false otherwise.
              */
-            inline bool operator>= ( SusceptanceNormLabel const & rhs )  const 
-            { 
-                return !(rhs > *this); 
+            inline bool operator>= ( SusceptanceNormLabel const & rhs )  const
+            {
+                return !(rhs > *this);
             }
         ///@}
 
@@ -227,7 +227,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     @p true if lhs == rhs, @p false otherwise.
              */
-            inline bool operator== ( SusceptanceNormLabel const & rhs ) const 
+            inline bool operator== ( SusceptanceNormLabel const & rhs ) const
             {
                 return this->SusceptanceNorm() == rhs.SusceptanceNorm();
             }
@@ -239,16 +239,16 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *
              * @return     @p true if lhs != rhs, @p false otherwise.
              */
-            inline bool operator!= ( SusceptanceNormLabel const & rhs ) const 
+            inline bool operator!= ( SusceptanceNormLabel const & rhs ) const
             {
                 return !(*this==rhs);
             }
         ///@}
 
-        ///@name Concatenation Operators 
+        ///@name Concatenation Operators
         ///@{
 #pragma mark CONCATENATION_OPERATORS
-            
+
             /**
              * @brief      Addition operators testing for cycles.
              * @details    A cycle is created if and only if the vertex is already in
@@ -261,7 +261,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     a cycle, @p false otherwise.
              */
             friend inline bool operator+( SusceptanceNormLabel const & lhs
-                                        , TVertexId            const & vertexId ) 
+                                        , TVertexId            const & vertexId )
             {
                 USAGE_ASSERT ( lhs.SusceptanceNorm()    != Const::NONE );
                 USAGE_ASSERT ( vertexId                 != Const::NONE );
@@ -282,16 +282,16 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     otherwise.
              */
             friend inline std::pair<TVertexSet, bool> operator+( TVertexId            const & vertexId
-                                                               , SusceptanceNormLabel const & rhs     ) 
+                                                               , SusceptanceNormLabel const & rhs     )
             {
                 USAGE_ASSERT ( rhs.SusceptanceNorm()    != Const::NONE );
                 USAGE_ASSERT ( vertexId                 != Const::NONE );
 
                 bool isInsert       = false;
                 TVertexSet newSet   = rhs.VertexSet();
-                
+
                 std::tie( std::ignore, isInsert ) = newSet.emplace( vertexId );
-                
+
                 return std::make_pair ( newSet, isInsert );
             }
 
@@ -306,7 +306,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     @p false otherwise.
              */
             friend inline std::pair<SusceptanceNormLabel, bool> operator+( TElement             const & edge
-                                                                         , SusceptanceNormLabel const & rhs ) 
+                                                                         , SusceptanceNormLabel const & rhs )
             {
                 USAGE_ASSERT ( rhs.SusceptanceNorm()    != Const::NONE );
                 USAGE_ASSERT ( edge.Properties().template Susceptance<Edges::CarrierDifferentiationType::DC>()  != 0 );
@@ -316,7 +316,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
 
                 newLabel           += edge;
                 TVertexId vertexId  = edge.Other( rhs.Vertex() );
-                
+
                 ESSENTIAL_ASSERT ( vertexId == newLabel.Vertex() );
 
                 std::tie( newLabel.VertexSet(), isInsert )  = vertexId + rhs;
@@ -335,7 +335,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     @p false otherwise.
              */
             friend inline std::pair<SusceptanceNormLabel, bool> operator+( SusceptanceNormLabel const & lhs
-                                                                         , TElement             const & edge ) 
+                                                                         , TElement             const & edge )
             {
                 USAGE_ASSERT ( lhs.SusceptanceNorm()    != Const::NONE );
                 USAGE_ASSERT ( edge.Properties().template Susceptance<Edges::CarrierDifferentiationType::DC>()  != 0 );
@@ -373,9 +373,9 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     @f$\bnorm{\fpath{}{\vertexa}{\vertexb}}@f$ on a path
              *     @f$\fpath{}{\vertexa}{\vertexb}@f$ of the label.
              */
-            inline Types::real   SusceptanceNorm() const  
-            { 
-                return susceptanceNorm_; 
+            inline Types::real   SusceptanceNorm() const
+            {
+                return susceptanceNorm_;
             }
 
             /**
@@ -385,9 +385,9 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     @f$\bnorm{\fpath{}{\vertexa}{\vertexb}}@f$ on a path
              *     @f$\fpath{}{\vertexa}{\vertexb}@f$ of the label.
              */
-            inline Types::real & SusceptanceNorm()        
-            { 
-                return susceptanceNorm_; 
+            inline Types::real & SusceptanceNorm()
+            {
+                return susceptanceNorm_;
             }
 
             /**
@@ -399,8 +399,8 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
              *     @f$\bnorm{\fpath{}{\vertexa}{\vertexb}}@f$.
              */
             inline Types::real Value() const
-            { 
-                return SusceptanceNorm(); 
+            {
+                return SusceptanceNorm();
             }
         ///@}
 
@@ -414,7 +414,7 @@ class SusceptanceNormLabel : public Label<ElementType, VertexSetContainer, Point
          * @return     The output stream.
          */
         friend std::ostream & operator<< ( std::ostream               & os
-                                         , SusceptanceNormLabel const & rhs ) 
+                                         , SusceptanceNormLabel const & rhs )
         {
             return os << rhs.SusceptanceNorm();
         }

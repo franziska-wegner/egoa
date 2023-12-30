@@ -14,7 +14,7 @@ namespace egoa {
 
 /**
  * @class Stroke
- * 
+ *
  * @code{.cpp}
  *      ...
  *      //code example TODO
@@ -55,25 +55,25 @@ class Stroke {
         ///@name Operators
         ///@{
 #pragma mark OPERATORS
-            bool operator== ( const Stroke& rhs ) 
+            bool operator== ( const Stroke& rhs )
             {
                 return stroke_ == rhs.stroke_;
             }
 
-            bool operator!= ( const Stroke& rhs ) 
+            bool operator!= ( const Stroke& rhs )
             {
                 return !operator==(rhs);
             }
         ///@}
 
         Types::count Type() const { return stroke_; }
-        
+
         ///@name Operators
         ///@{
 #pragma mark OUTPUT
-            friend std::ostream & operator<< ( std::ostream & outputStream, Name stroke ) 
+            friend std::ostream & operator<< ( std::ostream & outputStream, Name stroke )
             {
-                switch ( stroke ) 
+                switch ( stroke )
                 {
                     case Name::solid:           outputStream << "solid";          break;
                     case Name::dashed:          outputStream << "dashed";         break;

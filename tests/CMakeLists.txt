@@ -81,7 +81,7 @@ add_test(NAME TestPowerGrid COMMAND TestPowerGrid)
 # add_executable(PowerFlow PowerFlowModels/PowerFlow.cpp)
 # target_link_libraries(PowerFlow gtest gtest_main gmock_main EGOA)
 # add_test(NAME TestPowerFlow COMMAND PowerFlow)
-# 
+#
 ######################################################################################
 # Tests for MST ALGORITHMS ###########################################################
 ######################################################################################
@@ -130,4 +130,3 @@ add_test(NAME TestPowerGrid COMMAND TestPowerGrid)
 # add_executable(TestGeojsonWriter IO/TestGeojsonWriter.cpp)
 # target_link_libraries(TestGeojsonWriter EGOA gtest gtest_main gmock_main)
 # add_test(NAME TestGeojsonWriter COMMAND TestGeojsonWriter)
-

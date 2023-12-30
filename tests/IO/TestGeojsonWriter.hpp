@@ -69,8 +69,8 @@ class TestGeojsonExample : public TestGeojsonWriter {
                                                   , TestCaseSmallExampleInput_
                                                   , TPowerGridIO::ReadPyPsa ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseSmallExampleInput_ 
+                std::cerr   << "Expected file "
+                            << TestCaseSmallExampleInput_
                             << " does not exist!";
                 ASSERT_TRUE(false);
             }

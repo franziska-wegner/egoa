@@ -30,15 +30,15 @@ class Queue {
         Queue ( Compare const & compare, Container const & container ){}
 
         virtual ~Queue() {}
-        
+
 #pragma mark LOOPS
-        template<bool IsParallel, typename FUNCTION> 
+        template<bool IsParallel, typename FUNCTION>
         inline void for_all_elements ( FUNCTION function ) {}
 
         template<bool IsParallel, typename FUNCTION>
         inline void for_all_elements ( FUNCTION function ) const {}
 
-        template<typename FUNCTION> 
+        template<typename FUNCTION>
         inline void breakable_for_all_elements ( FUNCTION function ) {}
 
         template<typename FUNCTION>

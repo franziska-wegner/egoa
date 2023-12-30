@@ -66,7 +66,7 @@ enum class ObjectiveSense {
 };
 
 
-enum class Algorithm { 
+enum class Algorithm {
     automatical     = 0
     , primal        = 1
     , dual          = 2
@@ -333,17 +333,17 @@ inline Status CplexToSolverStatus ( IloAlgorithm::Status const & status )
 {
     if ( IloAlgorithm::Status::Feasible                     == status ) {
         return Status::feasible;
-    } else if ( IloAlgorithm::Status::Optimal               == status ) { 
+    } else if ( IloAlgorithm::Status::Optimal               == status ) {
         return Status::optimal;
-    } else if ( IloAlgorithm::Status::Infeasible            == status ) { 
+    } else if ( IloAlgorithm::Status::Infeasible            == status ) {
         return Status::infeasible;
-    } else if ( IloAlgorithm::Status::InfeasibleOrUnbounded == status ) { 
+    } else if ( IloAlgorithm::Status::InfeasibleOrUnbounded == status ) {
         return Status::inf_or_unb;
-    } else if ( IloAlgorithm::Status::Unbounded             == status ) { 
+    } else if ( IloAlgorithm::Status::Unbounded             == status ) {
         return Status::unbounded;
-    } else if ( IloAlgorithm::Status::Error                 == status ) { 
+    } else if ( IloAlgorithm::Status::Error                 == status ) {
         return Status::error;
-    } else if ( IloAlgorithm::Status::Unknown               == status ) { 
+    } else if ( IloAlgorithm::Status::Unknown               == status ) {
         return Status::unknown;
     } else {
         return Status::unknown;
@@ -432,7 +432,7 @@ inline Types::count NodeFileStrategyToInteger ( NodeFileStrategy const & strateg
  * @param      boolean  The IloBool boolean type.
  *
  * @see        https://www.ibm.com/support/knowledgecenter/SSSA5P_12.6.1/ilog.odms.ide.help/refcppopl/html/typedefs/IloBool.html
- * 
+ *
  * @return     Returns @p true for IloTrue, otherwise @p false.
  */
 inline bool IloBoolToBoolean ( IloBool const & boolean )
@@ -445,58 +445,58 @@ inline bool IloBoolToBoolean ( IloBool const & boolean )
 
 #pragma mark OUTPUT_OPERATOR
 
-inline std::ostream & operator<<( std::ostream & os, const Status & rhs ) 
+inline std::ostream & operator<<( std::ostream & os, const Status & rhs )
 {
-    if      ( rhs == Status::loaded         ) { os << "loaded";    } 
-    else if ( rhs == Status::optimal        ) { os << "optimal";   } 
-    else if ( rhs == Status::infeasible     ) { os << "infeasible"; } 
-    else if ( rhs == Status::inf_or_unb     ) { os << "inf_or_unb";} 
-    else if ( rhs == Status::unbounded      ) { os << "unbounded";      } 
-    else if ( rhs == Status::cutoff         ) { os << "cutoff"; } 
-    else if ( rhs == Status::iteration_limit) { os << "iteration_limit"; } 
-    else if ( rhs == Status::node_limit     ) { os << "node_limit"; } 
-    else if ( rhs == Status::time_limit     ) { os << "time_limit"; } 
-    else if ( rhs == Status::solution_limit ) { os << "solution_limit"; } 
-    else if ( rhs == Status::interrupted    ) { os << "interrupted"; } 
-    else if ( rhs == Status::numeric        ) { os << "numeric"; } 
-    else if ( rhs == Status::suboptimal     ) { os << "suboptimal"; } 
-    else if ( rhs == Status::inprogress     ) { os << "inprogress"; } 
-    else if ( rhs == Status::user_obj_limit ) { os << "user_obj_limit"; } 
+    if      ( rhs == Status::loaded         ) { os << "loaded";    }
+    else if ( rhs == Status::optimal        ) { os << "optimal";   }
+    else if ( rhs == Status::infeasible     ) { os << "infeasible"; }
+    else if ( rhs == Status::inf_or_unb     ) { os << "inf_or_unb";}
+    else if ( rhs == Status::unbounded      ) { os << "unbounded";      }
+    else if ( rhs == Status::cutoff         ) { os << "cutoff"; }
+    else if ( rhs == Status::iteration_limit) { os << "iteration_limit"; }
+    else if ( rhs == Status::node_limit     ) { os << "node_limit"; }
+    else if ( rhs == Status::time_limit     ) { os << "time_limit"; }
+    else if ( rhs == Status::solution_limit ) { os << "solution_limit"; }
+    else if ( rhs == Status::interrupted    ) { os << "interrupted"; }
+    else if ( rhs == Status::numeric        ) { os << "numeric"; }
+    else if ( rhs == Status::suboptimal     ) { os << "suboptimal"; }
+    else if ( rhs == Status::inprogress     ) { os << "inprogress"; }
+    else if ( rhs == Status::user_obj_limit ) { os << "user_obj_limit"; }
     else                                      { os << "unknown";    }
     return os;
-}    
+}
 
-inline std::ostream & operator<<( std::ostream & os, VariableType const & rhs ) 
+inline std::ostream & operator<<( std::ostream & os, VariableType const & rhs )
 {
-    if      ( rhs == VariableType::continuous       ) { os << "continuous";    } 
-    else if ( rhs == VariableType::semicontinuous   ) { os << "semicontinuous";   } 
-    else if ( rhs == VariableType::binary           ) { os << "binary"; } 
-    else if ( rhs == VariableType::integer          ) { os << "integer";} 
-    else if ( rhs == VariableType::semiinteger      ) { os << "semiinteger";      } 
+    if      ( rhs == VariableType::continuous       ) { os << "continuous";    }
+    else if ( rhs == VariableType::semicontinuous   ) { os << "semicontinuous";   }
+    else if ( rhs == VariableType::binary           ) { os << "binary"; }
+    else if ( rhs == VariableType::integer          ) { os << "integer";}
+    else if ( rhs == VariableType::semiinteger      ) { os << "semiinteger";      }
     else                                              { os << "unknown";    }
     return os;
-}    
+}
 
 
-inline std::ostream & operator<<( std::ostream & os, ObjectiveSense const & rhs ) 
+inline std::ostream & operator<<( std::ostream & os, ObjectiveSense const & rhs )
 {
-    if      ( rhs == ObjectiveSense::minimize   ) { os << "minimize";   } 
-    else if ( rhs == ObjectiveSense::maximize   ) { os << "maximize";   } 
+    if      ( rhs == ObjectiveSense::minimize   ) { os << "minimize";   }
+    else if ( rhs == ObjectiveSense::maximize   ) { os << "maximize";   }
     else                                          { os << "unknown";    }
     return os;
 }
 
-inline std::ostream & operator<<( std::ostream & os, Algorithm const & rhs ) 
+inline std::ostream & operator<<( std::ostream & os, Algorithm const & rhs )
 {
-    if      ( rhs == Algorithm::automatical   ) { os << "Auto";         } 
-    else if ( rhs == Algorithm::primal        ) { os << "Primal";       } 
-    else if ( rhs == Algorithm::dual          ) { os << "Dual";         } 
-    else if ( rhs == Algorithm::network       ) { os << "Network";      } 
-    else if ( rhs == Algorithm::barrier       ) { os << "Barrier";      } 
-    else if ( rhs == Algorithm::sifting       ) { os << "Sifting";      } 
-    else if ( rhs == Algorithm::concurrent    ) { os << "Concurrent";   } 
-    else if ( rhs == Algorithm::feasOpt       ) { os << "FeasOpt";      } 
-    else if ( rhs == Algorithm::mip           ) { os << "MIP";          } 
+    if      ( rhs == Algorithm::automatical   ) { os << "Auto";         }
+    else if ( rhs == Algorithm::primal        ) { os << "Primal";       }
+    else if ( rhs == Algorithm::dual          ) { os << "Dual";         }
+    else if ( rhs == Algorithm::network       ) { os << "Network";      }
+    else if ( rhs == Algorithm::barrier       ) { os << "Barrier";      }
+    else if ( rhs == Algorithm::sifting       ) { os << "Sifting";      }
+    else if ( rhs == Algorithm::concurrent    ) { os << "Concurrent";   }
+    else if ( rhs == Algorithm::feasOpt       ) { os << "FeasOpt";      }
+    else if ( rhs == Algorithm::mip           ) { os << "MIP";          }
     else                                        { os << "None";         }
     return os;
 }

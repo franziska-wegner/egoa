@@ -22,7 +22,7 @@ const std::vector<typename PowerGridIO<GraphType>::ReaderFunctionStringBased> Po
     PowerGridIO<GraphType>::ReadPyPsa
     //@todo PowerGridIO::readIeeePti
 };
-// 
+//
 template<typename GraphType>
 const std::vector<typename PowerGridIO<GraphType>::ReaderFunctionStreamBasedPowerGridAndCandidateNetwork> PowerGridIO<GraphType>::streamReadersPowerGridAndCandidateNetwork = {
     PowerGridIO<GraphType>::ReadPyPsa

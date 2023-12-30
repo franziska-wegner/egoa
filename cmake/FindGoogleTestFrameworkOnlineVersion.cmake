@@ -1,21 +1,21 @@
 # FindGoogleTestFrameworkOnlineVersion.cmake
-# 
+#
 #   Created on: Jan 30, 2019
-#       Source: https://github.com/google/googletest/tree/main/googletest 
-# 
-# Requirements      
-#   * CMake 2.8. or later due to the use of ExternalProject_Add(). 
-# 
+#       Source: https://github.com/google/googletest/tree/main/googletest
+#
+# Requirements
+#   * CMake 2.8. or later due to the use of ExternalProject_Add().
+#
 # CMake Warning (dev):
 #   * Policy CMP0042 is not set: MACOSX_RPATH is enabled by default.  Run
 #     "cmake --help-policy CMP0042" for policy details. Use the cmake_policy
 #     command to set the policy and suppress this warning. MACOSX_RPATH is not
 #     specified for the following targets: gtest_dll
 #   * This warning is for project developers. Use -Wno-dev to suppress it.
-# 
+#
 # If EGOA_ENABLE_TESTS is TRUE the necessary directories of the google test
 # framework are added to the project such as the includes for gtest and gmock.
-# 
+#
 
 set(CMAKE_MACOSX_RPATH 1)
 

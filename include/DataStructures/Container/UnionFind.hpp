@@ -18,15 +18,15 @@ namespace egoa {
  */
 class UnionFind {
     public:
-        UnionFind( Types::count numberOfVertices ) 
+        UnionFind( Types::count numberOfVertices )
         : parent_( numberOfVertices, 0 )
-        , numberOfVerticesInSubtree_( numberOfVertices, 1 ) 
+        , numberOfVerticesInSubtree_( numberOfVertices, 1 )
         , numberOfVertices_( numberOfVertices )
         {
             // Every vertex has itself as parent
             for ( Types::count counter = 0
                 ; counter < NumberOfVertices()
-                ; ++counter ) 
+                ; ++counter )
             {
                 Parent ( counter ) = counter;
             }
@@ -41,7 +41,7 @@ class UnionFind {
          *
          * @return     The root's identifier.
          */
-        inline Types::vertexId Find ( Types::vertexId vertex ) 
+        inline Types::vertexId Find ( Types::vertexId vertex )
         {
             if ( Parent(vertex) == vertex ) return vertex;
             else return Find ( Parent(vertex) );
@@ -54,14 +54,14 @@ class UnionFind {
          * @param[in]  u     The vertex u
          * @param[in]  v     The vertex v
          */
-        inline void Union ( Types::vertexId u, Types::vertexId v ) 
+        inline void Union ( Types::vertexId u, Types::vertexId v )
         {
             Types::vertexId root1 = Find(u);
             Types::vertexId root2 = Find(v);
 
             if ( root1 == root2 ) return;
 
-            if ( SubtreeSize(root1) > SubtreeSize(root2) ) 
+            if ( SubtreeSize(root1) > SubtreeSize(root2) )
             {
                 SubtreeSize(root1) += SubtreeSize(root2);
                 Parent(root2)       = root1;
@@ -79,45 +79,45 @@ class UnionFind {
          *
          * @return     If they are in the same component
          */
-        inline bool InSameComponent ( Types::vertexId u, Types::vertexId v ) 
+        inline bool InSameComponent ( Types::vertexId u, Types::vertexId v )
         {
-            return Find(u) == Find(v);            
+            return Find(u) == Find(v);
         }
 
         ///@Name Getter and setter
         ///@{
-            inline Types::count NumberOfVertices() 
-            { 
-                return numberOfVertices_; 
+            inline Types::count NumberOfVertices()
+            {
+                return numberOfVertices_;
             }
 
-            inline Types::vertexId & Parent ( Types::vertexId vertex ) 
-            { 
-                USAGE_ASSERT ( vertex < numberOfVertices_ 
+            inline Types::vertexId & Parent ( Types::vertexId vertex )
+            {
+                USAGE_ASSERT ( vertex < numberOfVertices_
                             || vertex == Const::NONE );
-                return parent_[vertex]; 
+                return parent_[vertex];
             }
 
-            inline Types::vertexId Parent ( Types::vertexId vertex ) const 
-            { 
-                USAGE_ASSERT ( vertex < numberOfVertices_ 
+            inline Types::vertexId Parent ( Types::vertexId vertex ) const
+            {
+                USAGE_ASSERT ( vertex < numberOfVertices_
                             || vertex == Const::NONE );
-                return parent_[vertex]; 
+                return parent_[vertex];
             }
 
-            inline Types::count & SubtreeSize ( Types::vertexId vertex ) 
+            inline Types::count & SubtreeSize ( Types::vertexId vertex )
             {
                 USAGE_ASSERT ( vertex < numberOfVertices_ );
                 return numberOfVerticesInSubtree_[vertex];
             }
 
-            inline Types::count SubtreeSize ( Types::vertexId vertex ) const 
+            inline Types::count SubtreeSize ( Types::vertexId vertex ) const
             {
                 USAGE_ASSERT ( vertex < numberOfVertices_ );
                 return numberOfVerticesInSubtree_[vertex];
             }
         ///@}
-    
+
     private:
         std::vector<Types::vertexId>    parent_;                       /*< Parent pointer */
         std::vector<Types::count>       numberOfVerticesInSubtree_;    /*< Number of vertices in subtree i */

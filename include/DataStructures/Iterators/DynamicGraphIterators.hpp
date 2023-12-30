@@ -62,8 +62,8 @@ class DynamicGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p Types::vertexId
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
+             *      []( Types::vertexId vertexId )
+             *      {
              *          // Do something with the vertex identifier.
              *      }
              * @endcode
@@ -95,9 +95,9 @@ class DynamicGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p TGraph::TVertex,
              *                       e.g.,
              * @code{.cpp}
-             *      []( TVertex & vertex ) 
-             *      { 
-             *          // Do something with the vertex object. 
+             *      []( TVertex & vertex )
+             *      {
+             *          // Do something with the vertex object.
              *      }
              * @endcode
              *
@@ -127,8 +127,8 @@ class DynamicGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept two arguments of types @p Types::vertexId
              *                       and @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TVertex & vertex ) 
-             *      { 
+             *      []( Types::vertexId vertexId, TVertex & vertex )
+             *      {
              *          // Do something with the vertex identifier and object.
              *      }
              * @endcode
@@ -165,8 +165,8 @@ class DynamicGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p Types::edgeId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId ) 
-             *      { 
+             *      []( Types::edgeId edgeId )
+             *      {
              *          // Do something with the edge identifier.
              *      }
              * @endcode
@@ -198,8 +198,8 @@ class DynamicGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept one argument of type @p TGraph::TEdge,
              *                       e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -230,8 +230,8 @@ class DynamicGraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel>
              *                       It must accept two arguments of types @p Types::edgeId
              *                       and @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId, TEdge & edge ) 
-             *      { 
+             *      []( Types::edgeId edgeId, TEdge & edge )
+             *      {
              *          // Do something with the edge.
              *      }
              * @endcode

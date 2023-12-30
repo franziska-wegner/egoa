@@ -3,7 +3,7 @@
  *
  *  Created on: Sep 07, 2018
  *      Author: Franziska Wegner
- *      
+ *
  * Check definitions under https://graphviz.gitlab.io/_pages/doc/info/output.html
  */
 
@@ -47,7 +47,7 @@ class PowerGridIO {
                                                       , std::istream & );
             using ReaderFunctionStringBased = bool (*)( PowerGrid< GraphType> &
                                                       , std::string const & );
-            using ReaderFunctionStreamBasedPowerGridAndCandidateNetwork  
+            using ReaderFunctionStreamBasedPowerGridAndCandidateNetwork
                                             = bool (*)( PowerGrid< GraphType> &
                                                       , GraphType &
                                                       , std::string const & );
@@ -57,7 +57,7 @@ class PowerGridIO {
         ///@{
             using WriterFunctionStreamBased  = bool (*)( PowerGrid<GraphType> const &
                                                        , std::ostream & );
-            using WriterFunctionStreamBasedtionStringBased 
+            using WriterFunctionStreamBasedtionStringBased
                                              = bool (*)( PowerGrid<GraphType> const &
                                                        , std::string          const & );
         ///@}
@@ -89,13 +89,13 @@ class PowerGridIO {
              *
              * @return     @p true if the reading was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool read ( PowerGrid<GraphType> & network
-                             , std::istream         & input_stream ) 
+                             , std::istream         & input_stream )
             {
-                for ( auto & reader : streamReaders ) 
+                for ( auto & reader : streamReaders )
                 {
-                    if ( reader ( network, input_stream ) ) 
+                    if ( reader ( network, input_stream ) )
                     {
                         return true;
                     } else {
@@ -115,14 +115,14 @@ class PowerGridIO {
              *
              * @return     @p true if the reading was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool read ( PowerGrid<GraphType> & network
                              , GraphType            & candidateNetwork
-                             , std::string    const & filename ) 
+                             , std::string    const & filename )
             {
-                for ( auto & reader : streamReadersPowerGridAndCandidateNetwork ) 
+                for ( auto & reader : streamReadersPowerGridAndCandidateNetwork )
                 {
-                    if ( reader ( network, candidateNetwork, filename ) ) 
+                    if ( reader ( network, candidateNetwork, filename ) )
                     {
                         return true;
                     }
@@ -141,10 +141,10 @@ class PowerGridIO {
              *
              * @return     @p true if the reading was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool read ( PowerGrid<GraphType>    & network
                              , std::string       const & filename
-                             , ReaderFunctionStreamBased reader = PowerGridIO<GraphType>::read ) 
+                             , ReaderFunctionStreamBased reader = PowerGridIO<GraphType>::read )
             {
                 std::ifstream input_stream( filename );
                 return input_stream.good() && reader ( network, input_stream );
@@ -161,10 +161,10 @@ class PowerGridIO {
              *
              * @return     @p true if the reading was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool read ( PowerGrid<GraphType>    & network
                              , std::string       const & filename
-                             , ReaderFunctionStringBased reader = PowerGridIO<GraphType>::read ) 
+                             , ReaderFunctionStringBased reader = PowerGridIO<GraphType>::read )
             {
                 return reader ( network, filename );
             }
@@ -181,11 +181,11 @@ class PowerGridIO {
              *
              * @return     @p true if the reading was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool read ( PowerGrid<GraphType>                                & network
                              , GraphType                                           & candidateNetwork
                              , std::string                                   const & filename
-                             , ReaderFunctionStreamBasedPowerGridAndCandidateNetwork reader = PowerGridIO<GraphType>::read ) 
+                             , ReaderFunctionStreamBasedPowerGridAndCandidateNetwork reader = PowerGridIO<GraphType>::read )
             {
                 return reader ( network, candidateNetwork, filename );
             }
@@ -206,10 +206,10 @@ class PowerGridIO {
              *
              * @return     @p true if the writing was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool write ( PowerGrid<GraphType> const & network
                               , std::ostream               & outputStream
-                              , WriterFunctionStreamBased    writer = PowerGridIO<GraphType>::write ) 
+                              , WriterFunctionStreamBased    writer = PowerGridIO<GraphType>::write )
             {
                 return writer ( network, outputStream );
             }
@@ -225,10 +225,10 @@ class PowerGridIO {
              *
              * @return     @p true if the writing was successful, @p false otherwise.
              */
-            static 
+            static
             inline bool write ( PowerGrid<GraphType>             const & network
                               , std::string                      const & filename
-                              , WriterFunctionStreamBasedtionStringBased writer = PowerGridIO<GraphType>::write ) 
+                              , WriterFunctionStreamBasedtionStringBased writer = PowerGridIO<GraphType>::write )
             {
                 return writer ( network, filename );
             }
@@ -250,7 +250,7 @@ class PowerGridIO {
              */
             static
             inline bool readIeeeCdfMatlab ( PowerGrid<GraphType> & network
-                                          , std::istream         & input_stream ) 
+                                          , std::istream         & input_stream )
             {
                 if ( !input_stream.good() ) return false;
                 IeeeCdfMatlabParser<GraphType> parser(input_stream);
@@ -269,7 +269,7 @@ class PowerGridIO {
              */
             static
             inline bool writeIeeeCdfMatlab ( PowerGrid<GraphType> const & network
-                                           , std::ostream               & output_stream ) 
+                                           , std::ostream               & output_stream )
             {
                 if (!output_stream.good()) return false;
                 IeeeCdfMatlabParser<GraphType> parser(output_stream);
@@ -292,7 +292,7 @@ class PowerGridIO {
              */
             static
             inline bool ReadPyPsa ( PowerGrid<GraphType>  & network
-                                  , std::string     const & filename ) 
+                                  , std::string     const & filename )
             {
                 PyPsaParser<GraphType> parser(filename);
                 return parser.read(network, filename);
@@ -312,7 +312,7 @@ class PowerGridIO {
             static
             inline bool ReadPyPsa ( PowerGrid<GraphType>  & network
                                   , GraphType             & candidateNetwork
-                                  , std::string     const & filename ) 
+                                  , std::string     const & filename )
             {
                 PyPsaParser<GraphType> parser(filename);
                 return parser.read(network, candidateNetwork, filename);
@@ -362,13 +362,13 @@ class PowerGridIO {
                 return writer.write ( network, outputStream );
             }
         ///@}
-        
+
         ///@name       Graph modeling language (GML)
         ///@details    For more information on GML see <a
         ///    href="https://gephi.org/users/supported-graph-formats/gml-format/">GML</a>.
         ///@{
 #pragma mark GRAPH_GML
-            
+
             /**
              * @brief      Reads a graph from a gml file.
              *
@@ -381,7 +381,7 @@ class PowerGridIO {
              */
             static
             inline bool ReadGraphGml ( PowerGrid<GraphType> & network
-                                     , std::istream         & input_stream ) 
+                                     , std::istream         & input_stream )
             {
                 throw std::runtime_error("ReadGraphGml is not implemented yet");
             }
@@ -396,11 +396,11 @@ class PowerGridIO {
              *     )@f$.
              * @param      output_stream  The output stream to write data to, e.g., a file.
              *
-             * @return     @p true if the writing was successful, @p false otherwise. 
+             * @return     @p true if the writing was successful, @p false otherwise.
              */
             static
             inline bool WriteGraphGml ( PowerGrid<GraphType> const & network
-                                      , std::ostream               & output_stream ) 
+                                      , std::ostream               & output_stream )
             {
                 throw std::runtime_error("WriteGraphGml is not implemented yet");
             }
@@ -413,18 +413,18 @@ class PowerGridIO {
              *     )@f$.
              * @param      filename  The filename to write the data.
              *
-             * @return     @p true if the writing was successful, @p false otherwise. 
+             * @return     @p true if the writing was successful, @p false otherwise.
              */
             static
             inline bool WriteGraphGml ( PowerGrid<GraphType> const & network
-                                      , std::string          const & filename ) 
+                                      , std::string          const & filename )
             {
                 throw std::runtime_error("WriteGraphGml is not implemented yet");
             }
         ///@}
 
 #else // IF OGDF AVAILABLE
-        
+
         /**
          * @brief      Writes a graph into a gml file using OGDF.
          *
@@ -436,19 +436,19 @@ class PowerGridIO {
          */
         static
         inline bool WriteGraphGml ( PowerGrid<GraphType> const & network
-                                  , std::string          const & filename ) 
+                                  , std::string          const & filename )
         {
             ogdf::Graph graph;
-            ogdf::GraphAttributes ga(   graph, 
-                                        ogdf::GraphAttributes::nodeGraphics     |  
-                                        ogdf::GraphAttributes::nodeLabel        | 
-                                        ogdf::GraphAttributes::nodeWeight       | 
+            ogdf::GraphAttributes ga(   graph,
+                                        ogdf::GraphAttributes::nodeGraphics     |
+                                        ogdf::GraphAttributes::nodeLabel        |
+                                        ogdf::GraphAttributes::nodeWeight       |
                                         ogdf::GraphAttributes::nodeId           |
-                                        // ogdf::GraphAttributes::nodeStyle        | //does not work yet 
+                                        // ogdf::GraphAttributes::nodeStyle        | //does not work yet
                                         ogdf::GraphAttributes::edgeGraphics     |
                                         ogdf::GraphAttributes::edgeStyle        |
-                                        ogdf::GraphAttributes::edgeLabel        | 
-                                        ogdf::GraphAttributes::edgeIntWeight    | 
+                                        ogdf::GraphAttributes::edgeLabel        |
+                                        ogdf::GraphAttributes::edgeIntWeight    |
                                         ogdf::GraphAttributes::edgeDoubleWeight |
                                         ogdf::GraphAttributes::nodeTemplate
                                     );
@@ -464,9 +464,9 @@ class PowerGridIO {
          *
          * @return     @p true if the writing was successful, @p false otherwise.
          */
-        static 
+        static
         inline bool WriteGml ( ogdf::GraphAttributes const & ga
-                             , std::string           const & filename ) 
+                             , std::string           const & filename )
         {
             return ogdf::GraphIO::write( ga, filename, ogdf::GraphIO::writeGML );
             // return ogdf::GraphIO::write( ga, filename, ogdf::GraphIO::writeGraphML );
@@ -478,11 +478,11 @@ class PowerGridIO {
          * @param      shape  The OGDF shape.
          * @param      type   The basic vertex type.
          */
-        static 
+        static
         inline void Shape2VertexType ( ogdf::Shape       const & shape
-                                     , Vertex::BasicVertexType & type  ) 
+                                     , Vertex::BasicVertexType & type  )
         {
-            switch (shape) 
+            switch (shape)
             {
                 case ogdf::Shape::Ellipse:  type = Vertex::BasicVertexType::source;         break;
                 case ogdf::Shape::Triangle: type = Vertex::BasicVertexType::sink;           break;
@@ -497,11 +497,11 @@ class PowerGridIO {
          * @param[in]  shape  The OGDF shape.
          * @param      type   The CDF bus type.
          */
-        static 
+        static
         inline void Shape2VertexType ( ogdf::Shape          shape
-                                     , Vertex::CdfBusType & type) 
+                                     , Vertex::CdfBusType & type)
         {
-            switch (shape) 
+            switch (shape)
             {
                 case ogdf::Shape::Ellipse:      type = Vertex::CdfBusType::slack;   break;
                 case ogdf::Shape::Triangle:     type = Vertex::CdfBusType::load;    break;
@@ -517,16 +517,16 @@ class PowerGridIO {
          * @param      shape  The OGDF shape.
          * @param      type   The IEEE bus type.
          */
-        static 
+        static
         inline void Shape2VertexType ( ogdf::Shape   const & shape
-                                     , Vertex::IeeeBusType & type) 
+                                     , Vertex::IeeeBusType & type)
         {
-            switch (shape) 
+            switch (shape)
             {
                 case ogdf::Shape::Ellipse:      type = Vertex::IeeeBusType::slack;      break;
                 case ogdf::Shape::Triangle:     type = Vertex::IeeeBusType::load;       break;
                 case ogdf::Shape::RoundedRect:  type = Vertex::IeeeBusType::generator;  break;
-                default:                        type = Vertex::IeeeBusType::unknown; 
+                default:                        type = Vertex::IeeeBusType::unknown;
             }
         }
 
@@ -536,16 +536,16 @@ class PowerGridIO {
          * @param[in]  type   The basic vertex type.
          * @param      shape  The OGDF shape.
          */
-        static 
+        static
         inline void VertexType2Shape ( Vertex::BasicVertexType type
-                                     , ogdf::Shape           & shape ) 
+                                     , ogdf::Shape           & shape )
         {
-            switch (type) 
+            switch (type)
             {
                 case Vertex::BasicVertexType::source:       shape = ogdf::Shape::Ellipse;   break;
                 case Vertex::BasicVertexType::sink:         shape = ogdf::Shape::Triangle;  break;
                 case Vertex::BasicVertexType::intermediate: shape = ogdf::Shape::Rect;      break;
-                default:                                    shape = ogdf::Shape::Hexagon; 
+                default:                                    shape = ogdf::Shape::Hexagon;
             }
         }
 
@@ -555,11 +555,11 @@ class PowerGridIO {
          * @param[in]  type   The CDF bus type.
          * @param      shape  The OGDF shape.
          */
-        static 
+        static
         inline void VertexType2Shape ( Vertex::CdfBusType type
-                                     , ogdf::Shape      & shape ) 
+                                     , ogdf::Shape      & shape )
         {
-            switch (type) 
+            switch (type)
             {
                 case Vertex::CdfBusType::slack:         shape = ogdf::Shape::Ellipse;       break;
                 case Vertex::CdfBusType::mvar:          shape = ogdf::Shape::RoundedRect;   break;
@@ -575,11 +575,11 @@ class PowerGridIO {
          * @param[in]  type   The IEEE bus type.
          * @param      shape  The OGDF shape.
          */
-        static 
+        static
         inline void VertexType2Shape ( Vertex::IeeeBusType type
-                                     , ogdf::Shape       & shape ) 
+                                     , ogdf::Shape       & shape )
         {
-            switch (type) 
+            switch (type)
             {
                 case Vertex::IeeeBusType::generator:    shape = ogdf::Shape::RoundedRect;   break;
                 case Vertex::IeeeBusType::slack:        shape = ogdf::Shape::Ellipse;       break;
@@ -595,10 +595,10 @@ class PowerGridIO {
          *
          * @return     The OGDF stroke.
          */
-        static 
-        inline ogdf::StrokeType Stroke2OgdfStroke ( Stroke::Name const & stroke ) 
+        static
+        inline ogdf::StrokeType Stroke2OgdfStroke ( Stroke::Name const & stroke )
         {
-            switch ( stroke ) 
+            switch ( stroke )
             {
                 case Stroke::Name::solid:          return ogdf::StrokeType::Solid;
                 case Stroke::Name::dashed:         return ogdf::StrokeType::Dash;
@@ -611,12 +611,12 @@ class PowerGridIO {
 
 #endif // not OGDF_AVAILABLE ?
 
-        ///@name Graph DOT 
+        ///@name Graph DOT
         ///@{
-#pragma mark GRAPH_DOT 
+#pragma mark GRAPH_DOT
             // see https://en.wikipedia.org/wiki/DOT_(graph_description_language)
             // see spec http://www.graphviz.org/doc/info/attrs.html#k:color
-            
+
             /**
              * @brief      Writes a graph dot.
              *
@@ -624,19 +624,19 @@ class PowerGridIO {
              * @param      outputStream  The stream to write data to
              *
              * @return     @true if the writing was successful, @false otherwise.
-             * 
+             *
              * @todo       Improve and put in its own file.
              */
-            static 
+            static
             bool WriteGraphDot ( PowerGrid<GraphType> const & network
-                               , std::ostream               & outputStream ) 
+                               , std::ostream               & outputStream )
             {
-                outputStream << "graph " << network.Graph().Name() << " {\n"; 
-                
+                outputStream << "graph " << network.Graph().Name() << " {\n";
+
                 outputStream << "rankdir=LR" << "\n";
                 outputStream << "size=" << "\"" << "3,3" << "\"" << "\n";
                 outputStream << "ratio=" << "\"" << "filled" << "\"" << "\n";
-                
+
                 // edge style
                 outputStream << "edge[";
                 outputStream << "size=" << "\"" << "3,3" << "\"" << "";
@@ -650,9 +650,9 @@ class PowerGridIO {
                 // edges
                 network.Graph().template for_all_edges<ExecutionPolicy::sequential>(
                     [&outputStream, network](TElectricalEdge edge){
-                        outputStream << network.Graph().VertexAt(edge.Source()).Properties().Name() 
-                                     << " -- " 
-                                     << network.Graph().VertexAt(edge.Target()).Properties().Name(); 
+                        outputStream << network.Graph().VertexAt(edge.Source()).Properties().Name()
+                                     << " -- "
+                                     << network.Graph().VertexAt(edge.Target()).Properties().Name();
                         Color  color;
                         Stroke::Name stroke;
                         Edges::ElectricalEdge2Color(  edge.Properties().Type(), color  );
@@ -668,17 +668,17 @@ class PowerGridIO {
                 return true;
             }
 
-            static 
+            static
             bool WriteGraphDot ( PowerGrid<GraphType> const & network
-                               , std::string          const & filename ) 
+                               , std::string          const & filename )
             {
                 std::ofstream outputStream(filename);
-                outputStream << "graph " << network.Graph().Name() << " {\n"; 
-                
+                outputStream << "graph " << network.Graph().Name() << " {\n";
+
                 outputStream << "rankdir=LR" << "\n";
                 outputStream << "size=" << "\"" << "3,3" << "\"" << "\n";
                 outputStream << "ratio=" << "\"" << "filled" << "\"" << "\n";
-                
+
                 // edge style
                 outputStream << "edge[";
                 outputStream << "size=" << "\"" << "3,3" << "\"" << "";
@@ -692,9 +692,9 @@ class PowerGridIO {
                 // edges
                 network.Graph().template for_all_edges<ExecutionPolicy::sequential>(
                     [&outputStream, network](TElectricalEdge edge){
-                        outputStream << network.Graph().VertexAt(edge.Source()).Properties().Name() 
-                                     << " -- " 
-                                     << network.Graph().VertexAt(edge.Target()).Properties().Name(); 
+                        outputStream << network.Graph().VertexAt(edge.Source()).Properties().Name()
+                                     << " -- "
+                                     << network.Graph().VertexAt(edge.Target()).Properties().Name();
                         Color  color;
                         Stroke::Name stroke;
                         Edges::ElectricalEdge2Color(  edge.Properties().Type(), color  );
@@ -717,10 +717,10 @@ class PowerGridIO {
              *
              * @return     The dot style stroke.
              */
-            static 
+            static
             inline std::string Stroke2DotStyle ( Stroke::Name const & stroke )
             {
-                switch ( stroke ) 
+                switch ( stroke )
                 {
                     case Stroke::Name::solid:          return "solid";
                     case Stroke::Name::dashed:         return "dashed";

@@ -103,4 +103,3 @@ class DominationDifferentiation<ElementType, DominationCriterion::none> {
 } // namespace egoa
 
 #endif // EGOA__DATA_STRUCTURES__CONTAINER__DOMINATION_CRITERION_HPP
-

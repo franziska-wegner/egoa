@@ -22,7 +22,7 @@ namespace egoa::Vertices {
  *
  * @tparam     PropertyType  The property of a vertex, e.g.,
  *     ElectricalProperties, specialize the vertex.
- * 
+ *
  * @see        egoa::Vertices::ElectricalProperties
  */
 template<class PropertyType>
@@ -55,7 +55,7 @@ class Vertex {
          * @param      lhs   The left vertex.
          * @param      rhs   The right vertex.
          */
-        friend void swap ( Vertex & lhs, Vertex & rhs ) 
+        friend void swap ( Vertex & lhs, Vertex & rhs )
         { // Necessary for the copy and swap idiom
             using std::swap; // enable ADL
             swap( lhs.identifier_, rhs.identifier_ );
@@ -65,7 +65,7 @@ class Vertex {
         ///@name Comparators
         ///@{
 #pragma mark COMPARATORS
-        
+
             /**
              * @brief      Compares two vertices for equality.
              *
@@ -74,7 +74,7 @@ class Vertex {
              *
              * @return     @p true if the vertex are the same, @p false otherwise.
              */
-            friend bool operator==( Vertex const & lhs, Vertex const & rhs ) 
+            friend bool operator==( Vertex const & lhs, Vertex const & rhs )
             {
                 return ( lhs.Identifier() == rhs.Identifier() )
                     && ( lhs.Properties() == rhs.Properties() );
@@ -88,7 +88,7 @@ class Vertex {
              *
              * @return     @p false if the vertices are the same, @p true otherwise.
              */
-            friend bool operator!=( Vertex const & lhs, Vertex const & rhs ) 
+            friend bool operator!=( Vertex const & lhs, Vertex const & rhs )
             {
                 return !(lhs == rhs);
             }
@@ -109,7 +109,7 @@ class Vertex {
 #pragma mark MEMBER
         Types::vertexId         identifier_;    /**< Unique identifier of the vertex. */
         TProperties             properties_;    /**< Property of the vertex.  */
-       
+
 };
 
 } // namespace egoa::Vertices

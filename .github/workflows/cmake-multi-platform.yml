@@ -72,6 +72,11 @@ jobs:
         cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
         dir: ${{ github.workspace }}/Qt
 
+    - name: Install LLVM for Clang-Tidy (MacOS)
+      if: startsWith(matrix.os,'macos-')
+      run: |
+        brew install llvm
+
     # - name: Install correct version of mingw
     #   uses: crazy-max/ghaction-chocolatey@v1
     #   with:
@@ -287,7 +292,7 @@ jobs:
           message(FATAL_ERROR "Building documentation failed")
         endif()
 
-    # See https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository 
+    # See https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository
     # for more information on the parameters.
     - name: Publish Documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3

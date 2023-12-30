@@ -9,7 +9,7 @@
 
 #include "Algorithms/GraphTraversal/DepthFirstSearch.hpp"
 
-namespace egoa { 
+namespace egoa {
 
 /**
  * @brief      Class to find articulation vertices.
@@ -66,7 +66,7 @@ class ArticulationVertexDetection : public DepthFirstSearch<GraphType, IsDirecte
          *
          * @param[in]  vertex  The vertex identifier.
          */
-        virtual inline void PreprocessingVertexWith ( TVertexId const vertex ) override 
+        virtual inline void PreprocessingVertexWith ( TVertexId const vertex ) override
         {
             TimeOfOldestReachableAncestor( vertex ) = this->EntryTimeAt( vertex );
         }
@@ -125,10 +125,10 @@ class ArticulationVertexDetection : public DepthFirstSearch<GraphType, IsDirecte
 
         /**
          * @brief      Decide which vertices are articulation vertices.
-         *         
+         *
          * @param[in]  vertexId  The vertex identifier.
          */
-        virtual inline void PostprocessingVertexWith ( TVertexId vertexId ) override 
+        virtual inline void PostprocessingVertexWith ( TVertexId vertexId ) override
         {
             if ( IsRoot( vertexId ) ) {
                 isArticulationVertex_[ vertexId ] = (TreeOutDegree( vertexId ) > 1);
@@ -151,7 +151,7 @@ class ArticulationVertexDetection : public DepthFirstSearch<GraphType, IsDirecte
          */
         inline bool IsRootArticulationVertexAt ( TVertexId const vertex ) const
         {
-            if ( IsRoot ( vertex ) ) { 
+            if ( IsRoot ( vertex ) ) {
                 if ( TreeOutDegree ( vertex ) > 1 ) {
                     // root articulation point
                     return true;
@@ -173,9 +173,9 @@ class ArticulationVertexDetection : public DepthFirstSearch<GraphType, IsDirecte
          */
         inline bool IsParentArticulationVertexAt ( TVertexId const vertex ) const
         {
-            if ( this->ParentOf ( vertex ) == OldestReachableAncestor ( vertex ) 
-               && !IsRoot ( this->ParentOf( vertex ) ) 
-               ) 
+            if ( this->ParentOf ( vertex ) == OldestReachableAncestor ( vertex )
+               && !IsRoot ( this->ParentOf( vertex ) )
+               )
             {
                 return true;
             }
@@ -198,7 +198,7 @@ class ArticulationVertexDetection : public DepthFirstSearch<GraphType, IsDirecte
          */
         inline std::pair<bool,bool> IsBridgeArticulationVertexAt ( TVertexId const vertex ) const {
             if ( vertex == OldestReachableAncestor ( vertex ) ) {
-                if ( TreeOutDegree ( vertex ) > 0 ) 
+                if ( TreeOutDegree ( vertex ) > 0 )
                 { // The vertex is not a leaf
                     return std::make_pair<bool,bool>(true,true);
                 }
@@ -235,7 +235,7 @@ class ArticulationVertexDetection : public DepthFirstSearch<GraphType, IsDirecte
         }
 
 #pragma mark MEMBERS
-    private:                                                                                
+    private:
         std::vector<TTime>          timeOfOldestReachableAncestor_;   /**< Oldest reachable ancestor representing the vertex closest to the root */
         std::vector<Types::count>   treeOutDegree_;             /**< Number of outgoing DFS tree edges per vertex */
         std::vector<bool>           isArticulationVertex_;      /**< Whether the vertex is an articulation vertex */

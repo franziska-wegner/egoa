@@ -111,7 +111,7 @@ protected:
     TestGraphFourVertices() : TestGraph<GraphType>("4K_1") {}
 
     void SetUp() override {
-        for ( Types::count i = 0; i < 4; ++i ) 
+        for ( Types::count i = 0; i < 4; ++i )
         {
             vertexIds_.push_back(this->graph_.AddVertex(TVertexProperties(i)));
         }
@@ -137,16 +137,16 @@ protected:
 
     TestGraphBidirectedPath() : TestGraph<GraphType>("P_3") {}
 
-    void SetUp() override 
+    void SetUp() override
     {
-        for ( Types::count i = 0; i < 3; ++i ) 
+        for ( Types::count i = 0; i < 3; ++i )
         {
             vertexIds_.push_back(this->graph_.AddVertex( TVertexProperties{i} ));
             TVertex vertex = this->graph_.VertexAt( vertexIds_.back() );
             mapIdToVertex_.emplace(vertexIds_.back(), vertex );
         }
 
-        for ( Types::count i = 0; i < 2; ++i ) 
+        for ( Types::count i = 0; i < 2; ++i )
         {
             Types::index    privatId = 2 * i;
             Types::vertexId source   = i;
@@ -185,20 +185,20 @@ protected:
 
     TestGraphStar() : TestGraph<GraphType>("K_1_3") {}
 
-    void SetUp() override 
+    void SetUp() override
     {
         centerId_ = this->graph_.AddVertex(TVertexProperties(0));
         vertexIds_.push_back(centerId_);
         TVertex vertex = this->graph_.VertexAt(vertexIds_.back());
         mapIdToVertex_.emplace(centerId_, vertex ); // TVertex(0));
-        for ( Types::count i = 0; i < 3; ++i ) 
+        for ( Types::count i = 0; i < 3; ++i )
         {
             leafIds_.push_back(this->graph_.AddVertex(TVertexProperties(i + 1)));
             vertexIds_.push_back(leafIds_.back());
             vertex = this->graph_.VertexAt(vertexIds_.back());
             mapIdToVertex_.emplace(leafIds_.back(), vertex );
         }
-        for ( Types::count i = 0; i < 3; ++i ) 
+        for ( Types::count i = 0; i < 3; ++i )
         {
             edgeIds_.push_back(this->graph_.AddEdge(centerId_, leafIds_[i], TEdgeProperties(i) ));
             mapIdToEdge_.emplace(edgeIds_.back(), this->graph_.EdgeAt(edgeIds_.back()) );
@@ -240,7 +240,7 @@ protected:
         TVertex vertex = this->graph_.VertexAt( vertexIds_.back() );
         mapIdToVertex_.emplace(centerId_, vertex);
         Types::vertexId vertexToRemove = this->graph_.AddVertex(TVertexProperties(234));
-        for ( Types::count i = 0; i < 3; ++i ) 
+        for ( Types::count i = 0; i < 3; ++i )
         {
             leafIds_.push_back(this->graph_.AddVertex( TVertexProperties{i + 1} ));
             vertexIds_.push_back(leafIds_.back());
@@ -254,7 +254,7 @@ protected:
         edgesToRemove.push_back(this->graph_.AddEdge(leafIds_[0], leafIds_[2], TEdgeProperties(5) ));
         this->graph_.AddEdge(leafIds_[1], vertexToRemove, TEdgeProperties{234});
         this->graph_.AddEdge(vertexToRemove, leafIds_[2], TEdgeProperties{123});
-        for (Types::count i = 0; i < 3; ++i) 
+        for (Types::count i = 0; i < 3; ++i)
         {
             TEdgeProperties edgeProperties{i};
             edgeIds_.push_back(this->graph_.AddEdge(centerId_, leafIds_[i], edgeProperties));
@@ -263,7 +263,7 @@ protected:
         }
 
         // remove edges
-        for (auto e : edgesToRemove) 
+        for (auto e : edgesToRemove)
         {
             this->graph_.RemoveEdgeAt(e);
         }
@@ -286,9 +286,9 @@ using GraphTypes = ::testing::Types<
                     >;
 
 template<>
-struct FileName<egoa::StaticGraph<MinimalProperties, MinimalProperties>> 
+struct FileName<egoa::StaticGraph<MinimalProperties, MinimalProperties>>
 {
-    static Types::string Name() 
+    static Types::string Name()
     {
         return "StaticGraph.hpp";
     }

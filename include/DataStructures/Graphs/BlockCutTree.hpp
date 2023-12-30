@@ -27,7 +27,7 @@ namespace egoa {
 /// @defgroup   bctree  Block-cut tree related classes and functions
 /// @details    This module contains all functions and classes that are related
 ///             to block-cut trees.
-///             
+///
 ///             To build a block-cut tree the functions
 ///             buildBlockCutTree(GraphType const &) or
 ///             BlockCutTree<GraphType>::Build(GraphType const &) can be used.
@@ -227,7 +227,7 @@ public:
 
         /**
          * @brief      Whether the block is a bridge.
-         * 
+         *
          * @details    Bridges are blocks that consist of only one edge.
          *
          * @return     @c true if the block represents a bridge, @c false otherwise.
@@ -311,7 +311,7 @@ private:
     std::vector<Block> blocks_;
     /**
      * @brief      The cut-vertices in the graph.
-     * 
+     *
      * @details    The cut-vertex with identifier @c id is at position @c id
      *             in the vector. The positions that do not correspond to
      *             cut-vertices contain empty objects.

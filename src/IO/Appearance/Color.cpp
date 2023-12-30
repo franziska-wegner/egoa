@@ -101,7 +101,7 @@ namespace egoa {
         , { 152, 167, 197 }  // KITseablue50
         , { 193, 202, 220 }  // KITseablue30
         , { 224, 229, 238 }  // KITseablue15
-        // 
+        //
         // Thesis Colors
         , {  86, 151, 197 }  // THESISblue
         , {  54, 120, 167 }  // THESISblue_dark
@@ -324,7 +324,7 @@ namespace egoa {
         , { 0.598, 0.656, 0.774 }  // KITseablue50
         , { 0.758, 0.794, 0.864 }  // KITseablue30
         , { 0.879, 0.897, 0.932 }  // KITseablue15
-        // 
+        //
         // Thesis Colors
         , { 0.337, 0.592, 0.773 }  // THESISblue
         , { 0.212, 0.471, 0.655 }  // THESISblue_dark
@@ -457,46 +457,46 @@ namespace egoa {
     , alpha_(0)
     {}
 
-    void Color::Red( Types::ubyte red ) {   
-        this->red() = ( red   / 255 ); 
+    void Color::Red( Types::ubyte red ) {
+        this->red() = ( red   / 255 );
     }
 
-    Types::ubyte Color::Red() const { 
+    Types::ubyte Color::Red() const {
         return static_cast<Types::ubyte>( red_   * 255 >= 0.0 )?
                                         ( red_   * 255 + 0.5  ):
-                                        ( red_   * 255 - 0.5  ); 
+                                        ( red_   * 255 - 0.5  );
     }
 
-    void Color::Green( Types::ubyte green ) {   
-        this->green() = ( green   / 255 ); 
+    void Color::Green( Types::ubyte green ) {
+        this->green() = ( green   / 255 );
     }
 
-    Types::ubyte Color::Green() const { 
+    Types::ubyte Color::Green() const {
         return static_cast<Types::ubyte>( green_ * 255 >= 0.0 )?
                                         ( green_ * 255 + 0.5  ):
-                                        ( green_ * 255 - 0.5  ); 
+                                        ( green_ * 255 - 0.5  );
     }
 
-    void Color::Blue( Types::ubyte blue ) {   
-        this->blue() = ( blue   / 255 ); 
-    }    
+    void Color::Blue( Types::ubyte blue ) {
+        this->blue() = ( blue   / 255 );
+    }
 
-    Types::ubyte Color::Blue() const { 
+    Types::ubyte Color::Blue() const {
         return static_cast<Types::ubyte>( blue_  * 255 >= 0.0 )?
                                         ( blue_  * 255 + 0.5  ):
-                                        ( blue_  * 255 - 0.5  ); 
+                                        ( blue_  * 255 - 0.5  );
     }
 
     std::string Color::Hexadecimal( ) {
         std::stringstream hexstring;
         hexstring << "#"    << std::setfill('0') << std::setw(2) << std::uppercase
-                            << std::hex          << static_cast<int>(Red()) 
+                            << std::hex          << static_cast<int>(Red())
                             << std::setfill('0') << std::setw(2) << std::uppercase
                             << std::hex          << static_cast<int>(Green())
                             << std::setfill('0') << std::setw(2) << std::uppercase
-                            << std::hex          << static_cast<int>(Blue()) 
+                            << std::hex          << static_cast<int>(Blue())
                             << std::endl;
-        return hexstring.str(); 
+        return hexstring.str();
     }
 
 } // namespace egoa

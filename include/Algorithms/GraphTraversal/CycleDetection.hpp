@@ -9,7 +9,7 @@
 
 #include "Algorithms/GraphTraversal/DepthFirstSearch.hpp"
 
-namespace egoa { 
+namespace egoa {
 
 /**
  * @brief      Class to detect a cycle in the graph.
@@ -45,7 +45,7 @@ class CycleDetection final : public DFS<GraphType, IsDirected> {
         virtual inline void ProcessingEdgeWith  ( TVertex const source
                                                 , TVertex const target ) override
         {
-            if ( source != ParentOf ( target ) ) { 
+            if ( source != ParentOf ( target ) ) {
                 ExtractPath ( source, target );
                 SetTerminate();
             }

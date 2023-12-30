@@ -23,18 +23,18 @@ namespace egoa::test {
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestDynamicGraphEmpty
-            , DeleteVertexExceptionHandling ) 
+            , DeleteVertexExceptionHandling )
     {
         auto assertionString = this->assertionString("RemoveVertexAt", "VertexExists\\(id\\)");
         Types::vertexId id = 0;
         try {
             this->graph_.RemoveVertexAt(id);
-        } catch ( std::runtime_error const & error ) 
+        } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-        } catch ( ... ) 
+        } catch ( ... )
         {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -110,7 +110,7 @@ TEST_F(TestDynamicGraphBidirectedPath, DeleteVertexFirst) {
 
 #pragma mark UpdateVertices
 
-TEST_F(TestDynamicGraphFourVertices, UpdateVertices) 
+TEST_F(TestDynamicGraphFourVertices, UpdateVertices)
 {
     Types::vertexId vertexToRemove = this->vertexIds_[2];
     ASSERT_EQ(2, this->graphConst_.VertexAt(vertexToRemove).Properties().PrivateId());
@@ -125,7 +125,7 @@ TEST_F(TestDynamicGraphFourVertices, UpdateVertices)
     std::vector<Types::vertexId> privateIds;
 
     this->graphConst_.template for_all_vertex_tuples<egoa::ExecutionPolicy::sequential>(
-        [&ids, &privateIds, this](Types::vertexId id, TVertex const & vertex) 
+        [&ids, &privateIds, this](Types::vertexId id, TVertex const & vertex)
         {
             ids.push_back(id);
             privateIds.push_back(vertex.Properties().PrivateId());
@@ -138,7 +138,7 @@ TEST_F(TestDynamicGraphFourVertices, UpdateVertices)
     ExpectSameContent({0, 1, 3}, privateIds);
 }
 
-TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesMiddle) 
+TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesMiddle)
 {
     Types::vertexId middleVertex = this->vertexIds_[1];
 
@@ -152,7 +152,7 @@ TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesMiddle)
     std::vector<Types::vertexId> privateIds;
 
     this->graphConst_.template for_all_vertex_tuples<egoa::ExecutionPolicy::sequential>(
-        [&ids, &privateIds, this](Types::vertexId id, TVertex const & vertex) 
+        [&ids, &privateIds, this](Types::vertexId id, TVertex const & vertex)
         {
             ids.push_back(id);
             privateIds.push_back(vertex.Properties().PrivateId());
@@ -168,7 +168,7 @@ TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesMiddle)
     ExpectSameContent({0, 2}, privateIds);
 }
 
-TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesFirst) 
+TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesFirst)
 {
     Types::vertexId firstVertex = this->vertexIds_[0];
 
@@ -182,7 +182,7 @@ TEST_F(TestDynamicGraphBidirectedPath, UpdateVerticesFirst)
     std::vector<Types::vertexId> privateIds;
 
     this->graphConst_.template for_all_vertex_tuples<egoa::ExecutionPolicy::sequential>(
-        [&ids, &privateIds, this](Types::vertexId id, TVertex const & vertex) 
+        [&ids, &privateIds, this](Types::vertexId id, TVertex const & vertex)
         {
             ids.push_back(id);
             privateIds.push_back(vertex.Properties().PrivateId());

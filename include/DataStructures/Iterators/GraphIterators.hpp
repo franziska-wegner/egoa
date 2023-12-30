@@ -56,8 +56,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       all vertices. It must accept one argument
              *                       of type @p TGraph::TVertexId, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) 
-             *      { 
+             *      []( Types::vertexId vertexId )
+             *      {
              *          // Do something with the vertex identifier.
              *      }
              * @endcode
@@ -69,7 +69,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             void for_all_vertex_identifiers ( TGraph & graph
                                             , FUNCTION function )
             {
-                for ( auto & vertex : graph.Vertices() ) 
+                for ( auto & vertex : graph.Vertices() )
                 {
                     auto id = vertex.Identifier();
                     function( id );
@@ -85,8 +85,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       all vertices. It must accept one argument
              *                       of type @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( TVertex & vertex ) 
-             *      { 
+             *      []( TVertex & vertex )
+             *      {
              *          // Do something with the vertex object.
              *      }
              * @endcode
@@ -98,7 +98,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             void for_all_vertices ( TGraph & graph
                                   , FUNCTION function )
             {
-                for ( auto & vertex : graph.Vertices() ) 
+                for ( auto & vertex : graph.Vertices() )
                 {
                     function( vertex );
                 }
@@ -114,8 +114,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       arguments of types @p Types::vertexId and
              *                       @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TVertex & vertex ) 
-             *      { 
+             *      []( Types::vertexId vertexId, TVertex & vertex )
+             *      {
              *          // Do something with the vertex identifier and object.
              *      }
              * @endcode
@@ -127,7 +127,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             void for_all_vertex_tuples ( TGraph & graph
                                        , FUNCTION function )
             {
-                for ( auto & vertex : graph.Vertices() ) 
+                for ( auto & vertex : graph.Vertices() )
                 {
                     auto id = vertex.Identifier();
                     function( id, vertex );
@@ -148,8 +148,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       It must accept one argument of type @p Types::edgeId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId ) 
-             *      { 
+             *      []( Types::edgeId edgeId )
+             *      {
              *          // Do something with the edge identifier.
              *      }
              * @endcode
@@ -161,7 +161,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             void for_all_edge_identifiers ( TGraph & graph
                                           , FUNCTION function )
             {
-                for ( auto & edge : graph.Edges() ) 
+                for ( auto & edge : graph.Edges() )
                 {
                     auto id = edge.Identifier();
                     function( id );
@@ -177,8 +177,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       It must accept one argument of type @p TGraph::TEdge,
              *                       e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -190,7 +190,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             void for_all_edges ( TGraph & graph
                                , FUNCTION function )
             {
-                for ( auto & edge : graph.Edges() ) 
+                for ( auto & edge : graph.Edges() )
                 {
                     function( edge );
                 }
@@ -206,8 +206,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       of types @p Types::edgeId and @p
              *                       TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId, TEdge & edge ) 
-             *      { 
+             *      []( Types::edgeId edgeId, TEdge & edge )
+             *      {
              *          // Do something with the edge.
              *      }
              * @endcode
@@ -219,7 +219,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
             void for_all_edge_tuples ( TGraph & graph
                                      , FUNCTION function )
             {
-                for ( auto & edge : graph.Edges() ) 
+                for ( auto & edge : graph.Edges() )
                 {
                     auto id = edge.Identifier();
                     function( id, edge );
@@ -241,8 +241,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -269,8 +269,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -283,11 +283,11 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
                                   , TVertexId vertexId
                                   , FUNCTION  function )
             {
-                for ( auto edgeId : graph.InEdgeIdsAt(vertexId) ) 
+                for ( auto edgeId : graph.InEdgeIdsAt(vertexId) )
                 {
                     function( graph.EdgeAt(edgeId) );
                 }
-                for ( auto edgeId : graph.OutEdgeIdsAt(vertexId) ) 
+                for ( auto edgeId : graph.OutEdgeIdsAt(vertexId) )
                 {
                     function( graph.EdgeAt(edgeId) );
                 }
@@ -304,8 +304,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -332,8 +332,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -363,8 +363,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -391,8 +391,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::sequential> {
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -442,8 +442,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       It must accept one argument of type @p Types::vertexId
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId ) -> bool 
-             *      {   
+             *      []( Types::vertexId vertexId ) -> bool
+             *      {
              *          bool whetherToContinue = true;
              *          // Do something with the vertex identifier.
              *          return whetherToContinue;
@@ -457,7 +457,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             void for_all_vertex_identifiers ( TGraph & graph
                                             , FUNCTION function )
             {
-                for ( auto & vertex : graph.Vertices() ) 
+                for ( auto & vertex : graph.Vertices() )
                 {
                     auto id = vertex.Identifier();
                     bool toContinue = function( id );
@@ -475,7 +475,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       all vertices. It must accept one argument
              *                       of type @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( TVertex & vertex ) -> bool 
+             *      []( TVertex & vertex ) -> bool
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the vertex identifier.
@@ -490,7 +490,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             void for_all_vertices ( TGraph & graph
                                   , FUNCTION function )
             {
-                for ( auto & vertex : graph.Vertices() ) 
+                for ( auto & vertex : graph.Vertices() )
                 {
                     bool toContinue = function( vertex );
                     if (!toContinue) return;
@@ -509,7 +509,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       arguments of types @p Types::vertexId and
              *                       @p TGraph::TVertex, e.g.,
              * @code{.cpp}
-             *      []( Types::vertexId vertexId, TVertex vertex ) -> bool 
+             *      []( Types::vertexId vertexId, TVertex vertex ) -> bool
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the vertex identifier and object.
@@ -524,7 +524,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             void for_all_vertex_tuples ( TGraph & graph
                                        , FUNCTION function )
             {
-                for ( auto & vertex : graph.Vertices() ) 
+                for ( auto & vertex : graph.Vertices() )
                 {
                     auto id = vertex.Identifier();
                     bool toContinue = function( id, vertex );
@@ -547,7 +547,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       It must accept one argument of type @p Types::edgeId,
              *                       e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId ) -> bool 
+             *      []( Types::edgeId edgeId ) -> bool
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge identifier.
@@ -562,7 +562,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             void for_all_edge_identifiers ( TGraph & graph
                                           , FUNCTION function )
             {
-                for ( auto & edge : graph.Edges() ) 
+                for ( auto & edge : graph.Edges() )
                 {
                     auto id = edge.Identifier();
                     bool toContinue = function( id );
@@ -573,14 +573,14 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             /**
              * @brief      The breakable @p for loop over all edges @f$\edges@f$ in the
              *             graph @f$\graph@f$.
-             * @details    The loop is aborted if the function returns @p false.            
+             * @details    The loop is aborted if the function returns @p false.
              *
              * @param      graph     The graph @f$\graph = (\vertices, \edges)@f$.
              * @param[in]  function  The function object that is called for all edges.
              *                       It must accept one argument of type @p TGraph::TEdge,
              *                       e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
+             *      []( TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -595,7 +595,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             void for_all_edges ( TGraph & graph
                                , FUNCTION function )
             {
-                for ( auto & edge : graph.Edges() ) 
+                for ( auto & edge : graph.Edges() )
                 {
                     bool toContinue = function( edge );
                     if (!toContinue) return;
@@ -612,7 +612,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       It must accept two arguments of types @p Types::edgeId
              *                       and @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( Types::edgeId edgeId, TEdge & edge ) 
+             *      []( Types::edgeId edgeId, TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge.
@@ -627,7 +627,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
             void for_all_edge_tuples ( TGraph & graph
                                      , FUNCTION function )
             {
-                for ( auto & edge : graph.Edges() ) 
+                for ( auto & edge : graph.Edges() )
                 {
                     auto id = edge.Identifier();
                     bool toContinue = function( id, edge );
@@ -651,7 +651,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
+             *      []( TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -682,7 +682,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
+             *      []( TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -698,12 +698,12 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
                                   , TVertexId vertexId
                                   , FUNCTION  function )
             {
-                for ( auto edgeId : graph.InEdgeIdsAt(vertexId) ) 
+                for ( auto edgeId : graph.InEdgeIdsAt(vertexId) )
                 {
                     bool toContinue = function( graph.EdgeAt(edgeId) );
                     if (!toContinue) return;
                 }
-                for ( auto edgeId : graph.OutEdgeIdsAt(vertexId) ) 
+                for ( auto edgeId : graph.OutEdgeIdsAt(vertexId) )
                 {
                     bool toContinue = function( graph.EdgeAt(edgeId) );
                     if (!toContinue) return;
@@ -721,7 +721,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
+             *      []( TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -751,7 +751,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge edge ) 
+             *      []( TEdge edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -785,7 +785,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
+             *      []( TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -815,7 +815,7 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::breakable> {
              *                       of @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
+             *      []( TEdge & edge )
              *      {
              *          bool whetherToContinue = true;
              *          // Do something with the edge object.
@@ -871,8 +871,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              *                       @f$\vertex@f$. It must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -899,8 +899,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              *                       @f$\vertex@f$. It must accept one
              *                       argument of type @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -945,8 +945,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              *                       must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -973,8 +973,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              *                       accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -1008,8 +1008,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              *                       must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode
@@ -1036,8 +1036,8 @@ class GraphLoopDifferentiation<GraphType, ExecutionPolicy::parallel> {
              *                       must accept one argument of type
              *                       @p TGraph::TEdge, e.g.,
              * @code{.cpp}
-             *      []( TEdge & edge ) 
-             *      { 
+             *      []( TEdge & edge )
+             *      {
              *          // Do something with the edge object.
              *      }
              * @endcode

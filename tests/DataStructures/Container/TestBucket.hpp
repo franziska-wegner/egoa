@@ -100,7 +100,7 @@ using TestBucketWithComparatorMaximizeWithMultipleIntegerDeathTest = TestBucketW
 template<typename TElement>
 void ParallelIteratorCheck   ( std::vector<TElement>                 const & numberVector
                              , std::vector<Types::count>             const & numberOfElements
-                             , std::vector< std::vector<TElement> >  const & elementsLoopedOver ) 
+                             , std::vector< std::vector<TElement> >  const & elementsLoopedOver )
 {
     Types::count sum = 0;
     for ( Types::count number : numberOfElements ) {
@@ -123,9 +123,9 @@ void ParallelIteratorCheck   ( std::vector<TElement>                 const & num
               , std::accumulate ( numberVector.begin()
                                 , numberVector.end()
                                 , 0
-                                , [](TElement const & left, TElement const & right) { 
-                                    return left.Value() + right.Value(); 
-                                }) 
+                                , [](TElement const & left, TElement const & right) {
+                                    return left.Value() + right.Value();
+                                })
               );
 }
 

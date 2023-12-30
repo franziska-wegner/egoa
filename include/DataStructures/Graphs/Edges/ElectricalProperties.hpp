@@ -1,4 +1,4 @@
-/* 
+/*
  * ElectricalProperties.hpp
  *
  *  Created on: Sep 16, 2018
@@ -17,7 +17,7 @@
 
 namespace egoa::Edges {
 
-template<Edges::CarrierDifferentiationType CarrierType> 
+template<Edges::CarrierDifferentiationType CarrierType>
 class CarrierDifferentiation;
 
 /**
@@ -32,7 +32,7 @@ class ElectricalProperties {
         /**@name Constructors and Destructor */
         ///@{
 #pragma mark CONSTRUCTORS_AND_DESTRUCTORS
-        
+
             ElectricalProperties()
             :   name_("Branch 0")
               , status_(true)
@@ -50,7 +50,7 @@ class ElectricalProperties {
               , angleShift_(0.0)
               , tapRatioCosThetaShift_(0.0)
               , tapRatioSinThetaShift_(0.0)
-              // 
+              //
               , capitalCost_(0.0)
               , length_(0.0)
               , numberOfParallelLines_(0)
@@ -70,11 +70,11 @@ class ElectricalProperties {
 
         /**
          * @brief Swapping the members of two ElectricalProperties
-         * 
+         *
          * @param lhs Left ElectricalProperties
          * @param rhs Right ElectricalProperties
          */
-        friend void swap ( ElectricalProperties & lhs, ElectricalProperties & rhs ) 
+        friend void swap ( ElectricalProperties & lhs, ElectricalProperties & rhs )
         { // Necessary for the copy and swap idiom
             using std::swap; // enable ADL
             swap( lhs.name_,                    rhs.name_ );
@@ -116,9 +116,9 @@ class ElectricalProperties {
              * @return     @p true if the edges are the same, @p false otherwise.
              */
             friend bool operator== ( ElectricalProperties const & lhs
-                                   , ElectricalProperties const & rhs) 
+                                   , ElectricalProperties const & rhs)
             {
-                return ( lhs.Name()                             == rhs.Name()       ) 
+                return ( lhs.Name()                             == rhs.Name()       )
                     && ( lhs.Status()                           == rhs.Status()     )
                     && ( lhs.Type()                             == rhs.Type()       )
                     && ( lhs.Resistance()                       == rhs.Resistance() )
@@ -127,7 +127,7 @@ class ElectricalProperties {
                     && ( lhs.susceptance_                       == rhs.susceptance_ )
                     && ( lhs.Weight()                           == rhs.Weight() )
                     && ( lhs.Charge()                           == rhs.Charge() )
-                    && ( lhs.ThermalLimit()                     == rhs.ThermalLimit()  ) 
+                    && ( lhs.ThermalLimit()                     == rhs.ThermalLimit()  )
                     && ( lhs.ThermalLimitB()                    == rhs.ThermalLimitB() )
                     && ( lhs.ThermalLimitC()                    == rhs.ThermalLimitC() )
                     && ( lhs.TapRatio()                         == rhs.TapRatio()      )
@@ -154,11 +154,11 @@ class ElectricalProperties {
              * @return     @p false if the edges are the same, @p true otherwise.
              */
             friend bool operator!=( ElectricalProperties const & lhs
-                                  , ElectricalProperties const & rhs) 
+                                  , ElectricalProperties const & rhs)
             {
                 return !(lhs == rhs);
             }
-        ///@}        
+        ///@}
 
         /**@name Getter and setter */
         ///@{
@@ -212,12 +212,12 @@ class ElectricalProperties {
 
             inline Types::real       TapRatioSinThetaShift() const { return tapRatioSinThetaShift_; }
             inline Types::real     & TapRatioSinThetaShift()       { return tapRatioSinThetaShift_; }
-            
+
             // used to be Bound type
             inline TBound            ThetaBound()            const { return thetaBound_; }
             inline TBound          & ThetaBound()                  { return thetaBound_; }
         ///@}
-            
+
             // PyPsa
             inline Types::real       CapitalCost()           const { return capitalCost_; }
             inline Types::real     & CapitalCost()                 { return capitalCost_; }
@@ -242,8 +242,8 @@ class ElectricalProperties {
 
             inline Types::real       TerrainFactor()                  const { return terrainFactor_; }
             inline Types::real     & TerrainFactor()                        { return terrainFactor_; }
-            
-            
+
+
         /**@name Output */
         ///@{
 #pragma mark OUTPUT_METHODS
@@ -254,16 +254,16 @@ class ElectricalProperties {
              *
              * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static void HeaderLong ( std::ostream & outputStream ) 
+            static void HeaderLong ( std::ostream & outputStream )
             {
-                outputStream  
+                outputStream
                     << std::setw(15)    << "Name"
                     << std::setw(6)     << "Source"
                     << std::setw(6)     << "Target"
                     << std::setw(10)    << "Resistance"
                     << std::setw(10)    << "Reactance"
-                    << std::setw(10)    << "Susceptance" 
-                    << std::setw(10)    << "ThermalLineLimitA" 
+                    << std::setw(10)    << "Susceptance"
+                    << std::setw(10)    << "ThermalLineLimitA"
                     << std::setw(10)    << "ThermalLineLimitB"
                     << std::setw(10)    << "ThermalLineLimitC"
                     << std::setw(10)    << "Ratio"
@@ -280,15 +280,15 @@ class ElectricalProperties {
              *
              * @param      outputStream  The stream to write data to, e.g., std::cout.
              */
-            static inline void Header ( std::ostream & outputStream) 
+            static inline void Header ( std::ostream & outputStream)
             {
-                outputStream  
+                outputStream
                     << std::setw(15)    << "name"
                     << std::setw(6)     << "fbus"
                     << std::setw(6)     << "tbus"
                     << std::setw(10)    << "r"
                     << std::setw(10)    << "x"
-                    << std::setw(10)    << "b" 
+                    << std::setw(10)    << "b"
                     << std::setw(10)    << "rateA"
                     << std::setw(10)    << "rateB"
                     << std::setw(10)    << "rateC"
@@ -312,9 +312,9 @@ class ElectricalProperties {
             inline void Line ( std::ostream & outputStream
                              , Types::name    sourceName
                              , Types::name    targetName
-                             , Types::real    baseMva = 1 ) const 
+                             , Types::real    baseMva = 1 ) const
             {
-                outputStream  
+                outputStream
                     << std::setprecision(2)
                     << std::fixed
                     << std::setw(15)    << Name()
@@ -343,7 +343,7 @@ class ElectricalProperties {
              * @return     The output stream.
              */
             friend std::ostream & operator<< ( std::ostream               & outputStream
-                                             , ElectricalProperties const & rhs ) 
+                                             , ElectricalProperties const & rhs )
             {
                 outputStream  << std::setprecision(2)
                     << std::fixed
@@ -358,7 +358,7 @@ class ElectricalProperties {
                     << std::setw(30) << "\tcharge: "            << std::setw(10) << rhs.Charge()         << std::setw(10) << ", "                         << std::endl
                     << std::setw(30) << "\ttap ratio: "         << std::setw(10) << rhs.TapRatio()       << std::setw(10) << " (tau),"                    << std::endl
                     << std::setw(30) << "\tangle shift: "       << std::setw(10) << rhs.AngleShift()     << std::setw(10) << " theta shift/final angle,"  << std::endl;
-                return outputStream;                    
+                return outputStream;
             }
         ///@}
 
@@ -374,20 +374,20 @@ class ElectricalProperties {
         TBound          thetaBound_;            /**< in rad, minimum/maximum angle difference, theta(source) - theta(target) =
                                                              delta theta; Thermal limit bound */
 
-        /**@name Branch impedance @f$ Z = R + j X @f$ in p.u. 
-         * @note A line with impedance 0 can be removed unless it is a jumper line. 
+        /**@name Branch impedance @f$ Z = R + j X @f$ in p.u.
+         * @note A line with impedance 0 can be removed unless it is a jumper line.
          */
         //@{
             Types::real resistance_;            /**< in p.u., resistance r */
             Types::real reactance_;             /**< in p.u., reactance  x */
         ///@}
         Types::real     conductance_;           /**< in p.u., conductance g, not included in IEEE data */
-        Types::real     susceptance_;           /**< in p.u., susceptance b, not included in IEEE data */ 
-        Types::real     charge_;                /**< in p.u., total line charging susceptance (b) 
+        Types::real     susceptance_;           /**< in p.u., susceptance b, not included in IEEE data */
+        Types::real     charge_;                /**< in p.u., total line charging susceptance (b)
                                                               0 unless the transmission line has been combined
                                                               with a transformer then add a line charging */
 
-        /**@name Line MVA ratings 
+        /**@name Line MVA ratings
          * @brief Three MVA ratings with Rate A being the lowest one.
          */
         ///@{
@@ -399,14 +399,14 @@ class ElectricalProperties {
         /**@name Transformer */
         //@{
             Types::real tapRatio_;              /**< in -, tap ratio representing final ratio, transformer off nominal turns
-                                                     ratio, i non-zero (taps at source and impedance at target meaning 
-                                                     @f$ r = x = b = 0 @f$, @f$ tap = |V(source)|/|V(target)|) @f$, tap = 0 
+                                                     ratio, i non-zero (taps at source and impedance at target meaning
+                                                     @f$ r = x = b = 0 @f$, @f$ tap = |V(source)|/|V(target)|) @f$, tap = 0
                                                      indicates transmission line rather than transformer, i.e., tap = 1 */
             Types::real angleShift_;            /**< in rad, transformer phase shift angle, known as theta shift (angle shift)
                                                      representing final angle, if it is positive it represents a delay. */
             Types::real tapRatioCosThetaShift_; /**< Tap ratio . cos(theta shift) */
             Types::real tapRatioSinThetaShift_; /**< Tap ratio . sin(theta shift) */
-        ///@}        
+        ///@}
 
         // PyPsa
         Types::real     capitalCost_;           /**< in Dollar, capital cost */
@@ -424,7 +424,7 @@ class ElectricalProperties {
 
 };
 
-template<> 
+template<>
 class CarrierDifferentiation<Edges::CarrierDifferentiationType::AC> {
     typedef ElectricalProperties TEdge;
     public:
@@ -438,7 +438,7 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::AC> {
          * @return     The AC conductance g(u, v)
          */
         static inline Types::real Conductance ( TEdge const & edge ) {
-            Types::real squareImpedanceMagnitude = ( pow( edge.Resistance(), 2 ) + pow( edge.Reactance(), 2 ) ); 
+            Types::real squareImpedanceMagnitude = ( pow( edge.Resistance(), 2 ) + pow( edge.Reactance(), 2 ) );
             if ( squareImpedanceMagnitude != 0 )
                 return ( edge.Resistance() / squareImpedanceMagnitude );
             else {
@@ -451,20 +451,20 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::AC> {
          * @brief      Susceptance for the AC network
          * @details    This represents the "standard" susceptance calculated
          *     by @f$x / (r^2 + x^2)@f$.
-         *     
-         *     For more details see 
-         *      Zimmerman, R. D., & Murillo-s, C. E. (2011). 
-         *      Matpower 4.1 User’s Manual. 
-         *      Power Systems Engineering Research Center (Pserc). 
+         *
+         *     For more details see
+         *      Zimmerman, R. D., & Murillo-s, C. E. (2011).
+         *      Matpower 4.1 User’s Manual.
+         *      Power Systems Engineering Research Center (Pserc).
          *      http://doi.org/http://www.pserc.cornell.edu/matpower/manual.pdf
          *
          * @param      edge  The edge
          *
          * @return     The AC susceptance b(u, v)
          */
-        static inline Types::real Susceptance ( TEdge const & edge ) 
+        static inline Types::real Susceptance ( TEdge const & edge )
         {
-            Types::real squareImpedanceMagnitude = ( pow( edge.Resistance(), 2 ) + pow( edge.Reactance(), 2 ) ); 
+            Types::real squareImpedanceMagnitude = ( pow( edge.Resistance(), 2 ) + pow( edge.Reactance(), 2 ) );
             if ( squareImpedanceMagnitude != 0 ) {
                 return ( -edge.Reactance() / squareImpedanceMagnitude );
             } else {
@@ -480,7 +480,7 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::AC> {
  *     AC carrier. Dependent on the carrier the computation for the
  *     susceptance and conductance changes.
  */
-template<> 
+template<>
 class CarrierDifferentiation<Edges::CarrierDifferentiationType::DC> {
     typedef ElectricalProperties TEdge;
     public:
@@ -494,7 +494,7 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::DC> {
          *
          * @return     Conductance g(u, v) of the DC approximation.
          */
-        static inline Types::real Conductance ( TEdge const & edge ) 
+        static inline Types::real Conductance ( TEdge const & edge )
         {
             return 0.0;
         }
@@ -504,11 +504,11 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::DC> {
          * @details    For the DC-Approximation r = 0. Thus, the term @f$x /(r^2
          *     + x^2)@f$ becomes @f$1 / x@f$. Note that this is often overseen
          *       in other tools.
-         * 
-         *     For more details see 
-         *      Zimmerman, R. D., & Murillo-s, C. E. (2011).  
-         *      Matpower 4.1 User’s Manual. 
-         *      Power Systems Engineering Research Center (Pserc). 
+         *
+         *     For more details see
+         *      Zimmerman, R. D., & Murillo-s, C. E. (2011).
+         *      Matpower 4.1 User’s Manual.
+         *      Power Systems Engineering Research Center (Pserc).
          *      http://doi.org/http://www.pserc.cornell.edu/matpower/manual.pdf
          *
          * @param      edge  The edge.
@@ -530,7 +530,7 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::DC> {
  * @details    Detailed information of the susceptance b and conductance g can
  *     be extracted from the data itself.
  */
-template<> 
+template<>
 class CarrierDifferentiation<Edges::CarrierDifferentiationType::unknown> {
     typedef ElectricalProperties TEdge;
     public:
@@ -540,7 +540,7 @@ class CarrierDifferentiation<Edges::CarrierDifferentiationType::unknown> {
 
         static inline Types::real Susceptance ( TEdge const & edge ) {
             return edge.susceptance_;
-        }    
+        }
 };
 
 } // namespace egoa::Edge

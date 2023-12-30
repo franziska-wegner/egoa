@@ -1,13 +1,13 @@
 # CMakeLists.txt
-# 
+#
 #   Created on: 30.01.2019
 #       Author: Franziska Wegner
-#       
+#
 # Main cmake configuration file.
-# 
+#
 
-cmake_minimum_required ( VERSION 3.13.1 ) 
-# Required for CMAKE_MSVC_RUNTIME_LIBRARY 
+cmake_minimum_required ( VERSION 3.13.1 )
+# Required for CMAKE_MSVC_RUNTIME_LIBRARY
 # https://cmake.org/cmake/help/latest/variable/CMAKE_MSVC_RUNTIME_LIBRARY.html#variable:CMAKE_MSVC_RUNTIME_LIBRARY
 cmake_policy(SET CMP0091 NEW)
 
@@ -85,7 +85,7 @@ set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
 
 ####################################################################
 # Find external libraries ##########################################
-#################################################################### 
+####################################################################
 
 # Initial Configuration
 include ( SetEnvironmentVariables )
@@ -131,6 +131,9 @@ if ( EGOA_ENABLE_BOOST )
     include ( Boost )
 endif ( EGOA_ENABLE_BOOST )
 
+# Search for clang-tidy
+find_package ( ClangTidy )
+
 # Google tests
 if ( EGOA_ENABLE_TESTS )
     include ( CTest )
@@ -144,12 +147,12 @@ if ( EGOA_ENABLE_TESTS )
     #     find_package ( GoogleTestFramework )
     # endif ()
 
-    # Add test coverage 
+    # Add test coverage
     # -coverage includes -fprofile-arcs -ftest-coverage while compiling and
     # -lgcov while linking -coverage
-    # 
+    #
     # brew install lcov || gcovr (https://gcovr.com/en/stable/)
-    # 
+    #
     # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EGOA_COVERAGE_COMPILE_FLAGS}")
     # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EGOA_COVERAGE_LINK_FLAGS}")
 endif(EGOA_ENABLE_TESTS)
@@ -173,7 +176,7 @@ elseif ( COIN_FOUND )
     include_directories(SYSTEM ${COIN_INCLUDE_DIRS} ${GUROBI_INCLUDE_DIRS} ${CPLEX_INCLUDE_DIRS})
     include_directories(${PROJECT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
     link_directories(${COIN_LIBRARY_DIR})
-else()  
+else()
     message( STATUS "Neither OGDF nor COIN include directory and library are added to the project.")
     include_directories(SYSTEM ${GUROBI_INCLUDE_DIRS} ${CPLEX_INCLUDE_DIRS})
     include_directories(${PROJECT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
@@ -181,9 +184,9 @@ endif()
 
 ####################################################################
 # Add files, libraries and sources #################################
-#################################################################### 
+####################################################################
 file ( GLOB_RECURSE HEADERS ${PROJECT_INCLUDE_DIR} include/*.hpp )
-file ( GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp ) 
+file ( GLOB_RECURSE SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp )
 file ( GLOB_RECURSE SOURCES_REMOVE ${PROJECT_SOURCE_DIR}/src/Runnables/*.cpp )
 list ( FILTER SOURCES EXCLUDE REGEX ".*Runnables.*" )
 
@@ -198,7 +201,7 @@ add_subdirectory ( src )
 
 ####################################################################
 # Testing ##########################################################
-#################################################################### 
+####################################################################
 if ( EGOA_ENABLE_TESTS )
     add_subdirectory ( tests )
     enable_testing()
@@ -226,6 +229,13 @@ if ( Qt6_FOUND )
     message ( STATUS "${MY_SPACE}qt6:\t\t\t\tadd libraries of QT6" )
     target_compile_definitions ( EGOA PUBLIC QT6_AVAILABLE )
 endif ( Qt6_FOUND )
+
+# clang-tidy found
+if ( CLANG_TIDY_PROG )
+    message ( STATUS "${MY_SPACE}clang-tidy:\t\t\t\tis enabled" )
+    # set CXX_CLANG_TIDY property after defining the target
+    # set_target_properties(EGOA PROPERTIES CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY}")
+endif ( CLANG_TIDY_PROG )
 
 # OpenMP found
 if ( OPENMP_FOUND )
@@ -295,7 +305,7 @@ endif ( )
 # Define a macro to get number of configured threads
 target_compile_definitions ( EGOA PUBLIC EGOA_USER_DEFINED_THREAD_LIMIT=$ENV{OMP_NUM_THREADS} )
 
-# 
+#
 target_compile_definitions ( EGOA PUBLIC EGOA_ENABLE_STATISTIC_DTP )
 target_compile_definitions ( EGOA PUBLIC EGOA_ENABLE_STATISTIC_BETWEENNESS_CENTRALITY )
 

@@ -101,7 +101,7 @@ enum class GeneratorType {
     ror           = 13,     /**< Run of river power */
     ccgt          = 14,     /**< Combined Cycle Gas Turbines (CCGT) */
     ocgt          = 15,     /**< Open Cycle Gas Turbines (OCGT) */
-    biomass       = 16,     /**< Biomass */ 
+    biomass       = 16,     /**< Biomass */
     battery       = 17,     /**< Battery */
     // ...
     unknown       = 99      /**< unknown */
@@ -379,20 +379,20 @@ enum class PowerSign {
 #pragma mark OUTPUT_OPERATOR
 
     inline std::ostream & operator<< ( std::ostream          & os
-                                     , BasicVertexType const & rhs ) 
+                                     , BasicVertexType const & rhs )
     {
-        if      ( rhs == BasicVertexType::sink         ){ os << "sink";         } 
-        else if ( rhs == BasicVertexType::source       ){ os << "source";       } 
-        else if ( rhs == BasicVertexType::intermediate ){ os << "intermediate"; } 
+        if      ( rhs == BasicVertexType::sink         ){ os << "sink";         }
+        else if ( rhs == BasicVertexType::source       ){ os << "source";       }
+        else if ( rhs == BasicVertexType::intermediate ){ os << "intermediate"; }
         else                                            { os << "unknown";      }
         return os;
     }
 
     inline std::ostream & operator<< ( std::ostream     & os
-                                     , CdfBusType const & rhs ) 
+                                     , CdfBusType const & rhs )
     {
         if      ( rhs == CdfBusType::load    ){ os <<       "load bus (Type 0)"; } /** unregulated bus also called load bus */
-        else if ( rhs == CdfBusType::mvar    ){ os << "Mvar generator (Type 1)"; } /** bus holding Mvar generation within voltage limits */        
+        else if ( rhs == CdfBusType::mvar    ){ os << "Mvar generator (Type 1)"; } /** bus holding Mvar generation within voltage limits */
         else if ( rhs == CdfBusType::voltage ){ os <<    "voltage bus (Type 2)"; } /** bus holding bus voltage within Mvar limits, i.e., regulated generator bus */
         else if ( rhs == CdfBusType::slack   ){ os <<      "slack bus (Type 3)"; } /** bus holding bus voltage and angle, i.e., swing/reference/slack bus */
         else                                  { os <<                 "unknown"; }
@@ -400,7 +400,7 @@ enum class PowerSign {
     }
 
     inline std::ostream & operator<< ( std::ostream      & os
-                                     , IeeeBusType const & rhs ) 
+                                     , IeeeBusType const & rhs )
     {
         if      ( rhs == IeeeBusType::load      ){ os <<    "load bus (Type 1)"; } /** bus with load only */
         else if ( rhs == IeeeBusType::generator ){ os <<   "generator (Type 2)"; } /**@todo Generator, but definition is missing */
@@ -410,48 +410,48 @@ enum class PowerSign {
     }
 
     inline std::ostream & operator<< ( std::ostream    & os
-                                     , BoundType const & rhs ) 
+                                     , BoundType const & rhs )
     {
-        if      ( rhs == BoundType::unbounded       ){ os << "unbounded";   } 
-        else if ( rhs == BoundType::bounded         ){ os << "bounded";     } 
-        else if ( rhs == BoundType::exact           ){ os << "exact";       } 
-        else if ( rhs == BoundType::pureunbounded   ){ os << "pure_unbounded";} 
+        if      ( rhs == BoundType::unbounded       ){ os << "unbounded";   }
+        else if ( rhs == BoundType::bounded         ){ os << "bounded";     }
+        else if ( rhs == BoundType::exact           ){ os << "exact";       }
+        else if ( rhs == BoundType::pureunbounded   ){ os << "pure_unbounded";}
         else                                         { os << "unknown";     }
         return os;
     }
 
     inline std::ostream & operator<< ( std::ostream    & os
-                                     , BusStatus const & rhs ) 
+                                     , BusStatus const & rhs )
     {
-        if      ( rhs == Vertices::BusStatus::inactive ){ os << "inactive"; } 
-        else if ( rhs == Vertices::BusStatus::active   ){ os << "active";   } 
+        if      ( rhs == Vertices::BusStatus::inactive ){ os << "inactive"; }
+        else if ( rhs == Vertices::BusStatus::active   ){ os << "active";   }
         else                                            { os << "unknown";  }
         return os;
     }
 
     inline std::ostream & operator<< ( std::ostream        & os
-                                     , EnergyCarrier const & rhs ) 
+                                     , EnergyCarrier const & rhs )
     {
-        if      ( rhs == Vertices::EnergyCarrier::AC   ){ os << "AC";       } 
-        else if ( rhs == Vertices::EnergyCarrier::DC   ){ os << "DC";       } 
-        else if ( rhs == Vertices::EnergyCarrier::heat ){ os << "heat";     } 
-        else if ( rhs == Vertices::EnergyCarrier::gas  ){ os << "gas";      } 
+        if      ( rhs == Vertices::EnergyCarrier::AC   ){ os << "AC";       }
+        else if ( rhs == Vertices::EnergyCarrier::DC   ){ os << "DC";       }
+        else if ( rhs == Vertices::EnergyCarrier::heat ){ os << "heat";     }
+        else if ( rhs == Vertices::EnergyCarrier::gas  ){ os << "gas";      }
         else                                            { os << "unknown";  }
         return os;
     }
 
     inline std::ostream & operator<< ( std::ostream      & os
-                                     , ControlType const & rhs ) 
+                                     , ControlType const & rhs )
     {
-        if      ( rhs == Vertices::ControlType::PQ    ){ os << "PQ";       } 
-        else if ( rhs == Vertices::ControlType::PV    ){ os << "PV";       } 
-        else if ( rhs == Vertices::ControlType::slack ){ os << "slack";    } 
+        if      ( rhs == Vertices::ControlType::PQ    ){ os << "PQ";       }
+        else if ( rhs == Vertices::ControlType::PV    ){ os << "PV";       }
+        else if ( rhs == Vertices::ControlType::slack ){ os << "slack";    }
         else                                           { os << "unknown";  }
         return os;
     }
 
     inline std::ostream & operator<< ( std::ostream        & os
-                                     , GeneratorType const & rhs ) 
+                                     , GeneratorType const & rhs )
     {
         if ( GeneratorType::coal == rhs ) {
             os << "coal" ;
@@ -486,7 +486,7 @@ enum class PowerSign {
     }
 ///@}
 
-/**@name Enum conversion */ 
+/**@name Enum conversion */
 ///@{
 #pragma mark ENUM_CONVERSION
 
@@ -500,12 +500,12 @@ enum class PowerSign {
     }
 
     template< typename E , typename T>
-    constexpr 
-    inline 
-    typename 
-    std::enable_if< std::is_enum<E>::value && std::is_integral<T>::value, 
-                    E 
-                  >::type 
+    constexpr
+    inline
+    typename
+    std::enable_if< std::is_enum<E>::value && std::is_integral<T>::value,
+                    E
+                  >::type
     to_enum( T value ) noexcept {
         return static_cast<E>( value );
     }
