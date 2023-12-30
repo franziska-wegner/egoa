@@ -210,7 +210,7 @@ class TestPowerGridAcm2018MtsfFigure4a : public TestPowerGrid {
             }
         }
 
-        Types::string   const   TestCaseAcm2018MtsfFigure4a_ = "../../framework/tests/Data/PowerGrids/ieee_2018_acm_eEnergy_MTSF_Figure4a.m";
+        Types::string   const   TestCaseAcm2018MtsfFigure4a_ = "../../tests/Data/PowerGrids/ieee_2018_acm_eEnergy_MTSF_Figure4a.m";
 };
 
 /**
@@ -259,7 +259,7 @@ class TestPowerGridAcm2018MtsfFigure4b : public TestPowerGrid {
             }
         }
 
-        Types::string   const   TestCaseAcm2018MtsfFigure4b_ = "../../framework/tests/Data/PowerGrids/ieee_2018_acm_eEnergy_MTSF_Figure4b.m";
+        Types::string   const   TestCaseAcm2018MtsfFigure4b_ = "../../tests/Data/PowerGrids/ieee_2018_acm_eEnergy_MTSF_Figure4b.m";
 };
 
 /**
@@ -309,7 +309,7 @@ class TestPowerGridPyPsaExample : public TestPowerGrid {
             }
         }
 
-        Types::string const TestCaseSmallExample_ = "../../framework/tests/Data/PowerGrids/PyPsaExample";
+        Types::string const TestCaseSmallExample_ = "../../tests/Data/PowerGrids/PyPsaExample";
 
     protected:
         TGraph         graph_;
