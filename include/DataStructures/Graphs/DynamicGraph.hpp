@@ -4,7 +4,7 @@
  *  Created on: Nov 04, 2018
  *      Author: Franziska Wegner, Matthias Wolf
  */
- 
+
 #ifndef EGOA__DATA_STRUCTURES__GRAPHS__DYNAMIC_GRAPH_HPP
 #define EGOA__DATA_STRUCTURES__GRAPHS__DYNAMIC_GRAPH_HPP
 
@@ -106,7 +106,7 @@ public:
          *             If the graph is destroyed, all views are invalid and calling
          *             member functions on them has undefined behavior.
          */
-        inline TVerticesView Vertices() 
+        inline TVerticesView Vertices()
         {
             return TVerticesView ( & vertices_
                                  , & vertexExists_
@@ -123,7 +123,7 @@ public:
          *             If the graph is destroyed, all views are invalid and calling
          *             member functions on them has undefined behavior.
          */
-        inline TConstVerticesView Vertices() const 
+        inline TConstVerticesView Vertices() const
         {
             return TConstVerticesView ( & vertices_
                                       , & vertexExists_
@@ -138,7 +138,7 @@ public:
          * @return     @p true if a vertex with identifier @p id exists,
          *             @p false otherwise.
          */
-        inline bool  VertexExists ( Types::vertexId id ) const 
+        inline bool  VertexExists ( Types::vertexId id ) const
         {
             return id < vertexExists_.size() && vertexExists_[id];
         }
@@ -152,7 +152,7 @@ public:
          *
          * @return     The vertex object.
          */
-        inline TVertex & VertexAt ( Types::vertexId id ) 
+        inline TVertex & VertexAt ( Types::vertexId id )
         {
             USAGE_ASSERT ( VertexExists(id) );
             return vertices_[id];
@@ -167,7 +167,7 @@ public:
          *
          * @return     The vertex object.
          */
-        inline TVertex const & VertexAt ( Types::vertexId id ) const 
+        inline TVertex const & VertexAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
             return vertices_[id];
@@ -187,7 +187,7 @@ public:
          *
          * @return     The vertex identifier.
          */
-        inline Types::vertexId VertexId ( TVertex const & vertex ) const 
+        inline Types::vertexId VertexId ( TVertex const & vertex ) const
         {
             return vertex.Identifier();
         }
@@ -201,7 +201,7 @@ public:
          *
          * @return     The identifier of the vertex.
          */
-        inline Types::vertexId AddVertex ( TVertexProperties & properties ) 
+        inline Types::vertexId AddVertex ( TVertexProperties & properties )
         {
             return AddVertex ( TVertexProperties(properties) );
         }
@@ -213,7 +213,7 @@ public:
          *
          * @return     The identifier of the vertex.
          */
-        inline Types::vertexId AddVertex ( TVertexProperties const & properties ) 
+        inline Types::vertexId AddVertex ( TVertexProperties const & properties )
         {
             return AddVertex ( TVertexProperties(properties) );
         }
@@ -225,7 +225,7 @@ public:
          *
          * @return     The identifier of the vertex.
          */
-        inline Types::vertexId AddVertex ( TVertexProperties && properties ) 
+        inline Types::vertexId AddVertex ( TVertexProperties && properties )
         {
             // TODO: Find a free place in the vector if it exists.
             auto id = vertices_.size();
@@ -250,7 +250,7 @@ public:
          *
          * @param      id The identifier of the vertex to remove.
          */
-        inline void RemoveVertexAt ( Types::vertexId id ) 
+        inline void RemoveVertexAt ( Types::vertexId id )
         {
             USAGE_ASSERT ( VertexExists(id) );
 
@@ -275,13 +275,13 @@ public:
          */
         template<typename FUNCTION>
         inline auto MapVertices ( FUNCTION function ) const
-                -> std::vector<decltype(function(std::declval<Types::vertexId>(), std::declval<TVertex>()))> 
+                -> std::vector<decltype(function(std::declval<Types::vertexId>(), std::declval<TVertex>()))>
         {
             using TResult = decltype(function(std::declval<Types::vertexId>(), std::declval<TVertex>()));
             std::vector<TResult> result;
 
             for_all_vertex_tuples<ExecutionPolicy::sequential>(
-                [&]( Types::vertexId id, TVertex const & vertex ) 
+                [&]( Types::vertexId id, TVertex const & vertex )
                 {
                     result.push_back ( function(id, vertex) );
                 }
@@ -302,7 +302,7 @@ public:
          *
          * @return     The vertex identifiers of all neighbors.
          */
-        inline std::vector<Types::vertexId> NeighborsOf ( Types::vertexId id ) const 
+        inline std::vector<Types::vertexId> NeighborsOf ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
 
@@ -325,7 +325,7 @@ public:
          *     neighbors are appended.
          */
         inline void NeighborsOf ( Types::vertexId                id
-                                , std::vector<Types::vertexId> & vertexIds ) const 
+                                , std::vector<Types::vertexId> & vertexIds ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
 
@@ -356,7 +356,7 @@ public:
          *
          * @return     The number of incoming edges.
          */
-        inline Types::count InDegreeAt ( Types::vertexId id ) const 
+        inline Types::count InDegreeAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
             return InEdgeIdsAt(id).size();
@@ -371,7 +371,7 @@ public:
          *
          * @return     The number of outgoing edges.
          */
-        inline Types::count OutDegreeAt ( Types::vertexId id ) const 
+        inline Types::count OutDegreeAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
             return OutEdgeIdsAt(id).size();
@@ -386,7 +386,7 @@ public:
          *
          * @return     The number of incident edges.
          */
-        inline Types::count DegreeAt ( Types::vertexId id ) const 
+        inline Types::count DegreeAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
             return InDegreeAt(id) + OutDegreeAt(id);
@@ -401,7 +401,7 @@ public:
          *
          * @return     The identifiers of the incoming edges at vertex @p id.
          */
-        inline std::vector<Types::edgeId> const & InEdgeIdsAt ( Types::vertexId id ) const 
+        inline std::vector<Types::edgeId> const & InEdgeIdsAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
             return inEdgeIds_[id];
@@ -416,7 +416,7 @@ public:
          *
          * @return     The identifiers of the outgoing edges at vertex @p id.
          */
-        inline std::vector<Types::edgeId> const & OutEdgeIdsAt ( Types::vertexId id ) const 
+        inline std::vector<Types::edgeId> const & OutEdgeIdsAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
             return outEdgeIds_[id];
@@ -432,7 +432,7 @@ public:
          *
          * @return     The edge identifiers at a vertex @p id.
          */
-        inline std::vector<Types::edgeId> EdgeIdsAt ( Types::vertexId id ) const 
+        inline std::vector<Types::edgeId> EdgeIdsAt ( Types::vertexId id ) const
         {
             USAGE_ASSERT ( VertexExists(id) );
 
@@ -478,7 +478,7 @@ public:
          *             If the graph is destroyed, all views are invalid and calling
          *             member functions on them has undefined behavior.
          */
-        inline TEdgesView Edges() 
+        inline TEdgesView Edges()
         {
             return TEdgesView ( & edges_
                               , & edgeExists_
@@ -495,7 +495,7 @@ public:
          *             If the graph is destroyed, all views are invalid and calling
          *             member functions on them has undefined behavior.
          */
-        inline TConstEdgesView Edges() const 
+        inline TConstEdgesView Edges() const
         {
             return TConstEdgesView ( & edges_
                                    , & edgeExists_
@@ -511,7 +511,7 @@ public:
          * @return     @p true if an edge with identifier @p id exists,
          *             @p false otherwise.
          */
-        inline bool EdgeExists ( Types::edgeId id ) const 
+        inline bool EdgeExists ( Types::edgeId id ) const
         {
             return id < edgeExists_.size() && edgeExists_[id];
         }
@@ -525,7 +525,7 @@ public:
          *
          * @return     The edge object with identifier @p id.
          */
-        inline TEdge & EdgeAt ( Types::edgeId id ) 
+        inline TEdge & EdgeAt ( Types::edgeId id )
         {
             USAGE_ASSERT ( EdgeExists(id) );
             return edges_[id];
@@ -540,7 +540,7 @@ public:
          *
          * @return     The edge object with identifier @p id.
          */
-        inline TEdge const & EdgeAt ( Types::edgeId id ) const 
+        inline TEdge const & EdgeAt ( Types::edgeId id ) const
         {
             USAGE_ASSERT ( EdgeExists(id) );
             return edges_[id];
@@ -562,20 +562,20 @@ public:
          *     not exist.
          */
         inline Types::edgeId EdgeId ( Types::vertexId source
-                                    , Types::vertexId target ) const 
+                                    , Types::vertexId target ) const
         {
             USAGE_ASSERT ( VertexExists(source) );
             USAGE_ASSERT ( VertexExists(target) );
 
-            if ( OutDegreeAt(source) <= InDegreeAt(target) ) 
+            if ( OutDegreeAt(source) <= InDegreeAt(target) )
             {
-                for ( Types::edgeId id : outEdgeIds_[source] ) 
+                for ( Types::edgeId id : outEdgeIds_[source] )
                 {
                     if ( EdgeAt(id).Target() == target )
                         return id;
                 }
             } else {
-                for (Types::edgeId id : inEdgeIds_[target]) 
+                for (Types::edgeId id : inEdgeIds_[target])
                 {
                     if ( EdgeAt(id).Source() == source )
                         return id;
@@ -600,7 +600,7 @@ public:
          * @return     The edge @f$(\vertexa, \vertexb)@f$.
          */
         inline TEdge & Edge ( Types::vertexId source
-                            , Types::vertexId target ) 
+                            , Types::vertexId target )
         {
             USAGE_ASSERT ( VertexExists(source) );
             USAGE_ASSERT ( VertexExists(target) );
@@ -625,7 +625,7 @@ public:
          * @return     The edge @f$(\vertexa, \vertexb)@f$.
          */
         inline const TEdge & Edge ( Types::vertexId source
-                                  , Types::vertexId target ) const 
+                                  , Types::vertexId target ) const
         {
             USAGE_ASSERT ( VertexExists(source) );
             USAGE_ASSERT ( VertexExists(target) );
@@ -648,7 +648,7 @@ public:
          */
         inline Types::edgeId AddEdge ( Types::vertexId   source
                                      , Types::vertexId   target
-                                     , TEdgeProperties & properties ) 
+                                     , TEdgeProperties & properties )
         {
             USAGE_ASSERT( VertexExists( source ) );
             USAGE_ASSERT( VertexExists( target ) );
@@ -719,7 +719,7 @@ public:
          *
          * @param      id  The identifier of the edge.
          */
-        inline void RemoveEdgeAt ( Types::edgeId id ) 
+        inline void RemoveEdgeAt ( Types::edgeId id )
         {
             USAGE_ASSERT( EdgeExists(id) );
             // remove edge
@@ -744,13 +744,13 @@ public:
          *
          * @param      id  The identifier of the vertex.
          */
-        inline void RemoveAllIncidentEdgesAt ( Types::vertexId id ) 
+        inline void RemoveAllIncidentEdgesAt ( Types::vertexId id )
         {
             USAGE_ASSERT ( VertexExists(id) );
 
             using std::begin, std::end;
 
-            for (Types::edgeId edgeId : inEdgeIds_[id]) 
+            for (Types::edgeId edgeId : inEdgeIds_[id])
             {
                 ESSENTIAL_ASSERT( EdgeExists(edgeId) );
 
@@ -763,7 +763,7 @@ public:
                 edgeExists_[edgeId] = false;
             }
 
-            for (Types::edgeId edgeId : outEdgeIds_[id]) 
+            for (Types::edgeId edgeId : outEdgeIds_[id])
             {
                 ESSENTIAL_ASSERT( EdgeExists(edgeId) );
 
@@ -784,7 +784,7 @@ public:
 
         /**
          * @brief      Applies @p function to all edges and collects the result in a vector.
-         *             
+         *
          * @param[in]  function  The function that is applied to all edges.
          *                       @code
          *                       TResult function(Types::edgeId, TEdge)
@@ -797,13 +797,13 @@ public:
          */
         template<typename FUNCTION>
         inline auto MapEdges(FUNCTION function) const
-                -> std::vector<decltype(function(std::declval<Types::edgeId>(), std::declval<TEdge>()))> 
+                -> std::vector<decltype(function(std::declval<Types::edgeId>(), std::declval<TEdge>()))>
         {
             using TResult = decltype(function(std::declval<Types::edgeId>(), std::declval<TEdge>()));
             std::vector<TResult> result;
 
             for_all_edge_tuples<ExecutionPolicy::sequential>(
-                [&]( Types::edgeId id, TEdge const & edge ) 
+                [&]( Types::edgeId id, TEdge const & edge )
                 {
                     result.push_back(function(id, edge));
                 }
@@ -839,9 +839,9 @@ public:
          * @brief Update vertices
          * @details Shrink vertex array
          */
-        inline void UpdateVertices() 
+        inline void UpdateVertices()
         {
-            if (NumberOfVertices() == vertices_.size()) 
+            if (NumberOfVertices() == vertices_.size())
             {
                 // There are no edges marked as deleted
                 return;
@@ -851,11 +851,11 @@ public:
 
             for ( Types::vertexId id = 0
                 ; id < vertices_.size()
-                ; ++id) 
+                ; ++id)
             {
                 if (vertexExists_[id]) continue;
 
-                while ( !vertexExists_.back() ) 
+                while ( !vertexExists_.back() )
                 {
                     vertices_.pop_back();
                     vertexExists_.pop_back();
@@ -863,7 +863,7 @@ public:
                     outEdgeIds_.pop_back();
                 }
 
-                if ( id == vertices_.size() ) 
+                if ( id == vertices_.size() )
                 {
                     // All vertices behind the one at position id were marked as
                     // deleted and have been removed. There is nothing left to do.
@@ -881,17 +881,17 @@ public:
                 swap(vertices_[id], vertices_.back());
                 vertices_.pop_back();
                 vertices_[id].identifier_ = id;
-                
+
                 swap(inEdgeIds_[id], inEdgeIds_.back());
                 inEdgeIds_.pop_back();
-                for ( auto & edge : inEdgeIds_[id] ) 
+                for ( auto & edge : inEdgeIds_[id] )
                 {
                     EdgeAt(edge).target_ = id;
                 }
 
                 swap(outEdgeIds_[id], outEdgeIds_.back());
                 outEdgeIds_.pop_back();
-                for ( auto & edge : outEdgeIds_[id] ) 
+                for ( auto & edge : outEdgeIds_[id] )
                 {
                     EdgeAt(edge).source_ = id;
                 }
@@ -915,9 +915,9 @@ public:
          *                              edges and edges that were marked as
          *                              deleted.
          */
-        inline void UpdateEdges() 
+        inline void UpdateEdges()
         {
-            if ( NumberOfEdges() == edges_.size() ) 
+            if ( NumberOfEdges() == edges_.size() )
             {
                 // There are no edges marked as deleted.
                 return;
@@ -928,17 +928,17 @@ public:
             // delete all entries where the edges do not exist
             for ( Types::edgeId id = 0
                 ; id < edges_.size()
-                ; ++id) 
+                ; ++id)
             {
                 if (edgeExists_[id]) continue;
 
-                while (!edgeExists_.back()) 
+                while (!edgeExists_.back())
                 {
                     edgeExists_.pop_back();
                     edges_.pop_back();
                 }
 
-                if (id == edges_.size()) 
+                if (id == edges_.size())
                 {
                     // All edges behind the one at id were marked as deleted as well
                     // and have been removed. We have nothing to do anymore.
@@ -962,16 +962,16 @@ public:
 
             // Rebuild the vectors containing the incident edges since the IDs may have changed.
             // TODO: This could be implemented more efficiently by only updating affected vertices.
-            for ( auto & edges : inEdgeIds_ ) 
+            for ( auto & edges : inEdgeIds_ )
             {
                 edges.clear();
             }
-            for ( auto & edges : outEdgeIds_ ) 
+            for ( auto & edges : outEdgeIds_ )
             {
                 edges.clear();
             }
 
-            std::for_each ( Edges().begin(), Edges().end(), 
+            std::for_each ( Edges().begin(), Edges().end(),
                 [this]( TEdge & edge )
                 {
                     Types::vertexId source = edge.Source();
@@ -1001,17 +1001,17 @@ public:
          *
          * @return     The minimum degree.
          */
-        inline Types::count MinDegree ( Types::vertexId & id ) const 
+        inline Types::count MinDegree ( Types::vertexId & id ) const
         {
-            if ( NumberOfVertices() == 0 ) 
+            if ( NumberOfVertices() == 0 )
             {
                 id = Const::NONE;
                 return 0;
             }
             TConstVerticesView vertices = Vertices();
-            
+
             auto result = std::min_element ( vertices.begin(), vertices.end(),
-                [&]( TVertex const & left, TVertex const & right ) 
+                [&]( TVertex const & left, TVertex const & right )
                 {
                     return DegreeAt( left.Identifier() ) < DegreeAt( right.Identifier() );
                 }
@@ -1028,7 +1028,7 @@ public:
          *
          * @return     The minimum degree.
          */
-        inline Types::count MinDegree() const 
+        inline Types::count MinDegree() const
         {
             Types::vertexId dummy = 0;
             return MinDegree(dummy);
@@ -1047,17 +1047,17 @@ public:
          *
          * @return     The maximum degree.
          */
-        inline Types::count MaxDegree ( Types::vertexId & id ) const 
+        inline Types::count MaxDegree ( Types::vertexId & id ) const
         {
-            if ( NumberOfVertices() == 0 ) 
+            if ( NumberOfVertices() == 0 )
             {
                 id = Const::NONE;
                 return 0;
             }
             TConstVerticesView vertices = Vertices();
-            
+
             auto result = std::max_element ( vertices.begin(), vertices.end(),
-                [&]( TVertex const & left, TVertex const & right ) 
+                [&]( TVertex const & left, TVertex const & right )
                 {
                     return DegreeAt( left.Identifier() ) < DegreeAt( right.Identifier() );
                 }
@@ -1073,7 +1073,7 @@ public:
          *
          * @return     The maximum degree.
          */
-        inline Types::count MaxDegree() const 
+        inline Types::count MaxDegree() const
         {
             Types::vertexId dummy = 0;
             return MaxDegree(dummy);
@@ -1092,8 +1092,8 @@ public:
          *                       vertices. It must accept one argument of type
          *                       @p Types::vertexId e.g.,
          * @code{.cpp}
-         *      []( Types::vertexId vertexId ) 
-         *      { 
+         *      []( Types::vertexId vertexId )
+         *      {
          *          // Do something with the vertex identifier.
          *      }
          * @endcode
@@ -1103,7 +1103,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_vertex_identifiers ( FUNCTION function ) const 
+        void for_all_vertex_identifiers ( FUNCTION function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_vertex_identifiers ( *this, function );
@@ -1116,8 +1116,8 @@ public:
          *                       vertices. It must accept one argument of type
          *                       @p TVertex e.g.,
          * @code{.cpp}
-         *      []( TVertex & vertex ) 
-         *      { 
+         *      []( TVertex & vertex )
+         *      {
          *          // Do something with the vertex object.
          *      }
          * @endcode
@@ -1127,7 +1127,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_vertices ( FUNCTION function ) 
+        void for_all_vertices ( FUNCTION function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_all_vertices ( *this, function );
@@ -1140,8 +1140,8 @@ public:
          *                       vertices. It must accept one argument of type
          *                       @p TVertex e.g.,
          * @code{.cpp}
-         *      []( TVertex const & vertex ) 
-         *      { 
+         *      []( TVertex const & vertex )
+         *      {
          *          // Do something with the vertex object.
          *      }
          * @endcode
@@ -1151,7 +1151,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_vertices( FUNCTION function ) const 
+        void for_all_vertices( FUNCTION function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_vertices ( *this, function );
@@ -1166,8 +1166,8 @@ public:
          *                       types @p Types::vertexId and @p TVertex,
          *                       e.g.,
          * @code{.cpp}
-         *      []( Types::vertexId id, TVertex const & vertex ) 
-         *      { 
+         *      []( Types::vertexId id, TVertex const & vertex )
+         *      {
          *          // Do something with the vertex identifier and object.
          *      }
          * @endcode
@@ -1177,7 +1177,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_vertex_tuples ( FUNCTION function ) 
+        void for_all_vertex_tuples ( FUNCTION function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_all_vertex_tuples ( *this, function );
@@ -1192,8 +1192,8 @@ public:
          *                       types @p Types::vertexId and @p TVertex,
          *                       e.g.,
          * @code{.cpp}
-         *      []( Types::vertexId id, TVertex const & vertex ) 
-         *      { 
+         *      []( Types::vertexId id, TVertex const & vertex )
+         *      {
          *          // Do something with the vertex identifier and object.
          *      }
          * @endcode
@@ -1203,7 +1203,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_vertex_tuples ( FUNCTION function ) const 
+        void for_all_vertex_tuples ( FUNCTION function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_vertex_tuples ( *this, function );
@@ -1221,8 +1221,8 @@ public:
          *                       edges. It must accept one argument of type @p
          *                       Types::edgeId, e.g.,
          * @code{.cpp}
-         *      []( Types::edgeId edgeId ) 
-         *      { 
+         *      []( Types::edgeId edgeId )
+         *      {
          *          // Do something with the edge identifier.
          *      }
          * @endcode
@@ -1232,7 +1232,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_edge_identifiers ( FUNCTION function ) const 
+        void for_all_edge_identifiers ( FUNCTION function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_edge_identifiers ( *this, function );
@@ -1245,8 +1245,8 @@ public:
          *                       edges. It must accept one argument of type @p
          *                       TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1256,7 +1256,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_edges ( FUNCTION function ) 
+        void for_all_edges ( FUNCTION function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_all_edges ( *this, function );
@@ -1269,8 +1269,8 @@ public:
          *                       edges. It must accept one argument of type @p
          *                       TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1280,7 +1280,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_edges ( FUNCTION function ) const 
+        void for_all_edges ( FUNCTION function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_edges ( *this, function );
@@ -1294,8 +1294,8 @@ public:
          *                       edges. It must accept two arguments of types
          *                       @p Types::edgeId and @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( Types::edgeId edgeId, TEdge & edge ) 
-         *      { 
+         *      []( Types::edgeId edgeId, TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1305,7 +1305,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_edge_tuples ( FUNCTION function )  
+        void for_all_edge_tuples ( FUNCTION function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_all_edge_tuples ( *this, function );
@@ -1319,8 +1319,8 @@ public:
          *                       It must accept two arguments of types @p Types::edgeId
          *                       and @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( Types::edgeId edgeId, TEdge const & edge ) 
-         *      { 
+         *      []( Types::edgeId edgeId, TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1330,7 +1330,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_edge_tuples ( FUNCTION function ) const 
+        void for_all_edge_tuples ( FUNCTION function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_edge_tuples ( *this, function );
@@ -1350,8 +1350,8 @@ public:
          *                       edges at the vertex. It must accept one
          *                       argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1361,7 +1361,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_all_edges_at ( TVertex const & vertex, FUNCTION function ) 
+        void for_all_edges_at ( TVertex const & vertex, FUNCTION function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_all_edges_at ( *this, vertex, function );
@@ -1376,8 +1376,8 @@ public:
          *                       edges at the vertex. It must accept one
          *                       argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1388,7 +1388,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_all_edges_at ( TVertex const & vertex
-                              , FUNCTION        function ) const 
+                              , FUNCTION        function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_all_edges_at ( *this, vertex, function );
@@ -1405,8 +1405,8 @@ public:
          *                       edges at the vertex. It must accept one
          *                       argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1417,7 +1417,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_all_edges_at ( Types::vertexId vertexId
-                              , FUNCTION        function ) 
+                              , FUNCTION        function )
         {
             USAGE_ASSERT( VertexExists(vertexId) );
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
@@ -1435,8 +1435,8 @@ public:
          *                       the vertex. It must accept one argument of type
          *                       @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1447,7 +1447,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_all_edges_at ( Types::vertexId vertexId
-                              , FUNCTION        function ) const 
+                              , FUNCTION        function ) const
         {
             USAGE_ASSERT( VertexExists(vertexId) );
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
@@ -1462,8 +1462,8 @@ public:
          *                       incoming edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1474,7 +1474,7 @@ public:
          */
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
-        void for_in_edges_at( TVertex const & vertex, FUNCTION function ) 
+        void for_in_edges_at( TVertex const & vertex, FUNCTION function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_in_edges_at ( *this, vertex.Identifier(), function );
@@ -1488,8 +1488,8 @@ public:
          *                       incoming edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1501,7 +1501,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_in_edges_at ( TVertex const & vertex
-                             , FUNCTION        function ) const 
+                             , FUNCTION        function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_in_edges_at ( *this, vertex.Identifier(), function );
@@ -1517,8 +1517,8 @@ public:
          *                       incoming edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1530,7 +1530,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_in_edges_at ( Types::vertexId vertexId
-                             , FUNCTION        function ) 
+                             , FUNCTION        function )
         {
             USAGE_ASSERT( VertexExists(vertexId) );
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
@@ -1547,8 +1547,8 @@ public:
          *                       incoming edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1560,7 +1560,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_in_edges_at ( Types::vertexId vertexId
-                             , FUNCTION        function ) const 
+                             , FUNCTION        function ) const
         {
             USAGE_ASSERT( VertexExists(vertexId) );
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
@@ -1575,8 +1575,8 @@ public:
          *                       outgoing edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1588,7 +1588,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_out_edges_at ( TVertex const & vertex
-                              , FUNCTION        function ) 
+                              , FUNCTION        function )
         {
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
                 ::for_out_edges_at ( *this, vertex, function );
@@ -1602,8 +1602,8 @@ public:
          *                       outgoing edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1615,7 +1615,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_out_edges_at ( TVertex const & vertex
-                              , FUNCTION        function ) const 
+                              , FUNCTION        function ) const
         {
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
                 ::for_out_edges_at ( *this, vertex, function );
@@ -1631,8 +1631,8 @@ public:
          *                       outgoing edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge & edge ) 
-         *      { 
+         *      []( TEdge & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1644,7 +1644,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_out_edges_at ( Types::vertexId vertexId
-                              , FUNCTION        function ) 
+                              , FUNCTION        function )
         {
             USAGE_ASSERT ( VertexExists(vertexId) );
             internal::DynamicGraphLoopDifferentiation<TGraph, Policy>
@@ -1661,8 +1661,8 @@ public:
          *                       outgoing edges at the vertex. It must accept
          *                       one argument of type @p TEdge, e.g.,
          * @code{.cpp}
-         *      []( TEdge const & edge ) 
-         *      { 
+         *      []( TEdge const & edge )
+         *      {
          *          // Do something with the edge object.
          *      }
          * @endcode
@@ -1674,7 +1674,7 @@ public:
         template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
         inline
         void for_out_edges_at ( Types::vertexId vertexId
-                              , FUNCTION        function ) const 
+                              , FUNCTION        function ) const
         {
             USAGE_ASSERT( VertexExists(vertexId) );
             internal::DynamicGraphLoopDifferentiation<TGraph const, Policy>
@@ -1693,7 +1693,7 @@ public:
          * @tparam     Const        { description }
          */
         template<typename ElementType, bool Const>
-        class OmittingVectorView 
+        class OmittingVectorView
         {
             using TElement = ElementType;
             /**
@@ -1757,28 +1757,28 @@ public:
               counter_(counter)
             {}
 
-            TIterator begin() const noexcept 
+            TIterator begin() const noexcept
             {
                 return TIterator ( elementVector_->begin()
                                  , elementVector_->end()
                                  , existsVector_->begin());
             }
 
-            TIterator end() const noexcept 
+            TIterator end() const noexcept
             {
                 return TIterator ( elementVector_->end()
                                  , elementVector_->end()
                                  , existsVector_->end() );
             }
 
-            TReverseIterator rbegin() const noexcept 
+            TReverseIterator rbegin() const noexcept
             {
                 return TReverseIterator ( elementVector_->rbegin()
                                         , elementVector_->rend()
                                         , existsVector_->rbegin() );
             }
 
-            TReverseIterator rend() const noexcept 
+            TReverseIterator rend() const noexcept
             {
                 return TReverseIterator ( elementVector_->rend()
                                         , elementVector_->rend()
@@ -1788,7 +1788,7 @@ public:
             bool         empty() const noexcept { return size() == 0; }
             Types::count size()  const noexcept { return *counter_; }
 
-            TReference   operator[] ( Types::index index ) const 
+            TReference   operator[] ( Types::index index ) const
             {
                 USAGE_ASSERT( (*existsVector_)[index] );
                 return (*elementVector_)[index];
@@ -1823,8 +1823,7 @@ public:
         std::vector< std::vector<Types::edgeId> >  inEdgeIds_;              /**< Ids of the incoming edges per vertex */
         std::vector< std::vector<Types::edgeId> >  outEdgeIds_;             /**< Ids of the outgoing edges per vertex */
 };
- 
+
 } // namespace egoa
 
 #endif // EGOA__DATA_STRUCTURES__GRAPHS__DYNAMIC_GRAPH_HPP
- 

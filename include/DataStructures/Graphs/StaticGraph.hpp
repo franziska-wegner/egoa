@@ -4,7 +4,7 @@
  *  Created on: Nov 04, 2018
  *      Author: Franziska Wegner
  */
- 
+
 #ifndef EGOA__DATA_STRUCTURES__GRAPHS__STATIC_GRAPH_HPP
 #define EGOA__DATA_STRUCTURES__GRAPHS__STATIC_GRAPH_HPP
 
@@ -70,13 +70,13 @@ class StaticGraph {
 
         /**@name Constructors and Destructor */
         ///@{
-#pragma mark CONSTRUCTORS_AND_DESTRUCTOR    
-        
+#pragma mark CONSTRUCTORS_AND_DESTRUCTOR
+
             StaticGraph()
             : name_("")
             {}
 
-            explicit StaticGraph ( Types::name name ) 
+            explicit StaticGraph ( Types::name name )
             : name_(std::move(name))
             {}
         ///@}
@@ -102,9 +102,9 @@ class StaticGraph {
              */
             inline Types::count NumberOfVertices() const
             {
-                return vertices_.size();   
+                return vertices_.size();
             }
-            
+
             /**
              * @brief      Number of edges @f$m = |\edges|@f$.
              *
@@ -112,7 +112,7 @@ class StaticGraph {
              */
             inline Types::count NumberOfEdges() const
             {
-                return edges_.size();      
+                return edges_.size();
             }
         ///@}
 
@@ -244,7 +244,7 @@ class StaticGraph {
                 vertices_.emplace_back( id, std::move(properties) );
                 inEdgeIds_.emplace_back( std::vector<Types::edgeId>() );
                 outEdgeIds_.emplace_back( std::vector<Types::edgeId>() );
-                
+
                 ESSENTIAL_ASSERT (   vertices_.size() == NumberOfVertices() );
                 ESSENTIAL_ASSERT (  inEdgeIds_.size() == NumberOfVertices() );
                 ESSENTIAL_ASSERT ( outEdgeIds_.size() == NumberOfVertices() );
@@ -257,7 +257,7 @@ class StaticGraph {
             /**
              * @brief      Applies @p function to all vertices and collects
              *     the result in a vector.
-             *             
+             *
              * @param[in]  function  The function that is applied to all edges.
              * @code{.cpp}
              *      TResult function ( Types::vertexId, TVertex )
@@ -270,13 +270,13 @@ class StaticGraph {
              */
             template<typename FUNCTION>
             inline auto MapVertices ( FUNCTION function ) const
-                    -> std::vector<decltype(function(std::declval<Types::vertexId>(), std::declval<TVertex>()))> 
+                    -> std::vector<decltype(function(std::declval<Types::vertexId>(), std::declval<TVertex>()))>
             {
                 using TResult = decltype(function(std::declval<Types::vertexId>(), std::declval<TVertex>()));
                 std::vector<TResult> result;
 
-                for_all_vertex_tuples<ExecutionPolicy::sequential>( 
-                    [&]( Types::vertexId id, const TVertex & vertex ) 
+                for_all_vertex_tuples<ExecutionPolicy::sequential>(
+                    [&]( Types::vertexId id, const TVertex & vertex )
                     {
                         result.push_back ( function(id, vertex) );
                     }
@@ -327,19 +327,19 @@ class StaticGraph {
 
                 std::vector<bool> vertexVisited(NumberOfVertices(), false);
 
-                for (Types::edgeId edgeId : OutEdgeIdsAt(id)) 
+                for (Types::edgeId edgeId : OutEdgeIdsAt(id))
                 {
                     Types::vertexId otherVertex = EdgeAt(edgeId).Target();
-                    if (!vertexVisited[otherVertex]) 
+                    if (!vertexVisited[otherVertex])
                     {
                         vertexIds.push_back(otherVertex);
                         vertexVisited[otherVertex] = true;
                     }
                 }
-                for (Types::edgeId edgeId : InEdgeIdsAt(id)) 
+                for (Types::edgeId edgeId : InEdgeIdsAt(id))
                 {
                     Types::vertexId otherVertex = EdgeAt(edgeId).Source();
-                    if (!vertexVisited[otherVertex]) 
+                    if (!vertexVisited[otherVertex])
                     {
                         vertexIds.push_back(otherVertex);
                         vertexVisited[otherVertex] = true;
@@ -572,15 +572,15 @@ class StaticGraph {
                 USAGE_ASSERT ( VertexExists(source) );
                 USAGE_ASSERT ( VertexExists(target) );
 
-                if ( OutDegreeAt(source) <= InDegreeAt(target) ) 
+                if ( OutDegreeAt(source) <= InDegreeAt(target) )
                 {
-                    for ( Types::edgeId id : outEdgeIds_[source] ) 
+                    for ( Types::edgeId id : outEdgeIds_[source] )
                     {
                         if ( EdgeAt(id).Target() == target )
                             return id;
                     }
                 } else {
-                    for (Types::edgeId id : inEdgeIds_[target]) 
+                    for (Types::edgeId id : inEdgeIds_[target])
                     {
                         if ( EdgeAt(id).Source() == source )
                             return id;
@@ -693,7 +693,7 @@ class StaticGraph {
             /**
              * @brief      Applies @p function to all edges and collects the
              *     result in a vector.
-             *             
+             *
              * @param[in]  function  The function that is applied to all edges.
              * @code{.cpp}
              *      TResult function(Types::edgeId, TEdge)
@@ -711,8 +711,8 @@ class StaticGraph {
                 using TResult = decltype(function(std::declval<Types::edgeId>(), std::declval<TEdge>()));
                 std::vector<TResult> result;
 
-                for_all_edge_tuples<ExecutionPolicy::sequential>( 
-                    [&]( Types::edgeId id, TEdge const & edge ) 
+                for_all_edge_tuples<ExecutionPolicy::sequential>(
+                    [&]( Types::edgeId id, TEdge const & edge )
                     {
                         result.push_back(function(id, edge));
                     }
@@ -757,14 +757,14 @@ class StaticGraph {
              */
             inline Types::count MinDegree ( Types::vertexId & id ) const
             {
-                if (NumberOfVertices() == 0) 
+                if (NumberOfVertices() == 0)
                 {
                     id = Const::NONE;
                     return 0;
                 }
                 auto result = std::min_element( vertices_.begin()
                                               , vertices_.end()
-                    , [this]( TVertex const & left, TVertex const & right) 
+                    , [this]( TVertex const & left, TVertex const & right)
                     {
                         return DegreeAt(left.Identifier()) < DegreeAt(right.Identifier());
                     }
@@ -802,14 +802,14 @@ class StaticGraph {
              */
             inline Types::count MaxDegree ( Types::vertexId & id ) const
             {
-                if (NumberOfVertices() == 0) 
+                if (NumberOfVertices() == 0)
                 {
                     id = Const::NONE;
                     return 0;
                 }
                 auto result = std::max_element ( vertices_.begin()
                                                , vertices_.end()
-                    , [this](const TVertex & left, TVertex const & right) 
+                    , [this](const TVertex & left, TVertex const & right)
                     {
                         return DegreeAt(left.Identifier()) < DegreeAt(right.Identifier());
                     }
@@ -846,8 +846,8 @@ class StaticGraph {
                 TVertexProperties::Header(outputStream);
                 for_all_vertices<ExecutionPolicy::sequential> (
                     [&]( TVertex const & u )
-                    { 
-                        u.Properties().Line( outputStream ); 
+                    {
+                        u.Properties().Line( outputStream );
                     }
                 );
             }
@@ -862,10 +862,10 @@ class StaticGraph {
                 TEdgeProperties::Header(outputStream);
                 for_all_edges<ExecutionPolicy::sequential>(
                     [&]( TEdge const & e )
-                    { 
+                    {
                         e.Properties().Line( outputStream
                                            , VertexAt(e.Source()).Properties().Name()
-                                           , VertexAt(e.Target()).Properties().Name() ); 
+                                           , VertexAt(e.Target()).Properties().Name() );
                     }
                 );
             }
@@ -908,8 +908,8 @@ class StaticGraph {
              *                       of type @p Types::vertexId, e.g.,
              * @code{.cpp}
              *      for_all_vertex_identifiers (
-             *          []( Types::vertexId vertexId ) 
-             *          { 
+             *          []( Types::vertexId vertexId )
+             *          {
              *              // Do something with the vertex identifier.
              *          }
              *      );
@@ -919,13 +919,13 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_vertex_identifiers ( FUNCTION function ) const
             {
                 internal::StaticGraphLoopDifferentiation<TGraph const, Policy>
                     ::for_all_vertex_identifiers ( *this, function );
             }
-        
+
             /**
              * @brief      The @p for loop over all vertex objects in the graph.
              *
@@ -934,8 +934,8 @@ class StaticGraph {
              *                       of type @p TVertex, e.g.,
              * @code{.cpp}
              *      for_all_vertices (
-             *          []( TVertex & vertex ) 
-             *          { 
+             *          []( TVertex & vertex )
+             *          {
              *              // Do something with the vertex object.
              *          }
              *      );
@@ -945,7 +945,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_vertices ( FUNCTION function )
             {
                 internal::StaticGraphLoopDifferentiation<TGraph, Policy>
@@ -960,8 +960,8 @@ class StaticGraph {
              *                       of type @p TVertex, e.g.,
              * @code{.cpp}
              *      for_all_vertices (
-             *          []( TVertex const & vertex ) 
-             *          { 
+             *          []( TVertex const & vertex )
+             *          {
              *              // Do something with the vertex object.
              *          }
              *      );
@@ -971,7 +971,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_vertices ( FUNCTION function ) const
             {
                 internal::StaticGraphLoopDifferentiation<TGraph const, Policy>
@@ -988,9 +988,9 @@ class StaticGraph {
              *                       @p TVertex, e.g.,
              * @code{.cpp}
              *      for_all_vertex_tuples (
-             *          []( Types::vertexId id, TVertex const & vertex ) 
-             *          { 
-             *              // Do something with the vertex identifier and object 
+             *          []( Types::vertexId id, TVertex const & vertex )
+             *          {
+             *              // Do something with the vertex identifier and object
              *          }
              *      );
              * @endcode
@@ -999,7 +999,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_vertex_tuples ( FUNCTION function )
             {
                 internal::StaticGraphLoopDifferentiation<TGraph, Policy>
@@ -1015,8 +1015,8 @@ class StaticGraph {
              *                       and @p TVertex, e.g.,
              * @code{.cpp}
              *      for_all_vertex_tuples (
-             *          []( Types::vertexId id, TVertex const & vertex ) 
-             *          { 
+             *          []( Types::vertexId id, TVertex const & vertex )
+             *          {
              *              // Do something with the vertex identifier and object.
              *          }
              *      );
@@ -1026,8 +1026,8 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
-            void for_all_vertex_tuples ( FUNCTION function ) const 
+            inline
+            void for_all_vertex_tuples ( FUNCTION function ) const
             {
                 internal::StaticGraphLoopDifferentiation<TGraph const, Policy>
                     ::for_all_vertex_tuples ( *this, function );
@@ -1046,8 +1046,8 @@ class StaticGraph {
              *                       type @p Types::edgeId, e.g.,
              * @code{.cpp}
              *      for_all_edge_identifiers (
-             *          []( Types::edgeId edgeId ) 
-             *          { 
+             *          []( Types::edgeId edgeId )
+             *          {
              *              // Do something with the edge identifier.
              *          }
              *      );
@@ -1072,8 +1072,8 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_all_edges (
-             *          []( TEdge & edge ) 
-             *          { 
+             *          []( TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1083,7 +1083,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edges ( FUNCTION function )
             {
                 internal::StaticGraphLoopDifferentiation<TGraph, Policy>
@@ -1098,8 +1098,8 @@ class StaticGraph {
              *                       e.g.,
              * @code{.cpp}
              *      for_all_edges (
-             *          []( TEdge const & edge ) 
-             *          { 
+             *          []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1109,7 +1109,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edges ( FUNCTION function ) const
             {
                 internal::StaticGraphLoopDifferentiation<TGraph const, Policy>
@@ -1126,8 +1126,8 @@ class StaticGraph {
              *                       e.g.,
              * @code{.cpp}
              *      for_all_edge_tuples (
-             *          []( Types::edgeId edgeId, TEdge & edge ) 
-             *          { 
+             *          []( Types::edgeId edgeId, TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1137,7 +1137,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edge_tuples ( FUNCTION function )
             {
                 internal::StaticGraphLoopDifferentiation<TGraph, Policy>
@@ -1153,9 +1153,9 @@ class StaticGraph {
              *                       of types @p Types::edgeId and @p TEdge,
              *                       e.g.,
              * @code{.cpp}
-             *      for_all_edge_tuples ( 
-             *          []( Types::edgeId edgeId, TEdge const & edge ) 
-             *          { 
+             *      for_all_edge_tuples (
+             *          []( Types::edgeId edgeId, TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1165,7 +1165,7 @@ class StaticGraph {
              * @tparam     FUNCTION The type of the function object.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edge_tuples ( FUNCTION function ) const
             {
                 internal::StaticGraphLoopDifferentiation<TGraph const, Policy>
@@ -1186,8 +1186,8 @@ class StaticGraph {
              *                       @p TEdge, e.g.,
              * @code{.cpp}
              *      for_all_edges_at<ExecutionPolicy::sequential>( vertex
-             *          , []( TEdge & edge ) 
-             *          { 
+             *          , []( TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1198,7 +1198,7 @@ class StaticGraph {
              *     all incident edges at @p vertexId.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edges_at ( TVertex const & vertex
                                   , FUNCTION        function )
             {
@@ -1216,8 +1216,8 @@ class StaticGraph {
              *                       @p TEdge, e.g.,
              * @code{.cpp}
              *      for_all_edges_at<ExecutionPolicy::sequential>( vertex
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1228,7 +1228,7 @@ class StaticGraph {
              *     all incident edges at @p vertexId.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edges_at ( TVertex const & vertex
                                   , FUNCTION        function ) const
             {
@@ -1248,8 +1248,8 @@ class StaticGraph {
              *                       @p TEdge, e.g.,
              * @code{.cpp}
              *      for_all_edges_at ( vertexId
-             *          , []( TEdge & edge ) 
-             *          { 
+             *          , []( TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1260,7 +1260,7 @@ class StaticGraph {
              *     all incident edges at @p vertexId.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edges_at ( Types::vertexId const vertexId
                                   , FUNCTION              function )
             {
@@ -1279,11 +1279,11 @@ class StaticGraph {
              * @param[in]  function  The function object that is called for all edges at
              *                       the vertex. It must accept one argument of type
              *                       @p TEdge, e.g.,
-             *                       
+             *
              * @code{.cpp}
              *      for_all_edges_at ( vertexId
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1294,7 +1294,7 @@ class StaticGraph {
              *     all incident edges at @p vertexId.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_all_edges_at ( Types::vertexId const vertexId
                                   , FUNCTION              function ) const
             {
@@ -1312,8 +1312,8 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_all_edges_at ( vertex
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1341,11 +1341,11 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_in_edges_at ( vertex
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
-             *      );    
+             *      );
              * @endcode
              *
              * @tparam     Policy    The execution policy.
@@ -1372,8 +1372,8 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_in_edges_at ( vertexId
-             *          , []( TEdge & edge ) 
-             *          { 
+             *          , []( TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1403,8 +1403,8 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_in_edges_at ( vertexId
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1432,8 +1432,8 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_out_edges_at ( vertex
-             *          , []( TEdge & edge ) 
-             *          { 
+             *          , []( TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1460,8 +1460,8 @@ class StaticGraph {
              *                       type @p TEdge, e.g.,
              * @code{.cpp}
              *      for_out_edges_at ( vertex
-             *          , []( TEdge const & edge ) 
-             *          { 
+             *          , []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1491,8 +1491,8 @@ class StaticGraph {
              *                       e.g.,
              * @code{.cpp}
              *      for_out_edges_at ( vertexId
-             *          , []( TEdge & edge ) 
-             *          { 
+             *          , []( TEdge & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1524,8 +1524,8 @@ class StaticGraph {
              *                       e.g.,
              * @code{.cpp}
              *      for_out_edges_at ( vertexId
-             *          []( TEdge const & edge ) 
-             *          { 
+             *          []( TEdge const & edge )
+             *          {
              *              // Do something with the edge object.
              *          }
              *      );
@@ -1536,7 +1536,7 @@ class StaticGraph {
              *     all outgoing edges of @p vertex.
              */
             template<ExecutionPolicy Policy = ExecutionPolicy::sequential, typename FUNCTION>
-            inline 
+            inline
             void for_out_edges_at( Types::vertexId vertexId
                                  , FUNCTION        function ) const
             {
@@ -1561,4 +1561,3 @@ class StaticGraph {
 } // namespace egoa
 
 #endif // EGOA__DATA_STRUCTURES__GRAPHS__STATIC_GRAPH_HPP
- 

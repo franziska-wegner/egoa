@@ -1,10 +1,10 @@
 # Boost.cmake
-# 
+#
 #   Created on: Nov 04, 2019
 #       Author: Franziska Wegner
-#       
+#
 # Find the Boost library.
-# 
+#
 
 ####################################################################
 # Reset variables ##################################################
@@ -21,7 +21,7 @@ set( Boost_DIRECTORIES "/usr/local/Cellar/boost/1.71.0/" CACHE STRING
 set( Boost_LIBRARY_DIRS "" )
 set( Boost_INCLUDE_DIRS "" )
 set( BOOST_ROOT "" CACHE PATH "Boost library path" )
-# https://stackoverflow.com/questions/58081084/target-boostlibrary-already-has-an-imported-location-link-errors 
+# https://stackoverflow.com/questions/58081084/target-boostlibrary-already-has-an-imported-location-link-errors
 # https://stackoverflow.com/questions/3016448/how-can-i-get-cmake-to-find-my-alternative-boost-installation/51904185
 set( Boost_NO_SYSTEM_PATHS on CACHE BOOL "Do not search system for Boost" )
 set( Boost_NO_BOOST_CMAKE on CACHE INTERNAL "" )

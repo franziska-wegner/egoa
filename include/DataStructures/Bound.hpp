@@ -38,7 +38,7 @@ class Bound {
              * @param[in]  maximum  The maximum representing the upper bound.
              */
             Bound ( TBound const & minimum
-                  , TBound const & maximum ) 
+                  , TBound const & maximum )
             : minimum_(minimum)
             , maximum_(maximum)
             {
@@ -48,7 +48,7 @@ class Bound {
                 USAGE_ASSERT ( minimum_ <= maximum_ );
             }
         ///@}
-        
+
         ///@name Getter and Setter
         ///@{
 #pragma mark GETTER_AND_SETTER
@@ -58,23 +58,23 @@ class Bound {
              *
              * @return     The minimum of the bound, i.e., lower bound.
              */
-            inline TBound   Minimum () const 
-            { 
-                return minimum_; 
+            inline TBound   Minimum () const
+            {
+                return minimum_;
             }
 
             /**
              * @brief      Setter of the minimum of the bound.
-             * 
+             *
              * @code{.cpp}
              *      someBound.Minimum() = 9;
              * @endcode
              *
              * @return     The minimum of the bound, i.e., lower bound.
              */
-            inline TBound & Minimum ()       
-            {  
-                return minimum_; 
+            inline TBound & Minimum ()
+            {
+                return minimum_;
             }
 
             /**
@@ -82,23 +82,23 @@ class Bound {
              *
              * @return     The maximum of the bound, i.e., upper bound.
              */
-            inline TBound   Maximum() const 
-            { 
-                return maximum_; 
+            inline TBound   Maximum() const
+            {
+                return maximum_;
             }
 
             /**
              * @brief      Setter of the maximum of the bound.
-             * 
+             *
              * @code{.cpp}
              *      someBound.Maximum() = 99;
              * @endcode
              *
              * @return     The maximum of the bound, i.e., upper bound.
              */
-            inline TBound & Maximum()       
-            { 
-                return maximum_; 
+            inline TBound & Maximum()
+            {
+                return maximum_;
             }
         ///@}
 
@@ -113,7 +113,7 @@ class Bound {
              * @param[in]  maximum  The maximum of the bound, i.e., upper bound.
              */
             inline void Range ( TBound const & minimum
-                              , TBound const & maximum ) 
+                              , TBound const & maximum )
             {
 #ifdef PGT_EXCEPTION_HANDLING
                 BoundMismatch::template Check<TBound>(minimum, maximum);
@@ -134,7 +134,7 @@ class Bound {
              * @brief      Comparison operator.
              *
              * @param[in]  rhs   The right hand side Bound.
-             * 
+             *
              * @code{.cpp}
              *      if ( Bound<int>(0,0) == Bound<int>(1,0) ) {  }
              * @endcode

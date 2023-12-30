@@ -1,4 +1,4 @@
-/* 
+/*
  * Edge.hpp
  *
  *  Created on: May 3, 2019
@@ -22,13 +22,13 @@ public:
       target_(Const::INFTY),
       properties_() {
     }
-    
+
     inline Types::vertexId   Source()                const { return source_; }
     inline Types::vertexId & Source()                      { return source_; }
 
     inline Types::vertexId   Target()                const { return target_; }
     inline Types::vertexId & Target()                      { return target_; }
-    
+
     inline TProperties       & Properties()       { return properties_; }
     inline TProperties const & Properties() const { return properties_; }
 

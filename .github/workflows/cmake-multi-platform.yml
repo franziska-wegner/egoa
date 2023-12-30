@@ -292,7 +292,7 @@ jobs:
           message(FATAL_ERROR "Building documentation failed")
         endif()
 
-    # See https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository 
+    # See https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository
     # for more information on the parameters.
     - name: Publish Documentation to Github Pages
       uses: peaceiris/actions-gh-pages@v3

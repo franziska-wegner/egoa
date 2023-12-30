@@ -25,7 +25,7 @@ TEST_F ( TestGeneratorBasedBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter
 
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), 1 );
 
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         EXPECT_EQ ( row.SourceId, 0 );
         TestCollectionValues ( row, "DTP", "", 4, 1, 4, 5, 10, 7, 3, 4 );
@@ -85,7 +85,7 @@ TEST_F ( TestGeneratorBasedBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter
 
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), 1 );
 
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         EXPECT_EQ ( row.SourceId, 0 );
         TestCollectionValues ( row, "DTP", "", 4, 1, 4, 5, 10, 7, 3, 4 );
@@ -146,7 +146,7 @@ TEST_F ( TestGeneratorBasedBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter
 
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), 1 );
 
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         EXPECT_EQ ( row.SourceId, 0 );
         TestCollectionValues ( row, "DTP", "", 4, 1, 4, 5, 18, 9, 6, 7 );
@@ -206,7 +206,7 @@ TEST_F ( TestGeneratorBasedBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter
 
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), 1 );
 
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         EXPECT_EQ ( row.SourceId, 0 );
         TestCollectionValues ( row, "DTP", "", 4, 1, 4, 5, 12, 7, 4, 5 );

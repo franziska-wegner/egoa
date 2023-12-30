@@ -39,7 +39,7 @@ class GeoJsonWriter final {
     // Edges
     using TEdge                 = typename TGraph::TEdge;
     using TEdgeProperties       = typename TGraph::TEdgeProperties;
-    
+
     // Bounds
     using TBound                = Bound<>;
 
@@ -94,7 +94,7 @@ private:
         ///@name Auxiliary
         ///@{
 #pragma mark AUXILIARY
-    
+
             /**
              * @brief      Add indent to the output stream.
              *
@@ -104,7 +104,7 @@ private:
             inline void Indent ( std::ostream & os
                                , Types::count   depth = 1 )
             {
-                if ( Readable() ) 
+                if ( Readable() )
                 {
                     Types::string indent( static_cast<std::string::size_type>( depth * indent_ ), ' ' );
                     os << indent;
@@ -118,7 +118,7 @@ private:
              */
             inline void NewLine ( std::ostream & os)
             {
-                if ( Readable() ) 
+                if ( Readable() )
                 {
                     os << std::endl;
                 }
@@ -131,9 +131,9 @@ private:
              *     newlines, @false compact representation without any indents
              *     and newlines.
              */
-            inline bool Readable () 
-            { 
-                return readable_; 
+            inline bool Readable ()
+            {
+                return readable_;
             }
         ///@}
 
@@ -158,7 +158,7 @@ private:
              * @param      os      The operating system
              * @param[in]  indent  The indent
              */
-            inline void WriteFooter ( std::ostream & os 
+            inline void WriteFooter ( std::ostream & os
                                     , Types::count   indent = 0 )
             {
                 Indent( os, indent );
@@ -174,7 +174,7 @@ private:
              */
             inline void WriteFeatureBegin ( std::ostream & os
                                           , Types::count   indent = 1 )
-            {   
+            {
                 Indent( os, indent );
                 os  << "{";
                 NewLine(os);
@@ -191,10 +191,10 @@ private:
              * @param[in]  last    The last.
              * @param[in]  indent  The indent.
              */
-            inline void WriteFeatureEnd ( std::ostream & os 
+            inline void WriteFeatureEnd ( std::ostream & os
                                         , bool           last   = false
                                         , Types::count   indent = 1 )
-            {   
+            {
                 char comma = last?' ':',';
                 Indent( os, indent );
                 os  << "}"
@@ -208,11 +208,11 @@ private:
              * @param      os      The output stream.
              * @param[in]  indent  The indent.
              */
-            inline void WritePropertiesBegin ( std::ostream & os 
+            inline void WritePropertiesBegin ( std::ostream & os
                                              , Types::count   indent = 2 )
             {
                 Indent( os, indent );
-                os  << "\"properties\":"   
+                os  << "\"properties\":"
                     << "{";
                 NewLine(os);
             }
@@ -325,7 +325,7 @@ private:
             template<typename T>
             inline void PropertyTemplate ( std::ostream & os
                                          , std::string    lhs
-                                         , T      const & rhs 
+                                         , T      const & rhs
                                          , bool           last   = false
                                          , Types::count   indent = 2)
             {
@@ -338,7 +338,7 @@ private:
                     << rhs
                     << "\""
                     << comma;
-                NewLine(os);   
+                NewLine(os);
             }
 
             /**
@@ -348,7 +348,7 @@ private:
              * @param[in]  last    The last.
              * @param[in]  indent  The indent.
              */
-            inline void WritePropertiesEnd  ( std::ostream & os 
+            inline void WritePropertiesEnd  ( std::ostream & os
                                             , bool           last   = false
                                             , Types::count   indent = 2 )
             {
@@ -389,8 +389,8 @@ private:
              * @param[in]  last    The last.
              * @param[in]  indent  The indent.
              */
-            inline void WriteFeaturesEnd ( std::ostream & os 
-                                         , bool           last   = false 
+            inline void WriteFeaturesEnd ( std::ostream & os
+                                         , bool           last   = false
                                          , Types::count   indent = 0 )
             {
                 char comma = last?' ':',';
@@ -406,9 +406,9 @@ private:
              * @param      os      The output stream.
              * @param[in]  indent  The indent.
              */
-            inline void WriteGeometry ( std::ostream & os 
+            inline void WriteGeometry ( std::ostream & os
                                       , Types::count   indent = 2 )
-            {   
+            {
                 Indent( os, indent );
                 os  << "\"geometry\": ";
             }
@@ -426,9 +426,9 @@ private:
              * @param[in]  last    The last.
              * @param[in]  indent  The indent.
              */
-            inline void WriteVertices ( std::ostream & os 
-                                      , TGraph const & graph 
-                                      , bool           last   = false 
+            inline void WriteVertices ( std::ostream & os
+                                      , TGraph const & graph
+                                      , bool           last   = false
                                       , Types::count   indent = 1 )
             {
                 graph.for_all_vertices( [this, &os, &last, &indent]( TVertex const & vertex ){
@@ -449,9 +449,9 @@ private:
              * @param[in]  last    The last.
              * @param[in]  indent  The indent.
              */
-            inline void WriteGenerators ( std::ostream   & os 
+            inline void WriteGenerators ( std::ostream   & os
                                         , TNetwork const & network
-                                        , bool           last   = false 
+                                        , bool           last   = false
                                         , Types::count   indent = 1 )
             {
                 // network.for_all_generators( [this, &os, &last, &indent]( TGeneratorProperties const & generatorProperty ){
@@ -473,8 +473,8 @@ private:
              */
             inline void WritePoint  ( std::ostream & os
                                     , Types::real    xCoordinate
-                                    , Types::real    yCoordinate 
-                                    , Types::count   indent      = 2 ) 
+                                    , Types::real    yCoordinate
+                                    , Types::count   indent      = 2 )
             {
                 WriteGeometry ( os, indent );
                 os  << "{";
@@ -485,7 +485,7 @@ private:
                 NewLine(os);
 
                 Indent( os, indent + 1 );
-                os  << "\"coordinates\": "; 
+                os  << "\"coordinates\": ";
                 WritePointCoordinate ( os, xCoordinate, yCoordinate, 0 );
                 NewLine(os);
                 Indent( os, indent );
@@ -502,12 +502,12 @@ private:
              */
             inline void WritePoint ( std::ostream  & os
                                    , TGraph  const & graph
-                                   , Types::vertexId vertexId 
-                                   , Types::count   indent      = 2 ) 
+                                   , Types::vertexId vertexId
+                                   , Types::count   indent      = 2 )
             {
                 WritePoint  ( os
                             , graph.VertexAt(vertexId).X()
-                            , graph.VertexAt(vertexId).Y() 
+                            , graph.VertexAt(vertexId).Y()
                             , indent );
             }
 
@@ -518,13 +518,13 @@ private:
              * @param      vertex  The vertex.
              */
             inline void WritePoint  ( std::ostream  & os
-                                    , TVertex const & vertex 
-                                    , Types::count   indent      = 2 ) 
+                                    , TVertex const & vertex
+                                    , Types::count   indent      = 2 )
             {
                 WritePoint  ( os
                             , vertex.Properties().X()
-                            , vertex.Properties().Y() 
-                            , indent );   
+                            , vertex.Properties().Y()
+                            , indent );
             }
 
             /**
@@ -536,11 +536,11 @@ private:
              */
             inline void WritePointCoordinate ( std::ostream & os
                                              , Types::real    xCoordinate
-                                             , Types::real    yCoordinate 
-                                             , Types::count   indent      = 2 ) 
+                                             , Types::real    yCoordinate
+                                             , Types::count   indent      = 2 )
             {
-                Indent ( os, indent );   
-                os  << "[" 
+                Indent ( os, indent );
+                os  << "["
                     << xCoordinate
                     << ","
                     << yCoordinate
@@ -680,7 +680,7 @@ private:
              * @param      os      The output stream.
              * @param[in]  indent  The indent.
              */
-            inline void WriteLineFooter ( std::ostream & os 
+            inline void WriteLineFooter ( std::ostream & os
                                         , Types::count   indent = 2 )
             {
                 Indent( os, indent + 1 );
@@ -703,13 +703,13 @@ private:
              *
              * @return     @p true if the writing was successful, @p false otherwise.
              */
-            bool write  ( TNetwork    const & network 
+            bool write  ( TNetwork    const & network
                         , std::string const & filename )
             {
                 std::ofstream file;
                 file.open(filename, std::ofstream::trunc);
                 if (!file.is_open()) return false;
-             
+
                 // file is empty
                 file.seekp(0, std::ios::end);
                 return WriteGraph ( file, network.Graph() );
@@ -723,14 +723,14 @@ private:
              *
              * @return     @p true if the writing was successful, @p false otherwise.
              */
-            bool write  ( TNetwork const & network 
+            bool write  ( TNetwork const & network
                         , std::ostream  & outputStream )
             {
                 return WriteGraph ( outputStream, network.Graph() );
             }
         ///@}
-    
-    private:    
+
+    private:
         Types::count const  indent_;
         bool                readable_;
 };

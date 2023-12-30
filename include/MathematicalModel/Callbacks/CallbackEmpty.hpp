@@ -38,7 +38,7 @@ class CallbackEmpty : public GRBCallback {
         }
     private:
         TSolver * solver_;
-};  
+};
 
 } // namespace egoa
 

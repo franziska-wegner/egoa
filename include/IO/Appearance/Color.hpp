@@ -15,15 +15,15 @@ namespace egoa {
 
 /**
  *  @class Color
- *  
+ *
  *  @code{.cpp}
  *      ...
  *      pgt::Color color(255,255,255);
  *      pgt::Color color(0.9,0.5,0.1);
  *      pgt::Color color(pgt::Color::Name::KITred);
  *      std::cout << "Color: " << to_string(color.Green()) << std::endl;
- *      std::cout << "Color: " << color.Hexadecimal() << std::endl;     
- *      
+ *      std::cout << "Color: " << color.Hexadecimal() << std::endl;
+ *
  *      std::cout << std::fixed << std::setprecision(3);
  *      std::cout   << color.red()   << ", "
  *                  << color.green() << ", "
@@ -31,7 +31,7 @@ namespace egoa {
  *                  << std::endl;
  *      std::cout << "Color: " << color.Hexadecimal() << std::endl;
  *      ...
- *      
+ *
  *  @endcode
  */
 class Color {
@@ -132,7 +132,7 @@ class Color {
             , KITseablue50          /**< RGB <- ( 152, 167, 197 ), rgb <- ( 0.598, 0.656, 0.774 ) */
             , KITseablue30          /**< RGB <- ( 193, 202, 220 ), rgb <- ( 0.758, 0.794, 0.864 ) */
             , KITseablue15          /**< RGB <- ( 224, 229, 238 ), rgb <- ( 0.879, 0.897, 0.932 ) */
-            // 
+            //
             // Thesis Colors
             , THESISblue            /**< RGB <- (  86, 151, 197 ), rgb <- ( 0.337, 0.592, 0.773 ) */
             , THESISblue_dark       /**< RGB <- (  54, 120, 167 ), rgb <- ( 0.212, 0.471, 0.655 ) */
@@ -257,11 +257,11 @@ class Color {
             , Yellow                /**< RGB <- ( 235, 235, 235 ), rgb <- ( 0.92 , 0.92 , 0.92  ) */
             , Yellowgreen           /**< RGB <- ( 235, 235, 235 ), rgb <- ( 0.92 , 0.92 , 0.92  ) */
         };
-    public:        
-        // Color ( Type::ubyte red = 0, Type::ubyte green = 0, Type::ubyte blue = 0, Type::ubyte alpha = 0 ) 
+    public:
+        // Color ( Type::ubyte red = 0, Type::ubyte green = 0, Type::ubyte blue = 0, Type::ubyte alpha = 0 )
         // : red_(red), green_(green), blue_(blue), alpha_(alpha) {}
 
-        Color ( Types::real red = 0.0, Types::real green = 0.0, Types::real blue = 0, Types::real alpha = 0 ) 
+        Color ( Types::real red = 0.0, Types::real green = 0.0, Types::real blue = 0, Types::real alpha = 0 )
         : red_(red), green_(green), blue_(blue), alpha_(alpha) {
             if ( red_ > 1) {
                 red_ = red_ / 255;
@@ -275,7 +275,7 @@ class Color {
         }
 
         Color(Color::Name name);
-        
+
         ~Color(){}
 
 
@@ -416,7 +416,7 @@ class Color {
             return os;
         }
 
-        
+
 
         ///@Name Getter and setter
         ///@{

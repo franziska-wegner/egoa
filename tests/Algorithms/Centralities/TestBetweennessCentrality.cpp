@@ -23,8 +23,8 @@ TEST_F ( TestBcDtpBnormUsingAcm2018MtsfFigure4aEdgeCounter
 {
     betweennessAlgorithm_.Run();
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), graph_.NumberOfVertices() );
-    
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         if ( 0 == row.SourceId ) {
             TestCollectionValues ( row, "DTP", "", 4, 0, 0, 5, 10, 7, 3, 4 );
@@ -90,8 +90,8 @@ TEST_F ( TestBcDtpBnormUsingAcm2018MtsfFigure4bEdgeCounter
     betweennessAlgorithm_.Run();
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), graph_.NumberOfVertices() );
     // betweennessAlgorithm_.WriteCollection ( std::cout );
-    
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         if ( 0 == row.SourceId ) {
             TestCollectionValues ( row, "DTP", "", 4, 0, 0, 5, 10, 7, 3, 4 );
@@ -157,8 +157,8 @@ TEST_F ( TestBcDtpVangleUsingAcm2018MtsfFigure4aEdgeCounter
 {
     betweennessAlgorithm_.Run();
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), graph_.NumberOfVertices() );
-    
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         if ( 0 == row.SourceId ) {
             TestCollectionValues ( row, "DTP", "", 4, 0, 0, 5, 18, 9, 6, 7 );
@@ -223,8 +223,8 @@ TEST_F ( TestBcDtpVangleUsingAcm2018MtsfFigure4bEdgeCounter
 {
     betweennessAlgorithm_.Run();
     EXPECT_EQ ( betweennessAlgorithm_.Collection().Collection().size(), graph_.NumberOfVertices() );
-    
-    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() ) 
+
+    for ( TMeasurementRow const & row : betweennessAlgorithm_.Collection().Collection() )
     {
         if ( 0 == row.SourceId ) {
             TestCollectionValues ( row, "DTP", "", 4, 0, 0, 5, 12, 7, 4, 5 );
@@ -293,10 +293,10 @@ TEST_F ( TestBcDtpVangleUsingMultipleCases
     TPowerGrid network;
     if (!TPowerGridIO::read ( network_
                             , TestCaseExample
-                            , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                            , TPowerGridIO::readIeeeCdfMatlab ) )
     {
-        std::cerr   << "Expected file " 
-                    << TestCaseExample 
+        std::cerr   << "Expected file "
+                    << TestCaseExample
                     << " does not exist!";
         exit(1);
     }

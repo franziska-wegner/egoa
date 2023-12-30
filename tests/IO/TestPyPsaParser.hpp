@@ -65,7 +65,7 @@ class TestPyPsaParser : public ::testing::Test {
 class TestPyPsaExample : public TestPyPsaParser {
     protected:
         TestPyPsaExample ()
-        : TestPyPsaParser () 
+        : TestPyPsaParser ()
         {}
 
         virtual void SetUp () override
@@ -75,8 +75,8 @@ class TestPyPsaExample : public TestPyPsaParser {
                                                   , TestCaseSmallExample_
                                                   , TPowerGridIO::ReadPyPsa ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseSmallExample_ 
+                std::cerr   << "Expected file "
+                            << TestCaseSmallExample_
                             << " does not exist!";
                 exit(1);
             }
@@ -91,7 +91,7 @@ class TestPyPsaExample : public TestPyPsaParser {
 class PyPSAExampleInconsistencyGeneratorsDeathTest : public TestPyPsaParser {
     protected:
         PyPSAExampleInconsistencyGeneratorsDeathTest ()
-        : TestPyPsaParser () 
+        : TestPyPsaParser ()
         {}
 
         Types::string   const   TestCaseSmallExample_ = "../../framework/tests/Data/PowerGrids/PyPSAExampleDeathTestInconsistencyGenerators";
@@ -103,7 +103,7 @@ class PyPSAExampleInconsistencyGeneratorsDeathTest : public TestPyPsaParser {
 class PyPSAExampleInconsistencyInTimestampLengthDeathTest : public TestPyPsaParser {
     protected:
         PyPSAExampleInconsistencyInTimestampLengthDeathTest ()
-        : TestPyPsaParser () 
+        : TestPyPsaParser ()
         {}
 
         Types::string   const   TestCaseSmallExample_ = "../../framework/tests/Data/PowerGrids/PyPSAExampleDeathTestInconsistencyInTimestampLength";
@@ -115,7 +115,7 @@ class PyPSAExampleInconsistencyInTimestampLengthDeathTest : public TestPyPsaPars
 class PyPSAExampleDuplicatedGeneratorsDeathTest : public TestPyPsaParser {
     protected:
         PyPSAExampleDuplicatedGeneratorsDeathTest ()
-        : TestPyPsaParser () 
+        : TestPyPsaParser ()
         {}
 
         Types::string   const   TestCaseSmallExample_ = "../../framework/tests/Data/PowerGrids/PyPSAExampleDeathTestDuplicatedGeneratorNames";
@@ -127,7 +127,7 @@ class PyPSAExampleDuplicatedGeneratorsDeathTest : public TestPyPsaParser {
 class PyPSA_PyPSA_data_2018_11_20__elec_s1024_AT : public TestPyPsaParser {
     protected:
         PyPSA_PyPSA_data_2018_11_20__elec_s1024_AT ()
-        : TestPyPsaParser () 
+        : TestPyPsaParser ()
         {}
 
         Types::string   const   TestCaseSmallExample_ = "../../framework/data/PowerGrids/PyPSA/pypsa-iti-collaboration/elec_s1024_AT";;

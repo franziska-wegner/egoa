@@ -40,7 +40,7 @@ namespace egoa::Types {
     typedef double      real;               /**< */
     typedef long double largeReal;          /**< */
 
-    // String 
+    // String
     typedef std::string string;             /**< */
     typedef std::string name;               /**< */
 
@@ -49,7 +49,7 @@ namespace egoa::Types {
     typedef real        loadSnapshot;       /**< */
     typedef real        weightSnapshot;     /**< */
     typedef string      timestampSnapshot;  /**< */
-    
+
 
     /**
      * @brief      Convert a string to a double
@@ -60,7 +60,7 @@ namespace egoa::Types {
      *
      * @return     The converted double
      */
-    inline real String2double( std::string str ) 
+    inline real String2double( std::string str )
     {
         QRegularExpression rx("(^-?[0-9]?\\d*(\\.\\d+)?)"); // Filter numbers only
         QRegularExpressionMatchIterator i   = rx.globalMatch(QString::fromStdString(str));
@@ -88,13 +88,13 @@ namespace egoa::Types {
      *
      * @return     The converted integer
      */
-    inline count String2integer( std::string str ) 
+    inline count String2integer( std::string str )
     {
         QRegularExpression rx("(^-?[0-9]?\\d*(\\.\\d+)?)"); // Filter numbers only
         QRegularExpressionMatchIterator i   = rx.globalMatch(QString::fromStdString(str));
         QRegularExpressionMatch match       = i.next();
         QString t_string                    = match.captured(1);
-        
+
         // QString t_string(str.c_str());
         bool ok; count number(0);
         number = QString(t_string).toUInt(&ok);

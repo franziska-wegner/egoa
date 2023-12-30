@@ -18,7 +18,7 @@ template<typename Type>
 class PriorityQueue : public Queue<Type> {
     // Type aliasing
     using TElement = Type;
-    
+
     public:
 #pragma mark CONSTRUCTORS_AND_DESTRUCTORS
         PriorityQueue(){}
@@ -36,13 +36,13 @@ class PriorityQueue : public Queue<Type> {
         virtual ~PriorityQueue() override {}
 
 #pragma mark LOOPS
-        template<bool IsParallel, typename FUNCTION> 
+        template<bool IsParallel, typename FUNCTION>
         inline void for_all_elements ( FUNCTION function ) {}
 
         template<bool IsParallel, typename FUNCTION>
         inline void for_all_elements ( FUNCTION function ) const {}
 
-        template<typename FUNCTION> 
+        template<typename FUNCTION>
         inline void breakable_for_all_elements ( FUNCTION function ) {}
 
         template<typename FUNCTION>
@@ -66,9 +66,9 @@ class PriorityQueue : public Queue<Type> {
             virtual inline TElement DeleteMin ()                         override = 0;
             virtual inline void     Clear ()                             override = 0;
 
-            virtual inline void     ChangeKey ( Types::index            index 
+            virtual inline void     ChangeKey ( Types::index            index
                                               , TElement        const & element ) = 0;
-            virtual inline void     DecreaseKey ( Types::index          index 
+            virtual inline void     DecreaseKey ( Types::index          index
                                                 , TElement      const & element ) = 0;
         ///@}
 

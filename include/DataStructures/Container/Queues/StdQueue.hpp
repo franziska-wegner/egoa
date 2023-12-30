@@ -47,7 +47,7 @@ class StdQueue {
             }
 
             virtual inline void Push ( TElement       && element ) {
-                queue_.push ( element );   
+                queue_.push ( element );
             }
 
             //@todo

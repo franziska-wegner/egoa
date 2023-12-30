@@ -1,11 +1,11 @@
 # FindGoogleTestFramework.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # If EGOA_ENABLE_TESTS is TRUE the necessary directories of the google test
 # framework are added to the project such as the includes for gtest and gmock.
-# 
+#
 
 ####################################################################
 # Include test framework ###########################################

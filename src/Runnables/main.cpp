@@ -58,8 +58,8 @@
 #include "IO/Appearance/Color.hpp"
 
 QString inputFile(""), outputDir("");
-void addCommandLineOptions ( const QCoreApplication &application, 
-                             QCommandLineParser     &parser       ) 
+void addCommandLineOptions ( const QCoreApplication &application,
+                             QCommandLineParser     &parser       )
 {
     parser.setApplicationDescription("Power Grid Tool");
     parser.addHelpOption();
@@ -95,7 +95,7 @@ void addCommandLineOptions ( const QCoreApplication &application,
     parser.addOption(solverOption);
 
     QCommandLineOption inputFileWarmStartOption(
-        QStringList() << "inputFileWarmStart", 
+        QStringList() << "inputFileWarmStart",
         QCoreApplication::translate("main", "Input file for the warm start (default: ../Data/windfarm-benchmarksets/testset-0-instance-1.gml)."),
         QCoreApplication::translate("main", "inputFileWarmStart"), "WS-testset-0-instance-1.gml"
     );
@@ -131,13 +131,13 @@ void addCommandLineOptions ( const QCoreApplication &application,
 
 
 #pragma mark COMMANDLINE_POSITIONAL_ARGUMENTS
-    parser.addPositionalArgument( 
-            "inputFile", 
+    parser.addPositionalArgument(
+            "inputFile",
             QCoreApplication::translate("main", "The input file to open.")
     );
 
-    parser.addPositionalArgument( 
-            "outputDir", 
+    parser.addPositionalArgument(
+            "outputDir",
             QCoreApplication::translate("main", "The output directory to write files.")
     );
 
@@ -165,15 +165,15 @@ void addCommandLineOptions ( const QCoreApplication &application,
 
 // Decide which graph type to use, meaning either a static or a dynamic graph
 #ifndef USE_DYNAMIC_GRAPH
-    const bool isStaticGraph = true;    
+    const bool isStaticGraph = true;
 #else
-    const bool isStaticGraph = false;    
+    const bool isStaticGraph = false;
 #endif
 
 #ifndef USE_TYPES_REAL_WEIGHT
-    const bool isTypesReal = true;    
+    const bool isTypesReal = true;
 #else
-    const bool isTypesReal = false;    
+    const bool isTypesReal = false;
 #endif
 
 typedef std::conditional<isStaticGraph,
@@ -188,13 +188,13 @@ typedef std::conditional<isTypesReal,
     void printGurobiException(const GRBException & e) {
         time_t t   = time(nullptr);   // get time now
         tm* now    = localtime(&t);
-        // 
+        //
         std::cerr << std::string(4*16+3*5, '-')                                                   << std::endl;
-        std::cerr << std::setw(16) << "Time"              << " = " << (now->tm_year + 1900)       << '-' 
+        std::cerr << std::setw(16) << "Time"              << " = " << (now->tm_year + 1900)       << '-'
                                                          << (now->tm_mon + 1)           << '-'
-                                                         <<  now->tm_mday               << " at " 
-                                                         <<  now->tm_hour               << ':' 
-                                                         <<  now->tm_min                << ':' 
+                                                         <<  now->tm_mday               << " at "
+                                                         <<  now->tm_hour               << ':'
+                                                         <<  now->tm_min                << ':'
                                                          <<  now->tm_sec                << " o'clock " << std::endl;
         std::cerr << std::setw(16) << "Error code"        << " = " << e.getErrorCode()            << std::endl;
         std::cerr << std::setw(16) << "Message"           << " = " << e.getMessage()              << std::endl;
@@ -223,13 +223,13 @@ int main(int argc, char *argv[]) {
     auto algorithm          = parser.value("algo").toUpper();
     auto solver             = parser.value("solver").toUpper();
     egoa::Types::real timeLimit   = parser.value("time").toDouble();
-    bool traceSolution      = parser.value("trace").toUpper()=="TRUE"?true:false; 
+    bool traceSolution      = parser.value("trace").toUpper()=="TRUE"?true:false;
     bool verbose            = parser.value("verbose").toUpper()=="TRUE"?true:false;;
     auto networkSetting     = parser.value("networkSetting").toUpper();
     auto variant            = parser.value("variant").toUpper();
     auto outputType         = parser.value("outputType").toUpper();
 
-#ifndef NDEBUG 
+#ifndef NDEBUG
     qDebug() << Qt::endl;
     qDebug() << "\tInputFile :"   << inputFile;
     qDebug() << "\tOutputDir :"   << outputDir;
@@ -253,7 +253,7 @@ int main(int argc, char *argv[]) {
     egoa::PowerGrid<TGraph> network;
     std::string filename = egoa::Auxiliary::Basename( inputFile.toStdString() );
                 filename = egoa::Auxiliary::RemoveExtension( filename );
-    
+
     if (!egoa::PowerGridIO<TGraph>::read ( network, inputFile.toStdString(), egoa::PowerGridIO<TGraph>::readIeeeCdfMatlab ))
         std::cerr << "Expected file " << inputFile.toStdString() << " does not exist!";
 
@@ -261,7 +261,7 @@ int main(int argc, char *argv[]) {
     if (verbose) {
         std::cout << network << std::endl;
 
-        std::cout   << std::string(40, '-') 
+        std::cout   << std::string(40, '-')
                     << std::endl
                     << "\tAlgorithm: " << algorithm.toStdString() << std::endl
                     << "\tVariant: "   << variant.toStdString()   << std::endl
@@ -292,7 +292,7 @@ int main(int argc, char *argv[]) {
             // else if ( variant == "QUADRATIC" ) { model->SetKVl2Quadratic(); }
             // check variant here
             // model->Run();
-        // } else 
+        // } else
         if ( algorithm == "MAXST" || algorithm == "2APPROXIMATION" ) {
             auto comparator = [&network](egoa::Types::edgeId lhs, egoa::Types::edgeId rhs) {
                 return network.Graph().EdgeAt(lhs).Properties().ThermalLimit()
@@ -331,9 +331,9 @@ int main(int argc, char *argv[]) {
 
         // if ( verbose && model != nullptr ) {
         //     std::cout   << "Finished "
-        //                 << algorithm.toStdString() 
-        //                 << " with status " 
-        //                 << model->Solver().Status() 
+        //                 << algorithm.toStdString()
+        //                 << " with status "
+        //                 << model->Solver().Status()
         //                 << std::endl;
         //     std::cout   << *model;
         //     std::cout   << std::endl << std::endl;
@@ -365,7 +365,7 @@ int main(int argc, char *argv[]) {
         system( ("dot -Tps " + outputDir.toStdString() + algoFile + ".dot -o " + outputDir.toStdString() + algoFile + ".svg").c_str() );
     } else if ( outputType == "NONE" ) {
         // qDebug() << "Output: " << outputType << "\n" << flush;
-    } else { 
+    } else {
         // qDebug() << "Output: " << outputType << "\n" << flush;
         egoa::PowerGridIO<TGraph>::write( network, outputDir.toStdString() + file     + ".dot", egoa::PowerGridIO<TGraph>::WriteGraphDot );
         egoa::PowerGridIO<TGraph>::write( resultGraph, outputDir.toStdString() + algoFile + ".dot", egoa::PowerGridIO<TGraph>::WriteGraphDot );

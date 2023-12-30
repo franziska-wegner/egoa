@@ -49,7 +49,7 @@ class BinaryHeapCheck;
  *     pointers such as std::function ( see
  *     https://stackoverflow.com/questions/14677997/stdfunction-vs-template
  *     for more information). This is the reason why the following code is not
- *     used 
+ *     used
  *     inline void for_all_<SOME_FUNCTION>(std::function<void(TVertex & vertex)> function) {}
  *
  * @tparam     HeapType     The type of the heap. If the heap type is const, const
@@ -134,7 +134,7 @@ class BinaryHeap {
              *
              * @return     The element with minimum key according to the comparator.
              */
-            inline TElement const & Top() const 
+            inline TElement const & Top() const
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 USAGE_ASSERT ( !Empty() );
@@ -148,7 +148,7 @@ class BinaryHeap {
              *
              * @return     Index of the element, or if not available Const::none.
              */
-            inline Types::index Search ( TElement const & element ) const 
+            inline Types::index Search ( TElement const & element ) const
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
 
@@ -171,7 +171,7 @@ class BinaryHeap {
              *
              * @return     @p *this.
              */
-            inline BinaryHeap & operator+= ( TElement const & rhs ) 
+            inline BinaryHeap & operator+= ( TElement const & rhs )
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 heap_.emplace_back(rhs);
@@ -187,7 +187,7 @@ class BinaryHeap {
              *
              * @return     @p *this.
              */
-            inline BinaryHeap & operator+= ( TElement && rhs ) 
+            inline BinaryHeap & operator+= ( TElement && rhs )
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 heap_.emplace_back(std::move(rhs));
@@ -201,7 +201,7 @@ class BinaryHeap {
              *
              * @param      element  The element.
              */
-            inline void Insert ( TElement const & element ) 
+            inline void Insert ( TElement const & element )
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 *this += element;
@@ -212,7 +212,7 @@ class BinaryHeap {
              *
              * @param      element  The element.
              */
-            inline void Insert ( TElement && element ) 
+            inline void Insert ( TElement && element )
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 *this += std::move(element);
@@ -228,12 +228,12 @@ class BinaryHeap {
              *                      input iterators.
              */
             template<typename InputIt>
-            inline void Insert ( InputIt first, InputIt last) 
+            inline void Insert ( InputIt first, InputIt last)
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 for ( InputIt it = first
                     ; it != last
-                    ; ++it ) 
+                    ; ++it )
                 {
                     *this += *it;
                 }
@@ -244,7 +244,7 @@ class BinaryHeap {
              *
              * @param      elements  The elements to insert
              */
-            inline void Insert ( std::vector<TElement> const & elements) 
+            inline void Insert ( std::vector<TElement> const & elements)
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 Insert(elements.begin(), elements.end());
@@ -256,7 +256,7 @@ class BinaryHeap {
              * @param      args  The arguments of a constructor of @p TElement.
              */
             template <typename... Args>
-            inline void Emplace ( Args&&... args ) 
+            inline void Emplace ( Args&&... args )
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 heap_.emplace_back ( std::forward<Args>(args)... );
@@ -271,7 +271,7 @@ class BinaryHeap {
              *
              * @param[in]  elements  The elements with which to build the heap
              */
-            inline void BuildWith ( std::vector<TElement> const & elements ) 
+            inline void BuildWith ( std::vector<TElement> const & elements )
             {
                 heap_ = elements;
                 MakeHeapProperty();
@@ -286,7 +286,7 @@ class BinaryHeap {
              *
              * @pre        The heap is not empty.
              */
-            inline void Pop() 
+            inline void Pop()
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 USAGE_ASSERT ( Size() > 0           );
@@ -300,13 +300,13 @@ class BinaryHeap {
              *
              * @return     The top element.
              */
-            inline TElement DeleteTop() 
+            inline TElement DeleteTop()
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 USAGE_ASSERT ( Size() > 0           );
 
                 TElement top = std::move( Front() );
-                if ( Size() > 1 ) 
+                if ( Size() > 1 )
                 {
                     using std::swap; // enable ADL
                     swap ( Front(), Back() );
@@ -321,7 +321,7 @@ class BinaryHeap {
             /**
              * @brief      Clears the heap.
              */
-            inline void Clear() 
+            inline void Clear()
             {
                 heap_.clear();
             }
@@ -341,7 +341,7 @@ class BinaryHeap {
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 USAGE_ASSERT ( index < Size()       );
-                
+
                 ElementAt( index ) = element;
                 SiftUp( index );
                 SiftDown( index );
@@ -361,7 +361,7 @@ class BinaryHeap {
              * @param      element  The new element.
              */
             inline void DecreaseKey ( Types::index     index
-                                    , TElement const & element ) 
+                                    , TElement const & element )
             {
                 ESSENTIAL_ASSERT ( ComplyHeapProperty() );
                 USAGE_ASSERT ( index < Size()       );
@@ -380,7 +380,7 @@ class BinaryHeap {
              *
              * @return     TRUE if empty and FALSE otherwise.
              */
-            inline bool Empty() const 
+            inline bool Empty() const
             {
                 return heap_.empty();
             }
@@ -390,7 +390,7 @@ class BinaryHeap {
              *
              * @return     The size of the heap
              */
-            inline Types::count Size() const 
+            inline Types::count Size() const
             {
                 return heap_.size();
             }
@@ -407,9 +407,9 @@ class BinaryHeap {
              */
             inline std::function< bool  ( TElement const &
                                         , TElement const & ) >
-            const & Comparator() const 
+            const & Comparator() const
             {
-                return comparator_; 
+                return comparator_;
             }
 
             /**
@@ -438,7 +438,7 @@ class BinaryHeap {
              * @details    The comparator is set to `std::greater<TElement>()` and the heap
              *             is updated to respect the new comparator.
              */
-            inline void Maximize() 
+            inline void Maximize()
             {
                 Comparator ( std::greater<TElement>() );
             }
@@ -448,7 +448,7 @@ class BinaryHeap {
              * @details    The comparator is set to `std::less<TElement>()` and the heap
              *             is updated to respect the new comparator.
              */
-            inline void Minimize() 
+            inline void Minimize()
             {
                 Comparator ( std::less<TElement>() );
             }
@@ -467,7 +467,7 @@ class BinaryHeap {
              * @return     @p true if the heaps are equivalent, @p false if they do not
              *             have the same element.
              */
-            inline bool operator==( BinaryHeap const & rhs ) const 
+            inline bool operator==( BinaryHeap const & rhs ) const
             {
                 return IsEqualTo<false>( rhs );
             }
@@ -483,7 +483,7 @@ class BinaryHeap {
              *             @p false if they contain the same elements where the order
              *             does not matter.
              */
-            inline bool operator!=( BinaryHeap const & rhs) const 
+            inline bool operator!=( BinaryHeap const & rhs) const
             {
                 return !(*this==rhs);
             }
@@ -500,7 +500,7 @@ class BinaryHeap {
              * @return     @p true if equal to @p rhs, @p false otherwise.
              */
             template<bool IsIdentical>
-            inline bool IsEqualTo( BinaryHeap const & rhs ) const 
+            inline bool IsEqualTo( BinaryHeap const & rhs ) const
             {
                 return internal::BinaryHeapCheck<TElement, IsIdentical>
                     ::IsEqualTo(*this, rhs);
@@ -512,7 +512,7 @@ class BinaryHeap {
              * @param      lhs   The left hand side BinaryHeaps
              * @param      rhs   The right hand side BinaryHeaps
              */
-            friend void swap ( BinaryHeap<TElement> & lhs, BinaryHeap<TElement> & rhs ) 
+            friend void swap ( BinaryHeap<TElement> & lhs, BinaryHeap<TElement> & rhs )
             { // Necessary for the copy and swap idiom
                 using std::swap; // enable ADL
                 swap( lhs.heap_,                    rhs.heap_ );
@@ -624,7 +624,7 @@ class BinaryHeap {
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            void for_all_elements ( FUNCTION function ) 
+            void for_all_elements ( FUNCTION function )
             {
                 internal::BinaryHeapLoopDifferentiation<BinaryHeap, Policy>
                     ::for_all_elements ( *this, function);
@@ -645,7 +645,7 @@ class BinaryHeap {
              */
             template<ExecutionPolicy Policy, typename FUNCTION>
             inline
-            void for_all_elements ( FUNCTION function ) const 
+            void for_all_elements ( FUNCTION function ) const
             {
                 internal::BinaryHeapLoopDifferentiation<BinaryHeap const, Policy>
                     ::for_all_elements ( *this, function);
@@ -681,7 +681,7 @@ class BinaryHeap {
              *
              * @return     The top element, which is at the front of @p heap_.
              */
-            inline TElement & Front() 
+            inline TElement & Front()
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 return heap_.front();
@@ -692,7 +692,7 @@ class BinaryHeap {
              *
              * @return     The top element, which is at the front of @p heap_.
              */
-            inline TElement const & Front() const 
+            inline TElement const & Front() const
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 return heap_.front();
@@ -703,7 +703,7 @@ class BinaryHeap {
              *
              * @return     The last element, which is at the back of @p heap_.
              */
-            inline TElement & Back() 
+            inline TElement & Back()
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 return heap_.back();
@@ -714,7 +714,7 @@ class BinaryHeap {
              *
              * @return     The last element, which is at the back of @p heap_.
              */
-            inline TElement const & Back() const 
+            inline TElement const & Back() const
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 return heap_.back();
@@ -725,7 +725,7 @@ class BinaryHeap {
              *
              * @return     The maximum index.
              */
-            inline Types::index MaximumIndex() const 
+            inline Types::index MaximumIndex() const
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 return heap_.size() - 1;
@@ -748,7 +748,7 @@ class BinaryHeap {
              *             @f$2^{l-1}@f$. As we start at 0, the value has to
              *             be reduced by 1.
              */
-            inline void MakeHeapProperty() 
+            inline void MakeHeapProperty()
             {
                 for ( Types::rcount counter = heap_.size() / 2 - 1
                     ; counter >= 0
@@ -768,7 +768,7 @@ class BinaryHeap {
              * @return     @p true if the heap complies with the heap property
              *             at element @p index and @p false otherwise.
              */
-            inline bool ComplyHeapProperty( Types::index index ) const 
+            inline bool ComplyHeapProperty( Types::index index ) const
             {
                 ESSENTIAL_ASSERT( index < Size() );
                 if ( !HasChildren( index ) ) return true;
@@ -783,13 +783,13 @@ class BinaryHeap {
              * @return     @p true if the heap complies the heap property, @p
              *     false otherwise.
              */
-            inline bool ComplyHeapProperty() const 
+            inline bool ComplyHeapProperty() const
             {
                 for ( Types::count counter = 0
                     ; counter < Size()
-                    ; ++counter ) 
+                    ; ++counter )
                 {
-                    if ( !ComplyHeapProperty( counter ) ) 
+                    if ( !ComplyHeapProperty( counter ) )
                     {
                         return false;
                     }
@@ -804,7 +804,7 @@ class BinaryHeap {
             /**
              * @brief      Sift the last element up.
              */
-            inline void SiftUp () 
+            inline void SiftUp ()
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 SiftUp( MaximumIndex() );
@@ -816,14 +816,14 @@ class BinaryHeap {
              *
              * @param[in]  index  The index of the element tha shall be sifted up.
              */
-            inline void SiftUp ( Types::index index ) 
+            inline void SiftUp ( Types::index index )
             {
                 ESSENTIAL_ASSERT( index < Size() );
 
                 if ( !HasParent(index) ) return;
                 Types::index parentIndex  = ParentIdOf( index );
-                while ( Comparator()( ElementAt( index ), ElementAt( parentIndex ) ) 
-                    && index != 0 ) 
+                while ( Comparator()( ElementAt( index ), ElementAt( parentIndex ) )
+                    && index != 0 )
                 {
                     using std::swap; // enable ADL
                     swap( ElementAt( index ), ElementAt( parentIndex ) );
@@ -836,7 +836,7 @@ class BinaryHeap {
             /**
              * @brief      Sift down the element at the root.
              */
-            inline void SiftDown() 
+            inline void SiftDown()
             {
                 ESSENTIAL_ASSERT( !Empty() );
                 SiftDown( 0 );
@@ -848,7 +848,7 @@ class BinaryHeap {
              *
              * @param[in]  index  The index of the element that shall be sifted down.
              */
-            inline void SiftDown( Types::index index ) 
+            inline void SiftDown( Types::index index )
             {
                 ESSENTIAL_ASSERT( index < Size() );
 
@@ -856,8 +856,8 @@ class BinaryHeap {
                 if ( !HasChildren( index ) ) return;
                 childIndex      = SelectSwappableChildAt ( index );
 
-                while ( Comparator()( ElementAt(childIndex), ElementAt(index) ) 
-                    && childIndex < Size() ) 
+                while ( Comparator()( ElementAt(childIndex), ElementAt(index) )
+                    && childIndex < Size() )
                 {
                     using std::swap;
                     swap( ElementAt(index), ElementAt(childIndex) );
@@ -881,16 +881,16 @@ class BinaryHeap {
              *
              * @return     The index of the child that has the best key.
              */
-            inline Types::index SelectSwappableChildAt ( Types::index index ) const 
+            inline Types::index SelectSwappableChildAt ( Types::index index ) const
             {
                 ESSENTIAL_ASSERT( HasChildren(index) );
-                if ( !HasRightChild(index) ) 
+                if ( !HasRightChild(index) )
                 {
                     return LeftChildIdOf( index );
                 }
 
                 ESSENTIAL_ASSERT( HasRightChild(index) );
-                if ( Comparator()( LeftElementAt( index ), RightElementAt( index )) ) 
+                if ( Comparator()( LeftElementAt( index ), RightElementAt( index )) )
                 {
                     return LeftChildIdOf( index );
                 }
@@ -918,11 +918,11 @@ namespace internal {
 #pragma mark HEAPS_ARE_IDENTICAL_CHECK
 template<typename Type>
 class BinaryHeapCheck<Type, true> {
-    
+
     // Type aliasing
     using TElement = Type;
     using THeap    = BinaryHeap<TElement>;
-    
+
     public:
         /**
          * @brief      Determines if equal---in sense of order---to the \rhs binary heap.
@@ -932,13 +932,13 @@ class BinaryHeapCheck<Type, true> {
          * @return     TRUE if the order of the elements are the same to the \p rhs, FALSE otherwise.
          */
         static inline bool IsEqualTo ( THeap const & lhs
-                                     , THeap const & rhs ) 
+                                     , THeap const & rhs )
         {
             if ( lhs.Size() != rhs.Size() ) return false;
             for ( Types::count counter = 0
                 ; counter < lhs.Size()
-                ; ++counter ) 
-            { 
+                ; ++counter )
+            {
                 if ( lhs.ElementAt( counter ) != rhs.ElementAt( counter ) ) return false;
             }
             return true;
@@ -962,15 +962,15 @@ class BinaryHeapCheck<Type, false> {
          * @return     TRUE if it has the same elements as \p rhs, FALSE otherwise.
          */
         static inline bool IsEqualTo ( THeap const & lhs
-                                     , THeap const & rhs ) 
+                                     , THeap const & rhs )
         {
             if ( lhs.Size() != rhs.Size() ) return false;
             THeap tempRhs = rhs; std::sort( tempRhs.heap_.begin(), tempRhs.heap_.end() );
             THeap tempLhs = lhs; std::sort( tempLhs.heap_.begin(), tempLhs.heap_.end() );
             for ( Types::count counter = 0
                 ; counter < tempLhs.Size()
-                ; ++counter ) 
-            { 
+                ; ++counter )
+            {
                 if ( tempLhs.ElementAt( counter ) != tempRhs.ElementAt( counter ) ) return false;
             }
             return true;
@@ -998,7 +998,7 @@ class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::sequential> {
          * @code{.cpp}
          *      [](TElement element) { Do something with the element object }
          * @endcode
-         * 
+         *
          * @tparam     FUNCTION  Function
          */
         template<typename FUNCTION>
@@ -1006,11 +1006,11 @@ class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::sequential> {
         void for_all_elements ( THeap &  heap
                               , FUNCTION function )
         {
-            for (auto & element : heap.heap_) 
+            for (auto & element : heap.heap_)
             {
                 function(element);
             }
-            if ( !heap.ComplyHeapProperty() ) 
+            if ( !heap.ComplyHeapProperty() )
             {
                 heap.MakeHeapProperty();
             }
@@ -1045,7 +1045,7 @@ class BinaryHeapLoopDifferentiation<HeapType const, ExecutionPolicy::sequential>
         void for_all_elements ( THeap &  heap
                               , FUNCTION function )
         {
-            for (auto & element : heap.heap_) 
+            for (auto & element : heap.heap_)
             {
                 function(element);
             }
@@ -1071,9 +1071,9 @@ class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::breakable> {
          * @code{.cpp}
          *      [](TElement element) -> bool { Do something with the element object }
          * @endcode
-         * 
+         *
          * @note       Heap property might be violated in the none const variant
-         * 
+         *
          * @tparam     FUNCTION  Function
          */
         template<typename FUNCTION>
@@ -1081,12 +1081,12 @@ class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::breakable> {
         void for_all_elements ( THeap &  heap
                               , FUNCTION function )
         {
-            for ( auto & element : heap.heap_ ) 
+            for ( auto & element : heap.heap_ )
             {
                 bool toContinue = function(element);
                 if ( !toContinue ) break;
             }
-            if ( !heap.ComplyHeapProperty() ) 
+            if ( !heap.ComplyHeapProperty() )
             {
                 heap.MakeHeapProperty();
             }
@@ -1120,7 +1120,7 @@ class BinaryHeapLoopDifferentiation<HeapType const, ExecutionPolicy::breakable> 
         void for_all_elements ( THeap &  heap
                               , FUNCTION function )
         {
-            for ( auto & element : heap.heap_ ) 
+            for ( auto & element : heap.heap_ )
             {
                 bool toContinue = function(element);
                 if ( !toContinue ) break;
@@ -1149,7 +1149,7 @@ class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::parallel> {
          * @code{.cpp}
          *      [](TElement element) { Do something with the element object }
          * @endcode
-         * 
+         *
          * @tparam     FUNCTION  Function
          */
         template<typename FUNCTION>
@@ -1160,11 +1160,11 @@ class BinaryHeapLoopDifferentiation<HeapType, ExecutionPolicy::parallel> {
             #pragma omp parallel for
                 for ( Types::count counter = 0
                     ; counter < heap.heap_.size()
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     function ( heap.heap_[counter] );
                 }
-            if ( !heap.ComplyHeapProperty() ) 
+            if ( !heap.ComplyHeapProperty() )
             {
                 heap.MakeHeapProperty();
             }
@@ -1198,7 +1198,7 @@ class BinaryHeapLoopDifferentiation<HeapType const, ExecutionPolicy::parallel> {
             #pragma omp parallel for
                 for ( Types::count counter = 0
                     ; counter < heap.heap_.size()
-                    ; ++counter ) 
+                    ; ++counter )
                 {
                     function ( heap.heap_[counter] );
                 }

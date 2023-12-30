@@ -1,10 +1,10 @@
 # HelperFunctions.cmake
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # A collection of function that help to reduce the cmake complexity.
-# 
+#
 
 # Link Gurobi if available
 function(add_gurobi_if_available varName)

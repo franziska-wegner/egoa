@@ -44,7 +44,7 @@ struct ContainerLoop<ExecutionPolicy::sequential> {
      * @tparam     FUNCTION   The type of the function object.
      */
     template<typename Container, typename FUNCTION>
-    static void for_each ( Container const & container, FUNCTION function ) 
+    static void for_each ( Container const & container, FUNCTION function )
     {
         using std::begin, std::end;
         std::for_each(begin(container), end(container), function);
@@ -67,7 +67,7 @@ struct ContainerLoop<ExecutionPolicy::breakable> {
      * @tparam     FUNCTION   The type of the function object.
      */
     template<typename Container, typename FUNCTION>
-    static void for_each ( Container const & container, FUNCTION function ) 
+    static void for_each ( Container const & container, FUNCTION function )
     {
         using std::begin, std::end;
 
@@ -75,7 +75,7 @@ struct ContainerLoop<ExecutionPolicy::breakable> {
         auto last = end(container);
         for ( auto it = begin(container)
             ; toContinue && it != last
-            ; ++it ) 
+            ; ++it )
         {
             toContinue = function(*it);
         }
@@ -100,12 +100,12 @@ struct ContainerLoop<ExecutionPolicy::parallel> {
      * @tparam     FUNCTION   The type of the function object.
      */
     template<typename Container, typename FUNCTION>
-    static void for_each ( Container const & container, FUNCTION function ) 
+    static void for_each ( Container const & container, FUNCTION function )
     {
         #pragma omp parallel for
         for ( Types::index i = 0
             ; i < container.size()
-            ; ++i ) 
+            ; ++i )
         {
             function(container[i]);
         }

@@ -41,7 +41,7 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
         ///@name Constructors and destructor
         ///@{
 #pragma mark CONSTRUCTOR_AND_DESTRUCTOR
-            
+
             /**
              * @brief      Constructs a new DFS instance.
              *
@@ -75,7 +75,7 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
                 PreprocessingVertexWith ( source );
 
                 this->breakable_for_all_edges_at ( source,
-                    [source, &dfs, this]( typename GraphType::TEdge const & edge ) 
+                    [source, &dfs, this]( typename GraphType::TEdge const & edge )
                     {
                         TVertexId target = edge.Other  ( source );
 
@@ -84,11 +84,11 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
 
                         bool targetVisited = this->VisitedVertexAt( target );
 
-                        if ( !targetVisited ) 
+                        if ( !targetVisited )
                         {
                             this->ParentOf( target ) = source;
                             dfs ( target, dfs );
-                        } else /* not processed */ 
+                        } else /* not processed */
                         { // Cycle edge
                             ProcessingEdgeWith( source, target, edge.Identifier() );
                         }
@@ -121,35 +121,35 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
          * @param[in]  target  The target identifier.
          *
          * @return     The DFS edge type.
-         * 
+         *
          * @todo Cross edge is only possible in directed case -> check for graph type
          */
-        inline DfsEdgeType TypifyEdge ( TVertexId source, TVertexId target ) 
+        inline DfsEdgeType TypifyEdge ( TVertexId source, TVertexId target )
         {
             // Tree edge
-            if ( source == this->ParentOf ( target ) ) 
+            if ( source == this->ParentOf ( target ) )
             {
                 return DfsEdgeType::tree;
             }
-            
+
             // Backward edge
-            if ( this->VisitedVertexAt   ( target ) 
-                && !this->ProcessedVertexAt ( target ) ) 
+            if ( this->VisitedVertexAt   ( target )
+                && !this->ProcessedVertexAt ( target ) )
             {
                 return DfsEdgeType::backward;
             }
-            
+
             // Forward edge
-            if ( this->ProcessedVertexAt ( target ) 
-                && EntryTimeAt ( target ) > EntryTimeAt ( source ) ) 
+            if ( this->ProcessedVertexAt ( target )
+                && EntryTimeAt ( target ) > EntryTimeAt ( source ) )
             {
                 return DfsEdgeType::forward;
             }
-            
+
             // Cross edge
-            if ( this->ProcessedVertexAt ( target ) 
+            if ( this->ProcessedVertexAt ( target )
                 && EntryTimeAt ( target ) < EntryTimeAt ( source ) )    return DfsEdgeType::cross;
-            
+
             // None of them -> should not happening
             ESSENTIAL_ASSERT( false && "DFS edge type is none." );
         }
@@ -159,7 +159,7 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
         /**
          * @brief      Terminate the DFS
          *
-         * @return     TRUE if the DFS 
+         * @return     TRUE if the DFS
          */
         inline bool Terminate()    const { return terminate_; }
         inline void SetTerminate()       { terminate_ = true; }
@@ -185,9 +185,9 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
          *
          * @return     { description_of_the_return_value }
          */
-        inline TTime EntryTimeAt ( TVertexId vertexId ) const 
-        { 
-            return entryTime_[vertexId]; 
+        inline TTime EntryTimeAt ( TVertexId vertexId ) const
+        {
+            return entryTime_[vertexId];
         }
 
         /**
@@ -197,15 +197,15 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
          *
          * @return     The exit time for a vertex during the DFS.
          */
-        inline TTime ExitTimeAt ( TVertexId const vertexId ) const 
-        { 
-            return exitTime_[vertexId]; 
+        inline TTime ExitTimeAt ( TVertexId const vertexId ) const
+        {
+            return exitTime_[vertexId];
         }
 
 
 //exact behavior of the Depth-First Search (DFS) depends on the processing methods
 #pragma mark FURTHER_PROCESSING
-        
+
         /**
          * @brief      Preprocessing the vertex with @p vertexId.
          *
@@ -218,9 +218,9 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
          */
         // template<typename FUNCTION>
         virtual
-        inline 
+        inline
         void PreprocessingVertexWith ( TVertexId vertexId
-                                     // , FUNCTION  function 
+                                     // , FUNCTION  function
                                      )
         {
             // function ( vertexId );
@@ -238,22 +238,22 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
          */
         // template<typename FUNCTION>
         virtual
-        inline 
+        inline
         void PostprocessingVertexWith ( TVertexId vertexId
-                                      // , FUNCTION  function 
-                                      ) 
+                                      // , FUNCTION  function
+                                      )
         {
             // function ( vertexId );
         }
 
         // template<typename FUNCTION>
         virtual
-        inline 
+        inline
         void ProcessingEdgeWith ( TVertexId     source
                                 , TVertexId     target
-                                , Types::edgeId edgeId 
-                                // , FUNCTION      function 
-                                ) 
+                                , Types::edgeId edgeId
+                                // , FUNCTION      function
+                                )
         {
             // function ( source, target, edgeId );
         }
@@ -270,12 +270,12 @@ class DepthFirstSearch : public Traversal<GraphType, IsDirected> {
          */
         // template<typename FUNCTION>
         virtual
-        inline 
+        inline
         void PostprocessingEdgeWith ( TVertexId     source
                                     , TVertexId     target
-                                    , Types::edgeId edgeId 
-                                    // , FUNCTION      function 
-                                    ) 
+                                    , Types::edgeId edgeId
+                                    // , FUNCTION      function
+                                    )
         {
             // function ( source, target, edgeId );
         }

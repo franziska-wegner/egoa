@@ -97,7 +97,7 @@ class TestDTPPowerGridSpecific : public TestDominatingThetaPath {
         using TMQTheta       = MappingBinaryHeap<typename TGraph::TVertexId, TLabelTheta >;
         // Bucket
         using TLabelSetTheta = Bucket< TQueueTheta >;
-        
+
         // Dominating theta path using susceptance norm only
         using TDtpTheta      = DominatingThetaPath < TGraph
                                                    , TLabelTheta
@@ -134,7 +134,7 @@ class TestDTPPowerGridSpecific : public TestDominatingThetaPath {
             EXPECT_EQ ( graph_.EdgeAt( edgeId ).Properties().Susceptance<Edges::CarrierDifferentiationType::DC>(), dcSusceptance );
             EXPECT_EQ ( graph_.EdgeAt( edgeId ).Properties().Susceptance<Edges::CarrierDifferentiationType::AC>(), acSusceptance );
             EXPECT_EQ ( graph_.EdgeAt( edgeId ).Properties().Conductance<Edges::CarrierDifferentiationType::DC>(), dcConductance );
-            EXPECT_EQ ( graph_.EdgeAt( edgeId ).Properties().Conductance<Edges::CarrierDifferentiationType::AC>(), acConductance );   
+            EXPECT_EQ ( graph_.EdgeAt( edgeId ).Properties().Conductance<Edges::CarrierDifferentiationType::AC>(), acConductance );
         }
     protected:
         TPowerGrid            network_;
@@ -151,7 +151,7 @@ class TestDTPPowerGridSpecific : public TestDominatingThetaPath {
  */
 class TestDTPEmptyGraph : public TestDominatingThetaPath {
     protected:
-        TestDTPEmptyGraph () 
+        TestDTPEmptyGraph ()
         : TestDominatingThetaPath ( std::move( TGraph( "Empty Test Graph" ) ) )
         {}
 
@@ -174,7 +174,7 @@ class TestDTPUsingAcm2018MtsfFigure4a : public TestDTPPowerGridSpecific {
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4a_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
                 std::cerr << "Expected file " << TestCaseAcm2018MtsfFigure4a_ << " does not exist!";
                 exit(1);
@@ -204,7 +204,7 @@ class TestDTPUsingAcm2018MtsfFigure4b : public TestDTPPowerGridSpecific {
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4b_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
                 std::cerr << "Expected file " << TestCaseAcm2018MtsfFigure4b_ << " does not exist!";
                 exit(1);

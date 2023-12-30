@@ -13,7 +13,7 @@
 
 namespace egoa::test {
 
-TEST_F ( TestPyPsaExample, CompareNetworkGlobalProperties ) 
+TEST_F ( TestPyPsaExample, CompareNetworkGlobalProperties )
 {
     EXPECT_EQ(0  , network_.Graph().MinDegree() );
     EXPECT_EQ(3  , network_.Graph().MaxDegree() );
@@ -25,11 +25,11 @@ TEST_F ( TestPyPsaExample, CompareNetworkGlobalProperties )
     // network_.OutputLoadSnaps();
 }
 
-TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithBusesData ) 
+TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithBusesData )
 {
     Types::index x =  1;
     Types::index y = 11;
-    
+
     network_.Graph().template for_all_vertices<ExecutionPolicy::sequential>(
         [&x,&y]( TVertex const & vertex )
     {
@@ -57,7 +57,7 @@ TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithBusesData )
     });
 }
 
-TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithLinesData ) 
+TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithLinesData )
 {
     Types::index x =  1;
 
@@ -65,30 +65,30 @@ TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithLinesData )
         [&x]( TEdge const & edge )
     {
         EXPECT_EQ(x                 , Types::String2integer(edge.Properties().Name()) );
-        
+
         // default
-        EXPECT_EQ(true              , edge.Properties().Status() ); 
+        EXPECT_EQ(true              , edge.Properties().Status() );
 
         EXPECT_EQ(20                , edge.Properties().Resistance() );
         EXPECT_EQ(10                , edge.Properties().Reactance() );
-        
-        // default        
+
+        // default
         EXPECT_EQ( 0                , edge.Properties().Conductance<Edges::CarrierDifferentiationType::DC>() );
         EXPECT_EQ( 0.04             , edge.Properties().Conductance<Edges::CarrierDifferentiationType::AC>() );
         EXPECT_EQ(-0.1              , edge.Properties().Susceptance<Edges::CarrierDifferentiationType::DC>() );
         EXPECT_EQ(-0.02             , edge.Properties().Susceptance<Edges::CarrierDifferentiationType::AC>() );
-        EXPECT_EQ(0.7               , edge.Properties().Weight() );         
-        EXPECT_EQ(0                 , edge.Properties().Charge() );         
-        EXPECT_EQ(0                 , edge.Properties().ThermalLimitB() );         
-        EXPECT_EQ(0                 , edge.Properties().ThermalLimitC() );         
-        EXPECT_EQ(1                 , edge.Properties().TapRatio() );         
-        EXPECT_EQ(0                 , edge.Properties().AngleShift() );         
-        EXPECT_EQ(0                 , edge.Properties().TapRatioCosThetaShift() );         
-        EXPECT_EQ(0                 , edge.Properties().TapRatioSinThetaShift() );         
-        EXPECT_EQ(-Const::REAL_INFTY, edge.Properties().ThetaBound().Minimum() );         
-        EXPECT_EQ( Const::REAL_INFTY, edge.Properties().ThetaBound().Maximum() );         
-        EXPECT_EQ(0                 , edge.Properties().NominalApparentPowerExtendable() );         
-        EXPECT_EQ(0                 , edge.Properties().TerrainFactor() );         
+        EXPECT_EQ(0.7               , edge.Properties().Weight() );
+        EXPECT_EQ(0                 , edge.Properties().Charge() );
+        EXPECT_EQ(0                 , edge.Properties().ThermalLimitB() );
+        EXPECT_EQ(0                 , edge.Properties().ThermalLimitC() );
+        EXPECT_EQ(1                 , edge.Properties().TapRatio() );
+        EXPECT_EQ(0                 , edge.Properties().AngleShift() );
+        EXPECT_EQ(0                 , edge.Properties().TapRatioCosThetaShift() );
+        EXPECT_EQ(0                 , edge.Properties().TapRatioSinThetaShift() );
+        EXPECT_EQ(-Const::REAL_INFTY, edge.Properties().ThetaBound().Minimum() );
+        EXPECT_EQ( Const::REAL_INFTY, edge.Properties().ThetaBound().Maximum() );
+        EXPECT_EQ(0                 , edge.Properties().NominalApparentPowerExtendable() );
+        EXPECT_EQ(0                 , edge.Properties().TerrainFactor() );
 
 
         EXPECT_EQ(Edges::ElectricalEdgeType::standard, edge.Properties().Type() );
@@ -96,7 +96,7 @@ TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithLinesData )
         EXPECT_EQ(100            , edge.Properties().Length() );
         EXPECT_EQ(x              , edge.Properties().NumberOfParallelLines() );
         EXPECT_EQ(0.7            , edge.Properties().ThermalLimit() );
-        EXPECT_EQ ( ceil ( (   ( x*1.0 + 2 ) * 1000 / ( x * 1.0 ) ) * 1000 / 1000 ) 
+        EXPECT_EQ ( ceil ( (   ( x*1.0 + 2 ) * 1000 / ( x * 1.0 ) ) * 1000 / 1000 )
                   , ceil ( edge.Properties().NominalApparentPower() * 1000 / 1000 ) );
         EXPECT_EQ(380            , edge.Properties().NominalVoltage() );
         EXPECT_EQ(4000           , edge.Properties().NominalApparentPowerBound().Minimum() );
@@ -105,8 +105,8 @@ TEST_F ( TestPyPsaExample, CompareVerticesPropertiesWithLinesData )
     });
 }
 
-TEST_F ( TestPyPsaExample, CompareGeneratorsPropertiesWithGeneratorsData ) 
-{   
+TEST_F ( TestPyPsaExample, CompareGeneratorsPropertiesWithGeneratorsData )
+{
     std::vector<Vertices::GeneratorType> generatorTypes { Vertices::GeneratorType::onwind
                                                         , Vertices::GeneratorType::solar };
     Types::count counter = 0;
@@ -114,7 +114,7 @@ TEST_F ( TestPyPsaExample, CompareGeneratorsPropertiesWithGeneratorsData )
     network_.template for_all_generators<ExecutionPolicy::sequential>(
         [&counter,&generatorTypes]( TGeneratorProperties const & generator )
     {
-        // EXPECT_EQ(0                        , generator.Name() );         
+        // EXPECT_EQ(0                        , generator.Name() );
         EXPECT_EQ( (counter+2)*100000                , generator.CapitalCost() );
         EXPECT_EQ(generatorTypes[counter%2]         , generator.GeneratorType() );
         EXPECT_EQ(1.0                               , generator.Efficiency() );
@@ -126,9 +126,9 @@ TEST_F ( TestPyPsaExample, CompareGeneratorsPropertiesWithGeneratorsData )
         else
             EXPECT_EQ(Const::REAL_INFTY                 , generator.NominalRealPowerBound().Maximum() );
 
-        EXPECT_EQ(TVertexType::generator            , generator.Type() );        
-        EXPECT_EQ(0                                 , generator.X() );         
-        EXPECT_EQ(0                                 , generator.Y() );         
+        EXPECT_EQ(TVertexType::generator            , generator.Type() );
+        EXPECT_EQ(0                                 , generator.X() );
+        EXPECT_EQ(0                                 , generator.Y() );
         EXPECT_EQ(1                                 , generator.VoltageMagnitude() );
         EXPECT_EQ(0                                 , generator.NominalRealPowerBound().Minimum() );
         EXPECT_EQ(Vertices::PowerSign::positive     , generator.PowerSign() );
@@ -160,12 +160,12 @@ TEST_F ( TestPyPsaExample, CompareGeneratorsPropertiesWithGeneratorsData )
     });
 }
 
-TEST_F ( TestPyPsaExample, CheckGeneratorRealPowerSnapshots ) 
+TEST_F ( TestPyPsaExample, CheckGeneratorRealPowerSnapshots )
 {
     Types::index generatorId = 1;
     Types::index snapId      = 0;
     network_.template for_all_real_power_generator_snapshots<ExecutionPolicy::sequential>(
-        [&generatorId, &snapId](Types::index snapshotId, Types::generatorSnapshot snapshot) 
+        [&generatorId, &snapId](Types::index snapshotId, Types::generatorSnapshot snapshot)
         {
             EXPECT_EQ ( generatorId*100 + (snapId%10)*10, snapshot);
             EXPECT_EQ ( (snapId%10),                      snapshotId);
@@ -194,18 +194,18 @@ TEST_F ( TestPyPsaExample, CheckGeneratorRealPowerSnapshots )
     snapId      = 0;
     std::vector<Types::index> numberOfColumsPerVertex = {2,2,2,2,2,3,2,3,3,2};
     Types::count counter = 0;
-    network_.Graph().template for_all_vertex_identifiers<ExecutionPolicy::sequential>( 
-        [&generatorId, 
-         &snapId, 
-         &numberOfColumsPerVertex, 
+    network_.Graph().template for_all_vertex_identifiers<ExecutionPolicy::sequential>(
+        [&generatorId,
+         &snapId,
+         &numberOfColumsPerVertex,
          &counter,
          this](Types::vertexId vertexId)
         {
-            network_.template for_all_real_power_generator_snapshots_at<ExecutionPolicy::sequential>( 
+            network_.template for_all_real_power_generator_snapshots_at<ExecutionPolicy::sequential>(
                 vertexId
-                , [&generatorId, 
-                   &snapId, 
-                   &numberOfColumsPerVertex, 
+                , [&generatorId,
+                   &snapId,
+                   &numberOfColumsPerVertex,
                    &counter](Types::index snapshotId, Types::generatorSnapshot snapshot)
                 {
                     EXPECT_EQ ( generatorId*100 + (snapId%10)*10, snapshot);
@@ -213,7 +213,7 @@ TEST_F ( TestPyPsaExample, CheckGeneratorRealPowerSnapshots )
                     ++snapId;
                     if ( 0 == (snapId%10) ) ++generatorId;
                     ++counter;
-                } 
+                }
             );
             EXPECT_EQ ( numberOfColumsPerVertex[vertexId], counter/10);
             counter = 0;
@@ -221,14 +221,14 @@ TEST_F ( TestPyPsaExample, CheckGeneratorRealPowerSnapshots )
     );
 }
 
-TEST_F ( TestPyPsaExample, CheckLoadRealPowerSnapshots ) 
+TEST_F ( TestPyPsaExample, CheckLoadRealPowerSnapshots )
 {
     Types::loadId loadId = 0;
     Types::index  snapId = 0;
     network_.template for_all_real_power_load_snapshots<ExecutionPolicy::sequential>(
         [&loadId, &snapId]
         ( Types::index snapshotId
-        , Types::loadSnapshot snapshot ) 
+        , Types::loadSnapshot snapshot )
         {
             // std::cout << "snapshotId: " << snapshotId << " ; snapshots: " << snapshot << std::endl;
             EXPECT_EQ ( 100 + (snapId%10)*10 + loadId, snapshot);
@@ -243,7 +243,7 @@ TEST_F ( TestPyPsaExample, CheckLoadRealPowerSnapshots )
     network_.template for_all_loads<ExecutionPolicy::sequential>(
         [this,&loadId, &snapId](TLoadProperties const & loadProperties)
         {
-            this->network_.template for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential>( 
+            this->network_.template for_all_real_power_load_snapshots_of<ExecutionPolicy::sequential>(
                 loadId,
                 [&loadId, &snapId](Types::index snapshotId, Types::generatorSnapshot snapshot) {
                     EXPECT_EQ ( 100 + (snapId%10)*10 + loadId, snapshot);
@@ -259,18 +259,18 @@ TEST_F ( TestPyPsaExample, CheckLoadRealPowerSnapshots )
     snapId = 0;
     std::vector<Types::index> numberOfColumsPerVertex = {1,1,1,1,1,1,1,1,1,1};
     Types::count counter = 0;
-    network_.Graph().template for_all_vertex_identifiers<ExecutionPolicy::sequential>( 
-        [&loadId, 
-         &snapId, 
-         &numberOfColumsPerVertex, 
+    network_.Graph().template for_all_vertex_identifiers<ExecutionPolicy::sequential>(
+        [&loadId,
+         &snapId,
+         &numberOfColumsPerVertex,
          &counter,
          this](Types::vertexId vertexId)
         {
-            network_.template for_all_real_power_load_snapshots_at<ExecutionPolicy::sequential>( 
+            network_.template for_all_real_power_load_snapshots_at<ExecutionPolicy::sequential>(
                 vertexId
-                , [&loadId, 
-                   &snapId, 
-                   &numberOfColumsPerVertex, 
+                , [&loadId,
+                   &snapId,
+                   &numberOfColumsPerVertex,
                    &counter](Types::index snapshotId, Types::generatorSnapshot snapshot)
                 {
                     EXPECT_EQ ( 100 + (snapId%10)*10 + loadId, snapshot);
@@ -278,7 +278,7 @@ TEST_F ( TestPyPsaExample, CheckLoadRealPowerSnapshots )
                     ++snapId;
                     if ( 0 == (snapId%10) ) ++loadId;
                     ++counter;
-                } 
+                }
             );
             EXPECT_EQ ( numberOfColumsPerVertex[vertexId], counter/10);
             counter = 0;
@@ -287,8 +287,8 @@ TEST_F ( TestPyPsaExample, CheckLoadRealPowerSnapshots )
 }
 
 TEST_F ( PyPSAExampleInconsistencyGeneratorsDeathTest
-       , DeathTestInconsistency ) 
-{   
+       , DeathTestInconsistency )
+{
     auto assertionString = buildAssertionString ( "PyPsaParser.hpp"
                                                 , "PyPsaParser"
                                                 , "ExtractGeneratorMaximumRealPowerPuHeader"
@@ -300,8 +300,8 @@ TEST_F ( PyPSAExampleInconsistencyGeneratorsDeathTest
 }
 
 TEST_F ( PyPSAExampleInconsistencyInTimestampLengthDeathTest
-       , DeathTestInconsistency ) 
-{   
+       , DeathTestInconsistency )
+{
     auto assertionString = buildAssertionString ( "PyPsaParser.hpp"
                                                 , "PyPsaParser"
                                                 , "HasCorrectSnapshotSizes"
@@ -313,8 +313,8 @@ TEST_F ( PyPSAExampleInconsistencyInTimestampLengthDeathTest
 }
 
 TEST_F ( PyPSAExampleDuplicatedGeneratorsDeathTest
-       , DeathTestGeneratorDuplicates ) 
-{   
+       , DeathTestGeneratorDuplicates )
+{
     auto assertionString = buildAssertionString ( "PyPsaParser.hpp"
                                                 , "PyPsaParser"
                                                 , "AddNameToGenerator"
@@ -326,15 +326,15 @@ TEST_F ( PyPSAExampleDuplicatedGeneratorsDeathTest
 }
 
 TEST_F ( PyPSA_PyPSA_data_2018_11_20__elec_s1024_AT
-       , SimpleReadTest ) 
-{   
+       , SimpleReadTest )
+{
     if ( ! egoa::PowerGridIO<TGraph>::read( network_
                                           , graph_
                                           , TestCaseSmallExample_
                                           , TPowerGridIO::ReadPyPsa ) )
     {
-        std::cout   << "Expected file " 
-                    << TestCaseSmallExample_ 
+        std::cout   << "Expected file "
+                    << TestCaseSmallExample_
                     << " does not exist!";
     }
 }

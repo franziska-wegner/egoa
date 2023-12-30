@@ -27,7 +27,7 @@ class TestBinaryHeap : public ::testing::Test {
         using TVector     = std::vector<TElement>;
 
         void ExpectContent  ( TBinaryHeap                   heap
-                            , std::vector<TElement> const & elements) 
+                            , std::vector<TElement> const & elements)
         {
             for ( auto e : elements ) {
                 ASSERT_FALSE ( heap.Empty() );
@@ -62,7 +62,7 @@ class TestBinaryHeapWithOneIntegerElement : public TestBinaryHeap {
         TestBinaryHeapWithOneIntegerElement(){}
         virtual ~TestBinaryHeapWithOneIntegerElement(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             TElement element = 99;
             heap_.Emplace(element);
@@ -77,7 +77,7 @@ class TestBinaryHeapWithVectorOfInteger : public TestBinaryHeap {
         TestBinaryHeapWithVectorOfInteger(){}
         virtual ~TestBinaryHeapWithVectorOfInteger(){}
 
-        virtual void SetUp() override 
+        virtual void SetUp() override
         {
             TVector elements = { 5, 9, 23, 55, 1, 4, 2};
             heap_.BuildWith ( elements );
@@ -90,7 +90,7 @@ class TestHeapIterator : public TestBinaryHeap {
     protected:
         std::vector<TElement> elements_;
 
-        void SetUp() override 
+        void SetUp() override
         {
             elements_ = {4, 5, 8, 32, 432, 3, 7};
             heap_.BuildWith(elements_);

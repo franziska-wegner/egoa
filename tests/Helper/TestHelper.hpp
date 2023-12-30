@@ -43,7 +43,7 @@ struct FileName {
  */
 Types::string buildAssertionString ( Types::string fileName
                                    , Types::string function
-                                   , Types::string message ) 
+                                   , Types::string message )
 {
     std::stringstream result;
 #ifdef EGOA_ENABLE_ASSERTION
@@ -84,7 +84,7 @@ Types::string buildAssertionString ( Types::string fileName
 Types::string buildAssertionString ( Types::string fileName
                                    , Types::string enclosingClass
                                    , Types::string function
-                                   , Types::string message ) 
+                                   , Types::string message )
 {
     return buildAssertionString ( fileName, function, message );
 }
@@ -108,7 +108,7 @@ Types::string buildAssertionString ( Types::string fileName
  */
 template<typename Type>
 Types::string buildAssertionString ( Types::string function
-                                   , Types::string message ) 
+                                   , Types::string message )
 {
     return buildAssertionString ( FileName<Type>::Name(), function, message );
 }
@@ -124,7 +124,7 @@ Types::string buildAssertionString ( Types::string function
  */
 template<typename T>
 void ExpectSameContent ( std::vector<T> left
-                       , std::vector<T> right ) 
+                       , std::vector<T> right )
 {
     std::sort(left.begin(), left.end());
     std::sort(right.begin(), right.end());
@@ -135,7 +135,7 @@ template<typename LeftIt, typename RightIt>
 void ExpectSameContent ( LeftIt  leftBegin
                        , LeftIt  leftEnd
                        , RightIt rightBegin
-                       , RightIt rightEnd ) 
+                       , RightIt rightEnd )
 {
     std::vector<decltype(*leftBegin)> left{leftBegin, leftEnd};
     std::vector<decltype(*rightBegin)> right{rightBegin, rightEnd};
@@ -158,11 +158,11 @@ template<typename LeftIt, typename RightIt>
 void ExpectEqual ( LeftIt  leftBegin
                  , LeftIt  leftEnd
                  , RightIt rightBegin
-                 , RightIt rightEnd ) 
+                 , RightIt rightEnd )
 {
     auto leftIt  = leftBegin;
     auto rightIt = rightBegin;
-    while ( leftIt != leftEnd && rightIt != rightEnd ) 
+    while ( leftIt != leftEnd && rightIt != rightEnd )
     {
         EXPECT_EQ ( *leftIt, *rightIt );
         ++leftIt;
@@ -175,7 +175,7 @@ void ExpectEqual ( LeftIt  leftBegin
 
 template<typename LeftRange, typename RightRange>
 void ExpectEqual ( LeftRange  && left
-                 , RightRange && right ) 
+                 , RightRange && right )
 {
     using std::begin, std::end;
     ExpectEqual ( begin(left), end(left), begin(right), end(right) );
@@ -200,12 +200,12 @@ public:
     void NonConstMemberFunction() {}
 
     friend bool operator== ( MinimalProperties const & left
-                           , MinimalProperties const & right ) 
+                           , MinimalProperties const & right )
     {
         return left.privateId_ == right.privateId_;
     }
     friend bool operator!= ( MinimalProperties const & left
-                           , MinimalProperties const & right ) 
+                           , MinimalProperties const & right )
     {
         return !(left == right);
     }
@@ -215,7 +215,7 @@ private:
 };
 
 inline std::ostream & operator<< ( std::ostream            & stream
-                                 , MinimalProperties const & edge ) 
+                                 , MinimalProperties const & edge )
 {
     stream  << "{"
             << "privateId = "
@@ -262,7 +262,7 @@ private:
 };
 
 inline std::ostream & operator<< ( std::ostream          & stream
-                                 , HashableElement const & element ) 
+                                 , HashableElement const & element )
 {
     stream << "#" << element.Identifier();
     return stream;
@@ -276,7 +276,7 @@ namespace std {
      */
     template<>
     struct hash<egoa::test::HashableElement> {
-        size_t operator() ( egoa::test::HashableElement const & element ) const 
+        size_t operator() ( egoa::test::HashableElement const & element ) const
         {
             return element.Identifier();
         }

@@ -84,16 +84,16 @@ class TestPowerGrid : public ::testing::Test {
 
             generatorProperties.RealPowerBound().Maximum()       = 9.9;
             generatorProperties.RealPowerBound().Minimum()       = 0.1;
-            
+
             generatorProperties.Pc1()                            = 23;
             generatorProperties.Pc2()                            = 27;
-            
+
             generatorProperties.Qc1Bound().Maximum()             = 11;
             generatorProperties.Qc1Bound().Minimum()             = 10;
-            
+
             generatorProperties.Qc2Bound().Maximum()             = 25;
             generatorProperties.Qc2Bound().Minimum()             = 21;
-            
+
             generatorProperties.RampAgc()                        = 3;
             generatorProperties.Ramp10()                         = 10;
             generatorProperties.Ramp30()                         = 30;
@@ -175,7 +175,7 @@ using TestNetworkEmptyDeathTest = TestNetworkEmpty;
 class TestPowerGridAcm2018MtsfFigure4a : public TestPowerGrid {
     protected:
         TestPowerGridAcm2018MtsfFigure4a ()
-        : TestPowerGrid () 
+        : TestPowerGrid ()
         {}
 
         virtual ~TestPowerGridAcm2018MtsfFigure4a () {}
@@ -184,16 +184,16 @@ class TestPowerGridAcm2018MtsfFigure4a : public TestPowerGrid {
         {
             EXPECT_EQ ( true, generatorProperties.IsActive()      );
             EXPECT_EQ ( Vertices::BusStatus::active, generatorProperties.Status()  );
-            
+
             EXPECT_EQ ( 1.234, generatorProperties.RealPower()    );
             EXPECT_EQ ( 1.111, generatorProperties.ReactivePower()  );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.RealPowerBound().Minimum()      );
             EXPECT_EQ ( 8.0, generatorProperties.RealPowerBound().Maximum()      );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.ReactivePowerBound().Minimum()  );
             EXPECT_EQ ( 2.0, generatorProperties.ReactivePowerBound().Maximum()  );
-            
+
             EXPECT_EQ ( 1.10, generatorProperties.VoltageMagnitude() );
         }
 
@@ -201,10 +201,10 @@ class TestPowerGridAcm2018MtsfFigure4a : public TestPowerGrid {
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4a_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4a_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4a_
                             << " does not exist!";
                 exit(1);
             }
@@ -224,7 +224,7 @@ using TestPowerGridAcm2018MtsfFigure4aDeathTest = TestPowerGridAcm2018MtsfFigure
 class TestPowerGridAcm2018MtsfFigure4b : public TestPowerGrid {
     protected:
         TestPowerGridAcm2018MtsfFigure4b ()
-        : TestPowerGrid () 
+        : TestPowerGrid ()
         {}
 
         virtual ~TestPowerGridAcm2018MtsfFigure4b () {}
@@ -233,16 +233,16 @@ class TestPowerGridAcm2018MtsfFigure4b : public TestPowerGrid {
         {
             EXPECT_EQ ( true, generatorProperties.IsActive()      );
             EXPECT_EQ ( Vertices::BusStatus::active, generatorProperties.Status()  );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.RealPower()      );
             EXPECT_EQ ( 0.0, generatorProperties.ReactivePower()  );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.RealPowerBound().Minimum()      );
             EXPECT_EQ ( 5.0, generatorProperties.RealPowerBound().Maximum()      );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.ReactivePowerBound().Minimum()  );
             EXPECT_EQ ( 0.0, generatorProperties.ReactivePowerBound().Maximum()  );
-            
+
             EXPECT_EQ ( 1.10, generatorProperties.VoltageMagnitude() );
         }
 
@@ -250,10 +250,10 @@ class TestPowerGridAcm2018MtsfFigure4b : public TestPowerGrid {
         {
             if (!TPowerGridIO::read ( network_
                                     , TestCaseAcm2018MtsfFigure4b_
-                                    , TPowerGridIO::readIeeeCdfMatlab ) ) 
+                                    , TPowerGridIO::readIeeeCdfMatlab ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseAcm2018MtsfFigure4b_ 
+                std::cerr   << "Expected file "
+                            << TestCaseAcm2018MtsfFigure4b_
                             << " does not exist!";
                 exit(1);
             }
@@ -273,7 +273,7 @@ using TestPowerGridAcm2018MtsfFigure4bDeathTest = TestPowerGridAcm2018MtsfFigure
 class TestPowerGridPyPsaExample : public TestPowerGrid {
     protected:
         TestPowerGridPyPsaExample ()
-        : TestPowerGrid () 
+        : TestPowerGrid ()
         {}
 
         virtual ~TestPowerGridPyPsaExample () {}
@@ -282,16 +282,16 @@ class TestPowerGridPyPsaExample : public TestPowerGrid {
         {
             EXPECT_EQ ( true, generatorProperties.IsActive()      );
             EXPECT_EQ ( Vertices::BusStatus::active, generatorProperties.Status()  );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.RealPower()      );
             EXPECT_EQ ( 0.0, generatorProperties.ReactivePower()  );
-            
+
             EXPECT_EQ ( 0, generatorProperties.RealPowerBound().Minimum()                      );
             EXPECT_EQ ( Const::REAL_INFTY, generatorProperties.RealPowerBound().Maximum()      );
-            
+
             EXPECT_EQ ( 0.0, generatorProperties.ReactivePowerBound().Minimum()  );
             EXPECT_EQ ( Const::REAL_INFTY, generatorProperties.ReactivePowerBound().Maximum()  );
-            
+
             EXPECT_EQ ( 1, generatorProperties.VoltageMagnitude() );
         }
 
@@ -302,8 +302,8 @@ class TestPowerGridPyPsaExample : public TestPowerGrid {
                                                   , TestCaseSmallExample_
                                                   , TPowerGridIO::ReadPyPsa ) )
             {
-                std::cerr   << "Expected file " 
-                            << TestCaseSmallExample_ 
+                std::cerr   << "Expected file "
+                            << TestCaseSmallExample_
                             << " does not exist!";
                 exit(1);
             }

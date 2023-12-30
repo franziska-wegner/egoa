@@ -18,7 +18,7 @@ using ::testing::MatchesRegex;
 namespace egoa::test {
 
 #pragma mark TEST_DOMINATING_THETA_PATH_PRIMITIVES
-    
+
 TEST_F ( TestDTPEmptyGraph
        , QueueEmpty )
 {
@@ -66,7 +66,7 @@ TEST_F ( TestDTPEmptyGraph
         } catch ( std::runtime_error const & error ) {
                 EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
-            FAIL()  << "Expected std::runtime_error with message: " 
+            FAIL()  << "Expected std::runtime_error with message: "
                     << assertionString;
         }
     }
@@ -76,32 +76,32 @@ TEST_F ( TestDTPEmptyGraph
 #pragma mark TEST_DOMINATING_THETA_PATH_WITH_GRAPH_ACM_FIGURE_4A
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , NumberOfLabels ) 
+        , NumberOfLabels )
 {
     EXPECT_EQ ( dtp_.NumberOfLabels(), 0 );
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , Initialization ) 
+        , Initialization )
 {
     EXPECT_EQ ( graph_.NumberOfVertices(), 4 );
     EXPECT_EQ ( graph_.NumberOfEdges(),    5 );
     EXPECT_EQ ( graph_.NumberOfEdges(),    5 );
     EXPECT_EQ ( graph_.MinDegree(),        2 );
     EXPECT_EQ ( graph_.MaxDegree(),        3 );
-    
+
     Types::edgeId edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(0)
                                          , static_cast<Types::vertexId>(1) );
     TestEdgeValues ( edgeId, 0, 1.00, -1.00, -1.00, 0.00, 0.00 );
-    
+
     edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(0)
                            , static_cast<Types::vertexId>(2) );
     TestEdgeValues ( edgeId, 1, 4.00, -1.00, -1.00, 0.00, 0.00 );
-    
+
     edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(0)
                            , static_cast<Types::vertexId>(3) );
     TestEdgeValues ( edgeId, 2, 3.00, -1.00, -1.00, 0.00, 0.00 );
-    
+
     edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(1)
                            , static_cast<Types::vertexId>(2) );
     TestEdgeValues ( edgeId, 3, 1.00, -1.00, -1.00, 0.00, 0.00 );
@@ -112,14 +112,14 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , RunDTPwithEmptySource ) 
+        , RunDTPwithEmptySource )
 {
     dtp_.Run();
     EXPECT_EQ ( 0, dtp_.NumberOfLabels() );
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , RunDTPwithSource ) 
+        , RunDTPwithSource )
 {
     dtp_.Source ( source_ );
     dtp_.Run();
@@ -127,7 +127,7 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , RunDTPthetaWithSource ) 
+        , RunDTPthetaWithSource )
 {
     dtpTheta_.Source ( source_ );
     dtpTheta_.Run();
@@ -135,7 +135,7 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , RunDTPthetaWithSourceResultGraph ) 
+        , RunDTPthetaWithSourceResultGraph )
 {
     dtpTheta_.Source ( source_ );
     dtpTheta_.Run();
@@ -145,7 +145,7 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
     Subgraph<TGraph const> expectedGraphWithSink0{&graph_, {0}, {}};
     Subgraph<TGraph const> resultGraphWithSink0{nullptr, {}, {}};
     Types::real result = dtpTheta_.Result( resultGraphWithSink0, 0 );
-    
+
     EXPECT_EQ ( expectedGraphWithSink0, resultGraphWithSink0 );
     EXPECT_EQ ( 0, result );
 
@@ -172,14 +172,14 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
-        , RunDTPthetaWithSourceResultVector ) 
+        , RunDTPthetaWithSourceResultVector )
 {
     dtpTheta_.Source ( source_ );
     dtpTheta_.Run();
     EXPECT_EQ ( 7, dtpTheta_.NumberOfLabels() );
 
     std::vector<std::vector<Types::vertexId>> resultVectorWithSink;
-    
+
     Types::real result = dtpTheta_.Result( resultVectorWithSink, 0 );
     EXPECT_EQ( resultVectorWithSink.size(), 1 );
     EXPECT_EQ( resultVectorWithSink[0].size(), 1 );
@@ -220,32 +220,32 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4a
 #pragma mark TEST_DOMINATING_THETA_PATH_WITH_GRAPH_ACM_FIGURE_4B
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , NumberOfLabels ) 
+        , NumberOfLabels )
 {
     EXPECT_EQ ( dtp_.NumberOfLabels(), 0 );
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , Initialization ) 
+        , Initialization )
 {
     EXPECT_EQ ( graph_.NumberOfVertices(), 4 );
     EXPECT_EQ ( graph_.NumberOfEdges(),    5 );
     EXPECT_EQ ( graph_.NumberOfEdges(),    5 );
     EXPECT_EQ ( graph_.MinDegree(),        2 );
     EXPECT_EQ ( graph_.MaxDegree(),        3 );
-    
+
     Types::edgeId edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(0)
                                          , static_cast<Types::vertexId>(1) );
     TestEdgeValues ( edgeId, 0, 1.00, -1.00, -1.00, 0.00, 0.00 );
-    
+
     edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(0)
                            , static_cast<Types::vertexId>(2) );
     TestEdgeValues ( edgeId, 1, 1.00, -1.00, -1.00, 0.00, 0.00 );
-    
+
     edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(0)
                            , static_cast<Types::vertexId>(3) );
     TestEdgeValues ( edgeId, 2, 2.00, -1.00, -1.00, 0.00, 0.00 );
-    
+
     edgeId = graph_.EdgeId ( static_cast<Types::vertexId>(1)
                            , static_cast<Types::vertexId>(2) );
     TestEdgeValues ( edgeId, 3, 1.00, -1.00, -1.00, 0.00, 0.00 );
@@ -256,14 +256,14 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , RunDTPwithEmptySource ) 
+        , RunDTPwithEmptySource )
 {
     dtp_.Run();
     EXPECT_EQ ( dtp_.NumberOfLabels(), 0 );
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , RunDTPwithSource ) 
+        , RunDTPwithSource )
 {
     dtp_.Source ( source_ );
     dtp_.Run();
@@ -271,7 +271,7 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , RunDTPthetaWithSource ) 
+        , RunDTPthetaWithSource )
 {
     dtpTheta_.Source ( source_ );
     dtpTheta_.Run();
@@ -279,7 +279,7 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , RunDTPthetaWithSourceResultGraph ) 
+        , RunDTPthetaWithSourceResultGraph )
 {
     dtpTheta_.Source ( source_ );
     dtpTheta_.Run();
@@ -315,14 +315,14 @@ TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
 }
 
 TEST_F  ( TestDTPUsingAcm2018MtsfFigure4b
-        , RunDTPthetaWithSourceResultVector ) 
+        , RunDTPthetaWithSourceResultVector )
 {
     dtpTheta_.Source ( source_ );
     dtpTheta_.Run();
     EXPECT_EQ ( dtpTheta_.NumberOfLabels(), 5 );
 
     std::vector<std::vector<Types::vertexId>> resultVectorWithSink;
-    
+
     Types::real result = dtpTheta_.Result( resultVectorWithSink, 0 );
     EXPECT_EQ( resultVectorWithSink.size(), 1 );
     EXPECT_EQ( resultVectorWithSink[0].size(), 1 );

@@ -22,16 +22,16 @@ class TestStdQueue : public ::testing::Test {
         using TElement = Types::integer;
         using TQueue   = StdQueue<TElement>;
         using TVector  = std::vector<TElement>;
-        
+
         void AddContent ( TQueue                      & queue
-                        , std::vector<TElement> const & elements) 
+                        , std::vector<TElement> const & elements)
         {
             for ( auto element : elements )
                 queue.Emplace(element);
         }
 
         void ExpectContent  ( TQueue                        queue
-                            , std::vector<TElement> const & elements) 
+                            , std::vector<TElement> const & elements)
         {
             for ( auto e : elements ) {
                 ASSERT_FALSE ( queue.Empty() );
