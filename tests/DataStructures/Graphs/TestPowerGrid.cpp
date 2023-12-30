@@ -1281,12 +1281,12 @@ TEST_F ( TestNetworkEmpty
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
                                    , generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 
@@ -1297,12 +1297,12 @@ TEST_F ( TestNetworkEmpty
                                             , "Graph\\(\\).VertexExists \\( vertexId \\)");
     try {
         network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 
@@ -1376,12 +1376,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                    , generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 
@@ -1398,12 +1398,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                    , generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1442,12 +1442,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
                                    , generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1518,12 +1518,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                    , generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 
@@ -1540,12 +1540,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                    , generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1628,12 +1628,12 @@ TEST_F ( TestNetworkEmpty
 
     try {
         network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1689,12 +1689,12 @@ TEST_F ( TestPowerGridPyPsaExample
 
     try {
         network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1736,12 +1736,12 @@ TEST_F ( TestNetworkEmpty
 
     try {
         network_.HasGeneratorAt ( vertex );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1865,12 +1865,12 @@ TEST_F ( TestNetworkEmpty
 
     try {
         network_.GeneratorIds( static_cast<Types::vertexId>(0), generatorIds );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -1936,12 +1936,12 @@ TEST_F ( TestNetworkEmpty
                                                 , "HasGenerator \\( generatorId \\)");
     try {
         network_.GeneratorAt( static_cast<Types::generatorId>(0) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2006,12 +2006,12 @@ TEST_F ( TestNetworkEmpty
                                                 , "Graph\\(\\).VertexExists \\( vertexId \\)");
     try {
         network_.GeneratorsAt( static_cast<Types::vertexId>(0), generators );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2119,12 +2119,12 @@ TEST_F ( TestNetworkEmpty
 
     try {
         network_.GeneratorsAt( vertex0, generatorProperties );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2314,12 +2314,12 @@ TEST_F  ( TestNetworkEmpty
 
     try {
         network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2560,12 +2560,12 @@ TEST_F  ( TestNetworkEmpty
 
     try {
         network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
@@ -2596,12 +2596,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 
     try {
         network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
-    } catch ( std::runtime_error const & error ) 
+    } catch ( std::runtime_error const & error )
     {
         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... ) 
+    } catch ( ... )
     {
-        FAIL()  << "Expected std::runtime_error with message: " 
+        FAIL()  << "Expected std::runtime_error with message: "
                 << assertionString;
     }
 }
