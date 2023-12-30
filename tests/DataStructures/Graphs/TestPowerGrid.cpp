@@ -5092,6 +5092,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddSnapshotTimestamp )
 {
@@ -5104,6 +5105,30 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.AddSnapshotTimestamp( "" );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddSnapshotTimestampExceptionHandling )
+{
+    network_.AddSnapshotTimestamp( "2019-09-19 19:19:19" );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddSnapshotTimestamp"
+                                                , "!timestamp.empty\\(\\)");
+    try {
+        network_.AddSnapshotTimestamp( "" );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddSnapshotTimestamp )
