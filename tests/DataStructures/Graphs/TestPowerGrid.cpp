@@ -1175,6 +1175,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
@@ -1195,6 +1196,38 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestPowerGridAcm2018MtsfFigure4b
+       , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+{
+    EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+    EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+
+    // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveGeneratorAt"
+                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+    try {
+        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+                                   , static_cast<Types::generatorId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 // ***********************************************************************
 // ***********************************************************************
