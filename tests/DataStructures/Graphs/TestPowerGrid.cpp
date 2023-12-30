@@ -5374,6 +5374,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , LoadSnapshotOfLoadsSize )
 {
@@ -5385,6 +5386,29 @@ TEST_F ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.LoadSnapshotOf ( 10, 0 );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , LoadSnapshotOfLoadsSizeExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadSnapshotOf"
+                                                , "loadId < loads_.size\\(\\)");
+
+    try {
+        network_.LoadSnapshotOf ( 10, 0 );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestNetworkEmptyDeathTest
        , LoadSnapshotOfConstNoneDeath )
