@@ -309,7 +309,7 @@ class TestPowerGridPyPsaExample : public TestPowerGrid {
             }
         }
 
-        Types::string const TestCaseSmallExample_ = "../../tests/Data/PowerGrids/PyPsaExample";
+        Types::string const TestCaseSmallExample_ = "../../tests/Data/PowerGrids/PyPSAExample";
 
     protected:
         TGraph         graph_;
