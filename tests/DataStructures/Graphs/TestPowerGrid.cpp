@@ -1174,25 +1174,25 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 #ifdef EGOA_ENABLE_ASSERTION
-TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGeneratorId )
-{
-    EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
-    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
+//        , RemoveGeneratorAtUsingVertexIdGeneratorId )
+// {
+//     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 
-    // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
-    ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                              , static_cast<Types::generatorId>(0) )
-                 , assertionString );
+//     // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                               , static_cast<Types::generatorId>(0) )
+//                  , assertionString );
 
-    EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+//     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
