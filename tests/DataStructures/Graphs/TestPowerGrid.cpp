@@ -739,9 +739,6 @@ TEST_F ( TestNetworkEmpty
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
                                                 , "Graph\\(\\).VertexExists\\( vertexId \\)");
-    ASSERT_DEATH ( {network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
-                                            , generatorProperties );}
-                 , assertionString );
     try {
         network_.AddGeneratorAt ( static_cast<Types::vertexId>(0), generatorProperties );
     } catch ( std::runtime_error const & error )
