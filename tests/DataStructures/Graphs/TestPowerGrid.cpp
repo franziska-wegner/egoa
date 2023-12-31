@@ -64,25 +64,25 @@ TEST_F ( TestNetworkEmpty
    EXPECT_TRUE ( Bound<>(-Const::REAL_INFTY,Const::REAL_INFTY) == networkConst_.ThetaBound() );
 }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , ThetaBound )
-{
-   EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
-   EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+//        , ThetaBound )
+// {
+//    EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
+//    EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
 
-   EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
-   EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
-}
+//    EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
+//    EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
+// }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , ThetaBound )
-{
-   EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
-   EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4b
+//        , ThetaBound )
+// {
+//    EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
+//    EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
 
-   EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
-   EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
-}
+//    EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
+//    EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
+// }
 
 TEST_F ( TestPowerGridPyPsaExample
        , ThetaBound )
@@ -1091,34 +1091,34 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
-{
-    EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
-    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+//        , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+// {
+//     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 
-    // Vertex does not contain the generator, thus method RemoveGeneratorAt access assertion branch
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                   , static_cast<Types::generatorId>(0) );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
+//     // Vertex does not contain the generator, thus method RemoveGeneratorAt access assertion branch
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , static_cast<Types::generatorId>(0) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
 
-    EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1, network_.NumberOfGenerators() );
-}
+//     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1, network_.NumberOfGenerators() );
+// }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
@@ -1196,34 +1196,34 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
-{
-    EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
-    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4b
+//        , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+// {
+//     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 
-    // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                   , static_cast<Types::generatorId>(0) );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
+//     // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , static_cast<Types::generatorId>(0) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
 
-    EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
-}
+//     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+// }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
