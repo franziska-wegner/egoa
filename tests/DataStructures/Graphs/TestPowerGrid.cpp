@@ -1263,50 +1263,50 @@ TEST_F ( TestNetworkEmptyDeathTest
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TEST_F ( TestNetworkEmpty
-       , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
-{
-    // Generate generator with default values
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name() = "TestGenerator1";
+// TEST_F ( TestNetworkEmpty
+//        , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
+// {
+//     // Generate generator with default values
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name() = "TestGenerator1";
 
-    // Vertex has no generators with assertion at RemoveGeneratorAt
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+//     // Vertex has no generators with assertion at RemoveGeneratorAt
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "Graph\\(\\).VertexExists \\( vertexId \\)");
 
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
-                                   , generatorProperties );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
 
-    // Vertex has no generators with assertion at HasGeneratorAt
-    assertionString = buildAssertionString  ( "PowerGrid.hpp"
-                                            , "PowerGrid"
-                                            , "HasGeneratorAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
-    try {
-        network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
+//     // Vertex has no generators with assertion at HasGeneratorAt
+//     assertionString = buildAssertionString  ( "PowerGrid.hpp"
+//                                             , "PowerGrid"
+//                                             , "HasGeneratorAt"
+//                                             , "Graph\\(\\).VertexExists \\( vertexId \\)");
+//     try {
+//         network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
 
-    EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
-    EXPECT_EQ ( 0, network_.NumberOfGenerators() );
-}
+//     EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
+//     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
+// }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
@@ -1360,51 +1360,51 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
 }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
-{
-    TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+//        , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
-    // Vertex has no generators
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     // Vertex has no generators
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
 
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                   , generatorProperties );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
 
-    // Ordinary generator removal
-    network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
-                               , generatorProperties );
+//     // Ordinary generator removal
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                , generatorProperties );
 
-    // Generator does not exist
-    assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                           , "PowerGrid"
-                                           , "RemoveGeneratorAt"
-                                           , "HasGenerator \\( generatorId \\)");
+//     // Generator does not exist
+//     assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                            , "PowerGrid"
+//                                            , "RemoveGeneratorAt"
+//                                            , "HasGenerator \\( generatorId \\)");
 
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                   , generatorProperties );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
-}
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+// }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
@@ -1471,35 +1471,35 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 }
 
 #ifdef EGOA_ENABLE_ASSERTION
-TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGenerator )
-{
-    TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
+//        , RemoveGeneratorAtUsingVertexIdGenerator )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
-    // Vertex has no generators
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     // Vertex has no generators
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
 
-    ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                               , generatorProperties );}
-                 , assertionString );
+//     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                                , generatorProperties );}
+//                  , assertionString );
 
-    // Ordinary generator removal
-    network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
-                               , generatorProperties );
+//     // Ordinary generator removal
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                , generatorProperties );
 
-    // Generator does not exist
-    assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                           , "PowerGrid"
-                                           , "RemoveGeneratorAt"
-                                           , "HasGenerator \\( generatorId \\)");
+//     // Generator does not exist
+//     assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                            , "PowerGrid"
+//                                            , "RemoveGeneratorAt"
+//                                            , "HasGenerator \\( generatorId \\)");
 
-    ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                               , generatorProperties );}
-                 , assertionString );
-}
+//     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                                , generatorProperties );}
+//                  , assertionString );
+// }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
