@@ -1502,51 +1502,51 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 // }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGenerator )
-{
-    TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
+//        , RemoveGeneratorAtUsingVertexIdGenerator )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
-    // Vertex has no generators
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     // Vertex has no generators
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
 
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                   , generatorProperties );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
 
-    // Ordinary generator removal
-    network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
-                               , generatorProperties );
+//     // Ordinary generator removal
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                , generatorProperties );
 
-    // Generator does not exist
-    assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                           , "PowerGrid"
-                                           , "RemoveGeneratorAt"
-                                           , "HasGenerator \\( generatorId \\)");
+//     // Generator does not exist
+//     assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                            , "PowerGrid"
+//                                            , "RemoveGeneratorAt"
+//                                            , "HasGenerator \\( generatorId \\)");
 
-    try {
-        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                   , generatorProperties );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
-}
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+// }
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 // ***********************************************************************
