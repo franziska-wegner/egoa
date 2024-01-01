@@ -724,7 +724,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
     ASSERT_DEATH ( {network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
                                             , generatorProperties );}
                  , assertionString );
@@ -740,7 +740,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
     try {
         network_.AddGeneratorAt ( static_cast<Types::vertexId>(0), generatorProperties );
     } catch ( std::runtime_error const & error )
@@ -997,7 +997,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
                                                , static_cast<Types::generatorId>(0) );}
@@ -1006,7 +1006,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasGeneratorAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );}, assertionString );
 
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
@@ -1020,7 +1020,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
@@ -1037,7 +1037,7 @@ TEST_F ( TestNetworkEmpty
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasGeneratorAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     try {
         network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
     } catch ( std::runtime_error const & error )
@@ -1083,7 +1083,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+                                                , R"(false && "The generatorId does not exist in generatorsAtVertex_\[vertexId\]!")");
     ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                               , static_cast<Types::generatorId>(0) )
                  , assertionString );
@@ -1131,7 +1131,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)" );
+                                                , R"(Graph\(\).VertexExists \( vertexId \))" );
     ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
                                               , static_cast<Types::generatorId>(0) )
                  , assertionString );
@@ -1144,7 +1144,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)" );
+                                                , R"(Graph\(\).VertexExists \( vertexId \))" );
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
                                    , static_cast<Types::generatorId>(0) );
@@ -1247,7 +1247,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
                                                , generatorProperties );}
@@ -1257,7 +1257,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasGeneratorAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );}, assertionString );
 
     EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
@@ -1340,7 +1340,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+                                                , R"(false && "The generatorId does not exist in generatorsAtVertex_\[vertexId\]!")");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                                , generatorProperties );}
@@ -1354,7 +1354,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "RemoveGeneratorAt"
-                                           , "HasGenerator \\( generatorId \\)");
+                                           , R"(HasGenerator \( generatorId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                                , generatorProperties );}
@@ -1420,7 +1420,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
                                                , generatorProperties );}
@@ -1437,7 +1437,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
@@ -1611,7 +1611,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) ); }
                  , assertionString );
@@ -1624,7 +1624,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) );
@@ -1672,7 +1672,7 @@ TEST_F ( TestPowerGridPyPsaExampleDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) ); }
                  , assertionString );
@@ -1685,7 +1685,7 @@ TEST_F ( TestPowerGridPyPsaExample
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) );
@@ -1713,7 +1713,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     TVertexProperties vertexProperties;
     TVertex vertex ( 9999, vertexProperties );
@@ -1729,7 +1729,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     TVertexProperties vertexProperties;
     TVertex vertex ( 9999, vertexProperties );
@@ -1846,7 +1846,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorIds"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.GeneratorIds( static_cast<Types::vertexId>(0), generatorIds );}
                  , assertionString );
 }
@@ -1861,7 +1861,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorIds"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.GeneratorIds( static_cast<Types::vertexId>(0), generatorIds );
@@ -1920,7 +1920,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorAt"
-                                                , "HasGenerator \\( generatorId \\)");
+                                                , R"(HasGenerator \( generatorId \))");
     ASSERT_DEATH ( {network_.GeneratorAt( static_cast<Types::generatorId>(0) );}
                  , assertionString );
 }
@@ -1933,7 +1933,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorAt"
-                                                , "HasGenerator \\( generatorId \\)");
+                                                , R"(HasGenerator \( generatorId \))");
     try {
         network_.GeneratorAt( static_cast<Types::generatorId>(0) );
     } catch ( std::runtime_error const & error )
@@ -1988,7 +1988,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorsAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.GeneratorsAt( static_cast<Types::vertexId>(0), generators );}
                  , assertionString );
 }
@@ -2003,7 +2003,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorsAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     try {
         network_.GeneratorsAt( static_cast<Types::vertexId>(0), generators );
     } catch ( std::runtime_error const & error )
@@ -2097,7 +2097,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorsAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.GeneratorsAt( vertex0, generatorProperties );}
                  , assertionString );
 }
@@ -2115,7 +2115,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorsAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.GeneratorsAt( vertex0, generatorProperties );
@@ -2297,7 +2297,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
@@ -2310,7 +2310,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2543,7 +2543,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
@@ -2556,7 +2556,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2579,7 +2579,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
@@ -2592,7 +2592,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
@@ -2635,7 +2635,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
@@ -2648,7 +2648,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
@@ -2727,7 +2727,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
@@ -2740,7 +2740,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2961,7 +2961,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
@@ -2974,7 +2974,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
@@ -2997,7 +2997,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
@@ -3010,7 +3010,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
@@ -3053,7 +3053,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
@@ -3066,7 +3066,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
@@ -3129,7 +3129,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt ( static_cast<Types::vertexId>(0), loadProperties ); }
                  , assertionString );
@@ -3144,7 +3144,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.AddLoadAt ( static_cast<Types::vertexId>(0), loadProperties );
@@ -3190,7 +3190,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt ( static_cast<Types::vertexId>(9), loadProperties );}
                  , assertionString );
@@ -3204,7 +3204,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.AddLoadAt ( static_cast<Types::vertexId>(9), loadProperties );
@@ -3277,7 +3277,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt ( vertex, loadProperties ); }
                  , assertionString );
@@ -3294,7 +3294,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.AddLoadAt ( vertex, loadProperties );
@@ -3418,7 +3418,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveLoadAt ( static_cast<Types::vertexId>(0)
                                           , static_cast<Types::loadId>(0) );}
@@ -3427,7 +3427,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasLoadAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.HasLoadAt ( static_cast<Types::vertexId>(0) );}, assertionString );
 
     EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
@@ -3442,7 +3442,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.RemoveLoadAt ( static_cast<Types::vertexId>(0)
@@ -3459,7 +3459,7 @@ TEST_F  ( TestNetworkEmpty
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasLoadAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     try {
         network_.HasLoadAt ( static_cast<Types::vertexId>(0) );
     } catch ( std::runtime_error const & error )
@@ -3490,7 +3490,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.RemoveLoadAt ( vertexId
                                           , static_cast<Types::loadId>(0) );}
@@ -3511,7 +3511,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     try {
         network_.RemoveLoadAt ( vertexId
@@ -3683,7 +3683,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.HasLoadAt ( static_cast<Types::vertexId>(0) );}
                  , assertionString );
@@ -3699,7 +3699,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.HasLoadAt ( static_cast<Types::vertexId>(0) );
@@ -3824,7 +3824,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadIds"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     ASSERT_DEATH ( {network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );}
                  , assertionString );
@@ -3843,7 +3843,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadIds"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     try {
         network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
@@ -3939,7 +3939,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 0 ) );}
                  , assertionString );
@@ -3954,7 +3954,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     try {
         network_.LoadAt ( static_cast<Types::loadId>( 0 ) );
@@ -3987,7 +3987,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
@@ -4002,7 +4002,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     try {
         network_.LoadAt ( static_cast<Types::loadId>( 3 ) );
@@ -4061,7 +4061,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
@@ -4076,7 +4076,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     try {
         network_.LoadAt ( static_cast<Types::loadId>( 3 ) );
@@ -4141,7 +4141,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadsAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     std::vector<TLoadProperties> loads;
     ASSERT_DEATH ( {network_.LoadsAt ( static_cast<Types::vertexId>( 0 ), loads );}
@@ -4158,7 +4158,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadsAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     std::vector<TLoadProperties> loads;
     try {
@@ -4290,7 +4290,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");
+                                                , R"(VertexExists\(id\))");
 
     std::vector<TLoadProperties> loads;
     ASSERT_DEATH ( {network_.LoadsAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ), loads );}
@@ -4306,7 +4306,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");
+                                                , R"(VertexExists\(id\))");
 
     std::vector<TLoadProperties> loads;
     try {
@@ -4438,7 +4438,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RealPowerLoadAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     ASSERT_DEATH ( {network_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
@@ -4453,7 +4453,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RealPowerLoadAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     try {
         network_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );
@@ -4522,7 +4522,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");
+                                                , R"(VertexExists\(id\))");
 
     ASSERT_DEATH ( {network_.RealPowerLoadAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );}
                  , assertionString );
@@ -4537,7 +4537,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");
+                                                , R"(VertexExists\(id\))");
 
     try {
         network_.RealPowerLoadAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );
@@ -4606,7 +4606,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerLoadBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
@@ -4621,7 +4621,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerLoadBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );
@@ -4736,7 +4736,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddGeneratorAt(static_cast<Types::vertexId>(0), generatorProperties);}
                  , assertionString );
@@ -4745,7 +4745,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddGeneratorRealPowerSnapshotAt"
-                                           , "HasGenerator \\( generatorId \\)");
+                                           , R"(HasGenerator \( generatorId \))");
     ASSERT_DEATH ( {network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );}
                  , assertionString );
 }
@@ -4761,7 +4761,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     try {
         network_.AddGeneratorAt(static_cast<Types::vertexId>(0), generatorProperties);
@@ -4778,7 +4778,7 @@ TEST_F  ( TestNetworkEmpty
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddGeneratorRealPowerSnapshotAt"
-                                           , "HasGenerator \\( generatorId \\)");
+                                           , R"(HasGenerator \( generatorId \))");
     try {
         network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );
     } catch ( std::runtime_error const & error )
@@ -4928,7 +4928,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt(static_cast<Types::vertexId>(0), loadProperties);}
                  , assertionString );
@@ -4937,7 +4937,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddLoadSnapshotAt"
-                                           , "HasLoad \\( loadId \\)");
+                                           , R"(HasLoad \( loadId \))");
     ASSERT_DEATH ( {network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );}
                  , assertionString );
 }
@@ -4953,7 +4953,7 @@ TEST_F  ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     try {
         network_.AddLoadAt(static_cast<Types::vertexId>(0), loadProperties);
@@ -4970,7 +4970,7 @@ TEST_F  ( TestNetworkEmpty
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddLoadSnapshotAt"
-                                           , "HasLoad \\( loadId \\)");
+                                           , R"(HasLoad \( loadId \))");
     try {
         network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
     } catch ( std::runtime_error const & error )
@@ -5216,7 +5216,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TimestampAt"
-                                                , "timestampPosition < timestamps_.size\\(\\)");
+                                                , R"(timestampPosition < timestamps_.size\(\))");
     ASSERT_DEATH ( {network_.TimestampAt ( 0 );}
                  , assertionString );
 }
@@ -5228,7 +5228,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TimestampAt"
-                                                , "timestampPosition < timestamps_.size\\(\\)");
+                                                , R"(timestampPosition < timestamps_.size\(\))");
     try {
         network_.TimestampAt ( 0 );
     } catch ( std::runtime_error const & error )
@@ -5270,7 +5270,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotAt"
-                                                , "generatorId < NumberOfGenerators\\(\\)");
+                                                , R"(generatorId < NumberOfGenerators\(\))");
 
     ASSERT_DEATH ( {network_.GeneratorRealPowerSnapshotAt ( 0, "0000-00-00 00:00:00" );}
                  , assertionString );
@@ -5283,7 +5283,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotAt"
-                                                , "generatorId < NumberOfGenerators\\(\\)");
+                                                , R"(generatorId < NumberOfGenerators\(\))");
 
     try {
         network_.GeneratorRealPowerSnapshotAt ( 0, "0000-00-00 00:00:00" );
@@ -5342,7 +5342,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotsAt"
-                                                , "!timestamps_.empty\\(\\)");
+                                                , R"(!timestamps_.empty\(\))");
 
     ASSERT_DEATH ( {network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
                                                            , snapshotsAtTimestamp );}
@@ -5358,7 +5358,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotsAt"
-                                                , "!timestamps_.empty\\(\\)");
+                                                , R"(!timestamps_.empty\(\))");
 
     try {
         network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
@@ -5385,7 +5385,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotsAt"
-                                                , "snapshotsAtTimestamp.empty\\(\\)");
+                                                , R"(snapshotsAtTimestamp.empty\(\))");
 
     ASSERT_DEATH ( {network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
                                                            , snapshotsAtTimestamp );}
@@ -5402,7 +5402,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotsAt"
-                                                , "snapshotsAtTimestamp.empty\\(\\)");
+                                                , R"(snapshotsAtTimestamp.empty\(\))");
 
     try {
         network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
@@ -5453,7 +5453,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadSnapshotOf"
-                                                , "loadId < loads_.size\\(\\)");
+                                                , R"(loadId < loads_.size\(\))");
 
     ASSERT_DEATH ( {network_.LoadSnapshotOf ( 10, 0 );}
                  , assertionString );
@@ -5466,7 +5466,7 @@ TEST_F ( TestNetworkEmpty
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadSnapshotOf"
-                                                , "loadId < loads_.size\\(\\)");
+                                                , R"(loadId < loads_.size\(\))");
 
     try {
         network_.LoadSnapshotOf ( 10, 0 );
