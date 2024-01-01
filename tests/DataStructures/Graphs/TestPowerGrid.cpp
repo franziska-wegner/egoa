@@ -7,6 +7,8 @@
 
 #include "TestPowerGrid.hpp"
 
+#include "Helper/TestHelper.hpp"
+
 using testing::StrEq;
 using ::testing::MatchesRegex;
 
