@@ -21,7 +21,7 @@ if(EGOA_ENABLE_DOCUMENTATION)
     set(doxyfile ${CMAKE_CURRENT_SOURCE_DIR}/documentation/Doxyfile)
 
     configure_file(${doxyfile_in} ${doxyfile} @ONLY)
-    add_custom_target(doc ALL
+    add_custom_target(doc #ALL
                 COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile_in}
                 WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
                 COMMENT "Generating API documentation with Doxygen"
