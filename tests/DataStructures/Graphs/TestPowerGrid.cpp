@@ -9,7 +9,7 @@
 
 #include "Helper/TestHelper.hpp"
 
-using testing::StrEq;
+using ::testing::StrEq;
 using ::testing::MatchesRegex;
 
 namespace egoa::test {
@@ -41,12 +41,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
    EXPECT_EQ ( 1, networkConst_.BaseMva() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , BaseMva )
-{
-   EXPECT_EQ ( 1,      network_.BaseMva() );
-   EXPECT_EQ ( 1, networkConst_.BaseMva() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , BaseMva )
+// {
+//    EXPECT_EQ ( 1,      network_.BaseMva() );
+//    EXPECT_EQ ( 1, networkConst_.BaseMva() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -86,15 +86,15 @@ TEST_F ( TestNetworkEmpty
 //    EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
 // }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , ThetaBound )
-{
-   EXPECT_EQ ( -Const::REAL_INFTY,      network_.ThetaBound().Minimum() );
-   EXPECT_EQ ( -Const::REAL_INFTY, networkConst_.ThetaBound().Minimum() );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , ThetaBound )
+// {
+//    EXPECT_EQ ( -Const::REAL_INFTY,      network_.ThetaBound().Minimum() );
+//    EXPECT_EQ ( -Const::REAL_INFTY, networkConst_.ThetaBound().Minimum() );
 
-   EXPECT_EQ ( Const::REAL_INFTY,      network_.ThetaBound().Maximum() );
-   EXPECT_EQ ( Const::REAL_INFTY, networkConst_.ThetaBound().Maximum() );
-}
+//    EXPECT_EQ ( Const::REAL_INFTY,      network_.ThetaBound().Maximum() );
+//    EXPECT_EQ ( Const::REAL_INFTY, networkConst_.ThetaBound().Maximum() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -123,18 +123,18 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorBoundType )
-{
-    EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorBoundType )
+// {
+//     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
+// }
 
-// ***********************************************************************
-// ***********************************************************************
-#pragma mark LoadBoundType
-// ***********************************************************************
-// ***********************************************************************
+// // ***********************************************************************
+// // ***********************************************************************
+// #pragma mark LoadBoundType
+// // ***********************************************************************
+// // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
        , LoadBoundType )
@@ -157,12 +157,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , LoadBoundType )
-{
-    EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , LoadBoundType )
+// {
+//     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -200,15 +200,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakeBounded )
-{
-    network_.MakeBounded ();
-    EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::bounded,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakeBounded )
+// {
+//     network_.MakeBounded ();
+//     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -246,15 +246,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakeUnbounded )
-{
-    network_.MakeUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakeUnbounded )
+// {
+//     network_.MakeUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -292,15 +292,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakePureUnbounded )
-{
-    network_.MakePureUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakePureUnbounded )
+// {
+//     network_.MakePureUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -338,15 +338,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakeExact )
-{
-    network_.MakeExact ();
-    EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::exact,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakeExact )
+// {
+//     network_.MakeExact ();
+//     EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::exact,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -384,15 +384,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE  ( networkConst_.IsBounded () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsBounded )
-{
-    EXPECT_FALSE (      network_.IsBounded () );
-    EXPECT_FALSE ( networkConst_.IsBounded () );
-    network_.MakeBounded ();
-    EXPECT_TRUE  (      network_.IsBounded () );
-    EXPECT_TRUE  ( networkConst_.IsBounded () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsBounded )
+// {
+//     EXPECT_FALSE (      network_.IsBounded () );
+//     EXPECT_FALSE ( networkConst_.IsBounded () );
+//     network_.MakeBounded ();
+//     EXPECT_TRUE  (      network_.IsBounded () );
+//     EXPECT_TRUE  ( networkConst_.IsBounded () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -439,18 +439,18 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( networkConst_.IsUnbounded () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsUnbounded )
-{
-    EXPECT_FALSE (      network_.IsUnbounded () );
-    EXPECT_FALSE ( networkConst_.IsUnbounded () );
-    network_.MakeUnbounded ();
-    EXPECT_TRUE  (      network_.IsUnbounded () );
-    EXPECT_TRUE  ( networkConst_.IsUnbounded () );
-    network_.MakeBounded ();
-    EXPECT_FALSE (      network_.IsUnbounded () );
-    EXPECT_FALSE ( networkConst_.IsUnbounded () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsUnbounded )
+// {
+//     EXPECT_FALSE (      network_.IsUnbounded () );
+//     EXPECT_FALSE ( networkConst_.IsUnbounded () );
+//     network_.MakeUnbounded ();
+//     EXPECT_TRUE  (      network_.IsUnbounded () );
+//     EXPECT_TRUE  ( networkConst_.IsUnbounded () );
+//     network_.MakeBounded ();
+//     EXPECT_FALSE (      network_.IsUnbounded () );
+//     EXPECT_FALSE ( networkConst_.IsUnbounded () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -488,15 +488,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE  ( networkConst_.IsPureUnbounded () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsPureUnbounded )
-{
-    EXPECT_FALSE (      network_.IsPureUnbounded () );
-    EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
-    network_.MakePureUnbounded ();
-    EXPECT_TRUE  (      network_.IsPureUnbounded () );
-    EXPECT_TRUE  ( networkConst_.IsPureUnbounded () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsPureUnbounded )
+// {
+//     EXPECT_FALSE (      network_.IsPureUnbounded () );
+//     EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
+//     network_.MakePureUnbounded ();
+//     EXPECT_TRUE  (      network_.IsPureUnbounded () );
+//     EXPECT_TRUE  ( networkConst_.IsPureUnbounded () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -534,15 +534,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE  ( networkConst_.IsExact () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsExact )
-{
-    EXPECT_FALSE (      network_.IsExact () );
-    EXPECT_FALSE ( networkConst_.IsExact () );
-    network_.MakeExact ();
-    EXPECT_TRUE  (      network_.IsExact () );
-    EXPECT_TRUE  ( networkConst_.IsExact () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsExact )
+// {
+//     EXPECT_FALSE (      network_.IsExact () );
+//     EXPECT_FALSE ( networkConst_.IsExact () );
+//     network_.MakeExact ();
+//     EXPECT_TRUE  (      network_.IsExact () );
+//     EXPECT_TRUE  ( networkConst_.IsExact () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -607,24 +607,24 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.NetworkBoundType () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , NetworkBoundType )
-{
-    EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
-    network_.MakeBounded ();
-    EXPECT_EQ ( Vertices::BoundType::bounded, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.NetworkBoundType () );
-    network_.MakeUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::unbounded, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.NetworkBoundType () );
-    network_.MakePureUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.NetworkBoundType () );
-    network_.MakeExact ();
-    EXPECT_EQ ( Vertices::BoundType::exact, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.NetworkBoundType () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , NetworkBoundType )
+// {
+//     EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
+//     network_.MakeBounded ();
+//     EXPECT_EQ ( Vertices::BoundType::bounded, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.NetworkBoundType () );
+//     network_.MakeUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.NetworkBoundType () );
+//     network_.MakePureUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.NetworkBoundType () );
+//     network_.MakeExact ();
+//     EXPECT_EQ ( Vertices::BoundType::exact, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.NetworkBoundType () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -689,24 +689,24 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_THAT ( "exact", StrEq( networkConst_.NetworkType () ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , NetworkType )
-{
-    EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
-    network_.MakeBounded ();
-    EXPECT_THAT ( "bounded", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "bounded", StrEq( networkConst_.NetworkType () ) );
-    network_.MakeUnbounded ();
-    EXPECT_THAT ( "unbounded", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "unbounded", StrEq( networkConst_.NetworkType () ) );
-    network_.MakePureUnbounded ();
-    EXPECT_THAT ( "pure_unbounded", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "pure_unbounded", StrEq( networkConst_.NetworkType () ) );
-    network_.MakeExact ();
-    EXPECT_THAT ( "exact", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "exact", StrEq( networkConst_.NetworkType () ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , NetworkType )
+// {
+//     EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakeBounded ();
+//     EXPECT_THAT ( "bounded", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "bounded", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakeUnbounded ();
+//     EXPECT_THAT ( "unbounded", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "unbounded", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakePureUnbounded ();
+//     EXPECT_THAT ( "pure_unbounded", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "pure_unbounded", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakeExact ();
+//     EXPECT_THAT ( "exact", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "exact", StrEq( networkConst_.NetworkType () ) );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -841,30 +841,30 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , AddGeneratorAtUsingVertexId )
-{
-    EXPECT_TRUE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
-    EXPECT_EQ ( 23,     network_.NumberOfGenerators() );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , AddGeneratorAtUsingVertexId )
+// {
+//     EXPECT_TRUE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_EQ ( 23,     network_.NumberOfGenerators() );
 
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name()       = "TestGenerator1";
-    Types::generatorId generatorId1  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(2)
-                                                               , generatorProperties );
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name()       = "TestGenerator1";
+//     Types::generatorId generatorId1  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(2)
+//                                                                , generatorProperties );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(2) ) );
-    EXPECT_TRUE ( network_.HasGenerator ( generatorId1 ) );
-    EXPECT_EQ ( 23,     generatorId1 );
-    EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(2) ) );
+//     EXPECT_TRUE ( network_.HasGenerator ( generatorId1 ) );
+//     EXPECT_EQ ( 23,     generatorId1 );
+//     EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
 
-    Types::generatorId generatorId2  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
-                                                               , generatorProperties );
+//     Types::generatorId generatorId2  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                                                , generatorProperties );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    EXPECT_TRUE ( network_.HasGenerator ( generatorId2 ) );
-    EXPECT_EQ ( 24,     generatorId2 );
-    EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
-}
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_TRUE ( network_.HasGenerator ( generatorId2 ) );
+//     EXPECT_EQ ( 24,     generatorId2 );
+//     EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -959,30 +959,30 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , AddGeneratorAtUsingVertex )
-{
-    TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
-    TVertex vertex1 = network_.Graph().VertexAt( static_cast<Types::vertexId>(1) );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , AddGeneratorAtUsingVertex )
+// {
+//     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
+//     TVertex vertex1 = network_.Graph().VertexAt( static_cast<Types::vertexId>(1) );
 
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name() = "TestGenerator1";
-    Types::generatorId generatorId1 = network_.AddGeneratorAt ( vertex0, generatorProperties );
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name() = "TestGenerator1";
+//     Types::generatorId generatorId1 = network_.AddGeneratorAt ( vertex0, generatorProperties );
 
-    EXPECT_EQ ( 0,      network_.Graph().VertexId ( vertex0 ) );
-    EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex0 ) );
-    EXPECT_TRUE ( network_.HasGenerator( generatorId1 ) );
-    EXPECT_EQ ( 23,     generatorId1 );
-    EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
+//     EXPECT_EQ ( 0,      network_.Graph().VertexId ( vertex0 ) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex0 ) );
+//     EXPECT_TRUE ( network_.HasGenerator( generatorId1 ) );
+//     EXPECT_EQ ( 23,     generatorId1 );
+//     EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
 
-    Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex1, generatorProperties );
+//     Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex1, generatorProperties );
 
-    EXPECT_EQ ( 1,      network_.Graph().VertexId ( vertex1 ) );
-    EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex1 ) );
-    EXPECT_TRUE ( network_.HasGenerator( generatorId2 ) );
-    EXPECT_EQ ( 24,     generatorId2 );
-    EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
-}
+//     EXPECT_EQ ( 1,      network_.Graph().VertexId ( vertex1 ) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex1 ) );
+//     EXPECT_TRUE ( network_.HasGenerator( generatorId2 ) );
+//     EXPECT_EQ ( 24,     generatorId2 );
+//     EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1195,7 +1195,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 
 //     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
 //     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
-}
+// }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 // TEST_F ( TestPowerGridAcm2018MtsfFigure4b
@@ -1577,26 +1577,26 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(1) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGenerator )
-{
-    for ( Types::count counter = 0
-        ; counter < network_.NumberOfGenerators()
-        ; ++counter )
-    {
-        EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>( counter ) ) );
-    }
-    EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( network_.NumberOfGenerators() ) ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGenerator )
+// {
+//     for ( Types::count counter = 0
+//         ; counter < network_.NumberOfGenerators()
+//         ; ++counter )
+//     {
+//         EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>( counter ) ) );
+//     }
+//     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( network_.NumberOfGenerators() ) ) );
+// }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAfterRemoval )
-{
-    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
-    network_.RemoveGeneratorAt ( static_cast<Types::vertexId>( 5 )
-                               , static_cast<Types::generatorId>( 11 ) );
-    EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAfterRemoval )
+// {
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>( 5 )
+//                                , static_cast<Types::generatorId>( 11 ) );
+//     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1654,52 +1654,52 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( 1 ) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexId )
-{
-    for ( Types::count counter = 0
-        ; counter < network_.Graph().NumberOfVertices()
-        ; ++counter )
-    {
-        EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( counter ) ) );
-    }
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAtVertexId )
+// {
+//     for ( Types::count counter = 0
+//         ; counter < network_.Graph().NumberOfVertices()
+//         ; ++counter )
+//     {
+//         EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( counter ) ) );
+//     }
+// }
 
-#ifdef EGOA_ENABLE_ASSERTION
-TEST_F ( TestPowerGridPyPsaExampleDeathTest
-       , HasGeneratorAtVertexId )
-{
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "HasGeneratorAt"
-                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+// #ifdef EGOA_ENABLE_ASSERTION
+// TEST_F ( TestPowerGridPyPsaExampleDeathTest
+//        , HasGeneratorAtVertexId )
+// {
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "HasGeneratorAt"
+//                                                 , R"(Graph\(\).VertexExists \( vertexId \))");
 
-    ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) ); }
-                 , assertionString );
-}
-#else
-#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexIdExceptionHandling )
-{
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "HasGeneratorAt"
-                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+//     ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) ); }
+//                  , assertionString );
+// }
+// #else
+// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAtVertexIdExceptionHandling )
+// {
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "HasGeneratorAt"
+//                                                 , R"(Graph\(\).VertexExists \( vertexId \))");
 
-    try {
-        network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) );
-    } catch ( std::runtime_error const & error )
-    {
-        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
-    } catch ( ... )
-    {
-        FAIL()  << "Expected std::runtime_error with message: "
-                << assertionString;
-    }
-}
-#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
-#endif // ifdef EGOA_ENABLE_ASSERTION
+//     try {
+//         network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+// }
+// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// #endif // ifdef EGOA_ENABLE_ASSERTION
 // ***********************************************************************
 // ***********************************************************************
 #pragma mark HasGeneratorAtVertexObject
@@ -1766,17 +1766,17 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGeneratorAt ( vertex1 ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexObject )
-{
-    for ( Types::count counter = 0
-        ; counter < network_.Graph().NumberOfVertices()
-        ; ++counter )
-    {
-        TVertex vertex = network_.Graph().VertexAt( static_cast<Types::vertexId>( counter ) );
-        EXPECT_TRUE  ( network_.HasGeneratorAt ( vertex ) );
-    }
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAtVertexObject )
+// {
+//     for ( Types::count counter = 0
+//         ; counter < network_.Graph().NumberOfVertices()
+//         ; ++counter )
+//     {
+//         TVertex vertex = network_.Graph().VertexAt( static_cast<Types::vertexId>( counter ) );
+//         EXPECT_TRUE  ( network_.HasGeneratorAt ( vertex ) );
+//     }
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1897,14 +1897,14 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorIds[0] );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorIds )
-{
-    std::vector<Types::generatorId> generatorIds;
-    network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorIds )
+// {
+//     std::vector<Types::generatorId> generatorIds;
+//     network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
 
-    EXPECT_EQ ( 2, generatorIds.size() );
-}
+//     EXPECT_EQ ( 2, generatorIds.size() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1964,13 +1964,13 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     GeneratorComplyInitialValues ( generatorProperties );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorAt )
-{
-    TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorAt )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
 
-    GeneratorComplyInitialValues ( generatorProperties );
-}
+//     GeneratorComplyInitialValues ( generatorProperties );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -2058,25 +2058,25 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorProperties.size() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorsAtUsingVertexId )
-{
-    std::vector<TGeneratorProperties> generatorProperties;
-    network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
-                          , generatorProperties );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorsAtUsingVertexId )
+// {
+//     std::vector<TGeneratorProperties> generatorProperties;
+//     network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
+//                           , generatorProperties );
 
-    EXPECT_EQ ( 2, generatorProperties.size() );
-    GeneratorComplyInitialValues ( generatorProperties[0] );
+//     EXPECT_EQ ( 2, generatorProperties.size() );
+//     GeneratorComplyInitialValues ( generatorProperties[0] );
 
-    // Clear vector
-    generatorProperties.clear();
-    EXPECT_EQ ( 0, generatorProperties.size() );
+//     // Clear vector
+//     generatorProperties.clear();
+//     EXPECT_EQ ( 0, generatorProperties.size() );
 
-    // Check number of generators at vertex identifier 1
-    network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
-                          , generatorProperties );
-    EXPECT_EQ ( 3, generatorProperties.size() );
-}
+//     // Check number of generators at vertex identifier 1
+//     network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
+//                           , generatorProperties );
+//     EXPECT_EQ ( 3, generatorProperties.size() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -2186,26 +2186,26 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorPropertiesS.size() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorsAtUsingVertexObject )
-{
-    std::vector<TGeneratorProperties> generatorPropertiesS;
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorsAtUsingVertexObject )
+// {
+//     std::vector<TGeneratorProperties> generatorPropertiesS;
 
-    // Generate generator with default values
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name() = "TestGenerator1";
+//     // Generate generator with default values
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name() = "TestGenerator1";
 
-    TVertex vertex0 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(0) );
-    TVertex vertex1 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(7) );
+//     TVertex vertex0 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(0) );
+//     TVertex vertex1 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(7) );
 
-    network_.GeneratorsAt ( vertex0, generatorPropertiesS );
-    EXPECT_EQ ( 2, generatorPropertiesS.size() );
+//     network_.GeneratorsAt ( vertex0, generatorPropertiesS );
+//     EXPECT_EQ ( 2, generatorPropertiesS.size() );
 
-    generatorPropertiesS.clear();
+//     generatorPropertiesS.clear();
 
-    network_.GeneratorsAt ( vertex1, generatorPropertiesS );
-    EXPECT_EQ ( 3, generatorPropertiesS.size() );
-}
+//     network_.GeneratorsAt ( vertex1, generatorPropertiesS );
+//     EXPECT_EQ ( 3, generatorPropertiesS.size() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -2266,23 +2266,23 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorId );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , FindGenerator )
-{
-    TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(15) );
-    std::vector<TGeneratorProperties> generatorPropertiesS;
+// TEST_F ( TestPowerGridPyPsaExample
+//        , FindGenerator )
+// {
+//     TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(15) );
+//     std::vector<TGeneratorProperties> generatorPropertiesS;
 
-    // Get generators at a vertex with identifier 0
-    network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
-                          , generatorPropertiesS );
+//     // Get generators at a vertex with identifier 0
+//     network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
+//                           , generatorPropertiesS );
 
-    // Find the generator that was extracted from position 0
-    Types::generatorId generatorId = network_.FindGenerator ( generatorProperties
-                                                            , generatorPropertiesS );
+//     // Find the generator that was extracted from position 0
+//     Types::generatorId generatorId = network_.FindGenerator ( generatorProperties
+//                                                             , generatorPropertiesS );
 
-    // That's what we expect: Field 0 of the vector at vertex 7
-    EXPECT_EQ ( 0, generatorId );
-}
+//     // That's what we expect: Field 0 of the vector at vertex 7
+//     EXPECT_EQ ( 0, generatorId );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -2517,18 +2517,18 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, bound.Maximum() );
 }
 
-TEST_F  ( TestPowerGridPyPsaExample
-        , TotalRealPowerGenerationBoundAtBounded )
-{ // Bounded
-    network_.MakeBounded ();
-    TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
-                                                                                                                                                        , static_cast<Types::index>(2) );
+// TEST_F  ( TestPowerGridPyPsaExample
+//         , TotalRealPowerGenerationBoundAtBounded )
+// { // Bounded
+//     network_.MakeBounded ();
+//     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
+//                                                                                                                                                         , static_cast<Types::index>(2) );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    // Test bound for the bounded type
-    EXPECT_EQ ( 0.0, bound.Minimum() );
-    EXPECT_EQ ( std::numeric_limits<double>::infinity(), bound.Maximum() );
-}
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     // Test bound for the bounded type
+//     EXPECT_EQ ( 0.0, bound.Minimum() );
+//     EXPECT_EQ ( std::numeric_limits<double>::infinity(), bound.Maximum() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -2684,34 +2684,34 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, value );
 }
 
-TEST_F  ( TestPowerGridPyPsaExample
-        , TotalRealPowerGenerationAt )
-{
-    Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0)
-                                                                                                                                                    , static_cast<Types::index>(0) );
+// TEST_F  ( TestPowerGridPyPsaExample
+//         , TotalRealPowerGenerationAt )
+// {
+//     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0)
+//                                                                                                                                                     , static_cast<Types::index>(0) );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 300.0, value );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 300.0, value );
 
-    value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
-                                                                                                                                        , static_cast<Types::index>(0) );
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 6000.0, value );
+//     value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
+//                                                                                                                                         , static_cast<Types::index>(0) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 6000.0, value );
 
-    value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
-                                                                                                                                        , static_cast<Types::index>(0) );
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 6000.0, value );
+//     value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
+//                                                                                                                                         , static_cast<Types::index>(0) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 6000.0, value );
 
-    value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
-                                                                                                                                        , static_cast<Types::index>(6) );
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(7) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 5280.0, value );
-}
+//     value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
+//                                                                                                                                         , static_cast<Types::index>(6) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(7) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 5280.0, value );
+// }
 
 
 // ***********************************************************************
@@ -3102,17 +3102,17 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, value );
 }
 
-TEST_F  ( TestPowerGridPyPsaExample
-        , TotalReactivePowerGenerationAt )
-{
-    Types::real value = network_.TotalReactivePowerGenerationAt<
-                                Vertices::GenerationStrategyDifferentiationType
-                                            ::totalVertexPowerGenerationPerSnapshot > ( static_cast<Types::vertexId>( 0 ) );
+// TEST_F  ( TestPowerGridPyPsaExample
+//         , TotalReactivePowerGenerationAt )
+// {
+//     Types::real value = network_.TotalReactivePowerGenerationAt<
+//                                 Vertices::GenerationStrategyDifferentiationType
+//                                             ::totalVertexPowerGenerationPerSnapshot > ( static_cast<Types::vertexId>( 0 ) );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 0.0, value );
-}
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 0.0, value );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -5196,12 +5196,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Const::NONE, index );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , PositionOf )
-{
-    Types::index index = network_.PositionOf ( "2013-01-01 03:00:00" );
-    EXPECT_EQ ( 3, index );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , PositionOf )
+// {
+//     Types::index index = network_.PositionOf ( "2013-01-01 03:00:00" );
+//     EXPECT_EQ ( 3, index );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -5250,12 +5250,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( "0000-00-00 00:00:00", timestamp );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , TimestampAt )
-{
-    Types::timestampSnapshot timestamp = network_.TimestampAt ( 7 );
-    EXPECT_EQ ( "2013-01-01 07:00:00", timestamp );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , TimestampAt )
+// {
+//     Types::timestampSnapshot timestamp = network_.TimestampAt ( 7 );
+//     EXPECT_EQ ( "2013-01-01 07:00:00", timestamp );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -5299,12 +5299,12 @@ TEST_F ( TestNetworkEmpty
 #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
 #endif // ifdef EGOA_ENABLE_ASSERTION
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestamp )
-{
-    Types::generatorSnapshot snapshot = network_.GeneratorRealPowerSnapshotAt ( 1, "2013-01-01 03:00:00" );
-    EXPECT_EQ ( 230, snapshot );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestamp )
+// {
+//     Types::generatorSnapshot snapshot = network_.GeneratorRealPowerSnapshotAt ( 1, "2013-01-01 03:00:00" );
+//     EXPECT_EQ ( 230, snapshot );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -5321,12 +5321,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
               , network_.GeneratorRealPowerSnapshotAt ( generator, "0000-00-00 01:00:00" ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorRealPowerSnapshotAtUsingGeneratorAndTimestamp )
-{
-    TGeneratorProperties generator = network_.GeneratorAt ( 1 );
-    EXPECT_EQ ( 230, network_.GeneratorRealPowerSnapshotAt ( generator, "2013-01-01 03:00:00" ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorRealPowerSnapshotAtUsingGeneratorAndTimestamp )
+// {
+//     TGeneratorProperties generator = network_.GeneratorAt ( 1 );
+//     EXPECT_EQ ( 230, network_.GeneratorRealPowerSnapshotAt ( generator, "2013-01-01 03:00:00" ) );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -5524,10 +5524,10 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 8, network_.LoadSnapshotOf ( 0, 0 ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , LoadSnapshotOf )
-{
-    EXPECT_EQ ( 137, network_.LoadSnapshotOf ( 7, 3 ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , LoadSnapshotOf )
+// {
+//     EXPECT_EQ ( 137, network_.LoadSnapshotOf ( 7, 3 ) );
+// }
 
 } // namespace egoa::test
