@@ -82,41 +82,6 @@ jobs:
     #   with:
     #     args: install mingw --version=8.1.0  -y
 
-    # Compared to Window and MacOS best option with stable ~2 min installation time.
-    - name: Install LaTeX (Linux)
-      if: startsWith(matrix.os,'ubuntu-')
-      run: |
-        sudo apt update --fix-missing
-        sudo apt upgrade
-        sudo apt update
-        sudo apt-get install texlive texlive-latex-recommended texlive-extra-utils texlive-latex-extra texlive-font-utils
-      shell: bash
-
-    # Takes too long > 13 min
-    # - name: Install LaTeX (MacOS)
-    #   if: startsWith(matrix.os,'macos-')
-    #   run: |
-    #     brew update
-    #     brew install --cask mactex;
-    #     echo "/Library/TeX/texbin/" >> $GITHUB_PATH
-    #   shell: bash
-
-    # Takes too long >> 25 min
-    # - name: Install LaTeX (Windows)
-    #   if: startsWith(matrix.os, 'windows-')
-    #   uses: teatimeguest/setup-texlive-action@v3
-    #   with:
-    #     packages: >-
-    #       scheme-medium
-    #       collection-latexextra
-    #       babel-dutch
-    #       cjk
-    #       bibtex
-
-    # For Doxygen installation use action from https://github.com/marketplace/actions/doxygen-install.
-    - name: doxygen-install
-      uses: ssciwr/doxygen-install@v1.2.0
-
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
@@ -279,30 +244,3 @@ jobs:
       uses: codecov/codecov-action@v3
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-    - name: Generate documentation
-      if: startsWith(matrix.os,'ubuntu-')
-      shell: sudo cmake -P {0}
-      run: |
-        execute_process(
-          COMMAND cmake --build build --target doc
-          RESULT_VARIABLE result
-        )
-        if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Building documentation failed")
-        endif()
-
-    # See https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository
-    # for more information on the parameters.
-    - name: Publish Documentation to Github Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event_name == 'push' && startsWith(matrix.os,'ubuntu-') }}
-      with:
-         github_token: ${{ secrets.GITHUB_TOKEN }}
-         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-         publish_dir: documentation/html
-         force_orphan: true
-         commit_message: ${{ github.event.head_commit.message }}
-         publish_branch: gh-pages
-         user_name: 'github-actions[bot]'
-         user_email: 'github-actions[bot]@users.noreply.github.com'
