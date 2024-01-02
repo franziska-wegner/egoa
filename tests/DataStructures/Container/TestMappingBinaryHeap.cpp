@@ -71,7 +71,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "Top"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         ASSERT_DEATH({heapConst_.Top();}, assertionString);
     }
 #else
@@ -82,7 +82,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Content) {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "Top"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         try {
             heapConst_.Top();
         } catch ( std::runtime_error const & error ) {
@@ -115,7 +115,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "TopElement"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         ASSERT_DEATH( {heapConst_.TopElement();}, assertionString );
     }
 #else
@@ -126,7 +126,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, Top) {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "TopElement"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         try {
             heapConst_.TopElement();
         } catch ( std::runtime_error const & error ) {
@@ -155,7 +155,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "TopKey"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         ASSERT_DEATH( {heapConst_.TopKey();}, assertionString );
     }
 #else
@@ -166,7 +166,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, TopElement) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "TopKey"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         try {
             heapConst_.TopKey();
         } catch ( std::runtime_error const & error ) {
@@ -815,7 +815,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DeleteTop"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         ASSERT_DEATH( {heap_.DeleteTop();}, assertionString );
     }
 #else
@@ -826,7 +826,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, EmplaceEqual) {
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DeleteTop"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         try {
             heap_.DeleteTop();
         } catch ( std::runtime_error const & error ) {
@@ -867,7 +867,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "Pop"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         ASSERT_DEATH( {heap_.Pop();}, assertionString );
     }
 #else
@@ -878,7 +878,7 @@ TEST_F(TestMappingBinaryHeapWithMultipleElements, DeleteTop) {
         auto assertionString = buildAssertionString ( "MappingBinaryHeap.hpp"
                                                     , "MappingBinaryHeap"
                                                     , "Pop"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         try {
             heap_.Pop();
         } catch ( std::runtime_error const & error ) {
