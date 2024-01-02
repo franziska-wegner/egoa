@@ -944,7 +944,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
 #pragma mark VertexAt
 #ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphEmptyDeathTest, VertexAt) {
-        auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
+        auto assertionString = this->assertionString("VertexAt", R"(VertexExists\(id\))");
         Types::vertexId id = 0;
         EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
         EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
@@ -956,7 +956,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
                 , VertexAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "VertexAt"
-                                                    , "VertexExists\\(id\\)");
+                                                    , R"(VertexExists\(id\))");
         Types::vertexId id = 0;
         try {
             this->graph_.VertexAt(id);
@@ -981,7 +981,7 @@ TYPED_TEST( TestGraphStar, EdgesIterateBackwardsConst) {
 
 #ifdef EGOA_ENABLE_ASSERTION
 TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
-    auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
+    auto assertionString = this->assertionString("VertexAt", R"(VertexExists\(id\))");
     Types::vertexId id = this->id_ + 1;
     EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
     EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
@@ -992,7 +992,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
                 , VertexAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "VertexAt"
-                                                    , "VertexExists\\(id\\)");
+                                                    , R"(VertexExists\(id\))");
         Types::vertexId id = this->id_ + 1;
         try {
             this->graph_.VertexAt(id);
@@ -1016,7 +1016,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphFourVerticesDeathTest, VertexAt) {
-        auto assertionString = this->assertionString("VertexAt", "VertexExists\\(id\\)");
+        auto assertionString = this->assertionString("VertexAt", R"(VertexExists\(id\))");
         Types::vertexId id = Const::NONE;
         EXPECT_DEATH( {this->graph_.VertexAt(id);}, assertionString);
         EXPECT_DEATH( {this->graphConst_.VertexAt(id);}, assertionString);
@@ -1027,7 +1027,7 @@ TYPED_TEST(TestGraphSingleVertexDeathTest, VertexAt) {
                 , VertexAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "VertexAt"
-                                                    , "VertexExists\\(id\\)");
+                                                    , R"(VertexExists\(id\))");
         Types::vertexId id = Const::NONE;
         try {
             this->graph_.VertexAt(id);
@@ -1068,7 +1068,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 /// @todo death tests for neighbors of non-existent vertices
 #ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphEmptyDeathTest, NeighborsOf) {
-        auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
+        auto assertionString = this->assertionString("NeighborsOf", R"(VertexExists\(id\))");
         Types::vertexId id = 0;
         EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
         EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
@@ -1079,7 +1079,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
                 , NeighborsOfExceptionHandling )
     {
         auto assertionString = this->assertionString( "NeighborsOf"
-                                                    , "VertexExists\\(id\\)");
+                                                    , R"(VertexExists\(id\))");
         Types::vertexId id = 0;
         try {
             this->graph_.NeighborsOf(id);
@@ -1103,7 +1103,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphSingleVertexDeathTest, NeighborsOf) {
-        auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
+        auto assertionString = this->assertionString("NeighborsOf", R"(VertexExists\(id\))");
         Types::vertexId id = this->id_ + 1;
         EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
         EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
@@ -1114,7 +1114,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
                 , NeighborsOfExceptionHandling )
     {
         auto assertionString = this->assertionString( "NeighborsOf"
-                                                    , "VertexExists\\(id\\)");
+                                                    , R"(VertexExists\(id\))");
         Types::vertexId id = this->id_ + 1;
         try {
             this->graph_.NeighborsOf(id);
@@ -1138,7 +1138,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
 
 #ifdef EGOA_ENABLE_ASSERTION
     TYPED_TEST(TestGraphFourVerticesDeathTest, NeighborsOf) {
-        auto assertionString = this->assertionString("NeighborsOf", "VertexExists\\(id\\)");
+        auto assertionString = this->assertionString("NeighborsOf", R"(VertexExists\(id\))");
         Types::vertexId id = Const::NONE;
         EXPECT_DEATH( {this->graph_.NeighborsOf(id);}, assertionString);
         EXPECT_DEATH( {this->graphConst_.NeighborsOf(id);}, assertionString);
@@ -1149,7 +1149,7 @@ TYPED_TEST(TestGraphStar, VertexAt) {
                 , NeighborsOfExceptionHandling )
     {
         auto assertionString = this->assertionString( "NeighborsOf"
-                                                    , "VertexExists\\(id\\)");
+                                                    , R"(VertexExists\(id\))");
         Types::vertexId id = Const::NONE;
         try {
             this->graph_.NeighborsOf(id);
@@ -2149,7 +2149,7 @@ TYPED_TEST(TestGraphStar, ForAllEdgeTuplesConst) {
 #pragma mark ForAllEdgesAt
 #ifdef EGOA_ENABLE_ASSERTION
 TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
-    auto assertionString = this->assertionString("for_all_edges_at", "VertexExists\\(vertexId\\)");
+    auto assertionString = this->assertionString("for_all_edges_at", R"(VertexExists\(vertexId\))");
     Types::vertexId nonexistentId = 3;
     EXPECT_DEATH(
         { this->graph_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
@@ -2166,7 +2166,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
                 , ForAllEdgesAtExceptionHandling )
     {
         auto assertionString = this->assertionString( "for_all_edges_at"
-                                                    , "VertexExists\\(vertexId\\)");
+                                                    , R"(VertexExists\(vertexId\))");
         Types::vertexId nonexistentId = 3;
         try {
             this->graph_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
@@ -2188,7 +2188,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAt) {
 
 #ifdef EGOA_ENABLE_ASSERTION
 TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
-    auto assertionString = this->assertionString("for_all_edges_at", "VertexExists\\(vertexId\\)");
+    auto assertionString = this->assertionString("for_all_edges_at", R"(VertexExists\(vertexId\))");
     Types::vertexId nonexistentId = 3;
     EXPECT_DEATH(
         { this->graphConst_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
@@ -2205,7 +2205,7 @@ TYPED_TEST(TestGraphEmptyDeathTest, ForAllEdgesAtConst) {
                 , ForAllEdgesAtConstExceptionHandling )
     {
         auto assertionString = this->assertionString( "for_all_edges_at"
-                                                    , "VertexExists\\(vertexId\\)");
+                                                    , R"(VertexExists\(vertexId\))");
         Types::vertexId nonexistentId = 3;
         try {
             this->graphConst_.template for_all_edges_at<egoa::ExecutionPolicy::sequential>(
