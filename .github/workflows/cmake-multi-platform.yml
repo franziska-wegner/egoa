@@ -259,7 +259,7 @@ jobs:
       #   Death tests use fork(), which is unsafe particularly in a threaded context. For this test, Google Test detected
       #   3 threads. See https://github.com/google/googletest/blob/main/docs/advanced.md#death-tests-and-threads for more
       #   explanation and suggested solutions, especially if this is the last message you see before your test times out.
-      run: ctest --verbose -j1 --build-config ${{ matrix.build_type }} -T Test
+      run: ctest --verbose -j1 --build-config ${{ matrix.build_type }} --test-action Test
 
     - name: Test Coverage Collection (Ubuntu GCC Debug only)
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
@@ -272,7 +272,7 @@ jobs:
       #   3 threads. See https://github.com/google/googletest/blob/main/docs/advanced.md#death-tests-and-threads for more
       #   explanation and suggested solutions, especially if this is the last message you see before your test times out.
       if: ${{ startsWith(matrix.os,'ubuntu-') && startsWith(matrix.c_compiler,'gcc') && matrix.build_type == 'Debug' }}
-      run: ctest --verbose -j1 --build-config ${{ matrix.build_type }} -T Coverage
+      run: ctest --rerun-failed --output-on-failure --verbose --build-config ${{ matrix.build_type }} --test-action Coverage
 
     - name: Upload coverage reports to Codecov (Ubuntu GCC Debug only)
       if: ${{ startsWith(matrix.os,'ubuntu-') && startsWith(matrix.c_compiler,'gcc') && matrix.build_type == 'Debug' }}

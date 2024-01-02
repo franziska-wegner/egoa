@@ -282,4 +282,5 @@ namespace std {
         }
     };
 } // namespace std
+
 #endif // EGOA__TESTS__HELPER__TEST_HELPER_HPP

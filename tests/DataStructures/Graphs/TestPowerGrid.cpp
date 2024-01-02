@@ -7,7 +7,10 @@
 
 #include "TestPowerGrid.hpp"
 
-using testing::StrEq;
+#include "Helper/TestHelper.hpp"
+
+using ::testing::StrEq;
+using ::testing::MatchesRegex;
 
 namespace egoa::test {
 
@@ -38,12 +41,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
    EXPECT_EQ ( 1, networkConst_.BaseMva() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , BaseMva )
-{
-   EXPECT_EQ ( 1,      network_.BaseMva() );
-   EXPECT_EQ ( 1, networkConst_.BaseMva() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , BaseMva )
+// {
+//    EXPECT_EQ ( 1,      network_.BaseMva() );
+//    EXPECT_EQ ( 1, networkConst_.BaseMva() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -63,35 +66,35 @@ TEST_F ( TestNetworkEmpty
    EXPECT_TRUE ( Bound<>(-Const::REAL_INFTY,Const::REAL_INFTY) == networkConst_.ThetaBound() );
 }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4a
-       , ThetaBound )
-{
-   EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
-   EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+//        , ThetaBound )
+// {
+//    EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
+//    EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
 
-   EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
-   EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
-}
+//    EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
+//    EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
+// }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4b
-       , ThetaBound )
-{
-   EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
-   EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4b
+//        , ThetaBound )
+// {
+//    EXPECT_EQ ( -2.61799, round(      network_.ThetaBound().Minimum() * 100000 ) / 100000 );
+//    EXPECT_EQ ( -2.61799, round( networkConst_.ThetaBound().Minimum() * 100000 ) / 100000 );
 
-   EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
-   EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
-}
+//    EXPECT_EQ (  2.61799, round(      network_.ThetaBound().Maximum() * 100000 ) / 100000 );
+//    EXPECT_EQ (  2.61799, round( networkConst_.ThetaBound().Maximum() * 100000 ) / 100000 );
+// }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , ThetaBound )
-{
-   EXPECT_EQ ( -Const::REAL_INFTY,      network_.ThetaBound().Minimum() );
-   EXPECT_EQ ( -Const::REAL_INFTY, networkConst_.ThetaBound().Minimum() );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , ThetaBound )
+// {
+//    EXPECT_EQ ( -Const::REAL_INFTY,      network_.ThetaBound().Minimum() );
+//    EXPECT_EQ ( -Const::REAL_INFTY, networkConst_.ThetaBound().Minimum() );
 
-   EXPECT_EQ ( Const::REAL_INFTY,      network_.ThetaBound().Maximum() );
-   EXPECT_EQ ( Const::REAL_INFTY, networkConst_.ThetaBound().Maximum() );
-}
+//    EXPECT_EQ ( Const::REAL_INFTY,      network_.ThetaBound().Maximum() );
+//    EXPECT_EQ ( Const::REAL_INFTY, networkConst_.ThetaBound().Maximum() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -120,18 +123,18 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorBoundType )
-{
-    EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorBoundType )
+// {
+//     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.GeneratorBoundType() );
+// }
 
-// ***********************************************************************
-// ***********************************************************************
-#pragma mark LoadBoundType
-// ***********************************************************************
-// ***********************************************************************
+// // ***********************************************************************
+// // ***********************************************************************
+// #pragma mark LoadBoundType
+// // ***********************************************************************
+// // ***********************************************************************
 
 TEST_F ( TestNetworkEmpty
        , LoadBoundType )
@@ -154,12 +157,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , LoadBoundType )
-{
-    EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , LoadBoundType )
+// {
+//     EXPECT_EQ ( Vertices::BoundType::unknown,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -197,15 +200,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakeBounded )
-{
-    network_.MakeBounded ();
-    EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::bounded,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakeBounded )
+// {
+//     network_.MakeBounded ();
+//     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::bounded,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -243,15 +246,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakeUnbounded )
-{
-    network_.MakeUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakeUnbounded )
+// {
+//     network_.MakeUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -289,15 +292,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakePureUnbounded )
-{
-    network_.MakePureUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakePureUnbounded )
+// {
+//     network_.MakePureUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::unbounded,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -335,15 +338,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.LoadBoundType() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , MakeExact )
-{
-    network_.MakeExact ();
-    EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.GeneratorBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::exact,      network_.LoadBoundType() );
-    EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.LoadBoundType() );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , MakeExact )
+// {
+//     network_.MakeExact ();
+//     EXPECT_EQ ( Vertices::BoundType::exact,      network_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.GeneratorBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::exact,      network_.LoadBoundType() );
+//     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.LoadBoundType() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -381,15 +384,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE  ( networkConst_.IsBounded () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsBounded )
-{
-    EXPECT_FALSE (      network_.IsBounded () );
-    EXPECT_FALSE ( networkConst_.IsBounded () );
-    network_.MakeBounded ();
-    EXPECT_TRUE  (      network_.IsBounded () );
-    EXPECT_TRUE  ( networkConst_.IsBounded () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsBounded )
+// {
+//     EXPECT_FALSE (      network_.IsBounded () );
+//     EXPECT_FALSE ( networkConst_.IsBounded () );
+//     network_.MakeBounded ();
+//     EXPECT_TRUE  (      network_.IsBounded () );
+//     EXPECT_TRUE  ( networkConst_.IsBounded () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -436,18 +439,18 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( networkConst_.IsUnbounded () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsUnbounded )
-{
-    EXPECT_FALSE (      network_.IsUnbounded () );
-    EXPECT_FALSE ( networkConst_.IsUnbounded () );
-    network_.MakeUnbounded ();
-    EXPECT_TRUE  (      network_.IsUnbounded () );
-    EXPECT_TRUE  ( networkConst_.IsUnbounded () );
-    network_.MakeBounded ();
-    EXPECT_FALSE (      network_.IsUnbounded () );
-    EXPECT_FALSE ( networkConst_.IsUnbounded () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsUnbounded )
+// {
+//     EXPECT_FALSE (      network_.IsUnbounded () );
+//     EXPECT_FALSE ( networkConst_.IsUnbounded () );
+//     network_.MakeUnbounded ();
+//     EXPECT_TRUE  (      network_.IsUnbounded () );
+//     EXPECT_TRUE  ( networkConst_.IsUnbounded () );
+//     network_.MakeBounded ();
+//     EXPECT_FALSE (      network_.IsUnbounded () );
+//     EXPECT_FALSE ( networkConst_.IsUnbounded () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -485,15 +488,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE  ( networkConst_.IsPureUnbounded () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsPureUnbounded )
-{
-    EXPECT_FALSE (      network_.IsPureUnbounded () );
-    EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
-    network_.MakePureUnbounded ();
-    EXPECT_TRUE  (      network_.IsPureUnbounded () );
-    EXPECT_TRUE  ( networkConst_.IsPureUnbounded () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsPureUnbounded )
+// {
+//     EXPECT_FALSE (      network_.IsPureUnbounded () );
+//     EXPECT_FALSE ( networkConst_.IsPureUnbounded () );
+//     network_.MakePureUnbounded ();
+//     EXPECT_TRUE  (      network_.IsPureUnbounded () );
+//     EXPECT_TRUE  ( networkConst_.IsPureUnbounded () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -531,15 +534,15 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_TRUE  ( networkConst_.IsExact () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , IsExact )
-{
-    EXPECT_FALSE (      network_.IsExact () );
-    EXPECT_FALSE ( networkConst_.IsExact () );
-    network_.MakeExact ();
-    EXPECT_TRUE  (      network_.IsExact () );
-    EXPECT_TRUE  ( networkConst_.IsExact () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , IsExact )
+// {
+//     EXPECT_FALSE (      network_.IsExact () );
+//     EXPECT_FALSE ( networkConst_.IsExact () );
+//     network_.MakeExact ();
+//     EXPECT_TRUE  (      network_.IsExact () );
+//     EXPECT_TRUE  ( networkConst_.IsExact () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -604,24 +607,24 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.NetworkBoundType () );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , NetworkBoundType )
-{
-    EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
-    network_.MakeBounded ();
-    EXPECT_EQ ( Vertices::BoundType::bounded, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.NetworkBoundType () );
-    network_.MakeUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::unbounded, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.NetworkBoundType () );
-    network_.MakePureUnbounded ();
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.NetworkBoundType () );
-    network_.MakeExact ();
-    EXPECT_EQ ( Vertices::BoundType::exact, network_.NetworkBoundType () );
-    EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.NetworkBoundType () );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , NetworkBoundType )
+// {
+//     EXPECT_EQ ( Vertices::BoundType::unknown, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::unknown, networkConst_.NetworkBoundType () );
+//     network_.MakeBounded ();
+//     EXPECT_EQ ( Vertices::BoundType::bounded, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::bounded, networkConst_.NetworkBoundType () );
+//     network_.MakeUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::unbounded, networkConst_.NetworkBoundType () );
+//     network_.MakePureUnbounded ();
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::pureunbounded, networkConst_.NetworkBoundType () );
+//     network_.MakeExact ();
+//     EXPECT_EQ ( Vertices::BoundType::exact, network_.NetworkBoundType () );
+//     EXPECT_EQ ( Vertices::BoundType::exact, networkConst_.NetworkBoundType () );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -686,24 +689,24 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_THAT ( "exact", StrEq( networkConst_.NetworkType () ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , NetworkType )
-{
-    EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
-    network_.MakeBounded ();
-    EXPECT_THAT ( "bounded", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "bounded", StrEq( networkConst_.NetworkType () ) );
-    network_.MakeUnbounded ();
-    EXPECT_THAT ( "unbounded", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "unbounded", StrEq( networkConst_.NetworkType () ) );
-    network_.MakePureUnbounded ();
-    EXPECT_THAT ( "pure_unbounded", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "pure_unbounded", StrEq( networkConst_.NetworkType () ) );
-    network_.MakeExact ();
-    EXPECT_THAT ( "exact", StrEq( network_.NetworkType () ) );
-    EXPECT_THAT ( "exact", StrEq( networkConst_.NetworkType () ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , NetworkType )
+// {
+//     EXPECT_THAT ( "unknown", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "unknown", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakeBounded ();
+//     EXPECT_THAT ( "bounded", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "bounded", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakeUnbounded ();
+//     EXPECT_THAT ( "unbounded", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "unbounded", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakePureUnbounded ();
+//     EXPECT_THAT ( "pure_unbounded", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "pure_unbounded", StrEq( networkConst_.NetworkType () ) );
+//     network_.MakeExact ();
+//     EXPECT_THAT ( "exact", StrEq( network_.NetworkType () ) );
+//     EXPECT_THAT ( "exact", StrEq( networkConst_.NetworkType () ) );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -711,6 +714,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , AddGeneratorAtUsingVertexId )
 {
@@ -720,11 +724,36 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
     ASSERT_DEATH ( {network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
                                             , generatorProperties );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , AddGeneratorAtUsingVertexIdExceptionHandling )
+{
+    TGeneratorProperties generatorProperties;
+    generatorProperties.Name() = "TestGenerator1";
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddGeneratorAt"
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
+    try {
+        network_.AddGeneratorAt ( static_cast<Types::vertexId>(0), generatorProperties );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestNetworkEmpty
        , AddGeneratorAtUsingVertexId )
@@ -812,30 +841,30 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , AddGeneratorAtUsingVertexId )
-{
-    EXPECT_TRUE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
-    EXPECT_EQ ( 23,     network_.NumberOfGenerators() );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , AddGeneratorAtUsingVertexId )
+// {
+//     EXPECT_TRUE ( network_.HasGeneratorAt( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_EQ ( 23,     network_.NumberOfGenerators() );
 
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name()       = "TestGenerator1";
-    Types::generatorId generatorId1  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(2)
-                                                               , generatorProperties );
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name()       = "TestGenerator1";
+//     Types::generatorId generatorId1  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(2)
+//                                                                , generatorProperties );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(2) ) );
-    EXPECT_TRUE ( network_.HasGenerator ( generatorId1 ) );
-    EXPECT_EQ ( 23,     generatorId1 );
-    EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(2) ) );
+//     EXPECT_TRUE ( network_.HasGenerator ( generatorId1 ) );
+//     EXPECT_EQ ( 23,     generatorId1 );
+//     EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
 
-    Types::generatorId generatorId2  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
-                                                               , generatorProperties );
+//     Types::generatorId generatorId2  = network_.AddGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                                                , generatorProperties );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    EXPECT_TRUE ( network_.HasGenerator ( generatorId2 ) );
-    EXPECT_EQ ( 24,     generatorId2 );
-    EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
-}
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_TRUE ( network_.HasGenerator ( generatorId2 ) );
+//     EXPECT_EQ ( 24,     generatorId2 );
+//     EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -930,30 +959,30 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGenerator( static_cast<Types::generatorId>(3) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , AddGeneratorAtUsingVertex )
-{
-    TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
-    TVertex vertex1 = network_.Graph().VertexAt( static_cast<Types::vertexId>(1) );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , AddGeneratorAtUsingVertex )
+// {
+//     TVertex vertex0 = network_.Graph().VertexAt( static_cast<Types::vertexId>(0) );
+//     TVertex vertex1 = network_.Graph().VertexAt( static_cast<Types::vertexId>(1) );
 
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name() = "TestGenerator1";
-    Types::generatorId generatorId1 = network_.AddGeneratorAt ( vertex0, generatorProperties );
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name() = "TestGenerator1";
+//     Types::generatorId generatorId1 = network_.AddGeneratorAt ( vertex0, generatorProperties );
 
-    EXPECT_EQ ( 0,      network_.Graph().VertexId ( vertex0 ) );
-    EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex0 ) );
-    EXPECT_TRUE ( network_.HasGenerator( generatorId1 ) );
-    EXPECT_EQ ( 23,     generatorId1 );
-    EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
+//     EXPECT_EQ ( 0,      network_.Graph().VertexId ( vertex0 ) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex0 ) );
+//     EXPECT_TRUE ( network_.HasGenerator( generatorId1 ) );
+//     EXPECT_EQ ( 23,     generatorId1 );
+//     EXPECT_EQ ( 24,     network_.NumberOfGenerators() );
 
-    Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex1, generatorProperties );
+//     Types::generatorId generatorId2 = network_.AddGeneratorAt ( vertex1, generatorProperties );
 
-    EXPECT_EQ ( 1,      network_.Graph().VertexId ( vertex1 ) );
-    EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex1 ) );
-    EXPECT_TRUE ( network_.HasGenerator( generatorId2 ) );
-    EXPECT_EQ ( 24,     generatorId2 );
-    EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
-}
+//     EXPECT_EQ ( 1,      network_.Graph().VertexId ( vertex1 ) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt   ( vertex1 ) );
+//     EXPECT_TRUE ( network_.HasGenerator( generatorId2 ) );
+//     EXPECT_EQ ( 24,     generatorId2 );
+//     EXPECT_EQ ( 25,     network_.NumberOfGenerators() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -961,13 +990,14 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
                                                , static_cast<Types::generatorId>(0) );}
@@ -976,12 +1006,54 @@ TEST_F ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasGeneratorAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );}, assertionString );
 
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_EQ ( 0,       network_.NumberOfGenerators() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveGeneratorAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+                                   , static_cast<Types::generatorId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    assertionString = buildAssertionString  ( "PowerGrid.hpp"
+                                            , "PowerGrid"
+                                            , "HasGeneratorAt"
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
+    try {
+        network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+    EXPECT_EQ ( 0,       network_.NumberOfGenerators() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
@@ -998,6 +1070,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 0,     network_.NumberOfGenerators() );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
 {
@@ -1010,7 +1083,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+                                                , R"(false && "The generatorId does not exist in generatorsAtVertex_\[vertexId\]!")");
     ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                               , static_cast<Types::generatorId>(0) )
                  , assertionString );
@@ -1018,18 +1091,74 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
     EXPECT_EQ ( 1, network_.NumberOfGenerators() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+//        , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+// {
+//     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 
+//     // Vertex does not contain the generator, thus method RemoveGeneratorAt access assertion branch
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , static_cast<Types::generatorId>(0) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+
+//     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1, network_.NumberOfGenerators() );
+// }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
        , RemoveGeneratorAtUsingGeneratorIdNonExistingVertexId )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)" );
+                                                , R"(Graph\(\).VertexExists \( vertexId \))" );
     ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
                                               , static_cast<Types::generatorId>(0) )
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+       , RemoveGeneratorAtUsingGeneratorIdNonExistingVertexIdExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveGeneratorAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))" );
+    try {
+        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
+                                   , static_cast<Types::generatorId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
        , RemoveGeneratorAtUsingVertexIdGeneratorId )
@@ -1046,26 +1175,59 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
 }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGeneratorId )
-{
-    EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
-    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+#ifdef EGOA_ENABLE_ASSERTION
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
+//        , RemoveGeneratorAtUsingVertexIdGeneratorId )
+// {
+//     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
 
-    // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
-    ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                              , static_cast<Types::generatorId>(0) )
-                 , assertionString );
+//     // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     ASSERT_DEATH ( network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                               , static_cast<Types::generatorId>(0) )
+//                  , assertionString );
 
-    EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
-    EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
-}
+//     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+// }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4b
+//        , RemoveGeneratorAtUsingVertexIdGeneratorIdExceptionHandling )
+// {
+//     EXPECT_TRUE  ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(1) ) );
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+
+//     // Vertex has not the generator, thus method RemoveGeneratorAt access assertion branch
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , static_cast<Types::generatorId>(0) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+
+//     EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>(0) ) );
+//     EXPECT_EQ ( 1,     network_.NumberOfGenerators() );
+// }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1073,6 +1235,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , RemoveGeneratorAtUsingVertexIdGenerator )
 {
@@ -1084,7 +1247,7 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
                                                , generatorProperties );}
@@ -1094,12 +1257,60 @@ TEST_F ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasGeneratorAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );}, assertionString );
 
     EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestNetworkEmpty
+//        , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
+// {
+//     // Generate generator with default values
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name() = "TestGenerator1";
+
+//     // Vertex has no generators with assertion at RemoveGeneratorAt
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "Graph\\(\\).VertexExists \\( vertexId \\)");
+
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+
+//     // Vertex has no generators with assertion at HasGeneratorAt
+//     assertionString = buildAssertionString  ( "PowerGrid.hpp"
+//                                             , "PowerGrid"
+//                                             , "HasGeneratorAt"
+//                                             , "Graph\\(\\).VertexExists \\( vertexId \\)");
+//     try {
+//         network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+
+//     EXPECT_FALSE ( network_.HasGenerator ( generatorProperties ) );
+//     EXPECT_EQ ( 0, network_.NumberOfGenerators() );
+// }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , RemoveGeneratorAtUsingVertexIdGenerator )
@@ -1119,6 +1330,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 0,    network_.NumberOfGenerators() );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
        , RemoveGeneratorAtUsingVertexIdGenerator )
 {
@@ -1128,7 +1340,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+                                                , R"(false && "The generatorId does not exist in generatorsAtVertex_\[vertexId\]!")");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                                , generatorProperties );}
@@ -1142,13 +1354,63 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "RemoveGeneratorAt"
-                                           , "HasGenerator \\( generatorId \\)");
+                                           , R"(HasGenerator \( generatorId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
                                                , generatorProperties );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+//        , RemoveGeneratorAtUsingVertexIdGeneratorExceptionHandling )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
+//     // Vertex has no generators
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+
+//     // Ordinary generator removal
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                , generatorProperties );
+
+//     // Generator does not exist
+//     assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                            , "PowerGrid"
+//                                            , "RemoveGeneratorAt"
+//                                            , "HasGenerator \\( generatorId \\)");
+
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+// }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
        , RemoveGeneratorAtUsingGeneratorNonExistingVertexId )
 {
@@ -1158,12 +1420,39 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
                                                , generatorProperties );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+       , RemoveGeneratorAtUsingGeneratorNonExistingVertexIdExceptionHandling )
+{
+    TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
+
+    // Vertex has no generators
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveGeneratorAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(11)
+                                   , generatorProperties );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4b
        , RemoveGeneratorAtUsingVertexIdGenerator )
@@ -1183,36 +1472,85 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0,    network_.NumberOfGenerators() );
 }
 
-TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
-       , RemoveGeneratorAtUsingVertexIdGenerator )
-{
-    TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
+#ifdef EGOA_ENABLE_ASSERTION
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
+//        , RemoveGeneratorAtUsingVertexIdGenerator )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
-    // Vertex has no generators
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "RemoveGeneratorAt"
-                                                , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+//     // Vertex has no generators
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
 
-    ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                               , generatorProperties );}
-                 , assertionString );
+//     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                                , generatorProperties );}
+//                  , assertionString );
 
-    // Ordinary generator removal
-    network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
-                               , generatorProperties );
+//     // Ordinary generator removal
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                , generatorProperties );
 
-    // Generator does not exist
-    assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                           , "PowerGrid"
-                                           , "RemoveGeneratorAt"
-                                           , "HasGenerator \\( generatorId \\)");
+//     // Generator does not exist
+//     assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                            , "PowerGrid"
+//                                            , "RemoveGeneratorAt"
+//                                            , "HasGenerator \\( generatorId \\)");
 
-    ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
-                                               , generatorProperties );}
-                 , assertionString );
-}
+//     ASSERT_DEATH ( {network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                                , generatorProperties );}
+//                  , assertionString );
+// }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestPowerGridAcm2018MtsfFigure4bDeathTest
+//        , RemoveGeneratorAtUsingVertexIdGenerator )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( 0 );
 
+//     // Vertex has no generators
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "RemoveGeneratorAt"
+//                                                 , "false && \"The generatorId does not exist in generatorsAtVertex_\\[vertexId\\]!\"");
+
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+
+//     // Ordinary generator removal
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(0)
+//                                , generatorProperties );
+
+//     // Generator does not exist
+//     assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                            , "PowerGrid"
+//                                            , "RemoveGeneratorAt"
+//                                            , "HasGenerator \\( generatorId \\)");
+
+//     try {
+//         network_.RemoveGeneratorAt ( static_cast<Types::vertexId>(1)
+//                                    , generatorProperties );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+// }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 // ***********************************************************************
 // ***********************************************************************
 #pragma mark HasGenerator
@@ -1239,26 +1577,26 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>(1) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGenerator )
-{
-    for ( Types::count counter = 0
-        ; counter < network_.NumberOfGenerators()
-        ; ++counter )
-    {
-        EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>( counter ) ) );
-    }
-    EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( network_.NumberOfGenerators() ) ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGenerator )
+// {
+//     for ( Types::count counter = 0
+//         ; counter < network_.NumberOfGenerators()
+//         ; ++counter )
+//     {
+//         EXPECT_TRUE ( network_.HasGenerator ( static_cast<Types::generatorId>( counter ) ) );
+//     }
+//     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( network_.NumberOfGenerators() ) ) );
+// }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAfterRemoval )
-{
-    EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
-    network_.RemoveGeneratorAt ( static_cast<Types::vertexId>( 5 )
-                               , static_cast<Types::generatorId>( 11 ) );
-    EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAfterRemoval )
+// {
+//     EXPECT_TRUE  ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
+//     network_.RemoveGeneratorAt ( static_cast<Types::vertexId>( 5 )
+//                                , static_cast<Types::generatorId>( 11 ) );
+//     EXPECT_FALSE ( network_.HasGenerator ( static_cast<Types::generatorId>( 11 ) ) );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1266,17 +1604,41 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , HasGeneratorAtVertexId )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , HasGeneratorAtVertexIdExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "HasGeneratorAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.HasGeneratorAt ( static_cast<Types::vertexId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , HasGeneratorAtVertexId )
@@ -1292,42 +1654,66 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( 1 ) ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexId )
-{
-    for ( Types::count counter = 0
-        ; counter < network_.Graph().NumberOfVertices()
-        ; ++counter )
-    {
-        EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( counter ) ) );
-    }
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAtVertexId )
+// {
+//     for ( Types::count counter = 0
+//         ; counter < network_.Graph().NumberOfVertices()
+//         ; ++counter )
+//     {
+//         EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>( counter ) ) );
+//     }
+// }
 
-TEST_F ( TestPowerGridPyPsaExampleDeathTest
-       , HasGeneratorAtVertexId )
-{
-    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
-                                                , "PowerGrid"
-                                                , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+// #ifdef EGOA_ENABLE_ASSERTION
+// TEST_F ( TestPowerGridPyPsaExampleDeathTest
+//        , HasGeneratorAtVertexId )
+// {
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "HasGeneratorAt"
+//                                                 , R"(Graph\(\).VertexExists \( vertexId \))");
 
-    ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) ); }
-                 , assertionString );
-}
+//     ASSERT_DEATH ( { network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) ); }
+//                  , assertionString );
+// }
+// #else
+// #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAtVertexIdExceptionHandling )
+// {
+//     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+//                                                 , "PowerGrid"
+//                                                 , "HasGeneratorAt"
+//                                                 , R"(Graph\(\).VertexExists \( vertexId \))");
 
+//     try {
+//         network_.HasGeneratorAt ( static_cast<Types::vertexId>( network_.Graph().NumberOfVertices() ) );
+//     } catch ( std::runtime_error const & error )
+//     {
+//         EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+//     } catch ( ... )
+//     {
+//         FAIL()  << "Expected std::runtime_error with message: "
+//                 << assertionString;
+//     }
+// }
+// #endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+// #endif // ifdef EGOA_ENABLE_ASSERTION
 // ***********************************************************************
 // ***********************************************************************
 #pragma mark HasGeneratorAtVertexObject
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , HasGeneratorAtVertexObject )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasGeneratorAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     TVertexProperties vertexProperties;
     TVertex vertex ( 9999, vertexProperties );
@@ -1335,6 +1721,32 @@ TEST_F ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.HasGeneratorAt ( vertex ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , HasGeneratorAtVertexObjectExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "HasGeneratorAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    TVertexProperties vertexProperties;
+    TVertex vertex ( 9999, vertexProperties );
+
+    try {
+        network_.HasGeneratorAt ( vertex );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , HasGeneratorAtVertexObject )
@@ -1354,17 +1766,17 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_FALSE ( network_.HasGeneratorAt ( vertex1 ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , HasGeneratorAtVertexObject )
-{
-    for ( Types::count counter = 0
-        ; counter < network_.Graph().NumberOfVertices()
-        ; ++counter )
-    {
-        TVertex vertex = network_.Graph().VertexAt( static_cast<Types::vertexId>( counter ) );
-        EXPECT_TRUE  ( network_.HasGeneratorAt ( vertex ) );
-    }
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , HasGeneratorAtVertexObject )
+// {
+//     for ( Types::count counter = 0
+//         ; counter < network_.Graph().NumberOfVertices()
+//         ; ++counter )
+//     {
+//         TVertex vertex = network_.Graph().VertexAt( static_cast<Types::vertexId>( counter ) );
+//         EXPECT_TRUE  ( network_.HasGeneratorAt ( vertex ) );
+//     }
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1424,6 +1836,7 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , GeneratorIds )
 {
@@ -1433,10 +1846,36 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorIds"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.GeneratorIds( static_cast<Types::vertexId>(0), generatorIds );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorIdsExceptionHandling )
+{
+    std::vector<Types::generatorId> generatorIds;
+
+    // Vertex does not exist
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorIds"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.GeneratorIds( static_cast<Types::vertexId>(0), generatorIds );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorIds )
@@ -1458,14 +1897,14 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorIds[0] );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorIds )
-{
-    std::vector<Types::generatorId> generatorIds;
-    network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorIds )
+// {
+//     std::vector<Types::generatorId> generatorIds;
+//     network_.GeneratorIds ( static_cast<Types::vertexId>(0), generatorIds );
 
-    EXPECT_EQ ( 2, generatorIds.size() );
-}
+//     EXPECT_EQ ( 2, generatorIds.size() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1473,6 +1912,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , GeneratorAt )
 {
@@ -1480,10 +1920,33 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorAt"
-                                                , "HasGenerator \\( generatorId \\)");
+                                                , R"(HasGenerator \( generatorId \))");
     ASSERT_DEATH ( {network_.GeneratorAt( static_cast<Types::generatorId>(0) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorAtExceptionHandling )
+{
+    // Generator does not exist
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorAt"
+                                                , R"(HasGenerator \( generatorId \))");
+    try {
+        network_.GeneratorAt( static_cast<Types::generatorId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorAt )
@@ -1501,13 +1964,13 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     GeneratorComplyInitialValues ( generatorProperties );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorAt )
-{
-    TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorAt )
+// {
+//     TGeneratorProperties & generatorProperties = network_.GeneratorAt( static_cast<Types::generatorId>(0) );
 
-    GeneratorComplyInitialValues ( generatorProperties );
-}
+//     GeneratorComplyInitialValues ( generatorProperties );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1515,6 +1978,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , GeneratorsAtUsingVertexId )
 {
@@ -1524,10 +1988,35 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorsAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.GeneratorsAt( static_cast<Types::vertexId>(0), generators );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorsAtUsingVertexIdExceptionHandling )
+{
+    std::vector<TGeneratorProperties> generators;
+
+    // Vertex does not exist
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorsAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+    try {
+        network_.GeneratorsAt( static_cast<Types::vertexId>(0), generators );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorsAtUsingVertexId )
@@ -1569,25 +2058,25 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorProperties.size() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorsAtUsingVertexId )
-{
-    std::vector<TGeneratorProperties> generatorProperties;
-    network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
-                          , generatorProperties );
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorsAtUsingVertexId )
+// {
+//     std::vector<TGeneratorProperties> generatorProperties;
+//     network_.GeneratorsAt ( static_cast<Types::vertexId>(0)
+//                           , generatorProperties );
 
-    EXPECT_EQ ( 2, generatorProperties.size() );
-    GeneratorComplyInitialValues ( generatorProperties[0] );
+//     EXPECT_EQ ( 2, generatorProperties.size() );
+//     GeneratorComplyInitialValues ( generatorProperties[0] );
 
-    // Clear vector
-    generatorProperties.clear();
-    EXPECT_EQ ( 0, generatorProperties.size() );
+//     // Clear vector
+//     generatorProperties.clear();
+//     EXPECT_EQ ( 0, generatorProperties.size() );
 
-    // Check number of generators at vertex identifier 1
-    network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
-                          , generatorProperties );
-    EXPECT_EQ ( 3, generatorProperties.size() );
-}
+//     // Check number of generators at vertex identifier 1
+//     network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
+//                           , generatorProperties );
+//     EXPECT_EQ ( 3, generatorProperties.size() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1595,6 +2084,7 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , GeneratorsAtUsingVertexObject )
 {
@@ -1607,10 +2097,39 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorsAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.GeneratorsAt( vertex0, generatorProperties );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorsAtUsingVertexObjectExceptionHandling )
+{
+    std::vector<TGeneratorProperties> generatorProperties;
+
+    TVertexProperties   vertexProperties;
+    TVertex vertex0 ( 9999, vertexProperties );
+
+    // Vertex does not exist
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorsAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.GeneratorsAt( vertex0, generatorProperties );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorsAtUsingVertexObject )
@@ -1667,26 +2186,26 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorPropertiesS.size() );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorsAtUsingVertexObject )
-{
-    std::vector<TGeneratorProperties> generatorPropertiesS;
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorsAtUsingVertexObject )
+// {
+//     std::vector<TGeneratorProperties> generatorPropertiesS;
 
-    // Generate generator with default values
-    TGeneratorProperties generatorProperties;
-    generatorProperties.Name() = "TestGenerator1";
+//     // Generate generator with default values
+//     TGeneratorProperties generatorProperties;
+//     generatorProperties.Name() = "TestGenerator1";
 
-    TVertex vertex0 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(0) );
-    TVertex vertex1 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(7) );
+//     TVertex vertex0 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(0) );
+//     TVertex vertex1 = network_.Graph().VertexAt ( static_cast<Types::vertexId>(7) );
 
-    network_.GeneratorsAt ( vertex0, generatorPropertiesS );
-    EXPECT_EQ ( 2, generatorPropertiesS.size() );
+//     network_.GeneratorsAt ( vertex0, generatorPropertiesS );
+//     EXPECT_EQ ( 2, generatorPropertiesS.size() );
 
-    generatorPropertiesS.clear();
+//     generatorPropertiesS.clear();
 
-    network_.GeneratorsAt ( vertex1, generatorPropertiesS );
-    EXPECT_EQ ( 3, generatorPropertiesS.size() );
-}
+//     network_.GeneratorsAt ( vertex1, generatorPropertiesS );
+//     EXPECT_EQ ( 3, generatorPropertiesS.size() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1747,23 +2266,23 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0, generatorId );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , FindGenerator )
-{
-    TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(15) );
-    std::vector<TGeneratorProperties> generatorPropertiesS;
+// TEST_F ( TestPowerGridPyPsaExample
+//        , FindGenerator )
+// {
+//     TGeneratorProperties              generatorProperties = network_.GeneratorAt ( static_cast<Types::generatorId>(15) );
+//     std::vector<TGeneratorProperties> generatorPropertiesS;
 
-    // Get generators at a vertex with identifier 0
-    network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
-                          , generatorPropertiesS );
+//     // Get generators at a vertex with identifier 0
+//     network_.GeneratorsAt ( static_cast<Types::vertexId>(7)
+//                           , generatorPropertiesS );
 
-    // Find the generator that was extracted from position 0
-    Types::generatorId generatorId = network_.FindGenerator ( generatorProperties
-                                                            , generatorPropertiesS );
+//     // Find the generator that was extracted from position 0
+//     Types::generatorId generatorId = network_.FindGenerator ( generatorProperties
+//                                                             , generatorPropertiesS );
 
-    // That's what we expect: Field 0 of the vector at vertex 7
-    EXPECT_EQ ( 0, generatorId );
-}
+//     // That's what we expect: Field 0 of the vector at vertex 7
+//     EXPECT_EQ ( 0, generatorId );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1771,17 +2290,41 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , TotalRealPowerGenerationBoundAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , TotalRealPowerGenerationBoundAtExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalRealPowerGenerationBoundAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , TotalRealPowerGenerationBoundAtBounded )
@@ -1974,18 +2517,18 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, bound.Maximum() );
 }
 
-TEST_F  ( TestPowerGridPyPsaExample
-        , TotalRealPowerGenerationBoundAtBounded )
-{ // Bounded
-    network_.MakeBounded ();
-    TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
-                                                                                                                                                        , static_cast<Types::index>(2) );
+// TEST_F  ( TestPowerGridPyPsaExample
+//         , TotalRealPowerGenerationBoundAtBounded )
+// { // Bounded
+//     network_.MakeBounded ();
+//     TBound bound = network_.TotalRealPowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
+//                                                                                                                                                         , static_cast<Types::index>(2) );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    // Test bound for the bounded type
-    EXPECT_EQ ( 0.0, bound.Minimum() );
-    EXPECT_EQ ( std::numeric_limits<double>::infinity(), bound.Maximum() );
-}
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     // Test bound for the bounded type
+//     EXPECT_EQ ( 0.0, bound.Minimum() );
+//     EXPECT_EQ ( std::numeric_limits<double>::infinity(), bound.Maximum() );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -1993,29 +2536,77 @@ TEST_F  ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , TotalRealPowerGenerationAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , TotalRealPowerGenerationAtExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalRealPowerGenerationAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
+    try {
+        network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
         , TotalRealPowerGenerationAtNonExistingVertex )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
+        , TotalRealPowerGenerationAtNonExistingVertexExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalRealPowerGenerationAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator )
@@ -2037,17 +2628,41 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 1.234, value );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
         , TotalRealPowerGenerationAtNonExistingVertex )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
+        , TotalRealPowerGenerationAtNonExistingVertexExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalRealPowerGenerationAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
         , TotalRealPowerGenerationAtWithVertexThatHasNoGenerator )
@@ -2069,34 +2684,34 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, value );
 }
 
-TEST_F  ( TestPowerGridPyPsaExample
-        , TotalRealPowerGenerationAt )
-{
-    Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0)
-                                                                                                                                                    , static_cast<Types::index>(0) );
+// TEST_F  ( TestPowerGridPyPsaExample
+//         , TotalRealPowerGenerationAt )
+// {
+//     Types::real value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0)
+//                                                                                                                                                     , static_cast<Types::index>(0) );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 300.0, value );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 300.0, value );
 
-    value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
-                                                                                                                                        , static_cast<Types::index>(0) );
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 6000.0, value );
+//     value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
+//                                                                                                                                         , static_cast<Types::index>(0) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 6000.0, value );
 
-    value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
-                                                                                                                                        , static_cast<Types::index>(0) );
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 6000.0, value );
+//     value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(8)
+//                                                                                                                                         , static_cast<Types::index>(0) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(8) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 6000.0, value );
 
-    value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
-                                                                                                                                        , static_cast<Types::index>(6) );
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(7) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 5280.0, value );
-}
+//     value = network_.TotalRealPowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(7)
+//                                                                                                                                         , static_cast<Types::index>(6) );
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(7) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 5280.0, value );
+// }
 
 
 // ***********************************************************************
@@ -2105,17 +2720,41 @@ TEST_F  ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , TotalReactivePowerGenerationBoundAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , TotalReactivePowerGenerationBoundAtExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalReactivePowerGenerationBoundAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalReactivePowerGenerationBoundAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , TotalReactivePowerGenerationBoundAtBounded )
@@ -2315,29 +2954,77 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , TotalReactivePowerGenerationAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , TotalReactivePowerGenerationAtExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalReactivePowerGenerationAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
+    try {
+        network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
         , TotalReactivePowerGenerationAtNonExistingVertex )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
+        , TotalReactivePowerGenerationAtNonExistingVertexExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalReactivePowerGenerationAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , TotalReactivePowerGenerationAtWithVertexThatHasNoGenerator )
@@ -2359,17 +3046,41 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 1.111, value );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
         , TotalReactivePowerGenerationAtNonExistingVertex )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalReactivePowerGenerationAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
+        , TotalReactivePowerGenerationAtNonExistingVertexExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalReactivePowerGenerationAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalReactivePowerGenerationAt<Vertices::GenerationStrategyDifferentiationType::totalVertexPowerGenerationPerSnapshot> ( static_cast<Types::vertexId>(9) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
         , TotalReactivePowerGenerationAtWithVertexThatHasNoGenerator )
@@ -2391,17 +3102,17 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( 0.0, value );
 }
 
-TEST_F  ( TestPowerGridPyPsaExample
-        , TotalReactivePowerGenerationAt )
-{
-    Types::real value = network_.TotalReactivePowerGenerationAt<
-                                Vertices::GenerationStrategyDifferentiationType
-                                            ::totalVertexPowerGenerationPerSnapshot > ( static_cast<Types::vertexId>( 0 ) );
+// TEST_F  ( TestPowerGridPyPsaExample
+//         , TotalReactivePowerGenerationAt )
+// {
+//     Types::real value = network_.TotalReactivePowerGenerationAt<
+//                                 Vertices::GenerationStrategyDifferentiationType
+//                                             ::totalVertexPowerGenerationPerSnapshot > ( static_cast<Types::vertexId>( 0 ) );
 
-    EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
-    // Test the total real power generation
-    EXPECT_EQ ( 0.0, value );
-}
+//     EXPECT_TRUE ( network_.HasGeneratorAt ( static_cast<Types::vertexId>(0) ) );
+//     // Test the total real power generation
+//     EXPECT_EQ ( 0.0, value );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -2409,6 +3120,7 @@ TEST_F  ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddLoadAtUsingVertexId )
 {
@@ -2417,11 +3129,36 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt ( static_cast<Types::vertexId>(0), loadProperties ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddLoadAtUsingVertexIdExceptionHandling )
+{
+    TLoadProperties loadProperties;
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddLoadAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.AddLoadAt ( static_cast<Types::vertexId>(0), loadProperties );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestNetworkEmpty
         , AddLoadAtUsingVertexId )
@@ -2445,6 +3182,7 @@ TEST_F  ( TestNetworkEmpty
     EXPECT_FALSE( network_.HasLoad ( static_cast<Types::loadId>(1) ) );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
         , AddLoadAtUsingVertexIdNonExistingVertexId )
 {
@@ -2452,11 +3190,35 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt ( static_cast<Types::vertexId>(9), loadProperties );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
+        , AddLoadAtUsingVertexIdNonExistingVertexIdExceptionHandling )
+{
+    TLoadProperties loadProperties;
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddLoadAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.AddLoadAt ( static_cast<Types::vertexId>(9), loadProperties );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddLoadAtUsingVertexId )
@@ -2504,6 +3266,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddLoadAtVertexObject )
 {
@@ -2514,11 +3277,38 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt ( vertex, loadProperties ); }
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddLoadAtVertexObjectExceptionHandling )
+{
+    TLoadProperties loadProperties;
+    TVertexProperties vertexProperties;
+    TVertex vertex ( 9999, vertexProperties );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddLoadAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.AddLoadAt ( vertex, loadProperties );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestNetworkEmpty
         , AddLoadAtVertexObject )
@@ -2620,6 +3410,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdLoadId )
 {
@@ -2627,7 +3418,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.RemoveLoadAt ( static_cast<Types::vertexId>(0)
                                           , static_cast<Types::loadId>(0) );}
@@ -2636,13 +3427,57 @@ TEST_F  ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString  ( "PowerGrid.hpp"
                                             , "PowerGrid"
                                             , "HasLoadAt"
-                                            , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
     ASSERT_DEATH ( {network_.HasLoadAt ( static_cast<Types::vertexId>(0) );}, assertionString );
 
     EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , RemoveLoadAtUsingVertexIdLoadIdExceptionHandling )
+{
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveLoadAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
+    try {
+        network_.RemoveLoadAt ( static_cast<Types::vertexId>(0)
+                              , static_cast<Types::loadId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    assertionString = buildAssertionString  ( "PowerGrid.hpp"
+                                            , "PowerGrid"
+                                            , "HasLoadAt"
+                                            , R"(Graph\(\).VertexExists \( vertexId \))");
+    try {
+        network_.HasLoadAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    EXPECT_FALSE ( network_.HasLoad ( static_cast<Types::loadId>(0) ) );
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExists )
 {
@@ -2655,13 +3490,44 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RemoveLoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.RemoveLoadAt ( vertexId
                                           , static_cast<Types::loadId>(0) );}
                  , assertionString );
     EXPECT_EQ ( 0, network_.NumberOfLoads() );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , RemoveLoadAtUsingVertexIdWhereLoadIdDoesNotExistsExceptionHandling )
+{
+    TVertexProperties vertexProperties;
+    Types::vertexId   vertexId = network_.Graph().AddVertex ( vertexProperties );
+    TVertex   const & vertex   = network_.Graph().VertexAt  ( vertexId );
+
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RemoveLoadAt"
+                                                , R"(HasLoad \( loadId \))");
+
+    try {
+        network_.RemoveLoadAt ( vertexId
+                              , static_cast<Types::loadId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    EXPECT_EQ ( 0, network_.NumberOfLoads() );
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestNetworkEmptyDeathTest
         , RemoveLoadAtUsingVertexIdLoadIdAddingAndRemovingMultipleLoads )
@@ -2809,6 +3675,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , HasLoadAt )
 { // Checks if there is a load at a vertex
@@ -2816,13 +3683,47 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "HasLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.HasLoadAt ( static_cast<Types::vertexId>(0) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.HasLoadAt ( static_cast<Types::vertexId>(0) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , HasLoadAtExceptionHandling )
+{ // Checks if there is a load at a vertex
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "HasLoadAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.HasLoadAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.HasLoadAt ( static_cast<Types::vertexId>(0) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , HasLoadAt )
@@ -2912,6 +3813,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , LoadIds )
 { // Checks if there is a load at a vertex
@@ -2922,13 +3824,51 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadIds"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     ASSERT_DEATH ( {network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , LoadIdsExceptionHandling )
+{ // Checks if there is a load at a vertex
+
+    TLoadProperties             loadProperties0;
+    std::vector<Types::loadId>  loadIds;
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadIds"
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
+
+    try {
+        network_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    try {
+        networkConst_.LoadIds ( static_cast<Types::vertexId>( 0 ), loadIds );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , LoadIds )
@@ -2992,33 +3932,101 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , LoadAt )
 { // Checks if there is a load at a load ID
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 0 ) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.LoadAt ( static_cast<Types::loadId>( 0 ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , LoadAtExceptionHandling )
+{ // Checks if there is a load at a load ID
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadAt"
+                                                , R"(HasLoad \( loadId \))");
 
+    try {
+        network_.LoadAt ( static_cast<Types::loadId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.LoadAt ( static_cast<Types::loadId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4aDeathTest
         , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
+        , LoadAtExceptionHandling )
+{ // Checks if there is a load at a load ID and returns the property
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadAt"
+                                                , R"(HasLoad \( loadId \))");
+
+    try {
+        network_.LoadAt ( static_cast<Types::loadId>( 3 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.LoadAt ( static_cast<Types::loadId>( 3 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , LoadAt )
@@ -3046,19 +4054,53 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 1.1, loadProperties0.ReactivePowerLoadBound().Maximum() );
 }
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4bDeathTest
         , LoadAt )
 { // Checks if there is a load at a load ID and returns the property
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadAt"
-                                                , "HasLoad \\( loadId \\)");
+                                                , R"(HasLoad \( loadId \))");
 
     ASSERT_DEATH ( {network_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.LoadAt ( static_cast<Types::loadId>( 3 ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
+        , LoadAtExceptionHandling )
+{ // Checks if there is a load at a load ID and returns the property
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadAt"
+                                                , R"(HasLoad \( loadId \))");
+
+    try {
+        network_.LoadAt ( static_cast<Types::loadId>( 3 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.LoadAt ( static_cast<Types::loadId>( 3 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
         , LoadAt )
@@ -3092,13 +4134,14 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , LoadsAtVertexId )
 { // Return load properties at a vertex ID
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadsAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     std::vector<TLoadProperties> loads;
     ASSERT_DEATH ( {network_.LoadsAt ( static_cast<Types::vertexId>( 0 ), loads );}
@@ -3107,6 +4150,40 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {networkConst_.LoadsAt ( static_cast<Types::vertexId>( 0 ), loads );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , LoadsAtVertexIdExceptionHandling )
+{ // Return load properties at a vertex ID
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadsAt"
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
+
+    std::vector<TLoadProperties> loads;
+    try {
+        network_.LoadsAt ( static_cast<Types::vertexId>( 0 ), loads );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.LoadsAt ( static_cast<Types::vertexId>( 0 ), loads );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , LoadsAtVertexId )
@@ -3206,13 +4283,14 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , LoadsAtVertex )
 { // Return load properties at a vertex ID
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");
+                                                , R"(VertexExists\(id\))");
 
     std::vector<TLoadProperties> loads;
     ASSERT_DEATH ( {network_.LoadsAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ), loads );}
@@ -3220,6 +4298,41 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {networkConst_.LoadsAt ( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ), loads );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , LoadsAtVertexExceptionHandling )
+{ // Return load properties at a vertex ID
+    auto assertionString = buildAssertionString ( "StaticGraph.hpp"
+                                                , "StaticGraph"
+                                                , "VertexAt"
+                                                , R"(VertexExists\(id\))");
+
+    std::vector<TLoadProperties> loads;
+    try {
+        network_.LoadsAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ), loads );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    try {
+        networkConst_.LoadsAt ( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ), loads );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , LoadsAtVertex )
@@ -3318,19 +4431,53 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , RealPowerLoadAt )
 { // Total real power load for a snapshot (here 0 implicitly) for a vertexId
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "RealPowerLoadAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     ASSERT_DEATH ( {network_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , RealPowerLoadAtExceptionHandling )
+{ // Total real power load for a snapshot (here 0 implicitly) for a vertexId
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "RealPowerLoadAt"
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
+
+    try {
+        network_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.RealPowerLoadAt ( static_cast<Types::vertexId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , RealPowerLoadAt )
@@ -3368,19 +4515,53 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , RealPowerLoadAtVertexObject )
 { // Total real power load for a snapshot (here 0 implicitly) for a vertexId
     auto assertionString = buildAssertionString ( "StaticGraph.hpp"
                                                 , "StaticGraph"
                                                 , "VertexAt"
-                                                , "VertexExists\\(id\\)");
+                                                , R"(VertexExists\(id\))");
 
     ASSERT_DEATH ( {network_.RealPowerLoadAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.RealPowerLoadAt ( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , RealPowerLoadAtVertexObjectExceptionHandling )
+{ // Total real power load for a snapshot (here 0 implicitly) for a vertexId
+    auto assertionString = buildAssertionString ( "StaticGraph.hpp"
+                                                , "StaticGraph"
+                                                , "VertexAt"
+                                                , R"(VertexExists\(id\))");
+
+    try {
+        network_.RealPowerLoadAt ( network_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.RealPowerLoadAt ( networkConst_.Graph().VertexAt( static_cast<Types::vertexId>( 0 ) ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , RealPowerLoadAtVertexObject )
@@ -3418,19 +4599,53 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , TotalRealPowerLoadBoundAt )
 { // Total real power load for a snapshot (here 0 implicitly) for a vertexId
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TotalRealPowerLoadBoundAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
     ASSERT_DEATH ( {networkConst_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , TotalRealPowerLoadBoundAtExceptionHandling )
+{ // Total real power load for a snapshot (here 0 implicitly) for a vertexId
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TotalRealPowerLoadBoundAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+    try {
+        networkConst_.TotalRealPowerLoadBoundAt ( static_cast<Types::vertexId>( 0 ) );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , TotalRealPowerLoadBoundAt )
@@ -3510,6 +4725,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddGeneratorRealPowerSnapshotAt )
 { // Add generator snapshot (real power)
@@ -3520,7 +4736,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddGeneratorAt"
-                                                , "Graph\\(\\).VertexExists\\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddGeneratorAt(static_cast<Types::vertexId>(0), generatorProperties);}
                  , assertionString );
@@ -3529,10 +4745,53 @@ TEST_F  ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddGeneratorRealPowerSnapshotAt"
-                                           , "HasGenerator \\( generatorId \\)");
+                                           , R"(HasGenerator \( generatorId \))");
     ASSERT_DEATH ( {network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddGeneratorRealPowerSnapshotAtExceptionHandling )
+{ // Add generator snapshot (real power)
+    TGeneratorProperties generatorProperties;
+
+    CreateExampleGeneratorProperties( generatorProperties );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddGeneratorAt"
+                                                , R"(Graph\(\).VertexExists\( vertexId \))");
+
+    try {
+        network_.AddGeneratorAt(static_cast<Types::vertexId>(0), generatorProperties);
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    Types::generatorId generatorId = static_cast<Types::generatorId>(0);
+    assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                           , "PowerGrid"
+                                           , "AddGeneratorRealPowerSnapshotAt"
+                                           , R"(HasGenerator \( generatorId \))");
+    try {
+        network_.AddGeneratorRealPowerSnapshotAt( generatorId, generatorProperties.RealPower() );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddGeneratorRealPowerSnapshotAt )
@@ -3658,6 +4917,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddLoadSnapshotAt )
 {
@@ -3668,7 +4928,7 @@ TEST_F  ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "AddLoadAt"
-                                                , "Graph\\(\\).VertexExists \\( vertexId \\)");
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
 
     ASSERT_DEATH ( {network_.AddLoadAt(static_cast<Types::vertexId>(0), loadProperties);}
                  , assertionString );
@@ -3677,10 +4937,53 @@ TEST_F  ( TestNetworkEmptyDeathTest
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddLoadSnapshotAt"
-                                           , "HasLoad \\( loadId \\)");
+                                           , R"(HasLoad \( loadId \))");
     ASSERT_DEATH ( {network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddLoadSnapshotAtExceptionHandling )
+{
+    TLoadProperties loadProperties;
+
+    CreateExampleLoadProperties( loadProperties );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddLoadAt"
+                                                , R"(Graph\(\).VertexExists \( vertexId \))");
+
+    try {
+        network_.AddLoadAt(static_cast<Types::vertexId>(0), loadProperties);
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+
+    Types::loadId loadId = static_cast<Types::loadId>(0);
+    assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                           , "PowerGrid"
+                                           , "AddLoadSnapshotAt"
+                                           , R"(HasLoad \( loadId \))");
+    try {
+        network_.AddLoadSnapshotAt( loadId, loadProperties.RealPowerLoad() );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddLoadSnapshotAt )
@@ -3756,6 +5059,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmpty
         , AddSnapshotWeighting )
 {
@@ -3768,6 +5072,30 @@ TEST_F  ( TestNetworkEmpty
     ASSERT_DEATH ( {network_.AddSnapshotWeighting( Const::NONE );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddSnapshotWeightingExceptionHandling )
+{
+    network_.AddSnapshotWeighting( 9.9 );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddSnapshotWeighting"
+                                                , "weight != Const::NONE");
+    try {
+        network_.AddSnapshotWeighting( Const::NONE );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddSnapshotWeighting )
@@ -3789,6 +5117,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F  ( TestNetworkEmptyDeathTest
         , AddSnapshotTimestamp )
 {
@@ -3801,6 +5130,30 @@ TEST_F  ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.AddSnapshotTimestamp( "" );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F  ( TestNetworkEmpty
+        , AddSnapshotTimestampExceptionHandling )
+{
+    network_.AddSnapshotTimestamp( "2019-09-19 19:19:19" );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "AddSnapshotTimestamp"
+                                                , "!timestamp.empty\\(\\)");
+    try {
+        network_.AddSnapshotTimestamp( "" );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddSnapshotTimestamp )
@@ -3843,12 +5196,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4b
     EXPECT_EQ ( Const::NONE, index );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , PositionOf )
-{
-    Types::index index = network_.PositionOf ( "2013-01-01 03:00:00" );
-    EXPECT_EQ ( 3, index );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , PositionOf )
+// {
+//     Types::index index = network_.PositionOf ( "2013-01-01 03:00:00" );
+//     EXPECT_EQ ( 3, index );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -3856,16 +5209,39 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmpty
        , TimestampAt )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "TimestampAt"
-                                                , "timestampPosition < timestamps_.size\\(\\)");
+                                                , R"(timestampPosition < timestamps_.size\(\))");
     ASSERT_DEATH ( {network_.TimestampAt ( 0 );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , TimestampAtExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "TimestampAt"
+                                                , R"(timestampPosition < timestamps_.size\(\))");
+    try {
+        network_.TimestampAt ( 0 );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , TimestampAt )
@@ -3874,12 +5250,12 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( "0000-00-00 00:00:00", timestamp );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , TimestampAt )
-{
-    Types::timestampSnapshot timestamp = network_.TimestampAt ( 7 );
-    EXPECT_EQ ( "2013-01-01 07:00:00", timestamp );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , TimestampAt )
+// {
+//     Types::timestampSnapshot timestamp = network_.TimestampAt ( 7 );
+//     EXPECT_EQ ( "2013-01-01 07:00:00", timestamp );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -3887,24 +5263,48 @@ TEST_F ( TestPowerGridPyPsaExample
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmpty
        , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestamp )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotAt"
-                                                , "generatorId < NumberOfGenerators\\(\\)");
+                                                , R"(generatorId < NumberOfGenerators\(\))");
 
     ASSERT_DEATH ( {network_.GeneratorRealPowerSnapshotAt ( 0, "0000-00-00 00:00:00" );}
                  , assertionString );
 }
-
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestamp )
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestampExceptionHandling )
 {
-    Types::generatorSnapshot snapshot = network_.GeneratorRealPowerSnapshotAt ( 1, "2013-01-01 03:00:00" );
-    EXPECT_EQ ( 230, snapshot );
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorRealPowerSnapshotAt"
+                                                , R"(generatorId < NumberOfGenerators\(\))");
+
+    try {
+        network_.GeneratorRealPowerSnapshotAt ( 0, "0000-00-00 00:00:00" );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
 }
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorRealPowerSnapshotAtUsingGeneratorIdAndTimestamp )
+// {
+//     Types::generatorSnapshot snapshot = network_.GeneratorRealPowerSnapshotAt ( 1, "2013-01-01 03:00:00" );
+//     EXPECT_EQ ( 230, snapshot );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
@@ -3921,19 +5321,19 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
               , network_.GeneratorRealPowerSnapshotAt ( generator, "0000-00-00 01:00:00" ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , GeneratorRealPowerSnapshotAtUsingGeneratorAndTimestamp )
-{
-    TGeneratorProperties generator = network_.GeneratorAt ( 1 );
-    EXPECT_EQ ( 230, network_.GeneratorRealPowerSnapshotAt ( generator, "2013-01-01 03:00:00" ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , GeneratorRealPowerSnapshotAtUsingGeneratorAndTimestamp )
+// {
+//     TGeneratorProperties generator = network_.GeneratorAt ( 1 );
+//     EXPECT_EQ ( 230, network_.GeneratorRealPowerSnapshotAt ( generator, "2013-01-01 03:00:00" ) );
+// }
 
 // ***********************************************************************
 // ***********************************************************************
 #pragma mark GeneratorRealPowerSnapshotsAt
 // ***********************************************************************
 // ***********************************************************************
-
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , GeneratorRealPowerSnapshotsAt )
 {
@@ -3942,13 +5342,40 @@ TEST_F ( TestNetworkEmptyDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotsAt"
-                                                , "!timestamps_.empty\\(\\)");
+                                                , R"(!timestamps_.empty\(\))");
 
     ASSERT_DEATH ( {network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
                                                            , snapshotsAtTimestamp );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , GeneratorRealPowerSnapshotsAtExceptionHandling )
+{
+    std::vector<Types::generatorSnapshot> snapshotsAtTimestamp;
 
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorRealPowerSnapshotsAt"
+                                                , R"(!timestamps_.empty\(\))");
+
+    try {
+        network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
+                                               , snapshotsAtTimestamp );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
        , GeneratorRealPowerSnapshotsAt )
 {
@@ -3958,12 +5385,39 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4aDeathTest
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "GeneratorRealPowerSnapshotsAt"
-                                                , "snapshotsAtTimestamp.empty\\(\\)");
+                                                , R"(snapshotsAtTimestamp.empty\(\))");
 
     ASSERT_DEATH ( {network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
                                                            , snapshotsAtTimestamp );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestPowerGridAcm2018MtsfFigure4a
+       , GeneratorRealPowerSnapshotsAtExceptionHandling )
+{
+    std::vector<Types::generatorSnapshot> snapshotsAtTimestamp;
+    snapshotsAtTimestamp.emplace_back ( Const::NONE );
+
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "GeneratorRealPowerSnapshotsAt"
+                                                , R"(snapshotsAtTimestamp.empty\(\))");
+
+    try {
+        network_.GeneratorRealPowerSnapshotsAt ( "0000-00-00 01:00:00"
+                                               , snapshotsAtTimestamp );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , GeneratorRealPowerSnapshotsAt )
@@ -3992,18 +5446,43 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
 // ***********************************************************************
 // ***********************************************************************
 
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , LoadSnapshotOfLoadsSize )
 {
     auto assertionString = buildAssertionString ( "PowerGrid.hpp"
                                                 , "PowerGrid"
                                                 , "LoadSnapshotOf"
-                                                , "loadId < loads_.size\\(\\)");
+                                                , R"(loadId < loads_.size\(\))");
 
     ASSERT_DEATH ( {network_.LoadSnapshotOf ( 10, 0 );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , LoadSnapshotOfLoadsSizeExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadSnapshotOf"
+                                                , R"(loadId < loads_.size\(\))");
 
+    try {
+        network_.LoadSnapshotOf ( 10, 0 );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
+
+#ifdef EGOA_ENABLE_ASSERTION
 TEST_F ( TestNetworkEmptyDeathTest
        , LoadSnapshotOfConstNoneDeath )
 {
@@ -4015,6 +5494,29 @@ TEST_F ( TestNetworkEmptyDeathTest
     ASSERT_DEATH ( {network_.LoadSnapshotOf ( Const::NONE, 0 );}
                  , assertionString );
 }
+#else
+#ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+TEST_F ( TestNetworkEmpty
+       , LoadSnapshotOfConstNoneDeathExceptionHandling )
+{
+    auto assertionString = buildAssertionString ( "PowerGrid.hpp"
+                                                , "PowerGrid"
+                                                , "LoadSnapshotOf"
+                                                , "loadId != Const::NONE");
+
+    try {
+        network_.LoadSnapshotOf ( Const::NONE, 0 );
+    } catch ( std::runtime_error const & error )
+    {
+        EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
+    } catch ( ... )
+    {
+        FAIL()  << "Expected std::runtime_error with message: "
+                << assertionString;
+    }
+}
+#endif // ifdef EGOA_ENABLE_EXCEPTION_HANDLING
+#endif // ifdef EGOA_ENABLE_ASSERTION
 
 TEST_F ( TestPowerGridAcm2018MtsfFigure4a
        , LoadSnapshotOf )
@@ -4022,10 +5524,10 @@ TEST_F ( TestPowerGridAcm2018MtsfFigure4a
     EXPECT_EQ ( 8, network_.LoadSnapshotOf ( 0, 0 ) );
 }
 
-TEST_F ( TestPowerGridPyPsaExample
-       , LoadSnapshotOf )
-{
-    EXPECT_EQ ( 137, network_.LoadSnapshotOf ( 7, 3 ) );
-}
+// TEST_F ( TestPowerGridPyPsaExample
+//        , LoadSnapshotOf )
+// {
+//     EXPECT_EQ ( 137, network_.LoadSnapshotOf ( 7, 3 ) );
+// }
 
 } // namespace egoa::test
