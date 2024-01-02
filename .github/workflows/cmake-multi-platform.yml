@@ -251,5 +251,5 @@ jobs:
 
     - uses: actions/upload-artifact@main
       with:
-        name: cmake-build-artifact-${{ matrix.os }}-${{ matrix.build_type }}
+        name: cmake-build-artifact-${{ matrix.os }}-${{ matrix.build_type }}-${{ matrix.cpp_compiler }}
         path: ${{ steps.strings.outputs.build-output-dir }}
