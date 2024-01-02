@@ -2,7 +2,7 @@ name: Code Documentation
 
 on:
   workflow_run:
-    workflows: cmake-multi-platform # [ "CMake on multiple platforms" ]
+    workflows: [ "CMake on Multiple Platforms" ]
     # branches: [ "main" ]
     types: [ "completed" ]
 
