@@ -47,7 +47,7 @@ TEST_F ( TestDTPEmptyGraph
         auto assertionString = buildAssertionString ( "DominatingThetaPath.hpp"
                                                     , "DominatingThetaPath"
                                                     , "Source"
-                                                    , "source < labelSets_.size\\(\\)");
+                                                    , R"(source < labelSets_.size\(\))");
 
         ASSERT_DEATH ( {dtp_.Source(0);}, assertionString );
     }
@@ -59,7 +59,7 @@ TEST_F ( TestDTPEmptyGraph
         auto assertionString = buildAssertionString ( "DominatingThetaPath.hpp"
                                                     , "DominatingThetaPath"
                                                     , "Source"
-                                                    , "source < labelSets_.size\\(\\)");
+                                                    , R"(source < labelSets_.size\(\))");
 
         try {
             dtp_.Source(0);
