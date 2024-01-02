@@ -62,6 +62,9 @@ jobs:
       with:
         name: cmake-build-artifact-${{ matrix.os }}-${{ matrix.build_type }}-${{ matrix.cpp_compiler }}
         path: ${{ steps.strings.outputs.build-output-dir }}
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        repository: franziska-wegner/egoa/actions/workflows/cmake-multi-platform.yml
+        # run-id: context.payload.workflow_run.id
 
     # Compared to Window and MacOS best option with stable ~2 min installation time.
     - name: Install LaTeX (Linux)
