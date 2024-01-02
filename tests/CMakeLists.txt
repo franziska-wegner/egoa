@@ -123,9 +123,9 @@ add_test(NAME TestBlockCutTree COMMAND TestBlockCutTree)
 ######################################################################################
 # Tests for IO #######################################################################
 ######################################################################################
-# add_executable(TestPyPsaParser IO/TestPyPsaParser.cpp)
-# target_link_libraries(TestPyPsaParser EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestPyPsaParser COMMAND TestPyPsaParser)
+add_executable(TestPyPsaParser IO/TestPyPsaParser.cpp)
+target_link_libraries(TestPyPsaParser EGOA gtest gtest_main gmock_main)
+add_test(NAME TestPyPsaParser COMMAND TestPyPsaParser)
 
 # add_executable(TestGeojsonWriter IO/TestGeojsonWriter.cpp)
 # target_link_libraries(TestGeojsonWriter EGOA gtest gtest_main gmock_main)
