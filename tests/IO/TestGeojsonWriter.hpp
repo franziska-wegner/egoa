@@ -77,7 +77,7 @@ class TestGeojsonExample : public TestGeojsonWriter {
         }
 
         Types::string const TestCaseSmallExampleInput_          = "../../tests/Data/PowerGrids/PyPSAExampleGeoJsonWriter";
-        Types::string const TestCaseSmallExampleExpectedOutput_ = "../../tests/Data/Output/PyPSAExampleJsonWriterExpectedOutput.json";
+        Types::string const TestCaseSmallExampleExpectedOutput_ = "../../tests/Data/Output/PyPsaExampleJsonWriterExpectedOutput.json";
         Types::string const TestCaseSmallExampleOutputFile_     = "../../tests/Data/Output/PyPSAExampleJsonWriter.json";
 };
 
