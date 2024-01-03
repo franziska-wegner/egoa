@@ -32,10 +32,10 @@
 #include <QApplication>
 #include <QCommandLineParser>
 
-#include <memory>
+#include <cassert>
 #include <cmath>
 #include <ctime>
-#include <assert.h>
+#include <memory>
 #include <type_traits>
 
 #include "DataStructures/Networks/PowerGrid.hpp"

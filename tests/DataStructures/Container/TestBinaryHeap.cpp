@@ -60,7 +60,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "Top"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         ASSERT_DEATH( {heapConst_.Top();}, assertionString );
     }
 #else
@@ -71,7 +71,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "Top"
-                                                    , "!Empty\\(\\)");
+                                                    , R"(!Empty\(\))");
         try {
             heapConst_.Top();
         } catch ( std::runtime_error const & error ) {
@@ -221,7 +221,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DecreaseKey"
-                                                    , "index < Size\\(\\)" );
+                                                    , R"(index < Size\(\))" );
 
         TElement p = -1;
 
@@ -235,7 +235,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DecreaseKey"
-                                                    , "index < Size\\(\\)" );
+                                                    , R"(index < Size\(\))" );
         TElement p = -1;
 
         try {
@@ -257,7 +257,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "ChangeKey"
-                                                    , "index < Size\\(\\)");
+                                                    , R"(index < Size\(\))");
 
         TElement p = -1;
 
@@ -271,7 +271,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "ChangeKey"
-                                                    , "index < Size\\(\\)");
+                                                    , R"(index < Size\(\))");
         TElement p = -1;
 
         try {
@@ -339,7 +339,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "Pop"
-                                                    , "Size\\(\\) > 0");
+                                                    , R"(Size\(\) > 0)");
         ASSERT_DEATH( {heap_.Pop();}, assertionString );
     }
 #else
@@ -350,7 +350,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "Pop"
-                                                    , "Size\\(\\) > 0");
+                                                    , R"(Size\(\) > 0)");
         try {
             heap_.Pop();
         } catch ( std::runtime_error const & error ) {
@@ -370,7 +370,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DeleteTop"
-                                                    , "Size\\(\\) > 0");
+                                                    , R"(Size\(\) > 0)");
 
         ASSERT_DEATH( {heap_.DeleteTop();}, assertionString );
     }
@@ -382,7 +382,7 @@ TEST_F( TestBinaryHeap,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DeleteTop"
-                                                    , "Size\\(\\) > 0");
+                                                    , R"(Size\(\) > 0)");
         try {
             heap_.DeleteTop();
         } catch ( std::runtime_error const & error ) {
@@ -718,7 +718,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DecreaseKey"
-                                                    , "index < Size\\(\\)" );
+                                                    , R"(index < Size\(\))" );
 
         ASSERT_DEATH( {heap_.DecreaseKey(7, 123);}, assertionString );
     }
@@ -730,7 +730,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "DecreaseKey"
-                                                    , "index < Size\\(\\)" );
+                                                    , R"(index < Size\(\))" );
         try {
             heap_.DecreaseKey(7, 123);
         } catch ( std::runtime_error const & error ) {
@@ -785,7 +785,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "ChangeKey"
-                                                    , "index < Size\\(\\)");
+                                                    , R"(index < Size\(\))");
 
         ASSERT_DEATH( {heap_.ChangeKey(7, 123);}, assertionString );
     }
@@ -797,7 +797,7 @@ TEST_F (TestBinaryHeapWithOneIntegerElement,
         auto assertionString = buildAssertionString ( "BinaryHeap.hpp"
                                                     , "BinaryHeap"
                                                     , "ChangeKey"
-                                                    , "index < Size\\(\\)");
+                                                    , R"(index < Size\(\))");
         try {
             heap_.ChangeKey(7, 123);
         } catch ( std::runtime_error const & error ) {

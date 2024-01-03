@@ -292,7 +292,7 @@ TEST_F ( PyPSAExampleInconsistencyGeneratorsDeathTest
     auto assertionString = buildAssertionString ( "PyPsaParser.hpp"
                                                 , "PyPsaParser"
                                                 , "ExtractGeneratorMaximumRealPowerPuHeader"
-                                                , "false && \"Generator name does not exist\"");
+                                                , R"(false && "Generator name does not exist")");
     EXPECT_DEATH({egoa::PowerGridIO<TGraph>::read( network_
                                                  , graph_
                                                  , TestCaseSmallExample_
@@ -318,7 +318,7 @@ TEST_F ( PyPSAExampleDuplicatedGeneratorsDeathTest
     auto assertionString = buildAssertionString ( "PyPsaParser.hpp"
                                                 , "PyPsaParser"
                                                 , "AddNameToGenerator"
-                                                , "false && \"Generator duplicates\"");
+                                                , R"(false && "Generator duplicates")");
     EXPECT_DEATH({egoa::PowerGridIO<TGraph>::read( network_
                                                  , graph_
                                                  , TestCaseSmallExample_

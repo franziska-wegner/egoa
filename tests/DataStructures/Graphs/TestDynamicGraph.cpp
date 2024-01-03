@@ -16,7 +16,7 @@ namespace egoa::test {
 #ifdef EGOA_ENABLE_ASSERTION
     TEST_F(TestDynamicGraphEmptyDeathTest, DeleteVertex) {
         auto assertionMessage =
-            this->assertionString("RemoveVertexAt", "VertexExists\\(id\\)");
+            this->assertionString("RemoveVertexAt", R"(VertexExists\(id\))");
         Types::vertexId id = 0;
         EXPECT_DEATH( { this->graph_.RemoveVertexAt(id); }, assertionMessage);
     }
@@ -25,7 +25,7 @@ namespace egoa::test {
     TEST_F  ( TestDynamicGraphEmpty
             , DeleteVertexExceptionHandling )
     {
-        auto assertionString = this->assertionString("RemoveVertexAt", "VertexExists\\(id\\)");
+        auto assertionString = this->assertionString("RemoveVertexAt", R"(VertexExists\(id\))");
         Types::vertexId id = 0;
         try {
             this->graph_.RemoveVertexAt(id);
