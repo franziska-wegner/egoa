@@ -29,20 +29,20 @@ class SolverRuntimeCollection {
         ///@name Constructor and destructor
         ///@{
 #pragma mark CONSTRUCTORS_AND_DESTRUCTOR
-            SolverRuntimeCollection() 
+            SolverRuntimeCollection()
             : information()
             , min(), max(), avg()
             , filename_("SolverRuntimeCollectionFilename")
             , verbose_(false)
             , name_("SolverRuntimeCollectionName")
             , numberOfVertices_(0)
-            , numberOfEdges_(0) 
+            , numberOfEdges_(0)
             {}
 
             SolverRuntimeCollection ( Types::string filename
-                                    , bool          verbose 
+                                    , bool          verbose
                                     , Types::string name
-                                    ) 
+                                    )
             : information()
             , min(), max(), avg()
             , filename_(filename)
@@ -56,9 +56,9 @@ class SolverRuntimeCollection {
         ///@name Operators
         ///@{
 #pragma mark OPERATORS
-            inline SolverRuntimeCollection & operator+= ( TRow & rhs ) 
+            inline SolverRuntimeCollection & operator+= ( TRow & rhs )
             {
-                if (verbose_) 
+                if (verbose_)
                 {
                     rhs.Name           = name_;
                     rhs.NumberOfEdges  = numberOfEdges_;
@@ -71,9 +71,9 @@ class SolverRuntimeCollection {
             inline void AddMeta ( Types::name  name
                                 , Types::count nrVertices
                                 , Types::count nrEdges
-                                ) 
+                                )
             {
-                for ( auto & info : information ) 
+                for ( auto & info : information )
                 {
                     info.Name               = name;
                     info.NumberOfVertices   = nrVertices;
@@ -82,7 +82,7 @@ class SolverRuntimeCollection {
             }
 
             // Compute statistics.
-            inline void ComputeStatistics() 
+            inline void ComputeStatistics()
             {
                 if ( information.empty() ) return;
 
@@ -91,7 +91,7 @@ class SolverRuntimeCollection {
                 min = information[0];
                 max = information[0];
 
-                for ( size_t i = 1; i < information.size(); ++i ) 
+                for ( size_t i = 1; i < information.size(); ++i )
                 {
                     avg += information[i];
                     min.Min(information[i]);
@@ -106,7 +106,7 @@ class SolverRuntimeCollection {
         ///@{
 #pragma mark OUTPUT
 
-            inline void Dump ( ostream & os ) 
+            inline void Dump ( ostream & os )
             {
                 if ( information.empty() ) return;
                 // ComputeStatistics();
@@ -123,56 +123,56 @@ class SolverRuntimeCollection {
                     << setw(30) << "Number of vertices: "   << setw(8)  << information[0].NumberOfVertices      << ", "     << std::endl
                     << setw(30) << "Number of edges: "      << setw(8)  << information[0].NumberOfEdges         << ", "     << std::endl
 
-                    << setw(30) << "Total time: "           << setw(8)  << avg.OptimizationRuntimeSeconds       << setw(11) << " sec (avg), "  
-                                                            << setw(8)  << min.OptimizationRuntimeSeconds       << setw(11) << " sec (min), "  
+                    << setw(30) << "Total time: "           << setw(8)  << avg.OptimizationRuntimeSeconds       << setw(11) << " sec (avg), "
+                                                            << setw(8)  << min.OptimizationRuntimeSeconds       << setw(11) << " sec (min), "
                                                             << setw(8)  << max.OptimizationRuntimeSeconds       << setw(11) << " sec (max)"    << std::endl
 
-                    << setw(30) << "Solutions: "            << setw(8)  << avg.Solution                         << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.Solution                         << setw(11) << " (min), "     
+                    << setw(30) << "Solutions: "            << setw(8)  << avg.Solution                         << setw(11) << " (avg), "
+                                                            << setw(8)  << min.Solution                         << setw(11) << " (min), "
                                                             << setw(8)  << max.Solution                         << setw(11) << " (max)"       << std::endl
 
-                    << setw(30) << "MipGap: "               << setw(8)  << avg.MipGap                           << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.MipGap                           << setw(11) << " (min), "     
+                    << setw(30) << "MipGap: "               << setw(8)  << avg.MipGap                           << setw(11) << " (avg), "
+                                                            << setw(8)  << min.MipGap                           << setw(11) << " (min), "
                                                             << setw(8)  << max.MipGap                           << setw(11) << " (max)"       << std::endl
 
-                    << setw(30) << "Upper bound: "          << setw(8)  << avg.UpperBound                       << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.UpperBound                       << setw(11) << " (min), "     
+                    << setw(30) << "Upper bound: "          << setw(8)  << avg.UpperBound                       << setw(11) << " (avg), "
+                                                            << setw(8)  << min.UpperBound                       << setw(11) << " (min), "
                                                             << setw(8)  << max.UpperBound                       << setw(11) << " (max)"       << std::endl
 
-                    << setw(30) << "Lower bound: "          << setw(8)  << avg.LowerBound                       << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.LowerBound                       << setw(11) << " (min), "     
+                    << setw(30) << "Lower bound: "          << setw(8)  << avg.LowerBound                       << setw(11) << " (avg), "
+                                                            << setw(8)  << min.LowerBound                       << setw(11) << " (min), "
                                                             << setw(8)  << max.LowerBound                       << setw(11) << " (max)"       << std::endl
-                    
-                    << setw(30) << "NumberOfVariables: "    << setw(8)  << avg.NumberOfVariables                << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfVariables                << setw(11) << " (min), "     
+
+                    << setw(30) << "NumberOfVariables: "    << setw(8)  << avg.NumberOfVariables                << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfVariables                << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfVariables                << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfConstraints: "  << setw(8)  << avg.NumberOfConstraints              << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfConstraints              << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfConstraints: "  << setw(8)  << avg.NumberOfConstraints              << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfConstraints              << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfConstraints              << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfConstraints: "  << setw(8)  << avg.NumberOfSoS                      << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfSoS                      << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfConstraints: "  << setw(8)  << avg.NumberOfSoS                      << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfSoS                      << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfSoS                      << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfQConstrains: "  << setw(8)  << avg.NumberOfQConstrains              << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfQConstrains              << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfQConstrains: "  << setw(8)  << avg.NumberOfQConstrains              << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfQConstrains              << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfQConstrains              << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfQConstrains: "  << setw(8)  << avg.NumberOfGenConstrains            << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfGenConstrains            << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfQConstrains: "  << setw(8)  << avg.NumberOfGenConstrains            << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfGenConstrains            << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfGenConstrains            << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfNZs: "          << setw(8)  << avg.NumberOfNZs                      << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfNZs                      << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfNZs: "          << setw(8)  << avg.NumberOfNZs                      << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfNZs                      << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfNZs                      << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfIntVars: "      << setw(8)  << avg.NumberOfIntVars                  << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfIntVars                  << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfIntVars: "      << setw(8)  << avg.NumberOfIntVars                  << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfIntVars                  << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfIntVars                  << setw(11) << " (max)"       << std::endl
-                    << setw(30) << "NumberOfBinaryVars: "   << setw(8)  << avg.NumberOfBinaryVars               << setw(11) << " (avg), "     
-                                                            << setw(8)  << min.NumberOfBinaryVars               << setw(11) << " (min), "     
+                    << setw(30) << "NumberOfBinaryVars: "   << setw(8)  << avg.NumberOfBinaryVars               << setw(11) << " (avg), "
+                                                            << setw(8)  << min.NumberOfBinaryVars               << setw(11) << " (min), "
                                                             << setw(8)  << max.NumberOfBinaryVars               << setw(11) << " (max)"       << std::endl
                     << std::endl;
             }
 
             inline void DumpLine ( Types::string    const   filename
                                  , TRow             const & info
-                                 , bool             const   overwrite = false ) const 
+                                 , bool             const   overwrite = false ) const
             {
 #ifndef NDEBUG
                 qDebug() << "Dumping debug data to: " << QString::fromStdString(filename);
@@ -192,7 +192,7 @@ class SolverRuntimeCollection {
             }
 
             inline void Dump ( std::string const filename
-                             , bool        const overwrite = true ) const 
+                             , bool        const overwrite = true ) const
             {
 #ifdef NDEBUG
                 qDebug() << "Dumping debug data to: " << QString::fromStdString(filename);
@@ -225,10 +225,10 @@ class SolverRuntimeCollection {
 #pragma mark MEMBER
             vector<TRow> information;
             TRow min, max, avg;
-            
+
             Types::name filename_;
             bool verbose_;
-            
+
             Types::name problemName_;
             Types::name name_;
 

@@ -21,7 +21,7 @@ namespace egoa::IO {
      * @see        GurobiRuntimeCollection A collection of @c SolverRuntimeRow objects
      */
     struct SolverRuntimeRow {
-    
+
         Types::name     NameOfProblem;          /**< Problem solved */
         Types::name     Name;                   /**< Name of the instance */
 
@@ -73,15 +73,15 @@ namespace egoa::IO {
 
         inline static void Header ( std::ostream & os ) {
             os
-                << "NameOfProblem"              << ",\t" 
+                << "NameOfProblem"              << ",\t"
                 << "Name"                       << ",\t"
 
                 << "NumberOfVertices"           << ",\t"
                 << "NumberOfEdges"              << ",\t"
 
-                << "Solution"                   << ",\t" 
-                << "OptimizationRuntimeSeconds" << ",\t" 
-                << "BuildingRuntimeSeconds"     << ",\t" 
+                << "Solution"                   << ",\t"
+                << "OptimizationRuntimeSeconds" << ",\t"
+                << "BuildingRuntimeSeconds"     << ",\t"
 
                 << "Status"                     << ",\t"
                 << "MipGap"                     << ",\t"
@@ -96,11 +96,11 @@ namespace egoa::IO {
                 << "NumberOfIntVars"            << ",\t"
                 << "NumberOfBinaryVars"         << ""
 
-                << std::endl;  
+                << std::endl;
         }
 
         inline void Content ( std::ostream & os ) const {
-            os 
+            os
                 << NameOfProblem                << ",\t"
                 << Name                         << ",\t"
 
@@ -200,7 +200,7 @@ namespace egoa::IO {
             NumberOfIntVars           = std::max( NumberOfIntVars,             rhs.NumberOfIntVars      );
             NumberOfBinaryVars        = std::max( NumberOfBinaryVars,          rhs.NumberOfBinaryVars   );
         }
-}; 
+};
 
 } // namespace egoa::IO
 
