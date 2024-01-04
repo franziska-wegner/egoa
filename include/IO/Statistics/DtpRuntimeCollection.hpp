@@ -98,7 +98,7 @@ class DtpRuntimeCollection {
                 }
 
                 for ( const auto & row : collection_ )
-                { 
+                {
                     row.Content(fileStream);
                 }
             }

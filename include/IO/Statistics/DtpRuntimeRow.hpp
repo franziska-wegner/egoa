@@ -23,7 +23,7 @@ namespace egoa::IO {
  * @see        egoa::DominatingThetaPath
  */
 class DtpRuntimeRow {
-    public: 
+    public:
         Types::string NameOfProblem;                /**< The name of the problem that is solved. */
         Types::name   Name;                         /**< The name of the instance. */
 
@@ -33,7 +33,7 @@ class DtpRuntimeRow {
         Types::count  NumberOfGenerators;           /**< The number of generators. */
         Types::count  NumberOfLoads;                /**< The number of loads. */
         Types::count  NumberOfEdges;                /**< The number of edges. */
-        
+
         Types::count  NumberOfEdgesProducingNoCycle;/**< The number of edges that produce not a cycle. */
         Types::count  NumberOfRelaxedEdges;         /**< The number of relaxed edges. */
         Types::count  NumberOfScannedEdges;         /**< The number of scanned edges. */
@@ -51,7 +51,7 @@ class DtpRuntimeRow {
             , NumberOfGenerators(0)
             , NumberOfLoads(0)
             , NumberOfEdges(0)
-            
+
             , NumberOfEdgesProducingNoCycle(0)
             , NumberOfRelaxedEdges(0)
             , NumberOfScannedEdges(0)
@@ -75,38 +75,38 @@ class DtpRuntimeRow {
             NumberOfLabels = 0;
         }
 
-        inline static void Header ( std::ostream & os ) 
+        inline static void Header ( std::ostream & os )
         {
             os
-                << "NameOfProblem"              << ",\t" 
+                << "NameOfProblem"              << ",\t"
                 << "Name"                       << ",\t"
 
                 << "SourceId"                   << ",\t"
-                
+
                 << "NumberOfVertices"           << ",\t"
                 << "NumberOfGenerators"         << ",\t"
                 << "NumberOfLoads"              << ",\t"
                 << "NumberOfEdges"              << ",\t"
 
-                << "NumberOfScannedEdges"       << ",\t" 
-                << "NumberOfEdgesProducingNoCycle"<< ",\t" 
-                << "NumberOfRelaxedEdges"       << ",\t" 
-                
-                << "NumberOfLabels"             << ",\t" 
+                << "NumberOfScannedEdges"       << ",\t"
+                << "NumberOfEdgesProducingNoCycle"<< ",\t"
+                << "NumberOfRelaxedEdges"       << ",\t"
+
+                << "NumberOfLabels"             << ",\t"
 
                 << "GlobalElapsedMilliseconds"  << ",\t"
 
-                << "\n";  
+                << "\n";
         }
 
-        inline void Content ( std::ostream & os ) const 
+        inline void Content ( std::ostream & os ) const
         {
-            os 
+            os
                 << NameOfProblem                << ",\t"
                 << Name                         << ",\t"
 
                 << SourceId                     << ",\t"
-                
+
                 << NumberOfVertices             << ",\t"
                 << NumberOfGenerators           << ",\t"
                 << NumberOfLoads                << ",\t"
@@ -115,7 +115,7 @@ class DtpRuntimeRow {
                 << NumberOfScannedEdges         << ",\t"
                 << NumberOfEdgesProducingNoCycle<< ",\t"
                 << NumberOfRelaxedEdges         << ",\t"
-                
+
                 << NumberOfLabels               << ",\t"
 
                 << GlobalElapsedMilliseconds
@@ -123,7 +123,7 @@ class DtpRuntimeRow {
                 << "\n";
         }
 
-        inline DtpRuntimeRow & operator+= ( const DtpRuntimeRow & rhs ) 
+        inline DtpRuntimeRow & operator+= ( const DtpRuntimeRow & rhs )
         {
             NumberOfEdgesProducingNoCycle   += rhs.NumberOfEdgesProducingNoCycle;
             NumberOfRelaxedEdges            += rhs.NumberOfRelaxedEdges;
@@ -143,7 +143,7 @@ class DtpRuntimeRow {
         }
 
         inline void WriteRowToFileWith ( Types::string const filename
-                                       , bool                overwrite = false ) 
+                                       , bool                overwrite = false )
         {
 #ifndef NDEBUG
             std::cout << "Write DTP runtime information row to: " << filename << std::endl;
@@ -156,14 +156,14 @@ class DtpRuntimeRow {
 
             // file is empty
             fileStream.seekp(0, std::ios::end);
-            if ( fileStream.tellp() == 0 ) 
-            { 
-                DtpRuntimeRow::Header(fileStream); 
+            if ( fileStream.tellp() == 0 )
+            {
+                DtpRuntimeRow::Header(fileStream);
             }
 
             fileStream << *this;
         }
-}; 
+};
 
 } // namespace egoa::IO
 
