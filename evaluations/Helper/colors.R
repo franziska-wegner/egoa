@@ -1,12 +1,12 @@
 #! /opt/local/bin/Rscript
 #
 # colors.R
-# 
+#
 #   Created on: 30.10.2018
 #       Author: Franziska Wegner
-#       
+#
 # Add color definition of KITcolors, Thesis colors, and others.
-# 
+#
 
 # install.packages("lubridate")
 library(lubridate)
@@ -150,4 +150,3 @@ KITcolors70         <- c(KITblack70, KITseablue70, KITblue70, KITcyanblue70, KIT
 KITcolors50         <- c(KITblack50, KITseablue50, KITblue50, KITcyanblue50, KITgreen50, KITpalegreen50, KITred50, KITlilac50, KITyellow50, KITorange50, KITbrown50);
 KITcolors30         <- c(KITblack30, KITseablue30, KITblue30, KITcyanblue30, KITgreen30, KITpalegreen30, KITred30, KITlilac30, KITyellow30, KITorange30, KITbrown30);
 KITcolors15         <- c(KITblack15, KITseablue15, KITblue15, KITcyanblue15, KITgreen15, KITpalegreen15, KITred15, KITlilac15, KITyellow15, KITorange15, KITbrown15);
-
