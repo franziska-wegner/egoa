@@ -1,17 +1,17 @@
 #!/bin/sh
 #
 # experimentUsage.sh
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # Defines a standard usage interface for the experiments including the details
 # of a specified configuration script. Templates for configuration scripts can
-# be found under 
-#   ./localConfig.sh 
+# be found under
+#   ./localConfig.sh
 #   ./serverConfig.sh
-# where "./localConfig.sh" is the default configuration.  
-#  
+# where "./localConfig.sh" is the default configuration.
+#
 
 #########################################################
 # Define input argument #################################
