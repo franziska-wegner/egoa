@@ -85,9 +85,9 @@ add_test(NAME TestBlockCutTree COMMAND TestBlockCutTree)
 ######################################################################################
 # Tests for MST ALGORITHMS ###########################################################
 ######################################################################################
-# add_executable(TestSpanningTree Algorithms/SpanningTree/TestSpanningTree.cpp)
-# target_link_libraries(TestSpanningTree EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestSpanningTree COMMAND TestSpanningTree)
+add_executable(TestSpanningTree Algorithms/SpanningTree/TestSpanningTree.cpp)
+target_link_libraries(TestSpanningTree EGOA gtest gtest_main gmock_main)
+add_test(NAME TestSpanningTree COMMAND TestSpanningTree)
 
 ######################################################################################
 # Tests for other ALGORITHMS #########################################################
