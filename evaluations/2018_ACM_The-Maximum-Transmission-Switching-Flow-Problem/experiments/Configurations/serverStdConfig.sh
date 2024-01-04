@@ -1,13 +1,13 @@
 #!/bin/sh
 #
 # serverConfig.sh
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-#       
+#
 # Project configuration on the server to avoid long command line text with
 # arguments.
-# 
+#
 #########################################################
 # Define server standard argument ########################
 #########################################################
