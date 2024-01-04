@@ -76,9 +76,9 @@ class TestGeojsonExample : public TestGeojsonWriter {
             }
         }
 
-        Types::string const TestCaseSmallExampleInput_          = "../../framework/tests/Data/PowerGrids/PyPsaExampleGeoJsonWriter";
-        Types::string const TestCaseSmallExampleExpectedOutput_ = "../../framework/tests/Data/Output/PyPsaExampleJsonWriterExpectedOutput.json";
-        Types::string const TestCaseSmallExampleOutputFile_     = "../../framework/tests/Data/Output/PyPsaExampleJsonWriter.json";
+        Types::string const TestCaseSmallExampleInput_          = "../../tests/Data/PowerGrids/PyPSAExampleGeoJsonWriter";
+        Types::string const TestCaseSmallExampleExpectedOutput_ = "../../tests/Data/Output/PyPsaExampleJsonWriterExpectedOutput.json";
+        Types::string const TestCaseSmallExampleOutputFile_     = "../../tests/Data/Output/PyPSAExampleJsonWriter.json";
 };
 
 
