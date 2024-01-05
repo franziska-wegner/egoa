@@ -58,7 +58,7 @@
         {
             "name": "debug",
             "displayName": "Debug",
-            "cacheVariables": { 
+            "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "EGOA_BUILD_TYPE": "Debug"
             }
@@ -66,7 +66,7 @@
         {
             "name": "release",
             "displayName": "Release",
-            "cacheVariables": { 
+            "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "EGOA_BUILD_TYPE": "Release"
             }
