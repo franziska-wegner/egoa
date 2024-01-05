@@ -5,8 +5,8 @@
 #   Created on: -
 #       Author: Franziska Wegner
 #
-# This script computes the DTP betweenness centrality plot for each case 
-# in "The Maximum Transmission Switching Flow Problem", 2018, ACM e-Energy, 
+# This script computes the DTP betweenness centrality plot for each case
+# in "The Maximum Transmission Switching Flow Problem", 2018, ACM e-Energy,
 # doi:10.1145/3208903.3208910.
 #
 
@@ -21,7 +21,7 @@ library(lattice)
 
 source("../Helper/colors.R", chdir=T)
 
-# Arguments 
+# Arguments
 args <- commandArgs(trailingOnly = TRUE)
 argument.path       <- args[1]
 argument.output     <- args[2]
@@ -60,7 +60,7 @@ while (length(files)!=0){
   data = NULL
   data = read.csv(paste(argument.path, files[1], sep = ""), header=TRUE, sep=",")
   data = data[order(data$BetweennessNormalizedValue, decreasing = TRUE),]
-  
+
   scenario <- strsplit(files[1], "_")
   filename <- files[1]
   filename = gsub('.{4}$', '', filename)
@@ -75,26 +75,26 @@ while (length(files)!=0){
                italic = paste(mainfont,"style=Italic",sep=":"),
                bolditalic = paste(mainfont,"style=Bold Italic,BoldItalic",sep=":"))
       pdf <- CairoPDF
-  
+
       filename = paste("plot", filename, sep="-")
       pdf(paste(argument.output, filename, sep = ""))
-  
+
       lfontsize = 1.0
-      
+
       # create extra margin room on the right for an axis
       # mar=c(unten, links, oben, rechts)
       par(mar=c(4,5.8,3.5,4.3)+.1, mgp = c(4, 0.8, 0), xpd=TRUE)
       par(las=1, cex=lfontsize) # make label text perpendicular to axis
-  
+
       leg = list()
       l_colim = c(seq(from=1,to=nrow(data),by=1))
-  
+
       l_ylim=c(min(data$OptimumSolutions), max(data$OptimumSolutions))
       l_xlim=c(1, nrow(data))
       l_clim=c(min(data$BetweennessNormalizedValue), max(data$BetweennessNormalizedValue))
-  
+
       leg = c("MPF by removing an edge", "Normalized DTP betweenness centrality")
-          
+
       plot(l_colim,data$BetweennessNormalizedValue, type="l",
            xlab="",
            ylab="",
@@ -106,10 +106,10 @@ while (length(files)!=0){
            lty=2,
            lwd=2
       )
-      
-      
+
+
       par(new=TRUE)
-      
+
       plot(l_colim, data$OptimumSolutions,  type="l",
                                             xlab="",
                                             ylab="",
@@ -123,16 +123,16 @@ while (length(files)!=0){
                                             col=KITgreen,
                                             lwd=2
                                             )
-  
+
       #par(new=TRUE)
-  
+
       # add a title for the left axis
       lab = seq(par("yaxp")[1], par("yaxp")[2], len = par("yaxp")[3])
       #axis(2, cex.axis=1, at=lab, labels=sprintf("%.2f", data$OptimumSolution))
       axis(2, las=2)
-  
+
       par(new=TRUE)
-      
+
       # plot max as point with x label
       plot(which.max(data$OptimumSolutions), max(data$OptimumSolutions), type="p",
            xlab="",
@@ -150,27 +150,27 @@ while (length(files)!=0){
       offset_x = (l_xlim[2]-l_xlim[1]) * -6 / 100
       offset_y = (l_ylim[2]-l_ylim[1]) * 2 / 100
       text(which.max(data$OptimumSolutions)-offset_x, max(data$OptimumSolutions)+offset_y, labels = sprintf("%.2f", max(data$OptimumSolutions)), cex = 1, col = KITblack70)
-      
+
       # add a title for the right axis
       axis(4,cex.axis=1)
-      
+
       # add a title for the bottom axis
       lab = seq(par("xaxp")[1], par("xaxp")[2], len = par("xaxp")[3])
       axis(1,cex.axis=1, at=lab, labels=sprintf("%.0f", lab))
       # add x-axis label (bottom)
-      
+
       mtext("Switched Edge", side=1, line=2, font=1, cex=lfontsize)
-      
+
       par(las=0) # make label text perpendicular to axis
       # add y-axis label (left)
       mtext("MPF Costs in $/MWh",side=2, line=3.5, cex=lfontsize)
       # add z-axis label (right)
       mtext("Normalized DTP Betweenness Centrality",side=4, line=3.0, cex=lfontsize)
-  
+
       # add legend
       #install.packages("extrafont")
       #library(extrafont)
-      
+
       scenario[[1]][4] = gsub('.{14}$', '', scenario[[1]][4])
       legendName = paste(scenario[[1]][2], scenario[[1]][3], scenario[[1]][4], sep="_")
       #legendName = paste( "$\\mathtt ", legendName, "$", sep="")
@@ -186,58 +186,58 @@ while (length(files)!=0){
              cex=.9,
              text.font=1
       )
-      
+
       par(font=1)
-  
+
       dev.off()
   } # if print as pdf
   else { ####################################################################################################################################################
     #########################################################################################################################################################
     #########################################################################################################################################################
     #########################################################################################################################################################
-    
+
     # install.packages('tikzDevice')
     library('tikzDevice')
     require('tikzDevice')
     library(tools)
     require(tools)
-    
+
     filename = paste("plot", filename, sep="-")
-    
+
     if(argument.standAlone == TRUE){
       tex_output_file <- paste(argument.output, filename, "-StandAlone", ".tex",sep = "")
-      tikzDevice::tikz(tex_output_file, 
-                       width = 6.1, 
-                       height = 3.75, 
-                       pointsize=8, 
-                       standAlone=TRUE)  
+      tikzDevice::tikz(tex_output_file,
+                       width = 6.1,
+                       height = 3.75,
+                       pointsize=8,
+                       standAlone=TRUE)
       #options( tikzLatexPackages = c("\\usepackage{xfrac}") )
     }else{
       tex_output_file <- paste(argument.output, filename, ".tex",sep = "")
-      tikzDevice::tikz(tex_output_file, 
-                       width = 6.1, 
-                       height = 3.75, 
-                       pointsize=8, 
+      tikzDevice::tikz(tex_output_file,
+                       width = 6.1,
+                       height = 3.75,
+                       pointsize=8,
                        standAlone=FALSE)
     }
     print(paste("File written to: ",getwd(),"/",tex_output_file, sep = ""))
-    
+
     lfontsize = 1.0
-    
+
     # create extra margin room on the right for an axis
     # mar=c(unten, links, oben, rechts)
     par(mar=c(4,5,3.5,5.3)+.1, mgp = c(4, 0.8, 0), xpd=TRUE)
     par(las=1, cex=lfontsize) # make label text perpendicular to axis
-    
+
     leg = list()
     l_colim = c(seq(from=1,to=nrow(data),by=1))
-    
+
     l_ylim=c(min(data$OptimumSolutions), max(data$OptimumSolutions))
     l_xlim=c(1, nrow(data))
     l_clim=c(min(data$BetweennessNormalizedValue), max(data$BetweennessNormalizedValue))
-    
+
     leg = c("$\\mathsf{MPF}~|S|=1$", "Normalized~$\\mathsf{DTP}$bc")
-    
+
     plot(l_colim,data$BetweennessNormalizedValue, type="l",
          xlab="",
          ylab="",
@@ -249,12 +249,12 @@ while (length(files)!=0){
          lty=2,
          lwd=2
     )
-    
+
     # add a title for the right axis
     axis(4,cex.axis=1)
-    
+
     par(new=TRUE)
-    
+
     plot(l_colim, data$OptimumSolutions,  type="l",
          xlab="",
          ylab="",
@@ -268,16 +268,16 @@ while (length(files)!=0){
          col=KITgreen,
          lwd=2
     )
-    
+
     #par(new=TRUE)
-    
+
     # add a title for the left axis
     lab = seq(par("yaxp")[1], par("yaxp")[2], len = par("yaxp")[3])
     #axis(2, cex.axis=1, at=lab, labels=sprintf("%.2f", data$OptimumSolution))
     axis(2, las=2)
-    
+
     par(new=TRUE)
-    
+
     # plot max as point with x label
     plot(which.max(data$OptimumSolutions), max(data$OptimumSolutions), type="p",
          xlab="",
@@ -295,19 +295,19 @@ while (length(files)!=0){
     offset_x = (l_xlim[2]-l_xlim[1]) * -8 / 100
     offset_y = (l_ylim[2]-l_ylim[1]) * -5 / 100
     text(which.max(data$OptimumSolutions)-offset_x, max(data$OptimumSolutions)+offset_y, labels = sprintf("%.2f", max(data$OptimumSolutions)), cex = 0.9, col = KITblack70)
-    
+
     # add a title for the bottom axis
     lab = seq(par("xaxp")[1], par("xaxp")[2], len = par("xaxp")[3])
     axis(1,cex.axis=1, at=lab, labels=sprintf("%.0f", lab))
     # add x-axis label (bottom)
     mtext("Switched Edge", side=1, line=2, font=1, cex=0.95)
-    
+
     par(las=0) # make label text perpendicular to axis
     # add y-axis label (left)
     mtext("$\\mathsf{MPF}$ in~$\\mathrm{MW}$",side=2, line=3.5, cex=0.95)
     # add z-axis label (right)
     mtext("Normalized~$\\mathsf{DTP}$ Betweenness Centrality",side=4, line=4.0, cex=0.95)
-    
+
     # add legend
     scenario[[1]][4] = gsub('.{14}$', '', scenario[[1]][4])
     legendName = paste(scenario[[1]][2], scenario[[1]][3], scenario[[1]][4], sep="\\_")
@@ -325,11 +325,9 @@ while (length(files)!=0){
            text.font=1
     )
     par(font=1)
-    
+
     dev.off()
-    
+
   } # else print as pdf
 
 } # while files
-
-
