@@ -5,9 +5,9 @@
             "name": "base",
             "hidden": true,
             "generator": "Unix Makefiles",
-            // "binaryDir": "${workspaceRoot}/out",
+            "binaryDir": "${workspaceRoot}/out",
             "cacheVariables": {
-                // "CMAKE_INSTALL_PREFIX": "${workspaceRoot}/out/install/${presetName}"
+                "CMAKE_INSTALL_PREFIX": "${workspaceRoot}/out/install/${presetName}",
                 "Boost_NO_SYSTEM_PATHS": "TRUE",
 				"EGOA_DOWNLOAD_CPPAD": "OFF",
 				"EGOA_DOWNLOAD_EIGEN": "ON",
