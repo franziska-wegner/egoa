@@ -5,12 +5,12 @@
 #   Created on: -
 #       Author: Franziska Wegner
 #
-# This script computes the DTP betweenness centrality plot with all cases 
-# "The Maximum Transmission Switching Flow Problem", 2018, ACM e-Energy, 
+# This script computes the DTP betweenness centrality plot with all cases
+# "The Maximum Transmission Switching Flow Problem", 2018, ACM e-Energy,
 # doi:10.1145/3208903.3208910.
 #
 
-# R include 
+# R include
 source("../Helper/plotting.R", chdir=T)
 source("../Helper/colors.R", chdir=T)
 
@@ -23,7 +23,7 @@ source("../Helper/colors.R", chdir=T)
 library(BiSeq)
 # require(BiSeq)
 
-# Commandline arguments 
+# Commandline arguments
 args                   <- commandArgs(trailingOnly = TRUE)
 argument.path          <- args[1]
 argument.output        <- args[2]
@@ -88,18 +88,18 @@ while ( length(files) != 0 ) {
   data   <- NULL
   data   <- read.csv(paste(argument.path, files[1], sep = ""), header=TRUE, sep=",")
   data   <- data[order(data$BetweennessNormalizedValue, decreasing = TRUE),]
-  
+
   # Normalize opt of mpf -> y-axis
   data$OptimumSolutions <- data$OptimumSolutions / max(data$OptimumSolutions)
-  
+
   # Add and normalize edge ids -> x-axis
   data$EdgeIndex       <- seq.int(nrow(data))
   data$EdgeIndex       <- data$EdgeIndex/data$NumberOfEdges
-  
+
   # Next file in the list
   files[1]             <- ""
   files                <- files[files != ""]
-  
+
   # Data frame of all data sets
   totaldata            <- rbind(totaldata,data)
 } # while files
@@ -144,8 +144,8 @@ totaldata      <- totaldata[ order(totaldata$NumberOfVertices, totaldata$EdgeInd
   #removed
   #noSamples   <- nrow(totaldata)/22#3#22#23
   #totaldata   <- filterBySharedRegions(object = totaldata, perc.samples = 1)
-  #totaldata   <- totaldata[sample(nrow(totaldata), noSamples, replace = TRUE),] 
-  
+  #totaldata   <- totaldata[sample(nrow(totaldata), noSamples, replace = TRUE),]
+
   #require(plotrix)
   #cluster.overplot(x,y)
   #plot(cluster.overplot(x, y ), main=”Using cluster.overplot”)
@@ -155,17 +155,17 @@ totaldata      <- totaldata[ order(totaldata$NumberOfVertices, totaldata$EdgeInd
 
 if ( argument.standAlone == TRUE ) { # Standalone tex
   tex_output_file <- paste(argument.output, "-standalone", ".tex",sep = "")
-  tikzDevice::tikz(tex_output_file, 
-                   width      = 6.1, 
-                   height     = 3.75, 
-                   pointsize  = 8, 
-                   standAlone = TRUE)  
+  tikzDevice::tikz(tex_output_file,
+                   width      = 6.1,
+                   height     = 3.75,
+                   pointsize  = 8,
+                   standAlone = TRUE)
 } else { # Tikz include graphic
   tex_output_file <- paste(argument.output, ".tex",sep = "")
-  tikzDevice::tikz(tex_output_file, 
-                   width      = 6.1, 
-                   height     = 3.75, 
-                   pointsize  = 8, 
+  tikzDevice::tikz(tex_output_file,
+                   width      = 6.1,
+                   height     = 3.75,
+                   pointsize  = 8,
                    standAlone = FALSE)
 }
 
@@ -174,85 +174,83 @@ if ( argument.standAlone == TRUE ) { # Standalone tex
 par(mar=c(4,5,3.5,5.3)+.1, mgp = c(4, 0.8, 0), xpd=TRUE)
 par(las=1, cex=lfontsize) # make label text perpendicular to axis
 
-g <- ggplot(  ) 
+g <- ggplot(  )
 g + theme_gray(base_size      = 14
-  ) + theme(legend.position   = "top", 
+  ) + theme(legend.position   = "top",
             axis.text.x       = element_text(size=13),
             axis.text.y       = element_text(size=13)
   # Vertical line at 0 to mark values with highest centrality
-  ) +  geom_vline( xintercept = 0, 
-                   color      = KITcyanblue70, 
-                   size       = 2.2, 
+  ) +  geom_vline( xintercept = 0,
+                   color      = KITcyanblue70,
+                   size       = 2.2,
                    alpha      = 0.7
   # Vertical line at 1 to mark values with lowest centrality
-  ) +  geom_vline( xintercept = 1, 
-                   color      = KITorange70,   
-                   size       = 2.2, 
+  ) +  geom_vline( xintercept = 1,
+                   color      = KITorange70,
+                   size       = 2.2,
                    alpha      = 0.7
   # Plot background as lines
-  # ) +   geom_line( aes(EdgeIndex, OptimumSolutions, column = Name), 
-  #                  totaldata, 
+  # ) +   geom_line( aes(EdgeIndex, OptimumSolutions, column = Name),
+  #                  totaldata,
   #                  colour = KITblack15
   # Plot background as points
-  ) + geom_jitter(alpha    = 0.5, 
+  ) + geom_jitter(alpha    = 0.5,
                   aes(EdgeIndex, OptimumSolutions), #, column = Name
                   totaldata,
-                  color    = KITblack25, 
+                  color    = KITblack25,
                   position = position_jitter(width = 0.01)
   # Coloring between the green curve and the blue one
-  ) + geom_ribbon( data    = subset(quantileData, 0 <= quantileData$EdgeIndex & quantileData$EdgeIndex <= 1), 
-                   aes( x    = EdgeIndex, 
+  ) + geom_ribbon( data    = subset(quantileData, 0 <= quantileData$EdgeIndex & quantileData$EdgeIndex <= 1),
+                   aes( x    = EdgeIndex,
                         ymin = lowerQuantile,
                         ymax = upperQuantile
-                      ), 
-                   fill    = KITgreen15, 
+                      ),
+                   fill    = KITgreen15,
                    alpha   = "0.7"
   # Coloring between the red curve and the blue one
-  ) + geom_ribbon( data    = subset(quantileData, 0 <= quantileData$EdgeIndex & quantileData$EdgeIndex <= 1), 
-                   aes( x    = EdgeIndex, 
+  ) + geom_ribbon( data    = subset(quantileData, 0 <= quantileData$EdgeIndex & quantileData$EdgeIndex <= 1),
+                   aes( x    = EdgeIndex,
                         ymin = avgQuantile,
                         ymax = upperQuantile
-                      ), 
-                   fill    = KITred30, 
+                      ),
+                   fill    = KITred30,
                    alpha   = "0.7"
   # 40 % quantile line
-  ) +   geom_line( aes(EdgeIndex, lowerQuantile, col=paste(argument.lowerQuantile*100, "\\%~quantile", sep = "") ), 
-                   quantileData, 
+  ) +   geom_line( aes(EdgeIndex, lowerQuantile, col=paste(argument.lowerQuantile*100, "\\%~quantile", sep = "") ),
+                   quantileData,
                    size    = 0.8
   # 45 % quantile line
-  ) +   geom_line( aes(EdgeIndex, avgQuantile, col=paste(argument.avgQuantile*100, "\\%~quantile", sep = "") ), 
-                   quantileData, 
+  ) +   geom_line( aes(EdgeIndex, avgQuantile, col=paste(argument.avgQuantile*100, "\\%~quantile", sep = "") ),
+                   quantileData,
                    size    = 0.8
   # 75 % quantile line
-  ) +   geom_line( aes(EdgeIndex, upperQuantile, col=paste(argument.upperQuantile*100, "\\%~quantile", sep = "") ), 
-                   quantileData, 
+  ) +   geom_line( aes(EdgeIndex, upperQuantile, col=paste(argument.upperQuantile*100, "\\%~quantile", sep = "") ),
+                   quantileData,
                    size    = 0.6
   # Colors used for the lines
-  ) + scale_color_manual(values=c(KITgreen50, KITred50, KITseablue70, KITblack02, KITblack03, KITblack04, KITblack05, KITblack06, KITblack07, KITblack08, KITblack09, 
-                                  KITblack10, KITblack11, KITblack12, KITblack13, KITblack14, KITblack15, KITblack16, KITblack17,KITblack18, KITblack19, KITblack20, 
+  ) + scale_color_manual(values=c(KITgreen50, KITred50, KITseablue70, KITblack02, KITblack03, KITblack04, KITblack05, KITblack06, KITblack07, KITblack08, KITblack09,
+                                  KITblack10, KITblack11, KITblack12, KITblack13, KITblack14, KITblack15, KITblack16, KITblack17,KITblack18, KITblack19, KITblack20,
                                   KITblack21, KITblack23, KITblack25, KITblack26, KITblack27, KITblack28, KITblack29, KITblack30, KITblack31, KITblack32)
   # Labels
-  ) +        labs( x       = "Edges normalized by factor~$|E|$", 
-                   y       = "Normalized~$\\mathsf{MPF}$ in~$\\mathrm{MW}$", 
+  ) +        labs( x       = "Edges normalized by factor~$|E|$",
+                   y       = "Normalized~$\\mathsf{MPF}$ in~$\\mathrm{MW}$",
                    color   = "NESTA Cases \\& Quantiles\n"
   ) +      guides( col     = guide_legend(title = NULL)
   # Text telling that "High c-DTPBC"
-  ) + annotate("text", x   = 0.093, 
+  ) + annotate("text", x   = 0.093,
                        y   = 1.06,
-               label       = "\\bf High $c_{\\mathsf{DTPBC}}$", 
-               parse       = FALSE, 
+               label       = "\\bf High $c_{\\mathsf{DTPBC}}$",
+               parse       = FALSE,
                color       = KITcyanblue
   # Text telling that "Low c-DTPBC"
-  ) + annotate("text", x   = 0.91, 
+  ) + annotate("text", x   = 0.91,
                        y   = 1.06,
-               label       = "\\bf Low $c_{\\mathsf{DTPBC}}$", 
-               parse       = FALSE, 
+               label       = "\\bf Low $c_{\\mathsf{DTPBC}}$",
+               parse       = FALSE,
                color       = KITorange
-  ) 
+  )
 
 # Print output path
 print(paste("File written to: ",tex_output_file, sep = ""))
 par(font=1)
 dev.off()
-
-
