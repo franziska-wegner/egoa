@@ -1,0 +1,9 @@
+# Include this file in your workflow with `git config --local include.path ./.gitconfig`
+[commit]
+        gpgsign = true
+        template = ./.gitmessage
+[filter "lfs"]
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true
