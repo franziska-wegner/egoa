@@ -1443,7 +1443,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 #ifdef OPENMP_AVAILABLE
         // Number of threads check
-        Types::count numberOfThreads = omp_get_max_threads();
+        Types::count const numberOfThreads = omp_get_max_threads();
         EXPECT_GE( numberOfThreads, 0 );
 
         // Non const loop check
@@ -1564,7 +1564,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 #ifdef OPENMP_AVAILABLE
         // Number of threads check
-        Types::count numberOfThreads = omp_get_max_threads();
+        Types::count const numberOfThreads = omp_get_max_threads();
         EXPECT_GE( numberOfThreads, 0 );
 
         // Non const loop check
