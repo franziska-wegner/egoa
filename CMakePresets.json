@@ -1,0 +1,93 @@
+{
+  "configurePresets": [
+    {
+      "binaryDir": "${workspaceRoot}/out",
+      "cacheVariables": {
+        "BONMIN_ROOT_DIR": "NONE-DIR",
+        "Boost_DIRECTORIES": "/opt/homebrew/opt/boost/",
+        "Boost_NO_SYSTEM_PATHS": "TRUE",
+        "CMAKE_CXX_COMPILER": "/opt/homebrew/opt/llvm/bin/clang++",
+        "CMAKE_C_COMPILER": "/opt/homebrew/opt/llvm/bin/clang",
+        "CMAKE_INSTALL_PREFIX": "${workspaceRoot}/out/install/${presetName}",
+        "COIN_INCLUDE_DIR": "NONE-DIR",
+        "COIN_LIBRARY_DIR": "NONE-DIR",
+        "CPLEX_HOME": "NONE-DIR",
+        "EGOA_DOWNLOAD_CPPAD": "OFF",
+        "EGOA_DOWNLOAD_EIGEN": "ON",
+        "EGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK": "ON",
+        "EGOA_DOWNLOAD_IEEE": "ON",
+        "EGOA_DOWNLOAD_PYPSA_EUR": "ON",
+        "EGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION": "ON",
+        "EGOA_DOWNLOAD_SCIGRID": "ON",
+        "EGOA_DOWNLOAD_WINDFARM": "ON",
+        "EGOA_ENABLE_ASSERTION": "ON",
+        "EGOA_ENABLE_BONMIN": "OFF",
+        "EGOA_ENABLE_BOOST": "OFF",
+        "EGOA_ENABLE_CPLEX": "OFF",
+        "EGOA_ENABLE_DOCUMENTATION": "ON",
+        "EGOA_ENABLE_EXCEPTION_HANDLING": "ON",
+        "EGOA_ENABLE_GUROBI": "OFF",
+        "EGOA_ENABLE_IPOPT": "OFF",
+        "EGOA_ENABLE_OGDF": "OFF",
+        "EGOA_ENABLE_OPENMP": "OFF",
+        "EGOA_ENABLE_TESTS": "ON",
+        "EGOA_ENABLE_VERBOSE_MAKEFILE": "ON",
+        "EGOA_PEDANTIC_AS_ERRORS": "OFF",
+        "EGOA_PEDANTIC_MODE": "ON",
+        "EGOA_TEST_FRAMEWORK": "OfflineGoogleTestFramework",
+        "EGOA_TEST_FRAMEWORK_LOCATION": "external/GoogleTestFramework",
+        "EGOA_THREAD_LIMIT": "0",
+        "EGOA_WARNINGS_AS_ERRORS": "ON",
+        "GUROBI_ROOT_DIR": "NONE-DIR",
+        "OGDF_AUTOGEN_INCLUDE_DIR": "NONE-DIR",
+        "OGDF_INCLUDE_DIR": "NONE-DIR",
+        "OGDF_LIBRARY_DIR": "NONE-DIR",
+        "OPENMP_INCLUDES": "/opt/homebrew/opt/llvm/include",
+        "OPENMP_LIBRARIES": "/opt/homebrew/opt/llvm/lib"
+      },
+      "generator": "Unix Makefiles",
+      "hidden": true,
+      "name": "base"
+    },
+    {
+      "cacheVariables": {
+        "VCPKG_BUILD_BENCHMARKING": "On"
+      },
+      "hidden": true,
+      "name": "benchmark-base"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "EGOA_BUILD_TYPE": "Debug"
+      },
+      "displayName": "Debug",
+      "name": "debug"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "EGOA_BUILD_TYPE": "Release"
+      },
+      "displayName": "Release",
+      "name": "release"
+    },
+    {
+      "displayName": "Debug + Benchmarks",
+      "inherits": [
+        "debug",
+        "benchmark-base"
+      ],
+      "name": "debug-benchmarks"
+    },
+    {
+      "displayName": "Release + Benchmarks",
+      "inherits": [
+        "release",
+        "benchmark-base"
+      ],
+      "name": "release-benchmarks"
+    }
+  ],
+  "version": 3
+}
