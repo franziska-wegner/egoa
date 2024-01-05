@@ -212,7 +212,7 @@ namespace egoa::test {
 TEST_F  ( TestBucketWithZeroElements
         , MergeAnElementIntoEmptyBucket )
 {
-    TElement element = TElement(2,false);
+    TElement element = TElement ( 2, false );
 
     ASSERT_EQ   ( bucket_.Size(), 0 );
     ASSERT_TRUE ( bucket_.Merge( element ) );
@@ -1630,7 +1630,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         Types::count counter = 0;
         bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter ]( TElement & element ) -> bool
+            , & counter ]( TElement const & element ) -> bool
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1676,7 +1676,7 @@ TEST_F  ( TestBucketWithMultipleInteger
     TEST_F  ( TestBucketWithMultipleInteger
             , IteratorParallelForAllOptima )
     {
-        TElement minElement = bucket_.Top();
+        TElement const & minElement = bucket_.Top();
 
         bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> (
             [ & minElement ] ( TElement const & element )
