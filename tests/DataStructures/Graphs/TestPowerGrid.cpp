@@ -3223,12 +3223,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddLoadAtUsingVertexId )
 {
-    auto vertexId = static_cast<Types::vertexId>(2);
+    auto const vertexId = static_cast<Types::vertexId>(2);
     EXPECT_EQ    ( 1, network_.NumberOfLoads() );
     EXPECT_FALSE ( network_.HasLoadAt ( vertexId ) );
     // Add load at vertex 2
     TLoadProperties loadProperties;
-    Types::loadId   loadId   = network_.AddLoadAt ( vertexId, loadProperties );
+    Types::loadId const loadId = network_.AddLoadAt ( vertexId, loadProperties );
     // Check
     EXPECT_TRUE  ( network_.HasLoadAt ( vertexId ) );
     EXPECT_TRUE  ( network_.HasLoad   ( loadId   ) );
