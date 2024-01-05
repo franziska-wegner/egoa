@@ -89,7 +89,7 @@ namespace egoa::test {
                                                             , "operator.*<"
                                                             , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ < bucketToCompare_;
+            auto const test = bucket_ < bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
@@ -111,7 +111,7 @@ namespace egoa::test {
                                                             , "Bucket"
                                                             , "operator.*<="
                                                             , R"(!EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ <= bucketToCompare_;}, assertionString );
+        ASSERT_DEATH ( { auto const test = bucket_ <= bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -124,7 +124,7 @@ namespace egoa::test {
                                                             , "operator.*<="
                                                             , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ <= bucketToCompare_;
+            auto const test = bucket_ <= bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
@@ -159,7 +159,7 @@ namespace egoa::test {
                                                             , "operator.*>"
                                                             , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ > bucketToCompare_;
+            auto const test = bucket_ > bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
@@ -181,7 +181,7 @@ namespace egoa::test {
                                                           , "Bucket"
                                                           , "operator.*>="
                                                           , R"(!EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ >= bucketToCompare_;}, assertionString );
+        ASSERT_DEATH ( { auto const test = bucket_ >= bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -194,7 +194,7 @@ namespace egoa::test {
                                                           , "operator.*>="
                                                           , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ >= bucketToCompare_;
+            auto const test = bucket_ >= bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -688,7 +688,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "Bucket"
                                                             , "operator.*<"
                                                             , R"(!rhs.EmptyQueue\(\))" );
-        ASSERT_DEATH ( { auto test = bucket_ < bucketToCompare_;}, assertionString );
+        ASSERT_DEATH ( { auto const test = bucket_ < bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -701,7 +701,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "operator.*<"
                                                             , R"(!rhs.EmptyQueue\(\))" );
         try {
-            auto test = bucket_ < bucketToCompare_;
+            auto const test = bucket_ < bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -727,7 +727,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "Bucket"
                                                             , "operator.*<="
                                                             , R"(!rhs.EmptyQueue\(\))" );
-        ASSERT_DEATH ( { auto test = bucket_ <= bucketToCompare_;}, assertionString );
+        ASSERT_DEATH ( { auto const test = bucket_ <= bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -740,7 +740,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "operator.*<="
                                                             , R"(!rhs.EmptyQueue\(\))" );
         try {
-            auto test = bucket_ <= bucketToCompare_;
+            auto const test = bucket_ <= bucketToCompare_;
         } catch ( std::runtime_error const & error ) {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
@@ -778,7 +778,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "operator.*>"
                                                             , R"(!rhs.EmptyQueue\(\))" );
         try {
-            auto test = bucket_ > bucketToCompare_;
+            auto const test = bucket_ > bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -805,7 +805,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "Bucket"
                                                             , "operator.*>="
                                                             , R"(!rhs.EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ >= bucketToCompare_;}
+        ASSERT_DEATH ( { auto const test = bucket_ >= bucketToCompare_;}
                      , assertionString );
     }
 #else
@@ -819,7 +819,7 @@ TEST_F  ( TestBucketWithZeroElements
                                                             , "operator.*>="
                                                             , R"(!rhs.EmptyQueue\(\))");
         try {
-            auto test = bucket_ >= bucketToCompare_;
+            auto const test = bucket_ >= bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -1307,7 +1307,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 #ifdef OPENMP_AVAILABLE
         // Number of threads check
-        Types::count numberOfThreads = omp_get_max_threads();
+        Types::count const numberOfThreads = omp_get_max_threads();
         EXPECT_GE( numberOfThreads, 0 );
 
         // Non const loop check
