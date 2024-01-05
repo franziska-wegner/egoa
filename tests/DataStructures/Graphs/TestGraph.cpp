@@ -1612,7 +1612,7 @@ TYPED_TEST( TestGraphFourVertices, AddEdge) {
     }
 
     // Add edge (0,1)
-    TEdgeProperties edgeProperties01 = TEdgeProperties(0);
+    auto edgeProperties01 = TEdgeProperties(0);
     Types::edgeId source = 0;
     Types::edgeId target = 1;
     Types::edgeId id01   = this->graph_.AddEdge(source, target, edgeProperties01);
@@ -1635,7 +1635,7 @@ TYPED_TEST( TestGraphFourVertices, AddEdge) {
 
 
     // Add edge (1,2)
-    TEdgeProperties edgeProperties12 = TEdgeProperties(1);
+    auto edgeProperties12 = TEdgeProperties(1);
     source = 1;
     target = 2;
     Types::edgeId id12 = this->graph_.AddEdge(source, target, edgeProperties12);
@@ -1659,7 +1659,7 @@ TYPED_TEST( TestGraphFourVertices, AddEdge) {
 
 
     // Add edge (0,3)
-    TEdgeProperties edgeProperties03 = TEdgeProperties(2);
+    auto edgeProperties03 = TEdgeProperties(2);
     source = 0;
     target = 3;
     Types::edgeId id03 = this->graph_.AddEdge(source, target, edgeProperties03);
