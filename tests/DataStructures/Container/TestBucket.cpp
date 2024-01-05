@@ -1068,11 +1068,9 @@ TEST_F  ( TestBucketWithMultipleInteger
         std::vector<TElement> optima = bucket_.Optima();
         ASSERT_EQ ( 3, optima.size() );
 
-        for ( Types::count counter = 0
-            ; counter < optima.size()
-            ; ++counter )
+        for ( auto const & optimum : optima )
         {
-            ASSERT_EQ ( optima[counter], 1 );
+            ASSERT_EQ ( optimum, 1 );
         }
     }
 ///@}
