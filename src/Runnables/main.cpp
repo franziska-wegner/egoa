@@ -208,7 +208,7 @@ void setNetworkSetting(egoa::PowerGrid<TGraph> & network, const QString & networ
     else if ( networkSetting == "EXACT"        ) { network.MakeExact();         }
 }
 
-void main(int const argc, char const * const * const argv) -> int {
+auto main(int const argc, char const * const * const argv) -> int {
 
 // Command line parsing
     auto application = std::unique_ptr<QCoreApplication>(std::make_unique<QCoreApplication>(argc, argv));
