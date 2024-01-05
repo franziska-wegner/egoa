@@ -71,7 +71,7 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CompareTwoEmptyBucketsLhsSmallerRhsDeathTest )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*<"
@@ -83,7 +83,7 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElements
             , CompareTwoEmptyBucketsLhsSmallerRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*<"
@@ -141,7 +141,7 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*>"
@@ -153,7 +153,7 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElements
             , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*>"
@@ -176,7 +176,7 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const assertionString = buildAssertionString ( "Bucket.hpp"
                                                           , "Bucket"
                                                           , "operator.*>="
@@ -759,7 +759,7 @@ TEST_F  ( TestBucketWithZeroElements
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*>"
@@ -772,7 +772,7 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithMultipleInteger
             , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*>"
@@ -799,7 +799,7 @@ TEST_F  ( TestBucketWithZeroElements
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
 
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
@@ -813,7 +813,7 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithMultipleInteger
             , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
         auto const & assertionString = buildAssertionString ( "Bucket.hpp"
                                                             , "Bucket"
                                                             , "operator.*>="
