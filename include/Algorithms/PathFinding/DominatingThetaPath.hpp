@@ -477,7 +477,7 @@ class DominatingThetaPath final {
                 Types::count numberOfOptimalLabels = LabelSetAt(target).Optima().size(); // Divide by this value
                 Types::real weightOfPath = static_cast<Types::real>(1) / numberOfOptimalLabels;
 
-                labelSets_[target].template for_all_optima<ExecutionPolicy::sequential>( 
+                labelSets_[target].template for_all_optima<ExecutionPolicy::sequential>(
                     [&]( TLabel const & optLabel )
                     {
                         Types::labelId  labelId  = optLabel.Index();
