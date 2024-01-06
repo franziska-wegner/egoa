@@ -13,7 +13,7 @@ using ::testing::MatchesRegex;
 
 namespace egoa::test {
 
-std::string buildAssertionString(std::string function, std::string message) {
+auto buildAssertionString(std::string const & function, std::string const & message) -> std::string {
     return buildAssertionString("MappingBinaryHeap.hpp", "MappingBinaryHeap", function, message);
 }
 
