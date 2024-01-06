@@ -46,7 +46,7 @@ set(PEDANTIC_FLAGS "-pedantic")
 # Microsoft Visual Studio ##########################################
 ####################################################################
 if(MSVC)
-    add_definitions(/MP /DNOMINMAX)
+    add_definitions(/MP /DNOMINMAX /wd4068) # /wd4068 disable "unknown pragma 'mark'" warnings
     if(CMAKE_BUILD_TYPE MATCHES "Debug")
         # D:\a\egoa\egoa\tests\DataStructures\Graphs\TestGraph.cpp : fatal
         # error C1128: number of sections exceeded object file format limit:
