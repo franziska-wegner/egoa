@@ -35,10 +35,10 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CheckTopElementDeathTest )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Top"
-                                                    , R"(!EmptyQueue\(\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Top"
+                                                            , R"(!EmptyQueue\(\))");
         ASSERT_DEATH ( {bucket_.Top();}, ".*" );
     }
 #else
@@ -46,10 +46,10 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElements
             , CheckTopElementExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Top"
-                                                    , R"(!EmptyQueue\(\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Top"
+                                                            , R"(!EmptyQueue\(\))");
         try {
             bucket_.Top();
         } catch ( std::runtime_error const & error )
@@ -71,11 +71,11 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CompareTwoEmptyBucketsLhsSmallerRhsDeathTest )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<"
-                                                    , R"(!EmptyQueue\(\))");
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<"
+                                                            , R"(!EmptyQueue\(\))");
         ASSERT_DEATH ( { auto test = bucket_ < bucketToCompare_;}, assertionString );
     }
 #else
@@ -83,13 +83,13 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElements
             , CompareTwoEmptyBucketsLhsSmallerRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<"
-                                                    , R"(!EmptyQueue\(\))");
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<"
+                                                            , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ < bucketToCompare_;
+            auto const test = bucket_ < bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
@@ -107,11 +107,11 @@ namespace egoa::test {
             , CompareTwoEmptyBucketsLhsSmallerEqualRhsDeathTest )
     {
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<="
-                                                    , R"(!EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ <= bucketToCompare_;}, assertionString );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<="
+                                                            , R"(!EmptyQueue\(\))");
+        ASSERT_DEATH ( { auto const test = bucket_ <= bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -119,12 +119,12 @@ namespace egoa::test {
             , CompareTwoEmptyBucketsLhsSmallerEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<="
-                                                    , R"(!EmptyQueue\(\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<="
+                                                            , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ <= bucketToCompare_;
+            auto const test = bucket_ <= bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
@@ -141,25 +141,25 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CompareTwoEmptyBucketsLhsGreaterRhsDeathTest )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>"
-                                                    , R"(!EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ > bucketToCompare_;}, assertionString );
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*>"
+                                                            , R"(!EmptyQueue\(\))");
+        ASSERT_DEATH ( { auto const test = bucket_ > bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
     TEST_F  ( TestBucketWithZeroElements
             , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>"
-                                                    , R"(!EmptyQueue\(\))");
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*>"
+                                                            , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ > bucketToCompare_;
+            auto const test = bucket_ > bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex(assertionString.c_str()) );
@@ -176,12 +176,12 @@ namespace egoa::test {
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , CompareTwoEmptyBucketsLhsGreaterEqualRhsDeathTest )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>="
-                                                    , R"(!EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ >= bucketToCompare_;}, assertionString );
+        TBucket const bucketToCompare_;
+        auto const assertionString = buildAssertionString ( "Bucket.hpp"
+                                                          , "Bucket"
+                                                          , "operator.*>="
+                                                          , R"(!EmptyQueue\(\))");
+        ASSERT_DEATH ( { auto const test = bucket_ >= bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -189,12 +189,12 @@ namespace egoa::test {
             , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>="
-                                                    , R"(!EmptyQueue\(\))");
+        auto const assertionString = buildAssertionString ( "Bucket.hpp"
+                                                          , "Bucket"
+                                                          , "operator.*>="
+                                                          , R"(!EmptyQueue\(\))");
         try {
-            auto test = bucket_ >= bucketToCompare_;
+            auto const test = bucket_ >= bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -212,7 +212,7 @@ namespace egoa::test {
 TEST_F  ( TestBucketWithZeroElements
         , MergeAnElementIntoEmptyBucket )
 {
-    TElement element = TElement(2,false);
+    TElement element = TElement ( 2, false );
 
     ASSERT_EQ   ( bucket_.Size(), 0 );
     ASSERT_TRUE ( bucket_.Merge( element ) );
@@ -291,10 +291,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , AccessElementElementAtDeathTest )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "ElementAt"
-                                                    , R"(HasElementAt\(index\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "ElementAt"
+                                                            , R"(HasElementAt\(index\))");
         ASSERT_DEATH ( {bucket_.ElementAt(0);},  assertionString );
         ASSERT_DEATH ( {bucket_.ElementAt(1);},  assertionString );
         ASSERT_DEATH ( {bucket_.ElementAt(-1);}, assertionString );
@@ -304,10 +304,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElements
             , AccessElementElementAtExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "ElementAt"
-                                                    , R"(HasElementAt\(index\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "ElementAt"
+                                                            , R"(HasElementAt\(index\))");
         try {
             try {
                 bucket_.ElementAt(0);
@@ -340,10 +340,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , AccessElementWithBracketOperatorDeathTest )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , R"(operator.*\[\])"
-                                                    , R"(HasElementAt\(index\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , R"(operator.*\[\])"
+                                                            , R"(HasElementAt\(index\))");
         ASSERT_DEATH ( {bucket_[0];},  assertionString );
         ASSERT_DEATH ( {bucket_[1];},  assertionString );
         ASSERT_DEATH ( {bucket_[-1];}, assertionString );
@@ -353,10 +353,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElements
             , AccessElementWithBracketOperatorExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , R"(operator.*\[\])"
-                                                    , R"(HasElementAt\(index\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , R"(operator.*\[\])"
+                                                            , R"(HasElementAt\(index\))");
         try {
             try {
                 bucket_[0];
@@ -392,10 +392,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , AccessElementTopDeathTest )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Top"
-                                                    , R"(!EmptyQueue\(\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Top"
+                                                            , R"(!EmptyQueue\(\))");
         EXPECT_TRUE  ( bucket_.EmptyQueue() );
         ASSERT_DEATH ( {bucket_.Top();}, assertionString );
     }
@@ -404,10 +404,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElements
             , AccessElementTopExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Top"
-                                                    , R"(!EmptyQueue\(\))");
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Top"
+                                                            , R"(!EmptyQueue\(\))");
         EXPECT_TRUE  ( bucket_.EmptyQueue() );
         try {
             bucket_.Top();
@@ -436,10 +436,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , RemoveElementUsingPopDeathTest )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Pop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Pop"
+                                                            , R"(!EmptyQueue\(\))" );
         ASSERT_DEATH ( {bucket_.Pop();}, assertionString );
     }
 #else
@@ -447,10 +447,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElements
             , RemoveElementUsingPopExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Pop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Pop"
+                                                            , R"(!EmptyQueue\(\))" );
         try {
             bucket_.Pop();
         } catch ( std::runtime_error const & error )
@@ -469,10 +469,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElementsDeathTest
             , RemoveElementUsingDeleteMinDeathTest )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "DeleteTop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "DeleteTop"
+                                                            , R"(!EmptyQueue\(\))" );
         ASSERT_DEATH ( {bucket_.DeleteTop();}, assertionString );
     }
 #else
@@ -480,10 +480,10 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithZeroElements
             , RemoveElementUsingDeleteMinExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "DeleteTop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "DeleteTop"
+                                                            , R"(!EmptyQueue\(\))" );
         try {
             bucket_.DeleteTop();
         } catch ( std::runtime_error const & error )
@@ -684,11 +684,11 @@ TEST_F  ( TestBucketWithZeroElements
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<"
-                                                    , R"(!rhs.EmptyQueue\(\))" );
-        ASSERT_DEATH ( { auto test = bucket_ < bucketToCompare_;}, assertionString );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<"
+                                                            , R"(!rhs.EmptyQueue\(\))" );
+        ASSERT_DEATH ( { auto const test = bucket_ < bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -696,12 +696,12 @@ TEST_F  ( TestBucketWithZeroElements
             , CompareTwoBucketsWhereOneIsEmptyLhsSmallerRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<"
-                                                    , R"(!rhs.EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<"
+                                                            , R"(!rhs.EmptyQueue\(\))" );
         try {
-            auto test = bucket_ < bucketToCompare_;
+            auto const test = bucket_ < bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -723,11 +723,11 @@ TEST_F  ( TestBucketWithZeroElements
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<="
-                                                    , R"(!rhs.EmptyQueue\(\))" );
-        ASSERT_DEATH ( { auto test = bucket_ <= bucketToCompare_;}, assertionString );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<="
+                                                            , R"(!rhs.EmptyQueue\(\))" );
+        ASSERT_DEATH ( { auto const test = bucket_ <= bucketToCompare_;}, assertionString );
     }
 #else
 #ifdef EGOA_ENABLE_EXCEPTION_HANDLING
@@ -735,12 +735,12 @@ TEST_F  ( TestBucketWithZeroElements
             , CompareTwoEmptyBucketsLhsSmallerEqualRhsExceptionHandling )
     {
         TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*<="
-                                                    , R"(!rhs.EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*<="
+                                                            , R"(!rhs.EmptyQueue\(\))" );
         try {
-            auto test = bucket_ <= bucketToCompare_;
+            auto const test = bucket_ <= bucketToCompare_;
         } catch ( std::runtime_error const & error ) {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
         } catch ( ... ) {
@@ -759,11 +759,11 @@ TEST_F  ( TestBucketWithZeroElements
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>"
-                                                    , R"(!rhs.EmptyQueue\(\))" );
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*>"
+                                                            , R"(!rhs.EmptyQueue\(\))" );
         ASSERT_DEATH ( { auto test = bucket_ > bucketToCompare_;}
                      , assertionString );
     }
@@ -772,13 +772,13 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithMultipleInteger
             , CompareTwoEmptyBucketsLhsGreaterRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>"
-                                                    , R"(!rhs.EmptyQueue\(\))" );
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*>"
+                                                            , R"(!rhs.EmptyQueue\(\))" );
         try {
-            auto test = bucket_ > bucketToCompare_;
+            auto const test = bucket_ > bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -799,13 +799,13 @@ TEST_F  ( TestBucketWithZeroElements
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-        TBucket bucketToCompare_;
+        TBucket const bucketToCompare_;
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>="
-                                                    , R"(!rhs.EmptyQueue\(\))");
-        ASSERT_DEATH ( { auto test = bucket_ >= bucketToCompare_;}
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*>="
+                                                            , R"(!rhs.EmptyQueue\(\))");
+        ASSERT_DEATH ( { auto const test = bucket_ >= bucketToCompare_;}
                      , assertionString );
     }
 #else
@@ -813,13 +813,13 @@ TEST_F  ( TestBucketWithZeroElements
     TEST_F  ( TestBucketWithMultipleInteger
             , CompareTwoEmptyBucketsLhsGreaterEqualRhsExceptionHandling )
     {
-        TBucket bucketToCompare_;
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "operator.*>="
-                                                    , R"(!rhs.EmptyQueue\(\))");
+        TBucket const bucketToCompare_;
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "operator.*>="
+                                                            , R"(!rhs.EmptyQueue\(\))");
         try {
-            auto test = bucket_ >= bucketToCompare_;
+            auto const test = bucket_ >= bucketToCompare_;
         } catch ( std::runtime_error const & error )
         {
             EXPECT_THAT ( error.what(), MatchesRegex( assertionString.c_str() ) );
@@ -915,10 +915,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "ElementAt"
-                                                    , R"(HasElementAt\(index\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "ElementAt"
+                                                            , R"(HasElementAt\(index\))" );
 
         ASSERT_DEATH ( {bucket_.ElementAt(0);},  assertionString );
         ASSERT_DEATH ( {bucket_.ElementAt(1);},  assertionString );
@@ -931,10 +931,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
         EXPECT_TRUE  ( bucket_.EmptyQueue()       );
 
-        auto assertionString2 = buildAssertionString ( "Bucket.hpp"
-                                                     , "Bucket"
-                                                     , "Pop"
-                                                     , R"(!EmptyQueue\(\))" );
+        auto const & assertionString2 = buildAssertionString ( "Bucket.hpp"
+                                                             , "Bucket"
+                                                             , "Pop"
+                                                             , R"(!EmptyQueue\(\))" );
         ASSERT_DEATH ( {bucket_.Pop();}, assertionString2 );
     }
 #else
@@ -942,10 +942,10 @@ TEST_F  ( TestBucketWithMultipleInteger
     TEST_F  ( TestBucketWithMultipleInteger
             , AccessElementElementAtExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "ElementAt"
-                                                    , R"(HasElementAt\(index\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "ElementAt"
+                                                            , R"(HasElementAt\(index\))" );
         try {
             try {
                 bucket_.ElementAt(0);
@@ -973,10 +973,10 @@ TEST_F  ( TestBucketWithMultipleInteger
             ASSERT_EQ    ( bucket_.HasElementAt(0), 1 );
             EXPECT_TRUE  ( bucket_.EmptyQueue()       );
 
-            auto assertionString2 = buildAssertionString ( "Bucket.hpp"
-                                                         , "Bucket"
-                                                         , "Pop"
-                                                         , R"(!EmptyQueue\(\))" );
+            auto const & assertionString2 = buildAssertionString ( "Bucket.hpp"
+                                                                 , "Bucket"
+                                                                 , "Pop"
+                                                                 , R"(!EmptyQueue\(\))" );
             try {
                 bucket_.Pop();
             } catch ( std::runtime_error const & error )
@@ -1000,10 +1000,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         // https://gitlab.inria.fr/Phylophile/Treerecs/blob/f6551e06797b52819ba3e630b92315254a944da5/tests/gtest/googletest/docs/AdvancedGuide.md
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , R"(operator.*\[\])"
-                                                    , R"(HasElementAt\(index\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , R"(operator.*\[\])"
+                                                            , R"(HasElementAt\(index\))" );
 
         ASSERT_DEATH ( { bucket_[0];  }, assertionString );
         ASSERT_DEATH ( { bucket_[1];  }, assertionString );
@@ -1014,10 +1014,10 @@ TEST_F  ( TestBucketWithMultipleInteger
     TEST_F  ( TestBucketWithMultipleInteger
             , AccessElementWithBracketOperatorExceptionHandling )
     {
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , R"(operator.*\[\])"
-                                                    , R"(HasElementAt\(index\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , R"(operator.*\[\])"
+                                                            , R"(HasElementAt\(index\))" );
         try {
             try {
                 bucket_[0];
@@ -1068,11 +1068,9 @@ TEST_F  ( TestBucketWithMultipleInteger
         std::vector<TElement> optima = bucket_.Optima();
         ASSERT_EQ ( 3, optima.size() );
 
-        for ( Types::count counter = 0
-            ; counter < optima.size()
-            ; ++counter )
+        for ( auto const & optimum : optima )
         {
-            ASSERT_EQ ( optima[counter], 1 );
+            ASSERT_EQ ( optimum, 1 );
         }
     }
 ///@}
@@ -1089,10 +1087,10 @@ TEST_F  ( TestBucketWithMultipleInteger
 
         ASSERT_TRUE ( bucket_.EmptyQueue() );
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Pop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Pop"
+                                                            , R"(!EmptyQueue\(\))" );
         ASSERT_DEATH ( {bucket_.Pop();}, assertionString );
 
         bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>(
@@ -1113,10 +1111,10 @@ TEST_F  ( TestBucketWithMultipleInteger
 
         ASSERT_TRUE ( bucket_.EmptyQueue() );
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "Pop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "Pop"
+                                                            , R"(!EmptyQueue\(\))" );
         try {
             bucket_.Pop();
         } catch ( std::runtime_error const & error )
@@ -1154,10 +1152,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         ASSERT_EQ    ( bucket_.ElementAt(0),    1 );
         EXPECT_TRUE  ( bucket_.EmptyQueue()       );
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "DeleteTop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "DeleteTop"
+                                                            , R"(!EmptyQueue\(\))" );
         ASSERT_DEATH ( {bucket_.DeleteTop();}, assertionString );
 
         bucket_.template for_all_processed_elements<egoa::ExecutionPolicy::sequential>(
@@ -1180,10 +1178,10 @@ TEST_F  ( TestBucketWithMultipleInteger
         ASSERT_EQ   ( bucket_.ElementAt(0),   1 );
         EXPECT_TRUE ( bucket_.EmptyQueue()      );
 
-        auto assertionString = buildAssertionString ( "Bucket.hpp"
-                                                    , "Bucket"
-                                                    , "DeleteTop"
-                                                    , R"(!EmptyQueue\(\))" );
+        auto const & assertionString = buildAssertionString ( "Bucket.hpp"
+                                                            , "Bucket"
+                                                            , "DeleteTop"
+                                                            , R"(!EmptyQueue\(\))" );
         try {
             bucket_.DeleteTop();
         } catch ( std::runtime_error const & error )
@@ -1309,7 +1307,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 #ifdef OPENMP_AVAILABLE
         // Number of threads check
-        Types::count numberOfThreads = omp_get_max_threads();
+        Types::count const numberOfThreads = omp_get_max_threads();
         EXPECT_GE( numberOfThreads, 0 );
 
         // Non const loop check
@@ -1445,7 +1443,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 #ifdef OPENMP_AVAILABLE
         // Number of threads check
-        Types::count numberOfThreads = omp_get_max_threads();
+        Types::count const numberOfThreads = omp_get_max_threads();
         EXPECT_GE( numberOfThreads, 0 );
 
         // Non const loop check
@@ -1566,7 +1564,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         ::testing::FLAGS_gtest_death_test_style = "threadsafe";
 #ifdef OPENMP_AVAILABLE
         // Number of threads check
-        Types::count numberOfThreads = omp_get_max_threads();
+        Types::count const numberOfThreads = omp_get_max_threads();
         EXPECT_GE( numberOfThreads, 0 );
 
         // Non const loop check
@@ -1632,7 +1630,7 @@ TEST_F  ( TestBucketWithMultipleInteger
         Types::count counter = 0;
         bucket_.for_all_unprocessed_elements<egoa::ExecutionPolicy::breakable> (
             [ & verificationVectorWithoutProcessedItems
-            , & counter ]( TElement & element ) -> bool
+            , & counter ]( TElement const & element ) -> bool
             {
                 EXPECT_EQ ( element, verificationVectorWithoutProcessedItems[counter] );
                 ++counter;
@@ -1678,7 +1676,7 @@ TEST_F  ( TestBucketWithMultipleInteger
     TEST_F  ( TestBucketWithMultipleInteger
             , IteratorParallelForAllOptima )
     {
-        TElement minElement = bucket_.Top();
+        TElement const & minElement = bucket_.Top();
 
         bucket_.for_all_optima<egoa::ExecutionPolicy::parallel> (
             [ & minElement ] ( TElement const & element )

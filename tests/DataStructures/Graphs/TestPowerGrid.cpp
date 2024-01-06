@@ -3223,12 +3223,12 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
         , AddLoadAtUsingVertexId )
 {
-    Types::vertexId vertexId = static_cast<Types::vertexId>(2);
+    auto const vertexId = static_cast<Types::vertexId>(2);
     EXPECT_EQ    ( 1, network_.NumberOfLoads() );
     EXPECT_FALSE ( network_.HasLoadAt ( vertexId ) );
     // Add load at vertex 2
     TLoadProperties loadProperties;
-    Types::loadId   loadId   = network_.AddLoadAt ( vertexId, loadProperties );
+    Types::loadId const loadId = network_.AddLoadAt ( vertexId, loadProperties );
     // Check
     EXPECT_TRUE  ( network_.HasLoadAt ( vertexId ) );
     EXPECT_TRUE  ( network_.HasLoad   ( loadId   ) );
@@ -3241,7 +3241,7 @@ TEST_F  ( TestPowerGridAcm2018MtsfFigure4a
 TEST_F  ( TestPowerGridAcm2018MtsfFigure4b
         , AddLoadAtUsingVertexId )
 {
-    Types::vertexId vertexId = static_cast<Types::vertexId>(1);
+    auto vertexId = static_cast<Types::vertexId>(1);
     EXPECT_EQ    ( 1, network_.NumberOfLoads() );
     EXPECT_FALSE ( network_.HasLoadAt ( vertexId ) );
     // Add load at vertex 2
@@ -4774,7 +4774,7 @@ TEST_F  ( TestNetworkEmpty
                 << assertionString;
     }
 
-    Types::generatorId generatorId = static_cast<Types::generatorId>(0);
+    auto generatorId = static_cast<Types::generatorId>(0);
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddGeneratorRealPowerSnapshotAt"
@@ -4966,7 +4966,7 @@ TEST_F  ( TestNetworkEmpty
                 << assertionString;
     }
 
-    Types::loadId loadId = static_cast<Types::loadId>(0);
+    auto loadId = static_cast<Types::loadId>(0);
     assertionString = buildAssertionString ( "PowerGrid.hpp"
                                            , "PowerGrid"
                                            , "AddLoadSnapshotAt"

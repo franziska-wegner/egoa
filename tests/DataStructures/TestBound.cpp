@@ -18,9 +18,9 @@ using ::testing::Le;
 
 namespace egoa::test {
 
-TestBound::TestBound () {}
+TestBound::TestBound () = default;
 
-TestBound::~TestBound () {}
+TestBound::~TestBound () = default;
 
 void TestBound::SetUp () {}
 

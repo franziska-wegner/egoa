@@ -279,15 +279,15 @@ class Color {
         ~Color(){}
 
 
-        bool operator== ( const Color& rhs ) {
+        bool operator== ( Color const  & rhs ) {
             return Red() == rhs.Red() && Green() == rhs.Green() && Blue() == rhs.Blue();
         }
 
-        bool operator!= ( const Color& rhs ) {
+        bool operator!= ( Color const & rhs ) {
             return !operator==(rhs);
         }
 
-        friend std::ostream& operator<<(std::ostream& os, const Name color ) {
+        friend std::ostream& operator<<(std::ostream& os, Name const color ) {
             switch ( color ) {
                 case Name::KITgreen:      os << "KITgreen";   break;
                 case Name::KITgreen70:    os << "KITgreen70"; break;
