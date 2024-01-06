@@ -200,7 +200,7 @@ class DominatingThetaPath final {
                 std::vector<TEdgeId>   edges;
 
                 Types::real result = \
-                    labelSets_[target].for_all_optima(
+                    labelSets_[target].for_all_optima<ExecutionPolicy::sequential>(
                         [ this, &vertices, &edges, &isVertexInSubgraph, &isEdgeInSubgraph ]( TLabel const & optLabel )
                 {
                     Types::labelId  labelId  = optLabel.Index();
@@ -264,7 +264,7 @@ class DominatingThetaPath final {
 
                 // Iterate over all optima
                 Types::real result = \
-                    labelSets_[target].for_all_optima([ this, & parent = parent ]( TLabel const & optLabel )
+                    labelSets_[target].for_all_optima<ExecutionPolicy::sequential>([ this, & parent = parent ]( TLabel const & optLabel )
                 {
                     // Add a row for another label path from target t
                     parent.emplace_back( std::vector<TVertexId>() );
@@ -409,7 +409,7 @@ class DominatingThetaPath final {
 
                 numberOfPathsPerVertex.resize( graph_.NumberOfVertices(), 0 );
 
-                labelSets_[target].for_all_optima (
+                labelSets_[target].for_all_optima<ExecutionPolicy::sequential> (
                     [&]( TLabel const & optLabel )
                     {
                         Types::labelId  labelId  = optLabel.Index();
