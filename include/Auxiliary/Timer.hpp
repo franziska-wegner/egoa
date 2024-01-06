@@ -278,10 +278,178 @@ class Timer {
             return 1;
         }
 // #elif defined(__unix__)
-// #elif defined (_WIN32)
-//         #error "Windows 32-bit operation system"
-// #elif defined (_WIN64)
+#elif defined (_WIN32)
+        // #error "Windows 32-bit operation system"
+        struct timespec start_;
+
+        /**
+         * @brief      Timestamp
+         * @details    Get current time dependent on clock.
+         *
+         * @param      timeStamp    Timespec
+         */
+        inline void TimeStamp( struct timespec * timeStamp ) {
+            GetSystemTime( timeStamp );
+        }
+
+        /**
+         * @brief      Timestamp for the start of the timer
+         */
+        inline void TimeStamp() {
+            GetSystemTime( & start_ );
+        }
+
+        /**
+         * @brief      Elapsed time
+         *
+         * @details    Calculates the difference between the current time and
+         *     start time that represents the duration.
+         *
+         * @param      elapsedTime    timespec
+         */
+        inline void ElapsedTime( struct timespec * elapsedTime ) {
+            TimeStamp( elapsedTime );
+            elapsedTime->tv_sec  = elapsedTime->tv_sec  - start_.tv_sec;
+            elapsedTime->tv_nsec = elapsedTime->tv_nsec - start_.tv_nsec;
+        }
+
+        /**
+         * @brief      Elapsed time in milliseconds
+         *
+         * @details    Calculates the difference between the current time and
+         *     start time that represents the duration.
+         *
+         * @return     Elapsed time in milliseconds
+         */
+        inline Types::largeReal ElapsedMillisecondsOS() {
+            struct timespec elapsedTime;
+            ElapsedTime( & elapsedTime );
+            return TimespecToMilliseconds( & elapsedTime );
+        }
+
+        /**
+         * @brief      Gets the clock resolution representing the granularity.
+         * @details    A possible output is
+         *             CLOCK_MONOTONIC has a resolution of 1ns, and
+         *             CLOCK_MONOTONIC_COARSE has a resolution of 999848ns (about 1ms).
+         *
+         * @return     The clock resolution.
+         */
+        inline Types::posInteger GetClockResolution() {
+            struct timespec res;
+            return clock_getres(linuxClockId, &res);
+        }
+
+        /**
+         * @brief      Transformations between timespec and milliseconds and
+         *     the other way around
+         */
+        ///@{
+            inline void MillisecondsToTimespec ( Types::largeReal milliseconds
+                                               , struct timespec * ts )
+            {
+                Types::largeReal seconds   = milliseconds / Const::MILLISEC_PER_SEC;
+                Types::largeReal remainder = milliseconds - seconds * Const::MILLISEC_PER_SEC;
+                ts->tv_sec  = seconds;
+                ts->tv_nsec = std::llround(remainder * Const::NSEC_PER_MILLISEC);
+            }
+
+            inline void TimespecToMilliseconds ( struct timespec * ts
+                                               , Types::largeReal & milliseconds )
+            {
+                milliseconds  = ts->tv_sec  * Const::MILLISEC_PER_SEC;
+                milliseconds += static_cast<Types::largeReal>( ts->tv_nsec ) / Const::NSEC_PER_MILLISEC;
+            }
+
+            inline Types::largeReal TimespecToMilliseconds ( struct timespec * ts ) {
+                return static_cast<Types::largeReal>( ts->tv_sec  * Const::MILLISEC_PER_SEC + ts->tv_nsec ) / Const::NSEC_PER_MILLISEC;
+            }
+#elif defined (_WIN64)
 //         #error "Windows 64-bit operation system"
+        struct timespec start_;
+
+        /**
+         * @brief      Timestamp
+         * @details    Get current time dependent on clock.
+         *
+         * @param      timeStamp    Timespec
+         */
+        inline void TimeStamp( struct timespec * timeStamp ) {
+            GetSystemTime( timeStamp );
+        }
+
+        /**
+         * @brief      Timestamp for the start of the timer
+         */
+        inline void TimeStamp() {
+            GetSystemTime( & start_ );
+        }
+
+        /**
+         * @brief      Elapsed time
+         *
+         * @details    Calculates the difference between the current time and
+         *     start time that represents the duration.
+         *
+         * @param      elapsedTime    timespec
+         */
+        inline void ElapsedTime( struct timespec * elapsedTime ) {
+            TimeStamp( elapsedTime );
+            elapsedTime->tv_sec  = elapsedTime->tv_sec  - start_.tv_sec;
+            elapsedTime->tv_nsec = elapsedTime->tv_nsec - start_.tv_nsec;
+        }
+
+        /**
+         * @brief      Elapsed time in milliseconds
+         *
+         * @details    Calculates the difference between the current time and
+         *     start time that represents the duration.
+         *
+         * @return     Elapsed time in milliseconds
+         */
+        inline Types::largeReal ElapsedMillisecondsOS() {
+            struct timespec elapsedTime;
+            ElapsedTime( & elapsedTime );
+            return TimespecToMilliseconds( & elapsedTime );
+        }
+
+        /**
+         * @brief      Gets the clock resolution representing the granularity.
+         * @details    A possible output is
+         *             CLOCK_MONOTONIC has a resolution of 1ns, and
+         *             CLOCK_MONOTONIC_COARSE has a resolution of 999848ns (about 1ms).
+         *
+         * @return     The clock resolution.
+         */
+        inline Types::posInteger GetClockResolution() {
+            struct timespec res;
+            return clock_getres(linuxClockId, &res);
+        }
+
+        /**
+         * @brief      Transformations between timespec and milliseconds and
+         *     the other way around
+         */
+        ///@{
+            inline void MillisecondsToTimespec ( Types::largeReal milliseconds
+                                               , struct timespec * ts )
+            {
+                Types::largeReal seconds   = milliseconds / Const::MILLISEC_PER_SEC;
+                Types::largeReal remainder = milliseconds - seconds * Const::MILLISEC_PER_SEC;
+                ts->tv_sec  = seconds;
+                ts->tv_nsec = std::llround(remainder * Const::NSEC_PER_MILLISEC);
+            }
+
+            inline void TimespecToMilliseconds ( struct timespec * ts
+                                               , Types::largeReal & milliseconds )
+            {
+                milliseconds  = ts->tv_sec  * Const::MILLISEC_PER_SEC;
+                milliseconds += static_cast<Types::largeReal>( ts->tv_nsec ) / Const::NSEC_PER_MILLISEC;
+            }
+
+            inline Types::largeReal TimespecToMilliseconds ( struct timespec * ts ) {
+                return static_cast<Types::largeReal>( ts->tv_sec  * Const::MILLISEC_PER_SEC + ts->tv_nsec ) / Const::NSEC_PER_MILLISEC;
+            }
 #endif
 };
 
