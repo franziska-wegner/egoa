@@ -19,6 +19,7 @@ concurrency:
 
 env:
   QT_VERSION:     "6.2.0"
+  QT_ARCH:        "gcc_64"
 
 permissions:
   contents: read
@@ -51,19 +52,13 @@ jobs:
           cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
           dir: ${{ github.workspace }}/Qt
 
-      - name: Echo Qt repo (temp only)
-        shell: bash
-        run: |
-          ls -la ${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/gcc_64
-          ls -la ${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/gcc_64/include
-          echo ${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/gcc_64/include
-
       - name: Set reusable strings
         # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
         id: strings
         shell: bash
         run: |
           echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+          echo "qt-include-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/include"
 
       - name: Configure CMake
         env:
@@ -135,7 +130,7 @@ jobs:
           lines-changed-only: false
           no-lgtm: false
           repo-root: ${{ github.workspace }}
-          extra-args: "-I./include -I${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/gcc_64/include"
+          extra-args: "-I./include -I${{ qt-include-dir }}"
           # The following value will only update a single comment
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
