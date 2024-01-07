@@ -54,9 +54,9 @@ jobs:
       - name: Echo Qt repo (temp only)
         shell: bash
         run: |
-          ls -la ${{ github.workspace }}/Qt
-          ls -la ${{ github.workspace }}/Qt/include
-          echo ${{ github.workspace }}/Qt/include
+          ls -la ${{ github.workspace }}/Qt/Qt
+          ls -la ${{ github.workspace }}/Qt/Qt/include
+          echo ${{ github.workspace }}/Qt/Qt/include
 
       - name: Set reusable strings
         # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
@@ -135,7 +135,7 @@ jobs:
           lines-changed-only: false
           no-lgtm: false
           repo-root: ${{ github.workspace }}
-          extra-args: "-I./include -I${{ github.workspace }}/Qt/include"
+          extra-args: "-I./include -I${{ github.workspace }}/Qt/Qt/include"
           # The following value will only update a single comment
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
