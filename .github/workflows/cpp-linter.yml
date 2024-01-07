@@ -61,6 +61,7 @@ jobs:
           echo "qt-main-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}" >> "$GITHUB_OUTPUT"
           echo "qt-include-dir=${{ steps.strings.outputs.qt-main-dir }}/include" >> "$GITHUB_OUTPUT"
           echo "qt-lib-dir=${{ steps.strings.outputs.qt-main-dir }}/lib" >> "$GITHUB_OUTPUT"
+          echo "google-test-dir=${{ github.workspace }}/external/GoogleTestFramework" >> "$GITHUB_OUTPUT"
 
       - name: Configure CMake
         env:
@@ -127,7 +128,7 @@ jobs:
           lines-changed-only: false
           no-lgtm: false
           repo-root: ${{ github.workspace }}
-          extra-args: "-I./include -I./tests -I./external/GoogleTestFramework/googlemock/include -I./external/GoogleTestFramework/googletest/include -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtCore -isystem ${{ steps.strings.outputs.qt-include-dir }} -isystem ${{ steps.strings.outputs.qt-main-dir }}/mkspecs/linux-g++ -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtQuick -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtGui -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtQml -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtNetwork -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtQmlModels -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtOpenGL -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtWidgets"
+          extra-args: "-DQT6_AVAILABLE -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DQT_WIDGETS_LIB -I./include -I./tests -I${{ steps.strings.outputs.google-test-dir }}/googletest/include -I${{ steps.strings.outputs.github.workspace }}/googletest -I${{ steps.strings.outputs.google-test-dir }}/googlemock/include -I${{ steps.strings.outputs.google-test-dir }}/googlemock -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtCore -isystem ${{ steps.strings.outputs.qt-include-dir }} -isystem ${{ steps.strings.outputs.qt-main-dir }}/mkspecs/linux-g++ -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtQuick -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtGui -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtQml -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtNetwork -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtQmlModels -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtOpenGL -isystem ${{ steps.strings.outputs.qt-include-dir }}/QtWidgets"
           # The following value will only update a single comment
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
