@@ -113,11 +113,6 @@ jobs:
           -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
           -S ${{ github.workspace }}
 
-      - name: Build (Unix)
-        # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
-        if: ${{ !startsWith(matrix.os,'windows-') }}
-        run: sudo cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
-
       - name: C/C++ Linter
         uses: cpp-linter/cpp-linter-action@main
         id: linter
