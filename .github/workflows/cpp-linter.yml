@@ -59,6 +59,7 @@ jobs:
         run: |
           echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
           echo "qt-include-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/include"
+          echo "qt-lib-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/lib"
 
       - name: Configure CMake
         env:
@@ -130,7 +131,7 @@ jobs:
           lines-changed-only: false
           no-lgtm: false
           repo-root: ${{ github.workspace }}
-          extra-args: "-I./include -I${{ qt-include-dir }}"
+          extra-args: "-I./include -I${{ qt-include-dir }} -I${{ qt-lib-dir }}"
           # The following value will only update a single comment
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
