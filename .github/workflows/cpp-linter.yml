@@ -51,6 +51,13 @@ jobs:
           cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
           dir: ${{ github.workspace }}/Qt
 
+      - name: Echo Qt repo (temp only)
+        shell: bash
+        run: |
+          ls -la ${{ github.workspace }}/Qt
+          ls -la ${{ github.workspace }}/Qt/include
+          echo ${{ github.workspace }}/Qt/include
+
       - name: Set reusable strings
         # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
         id: strings
