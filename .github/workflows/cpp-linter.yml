@@ -58,8 +58,8 @@ jobs:
         shell: bash
         run: |
           echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
-          echo "qt-include-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/include"
-          echo "qt-lib-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/lib"
+          echo "qt-include-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/include" >> "$GITHUB_OUTPUT"
+          echo "qt-lib-dir=${{ github.workspace }}/Qt/Qt/${{ env.QT_VERSION }}/${{ env.QT_ARCH }}/lib" >> "$GITHUB_OUTPUT"
 
       - name: Configure CMake
         env:
