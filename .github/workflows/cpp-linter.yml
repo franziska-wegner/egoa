@@ -126,7 +126,7 @@ jobs:
           lines-changed-only: false
           no-lgtm: false
           repo-root: ${{ github.workspace }}
-          extra-args: "-I./include -I./tests -I${{ steps.strings.outputs.qt-include-dir }} -I${{ steps.strings.outputs.qt-lib-dir }}"
+          extra-args: "-I./include -I./tests -I./external/GoogleTestFramework/googlemock/include -I./external/GoogleTestFramework/googletest/include -I${{ steps.strings.outputs.qt-include-dir }} -I${{ steps.strings.outputs.qt-lib-dir }}"
           # The following value will only update a single comment
           # in a pull request's thread. Set it to false to disable the comment.
           # Set it to true to post a new comment (and delete the old comment).
