@@ -116,7 +116,7 @@ jobs:
         run: sudo cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
       - name: C/C++ Linter
-        uses: cpp-linter/cpp-linter-action@v2.7.5
+        uses: cpp-linter/cpp-linter-action@main
         id: linter
         continue-on-error: true
         env:
