@@ -1,6 +1,6 @@
 #! /opt/local/bin/Rscript
 #
-# plot_dtp_betweenness_centrality_all.R
+# table_models_algorithms.R
 #
 #   Created on: -
 #       Author: Franziska Wegner
