@@ -16,7 +16,7 @@
 require("xtable")
 library(xtable)
 
-# Commandline Arguments 
+# Commandline Arguments
 args                   <- commandArgs(trailingOnly = TRUE)
 argument.path          <- args[1]
 argument.label         <- args[2]
@@ -24,7 +24,7 @@ argument.floating      <- args[3]
 argument.short         <- args[4]
 argument.caption       <- args[5]
 argument.header        <- args[6]
-      
+
 if ( is.na(argument.path     ) ) {
   argument.path    <- "/Users/fwegner/Documents/work/paper/MTSF-ACM-e-Energy/02-ACM/data/results/"
 }
@@ -51,11 +51,11 @@ if ( is.na(argument.caption) ) {
     # The parameter~$\\bf n$, $\\bf m$ and~$\\bf |\\switched_{\\Pi}|$ represent the
     # number of vertices, edges and switched edges for a problem~$\\bf\\Pi$,
     # respectively, and the optimal solutions are given in~$\\optbf_{\\bf\\Pi}$.
-    # % 
+    # %
     # The~\\colorbox{KITyellow15}{\\parbox[t][1.7mm]{9mm}{yellow}} rows mark the
     # interesting cases where~$\\optbf_{\\mpfbf}$ is smaller than
-    # the~$\\optbf_{\\mtsfbf}$. 
-    # % 
+    # the~$\\optbf_{\\mtsfbf}$.
+    # %
     # The highlighted cases are where the~$\\optbf_\\mtsfbf$ is smaller than
     # the~$\\optbf_\\mfbf$ (\\colorbox{KITblue15}{\\parbox[b][1.7mm]{6mm}{blue}}),
     # $\\optbf_\\maxstbf$ (see~\\cref{sec:approximation_algorithm_on_cacti})
@@ -65,17 +65,17 @@ if ( is.na(argument.caption) ) {
     # [1.7mm]{4.5mm}{red}}) and~$\\switched_\\maxstbf\\geq\\switched_\\mtsfbf$
     # (\\colorbox{KITgreen15}{\\parbox [b][1.7mm]{8mm}{green}}) (see all cases in~
     # \\cref{tbl:MTSF_MPF_PF_MF_long}).\n"
-    
+
     argument.caption <- "The models~\\pfbf, \\mpfbf\\ and \\mtsfbf\\ from~\\cref{sec:model} are
     evaluated on the NESTA benchmark sets~\\cite{DBLP:journals/corr/CoffrinGS14}.
     The parameters~$\\bf n$, $\\bf m$ and~$\\bf |\\switched_{\\Pi}|$ represent the
     number of vertices, edges and switched edges for a problem~$\\bf\\Pi$,
     respectively, and the optimal solutions are given in~$\\optbf_{\\bf\\Pi}$.
-    % 
+    %
     The~\\colorbox{KITyellow15}{\\parbox[t][1.7mm]{9mm}{yellow}} rows mark the
     interesting cases where~$\\optbf_{\\mpfbf}$ is smaller than
-    the~$\\optbf_{\\mtsfbf}$. 
-    % 
+    the~$\\optbf_{\\mtsfbf}$.
+    %
     The highlighted cases are where the~$\\optbf_\\mtsfbf$ is smaller than
     the~$\\optbf_\\mfbf$ (\\colorbox{KITblue15}{\\parbox[b][1.7mm]{6mm}{blue}}),
     $\\optbf_\\maxstbf$ (see~\\cref{sec:approximation_algorithm_on_cacti})
@@ -86,9 +86,9 @@ if ( is.na(argument.caption) ) {
     [1.7mm]{4.5mm}{red}}) and~$|\\switched_\\maxstbf|\\geq|\\switched_\\mtsfbf|$
     (\\colorbox{KITgreen15}{\\parbox [b][1.7mm]{8mm}{green}}) (all cases see~
     \\cref{tbl:MTSF_MPF_PF_MF_long})."
-    
+
     argument.header   <- "NESTA Case &\\hspace{-3mm} $n$ &\\hspace{-3mm} $m$ &\\hspace{-3mm} $|\\switched_{\\mtsf}|$ &\\hspace{-3mm} $|\\switched_{\\maxst}|$ &\\hspace{-3mm} $\\opt_{\\pf}$ &\\hspace{-3mm} $\\opt_{\\mpf}$ &\\hspace{-3mm} $\\opt_{\\mtsf}$ &\\hspace{-3mm} $\\opt_{\\maxst}$ &\\hspace{-3mm} $\\opt_{\\mf}$ &\\hspace{-3mm} $\\max$ Gen"
-    
+
   } else {
     # argument.caption <- "The models~\\pfbf, \\mpfbf, \\mtsfbf\\ and \\otsbf\\ from~\\cref{sec:model} are
     # evaluated on the NESTA benchmark sets~\\cite{DBLP:journals/corr/CoffrinGS14}. The
@@ -96,8 +96,8 @@ if ( is.na(argument.caption) ) {
     # edges and switched edges for a problem~$\\bf\\Pi$, respectively, and the optimal
     # solutions are given in~$\\optbf_{\\bf\\Pi}$. Since~\\otsbf\\ minimizes the cost, the
     # flowvalue~$\\bf \\flowvaluebf_{\\otsbf}$ is shown, too. The maximum possible
-    # generation is given in the last column 
-    # (marked~\\colorbox{KITred15}{\\parbox[t][1.7mm]{4.5mm}{red}} if it is larger than 
+    # generation is given in the last column
+    # (marked~\\colorbox{KITred15}{\\parbox[t][1.7mm]{4.5mm}{red}} if it is larger than
     # the~$\\optbf_\\mfbf$).
     # %
     # The~\\colorbox{KITyellow15}{\\parbox[t][1.7mm]{9mm}{yellow}} rows mark the
@@ -110,7 +110,7 @@ if ( is.na(argument.caption) ) {
     # In addition, there are three cases in which the number of switched lines in
     # the~$\\switched_\\maxstbf$ is greater than in the~$\\switched_\\mtsfbf$ shown
     # as~\\colorbox{KITgreen15}{\\parbox[b][1.7mm]{8mm}{green}}.\n"
-    
+
     argument.caption <- "The models~\\pfbf, \\mpfbf, \\mtsfbf\\ and \\otsbf\\ from~\\cref{sec:model} are
     evaluated on the NESTA benchmark sets~\\cite{DBLP:journals/corr/CoffrinGS14}. The
     parameter~$n$, $m$ and~$\\bf |\\switched_{\\Pi}|$ represent the number of vertices,
@@ -131,7 +131,7 @@ if ( is.na(argument.caption) ) {
     In addition, there are three cases in which the number of switched lines in
     the~$\\switched_\\maxstbf$ is greater than in the~$\\switched_\\mtsfbf$ shown
     as~\\colorbox{KITgreen15}{\\parbox[b][1.7mm]{8mm}{green}}.\n"
-    
+
     argument.header   <- "NESTA Case &\\hspace{-3mm} $n$ &\\hspace{-3mm} $m$ &\\hspace{-3mm} $|\\switched_{\\mtsf}|$ &\\hspace{-3mm} $|\\switched_{\\ots}|$ &\\hspace{-3mm} $|\\switched_{\\maxst}|$ &\\hspace{-3mm} $\\opt_{\\ots}$ in \\$ &\\hspace{-3mm} $\\flowvalue_{\\ots}$ &\\hspace{-3mm} $\\opt_{\\pf}$ &\\hspace{-3mm} $\\opt_{\\mpf}$ &\\hspace{-3mm} $\\opt_{\\mtsf}$ &\\hspace{-3mm} $\\opt_{\\maxst}$ &\\hspace{-3mm} $\\opt_{\\mf}$ &\\hspace{-3mm} $\\max$ Gen"
   }
 }
@@ -234,15 +234,15 @@ if (!argument.short) {
   # Replace some stuff TODO: super bad
   # latextable[data2$S_MTSF  == data2$m, ]$S_MTSF  <- "---"
   latextable[data2$S_MTSF  == 0,       ]$S_MTSF  <- "0"
-  
-  
+
+
   # latextable[data2$S_MAXST == 0,       ]$S_MAXST <- "0"
-  
+
   latextable[data2$S_OTS   == 0,       ]$S_OTS   <- "0"
   latextable[data2$OPT_OTS == 0,       ]$S_OTS   <- "---"
 }
 # Add cell color or color for some scenarios using \cellcolor{color} or \rowcolor{color}
-## OPT_MPF < OPT_MTSF:    color row in KITyellow 
+## OPT_MPF < OPT_MTSF:    color row in KITyellow
 latextable[data2$OPT_MPF   < data2$OPT_MTSF, ]$case      <- sub("^", "\\\\rowcolor{KITyellow15}",    latextable[data2$OPT_MPF   < data2$OPT_MTSF, ]$case      )
 ## OPT_MTSF < OPT_MF:     color both cells in KITcyanblue
 latextable[data2$OPT_MTSF  < data2$OPT_MF,   ]$OPT_MTSF  <- sub("^", "\\\\cellcolor{KITcyanblue15}", latextable[data2$OPT_MTSF  < data2$OPT_MF,   ]$OPT_MTSF  )
@@ -266,13 +266,13 @@ if ( !argument.short ) {
 addtorow          <- list()
 addtorow$pos      <- list(0)
 addtorow$command  <- c(paste(argument.header," \\\\\n", sep = ""))
-print(latextable, 
-      add.to.row           = addtorow, 
-      include.rownames     = FALSE, 
-      include.colnames     = FALSE, 
-      table.placement      = "tb!", 
-      booktabs             = TRUE, 
-      caption.placement    = "top", 
+print(latextable,
+      add.to.row           = addtorow,
+      include.rownames     = FALSE,
+      include.colnames     = FALSE,
+      table.placement      = "tb!",
+      booktabs             = TRUE,
+      caption.placement    = "top",
       floating             = argument.floating,
       floating.environment = getOption("xtable.floating.environment", "table*"   ),
       latex.environments   = getOption("xtable.latex.environments",   c("center")),
