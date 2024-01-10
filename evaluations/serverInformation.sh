@@ -1,13 +1,13 @@
 #!/bin/sh
-# 
+#
 # serverInformation.sh
-# 
+#
 #   Created on: Jan 30, 2019
 #       Author: Franziska Wegner
-# 
+#
 # Get the physical information about the Unix machine. These information are
 # required for the evaluation/simulation section.
-# 
+#
 
 uname -a
 cat /proc/version
