@@ -53,9 +53,9 @@ add_test(NAME TestBlockCutTree COMMAND TestBlockCutTree)
 ####################################################################################
 # Tests for PATH FINDING ALGORITHMS ################################################
 ####################################################################################
-# add_executable(TestDominatingThetaPath Algorithms/PathFinding/TestDominatingThetaPath.cpp)
-# target_link_libraries(TestDominatingThetaPath EGOA gtest gtest_main gmock_main)
-# add_test(NAME TestDominatingThetaPath COMMAND TestDominatingThetaPath)
+add_executable(TestDominatingThetaPath Algorithms/PathFinding/TestDominatingThetaPath.cpp)
+target_link_libraries(TestDominatingThetaPath EGOA gtest gtest_main gmock_main)
+add_test(NAME TestDominatingThetaPath COMMAND TestDominatingThetaPath)
 
 # add_executable(TestBetweennessCentrality Algorithms/Centralities/TestBetweennessCentrality.cpp)
 # target_link_libraries(TestBetweennessCentrality EGOA gtest gtest_main gmock_main)
