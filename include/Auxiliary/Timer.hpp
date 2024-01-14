@@ -19,18 +19,18 @@
 #include "Constants.hpp"
 #include "Types.hpp"
 
-// Linux operation systems such as Debian, Ubuntu, Gentoo, Fedora, openSUSE, RedHat, or Centos
+// Linux operation systems such as Debian, Ubuntu, Gentoo, Fedora, openSUSE, RedHat, or Centos.
 #if defined (__linux__)
     #include <time.h>
     #include <sys/time.h>
-// Apple and iOS
+// Apple and iOS.
 #elif defined(__APPLE__) && defined(__MACH__)
     #include <mach/mach_time.h>
     #include <mach/clock.h>
     #include <mach/mach.h>
+// Windows.
 #elif defined (_WIN32) || defined (_WIN64)
     #include <time.h>
-    #include <sys/time.h>
     #include <windows.h>
 #endif
 
