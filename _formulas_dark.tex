@@ -1,0 +1,459 @@
+\documentclass{article}
+\usepackage{ifthen}
+\usepackage{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\color{white}
+\pagecolor{black}
+% Packages requested by user
+\usepackage{/home/runner/work/egoa/egoa/documentation/includes/EGOA_DocumentationLatexPreamble}
+
+\usepackage{newunicodechar}
+  \makeatletter
+    \def\doxynewunicodechar#1#2{%
+    \@tempswafalse
+    \edef\nuc@tempa{\detokenize{#1}}%
+    \if\relax\nuc@tempa\relax
+      \nuc@emptyargerr
+    \else
+      \edef\@tempb{\expandafter\@car\nuc@tempa\@nil}%
+      \nuc@check
+      \if@tempswa
+        \@namedef{u8:\nuc@tempa}{#2}%
+      \fi
+    \fi
+  }
+  \makeatother
+  \doxynewunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \doxynewunicodechar{²}{${}^{2}$}% Superscript two
+  \doxynewunicodechar{³}{${}^{3}$}% Superscript three
+
+\pagestyle{empty}
+\begin{document}
+$\dtp$
+\pagebreak
+
+$c_{\sbc}\colon\edges\to\posreals$
+\pagebreak
+
+\[
+     c_{\sbc} := \frac{1}{m_B}\sum_{\source\in\vertices}\sum_{\sink\in\vertices\setminus\{\source\}} \frac{\sigma_{\dtp}(\source,\sink,\edge)}{\sigma_{\dtp}(\source,\sink)},
+    \]
+\pagebreak
+
+$\sigma_{\dtp}(\source,\sink,\edge)$
+\pagebreak
+
+$\dtp{s}$
+\pagebreak
+
+$\source$
+\pagebreak
+
+$\sink$
+\pagebreak
+
+$\edge$
+\pagebreak
+
+$\sigma_{\dtp}(\source,\sink)$
+\pagebreak
+
+$\dtp{\text{s}}$
+\pagebreak
+
+$m_B = |\vertices|\cdot(|\vertices|-1)$
+\pagebreak
+
+$\SBC$
+\pagebreak
+
+$\sbc$
+\pagebreak
+
+$m_B = |V|\cdot (|V|-1)$
+\pagebreak
+
+$\graph = (\vertices,\edges)$
+\pagebreak
+
+$\labels(\vertex)$
+\pagebreak
+
+$\vertex$
+\pagebreak
+
+$\labelu$
+\pagebreak
+
+$\labelu_{\mathrm{new}}$
+\pagebreak
+
+$\queue$
+\pagebreak
+
+$\labelu_{p}$
+\pagebreak
+
+$\labelu_p$
+\pagebreak
+
+$\vertex\in\vertices$
+\pagebreak
+
+$\Theta(1)$
+\pagebreak
+
+$\Theta(\log n)$
+\pagebreak
+
+$\Theta(n)$
+\pagebreak
+
+$n = |\vertices|$
+\pagebreak
+
+$m = |\edges|$
+\pagebreak
+
+$O(|\vertices|)$
+\pagebreak
+
+$O(1)$
+\pagebreak
+
+$(\vertexa,
+    \vertexb)$
+\pagebreak
+
+$\vertexa$
+\pagebreak
+
+$(\vertexa,\vertexb)$
+\pagebreak
+
+$\vertexb$
+\pagebreak
+
+$(\vertexa, \vertexb)$
+\pagebreak
+
+$\edges$
+\pagebreak
+
+$m-1$
+\pagebreak
+
+$\graph$
+\pagebreak
+
+$ r = x = b = 0 $
+\pagebreak
+
+$ tap = |V(source)|/|V(target)|) $
+\pagebreak
+
+$r / (r^2 + x^2)$
+\pagebreak
+
+$x / (r^2 + x^2)$
+\pagebreak
+
+$x /(r^2
+    + x^2)$
+\pagebreak
+
+$1 / x$
+\pagebreak
+
+$\shuntsusceptance(\vertex)$
+\pagebreak
+
+$\shuntsusceptance\colon\vertices\to\reals$
+\pagebreak
+
+$\shuntconductance(\vertex)$
+\pagebreak
+
+$\shuntconductance\colon\vertices\to\reals$
+\pagebreak
+
+$\voltagenominal$
+\pagebreak
+
+$\vmagnitude$
+\pagebreak
+
+$\vangle(\vertex)$
+\pagebreak
+
+$\vangle\colon\vertices\to\reals$
+\pagebreak
+
+$\voltagemin$
+\pagebreak
+
+$\voltagemax$
+\pagebreak
+
+$\ac$
+\pagebreak
+
+$\dc$
+\pagebreak
+
+$\vmagnitude(\vertex)$
+\pagebreak
+
+$\voltage := [\voltagemin,\voltagemax]$
+\pagebreak
+
+$\realpowernominal$
+\pagebreak
+
+$\realpowernominalmin$
+\pagebreak
+
+$\realpowernominalmax$
+\pagebreak
+
+\[
+    \realpowernominal := [\realpowernominalmin,\realpowernominalmax].
+    \]
+\pagebreak
+
+$\vertex\in\generators$
+\pagebreak
+
+$\realpowernominal:=[\realpowernominalmin,\realpowernominalmax]$
+\pagebreak
+
+$\realpowergeneration$
+\pagebreak
+
+$[\realpowergenerationmin, \realpowergenerationmax]$
+\pagebreak
+
+$[\realpowergenerationmin,
+    \realpowergenerationmax]$
+\pagebreak
+
+$\reactivepowergeneration$
+\pagebreak
+
+$[\reactivepowergenerationmin, \reactivepowergenerationmax]$
+\pagebreak
+
+$[\reactivepowergenerationmin,\reactivepowergenerationmax]$
+\pagebreak
+
+$\realpowernominal\coloneqq[\realpowernominalmin,
+   \realpowernominalmax]$
+\pagebreak
+
+$[\realpowergenerationmin,
+   \realpowergenerationmax]$
+\pagebreak
+
+$[\reactivepowergenerationmin,
+   \reactivepowergenerationmax]$
+\pagebreak
+
+$\realpowerdemand$
+\pagebreak
+
+$[\realpowerdemandmin, \realpowerdemandmax]$
+\pagebreak
+
+$\reactivepowerdemand$
+\pagebreak
+
+$[\reactivepowerdemandmin, \reactivepowerdemandmax]$
+\pagebreak
+
+$[\reactivepowerdemandmin,
+    \reactivepowerdemandmax]$
+\pagebreak
+
+$\graph = (\vertices, \edges)$
+\pagebreak
+
+$\vertices$
+\pagebreak
+
+$\network = ( \graph,
+    \generators, \consumers, \capacity, \susceptance, \dots
+    )$
+\pagebreak
+
+$\network = ( \graph,
+        \generators, \consumers, \capacity, \susceptance, \dots)$
+\pagebreak
+
+\[
+                 \bnorm{\fpath{}{\vertexa}{\vertexb}} := \sum_{\edge\in\fpath{}{\vertexa}{\vertexb}}\susceptance(\edge)^{-1},
+            \]
+\pagebreak
+
+$\susceptance(\vertexa,\vertexb)\in\reals$
+\pagebreak
+
+$(\vertexa,\vertexb)\in\edges$
+\pagebreak
+
+$\bnorm{\fpath{}{\vertexa}{\vertexb}}$
+\pagebreak
+
+$\fpath{}{\vertexa}{\vertexb}$
+\pagebreak
+
+\[
+         \deltavangle(\vertexa,\vertexb) = \bnorm{\fpath{}{\vertexa}{\vertexb}} \cdot \fmincapacity{}{\fpath{}{\vertexa}{\vertexb}},
+    \]
+\pagebreak
+
+$\bnorm{\fpath{}{\vertexa}{\vertexb}} := \sum_{\edge\in\fpath{}{\vertexa}{\vertexb}}\susceptance(\edge)^{-1}$
+\pagebreak
+
+$\fmincapacity{}{ \fpath{}{\vertexa}{\vertexb} }:= \min_{ (\vertexa,\vertexb)\in\pathu}\fcapacity{}{\vertexa}{\vertexb}$
+\pagebreak
+
+$\capacity\colon\edges\to\reals$
+\pagebreak
+
+$\bnorm{\fpath{}{\vertexa}{\vertexb}} = 0.0$
+\pagebreak
+
+$(0,\infty)$
+\pagebreak
+
+$\fmincapacity{}{ \fpath{}{\vertexa}{\vertexb} }$
+\pagebreak
+
+$\fmincapacity{}{\fpath{}{\vertexa}{\vertexb}}$
+\pagebreak
+
+$\vertexa\in\vertices$
+\pagebreak
+
+$\deltavangle(\vertexa,\vertexb)$
+\pagebreak
+
+$\realpowergeneration(\vertex)$
+\pagebreak
+
+$\network$
+\pagebreak
+
+\[
+     -\maxdemand\leq\netflow(\vertexa)\leq-\mindemand\qquad\forall\vertexa\in\consumers
+    \]
+\pagebreak
+
+\[
+      \maxexcess\leq\netflow(\vertexa)\leq \minexcess\qquad\forall\vertexa\in\generators
+    \]
+\pagebreak
+
+\[
+     -\infty\leq\netflow(\vertexa)\leq 0\qquad\forall\vertexa\in\consumers
+    \]
+\pagebreak
+
+\[
+     0\leq\netflow(\vertexa)\leq\infty\qquad\forall\vertexa\in\generators
+    \]
+\pagebreak
+
+\[
+     -\demand(\vertexa)\leq\netflow(\vertexa)\leq -\demand(\vertexa)\qquad\forall\vertexa\in\consumers,
+    \]
+\pagebreak
+
+\[
+      \excess(\vertexa)\leq\netflow(\vertexa)\leq\excess(\vertexa)\qquad\forall\vertexa\in\generators,
+    \]
+\pagebreak
+
+$\netflow:=\sum_{ \{ \vertexa,\vertexb \} \in \undirectededges } \flow ( \vertexa,\vertexb ) $
+\pagebreak
+
+$\generators$
+\pagebreak
+
+$\consumers$
+\pagebreak
+
+$g\in\generators$
+\pagebreak
+
+$\emptyset$
+\pagebreak
+
+$\{\vertex\}\cap\generators = \emptyset$
+\pagebreak
+
+$\realpowergenerationmin$
+\pagebreak
+
+$\realpowergenerationmax$
+\pagebreak
+
+$[\reactivepowergenerationmin,
+    \reactivepowergenerationmax]$
+\pagebreak
+
+$\reactivepowergenerationmin$
+\pagebreak
+
+$\reactivepowergenerationmax$
+\pagebreak
+
+$ \frac{R}{|Z|} $
+\pagebreak
+
+$ |Z| = R^2 + X^2 $
+\pagebreak
+
+$ \frac{X}{|Z|} $
+\pagebreak
+
+$ \frac{angle^\circ\cdot\pi}{180^\circ} $
+\pagebreak
+
+$ \pi = 180^\circ $
+\pagebreak
+
+$ ratio\cdot\cos\left( \frac{angle^\circ\cdot\pi}{180^\circ} \right) $
+\pagebreak
+
+$ ratio\cdot\sin\left( \frac{angle^\circ\cdot\pi}{180^\circ} \right) $
+\pagebreak
+
+$ \frac{angmin^\circ\cdot\pi}{180^\circ} $
+\pagebreak
+
+$ \frac{angmax^\circ\cdot\pi}{180^\circ} $
+\pagebreak
+
+$\network = ( \graph, \generators, \consumers, \capacity, \susceptance, \dots )$
+\pagebreak
+
+$\graph = (\vertices, \edges_{\mathrm{cand}})$
+\pagebreak
+
+$ \network $
+\pagebreak
+
+$\network $
+\pagebreak
+
+$\network = (
+    \graph, \generators, \consumers, \capacity, \susceptance,
+    \dots )$
+\pagebreak
+
+$\graph $
+\pagebreak
+
+\end{document}

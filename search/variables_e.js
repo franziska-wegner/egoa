@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['ramp10_5f_0',['ramp10_',['../classegoa_1_1_vertices_1_1_generator_properties.html#aeb0b158d90d8e2f5bcfadfa04733f254',1,'egoa::Vertices::GeneratorProperties']]],
+  ['ramp30_5f_1',['ramp30_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a37e07db76d7537ce3217c59a67ca5c22',1,'egoa::Vertices::GeneratorProperties']]],
+  ['rampagc_5f_2',['rampAgc_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a5e17929c9573f7e2e1940d73e006ac46',1,'egoa::Vertices::GeneratorProperties']]],
+  ['ramplimitdown_5f_3',['rampLimitDown_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a0633b699635081eaecfd3e8e16b7a568',1,'egoa::Vertices::GeneratorProperties']]],
+  ['ramplimitshutdown_5f_4',['rampLimitShutDown_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a32f4f0f5916f0ca68da30f641d1fdd04',1,'egoa::Vertices::GeneratorProperties']]],
+  ['ramplimitstartup_5f_5',['rampLimitStartUp_',['../classegoa_1_1_vertices_1_1_generator_properties.html#ad91c9c7998c3c0a4ae0fc732e1499dc6',1,'egoa::Vertices::GeneratorProperties']]],
+  ['ramplimitup_5f_6',['rampLimitUp_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a83998c650ae4f8b4b51a18efded3919e',1,'egoa::Vertices::GeneratorProperties']]],
+  ['rampq_5f_7',['rampQ_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a7d1de3e67044c75313cd69747d3ed50a',1,'egoa::Vertices::GeneratorProperties']]],
+  ['reactance_5f_8',['reactance_',['../classegoa_1_1_edges_1_1_electrical_properties.html#a3904d5c1c0ececacb9087a1bd9593360',1,'egoa::Edges::ElectricalProperties']]],
+  ['reactivepower_5f_9',['reactivePower_',['../classegoa_1_1_vertices_1_1_generator_properties.html#abf2055994c73c916bab1c000f3f186eb',1,'egoa::Vertices::GeneratorProperties']]],
+  ['reactivepowerbound_5f_10',['reactivePowerBound_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a8bd1eaaffa84c273938ae4484d2121cf',1,'egoa::Vertices::GeneratorProperties']]],
+  ['reactivepowerload_5f_11',['reactivePowerLoad_',['../classegoa_1_1_vertices_1_1_load_properties.html#aa25c82ef656fb269d972ea5a168859c7',1,'egoa::Vertices::LoadProperties']]],
+  ['reactivepowerloadbound_5f_12',['reactivePowerLoadBound_',['../classegoa_1_1_vertices_1_1_load_properties.html#a60ce200dea1291b3c00d06357f6bcee6',1,'egoa::Vertices::LoadProperties']]],
+  ['realpower_5f_13',['realPower_',['../classegoa_1_1_vertices_1_1_generator_properties.html#aa7f0c5900748ff1779c12f9201135c52',1,'egoa::Vertices::GeneratorProperties']]],
+  ['realpowerbound_5f_14',['realPowerBound_',['../classegoa_1_1_vertices_1_1_generator_properties.html#a07f7f1bb1f30bb2ed0f662f5c9ff6735',1,'egoa::Vertices::GeneratorProperties']]],
+  ['realpowerload_5f_15',['realPowerLoad_',['../classegoa_1_1_vertices_1_1_load_properties.html#aecf63bfaa63bef904b5ff520e3b7a6cd',1,'egoa::Vertices::LoadProperties']]],
+  ['realpowerloadbound_5f_16',['realPowerLoadBound_',['../classegoa_1_1_vertices_1_1_load_properties.html#a58362f06c1a1d1557a0044c595d846ce',1,'egoa::Vertices::LoadProperties']]],
+  ['resistance_5f_17',['resistance_',['../classegoa_1_1_edges_1_1_electrical_properties.html#a047ad49c5a26adb0574737c6e7990d2f',1,'egoa::Edges::ElectricalProperties']]]
+];
