@@ -80,11 +80,11 @@ class GeoJsonWriter final {
                                     , TGraph const & graph )
             {
                 WriteHeader ( os );
-                WriteFeatureCollection ( os );
                 WriteFeaturesBegin ( os );
                 WriteVertices ( os, graph, false);
                 WriteLines ( os, graph, true );
-                WriteFeaturesEnd ( os, true );
+                WriteFeaturesEnd ( os, false );
+                WriteFeatureCollection ( os/*, true*/ );
                 WriteFooter ( os );
                 return true; // How do you declare success
             }
@@ -178,10 +178,6 @@ private:
                 Indent( os, indent );
                 os  << "{";
                 NewLine(os);
-
-                Indent( os, indent + 1 );
-                os  << "\"type\": \"Feature\",";
-                NewLine(os);
             }
 
             /**
@@ -195,6 +191,9 @@ private:
                                         , bool           last   = false
                                         , Types::count   indent = 1 )
             {
+                Indent( os, indent + 1 );
+                os  << "\"type\": \"Feature\",";
+                NewLine(os);
                 char comma = last?' ':',';
                 Indent( os, indent );
                 os  << "}"
@@ -218,7 +217,7 @@ private:
             }
 
             /**
-             * @brief      Writes vertex properties.
+             * @brief      Writes vertex properties in alphabetic order.
              *
              * @param      os              The output stream.
              * @param      vertexProperty  The vertex property.
@@ -229,33 +228,24 @@ private:
                                               , Types::count              indent         = 2 )
             {
                 bool last = false;
-                /* Basic Property Members */
-                PropertyTemplate<Types::name> ( os, "name", vertexProperty.Name(), last, indent );
-                PropertyTemplate<TVertexType> ( os, "type", vertexProperty.Type(), last, indent );
-                PropertyTemplate<Types::real> ( os, "xCoordinate", vertexProperty.X(), last, indent );
-                PropertyTemplate<Types::real> ( os, "yCoordinate", vertexProperty.Y(), last, indent );
-
-                /* Admittance Related Members */
-                PropertyTemplate<Types::real> ( os, "shuntConductance", vertexProperty.ShuntConductance(), last, indent );
-                PropertyTemplate<Types::real> ( os, "shuntSusceptance", vertexProperty.ShuntSusceptance(), last, indent );
-
-                /* Voltage Related Members */
-                PropertyTemplate<Types::real> ( os, "voltageMagnitude", vertexProperty.VoltageMagnitude(), last, indent );
-                PropertyTemplate<Types::real> ( os, "voltageAngle", vertexProperty.VoltageAngle(), last, indent );
-                PropertyTemplate<Types::real> ( os, "nominalVoltage", vertexProperty.NominalVoltage(), last, indent );
-                PropertyTemplate<Types::real> ( os, "maximumVoltage", vertexProperty.MaximumVoltage(), last, indent );
-                PropertyTemplate<Types::real> ( os, "minimumVoltage", vertexProperty.MinimumVoltage(), last, indent );
-
-                /* Location Specific Members */
-                PropertyTemplate<Types::name> ( os, "country", vertexProperty.Country(), last, indent );
-                PropertyTemplate<Types::index> ( os, "area", vertexProperty.Area(), last, indent );
-                PropertyTemplate<Types::index> ( os, "zone", vertexProperty.Zone(), last, indent );
-                PropertyTemplate<Vertices::ControlType> ( os, "control", vertexProperty.Control(), last, indent );
-                PropertyTemplate<Vertices::EnergyCarrier> ( os, "carrier", vertexProperty.Carrier(), last, indent );
-
-                /* Status Members */
+                PropertyTemplate<Types::index> ( os, "area", vertexProperty.Area(), last, indent ); /* Location Specific Members */
+                PropertyTemplate<Vertices::EnergyCarrier> ( os, "carrier", vertexProperty.Carrier(), last, indent ); /* Location Specific Members */
+                PropertyTemplate<Vertices::ControlType> ( os, "control", vertexProperty.Control(), last, indent ); /* Location Specific Members */
+                PropertyTemplate<Types::name> ( os, "country", vertexProperty.Country(), last, indent ); /* Location Specific Members */
+                PropertyTemplate<Types::real> ( os, "maximumVoltage", vertexProperty.MaximumVoltage(), last, indent ); /* Voltage Related Members */
+                PropertyTemplate<Types::real> ( os, "minimumVoltage", vertexProperty.MinimumVoltage(), last, indent ); /* Voltage Related Members */
+                PropertyTemplate<Types::name> ( os, "name", vertexProperty.Name(), last, indent ); /* Basic Property Members */
+                PropertyTemplate<Types::real> ( os, "nominalVoltage", vertexProperty.NominalVoltage(), last, indent ); /* Voltage Related Members */
+                PropertyTemplate<Types::real> ( os, "shuntConductance", vertexProperty.ShuntConductance(), last, indent ); /* Admittance Related Members */
+                PropertyTemplate<Types::real> ( os, "shuntSusceptance", vertexProperty.ShuntSusceptance(), last, indent ); /* Admittance Related Members */
+                PropertyTemplate<Vertices::BusStatus> ( os, "status", vertexProperty.Status(), last, indent ); /* Status Members */
+                PropertyTemplate<TVertexType> ( os, "type", vertexProperty.Type(), last, indent ); /* Basic Property Members */
+                PropertyTemplate<Types::real> ( os, "voltageAngle", vertexProperty.VoltageAngle(), last, indent ); /* Voltage Related Members */
+                PropertyTemplate<Types::real> ( os, "voltageMagnitude", vertexProperty.VoltageMagnitude(), last, indent ); /* Voltage Related Members */
+                PropertyTemplate<Types::real> ( os, "xCoordinate", vertexProperty.X(), last, indent ); /* Basic Property Members */
+                PropertyTemplate<Types::real> ( os, "yCoordinate", vertexProperty.Y(), last, indent ); /* Basic Property Members */
                 last = true;
-                PropertyTemplate<Vertices::BusStatus> ( os, "status", vertexProperty.Status(), last, indent );
+                PropertyTemplate<Types::index> ( os, "zone", vertexProperty.Zone(), last, indent ); /* Location Specific Members */
             }
 
             /**
@@ -367,7 +357,7 @@ private:
              */
             inline void WriteFeatureCollection ( std::ostream & os )
             {
-                os  << "\"type\": \"FeatureCollection\",";
+                os  << "\"type\": \"FeatureCollection\"";
                 NewLine(os);
             }
 
@@ -433,10 +423,10 @@ private:
             {
                 graph.for_all_vertices( [this, &os, &last, &indent]( TVertex const & vertex ){
                     WriteFeatureBegin ( os, indent );
+                    WritePoint ( os, vertex, indent + 1 );
                     WritePropertiesBegin ( os, indent + 1 );
                     WriteVertexProperties ( os, vertex.Properties(), indent + 2 );
                     WritePropertiesEnd ( os, false, indent + 1 );
-                    WritePoint ( os, vertex, indent + 1 );
                     WriteFeatureEnd ( os, last, indent );
                 });
             }
@@ -465,7 +455,7 @@ private:
             }
 
             /**
-             * @brief      Writes a GeoJson point.
+             * @brief      Writes a GeoJson point in alphabetic order.
              *
              * @param      os           The output stream.
              * @param[in]  xCoordinate  The coordinate.
@@ -481,13 +471,14 @@ private:
                 NewLine(os);
 
                 Indent( os, indent + 1 );
-                os  << "\"type\": \"Point\",";
-                NewLine(os);
-
-                Indent( os, indent + 1 );
                 os  << "\"coordinates\": ";
                 WritePointCoordinate ( os, xCoordinate, yCoordinate, 0 );
                 NewLine(os);
+
+                Indent( os, indent + 1 );
+                os  << "\"type\": \"Point\",";
+                NewLine(os);
+
                 Indent( os, indent );
                 os  << "}";
                 NewLine(os);
