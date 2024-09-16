@@ -1,0 +1,107 @@
+name: Developer-Guideline-Check
+# https://github.com/marketplace/actions/clang-tidy-review
+
+# You can be more specific, but it currently only works on pull requests
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  QT_VERSION:     "6.2.0"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # https://github.com/marketplace/actions/clang-tidy-action
+    # - name: clang-tidy-action
+    #   uses: asarium/clang-tidy-action@v1.0
+    #   with:
+    #     fixesFile: clang-fixes.yaml
+
+    # Optionally generate compile_commands.json
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: ${{ env.QT_VERSION }}
+        cache: 'true'
+        cache-key-prefix: ${{ runner.os }}-Qt-Cache-${{ env.QT_VERSION }}
+        dir: ${{ github.workspace }}/Qt
+
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+    - uses: ZedThree/clang-tidy-review@v0.14.0
+      id: review
+      with:
+        clang_tidy_checks: -*,performance-*,readability-*,bugprone-*,clang-analyzer-*,cppcoreguidelines-*,mpi-*,misc-*
+        # List of packages to install, does not work
+        # apt_packages: qt6
+        # CMake command to run in order to generate compile_commands.json
+        cmake_command: cmake -B ${{ steps.strings.outputs.build-output-dir }}
+            -DCMAKE_EXPORT_COMPILE_COMMANDS=on
+            -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+            -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+            -DBoost_NO_SYSTEM_PATHS=TRUE
+            -DEGOA_BUILD_TYPE=${{ matrix.build_type }}
+            -DEGOA_DOWNLOAD_CPPAD=OFF
+            -DEGOA_DOWNLOAD_EIGEN=ON
+            -DEGOA_DOWNLOAD_GOOGLE_TEST_FRAMEWORK=ON
+            -DEGOA_DOWNLOAD_IEEE=ON
+            -DEGOA_DOWNLOAD_PYPSA_EUR=ON
+            -DEGOA_DOWNLOAD_PYPSA_ITI_COLLABORATION=ON
+            -DEGOA_DOWNLOAD_SCIGRID=ON
+            -DEGOA_DOWNLOAD_WINDFARM=ON
+            -DEGOA_ENABLE_ASSERTION=ON
+            -DEGOA_ENABLE_BONMIN=OFF
+            -DEGOA_ENABLE_BOOST=OFF
+            -DEGOA_ENABLE_CPLEX=OFF
+            -DEGOA_ENABLE_DOCUMENTATION=OFF
+            -DEGOA_ENABLE_EXCEPTION_HANDLING=ON
+            -DEGOA_ENABLE_GUROBI=OFF
+            -DEGOA_ENABLE_IPOPT=OFF
+            -DEGOA_ENABLE_OGDF=OFF
+            -DEGOA_ENABLE_OPENMP=OFF
+            -DEGOA_ENABLE_TESTS=OFF
+            -DEGOA_ENABLE_VERBOSE_MAKEFILE=ON
+            -DEGOA_PEDANTIC_AS_ERRORS=OFF
+            -DEGOA_PEDANTIC_MODE=ON
+            -DEGOA_TEST_FRAMEWORK=OfflineGoogleTestFramework
+            -DEGOA_TEST_FRAMEWORK_LOCATION=external/GoogleTestFramework
+            -DEGOA_THREAD_LIMIT=0
+            -DEGOA_WARNINGS_AS_ERRORS=ON
+            -DBONMIN_ROOT_DIR="NONE-DIR"
+            -DBoost_DIRECTORIES="/opt/homebrew/opt/boost/"
+            -DCOIN_INCLUDE_DIR="NONE-DIR"
+            -DCOIN_LIBRARY_DIR="NONE-DIR"
+            -DCPLEX_HOME="NONE-DIR"
+            -DGUROBI_ROOT_DIR="NONE-DIR"
+            -DOGDF_AUTOGEN_INCLUDE_DIR="NONE-DIR"
+            -DOGDF_INCLUDE_DIR="NONE-DIR"
+            -DOGDF_LIBRARY_DIR="NONE-DIR"
+            -DOPENMP_INCLUDES="/opt/homebrew/opt/llvm/include"
+            -DOPENMP_LIBRARIES="/opt/homebrew/opt/llvm/lib"
+            -S ${{ github.workspace }}
+
+    # Uploads an artefact containing clang_fixes.json
+    - uses: ZedThree/clang-tidy-review/upload@v0.14.0
+      id: upload-review
+
+    # If there are any comments, fail the check
+    - if: steps.review.outputs.total_comments > 0
+      run: exit 1
