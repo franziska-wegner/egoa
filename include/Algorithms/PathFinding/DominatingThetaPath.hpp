@@ -200,47 +200,48 @@ class DominatingThetaPath final {
                 std::vector<TEdgeId>   edges;
 
                 Types::real result = \
-                    labelSets_[target].for_all_optima(
+                    labelSets_[target].template for_all_optima<ExecutionPolicy::sequential>(
                         [ this, &vertices, &edges, &isVertexInSubgraph, &isEdgeInSubgraph ]( TLabel const & optLabel )
-                {
-                    Types::labelId  labelId  = optLabel.Index();
-                    TVertexId       vertexId = optLabel.Vertex();
-
-                    do
-                    {
-                        TLabel const & label = LabelAt( vertexId, labelId );
-                        labelId              = label.Index();
-
-                        ESSENTIAL_ASSERT ( graph_.VertexExists( vertexId ) );
-
-                        if ( !isVertexInSubgraph[vertexId] )
                         {
-                            isVertexInSubgraph[vertexId] = true;
-                            vertices.push_back(vertexId);
-                        }
+                            Types::labelId  labelId  = optLabel.Index();
+                            TVertexId       vertexId = optLabel.Vertex();
 
-                        if ( label.PreviousVertex() != Const::NONE )
-                        { // @todo multiple edges? It would be easier if the labels stored edges
-                            Types::edgeId edge = graph_.EdgeId ( vertexId, label.PreviousVertex() );
-                            if ( edge == Const::NONE )
+                            do
                             {
-                                edge = graph_.EdgeId ( label.PreviousVertex(), vertexId );
-                                ESSENTIAL_ASSERT( edge != Const::NONE );
-                            }
+                                TLabel const & label = LabelAt( vertexId, labelId );
+                                labelId              = label.Index();
 
-                            if (!isEdgeInSubgraph[edge])
-                            {
-                                isEdgeInSubgraph[edge] = true;
-                                edges.push_back(edge);
-                            }
+                                ESSENTIAL_ASSERT ( graph_.VertexExists( vertexId ) );
+
+                                if ( !isVertexInSubgraph[vertexId] )
+                                {
+                                    isVertexInSubgraph[vertexId] = true;
+                                    vertices.push_back(vertexId);
+                                }
+
+                                if ( label.PreviousVertex() != Const::NONE )
+                                { // @todo multiple edges? It would be easier if the labels stored edges
+                                    Types::edgeId edge = graph_.EdgeId ( vertexId, label.PreviousVertex() );
+                                    if ( edge == Const::NONE )
+                                    {
+                                        edge = graph_.EdgeId ( label.PreviousVertex(), vertexId );
+                                        ESSENTIAL_ASSERT( edge != Const::NONE );
+                                    }
+
+                                    if (!isEdgeInSubgraph[edge])
+                                    {
+                                        isEdgeInSubgraph[edge] = true;
+                                        edges.push_back(edge);
+                                    }
+                                }
+
+                                vertexId = label.PreviousVertex();
+                                labelId  = label.PreviousLabel();
+
+                            } while ( labelId  != Const::NONE
+                                   && vertexId != Const::NONE );
                         }
-
-                        vertexId = label.PreviousVertex();
-                        labelId  = label.PreviousLabel();
-
-                    } while ( labelId  != Const::NONE
-                           && vertexId != Const::NONE );
-                });
+                    );
 
                 resultSubgraph = Subgraph<TGraph const>(&graph_, vertices, edges);
                 return result;
@@ -264,7 +265,7 @@ class DominatingThetaPath final {
 
                 // Iterate over all optima
                 Types::real result = \
-                    labelSets_[target].for_all_optima([ this, & parent = parent ]( TLabel const & optLabel )
+                    labelSets_[target].template for_all_optima<ExecutionPolicy::sequential>([ this, & parent = parent ]( TLabel const & optLabel )
                 {
                     // Add a row for another label path from target t
                     parent.emplace_back( std::vector<TVertexId>() );
@@ -409,7 +410,7 @@ class DominatingThetaPath final {
 
                 numberOfPathsPerVertex.resize( graph_.NumberOfVertices(), 0 );
 
-                labelSets_[target].for_all_optima (
+                labelSets_[target].template for_all_optima<ExecutionPolicy::sequential> (
                     [&]( TLabel const & optLabel )
                     {
                         Types::labelId  labelId  = optLabel.Index();
@@ -476,38 +477,40 @@ class DominatingThetaPath final {
                 Types::count numberOfOptimalLabels = LabelSetAt(target).Optima().size(); // Divide by this value
                 Types::real weightOfPath = static_cast<Types::real>(1) / numberOfOptimalLabels;
 
-                labelSets_[target].template for_all_optima<ExecutionPolicy::sequential>( [&]( TLabel const & optLabel )
-                {
-                    Types::labelId  labelId  = optLabel.Index();
-                    TVertexId       vertexId = target;
+                labelSets_[target].template for_all_optima<ExecutionPolicy::sequential>(
+                    [&]( TLabel const & optLabel )
+                    {
+                        Types::labelId  labelId  = optLabel.Index();
+                        TVertexId       vertexId = target;
 
-                    do {
-                        TLabel & label = LabelAt( vertexId, labelId );
-                        labelId        = label.Index();
+                        do {
+                            TLabel & label = LabelAt( vertexId, labelId );
+                            labelId        = label.Index();
 
-                        if (   ( label.PreviousLabel()  == Const::NONE )
-                            || ( label.PreviousVertex() == Const::NONE )
-                            || ( vertexId == Const::NONE )
-                           ) break; // Label is already on path
+                            if (   ( label.PreviousLabel()  == Const::NONE )
+                                || ( label.PreviousVertex() == Const::NONE )
+                                || ( vertexId == Const::NONE )
+                               ) break; // Label is already on path
 
-                        // Increase number of paths at "edgeId"
-                        TEdgeId edgeId = ( graph_.EdgeId( label.PreviousVertex(), vertexId ) != Const::NONE )
-                                                ? graph_.EdgeId( label.PreviousVertex(), vertexId )
-                                                : graph_.EdgeId( vertexId, label.PreviousVertex() );
+                            // Increase number of paths at "edgeId"
+                            TEdgeId edgeId = ( graph_.EdgeId( label.PreviousVertex(), vertexId ) != Const::NONE )
+                                                    ? graph_.EdgeId( label.PreviousVertex(), vertexId )
+                                                    : graph_.EdgeId( vertexId, label.PreviousVertex() );
 
-                        ESSENTIAL_ASSERT ( edgeId != Const::NONE );
+                            ESSENTIAL_ASSERT ( edgeId != Const::NONE );
 
-                        ++numberOfPathsPerEdge[edgeId];
+                            ++numberOfPathsPerEdge[edgeId];
 
-                        relativeNumberOfPathsPerEdge[edgeId] += weightOfPath;
+                            relativeNumberOfPathsPerEdge[edgeId] += weightOfPath;
 
-                        // Extract next label on the DTP
-                        vertexId = label.PreviousVertex();
-                        labelId  = label.PreviousLabel();
+                            // Extract next label on the DTP
+                            vertexId = label.PreviousVertex();
+                            labelId  = label.PreviousLabel();
 
-                    } while ( labelId  != Const::NONE
-                           && vertexId != Const::NONE );
-                }); // For all labels in DTP at target vertex
+                        } while ( labelId  != Const::NONE
+                               && vertexId != Const::NONE );
+                    }
+                ); // For all labels in DTP at target vertex
             }
         ///@}
 
